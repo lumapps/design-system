@@ -25,11 +25,11 @@ export interface GenericBlockProps extends FlexBoxProps {
     /**
      * Horizontal alignment.
      */
-    hAlign?: FlexBoxProps['hAlign'];
+    horizontalAlign?: FlexBoxProps['hAlign'];
     /**
      * Vertical alignment.
      */
-    vAlign?: FlexBoxProps['vAlign'];
+    verticalAlign?: FlexBoxProps['vAlign'];
     /**
      * The props to forward to the content.
      * By default, the content will have the same alignment as wrapper.

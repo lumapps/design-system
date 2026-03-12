@@ -1,5 +1,5 @@
 ---
-frameworks: ['react']
+frameworks: ['react', 'vue']
 ---
 import * as DemoAnatomy from './react/anatomy.tsx';
 import * as DemoFigureSection from './react/figure-section.tsx';
@@ -10,7 +10,17 @@ import * as DemoActionSectionVertical from './react/action-section-vertical.tsx'
 import * as DemoGapSizes from './react/gap-sizes.tsx';
 import * as DemoAlignmentsHorizontal from './react/alignments-horizontal.tsx';
 import * as DemoAlignmentsVertical from './react/alignments-vertical.tsx';
+import * as VueDemoAnatomy from './vue/anatomy.vue';
+import * as VueDemoFigureSection from './vue/figure-section.vue';
+import * as VueDemoContentSectionVertical from './vue/content-section-vertical.vue';
+import * as VueDemoContentSectionHorizontal from './vue/content-section-horizontal.vue';
+import * as VueDemoActionSectionHorizontal from './vue/action-section-horizontal.vue';
+import * as VueDemoActionSectionVertical from './vue/action-section-vertical.vue';
+import * as VueDemoGapSizes from './vue/gap-sizes.vue';
+import * as VueDemoAlignmentsHorizontal from './vue/alignments-horizontal.vue';
+import * as VueDemoAlignmentsVertical from './vue/alignments-vertical.vue';
 import ReactGenericBlock from 'lumx-docs:@lumx/react/components/generic-block/GenericBlock';
+import VueGenericBlock from 'lumx-docs:@lumx/vue/components/generic-block/GenericBlock';
 
 # Generic block
 
@@ -22,13 +32,13 @@ Generic blocks have 3 sections : 1) **Figure**, 2) **Content** and 3) **Actions*
 
 Here presented in two **orientation**: **Vertical** and **Horizontal**.
 
-<DemoBlock orientation="horizontal" vAlign="space-evenly" demo={{ react: DemoAnatomy }} />
+<DemoBlock orientation="horizontal" vAlign="space-evenly" demo={{ react: DemoAnatomy, vue: VueDemoAnatomy }} />
 
 ### Figure section
 
 Optional, containing a figure-like element (like [Avatar](/product/components/avatar/), [Thumbnail](/product/components/thumbnail/), [Icon](/product/components/icon/), etc.).
 
-<DemoBlock orientation="horizontal" hAlign="bottom" vAlign="space-evenly" demo={{ react: DemoFigureSection }} />
+<DemoBlock orientation="horizontal" hAlign="bottom" vAlign="space-evenly" demo={{ react: DemoFigureSection, vue: VueDemoFigureSection }} />
 
 ### Content section
 
@@ -39,23 +49,23 @@ Containing one or more content elements ([Heading](/product/components/heading/)
     components mays have a fixed height and truncated text.
 </Message>
 
-<DemoBlock orientation="vertical" gap="huge" vAlign="center" hAlign="bottom" demo={{ react: DemoContentSectionVertical }} />
+<DemoBlock orientation="vertical" gap="huge" vAlign="center" hAlign="bottom" demo={{ react: DemoContentSectionVertical, vue: VueDemoContentSectionVertical }} />
 
-<DemoBlock orientation="horizontal" vAlign="space-evenly" demo={{ react: DemoContentSectionHorizontal }} />
+<DemoBlock orientation="horizontal" vAlign="space-evenly" demo={{ react: DemoContentSectionHorizontal, vue: VueDemoContentSectionHorizontal }} />
 
 ### Action section
 
 Optional, containing one or more action elements ([Button](/product/components/button), [CheckBox](/product/components/check-box), [Select](/product/components/select), etc.).
 
-<DemoBlock orientation="horizontal" vAlign="space-evenly" demo={{ react: DemoActionSectionHorizontal }} />
+<DemoBlock orientation="horizontal" vAlign="space-evenly" demo={{ react: DemoActionSectionHorizontal, vue: VueDemoActionSectionHorizontal }} />
 
-<DemoBlock orientation="vertical" gap="huge" vAlign="center" hAlign="bottom" demo={{ react: DemoActionSectionVertical }} />
+<DemoBlock orientation="vertical" gap="huge" vAlign="center" hAlign="bottom" demo={{ react: DemoActionSectionVertical, vue: VueDemoActionSectionVertical }} />
 
 ## Gap sizes
 
 Generic blocks can have various gap sizes between sections.
 
-<DemoBlock orientation="horizontal" vAlign="space-evenly" demo={{ react: DemoGapSizes }} />
+<DemoBlock orientation="horizontal" vAlign="space-evenly" demo={{ react: DemoGapSizes, vue: VueDemoGapSizes }} />
 
 ## Alignment
 
@@ -63,13 +73,13 @@ Generic blocks can have various gap sizes between sections.
 
 On **Horizontal** orientation, generic blocks can be aligned: `top`, `center` or `bottom`.
 
-<DemoBlock orientation="horizontal" vAlign="space-evenly" demo={{ react: DemoAlignmentsHorizontal }} />
+<DemoBlock orientation="horizontal" vAlign="space-evenly" demo={{ react: DemoAlignmentsHorizontal, vue: VueDemoAlignmentsHorizontal }} />
 
 ### Alignments in vertical orientation
 
 On **Vertical** orientation, generic blocks can be aligned: `right`, `center` or `left`.
 
-<DemoBlock orientation="horizontal" vAlign="space-evenly" demo={{ react: DemoAlignmentsVertical }} />
+<DemoBlock orientation="horizontal" vAlign="space-evenly" demo={{ react: DemoAlignmentsVertical, vue: VueDemoAlignmentsVertical }} />
 
 ### Accessibility concerns
 
@@ -79,4 +89,4 @@ You can, for example, use `<GenericBlock as="article">` so that generic blocks a
 
 ### Properties
 
-<PropTable docs={{ react: ReactGenericBlock }} />
+<PropTable docs={{ react: ReactGenericBlock, vue: VueGenericBlock }} />
