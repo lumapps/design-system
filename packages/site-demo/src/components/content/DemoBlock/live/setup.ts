@@ -36,6 +36,24 @@ export const github = {
     },
 };
 
+/** Convert `@lumx/demo` local imports to node_modules files for Sandpack resolution. */
+function localImportsToNodeModules(localImports: Record<string, string>, defaultExtension: string) {
+    const entries = Object.entries(localImports);
+    if (entries.length === 0) return {};
+    return {
+        '/node_modules/@lumx/demo/package.json': {
+            hidden: true,
+            code: JSON.stringify({ name: '@lumx/demo', version: '0.0.0' }),
+        },
+        ...Object.fromEntries(
+            entries.map(([key, code]) => [
+                `/node_modules/${key}${/\.\w+$/.test(key) ? '' : defaultExtension}`,
+                { hidden: true, code },
+            ]),
+        ),
+    };
+}
+
 /**
  * Setup React Sandpack configuration.
  */
@@ -61,8 +79,6 @@ export function setupReactSandpack(
                         compilerOptions: {
                             jsx: 'react-jsx',
                             lib: ['dom', 'es2021'],
-                            baseUrl: './',
-                            paths: { '@lumx/demo/*': ['@lumx/demo/*'] },
                         },
                         includes: ['**/*'],
                     },
@@ -87,9 +103,7 @@ createRoot(document.getElementById("root"))
     .render(<FlexBox className="demo-block" ${serializedProps}><App /></FlexBox>);
 `.trim(),
             },
-            ...Object.fromEntries(
-                Object.entries(demo.localImports).map(([key, code]) => [key, { hidden: true, code }]),
-            ),
+            ...localImportsToNodeModules(demo.localImports, '.tsx'),
             'App.tsx': {
                 active: true,
                 code: demo.sourceCode,
@@ -139,8 +153,6 @@ export function setupVueSandpack(
                             jsx: 'preserve',
                             esModuleInterop: true,
                             lib: ['dom', 'es2021'],
-                            baseUrl: './',
-                            paths: { '@lumx/demo/*': ['@lumx/demo/*'] },
                         },
                         includes: ['**/*'],
                     },
@@ -148,9 +160,7 @@ export function setupVueSandpack(
                     2,
                 ),
             },
-            ...Object.fromEntries(
-                Object.entries(demo.localImports).map(([key, code]) => [`${key}.vue`, { hidden: true, code }]),
-            ),
+            ...localImportsToNodeModules(demo.localImports, '.vue'),
             '/src/styles.css': {
                 hidden: true,
                 code: BASE_STYLES,
