@@ -35,6 +35,7 @@ export function createStorybookVitestConfig(options) {
             ],
             test: {
                 name,
+                passWithNoTests: true,
                 root: path.join(configDir, '..'),
                 browser: {
                     enabled: true,
