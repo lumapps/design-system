@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   Create the `DragHandle` component
     -   Create the `Uploader` component
     -   Create the `GenericBlock` component
+    -   Create the `InlineList` component
 
 ### Changed
 
@@ -21,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   Moved `Uploader` stories and tests from `@lumx/react`
     -   Made `Uploader` `fileInputProps` type framework-agnostic
     -   Moved `GenericBlock` stories and tests from `@lumx/react`
+    -   Moved `InlineList` from `@lumx/react`
 
 ## [4.7.1][] - 2026-03-10
 

@@ -1,58 +1,22 @@
 import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
-import { render, screen, within } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { queryByClassName } from '@lumx/react/testing/utils/queries';
+import BaseInlineListTests from '@lumx/core/js/components/InlineList/Tests';
 import { InlineList, InlineListProps } from '.';
 
 const CLASSNAME = InlineList.className as string;
 
-const setup = (props: Partial<InlineListProps> = {}) => {
-    render(<InlineList {...props} />);
+const setup = (propsOverride: Partial<InlineListProps> = {}) => {
+    render(<InlineList {...propsOverride} />);
     const inlineList = queryByClassName(document.body, CLASSNAME);
-    return { props, inlineList };
+    return { props: propsOverride, inlineList };
 };
 
 describe(`<${InlineList.displayName}>`, () => {
-    describe('Snapshots and structure', () => {
-        it('should render default', () => {
-            const { inlineList } = setup({ children: ['Some text', 'Some other text'] });
-
-            expect(inlineList).toBeInTheDocument();
-
-            const list = screen.getByRole('list');
-            expect(list).toBeInTheDocument();
-
-            const listItems = within(list).queryAllByRole('listitem');
-            expect(listItems.length).toBe(2);
-            expect(listItems[0]).toHaveTextContent('Some text');
-            expect(listItems[1]).toHaveTextContent('Some other text');
-        });
-
-        it('should render with typography', () => {
-            const { inlineList } = setup({ typography: 'body2', children: 'Some text' });
-            expect(inlineList).toHaveClass('lumx-typography-body2');
-        });
-
-        it('should render with color', () => {
-            const { inlineList } = setup({ color: 'blue', children: 'Some text' });
-            expect(inlineList).toHaveClass('lumx-color-font-blue-N');
-        });
-
-        it('should render with color and variant', () => {
-            const { inlineList } = setup({ color: 'blue', colorVariant: 'D2', children: 'Some text' });
-            expect(inlineList).toHaveClass('lumx-color-font-blue-D2');
-        });
-
-        it('should apply wrap class', () => {
-            const { inlineList } = setup({ wrap: true, children: 'Some text' });
-            expect(inlineList).toHaveClass(`${CLASSNAME}--wrap`);
-        });
-
-        it('should render separators between items', () => {
-            setup({ children: ['Item 1', 'Item 2', 'Item 3'] });
-            const separators = document.querySelectorAll(`.${CLASSNAME}__item-separator`);
-            expect(separators.length).toBe(2);
-            expect(separators[0].textContent).toMatch(/•/);
-        });
+    // Run core tests (items array passed as children via the React wrapper)
+    BaseInlineListTests({
+        render: ({ items, ...props }: any) => render(<InlineList {...props}>{items}</InlineList>),
+        screen,
     });
 
     // Common tests suite.
