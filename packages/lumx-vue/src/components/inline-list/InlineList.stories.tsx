@@ -1,5 +1,5 @@
-import { Icon, InlineList, Text } from '@lumx/react';
-import { withResizableBox } from '@lumx/react/stories/decorators/withResizableBox';
+import { Icon, InlineList, Text } from '@lumx/vue';
+import { withResizableBox } from '@lumx/vue/stories/decorators/withResizableBox';
 import { setup } from '@lumx/core/js/components/InlineList/Stories';
 
 const { meta, ...stories } = setup({
