@@ -1,29 +1,23 @@
 import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
+import BaseDragHandleTests, { setup } from '@lumx/core/js/components/DragHandle/Tests';
+import { DragHandleProps } from '@lumx/core/js/components/DragHandle';
 
-import { render } from '@testing-library/react';
-import { queryByClassName } from '@lumx/react/testing/utils/queries';
-import { Theme } from '@lumx/react';
-import { DragHandle, DragHandleProps } from './DragHandle';
+import { render, screen } from '@testing-library/react';
+import { DragHandle } from './DragHandle';
 
 const CLASSNAME = DragHandle.className as string;
 
-type SetupProps = Partial<DragHandleProps>;
-
-/**
- * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
- */
-const setup = (propsOverride: SetupProps = {}, { wrapper }: SetupRenderOptions = {}) => {
-    const props: DragHandleProps = { ...propsOverride };
-
-    const { container } = render(<DragHandle {...props} />, { wrapper });
-    const handle = queryByClassName(container, CLASSNAME);
-
-    return { props, handle };
-};
-
 describe(`<${DragHandle.displayName}>`, () => {
-    // Common tests suite.
-    commonTestsSuiteRTL(setup, {
+    const renderDragHandle = (props: DragHandleProps, options?: SetupRenderOptions) => {
+        return render(<DragHandle {...props} />, options);
+    };
+
+    BaseDragHandleTests({ render: renderDragHandle, screen });
+
+    const setupDragHandle = (props: Partial<DragHandleProps> = {}, options: SetupRenderOptions = {}) =>
+        setup(props, { ...options, render: renderDragHandle, screen });
+
+    commonTestsSuiteRTL(setupDragHandle, {
         baseClassName: CLASSNAME,
         forwardClassName: 'handle',
         forwardAttributes: 'handle',
@@ -33,24 +27,5 @@ describe(`<${DragHandle.displayName}>`, () => {
             viaProp: true,
             viaContext: true,
         },
-    });
-
-    describe('Rendering', () => {
-        it('should render icon', () => {
-            const { handle } = setup();
-            expect(handle?.querySelector('.lumx-icon')).toBeInTheDocument();
-        });
-
-        it('should use dark color for light theme (default)', () => {
-            const { handle } = setup({ theme: Theme.light });
-            const icon = handle?.querySelector('.lumx-icon');
-            expect(icon).toHaveClass('lumx-icon--color-dark');
-        });
-
-        it('should use light color for dark theme', () => {
-            const { handle } = setup({ theme: Theme.dark });
-            const icon = handle?.querySelector('.lumx-icon');
-            expect(icon).toHaveClass('lumx-icon--color-light');
-        });
     });
 });
