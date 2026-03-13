@@ -1,8 +1,10 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { defineConfig } from 'vitest/config';
-import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
+    resolve: {
+        tsconfigPaths: true,
+    },
     test: {
         globals: true,
         passWithNoTests: true,
@@ -13,5 +15,4 @@ export default defineConfig({
         },
         include: ['src/**/*.{test,spec}.{ts,js}'],
     },
-    plugins: [tsconfigPaths()],
 });

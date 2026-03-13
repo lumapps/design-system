@@ -1,11 +1,10 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable import/no-extraneous-dependencies */
 import { defineConfig } from 'vitest/config';
-import tsconfigPaths from 'vite-tsconfig-paths';
 import optimizeImportsLumxIcons from 'rollup-plugin-optimize-imports-lumx-icons';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import vue from '@vitejs/plugin-vue';
-import { nodeResolve } from '@rollup/plugin-node-resolve';
+
 import dts from 'vite-plugin-dts';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 import path from 'path';
@@ -37,7 +36,7 @@ export default defineConfig({
         },
         outDir: 'dist',
         sourcemap: true,
-        rollupOptions: {
+        rolldownOptions: {
             external(id) {
                 if (id === 'vue') return true;
                 if (id.startsWith('@lumx/icons')) return true;
@@ -51,11 +50,13 @@ export default defineConfig({
                 dir: DIST_PATH,
                 chunkFileNames: '_internal/[hash].js',
             },
-            plugins: [
-                /** Resolve source files. */
-                nodeResolve({ browser: true, extensions }),
-            ],
+            resolve: {
+                extensions,
+            },
         },
+    },
+    resolve: {
+        tsconfigPaths: true,
     },
     plugins: [
         fixEsmImports(),
@@ -67,7 +68,6 @@ export default defineConfig({
             // ensuring the right runtime is used is key.
             babelPlugins: [['@babel/plugin-transform-react-jsx', { runtime: 'automatic', importSource: 'vue' }]],
         }),
-        tsconfigPaths(),
         /** Transform @lumx/icons imports to direct ESM imports. */
         optimizeImportsLumxIcons(),
         dts({
