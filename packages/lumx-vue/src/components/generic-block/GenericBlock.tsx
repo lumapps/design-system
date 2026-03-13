@@ -1,4 +1,4 @@
-import { defineComponent, useAttrs } from 'vue';
+import { type CSSProperties, defineComponent, useAttrs } from 'vue';
 
 import {
     GenericBlock as GenericBlockUI,
@@ -9,6 +9,9 @@ import type { JSXElement } from '@lumx/core/js/types';
 
 import { FlexBox as FlexBoxVue, FlexBoxProps } from '../flex-box';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+
+/** FlexBox section props extended with standard HTML style. */
+type SectionProps = FlexBoxProps & { style?: CSSProperties };
 
 // Follow Vue FlexBox convention: expose verticalAlign/horizontalAlign instead of vAlign/hAlign.
 // figure, actions and content are handled via named slots only (not as VNode props).
@@ -33,15 +36,15 @@ export type GenericBlockProps = VueToJSXProps<
      * The props to forward to the content.
      * By default, the content will have the same alignment as wrapper.
      */
-    contentProps?: FlexBoxProps;
+    contentProps?: SectionProps;
     /**
      * props to forward to the actions element.
      */
-    actionsProps?: FlexBoxProps;
+    actionsProps?: SectionProps;
     /**
      * props to forward to the figure element.
      */
-    figureProps?: FlexBoxProps;
+    figureProps?: SectionProps;
 };
 
 /**

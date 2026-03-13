@@ -23,7 +23,6 @@ export const SectionsInProps = {
     render: (args: any) => (
         <GenericBlock
             {...args}
-            class="test"
             actionsProps={{ style: redBorderStyle }}
             figureProps={{ style: redBorderStyle }}
             contentProps={{ style: redBorderStyle }}
@@ -128,24 +127,24 @@ export const GapSizes = {
     render: (args: any) => (
         <>
             {[Size.regular, Size.big, Size.huge].map((gap) => (
-                <GenericBlock key={gap} orientation="vertical" gap={gap} style={{ marginBottom: '40px' }}>
+                <GenericBlock
+                    key={gap}
+                    orientation="vertical"
+                    gap={gap}
+                    style={{ marginBottom: '40px' }}
+                    figureProps={{ style: redBorderStyle }}
+                    contentProps={{ style: redBorderStyle }}
+                    actionsProps={{ style: redBorderStyle }}
+                >
                     {{
-                        figure: () => (
-                            <div style={redBorderStyle}>
-                                <Icon icon={mdiPencil} size={Size.m} />
-                            </div>
-                        ),
+                        figure: () => <Icon icon={mdiPencil} size={Size.m} />,
                         default: () => (
-                            <div style={redBorderStyle}>
+                            <>
                                 <h2>{gap} gap size</h2>
                                 <p>block description</p>
-                            </div>
+                            </>
                         ),
-                        actions: () => (
-                            <div style={redBorderStyle}>
-                                <Button theme={args.theme}>Button</Button>
-                            </div>
-                        ),
+                        actions: () => <Button theme={args.theme}>Button</Button>,
                     }}
                 </GenericBlock>
             ))}
@@ -156,10 +155,10 @@ export const GapSizes = {
 export const AsAFigure = {
     ...stories.AsAFigure,
     render: () => (
-        <GenericBlock as="figure" orientation="vertical" style={{ width: '150px' }}>
+        <GenericBlock as="figure" orientation="vertical" style={{ width: '150px' }} contentProps={{ as: 'figcaption' }}>
             {{
                 figure: () => <Thumbnail alt="" image={IMAGES.portrait1s200} aspectRatio="horizontal" />,
-                default: () => <figcaption>Rocky mountain landscape</figcaption>,
+                default: () => 'Rocky mountain landscape',
             }}
         </GenericBlock>
     ),
