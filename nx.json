@@ -2,12 +2,7 @@
     "$schema": "./node_modules/nx/schemas/nx-schema.json",
     "defaultBase": "master",
     "namedInputs": {
-        "sharedGlobals": [
-            "{workspaceRoot}/yarn.lock",
-            "{workspaceRoot}/tsconfig.json",
-            "{workspaceRoot}/package.json",
-            "{workspaceRoot}/.nvmrc"
-        ],
+        "sharedGlobals": ["{workspaceRoot}/tsconfig.json", "{workspaceRoot}/package.json", "{workspaceRoot}/.nvmrc"],
         "sourceFiles": [
             "sharedGlobals",
             "{projectRoot}/**/*",
