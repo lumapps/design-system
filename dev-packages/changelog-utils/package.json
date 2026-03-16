@@ -2,7 +2,5 @@
     "name": "@lumx/changelog-utils",
     "private": true,
     "main": "index.js",
-    "scripts": {
-        "test": "node --test index.test.js #"
-    }
+    "scripts": {}
 }
