@@ -7,7 +7,7 @@ const importUrl = new URL(import.meta.url);
 const postcss = path.join('../..', importUrl.pathname, 'configs');
 
 const config: StorybookConfig = {
-    addons: ['@storybook/addon-a11y', '@chromatic-com/storybook'],
+    addons: ['@storybook/addon-a11y'],
     stories: ['../src/**/*.stories.@(js|jsx|ts|tsx)'],
     staticDirs: ['../../site-demo/static/'],
     framework: '@storybook/react-vite',
