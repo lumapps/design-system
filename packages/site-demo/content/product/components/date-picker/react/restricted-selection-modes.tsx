@@ -1,12 +1,11 @@
 import { useState } from 'react';
 import { DatePicker } from '@lumx/react';
 
-const today = new Date();
-const maxDate = new Date(today);
-const minDate = new Date(today);
-minDate.setDate(minDate.getDate() - 1);
+export default ({ today = new Date() }: { today?: Date }) => {
+    const maxDate = new Date(today);
+    const minDate = new Date(today);
+    minDate.setDate(minDate.getDate() - 1);
 
-export default () => {
     const [datePicked, setDatePicked] = useState<Date | undefined>(maxDate);
     return (
         <>

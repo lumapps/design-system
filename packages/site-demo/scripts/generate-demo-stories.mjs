@@ -30,6 +30,15 @@ const STORY_TITLES = {
 const CATEGORIES_GLOB = `{${Object.keys(STORY_TITLES).join(',')}}`;
 
 /**
+ * Stable args injected into specific demo stories for visual-diff stability.
+ * Keys are folder names (e.g. 'date-picker'), values are JS expression strings
+ * that will be emitted as the `args` property of the story meta.
+ */
+const STABLE_STORY_ARGS = {
+    'date-picker': '{ today: new Date(2025, 0, 15) }',
+};
+
+/**
  * Convert a kebab-case demo file name to a PascalCase story name.
  * E.g. "high-emphasis" -> "HighEmphasis"
  * @param {string} name
@@ -89,8 +98,11 @@ function generateStories(folder, demos, { prefix, fw, importExt, storyTitle }) {
         ...demos.map((d) => `import ${d.storyName}Component from '${prefix}/${folder}/${fw}/${d.name}${importExt}';`),
     ];
 
+    const stableArgs = STABLE_STORY_ARGS[folder];
     const stories = demos
-        .map((d) => `export const ${d.storyName} = { render: () => <${d.storyName}Component /> };`)
+        .map((d) => {
+	    return `export const ${d.storyName} = { render: (args: any) => <${d.storyName}Component {...args} /> };`;
+        })
         .join('\n');
 
     return [
@@ -98,7 +110,7 @@ function generateStories(folder, demos, { prefix, fw, importExt, storyTitle }) {
         ``,
         imports.join('\n'),
         ``,
-        `export default {\n    title: '${storyTitle}/${folder}/Demos',\n    decorators: [withWrapper({ vAlign: 'space-evenly', hAlign: 'center', wrap: true }, FlexBox)],\n};`,
+        `export default {\n    title: '${storyTitle}/${folder}/Demos',\n    args: ${stableArgs || '{}'},\n    decorators: [withWrapper({ vAlign: 'space-evenly', hAlign: 'center', wrap: true }, FlexBox)],\n};`,
         ``,
         stories,
         ``,
