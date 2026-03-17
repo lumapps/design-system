@@ -1,6 +1,5 @@
 {
     "name": "@lumx/changelog-utils",
     "private": true,
-    "main": "index.js",
-    "scripts": {}
+    "main": "index.js"
 }
