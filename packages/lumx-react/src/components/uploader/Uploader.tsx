@@ -85,14 +85,16 @@ export const Uploader = forwardRef<UploaderProps>((props, ref) => {
         isAnyDisabled,
         isDragHovering,
         theme,
-        fileInputProps: {
-            ...fileInputProps,
-            ...disabledStateProps,
-            readOnly: isAnyDisabled,
-            onDragEnter: setDragHovering,
-            onDragLeave: unsetDragHovering,
-            onDrop: unsetDragHovering,
-        },
+        fileInputProps: fileInputProps
+            ? {
+                  ...fileInputProps,
+                  ...disabledStateProps,
+                  readOnly: isAnyDisabled,
+                  onDragEnter: setDragHovering,
+                  onDragLeave: unsetDragHovering,
+                  onDrop: unsetDragHovering,
+              }
+            : undefined,
         ...wrapper.props,
         ...forwardedProps,
     });
