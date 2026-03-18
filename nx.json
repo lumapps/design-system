@@ -1,6 +1,9 @@
 {
     "$schema": "./node_modules/nx/schemas/nx-schema.json",
     "defaultBase": "master",
+    "tui": {
+        "enabled": true
+    },
     "namedInputs": {
         "sharedGlobals": ["{workspaceRoot}/tsconfig.json", "{workspaceRoot}/package.json", "{workspaceRoot}/.nvmrc"],
         "sourceFiles": [
@@ -53,14 +56,29 @@
             "cache": true
         },
         "visual-diffs": {
-            "dependsOn": [{ "projects": ["@lumx/react", "@lumx/vue"], "target": "test:storybook:visual" }],
+            "dependsOn": [
+                {
+                    "projects": ["@lumx/react", "@lumx/vue"],
+                    "target": "test:storybook:visual"
+                }
+            ],
             "outputs": ["{workspaceRoot}/visual-diffs"],
             "cache": true
         },
-        "start:storybook": { "cache": false },
-        "start": { "cache": false },
-        "clean": { "cache": false },
-        "generate:icons": { "cache": false },
-        "generate:design-tokens": { "cache": false }
+        "start:storybook": {
+            "cache": false
+        },
+        "start": {
+            "cache": false
+        },
+        "clean": {
+            "cache": false
+        },
+        "generate:icons": {
+            "cache": false
+        },
+        "generate:design-tokens": {
+            "cache": false
+        }
     }
 }
