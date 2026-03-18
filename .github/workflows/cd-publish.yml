@@ -334,6 +334,23 @@ jobs:
             - name: 'Create release note'
               uses: ./.github/actions/release-note
 
+    bump_lumapps_web:
+        name: 'Bump LumX in lumapps-web'
+        needs: [check_trigger, build_publish_NPM]
+        if: >-
+            !failure() && (
+                needs.check_trigger.outputs.version ||
+                needs.build_publish_NPM.outputs.distTag == 'next'
+            )
+        runs-on: ubuntu-latest
+        steps:
+            - name: 'Trigger lumapps-web bump workflow'
+              env:
+                  GH_TOKEN: ${{ secrets.GITBOT_TOKEN }}
+              run: |
+                  gh workflow run -R lumapps/lumapps-web workflow-bump-lumx.yml \
+                      -f version=${{ needs.build_publish_NPM.outputs.distTag }}
+
     deploy_storybook_react:
         name: 'Deploy storybook (lumx-react)'
         if: needs.check_trigger.outputs.version
