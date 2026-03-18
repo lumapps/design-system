@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   `@lumx/core`:
+    -   Add internal `focusNavigation` utility (`createListFocusNavigation`, `setupRovingTabIndex`)
+
+### Changed
+
+-   `@lumx/react`:
+    -   `TabList`, `ProgressTracker`, `SlideshowControls`: arrow keys now support Home/End and skip disabled items (WAI-ARIA Tabs Pattern)
+
 ## [4.8.1][] - 2026-03-18
 
 ### Fixed

@@ -6,7 +6,7 @@ import { classNames } from '@lumx/core/js/utils';
 import { mergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
-import { useRovingTabIndex } from '../../hooks/useRovingTabIndex';
+import { useRovingTabIndexContainer } from '../../hooks/useRovingTabIndexContainer';
 import { useTabProviderContextState } from '../tabs/state';
 
 /**
@@ -47,11 +47,9 @@ const DEFAULT_PROPS: Partial<ProgressTrackerProps> = {};
 export const ProgressTracker = forwardRef<ProgressTrackerProps, HTMLDivElement>((props, ref) => {
     const { 'aria-label': ariaLabel, children, className, ...forwardedProps } = props;
     const stepListRef = React.useRef(null);
-    useRovingTabIndex({
-        parentRef: stepListRef,
-        elementSelector: '[role="tab"]',
-        keepTabIndex: false,
-        extraDependencies: [children],
+    useRovingTabIndexContainer({
+        containerRef: stepListRef,
+        itemSelector: '[role="tab"]',
     });
 
     const state = useTabProviderContextState();

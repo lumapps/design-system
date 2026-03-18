@@ -57,8 +57,11 @@ describe('TabProvider', () => {
             expect(tabPanel3).toBeInTheDocument();
             expect(tab3).toHaveAttribute('aria-controls', tabPanel3?.id);
 
-            // First tab is active
+            // First tab is active — it should be the roving tabindex entry point
             checkTabActive('Tab 1');
+            expect(tab1).toHaveAttribute('tabindex', '0');
+            expect(tab2).toHaveAttribute('tabindex', '-1');
+            expect(tab3).toHaveAttribute('tabindex', '-1');
         });
 
         it('should switch tab on click', async () => {
@@ -92,7 +95,7 @@ describe('TabProvider', () => {
             await userEvent.tab({ shift: true });
             expect(query.tab('Tab 1')).toHaveFocus();
 
-            // Navigate with ArrowRight to go to the next tab (tab2)
+            // Navigate with ArrowRight — goes to disabled tab2
             await userEvent.keyboard('[ArrowRight]');
             expect(query.tab('Tab 2')).toHaveFocus();
 
@@ -101,7 +104,7 @@ describe('TabProvider', () => {
             expect(query.tab('Tab 2')).toHaveFocus();
             checkTabActive('Tab 1');
 
-            // Navigate with ArrowRight to go to the next tab (tab3)
+            // Navigate with ArrowRight to go to tab3
             await userEvent.keyboard('[ArrowRight]');
             expect(query.tab('Tab 3')).toHaveFocus();
 
@@ -122,10 +125,35 @@ describe('TabProvider', () => {
             await userEvent.keyboard('[ArrowRight]');
             expect(query.tab('Tab 1')).toHaveFocus();
 
-            // Navigate with ArrowLeft to loop back to the last tab (tab3)
+            // Navigate with ArrowLeft to loop back to the last tab (tab3), through disabled tab2
             await userEvent.keyboard('[ArrowLeft]');
             expect(query.tab('Tab 3')).toHaveFocus();
 
+            checkTabActive('Tab 3');
+        });
+
+        it('should navigate with Home and End keys', async () => {
+            setup();
+
+            // Tab into the tab list
+            await userEvent.tab();
+            expect(query.tab('Tab 1')).toHaveFocus();
+
+            // End key should go to the last tab (tab3)
+            await userEvent.keyboard('[End]');
+            expect(query.tab('Tab 3')).toHaveFocus();
+
+            // Home key should go to the first tab (tab1)
+            await userEvent.keyboard('[Home]');
+            expect(query.tab('Tab 1')).toHaveFocus();
+        });
+    });
+
+    describe('initial activeTabIndex', () => {
+        it('should render the correct tab as active on first render when activeTabIndex is non-zero', () => {
+            setup({ activeTabIndex: 2 });
+
+            // Tab 3 (index 2) should be active from the very first render
             checkTabActive('Tab 3');
         });
     });
@@ -191,14 +219,16 @@ describe('TabProvider', () => {
             expect(query.tab('Tab 1')).toHaveFocus();
             checkTabActive('Tab 1');
 
+            // ArrowRight goes to disabled tab2 (shouldActivateOnFocus has no effect on disabled tabs)
             await userEvent.keyboard('[ArrowRight]');
             expect(query.tab('Tab 2')).toHaveFocus();
-            // Active tab not changed since tab 2 is disabled
+            // Active tab unchanged since tab 2 is disabled
             checkTabActive('Tab 1');
 
+            // ArrowRight goes to tab3
             await userEvent.keyboard('[ArrowRight]');
             expect(query.tab('Tab 3')).toHaveFocus();
-            // Active tab changed to tab 3
+            // Active tab changed to tab 3 (since shouldActivateOnFocus is true)
             checkTabActive('Tab 3');
         });
     });

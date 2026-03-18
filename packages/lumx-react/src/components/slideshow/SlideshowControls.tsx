@@ -9,7 +9,7 @@ import type { LumxClassName } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
 import { WINDOW } from '@lumx/react/constants';
 import { useSlideshowControls, DEFAULT_OPTIONS } from '@lumx/react/hooks/useSlideshowControls';
-import { useRovingTabIndex } from '@lumx/react/hooks/useRovingTabIndex';
+import { useRovingTabIndexContainer } from '@lumx/react/hooks/useRovingTabIndexContainer';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
@@ -121,11 +121,10 @@ const InternalSlideshowControls = forwardRef<SlideshowControlsProps, HTMLDivElem
     /**
      * Add roving tab index pattern to pagination items and activate slide on focus.
      */
-    useRovingTabIndex({
-        parentRef: paginationRef,
-        elementSelector: 'button',
-        keepTabIndex: true,
-        onElementFocus: (el) => {
+    useRovingTabIndexContainer({
+        containerRef: paginationRef,
+        itemSelector: 'button',
+        onItemFocused: (el) => {
             el.click();
         },
     });
