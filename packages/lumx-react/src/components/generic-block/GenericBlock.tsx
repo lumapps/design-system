@@ -15,7 +15,7 @@ import {
     CLASSNAME,
     COMPONENT_NAME,
     DEFAULT_PROPS,
-    GenericBlockSectionProps,
+    GenericBlockSectionProps as UISectionProps,
 } from '@lumx/core/js/components/GenericBlock';
 import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 
@@ -25,6 +25,11 @@ export interface GenericBlockProps extends GenericProps, ReactToJSX<UIProps, Gen
      * ({@see GenericBlock.Figure}, {@see GenericBlock.Content} & {@see GenericBlock.Actions})
      */
     children: ReactNode;
+}
+
+export interface GenericBlockSectionProps extends GenericProps, ReactToJSX<UISectionProps> {
+    /** Customize the root element. */
+    as?: React.ElementType;
 }
 
 type BaseGenericBlock = Comp<GenericBlockProps, HTMLDivElement>;

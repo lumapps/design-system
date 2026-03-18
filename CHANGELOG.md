@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   `@lumx/react`:
+    -   `GenericBlock`: fix `GenericBlockSectionProps` typing to support `as` and HTML attributes on sub-components (`Figure`, `Content`, `Actions`)
+
 ## [4.8.0][] - 2026-03-17
 
 ### Added
@@ -30,6 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [4.7.1][] - 2026-03-10
 
 ### Fixed
+
 -   `@lumx/react`:
     -   `TextField`: fix prop type
     -   `TextField`: fix prop forwarding
@@ -84,7 +90,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   Create the `Popover` component
     -   Create the `PopoverDialog` component
 -   `@lumx/react`:
-    -    `Dialog`: added `closeMode` to `"unmount"` (default) or `"hide"` the dialog when closed
+    -   `Dialog`: added `closeMode` to `"unmount"` (default) or `"hide"` the dialog when closed
 
 ### Changed
 
