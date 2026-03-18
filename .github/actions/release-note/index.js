@@ -4,7 +4,7 @@ const fs = require('fs');
 
 const { getStoryBookURL, getShortSHA } = require('../utils');
 const { CHANGELOG_PATH } = require('../../../configs/path');
-const { extractLatestVersionSection } = require('@lumx/changelog-utils');
+const { extractLatestVersionSection } = require('../../../dev-packages/changelog-utils');
 
 /**
  * Generate release note and create a release on GH.
