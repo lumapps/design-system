@@ -32,7 +32,7 @@ const DEFAULT_PROPS: Partial<TabProviderProps> = {
  */
 export const TabProvider: React.FC<TabProviderProps> = (props) => {
     const { children, onChange, ...propState } = props;
-    const [state, dispatch] = useReducer(reducer, INIT_STATE);
+    const [state, dispatch] = useReducer(reducer, { ...INIT_STATE, ...DEFAULT_PROPS, ...propState });
 
     // On prop state change => dispatch update.
     useEffect(

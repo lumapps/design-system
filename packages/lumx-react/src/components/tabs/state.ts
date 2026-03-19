@@ -1,5 +1,6 @@
-import { Dispatch, createContext, useCallback, useContext, useEffect, useMemo } from 'react';
+import { Dispatch, createContext, useCallback, useContext, useMemo } from 'react';
 import { useId } from '@lumx/react/hooks/useId';
+import { useIsomorphicLayoutEffect } from '@lumx/react/hooks/useIsomorphicLayoutEffect';
 
 type TabType = 'tab' | 'tabPanel';
 
@@ -79,7 +80,7 @@ export const useTabProviderContext = (type: TabType, originalId?: string): undef
     const generatedId = useId();
     const id = originalId || generatedId;
 
-    useEffect(
+    useIsomorphicLayoutEffect(
         () => {
             // On mount: register tab or tab panel id.
             dispatch({ type: 'register', payload: { type, id } });

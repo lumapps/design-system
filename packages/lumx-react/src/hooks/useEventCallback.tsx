@@ -1,17 +1,23 @@
 import React from 'react';
 
-const useEnhancedEffect = typeof window !== 'undefined' ? React.useLayoutEffect : React.useEffect;
+import { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect';
 
 /**
+ * Returns a stable callback that always calls the latest version of `fn`.
+ * Useful to avoid re-running effects when a callback prop changes reference.
+ *
  * https://github.com/facebook/react/issues/14099#issuecomment-440013892
  *
- * @param fn A function to run
- * @return A React callback
+ * @param fn A function to stabilize.
+ * @return A stable function with the same signature.
  */
-export default function useEventCallback(fn: (...args: any[]) => any): (event: any) => any {
+export function useEventCallback<T extends ((...args: any[]) => any) | undefined>(
+    fn: T,
+): T extends (...args: any[]) => any ? T : (...args: any[]) => undefined {
     const ref = React.useRef(fn);
-    useEnhancedEffect(() => {
+    useIsomorphicLayoutEffect(() => {
         ref.current = fn;
     });
-    return React.useCallback((event: any) => ref.current(event), []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    return React.useCallback((...args: any[]) => ref.current?.(...args), []) as any;
 }

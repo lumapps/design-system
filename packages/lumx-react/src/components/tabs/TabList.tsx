@@ -7,7 +7,7 @@ import { mergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 
-import { useRovingTabIndex } from '../../hooks/useRovingTabIndex';
+import { useRovingTabIndexContainer } from '../../hooks/useRovingTabIndexContainer';
 import { TABS_CLASSNAME as CLASSNAME } from './constants';
 
 const { block, element } = classNames.bem(CLASSNAME);
@@ -65,11 +65,9 @@ export const TabList = forwardRef<TabListProps, HTMLDivElement>((props, ref) => 
         ...forwardedProps
     } = props;
     const tabListRef = React.useRef(null);
-    useRovingTabIndex({
-        parentRef: tabListRef,
-        elementSelector: '[role="tab"]',
-        keepTabIndex: false,
-        extraDependencies: [children],
+    useRovingTabIndexContainer({
+        containerRef: tabListRef,
+        itemSelector: '[role="tab"]',
     });
 
     return (

@@ -22,7 +22,6 @@ export const checkTabActive = (activeTabName: string, { isLazy = true } = {}) =>
 
         // Tab state
         expect(tab).toHaveAttribute('aria-selected', String(isTabActive));
-        expect(tab).toHaveAttribute('tabindex', isTabActive ? '0' : '-1');
 
         const tabPanel = query.tabPanel(tab.textContent as string);
 

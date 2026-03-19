@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import { vi } from 'vitest';
-import useEventCallback from './useEventCallback';
+import { useEventCallback } from './useEventCallback';
 
 describe('useEventCallback', () => {
     it('should return a stable callback', () => {

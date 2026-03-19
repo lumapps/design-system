@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 
-import { Alignment, Button, Dialog, Tab, TabList, TabListLayout, TabPanel, TabProvider } from '@lumx/react';
+import { Alignment, Tab, TabList, TabListLayout, TabPanel, TabProvider } from '@lumx/react';
 import { iconArgType } from '@lumx/core/stories/controls/icons';
 import { getSelectArgType } from '@lumx/core/stories/controls/selectArgType';
 import { withNestedProps } from '@lumx/react/stories/decorators/withNestedProps';
@@ -104,42 +104,6 @@ export const Controlled = {
                     <TabPanel className="lumx-spacing-padding-huge">Tab c content</TabPanel>
                 </TabProvider>
             </>
-        );
-    },
-    parameters: { chromatic: { disable: true } },
-    tags: ['!snapshot'],
-};
-
-/* Display tabs far from their tab panels. */
-export const SplitTabListAndTabPanels = {
-    render() {
-        const [isOpen, setOpen] = useState(true);
-        const [activeTabIndex, onChange] = useState(1);
-
-        return (
-            <TabProvider activeTabIndex={activeTabIndex} onChange={onChange} isLazy={false}>
-                <Button
-                    onClick={() => {
-                        setOpen(!isOpen);
-                        onChange(1);
-                    }}
-                >
-                    Open dialog with tabs in footer
-                </Button>
-                <Dialog isOpen={isOpen} forceFooterDivider onClose={() => setOpen(false)}>
-                    <TabPanel className="lumx-spacing-padding-huge">Tab 1 content</TabPanel>
-                    <TabPanel className="lumx-spacing-padding-huge">Tab 2 content</TabPanel>
-                    <TabPanel className="lumx-spacing-padding-huge">Tab 3 content</TabPanel>
-
-                    <footer>
-                        <TabList aria-label="Tab list">
-                            <Tab label="Tab 1" />
-                            <Tab label="Tab 2" />
-                            <Tab label="Tab 3" />
-                        </TabList>
-                    </footer>
-                </Dialog>
-            </TabProvider>
         );
     },
     parameters: { chromatic: { disable: true } },

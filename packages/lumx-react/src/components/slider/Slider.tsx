@@ -2,7 +2,7 @@
 import { SyntheticEvent, useMemo, useRef } from 'react';
 
 import { InputHelper, InputLabel, Theme } from '@lumx/react';
-import useEventCallback from '@lumx/react/hooks/useEventCallback';
+import { useEventCallback } from '@lumx/react/hooks/useEventCallback';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
@@ -182,9 +182,9 @@ export const Slider = forwardRef<SliderProps, HTMLDivElement>((props, ref) => {
      * Clean a all listeners.
      */
     const handleEnd = useEventCallback(() => {
-        document.body.removeEventListener('mousemove', handleMove);
+        document.body.removeEventListener('mousemove', handleMove as any);
         document.body.removeEventListener('mouseup', handleEnd);
-        document.body.removeEventListener('touchmove', handleMove);
+        document.body.removeEventListener('touchmove', handleMove as any);
         document.body.removeEventListener('touchend', handleEnd);
     });
 
@@ -228,7 +228,7 @@ export const Slider = forwardRef<SliderProps, HTMLDivElement>((props, ref) => {
             onChange(computeValueFromPercent(newValue, min, max, precision), name, event);
         }
 
-        document.body.addEventListener('mousemove', handleMove);
+        document.body.addEventListener('mousemove', handleMove as any);
         document.body.addEventListener('mouseup', handleEnd);
     });
 
