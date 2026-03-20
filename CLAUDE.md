@@ -94,12 +94,12 @@ yarn type-check                # TypeScript checking
 
 ## SKILLS (Claude)
 
-| Skill               | When                                                     |
-| ------------------- | -------------------------------------------------------- |
-| `react-component`   | Scaffold new React component                             |
-| `vue-docs`          | Add Vue demos + PropTable to docs                        |
-| `migrate-component` | Move React-only → core/React/Vue architecture            |
-| `visual-diffs`      | Debug visual diffs in Storybook screenshots              |
+| Skill               | When                                          |
+| ------------------- | --------------------------------------------- |
+| `react-component`   | Scaffold new React component                  |
+| `vue-docs`          | Add Vue demos + PropTable to docs             |
+| `migrate-component` | Move React-only → core/React/Vue architecture |
+| `visual-diffs`      | Debug visual diffs in Storybook screenshots   |
 
 ## NOTES
 
@@ -109,3 +109,14 @@ yarn type-check                # TypeScript checking
 -   `site-demo` is private (not published); consuming docs live at design.lumapps.com
 -   All packages share the same version (4.6.0) — bumped together on release
 -   PR workflow: branch → PR → CI (lint + test + visual) → "need: review-frontend" label → approve → "need: test" → merge
+
+## PACKAGE DETAILS
+
+Load the relevant file when working in a specific package:
+
+-   `packages/lumx-core/CLAUDE.md`
+-   `packages/lumx-react/CLAUDE.md`
+-   `packages/lumx-vue/CLAUDE.md`
+-   `packages/lumx-icons/CLAUDE.md`
+-   `packages/site-demo/CLAUDE.md`
+-   `dev-packages/CLAUDE.md`
