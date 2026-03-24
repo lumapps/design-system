@@ -1,8 +1,9 @@
 import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
-import { render, within, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { getByClassName, queryByClassName } from '@lumx/react/testing/utils/queries';
-import { Text, Thumbnail, Size, Orientation } from '@lumx/react';
+import { Text, Thumbnail, Orientation } from '@lumx/react';
 import userEvent from '@testing-library/user-event';
+import BaseUserBlockTests from '@lumx/core/js/components/UserBlock/Tests';
 
 import { UserBlock, UserBlockProps } from './UserBlock';
 
@@ -26,17 +27,14 @@ const setup = (propsOverride: Partial<UserBlockProps> = {}, { wrapper }: SetupRe
 };
 
 describe(`<${UserBlock.displayName}>`, () => {
-    describe('Props', () => {
-        it('should apply orientation class', () => {
-            const { userBlock } = setup({ orientation: Orientation.vertical });
-            expect(userBlock).toHaveClass(`${CLASSNAME}--orientation-vertical`);
-        });
+    // Run core tests
+    BaseUserBlockTests({
+        render: (props: UserBlockProps) => render(<UserBlock {...props} />),
+        screen,
+    });
 
-        it('should apply size class', () => {
-            const { userBlock } = setup({ size: Size.s });
-            expect(userBlock).toHaveClass(`${CLASSNAME}--size-s`);
-        });
-
+    // React-specific tests
+    describe('React', () => {
         it('should render actions in vertical orientation', () => {
             setup({
                 orientation: Orientation.vertical,
@@ -91,13 +89,6 @@ describe(`<${UserBlock.displayName}>`, () => {
             expect(thumbnail).toHaveAttribute('href', props.linkProps?.href);
         });
 
-        it('should render fields', () => {
-            const { fields } = setup({ fields: ['Field 1', 'Field 2'] });
-            expect(fields).toBeInTheDocument();
-            expect(within(fields as any).getByText('Field 1')).toBeInTheDocument();
-            expect(within(fields as any).getByText('Field 2')).toBeInTheDocument();
-        });
-
         it('should render additional fields', () => {
             setup({ additionalFields: <Text as="span">Works in Toronto</Text> });
             expect(screen.queryByText(/works in toronto/i)).toBeInTheDocument();
@@ -110,7 +101,7 @@ describe(`<${UserBlock.displayName}>`, () => {
         });
     });
 
-    // Common tests suite.
+    // Common tests suite
     commonTestsSuiteRTL(setup, {
         baseClassName: CLASSNAME,
         forwardClassName: 'userBlock',
