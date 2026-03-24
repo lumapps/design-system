@@ -14,6 +14,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+-   `@lumx/core`:
+    -   Moved `UserBlock` stories and tests from `@lumx/react`
 -   `@lumx/react`:
     -   `TabList`, `ProgressTracker`, `SlideshowControls`: arrow keys now support Home/End and skip disabled items (WAI-ARIA Tabs Pattern)
 

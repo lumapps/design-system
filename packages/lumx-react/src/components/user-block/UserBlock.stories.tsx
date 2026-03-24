@@ -1,142 +1,51 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import { mdiMenuDown, mdiStar } from '@lumx/icons';
-import { Badge, ColorPalette, Icon, IconButton, Link, Orientation, Size, Text } from '@lumx/react';
+import { Badge, Icon, IconButton, Link, Text } from '@lumx/react';
 import { CustomLink } from '@lumx/react/stories/utils/CustomLink';
-
-import { AVATAR_IMAGES } from '@lumx/core/stories/controls/image';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
-import { getSelectArgType } from '@lumx/core/stories/controls/selectArgType';
 import { withResizableBox } from '@lumx/react/stories/decorators/withResizableBox';
+import { setup } from '@lumx/core/js/components/UserBlock/Stories';
 import { UserBlock } from './UserBlock';
 
-const sizes = [Size.xs, Size.s, Size.m, Size.l];
+const { meta, ...stories } = setup({
+    component: UserBlock,
+    components: { Text, Icon, IconButton, Badge, Link },
+    decorators: { withCombinations },
+});
 
 export default {
     title: 'LumX components/user-block/UserBlock',
-    component: UserBlock,
-    args: UserBlock.defaultProps,
-    argTypes: {
-        size: getSelectArgType(sizes),
-        orientation: getSelectArgType(Orientation),
-    },
+    ...meta,
     decorators: [withResizableBox({ width: 'auto', height: 'auto' })],
 };
 
-/** Only an avatar */
-export const AvatarOnly = {
-    args: { avatarProps: { image: AVATAR_IMAGES.avatar1 } },
-};
-
-/** Avatar and name */
-export const AvatarAndName = {
-    args: { ...AvatarOnly.args, name: 'Emmitt O. Lum' },
-};
-
-/** Avatar and children */
-export const AvatarAndCustomName = {
-    args: {
-        ...AvatarOnly.args,
-        name: (
-            <Text as="span" color="green">
-                Emmitt O. Lum
-            </Text>
-        ),
-    },
-};
-
-/** Avatar, name and secondary fields */
-export const AvatarAndNameAndSecondaryFields = {
-    args: {
-        ...AvatarAndName.args,
-        fields: ['Creative developer', 'Denpasar'],
-    },
-};
-
-/** With Right component */
-export const WithAfter = {
-    args: {
-        ...AvatarAndNameAndSecondaryFields.args,
-        after: <IconButton label="View" icon={mdiMenuDown} emphasis="low" />,
-    },
-};
-
-/** With after component */
+export const AvatarOnly = { ...stories.AvatarOnly };
+export const AvatarAndName = { ...stories.AvatarAndName };
+export const AvatarAndCustomName = { ...stories.AvatarAndCustomName };
+export const AvatarAndNameAndSecondaryFields = { ...stories.AvatarAndNameAndSecondaryFields };
+export const WithAfter = { ...stories.WithAfter };
 export const WithAdditionalFields = {
-    args: {
-        ...AvatarAndName.args,
-        fields: [
-            <Text key={0} as="span" color="dark">
-                Published a post in <Link href="#">Space</Link>
-            </Text>,
-            <time key={1}>May 13, 2025</time>,
-        ],
-        additionalFields: (
-            <Text as="span" typography="body1">
-                Works at the Toronto office
-            </Text>
-        ),
-    },
+    ...stories.WithAdditionalFields,
     parameters: {
-        // Testing constrained space
         wrapperProps: { style: { width: 245 } },
     },
 };
-
-/** Size variants */
-export const SizesAndOrientations = {
-    args: AvatarAndNameAndSecondaryFields.args,
-    decorators: [
-        withCombinations({
-            combinations: {
-                rows: { key: 'size', options: sizes },
-                cols: { key: 'orientation', options: Object.values(Orientation) },
-            },
-        }),
-    ],
-};
-
-/** Demo text ellipsis on name and fields */
+export const SizesAndOrientations = { ...stories.SizesAndOrientations };
 export const WithConstrainedSize = {
-    args: AvatarAndNameAndSecondaryFields.args,
+    ...stories.WithConstrainedSize,
     parameters: {
-        // Testing constrained space
         wrapperProps: { style: { width: 150, resize: 'horizontal' } },
     },
 };
-
-/** Setting `onClick` to use it as a button */
 export const AsButton = {
-    args: AvatarAndNameAndSecondaryFields.args,
+    ...stories.AsButton,
     argTypes: { onClick: { action: true } },
 };
-
-/** Setting the `linkProps` prop to use it as a link */
-export const AsLink = {
-    args: {
-        ...AvatarAndNameAndSecondaryFields.args,
-        linkProps: { href: 'https://example.com' },
-    },
-};
+export const AsLink = { ...stories.AsLink };
+export const WithBadge = { ...stories.WithBadge };
 
 /** Setting the `linkAs` prop to inject a custom link component */
 export const AsCustomLink = {
     args: {
         ...AvatarAndNameAndSecondaryFields.args,
         linkAs: CustomLink,
-    },
-};
-
-/** Setting the `avatarProps.badge` prop to inject a badge */
-export const WithBadge = {
-    args: {
-        ...AvatarAndNameAndSecondaryFields.args,
-        avatarProps: {
-            ...AvatarAndNameAndSecondaryFields.args.avatarProps,
-            badge: (
-                <Badge color={ColorPalette.blue}>
-                    <Icon icon={mdiStar} />
-                </Badge>
-            ),
-        },
     },
 };

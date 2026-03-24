@@ -1,76 +1,45 @@
 import React, { ReactNode } from 'react';
 
-import isEmpty from 'lodash/isEmpty';
-import set from 'lodash/set';
-
-import { Avatar, ColorPalette, Link, Orientation, Size, Theme, Text } from '@lumx/react';
-import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
+import { Avatar, Theme, Text, Link, ColorPalette } from '@lumx/react';
+import { GenericProps } from '@lumx/react/utils/type';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
+import {
+    UserBlock as UI,
+    UserBlockProps as UIProps,
+    UserBlockPropsToOverride,
+    CLASSNAME,
+    COMPONENT_NAME,
+    DEFAULT_PROPS,
+    element,
+    isUserBlockClickeable,
+    UserBlockSize,
+} from '@lumx/core/js/components/UserBlock';
+import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
+
+import isEmpty from 'lodash/isEmpty';
+import set from 'lodash/set';
+import { classNames } from '@lumx/core/js/utils';
 import { AvatarProps } from '../avatar/Avatar';
 
-/**
- * User block sizes.
- */
-export type UserBlockSize = Extract<Size, 'xs' | 's' | 'm' | 'l'>;
+export type { UserBlockSize };
 
 /**
  * Defines the props of the component.
  */
-export interface UserBlockProps extends GenericProps, HasTheme {
+export interface UserBlockProps extends GenericProps, ReactToJSX<UIProps, UserBlockPropsToOverride> {
     /** Props to pass to the avatar. */
     avatarProps?: Omit<AvatarProps, 'alt'>;
-    /** Additional fields used to describe the user. */
-    fields?: string[];
     /** Props to pass to the link wrapping the avatar thumbnail. */
     linkProps?: React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>;
-    /** Custom react component for the link (can be used to inject react router Link). */
-    linkAs?: 'a' | any;
-    /** Multiple action toolbar content. */
-    multipleActions?: ReactNode;
-    /** User name. */
-    name?: React.ReactNode;
-    /** Props to pass to the name block. */
-    nameProps?: GenericProps;
-    /** Orientation. */
-    orientation?: Orientation;
-    /** Simple action toolbar content. */
-    simpleAction?: ReactNode;
-    /** Size variant. */
-    size?: UserBlockSize;
     /** On click callback. */
     onClick?(): void;
     /** On mouse enter callback. */
     onMouseEnter?(): void;
     /** On mouse leave callback. */
     onMouseLeave?(): void;
-    /** Display additional fields below the original name and fields */
-    additionalFields?: React.ReactNode;
-    /** Display an additional element after the entire component. (to the right if orientation is horizontal, at the bottom if orientation is vertical) */
-    after?: React.ReactNode;
 }
-
-/**
- * Component display name.
- */
-const COMPONENT_NAME = 'UserBlock';
-
-/**
- * Component default class name and class prefix.
- */
-const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-user-block';
-const { block, element } = classNames.bem(CLASSNAME);
-
-/**
- * Component default props.
- */
-const DEFAULT_PROPS: Partial<UserBlockProps> = {
-    orientation: Orientation.horizontal,
-    size: Size.m,
-};
 
 /**
  * UserBlock component.
@@ -82,38 +51,26 @@ const DEFAULT_PROPS: Partial<UserBlockProps> = {
 export const UserBlock = forwardRef<UserBlockProps, HTMLDivElement>((props, ref) => {
     const defaultTheme = useTheme() || Theme.light;
     const {
-        avatarProps,
-        className,
-        fields,
-        linkProps,
-        linkAs,
-        multipleActions,
-        name,
-        nameProps,
         onClick,
         onMouseEnter,
         onMouseLeave,
-        orientation = DEFAULT_PROPS.orientation,
-        simpleAction,
-        size = DEFAULT_PROPS.size,
         theme = defaultTheme,
+        nameProps,
+        avatarProps,
+        name,
+        linkProps,
+        linkAs,
         children,
-        additionalFields,
-        after,
         ...forwardedProps
     } = props;
-    let componentSize = size;
 
-    // Special case - When using vertical orientation force the size to be Sizes.l.
-    if (orientation === Orientation.vertical) {
-        componentSize = Size.l;
-    }
+    const isClickable = isUserBlockClickeable({ linkAs, linkProps, handleClick: onClick });
 
-    const shouldDisplayActions: boolean = orientation === Orientation.vertical;
-
-    const isLink = Boolean(linkProps?.href || linkAs);
-    const isClickable = !!onClick || isLink;
-
+    /**
+     * This logic needs to occur on the wrapper level, since core templates cannot manage
+     * the render of dynamically determined components. So `NameComponent`, if moved to core,
+     * it will return an `undefined`
+     */
     const nameBlock: ReactNode = React.useMemo(() => {
         if (isEmpty(name)) {
             return null;
@@ -143,59 +100,24 @@ export const UserBlock = forwardRef<UserBlockProps, HTMLDivElement>((props, ref)
         );
     }, [avatarProps, isClickable, linkAs, linkProps, name, nameProps, onClick]);
 
-    const shouldDisplayFields = componentSize !== Size.s && componentSize !== Size.xs;
-
-    const fieldsBlock: ReactNode = fields && shouldDisplayFields && (
-        <div className={element('fields')}>
-            {fields.map((field: string, idx: number) => (
-                <Text as="span" key={idx} className={element('field')}>
-                    {field}
-                </Text>
-            ))}
-        </div>
-    );
-
-    return (
-        <div
-            ref={ref}
-            {...forwardedProps}
-            className={classNames.join(
-                className,
-                block({
-                    [`orientation-${orientation}`]: Boolean(orientation),
-                    [`size-${componentSize}`]: Boolean(componentSize),
-                    [`theme-${theme}`]: Boolean(theme),
-                    'is-clickable': isClickable,
-                }),
-            )}
-            onMouseLeave={onMouseLeave}
-            onMouseEnter={onMouseEnter}
-        >
-            {avatarProps && (
-                <Avatar
-                    linkAs={linkAs}
-                    linkProps={linkProps}
-                    alt=""
-                    {...(avatarProps as any)}
-                    className={classNames.join(element('avatar'), avatarProps.className)}
-                    size={componentSize}
-                    onClick={onClick}
-                    theme={theme}
-                />
-            )}
-            {(fields || name || children || additionalFields) && (
-                <div className={element('wrapper')}>
-                    {children || nameBlock}
-                    {fieldsBlock}
-                    {shouldDisplayFields ? additionalFields : null}
-                </div>
-            )}
-            {shouldDisplayActions && simpleAction && <div className={element('action')}>{simpleAction}</div>}
-            {shouldDisplayActions && multipleActions && <div className={element('actions')}>{multipleActions}</div>}
-            {after ? <div className={element('after')}>{after}</div> : null}
-        </div>
-    );
+    return UI({
+        Avatar,
+        ref,
+        Text,
+        handleClick: onClick,
+        handleMouseEnter: onMouseEnter,
+        handleMouseLeave: onMouseLeave,
+        theme,
+        nameProps,
+        avatarProps,
+        name,
+        linkProps,
+        linkAs,
+        ...forwardedProps,
+        children: children || nameBlock,
+    });
 });
+
 UserBlock.displayName = COMPONENT_NAME;
 UserBlock.className = CLASSNAME;
 UserBlock.defaultProps = DEFAULT_PROPS;
