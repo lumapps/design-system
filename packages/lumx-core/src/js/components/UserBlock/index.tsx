@@ -134,7 +134,7 @@ export interface UserBlockProps extends HasClassName, HasTheme {
     Avatar: (props: any) => any;
 }
 
-export type UserBlockPropsToOverride = 'Avatar' | 'Text' | 'nameProps' | 'linkProps' | 'avatarProps';
+export type UserBlockPropsToOverride = 'Avatar' | 'Text' | 'linkProps' | 'avatarProps';
 
 /**
  * Component display name.
