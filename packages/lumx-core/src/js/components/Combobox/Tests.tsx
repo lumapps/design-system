@@ -2,9 +2,12 @@
 import userEvent from '@testing-library/user-event';
 import { fireEvent, waitFor } from '@testing-library/dom';
 import { mdiDelete, mdiPencil } from '@lumx/icons';
-import { CLASSNAME as COMBOBOX_STATE_CLASSNAME } from './ComboboxState';
+import { CLASSNAME as COMBOBOX_LIST_CLASSNAME } from './ComboboxList';
+import { CLASSNAME as COMBOBOX_OPTION_CLASSNAME } from './ComboboxOption';
 import { CLASSNAME as COMBOBOX_OPTION_SKELETON_CLASSNAME } from './ComboboxOptionSkeleton';
+import { CLASSNAME as COMBOBOX_POPOVER_CLASSNAME } from './ComboboxPopover';
 import { CLASSNAME as COMBOBOX_SECTION_CLASSNAME } from './ComboboxSection';
+import { CLASSNAME as COMBOBOX_STATE_CLASSNAME } from './ComboboxState';
 import { VISUALLY_HIDDEN } from '../../constants';
 import { setupCombobox } from './setupCombobox';
 
@@ -510,6 +513,28 @@ export function createTemplates(Combobox: ComboboxNamespace, IconButton: any) {
         </Combobox.Provider>
     );
 
+    /** Combobox with an option that has a description. */
+    const descriptionTemplate = ({ value, onChange }: { value: string; onChange: (v: string) => void }) => (
+        <Combobox.Provider>
+            <Combobox.Input
+                value={value}
+                onChange={onChange}
+                placeholder="Pick a fruit…"
+                toggleButtonProps={{ label: 'Fruits' }}
+            />
+            <Combobox.Popover>
+                <Combobox.List aria-label="Fruits">
+                    <Combobox.Option key="Apple" value="Apple" description="A round red fruit">
+                        Apple
+                    </Combobox.Option>
+                    <Combobox.Option key="Banana" value="Banana">
+                        Banana
+                    </Combobox.Option>
+                </Combobox.List>
+            </Combobox.Popover>
+        </Combobox.Provider>
+    );
+
     return {
         inputTemplate,
         buttonTemplate,
@@ -526,6 +551,7 @@ export function createTemplates(Combobox: ComboboxNamespace, IconButton: any) {
         loadingTemplate,
         loadMoreTemplate,
         sectionLoadingTemplate,
+        descriptionTemplate,
     };
 }
 
@@ -579,18 +605,44 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
                 expect(input).toHaveAttribute('aria-expanded', 'true');
             });
 
+            // Verify the scroll wrapper is rendered inside the popover
+            const popover = document.body.querySelector(`.${COMBOBOX_POPOVER_CLASSNAME}`);
+            expect(popover).not.toBeNull();
+            const scrollWrapper = popover!.querySelector(`.${COMBOBOX_POPOVER_CLASSNAME}__scroll`);
+            expect(scrollWrapper).not.toBeNull();
+
             const listboxId = input.getAttribute('aria-controls')!;
             const listbox = getListbox(listboxId)!;
 
             expect(listbox).toHaveAttribute('role', 'listbox');
             expect(listbox).toHaveAttribute('aria-label', 'Fruits');
+            expect(listbox.classList.contains(COMBOBOX_LIST_CLASSNAME)).toBe(true);
 
             const options = Array.from(listbox.querySelectorAll('[role="option"]'));
             expect(options.length).toBe(FRUITS.length);
 
             for (const opt of options) {
                 expect(opt.id).toBeTruthy();
+                // Each option trigger should have the combobox option trigger class
+                expect(opt.classList.contains(`${COMBOBOX_OPTION_CLASSNAME}__action`)).toBe(true);
+                // The parent list item should have the combobox option class
+                const listItem = opt.closest(`.${COMBOBOX_OPTION_CLASSNAME}`);
+                expect(listItem).not.toBeNull();
             }
+        });
+
+        it('should render option description with correct class', async () => {
+            renderWithState(t.descriptionTemplate);
+            const input = getInput();
+            await userEvent.click(input);
+
+            await waitFor(() => {
+                expect(input).toHaveAttribute('aria-expanded', 'true');
+            });
+
+            const descriptionEl = document.body.querySelector(`.${COMBOBOX_OPTION_CLASSNAME}__description`);
+            expect(descriptionEl).not.toBeNull();
+            expect(descriptionEl!.textContent).toBe('A round red fruit');
         });
 
         it('should have toggle button with correct ARIA attributes', async () => {
@@ -914,7 +966,8 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
             expect(getActiveOption()).toBeNull();
 
             await waitFor(() => {
-                expect(getVisibleOptions().length).toBe(2);
+                // Banana, Blueberry, Strawberry (includes match)
+                expect(getVisibleOptions().length).toBe(3);
             });
         });
     });
@@ -1092,7 +1145,8 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
             await userEvent.type(input, 'ap');
             await waitFor(() => {
-                expect(getVisibleOptions().length).toBe(2);
+                // Apple, Apricot, Grape (includes match)
+                expect(getVisibleOptions().length).toBe(3);
             });
 
             await userEvent.keyboard('{Escape}');
@@ -1764,6 +1818,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
             const controlsId = input.getAttribute('aria-controls')!;
             const grid = document.getElementById(controlsId)!;
             expect(grid).toHaveAttribute('role', 'grid');
+            expect(grid.classList.contains(COMBOBOX_LIST_CLASSNAME)).toBe(true);
 
             const rows = Array.from(grid.querySelectorAll('[role="row"]'));
             expect(rows.length).toBe(GRID_FRUITS.length);
@@ -1775,10 +1830,15 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
                 const firstCell = cells[0] as HTMLElement;
                 expect(firstCell).toHaveAttribute('data-value');
                 expect(firstCell).toHaveAttribute('aria-selected');
+                // First cell (option trigger) should have the option trigger class
+                expect(firstCell.classList.contains(`${COMBOBOX_OPTION_CLASSNAME}__action`)).toBe(true);
 
                 for (const cell of Array.from(cells)) {
                     expect((cell as HTMLElement).id).toBeTruthy();
                 }
+
+                // Row should have the combobox option class
+                expect(row.classList.contains(COMBOBOX_OPTION_CLASSNAME)).toBe(true);
             }
         });
 

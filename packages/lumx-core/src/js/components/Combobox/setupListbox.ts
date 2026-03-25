@@ -39,7 +39,9 @@ export function setupListbox(
         onActivate: (item: HTMLElement) => {
             item.setAttribute('data-focus-visible-added', 'true');
             trigger.setAttribute('aria-activedescendant', item.id);
-            item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            // Scroll to the element in listbox or else the item
+            const toScrollTo = item.closest('[role=listbox] > *') || item;
+            toScrollTo.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             notify('activeDescendantChange', item.id);
         },
         onDeactivate: (item: HTMLElement) => {

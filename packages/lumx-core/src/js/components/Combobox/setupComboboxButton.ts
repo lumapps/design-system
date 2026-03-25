@@ -44,6 +44,14 @@ export function setupComboboxButton(button: HTMLButtonElement, callbacks: Combob
             const nav = combobox.focusNav;
 
             switch (event.key) {
+                case 'Tab':
+                    // Selects the focused option
+                    if (combobox.isOpen && nav?.hasActiveItem && nav.activeItem) {
+                        combobox.select(nav.activeItem);
+                    }
+                    // Return false to continue normal 'Tab' behavior (focus next).
+                    return false;
+
                 case ' ':
                     // Space acts like Enter in button mode.
                     if (combobox.isOpen && nav?.hasActiveItem && nav.activeItem) {

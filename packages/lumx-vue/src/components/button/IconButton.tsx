@@ -8,9 +8,9 @@ import {
 import { Tooltip, type TooltipProps } from '../tooltip/Tooltip';
 import { useTheme } from '../../composables/useTheme';
 import { useDisableStateProps } from '../../composables/useDisableStateProps';
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { type HyphenatedAriaProps, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 
-export type IconButtonProps = VueToJSXProps<UIProps> & {
+export type IconButtonProps = Omit<VueToJSXProps<UIProps>, HyphenatedAriaProps> & {
     /**
      * Props to pass to the tooltip.
      * If undefined or if tooltipProps.label is undefined, the label prop will be used as tooltip label.
@@ -87,11 +87,7 @@ const IconButton = defineComponent(
             'size',
             'theme',
             'class',
-            'aria-expanded',
             'aria-disabled',
-            'aria-haspopup',
-            'aria-label',
-            'aria-pressed',
             'disabled',
             'fullWidth',
             'isActive',

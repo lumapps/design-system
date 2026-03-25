@@ -17,6 +17,12 @@ export interface ComboboxOptionSkeletonProps extends HasClassName {
     children?: JSXElement;
     /** ref to the root <li> element. */
     ref?: CommonRef;
+    /**
+     * Number of skeleton `<li>` elements to render.
+     * Each is an independent element with `:nth-child` width cycling applied by SCSS.
+     * @default 1
+     */
+    count?: number;
 }
 
 /**
@@ -47,19 +53,29 @@ export const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-combobox-op
  * @return JSX element.
  */
 export const ComboboxOptionSkeleton = (props: ComboboxOptionSkeletonProps) => {
-    const { hasDescription, children, className, ref, ...forwardedProps } = props;
+    const { hasDescription, children, className, ref, count = 1, ...forwardedProps } = props;
 
-    return ListItem({
+    const itemProps = {
         ref,
-        size: 'tiny',
+        size: 'tiny' as const,
         role: 'none',
         ...forwardedProps,
         className: classNames.join(className, CLASSNAME),
-        children: children || (
-            <>
-                <SkeletonTypography typography="body1" theme="light" />
-                {hasDescription && <SkeletonTypography typography="caption" theme="light" />}
-            </>
-        ),
-    } as any);
+        children:
+            children ||
+            ((
+                <>
+                    <SkeletonTypography typography="body1" theme="light" />
+                    {hasDescription && <SkeletonTypography typography="caption" theme="light" />}
+                </>
+            ) as JSXElement),
+    };
+
+    return (
+        <>
+            {Array.from({ length: count }, (_, i) => (
+                <ListItem key={i} {...itemProps} />
+            ))}
+        </>
+    );
 };

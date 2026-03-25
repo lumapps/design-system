@@ -7,4 +7,6 @@ export namespace JSX {
     export type Literal = string | number | boolean | undefined | null;
     export type Element = React.JSX.Element;
     export type IntrinsicElements = React.JSX.IntrinsicElements;
+    /** Allow `key` on all JSX component elements (used in `.map()` loops). */
+    export type IntrinsicAttributes = React.JSX.IntrinsicAttributes;
 }

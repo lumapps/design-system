@@ -1,4 +1,4 @@
-import { computed, defineComponent, type Ref, isRef } from 'vue';
+import { computed, defineComponent, type Ref, unref, toRef } from 'vue';
 
 import {
     Popover as PopoverUI,
@@ -48,38 +48,31 @@ export const emitSchema = {
 
 const Popover = defineComponent(
     (props: PopoverProps, { emit, slots, attrs }) => {
-        // Convert props to refs for composables (accept both Ref and raw HTMLElement)
-        const anchorRef = computed(() => (isRef(props.anchorRef) ? props.anchorRef.value : props.anchorRef));
-        const boundaryRef = computed(() => (isRef(props.boundaryRef) ? props.boundaryRef.value : props.boundaryRef));
-        const offsetRef = computed(() => props.offset);
-        const hasArrowRef = computed(() => props.hasArrow);
-        const fitToAnchorWidthRef = computed(() => props.fitToAnchorWidth);
-        const fitWithinViewportHeightRef = computed(() => props.fitWithinViewportHeight);
-        const placementRef = computed(() => props.placement || (DEFAULT_PROPS.placement as Placement));
-        const zIndexRef = computed(() => props.zIndex ?? POPOVER_ZINDEX);
-        const focusAnchorOnCloseRef = computed(() => props.focusAnchorOnClose ?? true);
-        const parentElementRef = computed(() => props.parentElement);
-        const isOpenRef = computed(() => Boolean(props.isOpen));
+        // Unwrap anchorRef (accepts both Vue Ref and raw HTMLElement) — reused across composables
+        const anchorRef = computed(() => unref(props.anchorRef));
+        // Reused across useFocus and useFocusTrap
+        const focusElementRef = toRef(props, 'focusElement');
 
+        // Positioning
         const { styles, isPositioned, position, floatingRef, arrowRef } = usePopoverStyle({
             anchorRef: anchorRef as Ref<HTMLElement | undefined>,
-            offset: offsetRef,
-            hasArrow: hasArrowRef as Ref<boolean | undefined>,
-            fitToAnchorWidth: fitToAnchorWidthRef as Ref<string | boolean | undefined>,
-            fitWithinViewportHeight: fitWithinViewportHeightRef as Ref<boolean | undefined>,
-            boundaryRef: boundaryRef as Ref<HTMLElement | undefined>,
-            placement: placementRef as Ref<Placement | undefined>,
+            boundaryRef: computed(() => unref(props.boundaryRef)) as Ref<HTMLElement | undefined>,
+            offset: toRef(props, 'offset'),
+            hasArrow: toRef(props, 'hasArrow'),
+            fitToAnchorWidth: toRef(props, 'fitToAnchorWidth'),
+            fitWithinViewportHeight: toRef(props, 'fitWithinViewportHeight'),
+            placement: computed(() => props.placement || (DEFAULT_PROPS.placement as Placement)),
             style: computed(() => undefined),
-            zIndex: zIndexRef,
+            zIndex: computed(() => props.zIndex ?? POPOVER_ZINDEX),
         });
 
         // Focus restore on close
         useRestoreFocusOnClose(
-            focusAnchorOnCloseRef,
+            computed(() => props.focusAnchorOnClose ?? true),
             anchorRef as Ref<HTMLElement | undefined>,
-            parentElementRef as Ref<HTMLElement | undefined>,
+            computed(() => props.parentElement) as Ref<HTMLElement | undefined>,
             floatingRef,
-            isOpenRef,
+            computed(() => Boolean(props.isOpen)),
         );
 
         // Close handler using emit
@@ -88,12 +81,12 @@ const Popover = defineComponent(
         };
 
         // Escape key handling
-        const onCloseCallback = computed(() => handleClose);
-        const closeOnEscapeEnabled = computed(() => Boolean(props.isOpen && props.closeOnEscape));
-        useCallbackOnEscape(onCloseCallback, closeOnEscapeEnabled);
+        useCallbackOnEscape(
+            computed(() => handleClose),
+            computed(() => Boolean(props.isOpen && props.closeOnEscape)),
+        );
 
         // Focus management
-        const focusElementRef = computed(() => props.focusElement);
         const shouldFocus = computed(() => !props.withFocusTrap && Boolean(props.isOpen) && isPositioned.value);
         useFocus(focusElementRef, shouldFocus);
 
@@ -107,61 +100,29 @@ const Popover = defineComponent(
         // Click-away refs: popover ref + anchor ref
         const clickAwayRefs = computed(() => [floatingRef, anchorRef]) as Ref<Array<Ref<HTMLElement | undefined>>>;
 
-        return () => {
-            const theme = props.theme;
-            const { class: className, isOpen, ...restProps } = props;
-
-            // Extract only forwardable props (not framework-specific ones)
-            const {
-                anchorRef: _a,
-                boundaryRef: _b,
-                closeMode: _c0,
-                closeOnClickAway: _c,
-                closeOnEscape: _d,
-                focusElement: _e,
-                focusAnchorOnClose: _f,
-                fitToAnchorWidth: _g,
-                fitWithinViewportHeight: _h,
-                offset: _i,
-                parentElement: _j,
-                placement: _k,
-                usePortal: _l,
-                focusTrapZoneElement: _m,
-                zIndex: _n,
-                withFocusTrap: _o,
-                theme: _p,
-                as: _q,
-                elevation: _r,
-                hasArrow: _s,
-                ...forwardedProps
-            } = restProps;
-
-            const clickAwayCallback = props.closeOnClickAway ? handleClose : undefined;
-
-            return PopoverUI(
+        return () =>
+            PopoverUI(
                 {
-                    ...forwardedProps,
                     ...attrs,
                     as: props.as,
-                    children: slots.default?.() as JSXElement,
-                    className,
                     closeMode: props.closeMode,
                     elevation: props.elevation,
                     hasArrow: props.hasArrow,
-                    isOpen: Boolean(isOpen),
+                    usePortal: props.usePortal,
+                    children: slots.default?.() as JSXElement,
+                    className: props.class,
+                    isOpen: Boolean(props.isOpen),
                     position: position.value,
                     popoverStyle: styles.popover.value,
                     arrowStyle: styles.arrow.value,
-                    theme,
+                    theme: props.theme,
                     ref: floatingRef,
-                    arrowRef: arrowRef,
-                    usePortal: props.usePortal ?? true,
-                    clickAwayCallback,
+                    arrowRef,
+                    clickAwayCallback: props.closeOnClickAway ? handleClose : undefined,
                     clickAwayRefs,
                 },
                 { Portal, ClickAwayProvider, ThemeProvider },
             );
-        };
     },
     {
         name: 'LumxPopover',

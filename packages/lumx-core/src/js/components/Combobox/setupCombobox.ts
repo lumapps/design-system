@@ -161,7 +161,7 @@ export function setupCombobox(
     /**
      * Attach the shared keydown listener to the trigger.
      *
-     * Handles: Enter, ArrowDown, ArrowUp, Escape (2-tier), Tab, PageUp, PageDown.
+     * Handles: Enter, ArrowDown, ArrowUp, Escape (2-tier), PageUp, PageDown.
      * Mode-specific keys (Space, Home, End, ArrowLeft/Right, printable chars, etc.)
      * are delegated to the `onKeydown` hook provided by the mode controller.
      */
@@ -256,16 +256,6 @@ export function setupCombobox(
                     flag = true;
                     break;
 
-                case 'Tab':
-                    // Click the active option (if any) and close. Let Tab propagate.
-                    if (nav?.hasActiveItem && nav.activeItem && !isOptionDisabled(nav.activeItem)) {
-                        nav.activeItem.click();
-                    }
-                    // The delegated click handler closes for single-select, but for multi-select
-                    // or when no item is active, we still need to explicitly close.
-                    handle.setIsOpen(false);
-                    break;
-
                 case 'PageUp':
                     if (handle.isOpen && nav?.hasActiveItem) {
                         nav.goToOffset(-10);
@@ -309,10 +299,19 @@ export function setupCombobox(
         }
         trigger.setAttribute('aria-expanded', String(isOpenState));
 
-        // On first attach, wire up the mode-specific controller and shared keydown handler.
+        // On first attach, wire up the mode-specific controller, shared keydown, and focusout handlers.
         if (isNewController) {
             const onKeydown = onTriggerAttach?.(handle, abortController.signal) || undefined;
             attachTriggerKeydown(trigger, abortController.signal, onKeydown);
+
+            // Close the popup when the trigger loses focus
+            trigger.addEventListener(
+                'focusout',
+                () => {
+                    handle.setIsOpen(false);
+                },
+                { signal: abortController.signal },
+            );
         }
 
         if (listbox && !focusNav) {
@@ -378,7 +377,7 @@ export function setupCombobox(
         registerOption(element: HTMLElement, callback: (isFiltered: boolean) => void): () => void {
             const filterLower = filterValue.toLowerCase();
             const text = getOptionValue(element).toLowerCase();
-            const isFiltered = filterLower.length > 0 && !text.startsWith(filterLower);
+            const isFiltered = filterLower.length > 0 && !text.includes(filterLower);
             optionRegistrations.set(element, { callback, lastFiltered: isFiltered });
             // Notify immediately with current state so the option renders correctly.
             callback(isFiltered);
@@ -394,7 +393,7 @@ export function setupCombobox(
             const filterLower = newFilter.toLowerCase();
             for (const [element, reg] of optionRegistrations) {
                 const text = getOptionValue(element).toLowerCase();
-                const isFiltered = filterLower.length > 0 && !text.startsWith(filterLower);
+                const isFiltered = filterLower.length > 0 && !text.includes(filterLower);
                 // Only notify when state actually changes to avoid unnecessary re-renders.
                 if (isFiltered !== reg.lastFiltered) {
                     reg.lastFiltered = isFiltered;

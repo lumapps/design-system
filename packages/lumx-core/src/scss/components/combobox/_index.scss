@@ -2,8 +2,23 @@
    Combobox
    ========================================================================== */
 
+// ---- Input -----------------------
+.#{$lumx-base-prefix}-combobox-input {
+    .#{$lumx-base-prefix}-text-field__chips {
+        width: min-content;
+        min-width: 0;
+    }
+}
+
+// ---- Popover -----------------------
+
 .#{$lumx-base-prefix}-combobox-popover {
-    overflow-y: auto;
+    max-height: 50vh;
+    color: var(--lumx-color-dark-N);
+
+    &__scroll {
+        overflow-y: auto;
+    }
 }
 
 // Hide popover and list when there is no option, no state, and no skeleton
@@ -17,28 +32,42 @@
     }
 }
 
+// ---- State -----------------------
+
 .#{$lumx-base-prefix}-combobox-state {
     text-align: center;
 }
 
-// Skeleton option placeholders — width variation via :nth-child cycling
-.#{$lumx-base-prefix}-combobox-option-skeleton {
-    .#{$lumx-base-prefix}-skeleton-typography {
-        width: min(65%, 200px);
+// ---- Option -----------------------
+
+.#{$lumx-base-prefix}-combobox-option {
+    // Skeleton option placeholders — width variation via :nth-child cycling
+    &-skeleton {
+        .#{$lumx-base-prefix}-skeleton-typography {
+            width: min(65%, 200px);
+        }
+
+        &:nth-child(3n + 1) .#{$lumx-base-prefix}-skeleton-typography {
+            width: min(70%, 230px);
+        }
+
+        &:nth-child(3n + 2) .#{$lumx-base-prefix}-skeleton-typography {
+            width: min(55%, 170px);
+        }
     }
 
-    &:nth-child(3n + 1) .#{$lumx-base-prefix}-skeleton-typography {
-        width: min(70%, 230px);
+    // Center option content
+    .#{$lumx-base-prefix}-list-item__content {
+        display: flex;
+        flex-direction: column;
+        justify-items: center;
     }
 
-    &:nth-child(3n + 2) .#{$lumx-base-prefix}-skeleton-typography {
-        width: min(55%, 170px);
-    }
-}
-
-.#{$lumx-base-prefix}-combobox-option-more-info {
-    &__popover {
-        max-width: $lumx-size-xxl;
-        padding: $lumx-spacing-unit-big;
+    // Option more info popover sizing
+    &-more-info {
+        &__popover {
+            max-width: $lumx-size-xxl;
+            padding: $lumx-spacing-unit-big;
+        }
     }
 }

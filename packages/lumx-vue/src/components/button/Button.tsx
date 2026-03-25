@@ -11,13 +11,13 @@ import {
 
 import { useTheme } from '../../composables/useTheme';
 import { useDisableStateProps } from '../../composables/useDisableStateProps';
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { type HyphenatedAriaProps, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { ResetTheme } from '../../utils/theme';
 import { Icon } from '../icon';
 import Text from '../text/Text';
 import { JSXElement } from '@lumx/core/js/types';
 
-export type ButtonProps = VueToJSXProps<UIProps>;
+export type ButtonProps = Omit<VueToJSXProps<UIProps>, HyphenatedAriaProps>;
 
 export const emitSchema = {
     click: (event: MouseEvent) => event instanceof MouseEvent,
@@ -116,11 +116,7 @@ const Button = defineComponent(
             'size',
             'theme',
             'class',
-            'aria-expanded',
             'aria-disabled',
-            'aria-haspopup',
-            'aria-label',
-            'aria-pressed',
             'disabled',
             'fullWidth',
             'isActive',
