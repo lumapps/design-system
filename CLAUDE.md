@@ -82,6 +82,10 @@ yarn storybook:react           # Storybook React on :9000
 yarn storybook:vue             # Storybook Vue on :9001
 yarn start                     # Demo site on :4000
 
+# Code checks
+yarn lint                      # Lint
+yarn type-check                # TypeScript checking
+
 # Build
 yarn build:libs                # Build @lumx/icons + @lumx/core + @lumx/react + @lumx/vue
 yarn build:react / :vue / :core / :icons
@@ -89,7 +93,28 @@ yarn build:react / :vue / :core / :icons
 # Test
 yarn test                      # All unit tests (Nx + vitest)
 yarn test:storybook            # All storybook tests (Nx + vitest storybook)
-yarn type-check                # TypeScript checking
+yarn test:all                  # All unit tests + storybook tests
+
+# Per-package test commands
+yarn test:react / :vue / :core
+yarn test:storybook:react / :storybook:vue
+
+# Filtering tests — all test commands accept vitest args after `--`:
+#   File pattern (positional arg): matches test file names
+#   Test name pattern (--testNamePattern): filters by test name (regex)
+# Example:
+yarn test -- Button.test.tsx                           # unit tests in files matching Button.test.tsx
+yarn test:react -- Button.test.tsx --testNamePattern="hasBackground"  # single-word name
+yarn test:react -- Button.test.tsx --testNamePattern="should.render"  # multi-word: use regex dots (spaces break through nx)
+yarn test:storybook -- Button.stories.tsx --testNamePattern="Default"
+# NOTE: -t is consumed by nx (alias for --targets) — always use --testNamePattern instead
+
+# Nx caching and test filtering:
+# - Every unique arg combination (file pattern + testNamePattern) gets its own cache entry
+# - Filtered runs never warm the full-suite cache and vice versa — no interference
+# - Use --skipNxCache when debugging to always get a fresh run and avoid stale cached output
+yarn test:react --skipNxCache -- Button.test.tsx --testNamePattern="hasBackground"
+# - To fully clear local cache: yarn nx reset --only-cache
 ```
 
 ## SKILLS (Claude)
