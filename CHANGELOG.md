@@ -11,11 +11,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `@lumx/core`:
     -   Add internal `focusNavigation` utility (`createListFocusNavigation`, `setupRovingTabIndex`)
+-   `@lumx/vue`:
+    -   Create the `UserBlock` component
 
 ### Changed
 
 -   `@lumx/core`:
-    -   Moved `UserBlock` stories and tests from `@lumx/react`
+    -   Moved `UserBlock` from `@lumx/react`
 -   `@lumx/react`:
     -   `TabList`, `ProgressTracker`, `SlideshowControls`: arrow keys now support Home/End and skip disabled items (WAI-ARIA Tabs Pattern)
 

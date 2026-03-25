@@ -89,12 +89,14 @@ export interface UserBlockProps extends HasClassName, HasTheme {
      * Called when the mouse enters the component.
      */
     handleMouseEnter?(): void;
+    mouseEnterProp?: string;
 
     /**
      * Mouse leave event handler.
      * Called when the mouse leaves the component.
      */
     handleMouseLeave?(): void;
+    mouseLeaveProp?: string;
 
     /**
      * Additional custom fields to display below the standard fields.
@@ -134,7 +136,13 @@ export interface UserBlockProps extends HasClassName, HasTheme {
     Avatar: (props: any) => any;
 }
 
-export type UserBlockPropsToOverride = 'Avatar' | 'Text' | 'linkProps' | 'avatarProps';
+export type UserBlockPropsToOverride =
+    | 'Avatar'
+    | 'Text'
+    | 'linkProps'
+    | 'avatarProps'
+    | 'mouseLeaveProp'
+    | 'mouseEnterProp';
 
 /**
  * Component display name.
@@ -182,6 +190,8 @@ export const UserBlock = (props: UserBlockProps) => {
         linkAs,
         ref,
         multipleActions,
+        mouseEnterProp = 'onMouseEnter',
+        mouseLeaveProp = 'onMouseLeave',
         name,
         nameProps,
         handleClick,
@@ -221,10 +231,16 @@ export const UserBlock = (props: UserBlockProps) => {
         </div>
     );
 
+    const eventHandlers = {
+        ...(handleMouseEnter && { [mouseEnterProp]: handleMouseEnter }),
+        ...(handleMouseLeave && { [mouseLeaveProp]: handleMouseLeave }),
+    };
+
     return (
         <div
             ref={ref}
             {...forwardedProps}
+            {...(eventHandlers as any)}
             className={classNames.join(
                 className,
                 block({
@@ -234,8 +250,6 @@ export const UserBlock = (props: UserBlockProps) => {
                     'is-clickable': isClickable,
                 }),
             )}
-            onMouseLeave={handleMouseLeave}
-            onMouseEnter={handleMouseEnter}
         >
             {avatarProps && (
                 <Avatar

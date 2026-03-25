@@ -93,6 +93,9 @@ export function setup({
                 }
             />
         ),
+        parameters: {
+            wrapperProps: { style: { width: '245px' } },
+        },
     };
 
     /** Size variants */
@@ -111,6 +114,9 @@ export function setup({
     /** Demo text ellipsis on name and fields */
     const WithConstrainedSize = {
         args: AvatarAndNameAndSecondaryFields.args,
+        parameters: {
+            wrapperProps: { style: { width: '150px', resize: 'horizontal' } },
+        },
     };
 
     /** Setting `onClick` to use it as a button */

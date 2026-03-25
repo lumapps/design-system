@@ -1,13 +1,20 @@
 ---
-frameworks: ['react']
+frameworks: ['react', 'vue']
 ---
-import * as DemoExtraSmall from './react/extra-small.tsx';
-import * as DemoSmall from './react/small.tsx';
-import * as DemoMedium from './react/medium.tsx';
-import * as DemoLarge from './react/large.tsx';
-import * as DemoVertical from './react/vertical.tsx';
-import * as DemoExtended from './react/extended.tsx';
+import * as ReactDemoExtraSmall from './react/extra-small.tsx';
+import * as ReactDemoSmall from './react/small.tsx';
+import * as ReactDemoMedium from './react/medium.tsx';
+import * as ReactDemoLarge from './react/large.tsx';
+import * as ReactDemoVertical from './react/vertical.tsx';
+import * as ReactDemoExtended from './react/extended.tsx';
+import * as VueDemoExtraSmall from './vue/extra-small.vue';
+import * as VueDemoSmall from './vue/small.vue';
+import * as VueDemoMedium from './vue/medium.vue';
+import * as VueDemoLarge from './vue/large.vue';
+import * as VueDemoVertical from './vue/vertical.vue';
+import * as VueDemoExtended from './vue/extended.vue';
 import ReactUserBlock from 'lumx-docs:@lumx/react/components/user-block/UserBlock';
+import VueUserBlock from 'lumx-docs:@lumx/vue/components/user-block/UserBlock';
 
 # User block
 
@@ -20,19 +27,19 @@ Check [size foundations](/product/foundations/size) for more details.
 
 ### Extra Small
 
-<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: DemoExtraSmall }} />
+<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: ReactDemoExtraSmall, vue: VueDemoExtraSmall }} />
 
 ### Small
 
-<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: DemoSmall }} />
+<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: ReactDemoSmall, vue: VueDemoSmall }} />
 
 ### Medium
 
-<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: DemoMedium }} />
+<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: ReactDemoMedium, vue: VueDemoMedium }} />
 
 ### Large
 
-<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: DemoLarge }} />
+<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: ReactDemoLarge, vue: VueDemoLarge }} />
 
 ## Layouts
 
@@ -42,14 +49,14 @@ There are two orientation: `horizontal` and `vertical`.
 
 A `l` size user block is needed for `vertical` orientation.
 
-<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: DemoVertical }} />
+<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: ReactDemoVertical, vue: VueDemoVertical }} />
 
 ### Extended
 
 The `vertical` orientation displays additional contact actions and a follow button.
 When there are more than five contact actions, the fifth is replaced with an overflow menu presenting remaining actions.
 
-<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: DemoExtended }} />
+<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: ReactDemoExtended, vue: VueDemoExtended }} />
 
 ### Accessibility concerns
 
@@ -66,4 +73,4 @@ See the [button page](../button#accessibility-concerns) for the accessibility co
 
 ### Properties
 
-<PropTable docs={{ react: ReactUserBlock }} />
+<PropTable docs={{ react: ReactUserBlock, vue: VueUserBlock }} />
