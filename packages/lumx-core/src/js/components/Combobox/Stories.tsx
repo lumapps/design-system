@@ -430,6 +430,35 @@ export function setup({
         ),
     };
 
+    /** Combobox with link options — each option renders as an anchor element. */
+    const ComboboxWithLinkOptions = {
+        args: { value: '' },
+        decorators: [withValueOnChange()],
+        render: ({ value, onChange }: { value: string; onChange: (v: string) => void }) => (
+            <Combobox.Provider>
+                <Combobox.Input
+                    value={value}
+                    onChange={onChange}
+                    placeholder="Pick a fruit…"
+                    toggleButtonProps={{ label: 'Fruits' }}
+                />
+                <Combobox.Popover>
+                    <Combobox.List aria-label="Fruits">
+                        {FRUITS.map((fruit) => (
+                            <Combobox.Option
+                                key={fruit}
+                                value={fruit}
+                                actionProps={{ as: 'a', href: `#${fruit.toLowerCase()}` }}
+                            >
+                                {fruit}
+                            </Combobox.Option>
+                        ))}
+                    </Combobox.List>
+                </Combobox.Popover>
+            </Combobox.Provider>
+        ),
+    };
+
     /**
      * Combobox with avatar options and matching skeleton placeholders.
      * Options use `Avatar` in the `before` slot; skeletons use `SkeletonCircle`
@@ -480,6 +509,7 @@ export function setup({
         ComboboxWithSection,
         ComboboxWithFilteredSections,
         ComboboxWithButton,
+        ComboboxWithLinkOptions,
         ComboboxWithOptionMoreInfo,
         GridComboboxWithInput,
         GridComboboxWithButton,

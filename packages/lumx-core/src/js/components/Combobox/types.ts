@@ -43,8 +43,8 @@ export interface ComboboxEventMap {
 
 /** Callbacks provided by the consumer (React/Vue) to react to combobox state changes. */
 export interface ComboboxCallbacks {
-    /** Called when an option is selected (click or keyboard). */
-    onSelect(option: { value: string }): void;
+    /** Called when an option is selected (click or keyboard). Receives the combobox handle for post-selection side effects. */
+    onSelect(option: { value: string }, handle: ComboboxHandle): void;
 }
 
 /** Handle returned by `setupCombobox`. Used by framework wrappers and mode controllers. */

@@ -1,12 +1,5 @@
 import { type FocusNavigationController } from '../../utils/focusNavigation';
-import {
-    getOptionValue,
-    goToSelectedOrFirst,
-    goToSelectedOrLast,
-    isActionCell,
-    isOptionDisabled,
-    notifySection,
-} from './utils';
+import { getOptionValue, goToSelectedOrFirst, goToSelectedOrLast, isOptionDisabled, notifySection } from './utils';
 import { setupListbox } from './setupListbox';
 import type {
     ComboboxCallbacks,
@@ -32,7 +25,7 @@ interface ComboboxOptions {
  *
  * @see https://www.w3.org/WAI/ARIA/apg/patterns/combobox/
  *
- * @param callbacks Callbacks for select and open/close events.
+ * @param callbacks Callbacks invoked on combobox events (e.g. option selection).
  * @param options Options for configuring the shared combobox behavior.
  * @param onTriggerAttach Optional callback invoked when the trigger is registered and the signal is ready.
  *                        Used by mode-specific wrappers (setupComboboxInput/Button) to automatically
@@ -174,17 +167,19 @@ export function setupCombobox(
                 case 'Enter':
                     if (handle.isOpen && nav?.hasActiveItem && nav.activeItem) {
                         if (!isOptionDisabled(nav.activeItem)) {
-                            if (nav.type === 'grid' && isActionCell(nav.activeItem)) {
-                                // Action cell: programmatically click it.
-                                nav.activeItem.click();
-                            } else {
-                                // Option cell: select the option.
-                                handle.select(nav.activeItem);
-                            }
+                            // Click the active item. For option cells, the delegated click handler
+                            // on the listbox will call handle.select() and handle closing.
+                            // For action cells and link options, the native click fires too.
+                            nav.activeItem.click();
                         }
-                    }
-                    // In multi-select mode, keep open after selection; otherwise toggle.
-                    if (!handle.isMultiSelect) {
+                        // Close for single-select. For option cells the delegated handler
+                        // already closed, but setIsOpen(false) is idempotent. For action cells
+                        // and disabled options, the delegated handler did NOT close, so this is needed.
+                        if (!handle.isMultiSelect) {
+                            handle.setIsOpen(false);
+                        }
+                    } else if (!handle.isMultiSelect) {
+                        // No active item — toggle open/close.
                         handle.setIsOpen(!handle.isOpen);
                     }
                     flag = true;
@@ -241,10 +236,12 @@ export function setupCombobox(
                     break;
 
                 case 'Tab':
-                    // Select the active option (if any) and close. Let Tab propagate.
+                    // Click the active option (if any) and close. Let Tab propagate.
                     if (nav?.hasActiveItem && nav.activeItem && !isOptionDisabled(nav.activeItem)) {
-                        handle.select(nav.activeItem);
+                        nav.activeItem.click();
                     }
+                    // The delegated click handler closes for single-select, but for multi-select
+                    // or when no item is active, we still need to explicitly close.
                     handle.setIsOpen(false);
                     break;
 
@@ -335,7 +332,7 @@ export function setupCombobox(
         },
 
         select(option: HTMLElement | null) {
-            callbacks.onSelect({ value: option ? getOptionValue(option) : '' });
+            callbacks.onSelect({ value: option ? getOptionValue(option) : '' }, handle);
         },
 
         registerOption(element: HTMLElement, callback: (isFiltered: boolean) => void): () => void {
