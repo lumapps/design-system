@@ -1,14 +1,22 @@
-import { Badge, Icon, IconButton, Link, Text } from '@lumx/react';
-import { CustomLink } from '@lumx/react/stories/utils/CustomLink';
-import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
-import { withResizableBox } from '@lumx/react/stories/decorators/withResizableBox';
+import { Badge, Icon, IconButton, Link, Text, UserBlock } from '@lumx/vue';
+import { withCombinations } from '@lumx/vue/stories/decorators/withCombinations';
+import { withResizableBox } from '@lumx/vue/stories/decorators/withResizableBox';
 import { setup } from '@lumx/core/js/components/UserBlock/Stories';
-import { UserBlock } from './UserBlock';
 
 const { meta, ...stories } = setup({
     component: UserBlock,
     components: { Text, Icon, IconButton, Badge, Link },
     decorators: { withCombinations },
+    render: ({ simpleAction, multipleActions, additionalFields, after, ...args }: any) => (
+        <UserBlock {...args}>
+            {{
+                'simple-action': simpleAction ? () => simpleAction : undefined,
+                'multiple-actions': multipleActions ? () => multipleActions : undefined,
+                'additional-fields': additionalFields ? () => additionalFields : undefined,
+                after: after ? () => after : undefined,
+            }}
+        </UserBlock>
+    ),
 });
 
 export default {
@@ -31,11 +39,3 @@ export const AsButton = {
 };
 export const AsLink = { ...stories.AsLink };
 export const WithBadge = { ...stories.WithBadge };
-
-/** Setting the `linkAs` prop to inject a custom link component */
-export const AsCustomLink = {
-    args: {
-        ...AvatarAndNameAndSecondaryFields.args,
-        linkAs: CustomLink,
-    },
-};

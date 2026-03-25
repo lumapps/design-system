@@ -33,3 +33,4 @@ export * from './components/text';
 export * from './components/thumbnail';
 export * from './components/toolbar';
 export * from './components/tooltip';
+export * from './components/user-block';
