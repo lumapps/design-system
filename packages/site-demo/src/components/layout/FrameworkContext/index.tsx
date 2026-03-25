@@ -44,7 +44,7 @@ export const FrameworkProvider: React.FC<{ children: React.ReactNode }> = ({ chi
 
                 // Persist in URL (temporarily)
                 const url = new URL(global.location.href);
-                url.searchParams.set(FRAMEWORK_PARAM, framework);
+                url.searchParams.set(FRAMEWORK_PARAM, newFramework);
                 global.history.replaceState({}, '', url.toString());
 
                 // Animate change of framework
