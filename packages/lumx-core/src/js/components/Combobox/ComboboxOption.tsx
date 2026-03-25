@@ -47,6 +47,8 @@ export interface ComboboxOptionProps extends HasClassName {
     hidden?: boolean;
     /** On click callback. */
     handleClick?(): void;
+    /** Extra props forwarded to the inner action element (e.g. link props when as="a"). */
+    actionProps?: Record<string, any>;
     /** ref to the root <li> element. */
     ref?: CommonRef;
     /** The value for this option (used for selection). */
@@ -57,7 +59,7 @@ export interface ComboboxOptionProps extends HasClassName {
  * Props that React/Vue wrappers need to re-declare with framework-specific types.
  * Used by `ReactToJSX<ComboboxOptionProps, ComboboxOptionPropsToOverride>`.
  */
-export type ComboboxOptionPropsToOverride = 'before' | 'after' | 'children' | 'tooltipProps';
+export type ComboboxOptionPropsToOverride = 'before' | 'after' | 'children' | 'tooltipProps' | 'actionProps';
 
 /**
  * Component display name.
@@ -94,6 +96,7 @@ export const ComboboxOption = (props: ComboboxOptionProps, { Tooltip }: Combobox
         isGrid,
         isSelected,
         handleClick,
+        actionProps,
         ref,
         tooltipProps,
         value,
@@ -108,7 +111,8 @@ export const ComboboxOption = (props: ComboboxOptionProps, { Tooltip }: Combobox
     }
 
     const actionElement = ListItemAction({
-        as: 'p' as any,
+        as: 'button',
+        ...actionProps,
         id,
         className: element('trigger'),
         handleClick,

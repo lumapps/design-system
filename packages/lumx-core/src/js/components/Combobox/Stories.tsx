@@ -125,6 +125,11 @@ export function setup({
                                 );
                             })}
                         </Combobox.List>
+                        <Combobox.State
+                            emptyMessage={(inputValue: string) =>
+                                inputValue ? `No results for "${inputValue}"` : 'No results'
+                            }
+                        />
                     </Combobox.Popover>
                 </Combobox.Provider>
             );
@@ -315,13 +320,7 @@ export function setup({
                     toggleButtonProps={{ label: 'Fruits' }}
                 />
                 <Combobox.Popover>
-                    <Combobox.List aria-label="Fruits">
-                        {FRUITS.map((fruit) => (
-                            <Combobox.Option key={fruit} value={fruit}>
-                                {fruit}
-                            </Combobox.Option>
-                        ))}
-                    </Combobox.List>
+                    <Combobox.List aria-label="Fruits" />
                     <Combobox.State
                         emptyMessage={(inputValue: string) =>
                             inputValue ? `No results for "${inputValue}"` : 'No results'
@@ -342,7 +341,7 @@ export function setup({
             <Combobox.Provider>
                 <Combobox.Input value="" placeholder="Pick a fruit…" toggleButtonProps={{ label: 'Fruits' }} />
                 <Combobox.Popover>
-                    <Combobox.List aria-label="Fruits">{/* no options — simulating a failed load */}</Combobox.List>
+                    <Combobox.List aria-label="Fruits" />
                     <Combobox.State errorMessage="Service unavailable" errorTryReloadMessage="Please try again later" />
                 </Combobox.Popover>
             </Combobox.Provider>
@@ -362,7 +361,7 @@ export function setup({
                     <Combobox.List aria-label="Fruits">
                         <Combobox.OptionSkeleton count={3} />
                     </Combobox.List>
-                    <Combobox.State loadingMessage="Loading fruits…" emptyMessage="No results" />
+                    <Combobox.State loadingMessage="Loading fruits…" />
                 </Combobox.Popover>
             </Combobox.Provider>
         ),
@@ -430,6 +429,35 @@ export function setup({
         ),
     };
 
+    /** Combobox with link options — each option renders as an anchor element. */
+    const ComboboxWithLinkOptions = {
+        args: { value: '' },
+        decorators: [withValueOnChange()],
+        render: ({ value, onChange }: { value: string; onChange: (v: string) => void }) => (
+            <Combobox.Provider>
+                <Combobox.Input
+                    value={value}
+                    onChange={onChange}
+                    placeholder="Pick a fruit…"
+                    toggleButtonProps={{ label: 'Fruits' }}
+                />
+                <Combobox.Popover>
+                    <Combobox.List aria-label="Fruits">
+                        {FRUITS.map((fruit) => (
+                            <Combobox.Option
+                                key={fruit}
+                                value={fruit}
+                                actionProps={{ as: 'a', href: `#${fruit.toLowerCase()}` }}
+                            >
+                                {fruit}
+                            </Combobox.Option>
+                        ))}
+                    </Combobox.List>
+                </Combobox.Popover>
+            </Combobox.Provider>
+        ),
+    };
+
     /**
      * Combobox with avatar options and matching skeleton placeholders.
      * Options use `Avatar` in the `before` slot; skeletons use `SkeletonCircle`
@@ -480,6 +508,7 @@ export function setup({
         ComboboxWithSection,
         ComboboxWithFilteredSections,
         ComboboxWithButton,
+        ComboboxWithLinkOptions,
         ComboboxWithOptionMoreInfo,
         GridComboboxWithInput,
         GridComboboxWithButton,

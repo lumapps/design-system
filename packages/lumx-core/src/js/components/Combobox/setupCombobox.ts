@@ -1,12 +1,5 @@
 import { type FocusNavigationController } from '../../utils/focusNavigation';
-import {
-    getOptionValue,
-    goToSelectedOrFirst,
-    goToSelectedOrLast,
-    isActionCell,
-    isOptionDisabled,
-    notifySection,
-} from './utils';
+import { getOptionValue, goToSelectedOrFirst, goToSelectedOrLast, isOptionDisabled, notifySection } from './utils';
 import { setupListbox } from './setupListbox';
 import type {
     ComboboxCallbacks,
@@ -32,7 +25,7 @@ interface ComboboxOptions {
  *
  * @see https://www.w3.org/WAI/ARIA/apg/patterns/combobox/
  *
- * @param callbacks Callbacks for select and open/close events.
+ * @param callbacks Callbacks invoked on combobox events (e.g. option selection).
  * @param options Options for configuring the shared combobox behavior.
  * @param onTriggerAttach Optional callback invoked when the trigger is registered and the signal is ready.
  *                        Used by mode-specific wrappers (setupComboboxInput/Button) to automatically
@@ -66,6 +59,9 @@ export function setupCombobox(
     /** Last notified isEmpty state, to avoid redundant `emptyChange` notifications. */
     let lastIsEmpty = true;
 
+    /** Last notified input value, to re-fire `emptyChange` when the user keeps typing while empty. */
+    let lastInputValue = '';
+
     /** Event subscribers managed by the handle. */
     const subscribers: { [K in keyof ComboboxEventMap]: Set<(value: ComboboxEventMap[K]) => void> } = {
         open: new Set(),
@@ -81,7 +77,9 @@ export function setupCombobox(
     }
 
     /**
-     * Notify all registered sections and fire `emptyChange` if the visible option count changed.
+     * Notify all registered sections and fire `emptyChange` if the visible option count changed
+     * or if the input value changed while the list is empty (so `emptyMessage` callbacks get
+     * the updated query string).
      * Called whenever the set of visible options may have changed (option register/unregister, filter change).
      */
     function notifyVisibilityChange() {
@@ -94,9 +92,10 @@ export function setupCombobox(
             if (!reg.lastFiltered) visibleCount += 1;
         }
         const isEmpty = visibleCount === 0;
-        if (isEmpty !== lastIsEmpty) {
+        const inputValue = trigger?.value ?? '';
+        if (isEmpty !== lastIsEmpty || (isEmpty && inputValue !== lastInputValue)) {
             lastIsEmpty = isEmpty;
-            const inputValue = trigger?.value ?? '';
+            lastInputValue = inputValue;
             notify('emptyChange', { isEmpty, inputValue });
         }
     }
@@ -112,6 +111,22 @@ export function setupCombobox(
     /** Timer for debounced loading announcement. */
     let loadingTimer: ReturnType<typeof setTimeout> | undefined;
 
+    /** Whether a loading announcement has been sent since the last open. */
+    let announcementSent = false;
+
+    /** Start or restart the debounced loading announcement timer if conditions are met. */
+    function startLoadingAnnouncementTimer() {
+        clearTimeout(loadingTimer);
+        if (skeletonCount > 0 && isOpenState) {
+            loadingTimer = setTimeout(() => {
+                if (skeletonCount > 0 && isOpenState) {
+                    announcementSent = true;
+                    notify('loadingAnnouncement', true);
+                }
+            }, LOADING_ANNOUNCEMENT_DELAY);
+        }
+    }
+
     /**
      * Called when the skeleton count transitions between 0 and >0 (or vice versa).
      * Fires `loadingChange` immediately and manages the debounced `loadingAnnouncement`.
@@ -119,16 +134,15 @@ export function setupCombobox(
     function onSkeletonCountChange() {
         const isLoading = skeletonCount > 0;
         notify('loadingChange', isLoading);
-        clearTimeout(loadingTimer);
 
         if (isLoading) {
-            loadingTimer = setTimeout(() => {
-                if (skeletonCount > 0) {
-                    notify('loadingAnnouncement', true);
-                }
-            }, LOADING_ANNOUNCEMENT_DELAY);
+            startLoadingAnnouncementTimer();
         } else {
-            notify('loadingAnnouncement', false);
+            clearTimeout(loadingTimer);
+            if (announcementSent) {
+                announcementSent = false;
+                notify('loadingAnnouncement', false);
+            }
         }
     }
 
@@ -174,17 +188,19 @@ export function setupCombobox(
                 case 'Enter':
                     if (handle.isOpen && nav?.hasActiveItem && nav.activeItem) {
                         if (!isOptionDisabled(nav.activeItem)) {
-                            if (nav.type === 'grid' && isActionCell(nav.activeItem)) {
-                                // Action cell: programmatically click it.
-                                nav.activeItem.click();
-                            } else {
-                                // Option cell: select the option.
-                                handle.select(nav.activeItem);
-                            }
+                            // Click the active item. For option cells, the delegated click handler
+                            // on the listbox will call handle.select() and handle closing.
+                            // For action cells and link options, the native click fires too.
+                            nav.activeItem.click();
                         }
-                    }
-                    // In multi-select mode, keep open after selection; otherwise toggle.
-                    if (!handle.isMultiSelect) {
+                        // Close for single-select. For option cells the delegated handler
+                        // already closed, but setIsOpen(false) is idempotent. For action cells
+                        // and disabled options, the delegated handler did NOT close, so this is needed.
+                        if (!handle.isMultiSelect) {
+                            handle.setIsOpen(false);
+                        }
+                    } else if (!handle.isMultiSelect) {
+                        // No active item — toggle open/close.
                         handle.setIsOpen(!handle.isOpen);
                     }
                     flag = true;
@@ -241,10 +257,12 @@ export function setupCombobox(
                     break;
 
                 case 'Tab':
-                    // Select the active option (if any) and close. Let Tab propagate.
+                    // Click the active option (if any) and close. Let Tab propagate.
                     if (nav?.hasActiveItem && nav.activeItem && !isOptionDisabled(nav.activeItem)) {
-                        handle.select(nav.activeItem);
+                        nav.activeItem.click();
                     }
+                    // The delegated click handler closes for single-select, but for multi-select
+                    // or when no item is active, we still need to explicitly close.
                     handle.setIsOpen(false);
                     break;
 
@@ -327,15 +345,34 @@ export function setupCombobox(
             isOpenState = isOpen;
             if (!isOpen) {
                 focusNav?.clear();
+                // Reset announcement state so it retriggers on next open
+                clearTimeout(loadingTimer);
+                if (announcementSent) {
+                    announcementSent = false;
+                    notify('loadingAnnouncement', false);
+                }
+            } else if (skeletonCount > 0) {
+                // Opening while already loading — start the announcement timer
+                startLoadingAnnouncementTimer();
             }
 
             // Update aria-expanded on trigger
             trigger?.setAttribute('aria-expanded', String(isOpen));
             notify('open', isOpen);
+
+            // When opening, always notify the current empty state so that
+            // subscribers (ComboboxState) get the correct initial value.
+            // Without this, a list that starts empty never fires `emptyChange`
+            // because `lastIsEmpty` is initialized to `true` and `notifyVisibilityChange`
+            // only fires on *changes*.
+            if (isOpen) {
+                const inputValue = trigger?.value ?? '';
+                notify('emptyChange', { isEmpty: lastIsEmpty, inputValue });
+            }
         },
 
         select(option: HTMLElement | null) {
-            callbacks.onSelect({ value: option ? getOptionValue(option) : '' });
+            callbacks.onSelect({ value: option ? getOptionValue(option) : '' }, handle);
         },
 
         registerOption(element: HTMLElement, callback: (isFiltered: boolean) => void): () => void {
@@ -455,10 +492,12 @@ export function setupCombobox(
             listbox = null;
             filterValue = '';
             lastIsEmpty = true;
+            lastInputValue = '';
             optionRegistrations.clear();
             sectionRegistrations.clear();
             skeletonCount = 0;
             clearTimeout(loadingTimer);
+            announcementSent = false;
             // Clear all subscribers
             for (const set of Object.values(subscribers)) {
                 set.clear();

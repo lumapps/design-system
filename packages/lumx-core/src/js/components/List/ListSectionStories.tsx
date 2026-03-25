@@ -19,6 +19,7 @@ export function setup({
     const meta = {
         component: ListSection,
         argTypes: {
+            icon: iconArgType,
             'list.itemPadding': getSelectArgType([undefined, Size.big, Size.huge]),
             'listItem.size': getSelectArgType([undefined, Size.tiny, Size.regular, Size.big]),
         },
@@ -28,9 +29,6 @@ export function setup({
     const Default = {
         args: {
             label: 'Section title',
-        },
-        argTypes: {
-            icon: iconArgType,
         },
         render({ 'list.itemPadding': itemPadding, 'listItem.size': itemSize, ...args }: any) {
             return (
@@ -53,6 +51,7 @@ export function setup({
      * - Sections separated by a ListItem → no auto-divider (not adjacent)
      * - Sections separated by an explicit ListDivider → explicit divider only, no duplicate auto-divider
      * - Hidden section between two visible sections → one auto-divider between the visible sections
+     * - Hidden first section → no divider before the first visible section
      */
     const AutoDividerEdgeCases = {
         render({ 'list.itemPadding': itemPadding, 'listItem.size': itemSize }: any) {
@@ -132,6 +131,18 @@ export function setup({
                             </ListSection>
                             <ListSection label="Section 3">
                                 <ListItem size={itemSize}>Item B</ListItem>
+                            </ListSection>
+                        </List>
+                    </div>
+
+                    <div>
+                        <p style={{ marginBottom: '8px', fontWeight: 'bold' }}>Hidden first section</p>
+                        <List itemPadding={itemPadding} style={{ border: '1px dashed red' }}>
+                            <ListSection label="Hidden first" hidden>
+                                <ListItem size={itemSize}>Hidden item</ListItem>
+                            </ListSection>
+                            <ListSection label="Visible section">
+                                <ListItem size={itemSize}>Item A</ListItem>
                             </ListSection>
                         </List>
                     </div>

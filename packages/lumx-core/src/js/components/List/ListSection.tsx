@@ -7,8 +7,8 @@ import { TextProps } from '../Text';
  * Defines the props of the component.
  */
 export interface ListSectionProps extends HasClassName {
-    /** Section label displayed as the group title. */
-    label?: string;
+    /** Section label displayed as the group title. Accepts a plain string or custom JSX content. */
+    label?: string | JSXElement;
     /** Section icon */
     icon?: string;
     /** List items (should be ListItem, ListDivider, etc.). */
@@ -48,16 +48,17 @@ export const DEFAULT_PROPS: Partial<ListSectionProps> = {};
 export const ListSection = (props: ListSectionProps) => {
     const { children, className, label, icon, itemsWrapperProps, id, ref, Text, ...forwardedProps } = props;
     const labelId = `${id}-label`;
+    const hasHeader = !!label;
 
     return (
         <li ref={ref} {...forwardedProps} className={classNames.join(className, block())}>
-            {label && (
+            {hasHeader && (
                 <Text as="p" typography="overline" className={element('title')} id={labelId}>
                     {icon && Icon({ icon })}
                     {label}
                 </Text>
             )}
-            <ul {...itemsWrapperProps} className={element('items')} aria-labelledby={label ? labelId : undefined}>
+            <ul {...itemsWrapperProps} className={element('items')} aria-labelledby={hasHeader ? labelId : undefined}>
                 {children}
             </ul>
         </li>

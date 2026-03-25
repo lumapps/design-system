@@ -39,3 +39,6 @@ export type {
 
 export { ComboboxState } from './ComboboxState';
 export type { ComboboxStateProps } from './ComboboxState';
+
+export { subscribeComboboxState } from './subscribeComboboxState';
+export type { ComboboxStateSetters } from './subscribeComboboxState';

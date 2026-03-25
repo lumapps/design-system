@@ -35,7 +35,7 @@ export interface IconButtonProps extends GenericProps, ReactToJSX<UIProps, 'titl
  */
 export const IconButton = forwardRef<IconButtonProps, HTMLButtonElement>((props, ref) => {
     const defaultTheme = useTheme() || Theme.light;
-    const { tooltipProps, hideTooltip, label, ...forwardedProps } = props;
+    const { tooltipProps, hideTooltip, label, theme = defaultTheme, ...forwardedProps } = props;
 
     const { isAnyDisabled, disabledStateProps, otherProps } = useDisableStateProps(forwardedProps);
     const { onClick, onKeyPress, ...restOfOtherProps } = otherProps;
@@ -44,7 +44,7 @@ export const IconButton = forwardRef<IconButtonProps, HTMLButtonElement>((props,
         <Tooltip label={hideTooltip ? '' : label} {...tooltipProps}>
             {UI({
                 ref,
-                theme: defaultTheme,
+                theme,
                 ...disabledStateProps,
                 ...restOfOtherProps,
                 handleClick: onClick,

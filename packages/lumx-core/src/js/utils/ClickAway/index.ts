@@ -23,7 +23,7 @@ export type ClickAwayCallback = EventListener | Falsy;
  * @returns `true` if the click is outside all elements (i.e. a click away).
  */
 export function isClickAway(targets: HTMLElement[], elements: HTMLElement[]): boolean {
-    return !elements.some((element) => targets.some((target) => element?.contains(target)));
+    return !elements.some((element) => element instanceof Node && targets.some((target) => element.contains(target)));
 }
 
 /**
@@ -47,7 +47,7 @@ export function setupClickAway(
     }
 
     const listener: EventListener = (evt) => {
-        const targets = [evt.composedPath?.()[0], evt.target] as HTMLElement[];
+        const targets = [evt.composedPath?.()[0], evt.target].filter((t): t is HTMLElement => t instanceof Node);
         const elements = getElements();
         if (isClickAway(targets, elements)) {
             callback(evt);
