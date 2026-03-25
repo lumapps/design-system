@@ -10,7 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 -   `@lumx/core`:
-    -   Add internal `focusNavigation` utility (`createListFocusNavigation`, `setupRovingTabIndex`)
+    -   Add internal `focusNavigation` utility (`createListFocusNavigation`, `setupRovingTabIndex`, `createGridFocusNavigation`)
+    -   Add internal `createTypeahead` utility (useable for select-only combobox and button menus)
+    -   Create the `Combobox` component family
 -   `@lumx/vue`:
     -   Create the `UserBlock` component
 

@@ -1,4 +1,5 @@
 import { createActiveItemState } from './createActiveItemState';
+import { createSelectorTreeWalker } from '../browser/createSelectorTreeWalker';
 import type { FocusNavigationCallbacks, FocusNavigationController, ListNavigationOptions } from './types';
 
 /**
@@ -34,11 +35,7 @@ export function createListFocusNavigation(
      */
     function createItemWalker(enabledOnly = true): TreeWalker {
         const selector = enabledOnly ? enabledItemSelector : itemSelector;
-        return document.createTreeWalker(container, NodeFilter.SHOW_ELEMENT, {
-            acceptNode(node: Node) {
-                return (node as HTMLElement).matches(selector) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP;
-            },
-        });
+        return createSelectorTreeWalker(container, selector);
     }
 
     /** Find the first enabled item in the container. */

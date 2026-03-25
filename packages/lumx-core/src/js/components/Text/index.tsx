@@ -71,7 +71,7 @@ export const DEFAULT_PROPS = {} as const;
  * @param  props Component props.
  * @return Common Props
  */
-export const getTextProps = (props: TextProps) => {
+export const getTextProps = (props: Omit<TextProps, 'as'>) => {
     const { className, color, colorVariant, noWrap, typography, truncate, whiteSpace, style } = props;
 
     // Truncate mode

@@ -1,0 +1,44 @@
+/* ==========================================================================
+   Combobox
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-combobox-popover {
+    overflow-y: auto;
+}
+
+// Hide popover and list when there is no option, no state, and no skeleton
+.#{$lumx-base-prefix}-combobox-popover,
+.#{$lumx-base-prefix}-combobox-list {
+    &:empty,
+    &:not(:has(.#{$lumx-base-prefix}-combobox-option)):not(:has(.#{$lumx-base-prefix}-combobox-state)):not(
+        :has(.#{$lumx-base-prefix}-combobox-option-skeleton)
+    ) {
+        display: none;
+    }
+}
+
+.#{$lumx-base-prefix}-combobox-state {
+    text-align: center;
+}
+
+// Skeleton option placeholders — width variation via :nth-child cycling
+.#{$lumx-base-prefix}-combobox-option-skeleton {
+    .#{$lumx-base-prefix}-skeleton-typography {
+        width: min(65%, 200px);
+    }
+
+    &:nth-child(3n + 1) .#{$lumx-base-prefix}-skeleton-typography {
+        width: min(70%, 230px);
+    }
+
+    &:nth-child(3n + 2) .#{$lumx-base-prefix}-skeleton-typography {
+        width: min(55%, 170px);
+    }
+}
+
+.#{$lumx-base-prefix}-combobox-option-more-info {
+    &__popover {
+        max-width: $lumx-size-xxl;
+        padding: $lumx-spacing-unit-big;
+    }
+}
