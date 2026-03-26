@@ -1,18 +1,25 @@
-import { FocusEventHandler, KeyboardEventHandler, ReactNode, useCallback } from 'react';
+import { ReactNode } from 'react';
 
-import { Icon, IconProps, Size, Text } from '@lumx/react';
+import { Icon, IconProps, Text } from '@lumx/react';
 import { GenericProps } from '@lumx/react/utils/type';
-import { classNames } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';
+import {
+    Tab as UI,
+    TabProps as UIProps,
+    TabPropsToOverride,
+    COMPONENT_NAME,
+    DEFAULT_PROPS,
+    CLASSNAME,
+} from '@lumx/core/js/components/Tabs/Tab';
 
+import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 import { useTabProviderContext } from './state';
-import { TABS_CLASSNAME } from './constants';
 
 /**
  * Defines the props of the component.
  */
-export interface TabProps extends GenericProps {
+export interface TabProps extends GenericProps, ReactToJSX<UIProps, TabPropsToOverride> {
     /** Children are not supported. */
     children?: never;
     /** Icon (SVG path). */
@@ -30,22 +37,6 @@ export interface TabProps extends GenericProps {
 }
 
 /**
- * Component display name.
- */
-const COMPONENT_NAME = 'Tab';
-
-/**
- * Component default class name and class prefix.
- */
-const CLASSNAME = `${TABS_CLASSNAME}__link`;
-const { block } = classNames.bem(CLASSNAME);
-
-/**
- * Component default props.
- */
-const DEFAULT_PROPS: Partial<TabProps> = {};
-
-/**
  * Tab component.
  *
  * Implements WAI-ARIA `tab` role {@see https://www.w3.org/TR/wai-aria-practices-1.1/examples/tabs/tabs-1/tabs.html#rps_label}
@@ -56,80 +47,24 @@ const DEFAULT_PROPS: Partial<TabProps> = {};
  */
 export const Tab = forwardRef<TabProps, HTMLButtonElement>((props, ref) => {
     const { isAnyDisabled, otherProps } = useDisableStateProps(props);
-    const {
-        className,
-        icon,
-        iconProps = {},
-        id,
-        isActive: propIsActive,
-        label,
-        onFocus,
-        onKeyPress,
-        tabIndex = -1,
-        ...forwardedProps
-    } = otherProps;
+    const { isActive: propIsActive, id, onFocus, onKeyPress, ...forwardedProps } = otherProps;
     const state = useTabProviderContext('tab', id);
     const isActive = propIsActive || state?.isActive;
 
-    const changeToCurrentTab = useCallback(() => {
-        if (isAnyDisabled) {
-            return;
-        }
-        state?.changeToTab();
-    }, [isAnyDisabled, state]);
-
-    const handleFocus: FocusEventHandler = useCallback(
-        (event) => {
-            onFocus?.(event);
-            if (state?.shouldActivateOnFocus) {
-                changeToCurrentTab();
-            }
-        },
-        [changeToCurrentTab, onFocus, state?.shouldActivateOnFocus],
-    );
-
-    const handleKeyPress: KeyboardEventHandler = useCallback(
-        (event) => {
-            onKeyPress?.(event);
-            if (event.key !== 'Enter' || isAnyDisabled) {
-                return;
-            }
-            changeToCurrentTab();
-        },
-        [changeToCurrentTab, isAnyDisabled, onKeyPress],
-    );
-
-    return (
-        <button
-            ref={ref}
-            {...forwardedProps}
-            type="button"
-            id={state?.tabId}
-            className={classNames.join(
-                className,
-                block({
-                    'is-active': isActive,
-                    'is-disabled': isAnyDisabled,
-                }),
-            )}
-            onClick={changeToCurrentTab}
-            onKeyPress={handleKeyPress}
-            onFocus={handleFocus}
-            role="tab"
-            tabIndex={isActive ? 0 : tabIndex}
-            aria-disabled={isAnyDisabled}
-            aria-selected={isActive}
-            aria-controls={state?.tabPanelId}
-        >
-            {icon && <Icon icon={icon} size={Size.xs} {...iconProps} />}
-            {label && (
-                <Text as="span" truncate>
-                    {label}
-                </Text>
-            )}
-        </button>
-    );
+    return UI({
+        id,
+        ...state,
+        Icon,
+        Text,
+        ref,
+        isActive,
+        isAnyDisabled,
+        handleFocus: onFocus,
+        handleKeyPress: onKeyPress,
+        ...forwardedProps,
+    });
 });
+
 Tab.displayName = COMPONENT_NAME;
 Tab.className = CLASSNAME;
 Tab.defaultProps = DEFAULT_PROPS;

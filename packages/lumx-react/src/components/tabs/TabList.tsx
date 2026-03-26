@@ -6,9 +6,9 @@ import { classNames } from '@lumx/core/js/utils';
 import { mergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
+import { TABS_CLASSNAME as CLASSNAME } from '@lumx/core/js/components/Tabs/constants';
 
 import { useRovingTabIndexContainer } from '../../hooks/useRovingTabIndexContainer';
-import { TABS_CLASSNAME as CLASSNAME } from './constants';
 
 const { block, element } = classNames.bem(CLASSNAME);
 
