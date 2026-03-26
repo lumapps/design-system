@@ -17,7 +17,12 @@ interface StoryDecorators {
     /** Decorator wrapping story in a resizable box */
     withResizableBox?: (options?: Record<string, any>) => Decorator;
     /** Decorator managing a local state for a value prop, updating it via onChange */
-    withValueOnChange?: (options?: { valueProp?: string; valueTransform?: (v: any) => any }) => Decorator;
+    withValueOnChange?: (options?: {
+        valueProp?: string;
+        valueTransform?: (v: any) => any;
+        onChangeProp?: string;
+        valueExtract?: (v: any) => any;
+    }) => Decorator;
     /** Decorator forcing a minimum screen size for Chromatic snapshots */
     withChromaticForceScreenSize?: () => Decorator;
     /** Decorator for adding custom theming to a story */

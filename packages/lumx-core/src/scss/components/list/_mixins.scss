@@ -1,4 +1,4 @@
-@use "sass:map";
+@use 'sass:map';
 
 @mixin lumx-list() {
     padding: $lumx-spacing-unit 0;
@@ -12,7 +12,7 @@
     text-decoration: none;
     outline: none;
 
-    @if $size == "huge" {
+    @if $size == 'huge' {
         align-items: flex-start;
         padding-top: $lumx-spacing-unit * 2;
         padding-bottom: $lumx-spacing-unit * 2;
@@ -30,23 +30,24 @@
     width: 100%;
     cursor: pointer;
     text-align: left;
-    @include lumx-state(lumx-base-const("state", "DEFAULT"), lumx-base-const("emphasis", "LOW"), "dark");
+    @include lumx-state(lumx-base-const('state', 'DEFAULT'), lumx-base-const('emphasis', 'LOW'), 'dark');
 
-    &[data-focus-visible-added] {
-        outline: 2px solid lumx-color-variant("dark", "N");
+    &[data-focus-visible-added],
+    &:has([data-focus-visible-added]) {
+        outline: 2px solid lumx-color-variant('dark', 'N');
         outline-offset: -2px;
     }
 
-    &:not([aria-disabled="true"]) {
+    &:not([aria-disabled='true']) {
         &:hover,
         &[data-lumx-hover],
         &[data-focus-visible-added] {
-            @include lumx-state(lumx-base-const("state", "HOVER"), lumx-base-const("emphasis", "LOW"), "dark");
+            @include lumx-state(lumx-base-const('state', 'HOVER'), lumx-base-const('emphasis', 'LOW'), 'dark');
         }
 
         &:active,
-        &[data-lumx-active], {
-            @include lumx-state(lumx-base-const("state", "ACTIVE"), lumx-base-const("emphasis", "LOW"), "dark");
+        &[data-lumx-active] {
+            @include lumx-state(lumx-base-const('state', 'ACTIVE'), lumx-base-const('emphasis', 'LOW'), 'dark');
         }
     }
 }
@@ -54,25 +55,33 @@
 @mixin lumx-list-item-highlighted() {
     cursor: pointer;
 
-    @include lumx-state(lumx-base-const("state", "HOVER"), lumx-base-const("emphasis", "LOW"), "dark");
+    @include lumx-state(lumx-base-const('state', 'HOVER'), lumx-base-const('emphasis', 'LOW'), 'dark');
 
     &:active {
-        @include lumx-state(lumx-base-const("state", "ACTIVE"), lumx-base-const("emphasis", "LOW"), "dark");
+        @include lumx-state(lumx-base-const('state', 'ACTIVE'), lumx-base-const('emphasis', 'LOW'), 'dark');
     }
 }
 
 @mixin lumx-list-item-selected($component: null) {
-    @include lumx-state-as-selected(lumx-base-const("state", "DEFAULT"), lumx-base-const("theme", "LIGHT"), $component);
+    @include lumx-state-as-selected(lumx-base-const('state', 'DEFAULT'), lumx-base-const('theme', 'LIGHT'), $component);
 
     &:hover,
     &[data-lumx-hover],
     &[data-focus-visible-added] {
-        @include lumx-state-as-selected(lumx-base-const("state", "HOVER"), lumx-base-const("theme", "LIGHT"), $component);
+        @include lumx-state-as-selected(
+            lumx-base-const('state', 'HOVER'),
+            lumx-base-const('theme', 'LIGHT'),
+            $component
+        );
     }
 
     &:active,
-    &[data-lumx-active], {
-        @include lumx-state-as-selected(lumx-base-const("state", "ACTIVE"), lumx-base-const("theme", "LIGHT"), $component);
+    &[data-lumx-active] {
+        @include lumx-state-as-selected(
+            lumx-base-const('state', 'ACTIVE'),
+            lumx-base-const('theme', 'LIGHT'),
+            $component
+        );
     }
 }
 
@@ -85,17 +94,17 @@
 @mixin lumx-list-item-before($size) {
     @include lumx-list-item-edge($size);
 
-    @if $size == "tiny" {
-        width: map.get($lumx-sizes, lumx-base-const("size", "S"));
+    @if $size == 'tiny' {
+        width: map.get($lumx-sizes, lumx-base-const('size', 'S'));
         margin-right: $lumx-spacing-unit;
     } @else {
-        width: map.get($lumx-sizes, lumx-base-const("size", "M"));
+        width: map.get($lumx-sizes, lumx-base-const('size', 'M'));
         margin-right: $lumx-spacing-unit * 2;
     }
 }
 
 @mixin lumx-list-item-content() {
-    @include lumx-typography("body1");
+    @include lumx-typography('body1');
 
     flex: 1 1 auto;
 }
@@ -103,7 +112,7 @@
 @mixin lumx-list-item-after($size) {
     @include lumx-list-item-edge($size);
 
-    @if $size == "tiny" {
+    @if $size == 'tiny' {
         margin-left: $lumx-spacing-unit;
     } @else {
         margin-left: $lumx-spacing-unit * 2;
@@ -111,16 +120,16 @@
 }
 
 @mixin lumx-list-subheader() {
-    @include lumx-typography("overline");
+    @include lumx-typography('overline');
 
     display: flex;
     align-items: center;
-    height: map.get($lumx-list-item-sizes, "tiny");
-    color: lumx-color-variant("dark", "L2");
+    height: map.get($lumx-list-item-sizes, 'tiny');
+    color: lumx-color-variant('dark', 'L2');
 }
 
 @mixin lumx-list-subheader-icon {
-    @include lumx-icon-size(lumx-base-const("size", "XXS"));
+    @include lumx-icon-size(lumx-base-const('size', 'XXS'));
 
     margin-right: $lumx-spacing-unit;
 }
@@ -128,15 +137,17 @@
 @mixin lumx-list-divider() {
     height: 1px;
     margin: $lumx-spacing-unit 0;
-    background-color: lumx-color-variant("dark", $lumx-divider-color-variant);
+    background-color: lumx-color-variant('dark', $lumx-divider-color-variant);
 }
 
 @mixin lumx-list-auto-section-divider() {
     $divider: '.#{$lumx-base-prefix}-list-divider';
+    $section: &;
 
-    // Insert a divider before each section NOT directly following another section or an explicit divider.
-    // Avoids double dividers when two sections are adjacent or when a ListDivider separates them.
-    &:not(:first-child):not(& + &):not(#{$divider} + &) {
+    // Insert a divider before each section NOT directly following another visible section or an explicit divider.
+    // Avoids double dividers when two visible sections are adjacent or when a ListDivider separates them.
+    // Uses #{$section}:not([hidden]) so that hidden sections in between don't prevent the divider.
+    &:not(:first-child):not(#{$section}:not([hidden]) + &):not(#{$divider} + &) {
         &::before {
             content: '';
             display: block;
@@ -145,8 +156,9 @@
     }
 
     // Insert a divider after each section that is not the last child
-    // and not directly followed by an explicit divider.
-    &:not(:last-child):not(:has(+ #{$divider})) {
+    // and not directly followed by an explicit divider or a hidden element
+    // (when followed by a hidden element, the next visible section's ::before handles the divider).
+    &:not(:last-child):not(:has(+ #{$divider})):not(:has(+ [hidden])) {
         &::after {
             content: '';
             display: block;
@@ -156,10 +168,10 @@
 }
 
 @mixin lumx-list-item-padding($size) {
-    @if $size == "big" {
+    @if $size == 'big' {
         padding-right: $lumx-spacing-unit * 2;
         padding-left: $lumx-spacing-unit * 2;
-    } @else if $size == "huge" {
+    } @else if $size == 'huge' {
         padding-right: $lumx-spacing-unit * 3;
         padding-left: $lumx-spacing-unit * 3;
     }

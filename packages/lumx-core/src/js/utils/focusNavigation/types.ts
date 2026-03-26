@@ -41,10 +41,34 @@ export interface ListNavigationOptions {
     itemActiveSelector?: string;
 }
 
-/** Focus navigation controller interface for 1D lists. */
+/** Options for 2D grid navigation. */
+export interface GridNavigationOptions {
+    type: 'grid';
+    /** The container element (grid root) to scan for rows and cells. */
+    container: HTMLElement;
+    /** CSS selector to identify row elements within the container. */
+    rowSelector: string;
+    /** CSS selector to identify cell elements within each row. */
+    cellSelector: string;
+    /**
+     * Predicate to determine if a row should be included in navigation.
+     * Rows for which this returns `false` are skipped.
+     * Default: all rows are visible.
+     */
+    isRowVisible?: (row: HTMLElement) => boolean;
+    /** Whether navigation wraps at boundaries. Default: false. */
+    wrap?: boolean;
+}
+
+/** Union of all navigation option types. */
+export type NavigationOptions = ListNavigationOptions | GridNavigationOptions;
+
+// ─── Focus navigation controller ───────────────────────────────────
+
+/** Focus navigation controller interface — works for both 1D lists and 2D grids. */
 export interface FocusNavigationController {
     /** The navigation structure type. */
-    readonly type: 'list';
+    readonly type: 'list' | 'grid';
     /** The currently active item, or null if no item is active. */
     readonly activeItem: HTMLElement | null;
     /** Whether an item is currently active. */
@@ -63,7 +87,8 @@ export interface FocusNavigationController {
     goToItem(item: HTMLElement): boolean;
     /**
      * Navigate by offset from the current item.
-     * Positive offsets move forward, negative move backward.
+     * In list mode, moves by items. In grid mode, moves by rows.
+     * Positive offsets move forward/down, negative move backward/up.
      */
     goToOffset(offset: number): boolean;
     /**
@@ -74,12 +99,12 @@ export interface FocusNavigationController {
     /** Clear the active item — no item is active after this call. */
     clear(): void;
 
-    /** Navigate up (previous item in vertical list). */
+    /** Navigate up (previous item in vertical list, previous row in grid). */
     goUp(): boolean;
-    /** Navigate down (next item in vertical list). */
+    /** Navigate down (next item in vertical list, next row in grid). */
     goDown(): boolean;
-    /** Navigate left (previous item in horizontal list). */
+    /** Navigate left (previous item in horizontal list, previous cell in grid). */
     goLeft(): boolean;
-    /** Navigate right (next item in horizontal list). */
+    /** Navigate right (next item in horizontal list, next cell in grid). */
     goRight(): boolean;
 }
