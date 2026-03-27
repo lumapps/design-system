@@ -15,8 +15,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   Create the `Combobox` component family
     -   Moved `Tab` from `@lumx/react`
     -   Moved `TabList` and `TabPanel` from `@lumx/react`
+    -   Moved `TabProvider` state logic and test utilities from `@lumx/react`
 -   `@lumx/vue`:
     -   Create the `UserBlock` component
+    -   Create the `Tabs` component family (`Tab`, `TabList`, `TabPanel`, `TabProvider`)
 
 ### Changed
 

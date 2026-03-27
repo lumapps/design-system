@@ -15,11 +15,13 @@ export interface TabPanelProps extends HasClassName {
     tabId?: string;
     /** ID of the associated tab panel (for aria-controls). */
     id?: string;
+    /** Name of the prop used to set tab index (framework-dependent). */
+    tabIndexProp?: string;
     /** Forward ref to the underlying button element. */
     ref?: CommonRef;
 }
 
-export type TabPanelPropsToOverride = 'tabId';
+export type TabPanelPropsToOverride = 'tabId' | 'isLazy' | 'tabIndexProp';
 
 /**
  * Component display name.
@@ -47,7 +49,17 @@ export const DEFAULT_PROPS: Partial<TabPanelProps> = {};
  * @return React element.
  */
 export const TabPanel = (props: TabPanelProps) => {
-    const { children, className, isActive, id, tabId, isLazy, ref, ...forwardedProps } = props;
+    const {
+        children,
+        className,
+        isActive,
+        id,
+        tabId,
+        isLazy,
+        tabIndexProp = 'tabIndex',
+        ref,
+        ...forwardedProps
+    } = props;
 
     return (
         <div
@@ -56,7 +68,7 @@ export const TabPanel = (props: TabPanelProps) => {
             id={id}
             className={classNames.join(className, block({ 'is-active': isActive }))}
             role="tabpanel"
-            tabIndex={isActive ? 0 : -1}
+            {...{ [tabIndexProp]: isActive ? 0 : -1 }}
             aria-labelledby={tabId}
         >
             {(!isLazy || isActive) && children}

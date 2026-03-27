@@ -35,6 +35,10 @@ export interface TabProps extends HasClassName {
     changeToTab?: () => void;
     /** Tab index for roving tabindex management. */
     tabIndex?: number;
+    /** Name of the prop used to set tab index (framework-dependent). */
+    tabIndexProp?: string;
+    /** Name of the prop used to attach the keypress event (framework-dependent). */
+    keyPressProp?: string;
     /** ID applied to the tab button element (for aria-labelledby on the panel). */
     tabId?: string;
     /** ID of the associated tab panel (for aria-controls). */
@@ -52,6 +56,8 @@ export type TabPropsToOverride =
     | 'shouldActivateOnFocus'
     | 'changeToTab'
     | 'tabIndex'
+    | 'tabIndexProp'
+    | 'keyPressProp'
     | 'tabId'
     | 'tabPanelId'
     | 'Icon'
@@ -88,12 +94,15 @@ export const Tab = (props: TabProps) => {
         icon,
         iconProps = {},
         isAnyDisabled,
+        isDisabled,
         id,
         isActive,
         label,
         handleFocus,
         handleKeyPress,
         tabIndex = -1,
+        tabIndexProp = 'tabIndex',
+        keyPressProp = 'onKeyPress',
         changeToTab,
         tabPanelId,
         shouldActivateOnFocus,
@@ -140,10 +149,10 @@ export const Tab = (props: TabProps) => {
                 }),
             )}
             onClick={changeToCurrentTab}
-            onKeyPress={onKeyPress}
+            {...{ [keyPressProp]: onKeyPress }}
             onFocus={onFocus}
             role="tab"
-            tabIndex={isActive ? 0 : tabIndex}
+            {...{ [tabIndexProp]: isActive ? 0 : tabIndex }}
             aria-disabled={isAnyDisabled}
             aria-selected={isActive}
             aria-controls={tabPanelId}

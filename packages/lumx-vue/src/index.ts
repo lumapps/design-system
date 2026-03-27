@@ -29,6 +29,7 @@ export * from './components/uploader';
 export * from './components/generic-block';
 export * from './components/inline-list';
 export * from './components/table';
+export * from './components/tabs';
 export * from './components/text';
 export * from './components/thumbnail';
 export * from './components/toolbar';
