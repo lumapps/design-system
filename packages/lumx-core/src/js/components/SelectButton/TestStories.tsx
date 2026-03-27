@@ -7,9 +7,13 @@ import { createTemplates } from './Tests';
  */
 export function setup({
     components: { SelectButton },
+    renderWithState,
 }: SetupStoriesOptions<{
     components: { SelectButton: any };
-}>) {
+    decorators: 'withValueOnChange';
+}> & {
+    renderWithState: (template: (props: any) => any) => any;
+}) {
     const { defaultTemplate } = createTemplates(SelectButton);
 
     const meta = {
@@ -43,6 +47,33 @@ export function setup({
 
             await waitFor(() => {
                 expect(button).toHaveAttribute('aria-expanded', 'false');
+            });
+        },
+    };
+
+    // ─── Selection updates button display ────────────────────────
+
+    const SelectionUpdates = {
+        render: () => renderWithState(defaultTemplate),
+        play: async ({ canvasElement }: any) => {
+            const button = within(canvasElement).getByRole('combobox');
+
+            expect(button.textContent).toContain('Select a fruit');
+
+            await userEvent.click(button);
+            await waitFor(() => {
+                expect(button).toHaveAttribute('aria-expanded', 'true');
+            });
+
+            const options = screen.getAllByRole('option');
+            await userEvent.click(options[2]); // Banana
+
+            await waitFor(() => {
+                expect(button).toHaveAttribute('aria-expanded', 'false');
+            });
+
+            await waitFor(() => {
+                expect(button.textContent).toContain('Banana');
             });
         },
     };
@@ -94,6 +125,7 @@ export function setup({
     return {
         meta,
         ClickOutsideCloses,
+        SelectionUpdates,
         WithInfiniteScroll,
     };
 }

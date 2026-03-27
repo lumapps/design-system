@@ -1,5 +1,5 @@
 ---
-frameworks: ['react']
+frameworks: ['react', 'vue']
 ---
 
 import * as ReactDemoDefault from './react/default.tsx';
@@ -7,7 +7,13 @@ import * as ReactDemoWithDescriptionsAndSections from './react/with-descriptions
 import * as ReactDemoMultipleSelection from './react/multiple-selection.tsx';
 import * as ReactDemoListStates from './react/list-states.tsx';
 import * as ReactDemoCustomTrigger from './react/custom-trigger.tsx';
+import * as VueDemoDefault from './vue/default.vue';
+import * as VueDemoWithDescriptionsAndSections from './vue/with-descriptions-and-sections.vue';
+import * as VueDemoMultipleSelection from './vue/multiple-selection.vue';
+import * as VueDemoListStates from './vue/list-states.vue';
+import * as VueDemoCustomTrigger from './vue/custom-trigger.vue';
 import ReactSelectButton from 'lumx-docs:@lumx/react/components/select-button/SelectButton';
+import VueSelectButton from 'lumx-docs:@lumx/vue/components/select-button/SelectButton';
 
 # Select button
 
@@ -19,13 +25,13 @@ For a full text input with built-in search and filtering, use [Select text field
 
 By default, a select button lets the user pick a single option. The trigger shows the selected option, or the button label when nothing is selected yet.
 
-<DemoBlock orientation="horizontal" demo={{ react: ReactDemoDefault }} />
+<DemoBlock orientation="horizontal" demo={{ react: ReactDemoDefault, vue: VueDemoDefault }} />
 
 ## Options & Sections
 
 Each option can carry a primary label and an optional description shown on a second line in the dropdown. Long lists can also be grouped into sections with a heading, helping users scan and locate options faster.
 
-<DemoBlock orientation="horizontal" demo={{ react: ReactDemoWithDescriptionsAndSections }} />
+<DemoBlock orientation="horizontal" demo={{ react: ReactDemoWithDescriptionsAndSections, vue: VueDemoWithDescriptionsAndSections }} />
 
 ## Customization
 
@@ -37,13 +43,13 @@ The dropdown options themselves can be fully customized as well, to support rich
 
 The example below shows, side by side: a default button trigger tuned with a small size, low emphasis and red color; an icon button (compact, label exposed via tooltip); a chip with custom-rendered options; and a link.
 
-<DemoBlock orientation="horizontal" vAlign="space-around" demo={{ react: ReactDemoCustomTrigger }} />
+<DemoBlock orientation="horizontal" vAlign="space-around" demo={{ react: ReactDemoCustomTrigger, vue: VueDemoCustomTrigger }} />
 
 ## Multiple selection
 
 Switch to multi-select mode to let the user pick several options at once. The trigger shows the selected option names joined together, and clicking an already-selected option toggles it off.
 
-<DemoBlock orientation="horizontal" demo={{ react: ReactDemoMultipleSelection }} />
+<DemoBlock orientation="horizontal" demo={{ react: ReactDemoMultipleSelection, vue: VueDemoMultipleSelection }} />
 
 ## Label display modes
 
@@ -60,7 +66,7 @@ When options come from a server, the dropdown can communicate the loading or err
 - **Loading**: Displays skeleton placeholders while options are being fetched.
 - **Error**: Displays an error message inside the dropdown so the user knows the list could not be loaded and can try again.
 
-<DemoBlock orientation="horizontal" demo={{ react: ReactDemoListStates }} />
+<DemoBlock orientation="horizontal" demo={{ react: ReactDemoListStates, vue: VueDemoListStates }} />
 
 ## Accessibility concerns
 
@@ -72,4 +78,4 @@ Select button follows the WAI-ARIA combobox pattern, but a few content choices a
 
 ## Properties
 
-<PropTable docs={{ react: ReactSelectButton }} />
+<PropTable docs={{ react: ReactSelectButton, vue: VueSelectButton }} />
