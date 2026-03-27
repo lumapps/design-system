@@ -1,35 +1,23 @@
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useTabProviderContext } from '@lumx/react/components/tabs/state';
-import { GenericProps, LumxClassName } from '@lumx/react/utils/type';
-import { classNames } from '@lumx/core/js/utils';
+import { GenericProps } from '@lumx/react/utils/type';
+import {
+    CLASSNAME,
+    COMPONENT_NAME,
+    DEFAULT_PROPS,
+    TabPanel as UI,
+    TabPanelProps as UIProps,
+    TabPanelPropsToOverride,
+} from '@lumx/core/js/components/Tabs/TabPanel';
+import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 
 /**
  * Defines the props of the component.
  */
-export interface TabPanelProps extends GenericProps {
+export interface TabPanelProps extends GenericProps, ReactToJSX<UIProps, TabPanelPropsToOverride> {
     /** Native id property */
     id?: string;
-    /** Whether the tab is active or not. */
-    isActive?: boolean;
-    /** Children */
-    children?: React.ReactNode;
 }
-
-/**
- * Component display name.
- */
-const COMPONENT_NAME = 'TabPanel';
-
-/**
- * Component default class name and class prefix.
- */
-const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = `lumx-tab-panel`;
-const { block } = classNames.bem(CLASSNAME);
-
-/**
- * Component default props.
- */
-const DEFAULT_PROPS: Partial<TabPanelProps> = {};
 
 /**
  * TabPanel component.
@@ -41,25 +29,21 @@ const DEFAULT_PROPS: Partial<TabPanelProps> = {};
  * @return React element.
  */
 export const TabPanel = forwardRef<TabPanelProps, HTMLDivElement>((props, ref) => {
-    const { children, id, className, isActive: propIsActive, ...forwardedProps } = props;
+    const { id, isActive: propIsActive, ...forwardedProps } = props;
 
     const state = useTabProviderContext('tabPanel', id);
     const isActive = propIsActive || state?.isActive;
 
-    return (
-        <div
-            ref={ref}
-            {...forwardedProps}
-            id={state?.tabPanelId}
-            className={classNames.join(className, block({ 'is-active': isActive }))}
-            role="tabpanel"
-            tabIndex={isActive ? 0 : -1}
-            aria-labelledby={state?.tabId}
-        >
-            {(!state?.isLazy || isActive) && children}
-        </div>
-    );
+    return UI({
+        ref,
+        isActive,
+        id: state?.tabPanelId,
+        isLazy: state?.isLazy,
+        tabId: state?.tabId,
+        ...forwardedProps,
+    });
 });
+
 TabPanel.displayName = COMPONENT_NAME;
 TabPanel.className = CLASSNAME;
 TabPanel.defaultProps = DEFAULT_PROPS;

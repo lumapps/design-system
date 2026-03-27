@@ -2,6 +2,7 @@ import { Tab } from '@lumx/react';
 import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 import { render, screen } from '@testing-library/react';
 import { getByClassName, queryByClassName } from '@lumx/react/testing/utils/queries';
+import BaseTabListTests from '@lumx/core/js/components/Tabs/TabListTests';
 
 import { TabList, TabListProps } from './TabList';
 
@@ -27,10 +28,9 @@ const setup = (propsOverride: SetupProps = {}, { wrapper }: SetupRenderOptions =
 };
 
 describe(`<${TabList.displayName}>`, () => {
-    it('should render default', () => {
-        const name = 'Tab list';
-        const { links } = setup({ 'aria-label': name });
-        expect(links).toBe(screen.queryByRole('tablist', { name }));
+    BaseTabListTests({
+        render: (props: any) => render(<TabList aria-label="Tab list" {...props} />),
+        screen,
     });
 
     // Common tests suite.
