@@ -32,19 +32,17 @@ const TabPanel = defineComponent(
         const tabState = useTabProviderContext('tabPanel', props.id as string | undefined);
         const isActive = computed(() => props.isActive || tabState.value?.isActive);
 
-        return () => {
-            return (
-                <TabPanelUI
-                    {...attrs}
-                    className={props.class}
-                    isActive={isActive.value}
-                    id={tabState.value?.tabPanelId}
-                    isLazy={tabState.value?.isLazy}
-                    tabId={tabState.value?.tabId}
-                    children={slots.default?.() as JSXElement}
-                />
-            );
-        };
+        return () => (
+            <TabPanelUI
+                {...attrs}
+                className={props.class}
+                isActive={isActive.value}
+                id={tabState.value?.tabPanelId}
+                isLazy={tabState.value?.isLazy}
+                tabId={tabState.value?.tabId}
+                children={slots.default?.() as JSXElement}
+            />
+        );
     },
     {
         name: 'LumxTabPanel',

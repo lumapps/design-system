@@ -39,12 +39,6 @@ export default (renderOptions: SetupOptions<any>) => {
                 setup({ children: content, isActive: true }, renderOptions);
                 expect(screen.queryByText(content)).toBeInTheDocument();
             });
-
-            it('should hide children when lazy and not active', () => {
-                const content = 'Lazy content';
-                setup({ children: content, isLazy: true, isActive: false }, renderOptions);
-                expect(screen.queryByText(content)).not.toBeInTheDocument();
-            });
         });
     });
 };

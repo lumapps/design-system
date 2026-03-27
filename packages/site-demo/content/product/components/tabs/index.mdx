@@ -1,27 +1,34 @@
 ---
-frameworks: ['react']
+frameworks: ['react', 'vue']
 ---
-import * as DemoDefault from './react/default.tsx';
-import * as DemoJustifyLeft from './react/justify-left.tsx';
-import * as DemoIcon from './react/icon.tsx';
+import * as ReactDemoDefault from './react/default.tsx';
+import * as ReactDemoJustifyLeft from './react/justify-left.tsx';
+import * as ReactDemoIcon from './react/icon.tsx';
+import * as VueDemoDefault from './vue/default.vue';
+import * as VueDemoJustifyLeft from './vue/justify-left.vue';
+import * as VueDemoIcon from './vue/icon.vue';
 import ReactTabProvider from 'lumx-docs:@lumx/react/components/tabs/TabProvider';
 import ReactTabList from 'lumx-docs:@lumx/react/components/tabs/TabList';
 import ReactTab from 'lumx-docs:@lumx/react/components/tabs/Tab';
 import ReactTabPanel from 'lumx-docs:@lumx/react/components/tabs/TabPanel';
+import VueTabProvider from 'lumx-docs:@lumx/vue/components/tabs/TabProvider';
+import VueTabList from 'lumx-docs:@lumx/vue/components/tabs/TabList';
+import VueTab from 'lumx-docs:@lumx/vue/components/tabs/Tab';
+import VueTabPanel from 'lumx-docs:@lumx/vue/components/tabs/TabPanel';
 
 # Tabs
 
 **Tabs are navigation elements that regroup related sections of content for users to navigate.**
 
-<DemoBlock withThemeSwitcher demo={{ react: DemoDefault }} />
+<DemoBlock withThemeSwitcher demo={{ react: ReactDemoDefault, vue: VueDemoDefault }} />
 
 ## Justify left
 
-<DemoBlock withThemeSwitcher demo={{ react: DemoJustifyLeft }} />
+<DemoBlock withThemeSwitcher demo={{ react: ReactDemoJustifyLeft, vue: VueDemoJustifyLeft }} />
 
 ## Icon
 
-<DemoBlock withThemeSwitcher demo={{ react: DemoIcon }} />
+<DemoBlock withThemeSwitcher demo={{ react: ReactDemoIcon, vue: VueDemoIcon }} />
 
 ### Accessibility concerns
 
@@ -29,16 +36,16 @@ import ReactTabPanel from 'lumx-docs:@lumx/react/components/tabs/TabPanel';
 
 #### TabProvider properties
 
-<PropTable docs={{ react: ReactTabProvider }} />
+<PropTable docs={{ react: ReactTabProvider, vue: VueTabProvider }} />
 
 #### TabList properties
 
-<PropTable docs={{ react: ReactTabList }} />
+<PropTable docs={{ react: ReactTabList, vue: VueTabList }} />
 
 #### Tab properties
 
-<PropTable docs={{ react: ReactTab }} />
+<PropTable docs={{ react: ReactTab, vue: VueTab }} />
 
 #### TabPanel properties
 
-<PropTable docs={{ react: ReactTabPanel }} />
+<PropTable docs={{ react: ReactTabPanel, vue: VueTabPanel }} />
