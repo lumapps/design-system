@@ -7,8 +7,8 @@
     },
     "dependencies": {
         "@floating-ui/react-dom": "^2.1.7",
-        "@lumx/core": "^4.8.1",
-        "@lumx/icons": "^4.8.1",
+        "@lumx/core": "^4.9.0",
+        "@lumx/icons": "^4.9.0",
         "body-scroll-lock": "^3.1.5"
     },
     "devDependencies": {
@@ -100,5 +100,5 @@
         "build:storybook": "storybook build"
     },
     "sideEffects": false,
-    "version": "4.8.1"
+    "version": "4.9.0"
 }
