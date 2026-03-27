@@ -43,4 +43,5 @@ export * from './components/thumbnail';
 export * from './components/toolbar';
 export * from './components/tooltip';
 export * from './components/user-block';
+export * from './components/select-button';
 export * from './components/select-text-field';

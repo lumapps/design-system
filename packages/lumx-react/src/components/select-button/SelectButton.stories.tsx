@@ -35,7 +35,11 @@ export const LabelDisplayModes = { ...stories.LabelDisplayModes };
 
 // ── Framework-specific stories (use React hooks for stateful behavior) ──
 
-/** SelectButton with custom option rendering via the `renderOption` prop */
+/**
+ * SelectButton with a custom button trigger (`as={Chip}`) and custom option/section
+ * rendering via the `renderOption` and `renderSectionTitle` props (icons added on
+ * the section title and each option).
+ */
 export const CustomRender = () => {
     const [value, setValue] = useState<Fruit>();
 
@@ -46,15 +50,20 @@ export const CustomRender = () => {
             options={FRUITS}
             getOptionId="id"
             getOptionName="name"
+            getSectionId="category"
             value={value}
             onChange={setValue}
             isClickable
             isSelected={!!value}
             after={<Icon icon={mdiMenuDown} />}
-            renderOption={(fruit) => (
-                <SelectButton.Option value={fruit.id}>
-                    <strong>{fruit.name}</strong>
-                </SelectButton.Option>
+            renderSectionTitle={(sectionId: string, options: Fruit[]) => (
+                <>
+                    <Icon icon={options[0].categoryIcon} size="xs" />
+                    {sectionId}
+                </>
+            )}
+            renderOption={(fruit: Fruit) => (
+                <SelectButton.Option value={fruit.id} before={<Icon icon={fruit.icon} size="xs" />} />
             )}
         />
     );

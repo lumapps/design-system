@@ -9,16 +9,16 @@ import {
     watch,
 } from 'vue';
 
-import { getWithSelector } from '@lumx/core/js/utils/selectors';
-import { type RenderOptionContext, type BaseSelectTextFieldWrapperProps } from '@lumx/core/js/utils/select/types';
+import { type BaseSelectTextFieldWrapperProps } from '@lumx/core/js/utils/select/types';
 import { getOptionDisplayName } from '@lumx/core/js/utils/select/getOptionDisplayName';
+import { toggleSelection } from '@lumx/core/js/utils/select/toggleSelection';
 import { SelectTextField as UI } from '@lumx/core/js/components/SelectTextField';
 import type { JSXElement } from '@lumx/core/js/types';
 
 import { keysOf, type ClassValue, type EmitsOf } from '../../utils/VueToJSX';
-import { isComponentType } from '../../utils/isComponentType';
 import { Combobox } from '../combobox';
-import ComboboxOption from '../combobox/ComboboxOption';
+import { useWrappedRenderOptionSlot } from '../combobox/useWrappedRenderOptionSlot';
+import { useWrappedRenderSectionTitleSlot } from '../combobox/useWrappedRenderSectionTitleSlot';
 import SelectionChipGroup from '../chip/SelectionChipGroup';
 import { InfiniteScroll } from '@lumx/vue/utils/InfiniteScroll';
 import { useHasEventListener } from '../../composables/useHasEventListener';
@@ -177,34 +177,18 @@ const SelectTextField = defineComponent(
             return getOptionDisplayName(props.value, props.getOptionName, props.getOptionId);
         });
 
-        // Map option id selection to option object selection.
+        // Map option id selection to option object(s) selection (delegates the toggle math to core).
         const handleSelect = (selectedOption: { value: string }) => {
-            const selectedValue = selectedOption.value;
-            const newOption =
-                selectedValue &&
-                props.options?.find((option) => getWithSelector(props.getOptionId, option) === selectedValue);
-
-            if (props.selectionType === 'single') {
-                emit('change', newOption);
-            } else {
-                // TypeScript narrows props to MultipleSelectTextFieldProps here.
-                const currentValue = props.value || [];
-                const existingIndex = currentValue.findIndex(
-                    (item) => getWithSelector(props.getOptionId, item) === selectedValue,
-                );
-
-                if (existingIndex === -1) {
-                    // Skip if no matching option found (e.g. beforeOptions custom actions).
-                    if (newOption) {
-                        emit('change', [...currentValue, newOption]);
-                    }
-                } else {
-                    // Remove option (toggle off)
-                    const updated = [...currentValue];
-                    updated.splice(existingIndex, 1);
-                    emit('change', updated);
-                }
-            }
+            const next = toggleSelection(
+                props.options,
+                props.getOptionId,
+                props.value,
+                selectedOption.value,
+                props.selectionType === 'multiple',
+            );
+            // In multi mode, `toggleSelection` skips when no option matches and returns the
+            // unchanged current array — the emit is a no-op for the consumer.
+            emit('change', next);
 
             // Reset search state after selection.
             isSearching.value = false;
@@ -241,69 +225,9 @@ const SelectTextField = defineComponent(
             emit('blur', event);
         };
 
-        /** Adapt the slots.option to the JSX renderOption */
-        const wrappedRenderOption = computed(() => {
-            const renderOptionSlot = slots.option;
-            if (!renderOptionSlot) return undefined;
-
-            return (
-                option: unknown,
-                { index, value: optionValue, isSelected, description, name }: RenderOptionContext,
-            ) => {
-                const vnodes = renderOptionSlot({ option, index });
-                const customOption = vnodes?.find(isComponentType(ComboboxOption));
-
-                // Fallback: consumer didn't return a <Combobox.Option> — render their VNodes as-is.
-                if (!customOption) return vnodes as unknown as JSXElement;
-
-                // Extract slot-overridable props; drop undefined so they don't clobber core defaults.
-                const slotProps: Record<string, any> = customOption.props || {};
-                const definedSlotProps = Object.fromEntries(
-                    Object.entries(slotProps).filter(([, v]) => v !== undefined),
-                );
-
-                // `before`/`after` may be passed as JSX props (attrs) — promote them to named slots.
-                const { before: beforeProp, after: afterProp, ...restSlotProps } = definedSlotProps;
-
-                // Handle slots overrides (default, before and after)
-                const slotChildren = { ...(customOption.children as Record<string, any>) };
-                if (beforeProp !== undefined && !slotChildren.before) {
-                    slotChildren.before = () => beforeProp;
-                }
-                if (afterProp !== undefined && !slotChildren.after) {
-                    slotChildren.after = () => afterProp;
-                }
-                if (!slotChildren.default) {
-                    slotChildren.default = name;
-                }
-
-                return (
-                    <ComboboxOption
-                        key={optionValue}
-                        value={optionValue}
-                        isSelected={isSelected}
-                        description={description ?? undefined}
-                        {...restSlotProps}
-                    >
-                        {slotChildren}
-                    </ComboboxOption>
-                ) as JSXElement;
-            };
-        });
-
-        /*
-         * Wrap the consumer's renderSectionTitle slot.
-         * The scoped slot receives `{ sectionId, options }` and should return
-         * custom JSX to display as the section title.
-         */
-        const wrappedRenderSectionTitle = computed(() => {
-            const renderSectionTitleSlot = slots.sectionTitle;
-            if (!renderSectionTitleSlot) return undefined;
-
-            return (sectionId: string, options: unknown[]) => {
-                return renderSectionTitleSlot({ sectionId, options }) as JSXElement;
-            };
-        });
+        /** Adapt the scoped slots to the JSX render functions expected by the core template. */
+        const wrappedRenderOption = useWrappedRenderOptionSlot(slots.option);
+        const wrappedRenderSectionTitle = useWrappedRenderSectionTitleSlot(slots.sectionTitle);
 
         /*
          * Check if a 'load-more' listener is registered on this component

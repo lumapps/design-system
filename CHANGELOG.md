@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   `@lumx/vue`:
+    -   Create the `SelectButton` component
+
 ## [4.13.0][] - 2026-05-11
 
 ### Added
