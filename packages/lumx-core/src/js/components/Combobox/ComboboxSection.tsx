@@ -5,8 +5,8 @@ import { classNames } from '../../utils';
  * Defines the props for the core ComboboxSection template.
  */
 export interface ComboboxSectionProps extends HasClassName {
-    /** Section label displayed as the group title. */
-    label?: string;
+    /** Section label displayed as the group title. Accepts a plain string or custom JSX content. */
+    label?: string | JSXElement;
     /** Section icon */
     icon?: string;
     /** Section content (should be ComboboxOption elements). */

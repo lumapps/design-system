@@ -2,7 +2,7 @@ import type { ComboboxCallbacks, ComboboxHandle } from './types';
 import { setupCombobox } from './setupCombobox';
 
 /** Options for configuring the input-mode combobox controller. */
-export interface SetupComboboxInputOptions {
+export interface SetupComboboxInputOptions extends ComboboxCallbacks {
     /**
      * When true (default), the combobox automatically filters options as the user types.
      * Each registered `Combobox.Option` receives filter state updates and hides itself
@@ -24,50 +24,56 @@ export interface SetupComboboxInputOptions {
  * Handles: Home/End (text cursor), ArrowLeft/Right (clear active descendant),
  * filtering (on input and on open), and focus behavior.
  *
- * @param input     The input element to use as the combobox trigger.
- * @param callbacks Callbacks for select and open/close events.
- * @param options   Options for configuring the input-mode controller.
+ * @param input   The input element to use as the combobox trigger.
+ * @param options Options and callbacks for configuring the input-mode controller.
  * @returns A ComboboxHandle for interacting with the combobox.
  */
-export function setupComboboxInput(
-    input: HTMLInputElement,
-    callbacks: ComboboxCallbacks,
-    options: SetupComboboxInputOptions = {},
-): ComboboxHandle {
-    const { autoFilter = true } = options;
+export function setupComboboxInput(input: HTMLInputElement, options: SetupComboboxInputOptions): ComboboxHandle {
+    const { autoFilter = true, onSelect: optionOnSelect } = options;
 
-    const handle = setupCombobox(callbacks, { wrapNavigation: true }, (combobox, signal) => {
-        /**
-         * True when the current input value came from user typing (real InputEvent).
-         * False when the value was set programmatically (select, clear, etc.).
-         * Used to decide whether to re-apply the filter when the combobox opens.
-         */
-        let userHasTyped = false;
+    /**
+     * True when the current input value came from user typing (real InputEvent).
+     * False when the value was set programmatically (select, clear, etc.).
+     * Used to decide whether to re-apply the filter when the combobox opens.
+     */
+    let userHasTyped = false;
 
+    /**
+     * Wraps the consumer's onSelect to perform input-mode side effects after selection:
+     * clears the active descendant, resets the filter, and re-opens the popup.
+     */
+    const onSelect = (option: { value: string }, combobox: ComboboxHandle) => {
+        optionOnSelect(option, combobox);
+
+        // Clear the active item. In multi-select, keep visual focus so the
+        // user can continue navigating after selection.
+        if (!combobox.isMultiSelect) {
+            combobox.focusNav?.clear();
+        }
+        userHasTyped = false;
+        combobox.setIsOpen(true);
+        if (autoFilter) {
+            combobox.setFilter('');
+        }
+    };
+
+    const handle = setupCombobox({ onSelect }, { wrapNavigation: true }, (combobox, signal) => {
         signal.addEventListener('abort', () => {
             userHasTyped = false;
         });
 
-        // Filter on user typing; reset filter on programmatic input changes.
-        // Real user input fires an `InputEvent` (with `inputType`), while
-        // programmatic changes (selection bridge, clear, etc.) dispatch a
-        // plain `Event('input')` — we use this to distinguish the two.
+        // Filter on real user typing (InputEvent with `inputType`).
         input.addEventListener(
             'input',
             (event) => {
-                const isUserTyping = event instanceof InputEvent;
+                if (!(event instanceof InputEvent)) return;
 
-                // Clear the active item. In multi-select with a programmatic change, keep
-                // visual focus so the user can continue navigating after selection.
-                if (isUserTyping || !combobox.isMultiSelect) {
-                    combobox.focusNav?.clear();
-                }
-
-                userHasTyped = isUserTyping;
+                combobox.focusNav?.clear();
+                userHasTyped = true;
                 combobox.setIsOpen(true);
 
                 if (autoFilter) {
-                    combobox.setFilter(isUserTyping ? input.value : '');
+                    combobox.setFilter(input.value);
                 }
             },
             { signal },

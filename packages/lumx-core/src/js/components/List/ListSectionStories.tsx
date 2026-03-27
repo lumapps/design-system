@@ -19,6 +19,7 @@ export function setup({
     const meta = {
         component: ListSection,
         argTypes: {
+            icon: iconArgType,
             'list.itemPadding': getSelectArgType([undefined, Size.big, Size.huge]),
             'listItem.size': getSelectArgType([undefined, Size.tiny, Size.regular, Size.big]),
         },
@@ -28,9 +29,6 @@ export function setup({
     const Default = {
         args: {
             label: 'Section title',
-        },
-        argTypes: {
-            icon: iconArgType,
         },
         render({ 'list.itemPadding': itemPadding, 'listItem.size': itemSize, ...args }: any) {
             return (

@@ -19,6 +19,8 @@ export interface ComboboxOptionMoreInfoProps extends HasClassName {
     onMouseEnter?(): void;
     /** Mouse leave callback. */
     onMouseLeave?(): void;
+    /** Props forwarded to the IconButton. */
+    buttonProps?: Record<string, any>;
 }
 
 /**
@@ -63,7 +65,7 @@ export const ComboboxOptionMoreInfo = (
     props: ComboboxOptionMoreInfoProps,
     { IconButton, Popover }: ComboboxOptionMoreInfoComponents,
 ) => {
-    const { children, className, isOpen, popoverId, ref, onMouseEnter, onMouseLeave } = props;
+    const { children, className, isOpen, popoverId, ref, onMouseEnter, onMouseLeave, buttonProps } = props;
 
     return (
         <>
@@ -79,6 +81,7 @@ export const ComboboxOptionMoreInfo = (
                 // Keyboard accessibility is handled via combobox keyboard highlighting.
                 aria-hidden
                 label=""
+                {...buttonProps}
             />
             <Popover
                 id={popoverId}

@@ -2,7 +2,7 @@ import type { ComboboxCallbacks, ComboboxHandle } from './types';
 import { setupCombobox } from './setupCombobox';
 import { createTypeahead } from '../../utils/typeahead';
 import { createSelectorTreeWalker } from '../../utils/browser/createSelectorTreeWalker';
-import { getOptionValue, isActionCell } from './utils';
+import { getOptionValue } from './utils';
 
 /** Is the key a single printable character (not Space, no modifier keys)? */
 function isPrintableKey({ key, altKey, ctrlKey, metaKey }: KeyboardEvent): boolean {
@@ -47,13 +47,8 @@ export function setupComboboxButton(button: HTMLButtonElement, callbacks: Combob
                 case ' ':
                     // Space acts like Enter in button mode.
                     if (combobox.isOpen && nav?.hasActiveItem && nav.activeItem) {
-                        if (nav.type === 'grid' && isActionCell(nav.activeItem)) {
-                            // Action cell: programmatically click it.
-                            nav.activeItem.click();
-                        } else {
-                            combobox.select(nav.activeItem);
-                            combobox.setIsOpen(false);
-                        }
+                        // Click the active item — delegated handler handles select + close.
+                        nav.activeItem.click();
                     } else {
                         combobox.setIsOpen(true);
                     }
