@@ -6,7 +6,7 @@ on:
         types: [submitted]
     # Triggered when a label is removed (e.g. "in progress" or "need: dev*" removed)
     pull_request:
-        types: [unlabeled]
+        types: [unlabeled, ready_for_review]
     # Triggered from another workflow
     workflow_call:
 
