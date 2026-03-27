@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   Add internal `createTypeahead` utility (useable for select-only combobox and button menus)
     -   Create the `Combobox` component family
     -   Moved `Tab` from `@lumx/react`
+    -   Moved `TabList` and `TabPanel` from `@lumx/react`
 -   `@lumx/vue`:
     -   Create the `UserBlock` component
 

@@ -1,48 +1,28 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 
-import { Alignment, Theme } from '@lumx/react';
-import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { classNames } from '@lumx/core/js/utils';
+import { Theme } from '@lumx/react';
+import { GenericProps } from '@lumx/react/utils/type';
 import { mergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { TABS_CLASSNAME as CLASSNAME } from '@lumx/core/js/components/Tabs/constants';
+import {
+    COMPONENT_NAME,
+    DEFAULT_PROPS,
+    TabList as UI,
+    TabListProps as UIProps,
+    TabListLayout,
+} from '@lumx/core/js/components/Tabs/TabList';
 
+import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 import { useRovingTabIndexContainer } from '../../hooks/useRovingTabIndexContainer';
-
-const { block, element } = classNames.bem(CLASSNAME);
-
-export enum TabListLayout {
-    clustered = 'clustered',
-    fixed = 'fixed',
-}
 
 /**
  * Defines the props of the component.
  */
-export interface TabListProps extends GenericProps, HasTheme {
-    /** ARIA label (purpose of the set of tabs). */
-    ['aria-label']: string;
-    /** Tab list. */
-    children: ReactNode;
-    /** Layout of the tabs in the list. */
-    layout?: TabListLayout;
-    /** Position of the tabs in the list (requires 'clustered' layout). */
-    position?: Alignment;
-}
+export interface TabListProps extends GenericProps, ReactToJSX<UIProps> {}
 
-/**
- * Component display name.
- */
-const COMPONENT_NAME = 'TabList';
-
-/**
- * Component default props.
- */
-const DEFAULT_PROPS: Partial<TabListProps> = {
-    layout: TabListLayout.fixed,
-    position: Alignment.left,
-};
+export { TabListLayout };
 
 /**
  * TabList component.
@@ -55,40 +35,20 @@ const DEFAULT_PROPS: Partial<TabListProps> = {
  */
 export const TabList = forwardRef<TabListProps, HTMLDivElement>((props, ref) => {
     const defaultTheme = useTheme() || Theme.light;
-    const {
-        'aria-label': ariaLabel,
-        children,
-        className,
-        layout = DEFAULT_PROPS.layout,
-        position = DEFAULT_PROPS.position,
-        theme = defaultTheme,
-        ...forwardedProps
-    } = props;
+    const { theme = defaultTheme, ...forwardedProps } = props;
     const tabListRef = React.useRef(null);
     useRovingTabIndexContainer({
         containerRef: tabListRef,
         itemSelector: '[role="tab"]',
     });
 
-    return (
-        <div
-            ref={mergeRefs(ref, tabListRef)}
-            {...forwardedProps}
-            className={classNames.join(
-                className,
-                block({
-                    [`layout-${layout}`]: Boolean(layout),
-                    [`position-${position}`]: Boolean(position),
-                    [`theme-${theme}`]: Boolean(theme),
-                }),
-            )}
-        >
-            <div className={element('links')} role="tablist" aria-label={ariaLabel}>
-                {children}
-            </div>
-        </div>
-    );
+    return UI({
+        theme,
+        ref: mergeRefs(ref, tabListRef),
+        ...forwardedProps,
+    });
 });
+
 TabList.displayName = COMPONENT_NAME;
 TabList.className = CLASSNAME;
 TabList.defaultProps = DEFAULT_PROPS;

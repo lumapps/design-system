@@ -1,6 +1,7 @@
 import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
 import { getByClassName } from '@lumx/react/testing/utils/queries';
 import { render, screen } from '@testing-library/react';
+import BaseTabPanelTests from '@lumx/core/js/components/Tabs/TabPanelTests';
 
 import { TabPanel, TabPanelProps } from './TabPanel';
 
@@ -21,10 +22,9 @@ const setup = (propsOverride: SetupProps = {}) => {
 };
 
 describe(`<${TabPanel.displayName}>`, () => {
-    it('should render default', () => {
-        const content = 'Content';
-        const { tabPanel } = setup({ children: content });
-        expect(tabPanel).toBe(screen.queryByRole('tabpanel'));
+    BaseTabPanelTests({
+        render: (props: any) => render(<TabPanel {...props} />),
+        screen,
     });
 
     // Common tests suite.
