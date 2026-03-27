@@ -19,7 +19,7 @@ export interface TabPanelProps extends HasClassName {
     ref?: CommonRef;
 }
 
-export type TabPanelPropsToOverride = 'tabId';
+export type TabPanelPropsToOverride = 'tabId' | 'isLazy';
 
 /**
  * Component display name.
