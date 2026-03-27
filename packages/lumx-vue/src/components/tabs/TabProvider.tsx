@@ -1,11 +1,6 @@
-import { defineComponent, provide, ref, useSlots, watch } from 'vue';
+import { defineComponent, provide, ref, watch } from 'vue';
 
-import {
-    INIT_STATE,
-    reducer,
-    type Action,
-    type State,
-} from '@lumx/core/js/components/Tabs/state';
+import { INIT_STATE, reducer, type Action, type State } from '@lumx/core/js/components/Tabs/state';
 
 import { TAB_PROVIDER_INJECT_KEY } from './state';
 
@@ -52,19 +47,16 @@ const TabProvider = defineComponent(
         provide(TAB_PROVIDER_INJECT_KEY, { state, dispatch });
 
         // On prop change → sync internal state (mirrors React's useEffect on propState).
-        watch(
-            [() => props.activeTabIndex, () => props.isLazy, () => props.shouldActivateOnFocus],
-            () => {
-                dispatch({
-                    type: 'update',
-                    payload: {
-                        isLazy: props.isLazy ?? DEFAULT_PROPS.isLazy,
-                        shouldActivateOnFocus: props.shouldActivateOnFocus ?? DEFAULT_PROPS.shouldActivateOnFocus,
-                        ...(props.activeTabIndex !== undefined ? { activeTabIndex: props.activeTabIndex } : {}),
-                    },
-                });
-            },
-        );
+        watch([() => props.activeTabIndex, () => props.isLazy, () => props.shouldActivateOnFocus], () => {
+            dispatch({
+                type: 'update',
+                payload: {
+                    isLazy: props.isLazy ?? DEFAULT_PROPS.isLazy,
+                    shouldActivateOnFocus: props.shouldActivateOnFocus ?? DEFAULT_PROPS.shouldActivateOnFocus,
+                    ...(props.activeTabIndex !== undefined ? { activeTabIndex: props.activeTabIndex } : {}),
+                },
+            });
+        });
 
         // On internal active tab index change → emit change event (for controlled mode).
         watch(

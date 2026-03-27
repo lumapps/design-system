@@ -1,4 +1,4 @@
-import { nextTick, ref } from 'vue';
+import { ref } from 'vue';
 import { render, screen, waitFor, within } from '@testing-library/vue';
 import { flushPromises } from '@vue/test-utils';
 import userEvent from '@testing-library/user-event';
