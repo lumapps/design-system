@@ -40,6 +40,7 @@ const TabPanel = defineComponent(
                 id={tabState.value?.tabPanelId}
                 isLazy={tabState.value?.isLazy}
                 tabId={tabState.value?.tabId}
+                tabIndexProp="tabindex"
                 children={slots.default?.() as JSXElement}
             />
         );

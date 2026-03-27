@@ -53,6 +53,8 @@ const Tab = defineComponent(
                     tabPanelId={tabState.value?.tabPanelId}
                     handleFocus={(event: FocusEvent) => (onFocus as any)?.(event)}
                     handleKeyPress={(event: KeyboardEvent) => ((onKeypress || onKeyPress) as any)?.(event)}
+                    keyPressProp="onKeypress"
+                    tabIndexProp="tabindex"
                     Icon={Icon}
                     Text={Text}
                 />
