@@ -70,11 +70,11 @@ jobs:
                   if-no-files-found: ignore
 
             - name: 'Save visual snapshots cache'
-              if: ${{ github.event_name != 'pull_request' && (steps.cache-restore.outputs.cache-hit != 'true' || inputs.update) }}
+              if: ${{ github.event_name != 'pull_request' }}
               uses: actions/cache/save@v4
               with:
                   path: ${{ matrix.visDir }}/*/__baselines__
-                  key: vis-snapshots-${{ matrix.label }}-${{ github.sha }}${{ inputs.update && format('-{0}', github.run_id) || '' }}
+                  key: vis-snapshots-${{ matrix.label }}-${{ github.run_id }}
 
     visual-diffs:
         if: always() && github.event_name == 'pull_request'

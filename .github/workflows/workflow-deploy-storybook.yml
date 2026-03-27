@@ -75,6 +75,9 @@ jobs:
             - name: 'Setup'
               uses: ./.github/actions/setup
 
+            - name: 'Generate demo stories'
+              run: yarn workspace lumx-site-demo generate:demo-stories
+
             - name: 'Deploy chromatic'
               id: deploy
               env:
