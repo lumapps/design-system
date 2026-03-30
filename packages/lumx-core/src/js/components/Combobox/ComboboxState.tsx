@@ -58,6 +58,12 @@ export interface ComboboxStateProps {
          * Used to suppress false "empty" state while data is loading.
          */
         isLoading?: boolean;
+        /**
+         * Whether the combobox popover is open.
+         * Used to gate live region content so screen readers announce messages
+         * when the popover opens (content insertion triggers `aria-live` announcement).
+         */
+        isOpen?: boolean;
     };
 }
 
@@ -90,6 +96,7 @@ export interface ComboboxStateComponents {
  */
 export const ComboboxState = (props: ComboboxStateProps, { GenericBlock, Text }: ComboboxStateComponents) => {
     const { emptyMessage, errorMessage, errorTryReloadMessage, loadingMessage, state } = props;
+    const isOpen = state?.isOpen ?? true;
     const showError = !!errorMessage;
     const resolvedEmptyMessage =
         typeof emptyMessage === 'function' ? emptyMessage(state?.inputValue || '') : emptyMessage;
@@ -102,6 +109,12 @@ export const ComboboxState = (props: ComboboxStateProps, { GenericBlock, Text }:
     const show = showEmpty || showError;
     const alignProps = { hAlign: 'center', vAlign: 'center' };
 
+    // Gate message content behind isOpen so that content is *inserted* into the
+    // aria-live region when the popover opens, triggering screen reader announcements.
+    // Without this gate, content is already present (just hidden via display:none from
+    // the popover's closeMode="hide") and revealing it doesn't trigger announcements.
+    const renderContent = isOpen;
+
     return (
         <GenericBlock
             className={classNames.join(!show && classNames.visuallyHidden(), block(), classNames.padding('regular'))}
@@ -111,17 +124,17 @@ export const ComboboxState = (props: ComboboxStateProps, { GenericBlock, Text }:
             aria-live="polite"
             aria-atomic
         >
-            {showEmpty && (
+            {renderContent && showEmpty && (
                 <Text as="p" typography="body1" color="dark-L2">
                     {resolvedEmptyMessage}
                 </Text>
             )}
-            {showLoading && (
+            {renderContent && showLoading && (
                 <Text as="p" typography="body1" color="dark-L2">
                     {loadingMessage}
                 </Text>
             )}
-            {!!errorMessage && (
+            {renderContent && !!errorMessage && (
                 <>
                     <Text as="p" typography="subtitle2">
                         {errorMessage}

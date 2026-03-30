@@ -144,10 +144,12 @@
     $divider: '.#{$lumx-base-prefix}-list-divider';
     $section: &;
 
-    // Insert a divider before each section NOT directly following another visible section or an explicit divider.
-    // Avoids double dividers when two visible sections are adjacent or when a ListDivider separates them.
-    // Uses #{$section}:not([hidden]) so that hidden sections in between don't prevent the divider.
-    &:not(:first-child):not(#{$section}:not([hidden]) + &):not(#{$divider} + &) {
+    // Insert a divider before each section that:
+    // 1. Is not directly following another visible section (avoids double dividers)
+    // 2. Is not directly following an explicit divider
+    // 3. Has at least one preceding visible section (uses `~` general sibling combinator
+    //    so hidden-first-sections don't get a spurious top divider)
+    #{$section}:not([hidden]) ~ &:not(#{$section}:not([hidden]) + &):not(#{$divider} + &) {
         &::before {
             content: '';
             display: block;

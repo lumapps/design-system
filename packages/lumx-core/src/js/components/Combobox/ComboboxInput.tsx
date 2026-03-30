@@ -1,10 +1,10 @@
 import { mdiChevronUp, mdiChevronDown } from '@lumx/icons';
-import type { CommonRef, HasClassName, LumxClassName } from '../../types';
+import type { CommonRef, HasClassName, HasTheme, LumxClassName } from '../../types';
 
 /**
  * Defines the props for the core ComboboxInput template.
  */
-export interface ComboboxInputProps extends HasClassName {
+export interface ComboboxInputProps extends HasClassName, HasTheme {
     /** The ID of the listbox element (for aria-controls). */
     listboxId?: string;
     /** Whether the combobox is open. */
@@ -53,8 +53,17 @@ export const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-combobox-in
  * @return JSX element.
  */
 export const ComboboxInput = (props: ComboboxInputProps, { TextField, IconButton }: ComboboxInputComponents) => {
-    const { listboxId, isOpen, ref, inputRef, textFieldRef, toggleButtonProps, handleToggle, ...forwardedProps } =
-        props;
+    const {
+        listboxId,
+        isOpen,
+        ref,
+        inputRef,
+        textFieldRef,
+        toggleButtonProps,
+        handleToggle,
+        theme,
+        ...forwardedProps
+    } = props;
 
     return (
         <TextField
@@ -67,10 +76,12 @@ export const ComboboxInput = (props: ComboboxInputProps, { TextField, IconButton
             inputRef={inputRef}
             textFieldRef={textFieldRef}
             autoComplete="off"
+            theme={theme}
             afterElement={
                 toggleButtonProps ? (
                     <IconButton
                         {...toggleButtonProps}
+                        theme={theme}
                         emphasis="low"
                         size="s"
                         icon={isOpen ? mdiChevronUp : mdiChevronDown}

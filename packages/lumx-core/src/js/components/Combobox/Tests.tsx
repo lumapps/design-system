@@ -2242,20 +2242,62 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
                 expect(getStateContainer()).toHaveTextContent('No results for "z"');
             });
         });
+
+        it('should update input value in emptyMessage when typing while empty', async () => {
+            renderWithState(t.emptyStateTemplate);
+            const input = getInput();
+            await userEvent.click(input);
+
+            await waitFor(() => {
+                expect(input).toHaveAttribute('aria-expanded', 'true');
+            });
+
+            // Type "z" — list becomes empty
+            await userEvent.type(input, 'z');
+            await waitFor(() => {
+                expect(getStateContainer()).toHaveTextContent('No results for "z"');
+            });
+
+            // Keep typing "zz" — list stays empty, message should update
+            await userEvent.type(input, 'z');
+            await waitFor(() => {
+                expect(getStateContainer()).toHaveTextContent('No results for "zz"');
+            });
+        });
     });
 
     describe('Combobox.State - Error state', () => {
-        it('should show error message', () => {
+        it('should show error message', async () => {
             renderWithState(t.errorStateTemplate);
-            const stateEl = getStateContainer();
-            expect(stateEl).toBeInTheDocument();
-            expect(stateEl!.className).not.toContain(VISUALLY_HIDDEN);
-            expect(stateEl).toHaveTextContent('Service unavailable');
+            const input = getInput();
+            await userEvent.click(input);
+
+            await waitFor(() => {
+                expect(input).toHaveAttribute('aria-expanded', 'true');
+            });
+
+            // Content is deferred after open to allow the aria-live region
+            // to become visible in the accessibility tree first.
+            await waitFor(() => {
+                const stateEl = getStateContainer();
+                expect(stateEl).toBeInTheDocument();
+                expect(stateEl!.className).not.toContain(VISUALLY_HIDDEN);
+                expect(stateEl).toHaveTextContent('Service unavailable');
+            });
         });
 
-        it('should show secondary error message', () => {
+        it('should show secondary error message', async () => {
             renderWithState(t.errorStateTemplate);
-            expect(getStateContainer()).toHaveTextContent('Please try again later');
+            const input = getInput();
+            await userEvent.click(input);
+
+            await waitFor(() => {
+                expect(input).toHaveAttribute('aria-expanded', 'true');
+            });
+
+            await waitFor(() => {
+                expect(getStateContainer()).toHaveTextContent('Please try again later');
+            });
         });
 
         it('should have role=status on the state container', () => {
@@ -2360,7 +2402,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
             expect(stateEl).not.toHaveTextContent('No results');
         });
 
-        it('should announce loading after debounce via handle events', () => {
+        it('should announce loading after debounce via handle events (only when open)', () => {
             // Test the handle's debounce behavior directly (framework-agnostic)
             vi.useFakeTimers();
             try {
@@ -2372,15 +2414,22 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
                 handle.subscribe('loadingChange', (v) => loadingChanges.push(v));
                 handle.subscribe('loadingAnnouncement', (v) => announcements.push(v));
 
-                // Register 3 skeletons
+                // Register 3 skeletons while closed
                 const cleanup1 = handle.registerSkeleton();
                 const cleanup2 = handle.registerSkeleton();
                 const cleanup3 = handle.registerSkeleton();
 
                 // loadingChange fires immediately
                 expect(loadingChanges).toEqual([true]);
-                // No announcement yet
+                // No announcement while closed
                 expect(announcements).toEqual([]);
+
+                // After 500ms — still no announcement because combobox is closed
+                vi.advanceTimersByTime(500);
+                expect(announcements).toEqual([]);
+
+                // Open the combobox — timer starts now
+                handle.setIsOpen(true);
 
                 // After 499ms — still no announcement
                 vi.advanceTimersByTime(499);
@@ -2396,6 +2445,67 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
                 cleanup3();
                 expect(loadingChanges).toEqual([true, false]);
                 expect(announcements).toEqual([true, false]);
+
+                handle.destroy();
+            } finally {
+                vi.useRealTimers();
+            }
+        });
+
+        it('should retrigger loading announcement when reopening', () => {
+            vi.useFakeTimers();
+            try {
+                const callbacks = { onSelect: vi.fn() };
+                const handle = setupCombobox(callbacks);
+
+                const announcements: boolean[] = [];
+                handle.subscribe('loadingAnnouncement', (v) => announcements.push(v));
+
+                // Register skeletons and open
+                const cleanup1 = handle.registerSkeleton();
+                handle.setIsOpen(true);
+
+                // Wait for announcement
+                vi.advanceTimersByTime(500);
+                expect(announcements).toEqual([true]);
+
+                // Close the combobox — announcement resets
+                handle.setIsOpen(false);
+                expect(announcements).toEqual([true, false]);
+
+                // Reopen while still loading — announcement retriggers after delay
+                handle.setIsOpen(true);
+                expect(announcements).toEqual([true, false]);
+
+                vi.advanceTimersByTime(500);
+                expect(announcements).toEqual([true, false, true]);
+
+                // Cleanup
+                cleanup1();
+                expect(announcements).toEqual([true, false, true, false]);
+
+                handle.destroy();
+            } finally {
+                vi.useRealTimers();
+            }
+        });
+
+        it('should not announce loading if skeletons register and unregister while closed', () => {
+            vi.useFakeTimers();
+            try {
+                const callbacks = { onSelect: vi.fn() };
+                const handle = setupCombobox(callbacks);
+
+                const announcements: boolean[] = [];
+                handle.subscribe('loadingAnnouncement', (v) => announcements.push(v));
+
+                // Register and unregister skeletons while closed
+                const cleanup = handle.registerSkeleton();
+                vi.advanceTimersByTime(500);
+                cleanup();
+
+                // No announcements should have fired
+                expect(announcements).toEqual([]);
 
                 handle.destroy();
             } finally {

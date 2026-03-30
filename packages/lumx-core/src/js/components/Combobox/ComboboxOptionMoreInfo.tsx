@@ -19,6 +19,8 @@ export interface ComboboxOptionMoreInfoProps extends HasClassName {
     onMouseEnter?(): void;
     /** Mouse leave callback. */
     onMouseLeave?(): void;
+    /** Props forwarded to the IconButton. */
+    buttonProps?: Record<string, any>;
 }
 
 /**
@@ -63,15 +65,16 @@ export const ComboboxOptionMoreInfo = (
     props: ComboboxOptionMoreInfoProps,
     { IconButton, Popover }: ComboboxOptionMoreInfoComponents,
 ) => {
-    const { children, className, isOpen, popoverId, ref, onMouseEnter, onMouseLeave } = props;
+    const { children, className, isOpen, popoverId, ref, onMouseEnter, onMouseLeave, buttonProps } = props;
 
     return (
         <>
             <IconButton
                 ref={ref}
-                className={block([className])}
                 icon={mdiInformationOutline}
                 size="s"
+                {...buttonProps}
+                className={block([className, buttonProps?.className])}
                 emphasis="low"
                 onMouseEnter={onMouseEnter}
                 onMouseLeave={onMouseLeave}
@@ -89,6 +92,7 @@ export const ComboboxOptionMoreInfo = (
                 closeOnEscape
                 closeOnClickAway
                 placement="bottom-end"
+                hasArrow
             >
                 {children}
             </Popover>
