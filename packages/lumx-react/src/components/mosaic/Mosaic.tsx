@@ -1,39 +1,27 @@
-import { MouseEventHandler, useMemo } from 'react';
-
-import take from 'lodash/take';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 
-import { Alignment, AspectRatio, Theme, Thumbnail, ThumbnailProps } from '@lumx/react';
-import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
+import { Theme, Thumbnail, ThumbnailProps } from '@lumx/react';
+import { GenericProps } from '@lumx/react/utils/type';
+import {
+    CLASSNAME,
+    COMPONENT_NAME,
+    DEFAULT_PROPS,
+    Mosaic as UI,
+    MosaicProps as UIProps,
+    MosaicPropsToOverride,
+} from '@lumx/core/js/components/Mosaic';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 
 /**
  * Defines the props of the component.
  */
-export interface MosaicProps extends GenericProps, HasTheme {
+export interface MosaicProps extends GenericProps, ReactToJSX<UIProps, MosaicPropsToOverride> {
     /** Thumbnails. */
     thumbnails: ThumbnailProps[];
     /** On image click callback. */
     onImageClick?(index: number): void;
 }
-
-/**
- * Component display name.
- */
-const COMPONENT_NAME = 'Mosaic';
-
-/**
- * Component default class name and class prefix.
- */
-const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-mosaic';
-const { block, element } = classNames.bem(CLASSNAME);
-
-/**
- * Component default props.
- */
-const DEFAULT_PROPS: Partial<MosaicProps> = {};
 
 /**
  * Mosaic component.
@@ -44,60 +32,17 @@ const DEFAULT_PROPS: Partial<MosaicProps> = {};
  */
 export const Mosaic = forwardRef<MosaicProps, HTMLDivElement>((props, ref) => {
     const defaultTheme = useTheme() || Theme.light;
-    const { className, theme = defaultTheme, thumbnails, onImageClick, ...forwardedProps } = props;
-    const handleImageClick = useMemo(() => {
-        if (!onImageClick) return undefined;
+    const { theme = defaultTheme, onImageClick, ...forwardedProps } = props;
 
-        return (index: number, onClick?: MouseEventHandler): MouseEventHandler =>
-            (event) => {
-                onClick?.(event);
-                onImageClick?.(index);
-            };
-    }, [onImageClick]);
-
-    return (
-        <div
-            ref={ref}
-            {...forwardedProps}
-            className={classNames.join(
-                className,
-                block({
-                    [`theme-${theme}`]: Boolean(theme),
-                    'has-1-thumbnail': thumbnails?.length === 1,
-                    'has-2-thumbnails': thumbnails?.length === 2,
-                    'has-3-thumbnails': thumbnails?.length === 3,
-                    'has-4-thumbnails': thumbnails?.length >= 4,
-                }),
-            )}
-        >
-            <div className={element('wrapper')}>
-                {take(thumbnails, 4).map((thumbnail: any, index: number) => {
-                    const { image, onClick, align, ...thumbnailProps } = thumbnail;
-
-                    return (
-                        <div key={index} className={element('thumbnail')}>
-                            <Thumbnail
-                                {...thumbnailProps}
-                                align={align || Alignment.left}
-                                image={image}
-                                theme={theme}
-                                aspectRatio={AspectRatio.free}
-                                fillHeight
-                                onClick={handleImageClick?.(index, onClick) || onClick}
-                            />
-
-                            {thumbnails.length > 4 && index === 3 && (
-                                <div className={element('overlay')}>
-                                    <span>+{thumbnails.length - 4}</span>
-                                </div>
-                            )}
-                        </div>
-                    );
-                })}
-            </div>
-        </div>
-    );
+    return UI({
+        ref,
+        theme,
+        Thumbnail,
+        handleClick: onImageClick,
+        ...forwardedProps,
+    });
 });
+
 Mosaic.displayName = COMPONENT_NAME;
 Mosaic.className = CLASSNAME;
 Mosaic.defaultProps = DEFAULT_PROPS;

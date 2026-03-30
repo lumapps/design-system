@@ -18,6 +18,7 @@ export * from './components/input-label';
 export * from './components/link';
 export * from './components/list';
 export * from './components/message';
+export * from './components/mosaic';
 export * from './components/popover';
 export * from './components/popover-dialog';
 export * from './components/progress';
