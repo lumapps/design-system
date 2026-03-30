@@ -1,30 +1,28 @@
 import React, { Children, PropsWithChildren, ReactNode, useRef } from 'react';
 
-import { mdiChevronDown, mdiChevronUp } from '@lumx/icons';
-
 import isEmpty from 'lodash/isEmpty';
 
-import { ColorPalette, DragHandle, Emphasis, IconButton, IconButtonProps, Theme } from '@lumx/react';
-import { GenericProps, HasCloseMode, HasTheme, isComponent } from '@lumx/react/utils/type';
-import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
+import { DragHandle, IconButton, IconButtonProps, Theme } from '@lumx/react';
+import { GenericProps, isComponent } from '@lumx/react/utils/type';
 import { partitionMulti } from '@lumx/react/utils/partitionMulti';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { IS_BROWSER } from '@lumx/react/constants';
+import {
+    CLASSNAME,
+    COMPONENT_NAME,
+    DEFAULT_PROPS,
+    ExpansionPanel as UI,
+    ExpansionPanelProps as UIProps,
+    element,
+    ExpansionPanelPropsToOverride,
+} from '@lumx/core/js/components/ExpansionPanel';
+import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 
 /**
  * Defines the props of the component.
  */
-export interface ExpansionPanelProps extends GenericProps, HasCloseMode, HasTheme {
-    /** Whether the expansion panel has a background. */
-    hasBackground?: boolean;
-    /** Whether the header has a divider. */
-    hasHeaderDivider?: boolean;
-    /** Whether the component is open or not. */
-    isOpen?: boolean;
-    /** Label text (overwritten if a `<header>` is provided in the children). */
-    label?: string;
+export interface ExpansionPanelProps extends GenericProps, ReactToJSX<UIProps, ExpansionPanelPropsToOverride> {
     /** On open callback. */
     onOpen?: (event: React.MouseEvent) => void;
     /** On close callback. */
@@ -34,27 +32,7 @@ export interface ExpansionPanelProps extends GenericProps, HasCloseMode, HasThem
         Omit<IconButtonProps, 'label' | 'onClick' | 'icon' | 'emphasis' | 'color'>;
     /** On toggle open or close callback. */
     onToggleOpen?(shouldOpen: boolean, event: React.MouseEvent): void;
-    /** Children */
-    children?: React.ReactNode;
 }
-
-/**
- * Component display name.
- */
-const COMPONENT_NAME = 'ExpansionPanel';
-
-/**
- * Component default class name and class prefix.
- */
-const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-expansion-panel';
-const { block, element } = classNames.bem(CLASSNAME);
-
-/**
- * Component default props.
- */
-const DEFAULT_PROPS: Partial<ExpansionPanelProps> = {
-    closeMode: 'unmount',
-};
 
 const isDragHandle = isComponent(DragHandle);
 const isHeader = isComponent('header');
@@ -70,18 +48,14 @@ const isFooter = isComponent('footer');
 export const ExpansionPanel = forwardRef<ExpansionPanelProps, HTMLDivElement>((props, ref) => {
     const defaultTheme = useTheme() || Theme.light;
     const {
-        className,
         closeMode = DEFAULT_PROPS.closeMode,
         children: anyChildren,
-        hasBackground,
-        hasHeaderDivider,
         isOpen,
         label,
         onClose,
         onOpen,
         onToggleOpen,
         theme = defaultTheme,
-        toggleButtonProps,
         ...forwardedProps
     } = props;
 
@@ -96,35 +70,6 @@ export const ExpansionPanel = forwardRef<ExpansionPanelProps, HTMLDivElement>((p
         headerProps.children
     ) : (
         <span className={element('label')}>{label}</span>
-    );
-
-    const toggleOpen = (event: React.MouseEvent) => {
-        const shouldOpen = !isOpen;
-
-        if (onOpen && shouldOpen) {
-            onOpen(event);
-        }
-        if (onClose && !shouldOpen) {
-            onClose(event);
-        }
-        if (onToggleOpen) {
-            onToggleOpen(shouldOpen, event);
-        }
-    };
-
-    const color = theme === Theme.dark ? ColorPalette.light : ColorPalette.dark;
-
-    const rootClassName = classNames.join(
-        className,
-        block({
-            'has-background': hasBackground,
-            'has-header': Boolean(!isEmpty(headerProps.children)),
-            'has-header-divider': hasHeaderDivider,
-            'is-close': !isOpen,
-            'is-draggable': Boolean(dragHandle),
-            'is-open': isOpen,
-            [`theme-${theme}`]: Boolean(theme),
-        }),
     );
 
     const wrapperRef = useRef<HTMLDivElement>(null);
@@ -156,38 +101,26 @@ export const ExpansionPanel = forwardRef<ExpansionPanelProps, HTMLDivElement>((p
         return () => wrapper.removeEventListener('transitionend', onTransitionEnd);
     }, [closeMode]);
 
-    return (
-        <section ref={ref} {...forwardedProps} className={rootClassName}>
-            {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
-            <header className={element('header')} onClick={toggleOpen}>
-                {dragHandle && <div className={element('header-drag')}>{dragHandle}</div>}
-
-                <div {...headerProps} className={element('header-content')}>
-                    {headerContent}
-                </div>
-
-                <div className={element('header-toggle')}>
-                    <IconButton
-                        {...toggleButtonProps}
-                        color={color}
-                        emphasis={Emphasis.low}
-                        icon={isOpen ? mdiChevronUp : mdiChevronDown}
-                        aria-expanded={isOpen || 'false'}
-                    />
-                </div>
-            </header>
-
-            <div className={element('wrapper')} ref={wrapperRef}>
-                {(isOpen || isChildrenVisible) && (
-                    <div className={element('container')}>
-                        <div className={element('content')}>{content}</div>
-
-                        {footer && <div className={element('footer')}>{footer}</div>}
-                    </div>
-                )}
-            </div>
-        </section>
-    );
+    return UI({
+        content,
+        dragHandle,
+        footer,
+        headerContent,
+        ref,
+        headerProps,
+        wrapperRef,
+        IconButton,
+        isOpen,
+        handleClose: onClose,
+        handleToggleOpen: onToggleOpen,
+        handleOpen: onOpen,
+        theme,
+        isChildrenVisible,
+        children,
+        closeMode,
+        label,
+        ...forwardedProps,
+    });
 });
 ExpansionPanel.displayName = COMPONENT_NAME;
 ExpansionPanel.className = CLASSNAME;

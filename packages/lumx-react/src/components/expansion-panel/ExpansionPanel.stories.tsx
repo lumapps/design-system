@@ -3,89 +3,36 @@ import React from 'react';
 
 import { ExpansionPanel, ExpansionPanelProps, Text } from '@lumx/react';
 import { withNestedProps } from '@lumx/react/stories/decorators/withNestedProps';
+import { setup } from '@lumx/core/js/components/ExpansionPanel/Stories';
 
-function useBaseProps({
-    toggleButtonProps = { label: 'Toggle' },
+/** Stateful wrapper that manages isOpen per instance, enabling independent toggle per panel. */
+function StatefulExpansionPanel({
     isOpen: initiallyOpen,
-    ...args
-}: Partial<ExpansionPanelProps>) {
+    toggleButtonProps = { label: 'Toggle' },
+    children,
+    ...props
+}: ExpansionPanelProps) {
     const [isOpen, setOpen] = React.useState(initiallyOpen);
-    return { isOpen, toggleButtonProps, onToggleOpen: setOpen, ...args };
+    return (
+        <ExpansionPanel isOpen={isOpen} onToggleOpen={setOpen} toggleButtonProps={toggleButtonProps} {...props}>
+            {children}
+        </ExpansionPanel>
+    );
 }
+
+const { meta, ...stories } = setup({
+    component: ExpansionPanel,
+    components: { Text, StatefulExpansionPanel },
+    decorators: { withNestedProps },
+});
 
 export default {
     title: 'LumX components/expansion-panel/ExpansionPanel',
-    component: ExpansionPanel,
-    args: {
-        'toggleButtonProps.label': 'Toggle',
-        children: (
-            <Text as="p" typography="body1" color="dark-L2" className="lumx-spacing-padding-big">
-                content
-            </Text>
-        ),
-        label: 'Label',
-    },
-    decorators: [withNestedProps()],
-    render(args: ExpansionPanelProps) {
-        return <ExpansionPanel {...useBaseProps(args)} />;
-    },
+    ...meta,
 };
 
-/** Minimal expansion panel config */
-export const Default = {};
-
-/** hasBackground variant */
-export const HasBackground = {
-    args: {
-        hasBackground: true,
-    },
-};
-
-/** hasHeaderDivider variant */
-export const HasHeaderDivider = {
-    args: {
-        isOpen: true,
-        hasBackground: true,
-        hasHeaderDivider: true,
-    },
-};
-
-/** Nested expansion panels */
-export const Nested = {
-    args: {},
-    render(args: ExpansionPanelProps) {
-        return (
-            <ExpansionPanel {...useBaseProps(args)}>
-                <ExpansionPanel
-                    label="Child 1"
-                    hasBackground
-                    className="lumx-spacing-margin-left-huge lumx-spacing-margin-bottom-big"
-                    {...useBaseProps(args)}
-                >
-                    <Text as="p" typography="body1" color="dark-L2" className="lumx-spacing-padding-big">
-                        content child 1
-                    </Text>
-                </ExpansionPanel>
-
-                <ExpansionPanel
-                    label="Child 2"
-                    hasBackground
-                    className="lumx-spacing-margin-left-huge lumx-spacing-margin-bottom-big"
-                    {...useBaseProps(args)}
-                >
-                    <Text as="p" typography="body1" color="dark-L2" className="lumx-spacing-padding-big">
-                        content child 2
-                    </Text>
-                </ExpansionPanel>
-            </ExpansionPanel>
-        );
-    },
-};
-
-/** Hide component instead of unmounting it */
-export const HideChildren = {
-    args: {
-        hasBackground: true,
-        closeMode: 'hide',
-    },
-};
+export const Default = { ...stories.Default };
+export const HasBackground = { ...stories.HasBackground };
+export const HasHeaderDivider = { ...stories.HasHeaderDivider };
+export const Nested = { ...stories.Nested };
+export const HideChildren = { ...stories.HideChildren };
