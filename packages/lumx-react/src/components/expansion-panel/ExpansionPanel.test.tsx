@@ -7,6 +7,7 @@ import userEvent from '@testing-library/user-event';
 import { useBooleanState } from '@lumx/react/hooks/useBooleanState';
 import { DragHandle } from '@lumx/react';
 import { isFocusVisible } from '@lumx/core/js/utils/browser/isFocusVisible';
+import BaseExpansionPanelTests from '@lumx/core/js/components/ExpansionPanel/Tests';
 import { ExpansionPanel, ExpansionPanelProps } from '.';
 
 const CLASSNAME = ExpansionPanel.className as string;
@@ -57,39 +58,13 @@ const setup = (
 describe(`<${ExpansionPanel.displayName}>`, () => {
     (isFocusVisible as Mock).mockReturnValue(false);
 
-    describe('Render', () => {
-        it('should render default', () => {
-            const { element, query } = setup();
-            expect(element).toBeInTheDocument();
-            expect(element).toHaveClass(CLASSNAME);
-            expect(element).toHaveClass(`${CLASSNAME}--is-close`);
-            expect(element).toHaveClass(`${CLASSNAME}--theme-light`);
+    // Run core tests
+    BaseExpansionPanelTests({
+        render: (props: any) => render(<ExpansionPanel {...props} />),
+        screen,
+    });
 
-            // Header is visible
-            expect(query.header()).toBeInTheDocument();
-
-            // Content is not visible
-            expect(query.content()).not.toBeInTheDocument();
-
-            expect(query.toggleButton()).toHaveAttribute('aria-expanded', 'false');
-        });
-
-        it('should render open', () => {
-            const { query } = setup({ isOpen: true });
-
-            // Content is visible
-            expect(query.content()).toBeInTheDocument();
-
-            expect(query.toggleButton()).toHaveAttribute('aria-expanded', 'true');
-        });
-
-        it('should show label', () => {
-            const labelText = 'Label text';
-            const { query } = setup({ label: labelText });
-
-            expect(query.header()).toHaveTextContent(labelText);
-        });
-
+    describe('React', () => {
         it('should show header instead of label', () => {
             const labelText = 'Label text';
             const headerText = 'Header text';
@@ -109,16 +84,6 @@ describe(`<${ExpansionPanel.displayName}>`, () => {
             const footerContent = screen.getByText('Footer Content');
             expect(footerContent).toBeInTheDocument();
             expect(footerContent.closest(`.${CLASSNAME}__footer`)).toBeInTheDocument();
-        });
-
-        it('should apply background class', () => {
-            const { element } = setup({ hasBackground: true });
-            expect(element).toHaveClass(`${CLASSNAME}--has-background`);
-        });
-
-        it('should apply header divider class', () => {
-            const { element } = setup({ hasHeaderDivider: true });
-            expect(element).toHaveClass(`${CLASSNAME}--has-header-divider`);
         });
     });
 
