@@ -43,6 +43,8 @@ export function createStorybookVitestConfig(options) {
                         contextOptions: {
                             // Reduce animations (not great in screenshots)
                             reducedMotion: 'reduce',
+                            // 2x resolution for sharper screenshots and reduced sub-pixel noise
+                            deviceScaleFactor: 2,
                         },
                     }),
                     headless: true,
