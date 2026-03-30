@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   Moved `TabProvider` state logic and test utilities from `@lumx/react`
 -   `@lumx/vue`:
     -   Create the `UserBlock` component
+    -   Create the `Mosaic` component
     -   Create the `Tabs` component family (`Tab`, `TabList`, `TabPanel`, `TabProvider`)
 -   `@lumx/react`:
     -   Create the `Combobox` component family
@@ -26,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `@lumx/core`:
     -   Moved `UserBlock` from `@lumx/react`
+    -   Moved `Mosaic` stories and tests from `@lumx/react`
 -   `@lumx/react`:
     -   `TabList`, `ProgressTracker`, `SlideshowControls`: arrow keys now support Home/End and skip disabled items (WAI-ARIA Tabs Pattern)
 

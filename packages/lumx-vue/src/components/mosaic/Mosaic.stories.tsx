@@ -1,17 +1,17 @@
-import { Mosaic } from '@lumx/react';
-import { withWrapper } from '@lumx/react/stories/decorators/withWrapper';
+import { withWrapper } from '@lumx/vue/stories/decorators/withWrapper';
 import { setup } from '@lumx/core/js/components/Mosaic/Stories';
+import { Mosaic } from '@lumx/vue';
 
 const { meta, ...stories } = setup({
     component: Mosaic,
     decorators: { withWrapper },
     overrides: {
-        OneThumbnailClickable: { argTypes: { onImageClick: { action: true } } },
-        TwoThumbnailClickable: { argTypes: { onImageClick: { action: true } } },
-        ThreeThumbnailClickable: { argTypes: { onImageClick: { action: true } } },
-        FourThumbnailClickable: { argTypes: { onImageClick: { action: true } } },
-        FiveThumbnailClickable: { argTypes: { onImageClick: { action: true } } },
-        SixThumbnailClickable: { argTypes: { onImageClick: { action: true } } },
+        OneThumbnailClickable: { argTypes: { onHandleClick: { action: true } } },
+        TwoThumbnailClickable: { argTypes: { onHandleClick: { action: true } } },
+        ThreeThumbnailClickable: { argTypes: { onHandleClick: { action: true } } },
+        FourThumbnailClickable: { argTypes: { onHandleClick: { action: true } } },
+        FiveThumbnailClickable: { argTypes: { onHandleClick: { action: true } } },
+        SixThumbnailClickable: { argTypes: { onHandleClick: { action: true } } },
     },
 });
 
