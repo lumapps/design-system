@@ -1,6 +1,6 @@
-import { Chip, ChipGroup, IconButton, ImageBlock } from '@lumx/react';
-import { withNestedProps } from '@lumx/react/stories/decorators/withNestedProps';
-import { withWrapper } from '@lumx/react/stories/decorators/withWrapper';
+import { Chip, ChipGroup, IconButton, ImageBlock } from '@lumx/vue';
+import { withNestedProps } from '@lumx/vue/stories/decorators/withNestedProps';
+import { withWrapper } from '@lumx/vue/stories/decorators/withWrapper';
 import { setup } from '@lumx/core/js/components/ImageBlock/Stories';
 
 const { meta, ...stories } = setup({
