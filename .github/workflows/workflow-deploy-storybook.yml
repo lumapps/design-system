@@ -62,7 +62,9 @@ jobs:
                       core.setOutput('package_path', package_path);
 
             - name: 'Update PR body: Deploying state'
+              id: update-pr-deploying
               if: inputs.pr_number != ''
+              continue-on-error: true
               uses: ./.github/actions/update-pr-body
               with:
                   github_token: ${{ secrets.GITBOT_TOKEN || github.token }}
@@ -71,6 +73,10 @@ jobs:
                   replace: 'StoryBook ${{ inputs.package }}: [Deploying...](${{ steps.vars.outputs.run_html_url }})'
                   whenNotFound: 'append'
                   keepLastMatch: true
+
+            - name: 'Warn: PR body update skipped (Deploying)'
+              if: steps.update-pr-deploying.outcome == 'failure'
+              run: echo "::warning::Could not update PR body (deploying state). The token may lack write access to pull requests (e.g. Dependabot PRs)."
 
             - name: 'Setup'
               uses: ./.github/actions/setup
@@ -82,8 +88,10 @@ jobs:
               run: yarn dlx chromatic --exit-once-uploaded
               working-directory: ${{ steps.vars.outputs.package_path }}
 
-            - if: failure() && inputs.pr_number != ''
-              name: 'Update PR body: Failure state'
+            - name: 'Update PR body: Failure state'
+              id: update-pr-failure
+              if: failure() && inputs.pr_number != ''
+              continue-on-error: true
               uses: ./.github/actions/update-pr-body
               with:
                   github_token: ${{ secrets.GITBOT_TOKEN || github.token }}
@@ -93,8 +101,14 @@ jobs:
                   whenNotFound: 'ignore'
                   keepLastMatch: true
 
+            - name: 'Warn: PR body update skipped (Failure)'
+              if: steps.update-pr-failure.outcome == 'failure'
+              run: echo "::warning::Could not update PR body (failure state). The token may lack write access to pull requests (e.g. Dependabot PRs)."
+
             - name: 'Update PR body: Deployed state'
+              id: update-pr-deployed
               if: inputs.pr_number != ''
+              continue-on-error: true
               uses: ./.github/actions/update-pr-body
               with:
                   github_token: ${{ secrets.GITBOT_TOKEN || github.token }}
@@ -103,3 +117,7 @@ jobs:
                   replace: 'StoryBook ${{ inputs.package }}: ${{ steps.vars.outputs.storybook_url }}'
                   whenNotFound: 'append'
                   keepLastMatch: true
+
+            - name: 'Warn: PR body update skipped (Deployed)'
+              if: steps.update-pr-deployed.outcome == 'failure'
+              run: echo "::warning::Could not update PR body (deployed state). The token may lack write access to pull requests (e.g. Dependabot PRs)."
