@@ -28,7 +28,7 @@ jobs:
                       label: 'vue'
         steps:
             - name: 'Checkout repository'
-              uses: actions/checkout@v5
+              uses: actions/checkout@v6
 
             - name: 'Setup'
               uses: ./.github/actions/setup
@@ -38,7 +38,7 @@ jobs:
             - name: 'Restore visual snapshots cache'
               if: ${{ !inputs.update }}
               id: cache-restore
-              uses: actions/cache/restore@v4
+              uses: actions/cache/restore@v5
               with:
                   path: ${{ matrix.visDir }}/*/__baselines__
                   key: vis-snapshots-${{ matrix.label }}-${{ github.sha }}
@@ -62,7 +62,7 @@ jobs:
 
             - name: 'Upload visual report artifacts'
               if: always()
-              uses: actions/upload-artifact@v4
+              uses: actions/upload-artifact@v7
               with:
                   name: vis-report-${{ matrix.label }}
                   path: ${{ matrix.visDir }}
@@ -71,7 +71,7 @@ jobs:
 
             - name: 'Save visual snapshots cache'
               if: ${{ github.event_name != 'pull_request' }}
-              uses: actions/cache/save@v4
+              uses: actions/cache/save@v5
               with:
                   path: ${{ matrix.visDir }}/*/__baselines__
                   key: vis-snapshots-${{ matrix.label }}-${{ github.run_id }}
@@ -84,10 +84,10 @@ jobs:
             pull-requests: write
         steps:
             - name: 'Checkout repository'
-              uses: actions/checkout@v5
+              uses: actions/checkout@v6
 
             - name: 'Download visual diff artifacts'
-              uses: actions/download-artifact@v4
+              uses: actions/download-artifact@v7
               with:
                   pattern: vis-report-*
                   path: vis-artifacts/
@@ -104,7 +104,7 @@ jobs:
 
             - name: 'Upload consolidated visual report'
               if: always()
-              uses: actions/upload-artifact@v4
+              uses: actions/upload-artifact@v7
               with:
                   name: visual-diffs
                   path: visual-diffs

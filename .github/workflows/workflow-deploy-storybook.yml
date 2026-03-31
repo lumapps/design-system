@@ -38,13 +38,13 @@ jobs:
             url: ${{ steps.vars.outputs.storybook_url }}
         steps:
             - name: 'Checkout repository'
-              uses: actions/checkout@v5
+              uses: actions/checkout@v6
               with:
                   fetch-depth: 0
 
             - name: 'Init variables'
               id: vars
-              uses: actions/github-script@v6
+              uses: actions/github-script@v8
               with:
                   result-encoding: json
                   script: |

@@ -46,7 +46,7 @@ runs:
     using: composite
     steps:
         - name: Update PR body
-          uses: actions/github-script@v6
+          uses: actions/github-script@v8
           with:
               github-token: ${{ inputs.github_token }}
               script: |

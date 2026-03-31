@@ -15,7 +15,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: 'Checkout repository'
-              uses: actions/checkout@v5
+              uses: actions/checkout@v6
 
             - name: 'Setup'
               uses: ./.github/actions/setup
@@ -38,7 +38,7 @@ jobs:
                       packageOverrides: 'react@19.1.1 react-dom@19.1.1 @testing-library/react@16.3.0'
         steps:
             - name: 'Checkout repository'
-              uses: actions/checkout@v5
+              uses: actions/checkout@v6
 
             - name: 'Setup'
               uses: ./.github/actions/setup
@@ -58,7 +58,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: 'Checkout repository'
-              uses: actions/checkout@v5
+              uses: actions/checkout@v6
 
             - name: 'Setup'
               uses: ./.github/actions/setup
@@ -79,7 +79,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: 'Checkout repository'
-              uses: actions/checkout@v5
+              uses: actions/checkout@v6
 
             - name: 'Commit message validation'
               uses: lumapps/commit-message-validator@master
@@ -97,7 +97,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: 'Checkout repository'
-              uses: actions/checkout@v5
+              uses: actions/checkout@v6
 
             - name: 'Fail if release is frozen'
               uses: ./.github/actions/manage-release-pr

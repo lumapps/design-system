@@ -11,7 +11,7 @@ runs:
     steps:
         - name: Detect release type from changelog
           id: detect
-          uses: actions/github-script@v6
+          uses: actions/github-script@v8
           with:
               script: |
                   return require("${{ github.action_path }}")()

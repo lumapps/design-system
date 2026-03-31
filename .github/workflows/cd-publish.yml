@@ -59,7 +59,7 @@ jobs:
             affected: ${{ steps.check.outputs.affected }}
         steps:
             - name: 'Checkout repository'
-              uses: actions/checkout@v5
+              uses: actions/checkout@v6
               with:
                   fetch-depth: 0
 
@@ -106,7 +106,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: 'Checkout repository'
-              uses: actions/checkout@v5
+              uses: actions/checkout@v6
               with:
                   token: ${{ secrets.GITBOT_TOKEN }}
                   fetch-depth: 0
@@ -175,7 +175,7 @@ jobs:
             prereleaseVersion: ${{ steps.version.outputs.nextVersion }}
         steps:
             - name: 'Checkout repository'
-              uses: actions/checkout@v5
+              uses: actions/checkout@v6
               with:
                   ref: ${{ github.event.pull_request.head.sha || github.sha }}
                   # Need to fetch all for the increment package versions step
@@ -229,7 +229,7 @@ jobs:
             tag: ${{ steps.git.outputs.tag }}
         steps:
             - name: 'Checkout repository'
-              uses: actions/checkout@v5
+              uses: actions/checkout@v6
               with:
                   # Tag the release commit (PR head), not the merge commit
                   ref: ${{ github.event.pull_request.head.sha || github.sha }}
@@ -259,7 +259,7 @@ jobs:
             GCP_PROD_REGISTRY: gcr.io/lumapps-registry
         steps:
             - name: 'Checkout repository'
-              uses: actions/checkout@v5
+              uses: actions/checkout@v6
               with:
                   ref: ${{ github.event.pull_request.head.sha || github.sha }}
                   fetch-depth: 0
@@ -327,7 +327,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: 'Checkout repository'
-              uses: actions/checkout@v5
+              uses: actions/checkout@v6
               with:
                   ref: ${{ github.event.pull_request.head.sha || github.sha }}
 

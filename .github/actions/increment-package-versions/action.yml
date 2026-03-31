@@ -54,7 +54,7 @@ runs:
     steps:
         - name: Upgrade package versions
           id: version
-          uses: actions/github-script@v6
+          uses: actions/github-script@v8
           with:
               script: |
                   return require("${{ github.action_path }}")({

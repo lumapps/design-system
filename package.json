@@ -22,7 +22,7 @@
         "typescript": "^5.4.3"
     },
     "engines": {
-        "node": ">= 20.0.0"
+        "node": ">= 24.0.0"
     },
     "homepage": "https://github.com/lumapps/design-system",
     "lint-staged": {
