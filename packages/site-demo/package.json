@@ -65,6 +65,6 @@
         "tsconfig-paths-webpack-plugin": "^4.0.1",
         "typescript": "^5.4.3",
         "vue-tsc": "^3.2.4",
-        "yaml": "^1.10.0"
+        "yaml": "^1.10.3"
     }
 }
