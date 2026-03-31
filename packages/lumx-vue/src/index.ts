@@ -29,6 +29,7 @@ export * from './components/switch';
 export * from './components/text-field';
 export * from './components/uploader';
 export * from './components/generic-block';
+export * from './components/image-block';
 export * from './components/inline-list';
 export * from './components/table';
 export * from './components/tabs';
