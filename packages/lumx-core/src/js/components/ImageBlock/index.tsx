@@ -2,7 +2,7 @@ import { Alignment, HorizontalAlignment, Size } from '../../constants';
 import type { CommonRef, HasClassName, JSXElement, LumxClassName, GenericProps, HasTheme, ValueOf } from '../../types';
 import { classNames } from '../../utils';
 
-import { ImageCaptionMetadata } from './ImageCaption';
+import { ImageCaptionMetadata, ImageCaptionPropsToOverride } from './ImageCaption';
 
 /**
  * Image block variants.
@@ -21,7 +21,10 @@ export type ImageBlockSize = Extract<Size, 'xl' | 'xxl'>;
 /**
  * Defines the props of the component.
  */
-export interface ImageBlockProps extends HasClassName, HasTheme, ImageCaptionMetadata {
+export interface ImageBlockProps
+    extends HasClassName,
+        HasTheme,
+        Omit<ImageCaptionMetadata, ImageCaptionPropsToOverride> {
     /** Action toolbar content. */
     actions?: JSXElement;
     /** Alignment. */
@@ -45,6 +48,8 @@ export interface ImageBlockProps extends HasClassName, HasTheme, ImageCaptionMet
     /** component for rendering the image caption */
     ImageCaption: any;
 }
+
+export type ImageBlockPropsToOverride = 'Thumbnail' | 'ImageCaption' | 'thumbnailProps';
 
 /**
  * Component display name.

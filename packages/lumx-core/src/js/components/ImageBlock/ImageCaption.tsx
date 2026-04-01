@@ -11,17 +11,21 @@ export type ImageCaptionMetadata = {
     titleProps?: GenericProps;
     /** Image description. Can be either a string, ReactNode, or sanitized html object. */
     description?: JSXElement | { __html: string };
-    /** Props to pass to the title. */
+    /** Props to pass to the description. */
     descriptionProps?: GenericProps;
     /** Tag content. */
     tags?: JSXElement;
     /** Caption custom CSS style. */
     captionStyle?: GenericProps;
+    /** Props to pass to the wrapper FlexBox element. */
+    wrapperProps?: GenericProps;
+    /** FlexBox component injected by the framework wrapper (React or Vue). */
     FlexBox: any;
+    /** Text component injected by the framework wrapper (React or Vue). */
     Text: any;
 };
 
-export type ImageCaptionPropsToOverride = 'FlexBox' | 'Text' | 'titleProps' | 'descriptionProps' | 'captionStyle';
+export type ImageCaptionPropsToOverride = 'FlexBox' | 'Text' | 'wrapperProps';
 
 export type ImageCaptionProps<AS extends As = 'figcaption'> = HasTheme &
     HasPolymorphicAs<AS> &
@@ -50,6 +54,7 @@ export const ImageCaption = <AS extends As>(props: ImageCaptionProps<AS>) => {
         truncate,
         FlexBox,
         Text,
+        wrapperProps = { vAlign: align, hAlign: align === 'center' ? align : undefined },
     } = props;
 
     if (!title && !description && !tags) return null;
@@ -63,9 +68,8 @@ export const ImageCaption = <AS extends As>(props: ImageCaptionProps<AS>) => {
             className={classNames.join(baseClassName && `${baseClassName}__wrapper`)}
             style={captionStyle}
             orientation="vertical"
-            vAlign={align}
-            hAlign={align === 'center' ? align : undefined}
             gap="regular"
+            {...wrapperProps}
         >
             {(title || description) && (
                 <Text
