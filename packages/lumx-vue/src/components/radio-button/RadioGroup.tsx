@@ -3,6 +3,7 @@ import { defineComponent, useAttrs } from 'vue';
 import { RadioGroup as RadioGroupUI, CLASSNAME, COMPONENT_NAME } from '@lumx/core/js/components/RadioGroup';
 import type { JSXElement } from '@lumx/core/js/types';
 
+import { useClassName } from '../../composables/useClassName';
 import { keysOf } from '../../utils/VueToJSX';
 
 export interface RadioGroupProps {
@@ -21,9 +22,15 @@ export { CLASSNAME, COMPONENT_NAME };
 const RadioGroup = defineComponent(
     (props: RadioGroupProps, { slots }) => {
         const attrs = useAttrs();
+        const className = useClassName(() => props.class);
 
         return () => (
-            <RadioGroupUI {...props} {...attrs} className={props.class} children={slots.default?.() as JSXElement} />
+            <RadioGroupUI
+                {...props}
+                {...attrs}
+                className={className.value}
+                children={slots.default?.() as JSXElement}
+            />
         );
     },
     {

@@ -7,6 +7,7 @@ import {
 import type { JSXElement } from '@lumx/core/js/types';
 
 import { useId } from '../../composables/useId';
+import { useClassName } from '../../composables/useClassName';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { Text } from '../text';
 
@@ -22,12 +23,13 @@ const ListSection = defineComponent(
     (props: ListSectionProps, { slots }) => {
         const attrs = useAttrs();
         const id = useId();
+        const className = useClassName(() => props.class);
 
         return () => (
             <ListSectionUI
                 {...props}
                 {...attrs}
-                className={props.class}
+                className={className.value}
                 id={id}
                 Text={Text as unknown as UIProps['Text']}
                 children={slots.default?.() as JSXElement}

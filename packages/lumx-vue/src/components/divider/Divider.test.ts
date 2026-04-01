@@ -7,17 +7,8 @@ import { commonTestsSuiteVTL, SetupRenderOptions } from '@lumx/vue/testing';
 import { Divider } from '.';
 
 describe('<Divider />', () => {
-    // Adapter for core tests - map className to class for Vue
-    const renderDivider = (props: DividerProps, options?: SetupRenderOptions<DividerProps>) => {
-        const { className, ...restProps } = props;
-        return render(Divider, {
-            props: {
-                ...restProps,
-                ...(className ? { class: className } : {}),
-            },
-            ...options,
-        });
-    };
+    const renderDivider = (props: DividerProps, options?: SetupRenderOptions<DividerProps>) =>
+        render(Divider, { props, ...options });
 
     BaseDividerTests({ render: renderDivider, screen });
 

@@ -6,16 +6,8 @@ import { commonTestsSuiteVTL, SetupRenderOptions } from '@lumx/vue/testing';
 import { DragHandle } from '.';
 
 describe('<DragHandle />', () => {
-    const renderDragHandle = (props: DragHandleProps, options?: SetupRenderOptions<DragHandleProps>) => {
-        const { className, ...restProps } = props;
-        return render(DragHandle, {
-            props: {
-                ...restProps,
-                ...(className ? { class: className } : {}),
-            },
-            ...options,
-        });
-    };
+    const renderDragHandle = (props: DragHandleProps, options?: SetupRenderOptions<DragHandleProps>) =>
+        render(DragHandle, { props, ...options });
 
     BaseDragHandleTests({ render: renderDragHandle, screen });
 

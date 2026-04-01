@@ -10,6 +10,7 @@ import {
 } from '@lumx/core/js/components/Tooltip';
 
 import { useId } from '../../composables/useId';
+import { useClassName } from '../../composables/useClassName';
 import { useCallbackOnEscape } from '../../composables/useCallbackOnEscape';
 import { useTooltipOpen } from './useTooltipOpen';
 import { useInjectTooltipRef } from './useInjectTooltipRef';
@@ -34,6 +35,7 @@ export interface TooltipProps extends CoreTooltipProps {
 export const Tooltip = defineComponent(
     (props: TooltipProps, { slots }) => {
         const id = useId();
+        const className = useClassName(() => props.class);
         const anchorElement = ref<HTMLElement | null>(null);
         const popperElement = ref<HTMLElement | null>(null);
 
@@ -105,7 +107,7 @@ export const Tooltip = defineComponent(
                                 isHidden: isHidden.value,
                                 style: isHidden.value ? undefined : floatingStyles.value,
                                 zIndex: zIndex.value,
-                                className: props.class,
+                                className: className.value,
                             })}
                         </Portal>
                     )}

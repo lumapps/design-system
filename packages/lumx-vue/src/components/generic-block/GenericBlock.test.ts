@@ -11,7 +11,7 @@ describe('<GenericBlock />', () => {
     // - figure/actions → named slots (as string content)
     // - vAlign/hAlign → verticalAlign/horizontalAlign (Vue FlexBox convention)
     const renderGenericBlock = (
-        { children, figure, actions, vAlign, hAlign, className, ...props }: any,
+        { children, figure, actions, vAlign, hAlign, ...props }: any,
         options?: SetupRenderOptions<any>,
     ) => {
         const slots: Record<string, any> = {};
@@ -24,7 +24,6 @@ describe('<GenericBlock />', () => {
                 verticalAlign: vAlign,
                 horizontalAlign: hAlign,
                 ...props,
-                ...(className ? { class: className } : {}),
             },
             slots,
         });

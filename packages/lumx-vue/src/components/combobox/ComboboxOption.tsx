@@ -10,6 +10,7 @@ import {
 import type { JSXElement } from '@lumx/core/js/types';
 
 import { useId } from '../../composables/useId';
+import { useClassName } from '../../composables/useClassName';
 import { useWatchDisposable } from '../../composables/useWatchDisposable';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { Tooltip } from '../tooltip';
@@ -17,19 +18,6 @@ import type { TooltipProps } from '../tooltip/Tooltip';
 import { useComboboxContext } from './context/ComboboxContext';
 import { useComboboxListContext } from './context/ComboboxListContext';
 import { provideComboboxOptionContext } from './context/ComboboxOptionContext';
-
-/**
- * Adapter: maps core's `className` prop to Vue's `class` prop for Tooltip.
- * Children are received as Vue slots and forwarded to the Tooltip component.
- */
-const TooltipAdapter = (p: any, { slots }: any) => {
-    const { className, ...rest } = p;
-    return (
-        <Tooltip class={className} {...rest}>
-            {{ default: slots.default }}
-        </Tooltip>
-    );
-};
 
 export type ComboboxOptionProps = VueToJSXProps<
     UIProps,
@@ -52,6 +40,7 @@ export type ComboboxOptionProps = VueToJSXProps<
 const ComboboxOption = defineComponent(
     (props: ComboboxOptionProps, { slots }) => {
         const attrs = useAttrs();
+        const className = useClassName(() => props.class);
         const { type } = useComboboxListContext();
         const { handle } = useComboboxContext();
         const isGrid = type === 'grid';
@@ -102,9 +91,9 @@ const ComboboxOption = defineComponent(
                     id: optionId,
                     descriptionId,
                     tooltipProps: props.tooltipProps as any,
-                    className: props.class,
+                    className: className.value,
                 },
-                { Tooltip: TooltipAdapter },
+                { Tooltip },
             );
         };
     },

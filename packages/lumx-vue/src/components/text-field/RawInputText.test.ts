@@ -7,13 +7,8 @@ import { commonTestsSuiteVTL, SetupRenderOptions } from '@lumx/vue/testing';
 import { RawInputText } from '.';
 
 describe('<RawInputText />', () => {
-    const renderRawInputText = (props: any, options?: SetupRenderOptions<any>) => {
-        const { handleChange, className, ...restProps } = props;
-        return render(RawInputText, {
-            ...options,
-            props: restProps,
-        });
-    };
+    const renderRawInputText = ({ handleChange, ...props }: any, options?: SetupRenderOptions<any>) =>
+        render(RawInputText, { props, ...options });
 
     BaseRawInputTextTests({ render: renderRawInputText, screen });
 

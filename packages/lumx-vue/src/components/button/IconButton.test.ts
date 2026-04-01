@@ -33,6 +33,16 @@ describe('<IconButton />', () => {
     };
 
     describe('Props', () => {
+        it('should forward tabindex attr to the button element', () => {
+            renderComponent({ label: 'Icon' } as any, { attrs: { tabindex: 2 } });
+            expect(screen.getByRole('button')).toHaveAttribute('tabindex', '2');
+        });
+
+        it('should forward React-cased tabIndex attr to the button element', () => {
+            renderComponent({ label: 'Icon' } as any, { attrs: { tabIndex: 3 } });
+            expect(screen.getByRole('button')).toHaveAttribute('tabindex', '3');
+        });
+
         it('should call onClick', async () => {
             const { iconButton, wrapper } = setupComponent();
             await userEvent.click(iconButton);

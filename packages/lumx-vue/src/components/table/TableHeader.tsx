@@ -1,5 +1,6 @@
 import { defineComponent, useAttrs } from 'vue';
 import { TableHeader as UI, type TableHeaderProps as UIProps } from '@lumx/core/js/components/Table/TableHeader';
+import { useClassName } from '../../composables/useClassName';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { JSXElement } from '@lumx/core/js/types';
 
@@ -8,9 +9,10 @@ export type TableHeaderProps = VueToJSXProps<UIProps>;
 const TableHeader = defineComponent(
     (props: TableHeaderProps, { slots }) => {
         const attrs = useAttrs();
+        const className = useClassName(() => props.class);
 
         return () => {
-            return <UI {...props} {...attrs} className={props.class} children={slots.default?.() as JSXElement} />;
+            return <UI {...props} {...attrs} className={className.value} children={slots.default?.() as JSXElement} />;
         };
     },
     {

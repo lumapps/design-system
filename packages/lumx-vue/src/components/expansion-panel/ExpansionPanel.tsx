@@ -14,6 +14,7 @@ import type { JSXElement } from '@lumx/core/js/types';
 
 import IconButton from '../button/IconButton';
 import { useTheme } from '../../composables/useTheme';
+import { useClassName } from '../../composables/useClassName';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 
 export type ExpansionPanelProps = VueToJSXProps<UIProps, ExpansionPanelPropsToOverride> & {
@@ -40,6 +41,7 @@ const ExpansionPanel = defineComponent(
     (props: ExpansionPanelProps, { emit, slots }) => {
         const attrs = useAttrs();
         const defaultTheme = useTheme();
+        const className = useClassName(() => props.class);
 
         const wrapperRef = ref<HTMLDivElement | null>(null);
         const isChildrenVisible = ref<boolean | undefined>(props.isOpen);
@@ -95,7 +97,7 @@ const ExpansionPanel = defineComponent(
             return (
                 <UI
                     {...attrs}
-                    className={props.class}
+                    className={className.value}
                     theme={props.theme || defaultTheme.value}
                     isOpen={props.isOpen}
                     label={props.label}

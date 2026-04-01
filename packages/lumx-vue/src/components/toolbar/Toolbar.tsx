@@ -6,6 +6,7 @@ import {
     TOOLBAR_NAME,
     DEFAULT_PROPS,
 } from '@lumx/core/js/components/Toolbar';
+import { useClassName } from '../../composables/useClassName';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import type { JSXElement } from '@lumx/core/js/types';
 
@@ -16,13 +17,14 @@ export { CLASSNAME, TOOLBAR_NAME, DEFAULT_PROPS };
 const Toolbar = defineComponent(
     (props: ToolbarProps, { slots }) => {
         const attrs = useAttrs();
+        const className = useClassName(() => props.class);
 
         return () => {
             return (
                 <ToolbarUI
                     {...props}
                     {...attrs}
-                    className={props.class}
+                    className={className.value}
                     label={slots.default?.() as JSXElement}
                     before={slots.before?.() as JSXElement}
                     after={slots.after?.() as JSXElement}

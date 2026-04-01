@@ -3,6 +3,7 @@ import { defineComponent, useAttrs } from 'vue';
 import { Icon as IconUI, type IconProps as UIProps } from '@lumx/core/js/components/Icon';
 
 import { useTheme } from '../../composables/useTheme';
+import { useClassName } from '../../composables/useClassName';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 
 export type IconProps = VueToJSXProps<UIProps>;
@@ -17,8 +18,11 @@ const Icon = defineComponent(
     (props: IconProps) => {
         const attrs = useAttrs();
         const defaultTheme = useTheme({ defaultTheme: undefined });
+        const className = useClassName(() => props.class);
 
-        return () => <IconUI {...props} {...attrs} className={props.class} theme={props.theme || defaultTheme.value} />;
+        return () => (
+            <IconUI {...props} {...attrs} className={className.value} theme={props.theme || defaultTheme.value} />
+        );
     },
     {
         name: 'Icon',

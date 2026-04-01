@@ -7,6 +7,7 @@ import {
 } from '@lumx/core/js/components/Mosaic';
 
 import { useTheme } from '../../composables/useTheme';
+import { useClassName } from '../../composables/useClassName';
 import { useHasEventListener } from '../../composables/useHasEventListener';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import Thumbnail, { type ThumbnailProps } from '../thumbnail/Thumbnail';
@@ -32,6 +33,7 @@ const Mosaic = defineComponent(
     (props: MosaicProps, { emit }) => {
         const attrs = useAttrs();
         const defaultTheme = useTheme();
+        const className = useClassName(() => props.class);
         const hasHandleClickListener = useHasEventListener('onHandleClick');
 
         const handleClick = (index: number) => {
@@ -41,7 +43,7 @@ const Mosaic = defineComponent(
         return () => (
             <MosaicUI
                 {...attrs}
-                className={props.class}
+                className={className.value}
                 theme={props.theme || defaultTheme.value}
                 thumbnails={props.thumbnails}
                 Thumbnail={Thumbnail}

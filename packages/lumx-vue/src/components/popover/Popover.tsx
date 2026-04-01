@@ -10,6 +10,7 @@ import type { JSXElement } from '@lumx/core/js/types';
 
 import { ThemeProvider } from '../../utils/theme/ThemeProvider';
 import { useCallbackOnEscape } from '../../composables/useCallbackOnEscape';
+import { useClassName } from '../../composables/useClassName';
 import { Portal } from '../../utils/Portal/Portal';
 import { ClickAwayProvider } from '../../utils/ClickAway/ClickAwayProvider';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
@@ -48,6 +49,7 @@ export const emitSchema = {
 
 const Popover = defineComponent(
     (props: PopoverProps, { emit, slots, attrs }) => {
+        const className = useClassName(() => props.class);
         // Unwrap anchorRef (accepts both Vue Ref and raw HTMLElement) — reused across composables
         const anchorRef = computed(() => unref(props.anchorRef));
         // Reused across useFocus and useFocusTrap
@@ -110,7 +112,7 @@ const Popover = defineComponent(
                     hasArrow: props.hasArrow,
                     usePortal: props.usePortal,
                     children: slots.default?.() as JSXElement,
-                    className: props.class,
+                    className: className.value,
                     isOpen: Boolean(props.isOpen),
                     position: position.value,
                     popoverStyle: styles.popover.value,

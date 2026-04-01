@@ -9,6 +9,7 @@ import {
 } from '@lumx/core/js/components/Switch';
 
 import { useTheme } from '../../composables/useTheme';
+import { useClassName } from '../../composables/useClassName';
 import { useDisableStateProps } from '../../composables/useDisableStateProps';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { useId } from '../../composables/useId';
@@ -33,6 +34,7 @@ const Switch = defineComponent(
     (props: SwitchProps, { emit, slots }) => {
         const attrs = useAttrs();
         const defaultTheme = useTheme();
+        const className = useClassName(() => props.class);
         const generatedInputId = useId();
         const inputId = computed(() => props.id || generatedInputId);
 
@@ -52,7 +54,7 @@ const Switch = defineComponent(
             return (
                 <SwitchUI
                     {...otherProps.value}
-                    className={props.class}
+                    className={className.value}
                     theme={props.theme || defaultTheme.value}
                     inputId={inputId.value}
                     isDisabled={isAnyDisabled.value}

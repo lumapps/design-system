@@ -10,6 +10,7 @@ import {
 } from '@lumx/core/js/components/Checkbox';
 
 import { useTheme } from '../../composables/useTheme';
+import { useClassName } from '../../composables/useClassName';
 import { useDisableStateProps } from '../../composables/useDisableStateProps';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { useId } from '../../composables/useId';
@@ -33,6 +34,7 @@ const Checkbox = defineComponent(
     (props: CheckboxProps, { emit }) => {
         const attrs = useAttrs();
         const defaultTheme = useTheme();
+        const className = useClassName(() => props.class);
         const generatedInputId = useId();
         const inputId = computed(() => props.id || generatedInputId);
         const localInputRef = ref<HTMLInputElement | null>(null);
@@ -66,7 +68,7 @@ const Checkbox = defineComponent(
             return (
                 <CheckboxUI
                     {...otherProps.value}
-                    className={props.class}
+                    className={className.value}
                     theme={props.theme || defaultTheme.value}
                     inputId={inputId.value}
                     inputRef={localInputRef}

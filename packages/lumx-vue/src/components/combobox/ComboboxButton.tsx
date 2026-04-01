@@ -9,37 +9,12 @@ import {
 } from '@lumx/core/js/components/Combobox/ComboboxButton';
 import { setupComboboxButton } from '@lumx/core/js/components/Combobox/setupComboboxButton';
 
+import { useClassName } from '../../composables/useClassName';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { Button } from '../button';
 import { Tooltip } from '../tooltip';
 import { useComboboxContext } from './context/ComboboxContext';
 import { useComboboxOpen } from './context/useComboboxOpen';
-
-/**
- * Adapter: maps core's `className` prop to Vue's `class` prop for the Button.
- * Children are received as Vue slots and forwarded to the Button component.
- */
-const ButtonAdapter = (p: any, { slots }: any) => {
-    const { className, ...rest } = p;
-    return (
-        <Button class={className} {...rest}>
-            {{ default: slots.default }}
-        </Button>
-    );
-};
-
-/**
- * Adapter: maps core's `className` prop to Vue's `class` prop for the Tooltip.
- * Children are received as Vue slots and forwarded to the Tooltip component.
- */
-const TooltipAdapter = (p: any, { slots }: any) => {
-    const { className, ...rest } = p;
-    return (
-        <Tooltip class={className} {...rest}>
-            {{ default: slots.default }}
-        </Tooltip>
-    );
-};
 
 export type ComboboxButtonProps = VueToJSXProps<UIProps, 'label'> & {
     /** The label for the button (used for ARIA and tooltip). */
@@ -61,6 +36,7 @@ export type ComboboxButtonProps = VueToJSXProps<UIProps, 'label'> & {
 const ComboboxButton = defineComponent(
     (props: ComboboxButtonProps, { emit }) => {
         const attrs = useAttrs();
+        const className = useClassName(() => props.class);
         const { listboxId, anchorRef, setHandle, handle } = useComboboxContext();
         const { isOpen } = useComboboxOpen();
 
@@ -91,7 +67,7 @@ const ComboboxButton = defineComponent(
         });
 
         return () => {
-            const { label, value, labelDisplayMode = 'show-selection', class: className, ...forwardedProps } = props;
+            const { label, value, labelDisplayMode = 'show-selection', class: _class, ...forwardedProps } = props;
             return UI(
                 {
                     ...attrs,
@@ -106,9 +82,9 @@ const ComboboxButton = defineComponent(
                         buttonRef.value = el?.$el ?? el;
                         anchorRef.value = buttonRef.value;
                     },
-                    className,
+                    className: className.value,
                 },
-                { Button: ButtonAdapter, Tooltip: TooltipAdapter },
+                { Button, Tooltip },
             );
         };
     },

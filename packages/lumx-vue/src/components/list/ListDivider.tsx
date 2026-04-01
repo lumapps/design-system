@@ -5,6 +5,7 @@ import {
     type ListDividerProps as UIProps,
 } from '@lumx/core/js/components/List/ListDivider';
 
+import { useClassName } from '../../composables/useClassName';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 
 export type ListDividerProps = VueToJSXProps<UIProps>;
@@ -18,8 +19,9 @@ export type ListDividerProps = VueToJSXProps<UIProps>;
 const ListDivider = defineComponent(
     (props: ListDividerProps) => {
         const attrs = useAttrs();
+        const className = useClassName(() => props.class);
 
-        return () => <ListDividerUI {...attrs} className={props.class} />;
+        return () => <ListDividerUI {...attrs} className={className.value} />;
     },
     {
         name: 'LumxListDivider',

@@ -8,6 +8,7 @@ import {
 import type { JSXElement } from '@lumx/core/js/types';
 
 import { FlexBox as FlexBoxVue, FlexBoxProps } from '../flex-box';
+import { useClassName } from '../../composables/useClassName';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 
 /** FlexBox section props extended with standard HTML style. */
@@ -59,6 +60,7 @@ export type GenericBlockProps = VueToJSXProps<
 const GenericBlock = defineComponent(
     (props: GenericBlockProps, { slots }) => {
         const attrs = useAttrs();
+        const className = useClassName(() => props.class);
 
         return () => {
             const figure = slots.figure?.() as JSXElement;
@@ -82,7 +84,7 @@ const GenericBlock = defineComponent(
                 <GenericBlockUI
                     {...restProps}
                     {...attrs}
-                    className={props.class as string}
+                    className={className.value as string}
                     FlexBox={FlexBoxVue as any}
                     figure={figure}
                     content={content}

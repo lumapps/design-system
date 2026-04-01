@@ -3,6 +3,7 @@ import { defineComponent, useAttrs } from 'vue';
 import { InlineList as InlineListUI, type InlineListProps as UIProps } from '@lumx/core/js/components/InlineList';
 import { type JSXElement } from '@lumx/core/js/types';
 
+import { useClassName } from '../../composables/useClassName';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 
 export type InlineListProps = VueToJSXProps<UIProps, 'items'>;
@@ -16,9 +17,10 @@ export type InlineListProps = VueToJSXProps<UIProps, 'items'>;
 const InlineList = defineComponent(
     (props: InlineListProps, { slots }) => {
         const attrs = useAttrs();
+        const className = useClassName(() => props.class);
 
         return () => (
-            <InlineListUI {...props} {...attrs} className={props.class} items={slots.default?.() as JSXElement[]} />
+            <InlineListUI {...props} {...attrs} className={className.value} items={slots.default?.() as JSXElement[]} />
         );
     },
     {
