@@ -14,6 +14,7 @@ export interface RawInputTextareaProps extends HasTheme, HasClassName {
     name?: string | undefined;
     ref?: CommonRef;
     handleChange?: (value: string, name?: string, event?: any) => void;
+    handleInput?: (value: string, name?: string, event?: any) => void;
 }
 
 /**
@@ -28,10 +29,24 @@ export const DEFAULT_PROPS: Partial<RawInputTextareaProps> = {
  * (textarea element without any decoration)
  */
 export const RawInputTextarea = (props: RawInputTextareaProps) => {
-    const { className, theme, value, handleChange, rows = DEFAULT_PROPS.rows, name, ref, ...forwardedProps } = props;
+    const {
+        className,
+        theme,
+        value,
+        handleChange,
+        handleInput,
+        rows = DEFAULT_PROPS.rows,
+        name,
+        ref,
+        ...forwardedProps
+    } = props;
 
     const handleOnChange = (evt: any) => {
         handleChange?.(evt.target.value, name, evt);
+    };
+
+    const handleOnInput = (evt: any) => {
+        handleInput?.(evt.target.value, name, evt);
     };
 
     return (
@@ -47,6 +62,7 @@ export const RawInputTextarea = (props: RawInputTextareaProps) => {
                 }),
             )}
             onChange={handleOnChange}
+            onInput={handleOnInput}
             value={value}
             rows={rows}
         />

@@ -32,6 +32,18 @@ describe('<RawInputTextarea />', () => {
             expect(changeEvents).toHaveLength(1);
             expect((changeEvents as any)[0][0]).toBe('hello');
         });
+
+        it('should emit input event on keystroke', async () => {
+            const { emitted } = render(RawInputTextarea, {
+                props: { value: '' },
+            });
+            const textarea = document.querySelector('textarea') as HTMLTextAreaElement;
+            await fireEvent.input(textarea, { target: { value: 'hello' } });
+
+            const inputEvents = emitted('input');
+            expect(inputEvents).toHaveLength(1);
+            expect((inputEvents as any)[0][0]).toBe('hello');
+        });
     });
 
     commonTestsSuiteVTL(setupRawInputTextarea, {

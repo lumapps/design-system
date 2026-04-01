@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   Create the `Tabs` component family (`Tab`, `TabList`, `TabPanel`, `TabProvider`)
     -   Create the `ImageBlock` component
     -   Create the `Combobox` component family
+    -   `TextField`, `RawInputText`, `RawInputTextarea`: add `input` event 
 -   `@lumx/react`:
     -   Create the `Combobox` component family
 

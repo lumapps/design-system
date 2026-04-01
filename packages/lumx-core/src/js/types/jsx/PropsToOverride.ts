@@ -3,6 +3,7 @@ export type PropsToOverride =
     | 'ref'
     | 'handleClick'
     | 'handleChange'
+    | 'handleInput'
     | 'handleKeyPress'
     | 'handleClose'
     | 'handleFocus'
