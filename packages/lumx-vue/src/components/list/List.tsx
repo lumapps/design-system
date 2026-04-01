@@ -3,6 +3,7 @@ import { defineComponent, useAttrs } from 'vue';
 import { List as ListUI, type ListProps as UIProps } from '@lumx/core/js/components/List';
 import type { JSXElement } from '@lumx/core/js/types';
 
+import { useClassName } from '../../composables/useClassName';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 
 export type ListProps = VueToJSXProps<UIProps>;
@@ -16,9 +17,10 @@ export type ListProps = VueToJSXProps<UIProps>;
 const List = defineComponent(
     (props: ListProps, { slots }) => {
         const attrs = useAttrs();
+        const className = useClassName(() => props.class);
 
         return () => (
-            <ListUI {...props} {...attrs} className={props.class} children={slots.default?.() as JSXElement} />
+            <ListUI {...props} {...attrs} className={className.value} children={slots.default?.() as JSXElement} />
         );
     },
     {

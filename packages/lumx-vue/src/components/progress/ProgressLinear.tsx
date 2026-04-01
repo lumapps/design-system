@@ -7,6 +7,7 @@ import {
     DEFAULT_PROPS,
 } from '@lumx/core/js/components/ProgressLinear';
 import { useTheme } from '../../composables/useTheme';
+import { useClassName } from '../../composables/useClassName';
 import { keysOf, type VueToJSXProps } from '../../utils/VueToJSX';
 
 export type ProgressLinearProps = VueToJSXProps<UIProps, 'ref'>;
@@ -17,13 +18,14 @@ const ProgressLinear = defineComponent(
     (props: ProgressLinearProps) => {
         const attrs = useAttrs();
         const defaultTheme = useTheme();
+        const className = useClassName(() => props.class);
 
         return () => {
             return (
                 <ProgressLinearUI
                     {...props}
                     {...attrs}
-                    className={props.class}
+                    className={className.value}
                     theme={props.theme || defaultTheme.value}
                 />
             );

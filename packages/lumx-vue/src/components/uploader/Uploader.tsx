@@ -11,6 +11,7 @@ import type { UploaderProps as UIProps, UploaderPropsToOverride } from '@lumx/co
 import type { UploaderSize } from '@lumx/core/js/components/Uploader';
 
 import { useTheme } from '../../composables/useTheme';
+import { useClassName } from '../../composables/useClassName';
 import { useDisableStateProps } from '../../composables/useDisableStateProps';
 import { useId } from '../../composables/useId';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
@@ -49,6 +50,7 @@ const Uploader = defineComponent(
     (props: UploaderProps, { emit }) => {
         const attrs = useAttrs();
         const defaultTheme = useTheme();
+        const className = useClassName(() => props.class);
         const generatedInputId = useId();
         const inputId = computed(() => props.fileInputProps?.id || generatedInputId);
         const isDragHovering = ref(false);
@@ -87,7 +89,7 @@ const Uploader = defineComponent(
             return (
                 <UploaderUI
                     {...restProps}
-                    className={props.class}
+                    className={className.value}
                     theme={props.theme || defaultTheme.value}
                     inputId={inputId.value}
                     isAnyDisabled={isAnyDisabled.value}

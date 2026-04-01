@@ -43,6 +43,21 @@ Multi-component families (Button, Chip, List, Tabs…) add siblings in the same 
 
 `src/composables/` — the Vue equivalent of lumx-react hooks (theme, disabled state, focus, keyboard, slots, etc.), each with a co-located `.test.ts`.
 
+### `useClassName` — merging `class` prop with `className` attr
+
+Core JSX components pass `className` (React convention) when rendering Vue sub-components. Since `className` is not a declared Vue prop, it lands in `$attrs`. The `useClassName` composable merges `props.class` and `attrs.className` using `classNames.join()`.
+
+**Rules:**
+
+-   **All Vue components that forward `class` to a core UI** must use `useClassName`
+-   **Always pass a getter** `() => props.class` — not `props.class` directly. `props.class` dereferences to a plain string at setup time, losing reactivity. The getter defers access into the composable's internal `computed()`.
+
+### `useAttrFallback` — falling back to `$attrs` for React-named props
+
+When a core JSX component renders a Vue sub-component, it passes props using React naming conventions (e.g. `className`, `tabIndex`). Since these are not declared Vue props, they land in `$attrs`. `useAttrFallback` reads the fallback attr and merges it with the corresponding Vue prop using `??` (or a custom merge function). Returns a `ComputedRef`.
+
+`useClassName` is built on top of `useAttrFallback`. Use `useAttrFallback` directly for other React-named attrs like `tabIndex`.
+
 ## TESTING
 
 Two suites, both powered by Vitest:

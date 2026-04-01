@@ -8,6 +8,7 @@ import {
 } from '@lumx/core/js/components/PopoverDialog';
 import type { PopoverProps as CorePopoverProps } from '@lumx/core/js/components/Popover';
 import { classNames } from '@lumx/core/js/utils';
+import { useClassName } from '@lumx/vue/composables/useClassName';
 
 import { keysOf } from '../../utils/VueToJSX';
 import Popover, { type PopoverProps } from '../popover/Popover';
@@ -26,7 +27,7 @@ export const emitSchema = {
 const PopoverDialog = defineComponent(
     (props: PopoverDialogProps, { emit, slots }) => {
         const attrs = useAttrs();
-        const className = computed(() => classNames.join(props.class, CLASSNAME));
+        const className = useClassName(() => props.class);
 
         // Vue normalizes hyphenated prop names to camelCase, so 'aria-label' prop becomes 'ariaLabel'.
         // We also check attrs for aria-label when it's not declared as a prop.
@@ -41,7 +42,7 @@ const PopoverDialog = defineComponent(
                 <Popover
                     {...forwardedProps}
                     {...mergeProps(attrs, { role: 'dialog', 'aria-modal': 'true', 'aria-label': ariaLabel.value })}
-                    class={className.value}
+                    class={classNames.join(CLASSNAME, className.value)}
                     closeOnClickAway
                     closeOnEscape
                     withFocusTrap

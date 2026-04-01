@@ -8,6 +8,7 @@ import {
 } from '@lumx/core/js/components/Combobox/ComboboxList';
 import type { JSXElement } from '@lumx/core/js/types';
 
+import { useClassName } from '../../composables/useClassName';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { useWatchDisposable } from '../../composables/useWatchDisposable';
 import { useComboboxContext } from './context/ComboboxContext';
@@ -26,6 +27,7 @@ export type ComboboxListProps = VueToJSXProps<UIProps, 'aria-label' | 'aria-busy
 const ComboboxList = defineComponent(
     (props: ComboboxListProps, { slots }) => {
         const attrs = useAttrs();
+        const className = useClassName(() => props.class);
         const { listboxId, handle } = useComboboxContext();
         const listRef = ref<HTMLElement | null>(null);
 
@@ -56,7 +58,7 @@ const ComboboxList = defineComponent(
                 'aria-label': ariaLabel,
                 'aria-multiselectable': ariaMultiselectable || undefined,
                 'aria-busy': isLoading.value || undefined,
-                className: props.class,
+                className: className.value,
                 ref: setListRef as any,
                 id: listboxId,
                 type: props.type || 'listbox',

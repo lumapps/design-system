@@ -4,7 +4,9 @@ import { ListItemAction as ListItemActionUI } from '@lumx/core/js/components/Lis
 import type { BaseClickableProps, ClickableElement } from '@lumx/core/js/components/RawClickable';
 import type { HasClassName, JSXElement } from '@lumx/core/js/types';
 
+import { classNames } from '@lumx/core/js/utils';
 import { useDisableStateProps } from '../../composables/useDisableStateProps';
+import { useClassName } from '../../composables/useClassName';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 
 export type ListItemActionProps = VueToJSXProps<BaseClickableProps & HasClassName> & {
@@ -27,6 +29,7 @@ export const emitSchema = {
 const ListItemAction = defineComponent(
     (props: ListItemActionProps, { emit, slots, expose }) => {
         const attrs = useAttrs();
+        const userClassName = useClassName(() => props.class);
 
         const actionRef = ref<HTMLElement>();
         expose({ $el: actionRef });
@@ -43,12 +46,12 @@ const ListItemAction = defineComponent(
         };
 
         return () => {
-            const { className, ...rest } = otherProps.value as any;
+            const { className: coreClassName, ...rest } = otherProps.value as any;
             return (
                 <ListItemActionUI
                     {...rest}
                     ref={actionRef}
-                    className={(props.class || className) as string}
+                    className={classNames.join(userClassName.value, coreClassName) as string}
                     isDisabled={disabledStateProps.value.disabled}
                     aria-disabled={disabledStateProps.value['aria-disabled']}
                     handleClick={handleClick}

@@ -4,6 +4,7 @@ import { Flag as FlagUI, type FlagProps as UIProps } from '@lumx/core/js/compone
 import type { JSXElement } from '@lumx/core/js/types';
 
 import { useTheme } from '../../composables/useTheme';
+import { useClassName } from '../../composables/useClassName';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { Text } from '../text';
 
@@ -19,12 +20,13 @@ const Flag = defineComponent(
     (props: FlagProps, { slots }) => {
         const attrs = useAttrs();
         const defaultTheme = useTheme();
+        const className = useClassName(() => props.class);
 
         return () => (
             <FlagUI
                 {...props}
                 {...attrs}
-                className={props.class}
+                className={className.value}
                 theme={props.theme || defaultTheme.value}
                 children={slots.default?.() as JSXElement}
                 Text={Text as unknown as UIProps['Text']}

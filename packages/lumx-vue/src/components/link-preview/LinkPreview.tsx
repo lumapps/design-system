@@ -10,6 +10,7 @@ import {
 import { Link } from '../link';
 import { Thumbnail } from '../thumbnail';
 import { useTheme } from '../../composables/useTheme';
+import { useClassName } from '../../composables/useClassName';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 
 export type LinkPreviewProps = VueToJSXProps<UIProps, 'TitleHeading' | 'Link' | 'Thumbnail'> & {
@@ -18,14 +19,6 @@ export type LinkPreviewProps = VueToJSXProps<UIProps, 'TitleHeading' | 'Link' | 
 };
 
 export { COMPONENT_NAME };
-
-// Adapter: core passes `className` (JSX convention), Vue Link expects `class` (Vue convention).
-// The second `context` argument is used to forward default slot content to Vue Link.
-const LinkAdapter = ({ className, ...linkProps }: any, { slots }: any) => (
-    <Link {...linkProps} class={className}>
-        {slots.default?.()}
-    </Link>
-);
 
 /**
  * LinkPreview component.
@@ -37,6 +30,7 @@ const LinkPreview = defineComponent(
     (props: LinkPreviewProps) => {
         const attrs = useAttrs();
         const defaultTheme = useTheme();
+        const className = useClassName(() => props.class);
 
         return () => {
             const { titleHeading = DEFAULT_PROPS.titleHeading, linkAs, ...restProps } = props;
@@ -46,10 +40,10 @@ const LinkPreview = defineComponent(
                     {...restProps}
                     {...attrs}
                     linkAs={toRaw(linkAs)}
-                    className={props.class}
+                    className={className.value}
                     theme={props.theme || defaultTheme.value}
                     TitleHeading={titleHeading as any}
-                    Link={LinkAdapter}
+                    Link={Link}
                     Thumbnail={Thumbnail}
                 />
             );

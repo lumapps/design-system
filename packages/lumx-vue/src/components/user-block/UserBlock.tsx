@@ -18,6 +18,7 @@ import { ColorPalette } from '@lumx/core/js/constants';
 import type { JSXElement } from '@lumx/core/js/types';
 
 import { useTheme } from '../../composables/useTheme';
+import { useClassName } from '../../composables/useClassName';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { classNames } from '@lumx/core/js/utils';
 
@@ -63,6 +64,7 @@ const UserBlock = defineComponent(
     (props: UserBlockProps, { emit, slots }) => {
         const attrs = useAttrs();
         const defaultTheme = useTheme();
+        const className = useClassName(() => props.class);
 
         const handleClick = () => {
             emit('click');
@@ -147,7 +149,7 @@ const UserBlock = defineComponent(
                     {...restProps}
                     {...attrs}
                     linkAs={toRaw(linkAs)}
-                    className={props.class}
+                    className={className.value}
                     theme={props.theme || defaultTheme.value}
                     handleClick={hasOnClick ? handleClick : undefined}
                     handleMouseEnter={hasOnMouseEnter ? handleMouseEnter : undefined}
@@ -161,7 +163,7 @@ const UserBlock = defineComponent(
                     Avatar={(avProps) => {
                         const { badge, ...restAvatarProps } = avProps;
                         return (
-                            <Avatar {...restAvatarProps} class={avProps.className}>
+                            <Avatar {...restAvatarProps}>
                                 {{
                                     badge: badge ? () => badge : undefined,
                                 }}

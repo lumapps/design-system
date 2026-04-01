@@ -5,6 +5,7 @@ import {
     ThOrder,
     TableCellVariant,
 } from '@lumx/core/js/components/Table/TableCell';
+import { useClassName } from '../../composables/useClassName';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { JSXElement } from '@lumx/core/js/types';
 import { useHasEventListener } from '@lumx/vue/composables/useHasEventListener';
@@ -23,6 +24,8 @@ export const emitSchema = {
 
 const TableCell = defineComponent(
     (props: TableCellProps, { emit, slots, attrs }) => {
+        const className = useClassName(() => props.class);
+
         const handleHeaderClick = () => {
             emit('headerClick');
         };
@@ -34,7 +37,7 @@ const TableCell = defineComponent(
                 <UI
                     {...props}
                     {...attrs}
-                    className={props.class}
+                    className={className.value}
                     // Pass handler if sortable or if there's a listener
                     handleClick={hasClickListener ? handleHeaderClick : undefined}
                     children={slots.default?.() as JSXElement}

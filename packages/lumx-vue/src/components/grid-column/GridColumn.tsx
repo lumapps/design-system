@@ -8,6 +8,7 @@ import {
     DEFAULT_PROPS,
 } from '@lumx/core/js/components/GridColumn';
 import { type JSXElement } from '@lumx/core/js/types';
+import { useClassName } from '../../composables/useClassName';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 
 export type GridColumnProps = VueToJSXProps<UIProps>;
@@ -18,9 +19,15 @@ export type { GridColumnGapSize };
 const GridColumn = defineComponent(
     (props: GridColumnProps, { slots }) => {
         const attrs = useAttrs();
+        const className = useClassName(() => props.class);
 
         return () => (
-            <GridColumnUI {...props} {...attrs} className={props.class} children={slots.default?.() as JSXElement} />
+            <GridColumnUI
+                {...props}
+                {...attrs}
+                className={className.value}
+                children={slots.default?.() as JSXElement}
+            />
         );
     },
     {

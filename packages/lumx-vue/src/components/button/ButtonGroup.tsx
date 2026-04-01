@@ -6,6 +6,7 @@ import {
 } from '@lumx/core/js/components/Button/ButtonGroup';
 import type { JSXElement } from '@lumx/core/js/types';
 
+import { useClassName } from '../../composables/useClassName';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 
 export type ButtonGroupProps = VueToJSXProps<UIProps>;
@@ -19,9 +20,15 @@ export type ButtonGroupProps = VueToJSXProps<UIProps>;
 const ButtonGroup = defineComponent(
     (props: ButtonGroupProps, { slots }) => {
         const attrs = useAttrs();
+        const className = useClassName(() => props.class);
 
         return () => (
-            <ButtonGroupUI {...props} {...attrs} className={props.class} children={slots.default?.() as JSXElement} />
+            <ButtonGroupUI
+                {...props}
+                {...attrs}
+                className={className.value}
+                children={slots.default?.() as JSXElement}
+            />
         );
     },
     {

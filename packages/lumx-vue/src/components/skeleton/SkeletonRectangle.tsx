@@ -10,6 +10,7 @@ import {
 } from '@lumx/core/js/components/Skeleton';
 
 import { useTheme } from '../../composables/useTheme';
+import { useClassName } from '../../composables/useClassName';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 
 export type SkeletonRectangleProps = VueToJSXProps<UIProps>;
@@ -26,13 +27,14 @@ const SkeletonRectangle = defineComponent(
     (props: SkeletonRectangleProps) => {
         const attrs = useAttrs();
         const defaultTheme = useTheme();
+        const className = useClassName(() => props.class);
 
         return () => {
             return (
                 <SkeletonRectangleUI
                     {...props}
                     {...attrs}
-                    className={props.class}
+                    className={className.value}
                     theme={props.theme || defaultTheme.value}
                 />
             );

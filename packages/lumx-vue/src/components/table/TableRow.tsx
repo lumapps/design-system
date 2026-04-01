@@ -1,6 +1,7 @@
 import { computed, defineComponent, useAttrs } from 'vue';
 import { TableRow as UI, type TableRowProps as UIProps } from '@lumx/core/js/components/Table/TableRow';
 import { useDisableStateProps } from '../../composables/useDisableStateProps';
+import { useClassName } from '../../composables/useClassName';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { JSXElement } from '@lumx/core/js/types';
 
@@ -12,6 +13,7 @@ export type TableRowProps = VueToJSXProps<UIProps, 'tabIndex' | 'aria-disabled'>
 const TableRow = defineComponent(
     (props: TableRowProps, { slots }) => {
         const attrs = useAttrs();
+        const className = useClassName(() => props.class);
 
         const { isAnyDisabled, otherProps } = useDisableStateProps(computed(() => ({ ...props, ...attrs })));
 
@@ -19,7 +21,7 @@ const TableRow = defineComponent(
             return (
                 <UI
                     {...otherProps.value}
-                    className={props.class}
+                    className={className.value}
                     tabIndex={props.isClickable && !isAnyDisabled.value ? 0 : -1}
                     aria-disabled={isAnyDisabled.value}
                     children={slots.default?.() as JSXElement}

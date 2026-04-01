@@ -9,6 +9,7 @@ import {
 } from '@lumx/core/js/components/DragHandle';
 
 import { useTheme } from '../../composables/useTheme';
+import { useClassName } from '../../composables/useClassName';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 
 export type DragHandleProps = VueToJSXProps<UIProps>;
@@ -25,10 +26,16 @@ const DragHandle = defineComponent(
     (props: DragHandleProps) => {
         const attrs = useAttrs();
         const defaultTheme = useTheme({ defaultTheme: undefined });
+        const className = useClassName(() => props.class);
 
         return () => {
             return (
-                <DragHandleUI {...attrs} {...props} className={props.class} theme={props.theme || defaultTheme.value} />
+                <DragHandleUI
+                    {...attrs}
+                    {...props}
+                    className={className.value}
+                    theme={props.theme || defaultTheme.value}
+                />
             );
         };
     },

@@ -10,6 +10,7 @@ import {
 } from '@lumx/core/js/components/Tabs/TabPanel';
 import { type JSXElement } from '@lumx/core/js/types';
 
+import { useClassName } from '../../composables/useClassName';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { useTabProviderContext } from './state';
 
@@ -29,13 +30,14 @@ const TabPanel = defineComponent(
     (props: TabPanelProps) => {
         const attrs = useAttrs();
         const slots = useSlots();
+        const className = useClassName(() => props.class);
         const tabState = useTabProviderContext('tabPanel', props.id as string | undefined);
         const isActive = computed(() => props.isActive || tabState.value?.isActive);
 
         return () => (
             <TabPanelUI
                 {...attrs}
-                className={props.class}
+                className={className.value}
                 isActive={isActive.value}
                 id={tabState.value?.tabPanelId}
                 isLazy={tabState.value?.isLazy}

@@ -7,6 +7,8 @@ import {
 
 import { Tooltip, type TooltipProps } from '../tooltip/Tooltip';
 import { useTheme } from '../../composables/useTheme';
+import { useClassName } from '../../composables/useClassName';
+import { useAttrFallback } from '../../composables/useAttrFallback';
 import { useDisableStateProps } from '../../composables/useDisableStateProps';
 import { type HyphenatedAriaProps, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 
@@ -34,6 +36,10 @@ const IconButton = defineComponent(
     (props: IconButtonProps, { emit, expose }) => {
         const attrs = useAttrs();
         const defaultTheme = useTheme();
+        const className = useClassName(() => props.class);
+        // Core JSX passes `tabIndex` (React casing); Vue/HTML uses lowercase `tabindex`.
+        // useAttrFallback falls back to attrs.tabIndex when tabindex is absent.
+        const tabIndex = useAttrFallback(() => attrs.tabindex as number | undefined, 'tabIndex');
 
         const { isAnyDisabled, disabledStateProps, otherProps } = useDisableStateProps(
             computed(() => ({ ...props, ...attrs })),
@@ -60,7 +66,8 @@ const IconButton = defineComponent(
                         ref={buttonRef}
                         linkAs={toRaw(linkAs)}
                         {...disabledStateProps.value}
-                        className={props.class}
+                        className={className.value}
+                        {...({ tabindex: tabIndex.value } as any)}
                         theme={props.theme || defaultTheme.value}
                         label={props.label}
                         handleClick={handleClick as any}

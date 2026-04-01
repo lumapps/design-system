@@ -1,5 +1,7 @@
 import { defineComponent, reactive, ref } from 'vue';
 
+import { useClassName } from '../../composables/useClassName';
+
 import {
     ComboboxSection as UI,
     type ComboboxSectionProps as UIProps,
@@ -14,19 +16,6 @@ import { useWatchDisposable } from '../../composables/useWatchDisposable';
 import { ListSection } from '../list';
 import { useComboboxContext } from './context/ComboboxContext';
 
-/**
- * Adapter: maps core's `className` prop to Vue's `class` prop for ListSection.
- * Children are received as Vue slots and forwarded to the ListSection component.
- */
-const ListSectionAdapter = (p: any, { slots }: any) => {
-    const { className, ...rest } = p;
-    return (
-        <ListSection class={className} {...rest}>
-            {{ default: slots.default }}
-        </ListSection>
-    );
-};
-
 export type ComboboxSectionProps = VueToJSXProps<UIProps, ComboboxSectionPropsToOverride | 'hidden' | 'aria-hidden'>;
 
 /**
@@ -37,6 +26,7 @@ export type ComboboxSectionProps = VueToJSXProps<UIProps, ComboboxSectionPropsTo
  */
 const ComboboxSection = defineComponent(
     (props: ComboboxSectionProps, { slots }) => {
+        const className = useClassName(() => props.class);
         const { handle } = useComboboxContext();
         const sectionRef = ref<HTMLElement | null>(null);
         const sectionState = reactive({ hidden: false, 'aria-hidden': false });
@@ -52,8 +42,10 @@ const ComboboxSection = defineComponent(
             }
         });
 
-        const setSectionRef = (el: Element | null) => {
-            sectionRef.value = el as HTMLElement | null;
+        const setSectionRef = (el: any) => {
+            // When ListSection is used directly (no adapter), `el` is the component instance.
+            // Unwrap `$el` to get the root DOM element.
+            sectionRef.value = (el?.$el ?? el) as HTMLElement | null;
         };
 
         return () => {
@@ -68,13 +60,13 @@ const ComboboxSection = defineComponent(
                 {
                     label,
                     icon: props.icon,
-                    className: props.class,
+                    className: className.value,
                     hidden: sectionState.hidden,
                     'aria-hidden': sectionState['aria-hidden'] || undefined,
                     ref: setSectionRef as any,
                     children: children as JSXElement,
                 },
-                { ListSection: ListSectionAdapter },
+                { ListSection },
             );
         };
     },

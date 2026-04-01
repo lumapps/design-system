@@ -4,6 +4,7 @@ import { InputLabel as InputLabelUI, type InputLabelProps as UIProps } from '@lu
 import type { JSXElement } from '@lumx/core/js/types';
 
 import { useTheme } from '../../composables/useTheme';
+import { useClassName } from '../../composables/useClassName';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 
 export type InputLabelProps = VueToJSXProps<UIProps>;
@@ -18,12 +19,13 @@ const InputLabel = defineComponent(
     (props: InputLabelProps, { slots }) => {
         const attrs = useAttrs();
         const defaultTheme = useTheme();
+        const className = useClassName(() => props.class);
 
         return () => (
             <InputLabelUI
                 {...props}
                 {...attrs}
-                className={props.class}
+                className={className.value}
                 theme={props.theme || defaultTheme.value}
                 children={slots.default?.() as JSXElement}
             />
