@@ -1,21 +1,24 @@
 ---
-frameworks: ['react']
+frameworks: ['react', 'vue']
 ---
-import * as DemoDefault from './react/default.tsx';
-import * as DemoBigSize from './react/big-size.tsx';
+import * as ReactDemoDefault from './react/default.tsx';
+import * as ReactDemoBigSize from './react/big-size.tsx';
+import * as VueDemoDefault from './vue/default.vue';
+import * as VueDemoBigSize from './vue/big-size.vue';
 import ReactLinkPreview from 'lumx-docs:@lumx/react/components/link-preview/LinkPreview';
+import VueLinkPreview from 'lumx-docs:@lumx/vue/components/link-preview/LinkPreview';
 
 # Link preview
 
 **Link previews display an hyperlink related info and image.**
 
-<DemoBlock withThemeSwitcher demo={{ react: DemoDefault }} />
+<DemoBlock withThemeSwitcher demo={{ react: ReactDemoDefault, vue: VueDemoDefault }} />
 
 ## Big size
 
 Use `big` size to give more emphasis to the displayed hyperlink, make sure to have a good quality image.
 
-<DemoBlock withThemeSwitcher demo={{ react: DemoBigSize }} />
+<DemoBlock withThemeSwitcher demo={{ react: ReactDemoBigSize, vue: VueDemoBigSize }} />
 
 ### Accessibility concerns
 
@@ -24,4 +27,4 @@ The thumbnail, title and link are all clickable but on keyboard focus navigation
 
 ### Properties
 
-<PropTable docs={{ react: ReactLinkPreview }} />
+<PropTable docs={{ react: ReactLinkPreview, vue: VueLinkPreview }} />

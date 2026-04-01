@@ -1,7 +1,7 @@
-import { withNestedProps } from '@lumx/react/stories/decorators/withNestedProps';
-import { withWrapper } from '@lumx/react/stories/decorators/withWrapper';
+import { withNestedProps } from '@lumx/vue/stories/decorators/withNestedProps';
+import { withWrapper } from '@lumx/vue/stories/decorators/withWrapper';
 import { setup } from '@lumx/core/js/components/LinkPreview/Stories';
-import { LinkPreview } from './LinkPreview';
+import { LinkPreview } from '.';
 
 const { meta, ...stories } = setup({
     component: LinkPreview,
