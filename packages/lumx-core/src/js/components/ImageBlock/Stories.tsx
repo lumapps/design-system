@@ -123,7 +123,7 @@ export function setup({
             ...WithFocusPointVertical.args,
             ...WithAlign.args,
         },
-        decorators: [withWrapper({ style: { width: 400, height: 300 } })],
+        decorators: [withWrapper({ style: { width: '400px', height: '300px' } })],
     };
 
     return {

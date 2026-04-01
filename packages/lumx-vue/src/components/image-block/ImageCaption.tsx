@@ -29,8 +29,17 @@ const ImageCaption = defineComponent(
         const defaultTheme = useTheme();
 
         return () => {
-            const { class: _class, theme, ...restProps } = props as any;
-            return <UI {...(restProps as any)} theme={theme || defaultTheme.value} FlexBox={FlexBox} Text={Text} />;
+            const { class: _class, theme, align, ...restProps } = props as any;
+            return (
+                <UI
+                    {...(restProps as any)}
+                    align={align}
+                    theme={theme || defaultTheme.value}
+                    FlexBox={FlexBox}
+                    Text={Text}
+                    wrapperProps={{ verticalAlign: align, horizontalAlign: align === 'center' ? align : undefined }}
+                />
+            );
         };
     },
     {

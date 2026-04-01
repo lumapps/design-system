@@ -7,23 +7,17 @@ import {
     COMPONENT_NAME,
     DEFAULT_PROPS,
     ImageBlockCaptionPosition,
+    ImageBlockPropsToOverride,
 } from '@lumx/core/js/components/ImageBlock';
 
 import { useTheme } from '../../composables/useTheme';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
-import { Thumbnail } from '../thumbnail';
+import { Thumbnail, ThumbnailProps } from '../thumbnail';
 import ImageCaption from './ImageCaption';
 
-export type ImageBlockProps = Omit<
-    VueToJSXProps<
-        UIProps,
-        'Thumbnail' | 'ImageCaption' | 'FlexBox' | 'Text' | 'titleProps' | 'descriptionProps' | 'captionStyle'
-    >,
-    never
-> & {
-    titleProps?: Record<string, any>;
-    descriptionProps?: Record<string, any>;
-    captionStyle?: Record<string, any>;
+export type ImageBlockProps = Omit<VueToJSXProps<UIProps, ImageBlockPropsToOverride>, never> & {
+    /** Props to pass to the thumbnail (minus those already set by the ImageBlock props). */
+    thumbnailProps?: Omit<ThumbnailProps, 'image' | 'size' | 'theme' | 'align' | 'fillHeight' | 'alt'>;
 };
 
 export { CLASSNAME, COMPONENT_NAME, DEFAULT_PROPS, ImageBlockCaptionPosition };
