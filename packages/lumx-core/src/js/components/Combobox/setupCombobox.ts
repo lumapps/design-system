@@ -1,5 +1,12 @@
 import { type FocusNavigationController } from '../../utils/focusNavigation';
-import { getOptionValue, goToSelectedOrFirst, goToSelectedOrLast, isOptionDisabled, notifySection } from './utils';
+import {
+    getOptionValue,
+    goToSelectedOrFirst,
+    goToSelectedOrLast,
+    isActionCell,
+    isOptionDisabled,
+    notifySection,
+} from './utils';
 import { setupListbox } from './setupListbox';
 import type {
     ComboboxCallbacks,
@@ -187,16 +194,15 @@ export function setupCombobox(
             switch (event.key) {
                 case 'Enter':
                     if (handle.isOpen && nav?.hasActiveItem && nav.activeItem) {
-                        if (!isOptionDisabled(nav.activeItem)) {
-                            // Click the active item. For option cells, the delegated click handler
-                            // on the listbox will call handle.select() and handle closing.
-                            // For action cells and link options, the native click fires too.
-                            nav.activeItem.click();
+                        // Capture activeItem before click — the click handler may close
+                        // the popover and clear the focus navigation state.
+                        const { activeItem } = nav;
+                        // "Click" on active option
+                        if (!isOptionDisabled(activeItem)) {
+                            activeItem.click();
                         }
-                        // Close for single-select. For option cells the delegated handler
-                        // already closed, but setIsOpen(false) is idempotent. For action cells
-                        // and disabled options, the delegated handler did NOT close, so this is needed.
-                        if (!handle.isMultiSelect) {
+                        // Only close when not in multi select and not in action cell
+                        if (!handle.isMultiSelect && !isActionCell(activeItem)) {
                             handle.setIsOpen(false);
                         }
                     } else if (!handle.isMultiSelect) {

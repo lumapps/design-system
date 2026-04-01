@@ -1985,12 +1985,10 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
             await userEvent.keyboard('{Enter}');
 
             expect(input.value).toBe('');
-
-            await waitFor(() => {
-                expect(input).toHaveAttribute('aria-expanded', 'false');
-            });
-
             expect(onDelete).toHaveBeenCalled();
+
+            // Popover stays open after activating an action cell (matches mouse click behavior).
+            expect(input).toHaveAttribute('aria-expanded', 'true');
         });
 
         it('should remember column position across rows', async () => {
