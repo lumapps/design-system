@@ -135,13 +135,13 @@ export function setup({
             let visibleOptions = getVisibleOptions();
             expect(visibleOptions).toHaveLength(10);
 
-            // Type "B" → "Banana" and "Blueberry" match (case-insensitive startsWith)
+            // Type "B" → "Banana", "Blueberry" and "Strawberry" match (case-insensitive includes)
             await userEvent.type(input, 'B');
 
             await waitFor(() => {
                 visibleOptions = getVisibleOptions();
-                expect(visibleOptions).toHaveLength(2);
-                expect(visibleOptions.map((o) => o.textContent)).toEqual(['Banana', 'Blueberry']);
+                expect(visibleOptions).toHaveLength(3);
+                expect(visibleOptions.map((o) => o.textContent)).toEqual(['Banana', 'Blueberry', 'Strawberry']);
             });
 
             // Continue typing "a" (input now "Ba") → only "Banana" matches
@@ -347,9 +347,39 @@ export function setup({
         },
     };
 
+    /**
+     * Verifies the withValueOnChange decorator correctly propagates the
+     * selected option value back into the input.
+     */
+    const SelectOptionUpdatesInput = {
+        ...comboboxInputStory,
+        play: async ({ canvasElement }: any) => {
+            const input = getInput(canvasElement);
+            await userEvent.click(input);
+
+            await waitFor(() => {
+                expect(input).toHaveAttribute('aria-expanded', 'true');
+            });
+
+            // Navigate to "Cherry" (5th option) and select it with Enter
+            // eslint-disable-next-line no-await-in-loop
+            for (let i = 0; i < 5; i++) await userEvent.keyboard('{ArrowDown}');
+            await waitFor(() => {
+                expect(getActiveOption()!.textContent).toBe('Cherry');
+            });
+
+            await userEvent.keyboard('{Enter}');
+            await waitFor(() => {
+                expect(input.value).toBe('Cherry');
+                expect(input).toHaveAttribute('aria-expanded', 'false');
+            });
+        },
+    };
+
     return {
         meta,
         AutoFilterOptions,
+        SelectOptionUpdatesInput,
         MouseHoverDoesNotActivateOption,
         ClickAwayClosesPopup,
         MouseHoverThenKeyboardNav,

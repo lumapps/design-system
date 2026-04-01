@@ -23,12 +23,6 @@ export interface ComboboxOptionSkeletonProps
     after?: ReactNode;
     /** Override the default SkeletonTypography content entirely. */
     children?: ReactNode;
-    /**
-     * Number of skeleton `<li>` elements to render.
-     * Each is an independent element with `:nth-child` width cycling applied by SCSS.
-     * @default 1
-     */
-    count?: number;
 }
 
 /**
@@ -56,11 +50,10 @@ export interface ComboboxOptionSkeletonProps
  * @return React element(s).
  */
 export const ComboboxOptionSkeleton = (props: ComboboxOptionSkeletonProps) => {
-    const { count = 1, ...itemProps } = props;
     const { handle } = useComboboxContext();
     useEffect(() => handle?.registerSkeleton(), [handle]);
 
-    return Array.from({ length: count }, (_, i) => <UI key={i} {...itemProps} />);
+    return <UI {...props} />;
 };
 
 ComboboxOptionSkeleton.displayName = COMPONENT_NAME;

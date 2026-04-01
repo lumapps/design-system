@@ -1,4 +1,4 @@
-import { computed, defineComponent, ref, useAttrs } from 'vue';
+import { computed, defineComponent, type ComponentPublicInstance, ref, useAttrs, watch } from 'vue';
 
 import {
     TextField as TextFieldUI,
@@ -40,6 +40,10 @@ export type TextFieldProps = VueToJSXProps<UIProps, TextFieldPropsToOverride | '
     minimumRows?: number;
     /** Additional label props. */
     labelProps?: InputLabelProps;
+    /** Ref callback for the native input element. */
+    inputRef?: (el: HTMLInputElement | HTMLTextAreaElement | null) => void;
+    /** Ref callback for the text field wrapper element. */
+    textFieldRef?: (el: HTMLElement | null) => void;
 };
 
 export const emitSchema = {
@@ -71,6 +75,17 @@ const TextField = defineComponent(
         const isFocus = ref(false);
 
         const { isAnyDisabled, disabledStateProps } = useDisableStateProps(computed(() => ({ ...props, ...attrs })));
+
+        // Track the native input element for inputRef forwarding.
+        const rawInputInstance = ref<ComponentPublicInstance | null>(null);
+        watch(
+            rawInputInstance,
+            (instance) => {
+                const inputElement: HTMLInputElement | HTMLTextAreaElement | null = instance?.$el ?? instance ?? null;
+                props.inputRef?.(inputElement);
+            },
+            { flush: 'sync' },
+        );
 
         const accessibilityIds = computed(() =>
             generateAccessibilityIds(
@@ -139,9 +154,9 @@ const TextField = defineComponent(
 
             const input = (
                 props.multiline ? (
-                    <RawInputTextarea {...inputCommonProps} rows={props.minimumRows} />
+                    <RawInputTextarea ref={rawInputInstance} {...inputCommonProps} rows={props.minimumRows} />
                 ) : (
-                    <RawInputText {...inputCommonProps} type={props.type || 'text'} />
+                    <RawInputText ref={rawInputInstance} {...inputCommonProps} type={props.type || 'text'} />
                 )
             ) as any;
 
@@ -170,6 +185,7 @@ const TextField = defineComponent(
                     errorId={errorId}
                     isFocus={isFocus.value}
                     input={input}
+                    textFieldRef={props.textFieldRef}
                     IconButton={IconButtonAdapter as any}
                     clearButtonProps={
                         props.clearButtonProps ? { ...props.clearButtonProps, onClick: handleClear } : undefined
@@ -206,6 +222,8 @@ const TextField = defineComponent(
             'name',
             'type',
             'minimumRows',
+            'inputRef',
+            'textFieldRef',
         ),
         emits: emitSchema,
     },

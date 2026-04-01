@@ -11,7 +11,7 @@ import { GenericProps } from '@lumx/core/js/types';
 import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';
-import { ListSection } from '../list';
+import { ListSection } from '../list/ListSection';
 import { useComboboxContext } from './context/ComboboxContext';
 
 /**

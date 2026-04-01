@@ -1,5 +1,6 @@
 import { mdiChevronUp, mdiChevronDown } from '@lumx/icons';
 import type { CommonRef, HasClassName, HasTheme, LumxClassName } from '../../types';
+import { getDisabledState } from '../../utils/disabledState';
 
 /**
  * Defines the props for the core ComboboxInput template.
@@ -65,8 +66,13 @@ export const ComboboxInput = (props: ComboboxInputProps, { TextField, IconButton
         ...forwardedProps
     } = props;
 
+    // Compute whether the combobox is disabled (native or aria-disabled).
+    const disabledState = getDisabledState(undefined, props);
+    const isAnyDisabled = disabledState.disabled || disabledState['aria-disabled'] || undefined;
+
     return (
         <TextField
+            autoComplete="off"
             {...forwardedProps}
             ref={ref}
             role="combobox"
@@ -75,13 +81,13 @@ export const ComboboxInput = (props: ComboboxInputProps, { TextField, IconButton
             aria-expanded={isOpen}
             inputRef={inputRef}
             textFieldRef={textFieldRef}
-            autoComplete="off"
             theme={theme}
             afterElement={
                 toggleButtonProps ? (
                     <IconButton
                         {...toggleButtonProps}
                         theme={theme}
+                        isDisabled={isAnyDisabled}
                         emphasis="low"
                         size="s"
                         icon={isOpen ? mdiChevronUp : mdiChevronDown}

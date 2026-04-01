@@ -4,6 +4,7 @@ import { ComboboxPopover as UI, COMPONENT_NAME, CLASSNAME } from '@lumx/core/js/
 import { Popover, PopoverProps } from '@lumx/react/components/popover';
 import { useComboboxContext } from './context/ComboboxContext';
 import { useComboboxOpen } from './context/useComboboxOpen';
+import { FlexBox } from '../flex-box';
 
 /**
  * Props for Popover that can be passed to Combobox.Popover.
@@ -39,7 +40,7 @@ export const ComboboxPopover = (props: ComboboxPopoverComponentProps) => {
             anchorRef: anchorRef as React.RefObject<HTMLElement>,
             handleClose: () => setIsOpen(false),
         },
-        { Popover },
+        { Popover, FlexBox },
     );
 };
 

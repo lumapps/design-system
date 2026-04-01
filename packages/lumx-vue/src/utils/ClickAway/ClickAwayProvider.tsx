@@ -62,8 +62,16 @@ export const ClickAwayProvider = defineComponent(
                 currentContext.addRefs(...refs);
             }
 
-            // Setup click away using the context's collected refs directly
-            teardown = setupClickAway(() => contextChildrenRefs, props.callback);
+            // Setup click away using a closure that always reads the latest callback prop.
+            // This handles transitions like closeMode="hide" where the callback changes
+            // between open (handleClose) and closed (undefined) without re-creating the listener.
+            teardown = setupClickAway(
+                () => contextChildrenRefs,
+                (event) => {
+                    const cb = props.callback;
+                    if (typeof cb === 'function') cb(event);
+                },
+            );
         });
 
         onBeforeUnmount(() => {

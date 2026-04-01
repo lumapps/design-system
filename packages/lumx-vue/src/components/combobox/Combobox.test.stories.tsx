@@ -1,13 +1,13 @@
 /**
- * Browser-only test stories for Combobox (React).
+ * Browser-only test stories for Combobox (Vue).
  *
  * These tests require Playwright because they rely on hover events,
  * click-away detection, or secondary popover positioning.
  *
- * The majority of combobox tests run in jsdom via Combobox.test.tsx.
+ * The majority of combobox tests run in jsdom via Combobox.test.ts.
  */
-import { Button, IconButton } from '@lumx/react';
-import { withValueOnChange } from '@lumx/react/stories/decorators/withValueOnChange';
+import { Button, IconButton } from '@lumx/vue';
+import { withValueOnChange } from '@lumx/vue/stories/decorators/withValueOnChange';
 import { setup } from '@lumx/core/js/components/Combobox/TestStories';
 
 import { Combobox } from '.';
@@ -25,9 +25,6 @@ export default {
     title: 'LumX components/combobox/Combobox/Tests',
     ...meta,
 };
-
-// Browser-only: auto-filter test
-export const AutoFilterOptions = { ...testStories.AutoFilterOptions };
 
 // Browser-only: select updates input (withValueOnChange decorator integration)
 export const SelectOptionUpdatesInput = { ...testStories.SelectOptionUpdatesInput };

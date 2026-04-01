@@ -14,6 +14,14 @@ export type VueToJSXProps<Props, OmitProps extends keyof Props = never> = Omit<
     class?: string;
 };
 
+/**
+ * Hyphenated aria-* prop keys that must NOT be declared as Vue component props.
+ * When declared, Vue normalizes them to camelCase (e.g. aria-haspopup → ariaHaspopup),
+ * which breaks hyphenated key destructuring in core component templates.
+ * By excluding them from props, they flow through `attrs` with their original hyphenated keys.
+ */
+export type HyphenatedAriaProps = 'aria-expanded' | 'aria-haspopup' | 'aria-label' | 'aria-pressed';
+
 export const keysOf = <T>() => {
     return <K extends readonly (keyof T)[]>(
         ...keys: [keyof T] extends [K[number]]

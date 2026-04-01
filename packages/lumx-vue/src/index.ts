@@ -2,6 +2,7 @@ export * from '@lumx/core/js/constants';
 export * from '@lumx/core/js/types';
 
 export * from './components/avatar';
+export * from './components/combobox';
 export * from './components/badge';
 export * from './components/button';
 export * from './components/checkbox';

@@ -11,6 +11,7 @@ export const COMPONENT_NAME = 'ComboboxPopover';
  * Component default class name.
  */
 export const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-combobox-popover';
+const { block, element } = classNames.bem(CLASSNAME);
 
 /**
  * Defines the props for the core ComboboxPopover template.
@@ -40,6 +41,8 @@ export interface ComboboxPopoverProps extends HasClassName {
 export interface ComboboxPopoverComponents {
     /** Popover component (framework-specific). */
     Popover: any;
+    /** FlexBox component (framework-specific). */
+    FlexBox: any;
 }
 
 /**
@@ -53,7 +56,7 @@ export interface ComboboxPopoverComponents {
  * @param components Injected framework-specific components.
  * @return JSX element.
  */
-export const ComboboxPopover = (props: ComboboxPopoverProps, { Popover }: ComboboxPopoverComponents) => {
+export const ComboboxPopover = (props: ComboboxPopoverProps, { Popover, FlexBox }: ComboboxPopoverComponents) => {
     const {
         children,
         className,
@@ -72,7 +75,7 @@ export const ComboboxPopover = (props: ComboboxPopoverProps, { Popover }: Combob
             {...forwardedProps}
             placement={placement}
             fitToAnchorWidth={fitToAnchorWidth}
-            className={classNames.join(className, CLASSNAME)}
+            className={block([className])}
             anchorRef={anchorRef}
             isOpen={isOpen}
             onClose={handleClose}
@@ -80,7 +83,9 @@ export const ComboboxPopover = (props: ComboboxPopoverProps, { Popover }: Combob
             closeOnEscape={closeOnEscape}
             closeMode="hide"
         >
-            {children}
+            <FlexBox orientation="vertical" className={element('scroll')}>
+                {children}
+            </FlexBox>
         </Popover>
     );
 };

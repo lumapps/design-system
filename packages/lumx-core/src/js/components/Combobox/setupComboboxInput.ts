@@ -31,6 +31,9 @@ export interface SetupComboboxInputOptions extends ComboboxCallbacks {
 export function setupComboboxInput(input: HTMLInputElement, options: SetupComboboxInputOptions): ComboboxHandle {
     const { autoFilter = true, onSelect: optionOnSelect } = options;
 
+    /** Check if the input is disabled (native `disabled` attribute or `aria-disabled="true"`). */
+    const isDisabled = () => input.disabled || input.getAttribute('aria-disabled') === 'true';
+
     /**
      * True when the current input value came from user typing (real InputEvent).
      * False when the value was set programmatically (select, clear, etc.).
@@ -67,6 +70,7 @@ export function setupComboboxInput(input: HTMLInputElement, options: SetupCombob
             'input',
             (event) => {
                 if (!(event instanceof InputEvent)) return;
+                if (isDisabled()) return;
 
                 combobox.focusNav?.clear();
                 userHasTyped = true;
@@ -83,6 +87,7 @@ export function setupComboboxInput(input: HTMLInputElement, options: SetupCombob
         input.addEventListener(
             'focus',
             () => {
+                if (isDisabled()) return;
                 combobox.focusNav?.clear();
                 combobox.setIsOpen(true);
             },
@@ -90,7 +95,14 @@ export function setupComboboxInput(input: HTMLInputElement, options: SetupCombob
         );
 
         // Open on click (handles the case where the input is already focused, so focus doesn't re-fire).
-        input.addEventListener('click', () => combobox.setIsOpen(true), { signal });
+        input.addEventListener(
+            'click',
+            () => {
+                if (isDisabled()) return;
+                combobox.setIsOpen(true);
+            },
+            { signal },
+        );
 
         // Re-apply filter when the combobox opens, but only if the current
         // input value came from user typing. After a programmatic change

@@ -114,7 +114,7 @@ export const ComboboxOption = (props: ComboboxOptionProps, { Tooltip }: Combobox
         as: 'button',
         ...actionProps,
         id,
-        className: element('trigger'),
+        className: element('action'),
         handleClick,
         'aria-selected': isSelected ? 'true' : 'false',
         'data-value': value,
