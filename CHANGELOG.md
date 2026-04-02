@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   `@lumx/vue`:
+    -   Create the `LinkPreview` component
+
+### Changed
+
+-   `@lumx/core`:
+    -   Moved `LinkPreview` stories and tests from `@lumx/react`
+
 ## [4.9.0][] - 2026-04-02
 
 ### Added
