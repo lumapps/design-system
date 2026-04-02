@@ -1,6 +1,6 @@
 import { Size, Theme, Thumbnail } from '@lumx/react';
 
-import { GenericProps, ValueOf } from '@lumx/react/utils/type';
+import { GenericProps } from '@lumx/react/utils/type';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
@@ -10,7 +10,6 @@ import {
     DEFAULT_PROPS,
     ImageBlock as UI,
     ImageBlockProps as UIProps,
-    ImageBlockCaptionPosition as UICaptionPosition,
     ImageBlockPropsToOverride,
 } from '@lumx/core/js/components/ImageBlock';
 import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
@@ -20,7 +19,7 @@ import { ImageCaption } from './ImageCaption';
 /**
  * Image block variants.
  */
-export type ImageBlockCaptionPosition = ValueOf<typeof UICaptionPosition>;
+export { ImageBlockCaptionPosition } from '@lumx/core/js/components/ImageBlock';
 
 /**
  *  Image block sizes.
