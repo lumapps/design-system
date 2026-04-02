@@ -13,6 +13,8 @@ export type RawInputTextProps = VueToJSXProps<UIProps>;
 export const emitSchema = {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     change: (value: string, _name?: string, _event?: Event) => typeof value === 'string',
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    input: (value: string, _name?: string, _event?: Event) => typeof value === 'string',
 };
 
 /**
@@ -32,6 +34,10 @@ const RawInputText = defineComponent(
             emit('change', value, name, event);
         };
 
+        const handleInput = (value: string, name?: string, event?: any) => {
+            emit('input', value, name, event);
+        };
+
         return () => {
             return (
                 <RawInputTextUI
@@ -42,6 +48,7 @@ const RawInputText = defineComponent(
                     className={props.class}
                     theme={props.theme || defaultTheme.value}
                     handleChange={handleChange}
+                    handleInput={handleInput}
                 />
             );
         };

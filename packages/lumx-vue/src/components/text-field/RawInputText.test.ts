@@ -32,6 +32,18 @@ describe('<RawInputText />', () => {
             expect(changeEvents).toHaveLength(1);
             expect((changeEvents as any)[0][0]).toBe('a');
         });
+
+        it('should emit input event on keystroke', async () => {
+            const { emitted } = render(RawInputText, {
+                props: { value: '' },
+            });
+            const input = document.querySelector('input') as HTMLInputElement;
+            await fireEvent.input(input, { target: { value: 'a' } });
+
+            const inputEvents = emitted('input');
+            expect(inputEvents).toHaveLength(1);
+            expect((inputEvents as any)[0][0]).toBe('a');
+        });
     });
 
     commonTestsSuiteVTL(setupRawInputText, {

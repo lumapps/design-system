@@ -37,6 +37,30 @@ describe('<TextField />', () => {
             expect((changeEvents as any)[0][0]).toBe('hello');
         });
 
+        it('should emit input event on keystroke', async () => {
+            const { emitted } = render(TextField, {
+                props: { value: '' },
+            });
+            const input = document.querySelector('input') as HTMLInputElement;
+            await fireEvent.input(input, { target: { value: 'hello' } });
+
+            const inputEvents = emitted('input');
+            expect(inputEvents).toHaveLength(1);
+            expect((inputEvents as any)[0][0]).toBe('hello');
+        });
+
+        it('should emit input event on keystroke when multiline', async () => {
+            const { emitted } = render(TextField, {
+                props: { value: '', multiline: true },
+            });
+            const textarea = document.querySelector('textarea') as HTMLTextAreaElement;
+            await fireEvent.input(textarea, { target: { value: 'hello' } });
+
+            const inputEvents = emitted('input');
+            expect(inputEvents).toHaveLength(1);
+            expect((inputEvents as any)[0][0]).toBe('hello');
+        });
+
         it('should emit clear event and reset value when clear button is clicked', async () => {
             const { emitted } = render(TextField, {
                 props: { value: 'some value', clearButtonProps: { label: 'Clear' } },

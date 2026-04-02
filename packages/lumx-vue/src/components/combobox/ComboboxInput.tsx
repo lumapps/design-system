@@ -71,24 +71,10 @@ const ComboboxInput = defineComponent(
             { flush: 'sync' },
         );
 
-        // Native input event handler (stored for cleanup)
-        let nativeInputCleanup: (() => void) | undefined;
-
         // Get the input element from the TextField component after mount
         onMounted(() => {
             const input = inputEl.value;
             if (!input) return;
-
-            // In Vue, the native <input onChange> fires on DOM 'change' (blur), not per-keystroke.
-            // We add a native 'input' listener to emit 'change' on each real user keystroke,
-            // keeping the controlled value prop up to date.
-            const handleNativeInput = (event: Event) => {
-                if (event instanceof InputEvent) {
-                    emit('change', (event.target as HTMLInputElement).value);
-                }
-            };
-            input.addEventListener('input', handleNativeInput);
-            nativeInputCleanup = () => input.removeEventListener('input', handleNativeInput);
 
             setHandle(
                 setupComboboxInput(input, {
@@ -104,7 +90,6 @@ const ComboboxInput = defineComponent(
         });
 
         onUnmounted(() => {
-            nativeInputCleanup?.();
             handle.value?.destroy();
             setHandle(null);
         });
@@ -127,6 +112,7 @@ const ComboboxInput = defineComponent(
             // spread to the TextField adapter. They are not in the core ComboboxInputProps type.
             const eventHandlers = {
                 onChange: (value: string, name?: string, event?: Event) => emit('change', value, name, event),
+                onInput: (value: string) => emit('change', value),
                 onFocus: (event?: FocusEvent) => emit('focus', event),
                 onBlur: (event?: FocusEvent) => emit('blur', event),
                 onClear: (event?: MouseEvent) => emit('clear', event),

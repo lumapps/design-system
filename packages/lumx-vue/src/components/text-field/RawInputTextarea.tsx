@@ -15,6 +15,8 @@ export type RawInputTextareaProps = VueToJSXProps<UIProps>;
 export const emitSchema = {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     change: (value: string, _name?: string, _event?: Event) => typeof value === 'string',
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    input: (value: string, _name?: string, _event?: Event) => typeof value === 'string',
 };
 
 /**
@@ -41,6 +43,10 @@ const RawInputTextarea = defineComponent(
             emit('change', value, name, event);
         };
 
+        const handleInput = (value: string, name?: string, event?: any) => {
+            emit('input', value, name, event);
+        };
+
         return () => {
             return (
                 <RawInputTextareaUI
@@ -52,6 +58,7 @@ const RawInputTextarea = defineComponent(
                     className={props.class}
                     theme={props.theme || defaultTheme.value}
                     handleChange={handleChange}
+                    handleInput={handleInput}
                 />
             );
         };

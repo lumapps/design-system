@@ -50,6 +50,8 @@ export const emitSchema = {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     change: (value: string, _name?: string, _event?: Event) => typeof value === 'string',
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    input: (value: string, _name?: string, _event?: Event) => typeof value === 'string',
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     focus: (_event?: FocusEvent) => true,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     blur: (_event?: FocusEvent) => true,
@@ -100,6 +102,10 @@ const TextField = defineComponent(
             emit('change', value, name, event);
         };
 
+        const handleInput = (value: string, name?: string, event?: any) => {
+            emit('input', value, name, event);
+        };
+
         const handleFocus = (event?: any) => {
             isFocus.value = true;
             emit('focus', event);
@@ -130,6 +136,7 @@ const TextField = defineComponent(
                 'aria-disabled': _aad,
                 ariaDisabled: _ad,
                 onChange: _oc,
+                onInput: _oi,
                 onFocus: _of,
                 onBlur: _ob,
                 chips: _chips,
@@ -148,6 +155,7 @@ const TextField = defineComponent(
                 ...disabledStateProps.value,
                 readOnly: !!disabledStateProps.value['aria-disabled'],
                 onChange: handleChange,
+                onInput: handleInput,
                 onFocus: handleFocus,
                 onBlur: handleBlur,
             };
