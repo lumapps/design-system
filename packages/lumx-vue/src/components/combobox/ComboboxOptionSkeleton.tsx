@@ -1,4 +1,4 @@
-import { defineComponent } from 'vue';
+import { computed, defineComponent, ref } from 'vue';
 
 import {
     ComboboxOptionSkeleton as UI,
@@ -23,9 +23,18 @@ export type ComboboxOptionSkeletonProps = VueToJSXProps<UIProps, ComboboxOptionS
  * @return Vue element.
  */
 const ComboboxOptionSkeleton = defineComponent(
-    (props: ComboboxOptionSkeletonProps, { slots, attrs }) => {
+    (props: ComboboxOptionSkeletonProps, { slots, attrs, expose }) => {
         const className = useClassName(() => props.class);
         const { handle } = useComboboxContext();
+
+        // Expose the last rendered <li> element: the core template returns a Fragment
+        // with multiple <ListItem> elements, so Vue's built-in $el would resolve to
+        // the Fragment start anchor (empty Text node).
+        // Note: the core template shares the same ref across all items — the last one wins
+        // (same behavior as React).
+        const skeletonRef = ref<any>(null);
+        const skeletonEl = computed(() => skeletonRef.value?.$el as HTMLElement | undefined);
+        expose({ $el: skeletonEl });
 
         // Register once with the combobox handle on mount
         useWatchDisposable(handle, (h) => h?.registerSkeleton());
@@ -37,6 +46,7 @@ const ComboboxOptionSkeleton = defineComponent(
 
             return UI({
                 ...attrs,
+                ref: skeletonRef,
                 className: className.value,
                 count: props.count,
                 before,

@@ -34,13 +34,17 @@ export type ComboboxButtonProps = VueToJSXProps<UIProps, 'label'> & {
  * @return Vue element.
  */
 const ComboboxButton = defineComponent(
-    (props: ComboboxButtonProps, { emit }) => {
+    (props: ComboboxButtonProps, { emit, expose }) => {
         const attrs = useAttrs();
         const className = useClassName(() => props.class);
         const { listboxId, anchorRef, setHandle, handle } = useComboboxContext();
         const { isOpen } = useComboboxOpen();
 
         const buttonRef = ref<HTMLElement | null>(null);
+
+        // Expose the button DOM element: the core template wraps in Tooltip (Fragment root),
+        // so Vue's built-in $el would resolve to the Fragment start anchor (empty Text node).
+        expose({ $el: buttonRef });
 
         // Create the combobox handle with button-mode controller on mount
         watch(

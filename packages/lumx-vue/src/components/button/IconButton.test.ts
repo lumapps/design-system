@@ -57,7 +57,7 @@ describe('<IconButton />', () => {
         });
 
         it('should forward ref to the underlying button element', () => {
-            const iconButtonRef = ref<HTMLElement>();
+            const iconButtonRef = ref();
             render(
                 defineComponent({
                     components: { IconButton },
@@ -67,9 +67,10 @@ describe('<IconButton />', () => {
                     template: `<IconButton ref="iconButtonRef" label="Icon" />`,
                 }),
             );
-            // The ref exposes { $el } pointing to the underlying button element,
-            // so that @floating-ui/vue can resolve it correctly as an anchor.
-            expect((iconButtonRef.value as any)?.$el).toBe(screen.getByRole('button', { name: 'Icon' }));
+            // IconButton wraps content in Tooltip (Fragment), so Vue's built-in $el would resolve to
+            // the Fragment anchor (empty Text node). The custom expose({ $el: buttonRef }) ensures
+            // the ref resolves to the actual button element (auto-unwrapped by Vue's proxyRefs).
+            expect(iconButtonRef.value?.$el).toBe(screen.getByRole('button', { name: 'Icon' }));
         });
 
         it('should hide tooltip when hideTooltip is true', async () => {

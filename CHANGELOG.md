@@ -19,7 +19,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   Moved `Dialog` from `@lumx/react`
     -   `setupRovingTabIndex`: add MutationObserver-based tabindex normalization (mount, removal recovery, insertion, disabled-state, selection)
 
-## [4.10.0][] - 2026-04-03
+
+### Fixed
+
+- `@lumx/vue`:
+    - `ComboboxButton`, `ComboboxOptionMoreInfo`, `ComboboxOptionSkeleton`, `ListSection`: fix exposing the correct ref
+
+
+# [4.10.0][] - 2026-04-03
 
 ### Added
 

@@ -1,4 +1,4 @@
-import { defineComponent, isRef, ref, watchEffect } from 'vue';
+import { computed, defineComponent, ref } from 'vue';
 
 import { useClassName } from '../../composables/useClassName';
 
@@ -37,20 +37,19 @@ export type ComboboxOptionMoreInfoProps = VueToJSXProps<
  * @return Vue element.
  */
 const ComboboxOptionMoreInfo = defineComponent(
-    (props: ComboboxOptionMoreInfoProps, { slots }) => {
+    (props: ComboboxOptionMoreInfoProps, { slots, expose }) => {
         const mergedClassName = useClassName(() => props.class);
 
         // Ref to the IconButton component instance (with exposed `$el`).
         const iconButtonRef = ref<any>(null);
 
-        // Ref to the resolved DOM element (<button>) used as the popover anchor.
-        // IconButton uses `expose({ $el: buttonRef })` where `buttonRef` is a Vue `Ref<HTMLElement>`,
-        // so we need to unwrap it to get the raw DOM element.
-        const anchorEl = ref<HTMLElement>();
-        watchEffect(() => {
-            const raw = iconButtonRef.value?.$el;
-            anchorEl.value = (isRef(raw) ? raw.value : raw) ?? undefined;
-        });
+        // Resolved DOM element (<button>) used as the popover anchor.
+        const anchorEl = computed(() => iconButtonRef.value?.$el as HTMLElement | undefined);
+
+        // Expose the IconButton's button element: the core template returns a Fragment
+        // (<>IconButton + Popover</>), so Vue's built-in $el would resolve to the
+        // Fragment start anchor (empty Text node).
+        expose({ $el: anchorEl });
 
         const isHovered = ref(false);
 
@@ -63,12 +62,8 @@ const ComboboxOptionMoreInfo = defineComponent(
         const popoverId = `${optionId}-more-info`;
 
         /**
-         * IconButton adapter (closure) that maps core `onMouseEnter`/`onMouseLeave`
-         * → Vue `onMouseenter`/`onMouseleave`
-         *
-         * The ref resolves to the IconButton's exposed proxy (with `$el` pointing to the
-         * actual `<button>` DOM element), which is then used by `watchEffect` to extract
-         * the anchor element for popover positioning.
+         * IconButton adapter: maps core `onMouseEnter`/`onMouseLeave`
+         * → Vue `onMouseenter`/`onMouseleave` and captures the component ref.
          */
         function IconButtonAdapter(coreProps: any) {
             const { onMouseEnter, onMouseLeave, ...rest } = coreProps;
