@@ -18,7 +18,8 @@ export function isOptionDisabled(option: HTMLElement): boolean {
 /** Returns true when the cell is NOT the first gridcell in its row (i.e., it's an action cell). */
 export function isActionCell(cell: HTMLElement): boolean {
     const row = cell.closest('[role="row"]');
-    return row?.querySelector('[role="gridcell"]') !== cell;
+    if (!row) return false;
+    return row.querySelector('[role="gridcell"]') !== cell;
 }
 
 /** Predicate matching an option element that carries `aria-selected="true"`. */
