@@ -336,7 +336,7 @@ jobs:
 
     bump_lumapps_web:
         name: 'Bump LumX in lumapps-web'
-        needs: [check_trigger, build_publish_NPM]
+        needs: [check_trigger, build_publish_NPM, deploy_storybook_react]
         if: >-
             !failure() && (
                 needs.check_trigger.outputs.version ||
@@ -348,8 +348,12 @@ jobs:
               env:
                   GH_TOKEN: ${{ secrets.GITBOT_TOKEN }}
               run: |
-                  gh workflow run -R lumapps/lumapps-web workflow-bump-lumx.yml \
-                      -f version=${{ needs.build_publish_NPM.outputs.distTag }}
+                  ARGS=(-f "version=${{ needs.build_publish_NPM.outputs.distTag }}")
+                  STORYBOOK_URL="${{ needs.deploy_storybook_react.outputs.storybook_url }}"
+                  if [ -n "$STORYBOOK_URL" ]; then
+                      ARGS+=(-f "storybookUrl=$STORYBOOK_URL")
+                  fi
+                  gh workflow run -R lumapps/lumapps-web workflow-bump-lumx.yml "${ARGS[@]}"
 
     deploy_storybook_react:
         name: 'Deploy storybook (lumx-react)'
