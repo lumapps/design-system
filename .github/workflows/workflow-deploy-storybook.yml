@@ -21,6 +21,10 @@ on:
                 required: false
                 type: string
                 default: ''
+        outputs:
+            storybook_url:
+                description: 'Chromatic permalink for the deployed Storybook'
+                value: ${{ jobs.deploy.outputs.storybook_url }}
         secrets:
             GITBOT_TOKEN:
                 description: 'GitHub token with write access to PRs (used for PR body updates, bypasses Dependabot token restrictions)'
@@ -30,6 +34,8 @@ jobs:
     deploy:
         name: 'Deploy chromatic (${{ inputs.package }})'
         runs-on: ubuntu-latest
+        outputs:
+            storybook_url: ${{ steps.vars.outputs.storybook_url }}
         concurrency:
             group: storybook-${{ inputs.package }}-${{ github.head_ref || github.ref_name }}
             cancel-in-progress: true
