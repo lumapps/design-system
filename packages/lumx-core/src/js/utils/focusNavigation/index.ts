@@ -2,6 +2,7 @@ export type {
     FocusNavigationCallbacks,
     FocusNavigationController,
     GridNavigationOptions,
+    ListFocusNavigationController,
     ListNavigationOptions,
     NavigationOptions,
 } from './types';

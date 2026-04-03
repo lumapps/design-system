@@ -34,11 +34,18 @@ export interface ListNavigationOptions {
      */
     itemDisabledSelector?: string;
     /**
-     * CSS selector identifying the initially active item within the container.
-     * If an item matching this selector is found on setup, it becomes the active item
-     * without triggering focus or activation callbacks (silent init from DOM state).
+     * Callback returning the currently active item from the DOM.
+     *
+     * The list navigation controller does **not** maintain an internal active-item
+     * reference; instead it delegates to this callback every time it needs the current
+     * active item (e.g. before navigating by offset).
+     *
+     * The callback is expected to read from the DOM (e.g. query `[tabindex="0"]` for
+     * roving tabindex, or read `aria-activedescendant` for combobox patterns).
+     *
+     * Default: `() => null` (no active item).
      */
-    itemActiveSelector?: string;
+    getActiveItem?: () => HTMLElement | null;
 }
 
 /** Options for 2D grid navigation. */
@@ -107,4 +114,23 @@ export interface FocusNavigationController {
     goLeft(): boolean;
     /** Navigate right (next item in horizontal list, next cell in grid). */
     goRight(): boolean;
+}
+
+/**
+ * Extended controller for 1D list navigation.
+ * Adds list-specific methods that don't apply to grid navigation.
+ */
+export interface ListFocusNavigationController extends FocusNavigationController {
+    /** Combined CSS selector matching enabled (non-disabled) items. */
+    readonly enabledItemSelector: string;
+
+    /**
+     * Find the nearest enabled item to the given anchor node.
+     * The anchor does not need to be an item or even an HTMLElement — it's used
+     * as a positional reference to find the closest enabled item in DOM order.
+     * Prefers the next item; falls back to the previous item.
+     *
+     * @returns The nearest enabled item, or null if no enabled items exist.
+     */
+    findNearestEnabled(anchor: Node): HTMLElement | null;
 }

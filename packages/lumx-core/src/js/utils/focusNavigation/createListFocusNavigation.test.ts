@@ -10,18 +10,31 @@ function createContainer(html: string): HTMLElement {
     return div.firstElementChild as HTMLElement;
 }
 
+const ACTIVE_ATTR = 'data-active';
+
 function makeCallbacks() {
     const activated: HTMLElement[] = [];
     const deactivated: HTMLElement[] = [];
     const counter = { clearCount: 0 };
     const callbacks: FocusNavigationCallbacks = {
-        onActivate: (item) => activated.push(item),
-        onDeactivate: (item) => deactivated.push(item),
+        onActivate: (item) => {
+            item.setAttribute(ACTIVE_ATTR, 'true');
+            activated.push(item);
+        },
+        onDeactivate: (item) => {
+            item.removeAttribute(ACTIVE_ATTR);
+            deactivated.push(item);
+        },
         onClear: () => {
             counter.clearCount += 1;
         },
     };
     return { callbacks, activated, deactivated, counter };
+}
+
+/** Create a getActiveItem callback for a container and item selector. */
+function makeGetActiveItem(container: HTMLElement, itemSelector: string) {
+    return () => container.querySelector<HTMLElement>(`${itemSelector}[${ACTIVE_ATTR}]`);
 }
 
 afterEach(() => {
@@ -42,8 +55,14 @@ describe('createListFocusNavigation', () => {
             const container = createList(3);
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
+            const itemSelector = '[role="option"]:not([data-filtered])';
             const nav = createListFocusNavigation(
-                { type: 'list', container, itemSelector: '[role="option"]:not([data-filtered])' },
+                {
+                    type: 'list',
+                    container,
+                    itemSelector,
+                    getActiveItem: makeGetActiveItem(container, itemSelector),
+                },
                 callbacks,
                 ac.signal,
             );
@@ -56,8 +75,14 @@ describe('createListFocusNavigation', () => {
             const container = createList(3);
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
+            const itemSelector = '[role="option"]';
             const nav = createListFocusNavigation(
-                { type: 'list', container, itemSelector: '[role="option"]' },
+                {
+                    type: 'list',
+                    container,
+                    itemSelector,
+                    getActiveItem: makeGetActiveItem(container, itemSelector),
+                },
                 callbacks,
                 ac.signal,
             );
@@ -69,8 +94,14 @@ describe('createListFocusNavigation', () => {
             const container = createList(3);
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
+            const itemSelector = '[role="option"]';
             const nav = createListFocusNavigation(
-                { type: 'list', container, itemSelector: '[role="option"]' },
+                {
+                    type: 'list',
+                    container,
+                    itemSelector,
+                    getActiveItem: makeGetActiveItem(container, itemSelector),
+                },
                 callbacks,
                 ac.signal,
             );
@@ -81,8 +112,14 @@ describe('createListFocusNavigation', () => {
             const container = createContainer('<div role="listbox"></div>');
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
+            const itemSelector = '[role="option"]';
             const nav = createListFocusNavigation(
-                { type: 'list', container, itemSelector: '[role="option"]' },
+                {
+                    type: 'list',
+                    container,
+                    itemSelector,
+                    getActiveItem: makeGetActiveItem(container, itemSelector),
+                },
                 callbacks,
                 ac.signal,
             );
@@ -95,8 +132,14 @@ describe('createListFocusNavigation', () => {
             const container = createList(3);
             const { callbacks, activated } = makeCallbacks();
             const ac = new AbortController();
+            const itemSelector = '[role="option"]';
             const nav = createListFocusNavigation(
-                { type: 'list', container, itemSelector: '[role="option"]' },
+                {
+                    type: 'list',
+                    container,
+                    itemSelector,
+                    getActiveItem: makeGetActiveItem(container, itemSelector),
+                },
                 callbacks,
                 ac.signal,
             );
@@ -109,8 +152,14 @@ describe('createListFocusNavigation', () => {
             const container = createList(3);
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
+            const itemSelector = '[role="option"]';
             const nav = createListFocusNavigation(
-                { type: 'list', container, itemSelector: '[role="option"]' },
+                {
+                    type: 'list',
+                    container,
+                    itemSelector,
+                    getActiveItem: makeGetActiveItem(container, itemSelector),
+                },
                 callbacks,
                 ac.signal,
             );
@@ -122,8 +171,14 @@ describe('createListFocusNavigation', () => {
             const container = createContainer('<div></div>');
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
+            const itemSelector = '[role="option"]';
             const nav = createListFocusNavigation(
-                { type: 'list', container, itemSelector: '[role="option"]' },
+                {
+                    type: 'list',
+                    container,
+                    itemSelector,
+                    getActiveItem: makeGetActiveItem(container, itemSelector),
+                },
                 callbacks,
                 ac.signal,
             );
@@ -137,8 +192,14 @@ describe('createListFocusNavigation', () => {
             const container = createList(5);
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
+            const itemSelector = '[role="option"]';
             const nav = createListFocusNavigation(
-                { type: 'list', container, itemSelector: '[role="option"]' },
+                {
+                    type: 'list',
+                    container,
+                    itemSelector,
+                    getActiveItem: makeGetActiveItem(container, itemSelector),
+                },
                 callbacks,
                 ac.signal,
             );
@@ -151,8 +212,14 @@ describe('createListFocusNavigation', () => {
             const container = createList(5);
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
+            const itemSelector = '[role="option"]';
             const nav = createListFocusNavigation(
-                { type: 'list', container, itemSelector: '[role="option"]' },
+                {
+                    type: 'list',
+                    container,
+                    itemSelector,
+                    getActiveItem: makeGetActiveItem(container, itemSelector),
+                },
                 callbacks,
                 ac.signal,
             );
@@ -165,8 +232,15 @@ describe('createListFocusNavigation', () => {
             const container = createList(3);
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
+            const itemSelector = '[role="option"]';
             const nav = createListFocusNavigation(
-                { type: 'list', container, itemSelector: '[role="option"]', wrap: false },
+                {
+                    type: 'list',
+                    container,
+                    itemSelector,
+                    wrap: false,
+                    getActiveItem: makeGetActiveItem(container, itemSelector),
+                },
                 callbacks,
                 ac.signal,
             );
@@ -179,8 +253,15 @@ describe('createListFocusNavigation', () => {
             const container = createList(3);
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
+            const itemSelector = '[role="option"]';
             const nav = createListFocusNavigation(
-                { type: 'list', container, itemSelector: '[role="option"]', wrap: true },
+                {
+                    type: 'list',
+                    container,
+                    itemSelector,
+                    wrap: true,
+                    getActiveItem: makeGetActiveItem(container, itemSelector),
+                },
                 callbacks,
                 ac.signal,
             );
@@ -193,8 +274,14 @@ describe('createListFocusNavigation', () => {
             const container = createList(5);
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
+            const itemSelector = '[role="option"]';
             const nav = createListFocusNavigation(
-                { type: 'list', container, itemSelector: '[role="option"]' },
+                {
+                    type: 'list',
+                    container,
+                    itemSelector,
+                    getActiveItem: makeGetActiveItem(container, itemSelector),
+                },
                 callbacks,
                 ac.signal,
             );
@@ -206,8 +293,14 @@ describe('createListFocusNavigation', () => {
             const container = createList(5);
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
+            const itemSelector = '[role="option"]';
             const nav = createListFocusNavigation(
-                { type: 'list', container, itemSelector: '[role="option"]' },
+                {
+                    type: 'list',
+                    container,
+                    itemSelector,
+                    getActiveItem: makeGetActiveItem(container, itemSelector),
+                },
                 callbacks,
                 ac.signal,
             );
@@ -221,8 +314,14 @@ describe('createListFocusNavigation', () => {
             const container = createList(3);
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
+            const itemSelector = '[role="option"]';
             const nav = createListFocusNavigation(
-                { type: 'list', container, itemSelector: '[role="option"]' },
+                {
+                    type: 'list',
+                    container,
+                    itemSelector,
+                    getActiveItem: makeGetActiveItem(container, itemSelector),
+                },
                 callbacks,
                 ac.signal,
             );
@@ -235,8 +334,14 @@ describe('createListFocusNavigation', () => {
             const container = createContainer('<div><span id="not-option">text</span></div>');
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
+            const itemSelector = '[role="option"]';
             const nav = createListFocusNavigation(
-                { type: 'list', container, itemSelector: '[role="option"]' },
+                {
+                    type: 'list',
+                    container,
+                    itemSelector,
+                    getActiveItem: makeGetActiveItem(container, itemSelector),
+                },
                 callbacks,
                 ac.signal,
             );
@@ -256,8 +361,14 @@ describe('createListFocusNavigation', () => {
             `);
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
+            const itemSelector = '[role="option"]';
             const nav = createListFocusNavigation(
-                { type: 'list', container, itemSelector: '[role="option"]' },
+                {
+                    type: 'list',
+                    container,
+                    itemSelector,
+                    getActiveItem: makeGetActiveItem(container, itemSelector),
+                },
                 callbacks,
                 ac.signal,
             );
@@ -269,8 +380,14 @@ describe('createListFocusNavigation', () => {
             const container = createList(3);
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
+            const itemSelector = '[role="option"]';
             const nav = createListFocusNavigation(
-                { type: 'list', container, itemSelector: '[role="option"]' },
+                {
+                    type: 'list',
+                    container,
+                    itemSelector,
+                    getActiveItem: makeGetActiveItem(container, itemSelector),
+                },
                 callbacks,
                 ac.signal,
             );
@@ -283,8 +400,14 @@ describe('createListFocusNavigation', () => {
             const container = createList(3);
             const { callbacks, deactivated, counter } = makeCallbacks();
             const ac = new AbortController();
+            const itemSelector = '[role="option"]';
             const nav = createListFocusNavigation(
-                { type: 'list', container, itemSelector: '[role="option"]' },
+                {
+                    type: 'list',
+                    container,
+                    itemSelector,
+                    getActiveItem: makeGetActiveItem(container, itemSelector),
+                },
                 callbacks,
                 ac.signal,
             );
@@ -302,8 +425,15 @@ describe('createListFocusNavigation', () => {
             const container = createList(3);
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
+            const itemSelector = '[role="option"]';
             const nav = createListFocusNavigation(
-                { type: 'list', container, itemSelector: '[role="option"]', direction: 'vertical' },
+                {
+                    type: 'list',
+                    container,
+                    itemSelector,
+                    direction: 'vertical',
+                    getActiveItem: makeGetActiveItem(container, itemSelector),
+                },
                 callbacks,
                 ac.signal,
             );
@@ -316,8 +446,15 @@ describe('createListFocusNavigation', () => {
             const container = createList(3);
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
+            const itemSelector = '[role="option"]';
             const nav = createListFocusNavigation(
-                { type: 'list', container, itemSelector: '[role="option"]', direction: 'vertical' },
+                {
+                    type: 'list',
+                    container,
+                    itemSelector,
+                    direction: 'vertical',
+                    getActiveItem: makeGetActiveItem(container, itemSelector),
+                },
                 callbacks,
                 ac.signal,
             );
@@ -330,8 +467,15 @@ describe('createListFocusNavigation', () => {
             const container = createList(3);
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
+            const itemSelector = '[role="option"]';
             const nav = createListFocusNavigation(
-                { type: 'list', container, itemSelector: '[role="option"]', direction: 'vertical' },
+                {
+                    type: 'list',
+                    container,
+                    itemSelector,
+                    direction: 'vertical',
+                    getActiveItem: makeGetActiveItem(container, itemSelector),
+                },
                 callbacks,
                 ac.signal,
             );
@@ -346,8 +490,15 @@ describe('createListFocusNavigation', () => {
             const container = createList(3);
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
+            const itemSelector = '[role="option"]';
             const nav = createListFocusNavigation(
-                { type: 'list', container, itemSelector: '[role="option"]', direction: 'horizontal' },
+                {
+                    type: 'list',
+                    container,
+                    itemSelector,
+                    direction: 'horizontal',
+                    getActiveItem: makeGetActiveItem(container, itemSelector),
+                },
                 callbacks,
                 ac.signal,
             );
@@ -360,8 +511,15 @@ describe('createListFocusNavigation', () => {
             const container = createList(3);
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
+            const itemSelector = '[role="option"]';
             const nav = createListFocusNavigation(
-                { type: 'list', container, itemSelector: '[role="option"]', direction: 'horizontal' },
+                {
+                    type: 'list',
+                    container,
+                    itemSelector,
+                    direction: 'horizontal',
+                    getActiveItem: makeGetActiveItem(container, itemSelector),
+                },
                 callbacks,
                 ac.signal,
             );
@@ -374,8 +532,15 @@ describe('createListFocusNavigation', () => {
             const container = createList(3);
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
+            const itemSelector = '[role="option"]';
             const nav = createListFocusNavigation(
-                { type: 'list', container, itemSelector: '[role="option"]', direction: 'horizontal' },
+                {
+                    type: 'list',
+                    container,
+                    itemSelector,
+                    direction: 'horizontal',
+                    getActiveItem: makeGetActiveItem(container, itemSelector),
+                },
                 callbacks,
                 ac.signal,
             );
@@ -390,8 +555,14 @@ describe('createListFocusNavigation', () => {
             const container = createList(5, [1, 3]);
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
+            const itemSelector = '[role="option"]:not([data-filtered])';
             const nav = createListFocusNavigation(
-                { type: 'list', container, itemSelector: '[role="option"]:not([data-filtered])' },
+                {
+                    type: 'list',
+                    container,
+                    itemSelector,
+                    getActiveItem: makeGetActiveItem(container, itemSelector),
+                },
                 callbacks,
                 ac.signal,
             );
@@ -417,12 +588,14 @@ describe('createListFocusNavigation', () => {
             const container = createListWithDisabled([1, 2]);
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
+            const itemSelector = '[role="option"]';
             const nav = createListFocusNavigation(
                 {
                     type: 'list',
                     container,
-                    itemSelector: '[role="option"]',
+                    itemSelector,
                     itemDisabledSelector: '[aria-disabled="true"]',
+                    getActiveItem: makeGetActiveItem(container, itemSelector),
                 },
                 callbacks,
                 ac.signal,
@@ -437,12 +610,14 @@ describe('createListFocusNavigation', () => {
             const container = createListWithDisabled([2, 3]);
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
+            const itemSelector = '[role="option"]';
             const nav = createListFocusNavigation(
                 {
                     type: 'list',
                     container,
-                    itemSelector: '[role="option"]',
+                    itemSelector,
                     itemDisabledSelector: '[aria-disabled="true"]',
+                    getActiveItem: makeGetActiveItem(container, itemSelector),
                 },
                 callbacks,
                 ac.signal,
@@ -457,12 +632,14 @@ describe('createListFocusNavigation', () => {
             const container = createListWithDisabled([0, 1]);
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
+            const itemSelector = '[role="option"]';
             const nav = createListFocusNavigation(
                 {
                     type: 'list',
                     container,
-                    itemSelector: '[role="option"]',
+                    itemSelector,
                     itemDisabledSelector: '[aria-disabled="true"]',
+                    getActiveItem: makeGetActiveItem(container, itemSelector),
                 },
                 callbacks,
                 ac.signal,
@@ -475,12 +652,14 @@ describe('createListFocusNavigation', () => {
             const container = createListWithDisabled([3, 4]);
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
+            const itemSelector = '[role="option"]';
             const nav = createListFocusNavigation(
                 {
                     type: 'list',
                     container,
-                    itemSelector: '[role="option"]',
+                    itemSelector,
                     itemDisabledSelector: '[aria-disabled="true"]',
+                    getActiveItem: makeGetActiveItem(container, itemSelector),
                 },
                 callbacks,
                 ac.signal,
@@ -493,12 +672,14 @@ describe('createListFocusNavigation', () => {
             const container = createListWithDisabled([0, 1, 2, 3, 4]);
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
+            const itemSelector = '[role="option"]';
             const nav = createListFocusNavigation(
                 {
                     type: 'list',
                     container,
-                    itemSelector: '[role="option"]',
+                    itemSelector,
                     itemDisabledSelector: '[aria-disabled="true"]',
+                    getActiveItem: makeGetActiveItem(container, itemSelector),
                 },
                 callbacks,
                 ac.signal,
@@ -510,12 +691,14 @@ describe('createListFocusNavigation', () => {
             const container = createListWithDisabled([0, 1, 2, 3, 4]);
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
+            const itemSelector = '[role="option"]';
             const nav = createListFocusNavigation(
                 {
                     type: 'list',
                     container,
-                    itemSelector: '[role="option"]',
+                    itemSelector,
                     itemDisabledSelector: '[aria-disabled="true"]',
+                    getActiveItem: makeGetActiveItem(container, itemSelector),
                 },
                 callbacks,
                 ac.signal,
@@ -527,13 +710,15 @@ describe('createListFocusNavigation', () => {
             const container = createListWithDisabled([3, 4]);
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
+            const itemSelector = '[role="option"]';
             const nav = createListFocusNavigation(
                 {
                     type: 'list',
                     container,
-                    itemSelector: '[role="option"]',
+                    itemSelector,
                     itemDisabledSelector: '[aria-disabled="true"]',
                     wrap: true,
+                    getActiveItem: makeGetActiveItem(container, itemSelector),
                 },
                 callbacks,
                 ac.signal,
@@ -548,13 +733,15 @@ describe('createListFocusNavigation', () => {
             const container = createListWithDisabled([3, 4]);
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
+            const itemSelector = '[role="option"]';
             const nav = createListFocusNavigation(
                 {
                     type: 'list',
                     container,
-                    itemSelector: '[role="option"]',
+                    itemSelector,
                     itemDisabledSelector: '[aria-disabled="true"]',
                     wrap: false,
+                    getActiveItem: makeGetActiveItem(container, itemSelector),
                 },
                 callbacks,
                 ac.signal,
@@ -567,12 +754,14 @@ describe('createListFocusNavigation', () => {
             const container = createListWithDisabled([1]);
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
+            const itemSelector = '[role="option"]';
             const nav = createListFocusNavigation(
                 {
                     type: 'list',
                     container,
-                    itemSelector: '[role="option"]',
+                    itemSelector,
                     itemDisabledSelector: '[aria-disabled="true"]',
+                    getActiveItem: makeGetActiveItem(container, itemSelector),
                 },
                 callbacks,
                 ac.signal,
@@ -586,12 +775,14 @@ describe('createListFocusNavigation', () => {
             const container = createListWithDisabled([1, 3]);
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
+            const itemSelector = '[role="option"]';
             const nav = createListFocusNavigation(
                 {
                     type: 'list',
                     container,
-                    itemSelector: '[role="option"]',
+                    itemSelector,
                     itemDisabledSelector: '[aria-disabled="true"]',
+                    getActiveItem: makeGetActiveItem(container, itemSelector),
                 },
                 callbacks,
                 ac.signal,
@@ -608,12 +799,14 @@ describe('createListFocusNavigation', () => {
             const container = createListWithDisabled([1, 2, 3]);
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
+            const itemSelector = '[role="option"]';
             const nav = createListFocusNavigation(
                 {
                     type: 'list',
                     container,
-                    itemSelector: '[role="option"]',
+                    itemSelector,
                     itemDisabledSelector: '[aria-disabled="true"]',
+                    getActiveItem: makeGetActiveItem(container, itemSelector),
                 },
                 callbacks,
                 ac.signal,
@@ -631,12 +824,14 @@ describe('createListFocusNavigation', () => {
             const container = createListWithDisabled([1, 2, 3, 4]);
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
+            const itemSelector = '[role="option"]';
             const nav = createListFocusNavigation(
                 {
                     type: 'list',
                     container,
-                    itemSelector: '[role="option"]',
+                    itemSelector,
                     itemDisabledSelector: '[aria-disabled="true"]',
+                    getActiveItem: makeGetActiveItem(container, itemSelector),
                 },
                 callbacks,
                 ac.signal,
@@ -653,11 +848,23 @@ describe('createListFocusNavigation', () => {
             const container = createList(3);
             const order: string[] = [];
             const ac = new AbortController();
+            const itemSelector = '[role="option"]';
             const nav = createListFocusNavigation(
-                { type: 'list', container, itemSelector: '[role="option"]' },
                 {
-                    onActivate: (item) => order.push(`activate:${item.id}`),
-                    onDeactivate: (item) => order.push(`deactivate:${item.id}`),
+                    type: 'list',
+                    container,
+                    itemSelector,
+                    getActiveItem: makeGetActiveItem(container, itemSelector),
+                },
+                {
+                    onActivate: (item) => {
+                        item.setAttribute(ACTIVE_ATTR, 'true');
+                        order.push(`activate:${item.id}`);
+                    },
+                    onDeactivate: (item) => {
+                        item.removeAttribute(ACTIVE_ATTR);
+                        order.push(`deactivate:${item.id}`);
+                    },
                     onClear: () => order.push('clear'),
                 },
                 ac.signal,
@@ -671,11 +878,23 @@ describe('createListFocusNavigation', () => {
             const container = createList(3);
             const order: string[] = [];
             const ac = new AbortController();
+            const itemSelector = '[role="option"]';
             const nav = createListFocusNavigation(
-                { type: 'list', container, itemSelector: '[role="option"]' },
                 {
-                    onActivate: (item) => order.push(`activate:${item.id}`),
-                    onDeactivate: (item) => order.push(`deactivate:${item.id}`),
+                    type: 'list',
+                    container,
+                    itemSelector,
+                    getActiveItem: makeGetActiveItem(container, itemSelector),
+                },
+                {
+                    onActivate: (item) => {
+                        item.setAttribute(ACTIVE_ATTR, 'true');
+                        order.push(`activate:${item.id}`);
+                    },
+                    onDeactivate: (item) => {
+                        item.removeAttribute(ACTIVE_ATTR);
+                        order.push(`deactivate:${item.id}`);
+                    },
                     onClear: () => order.push('clear'),
                 },
                 ac.signal,
@@ -691,8 +910,14 @@ describe('createListFocusNavigation', () => {
             const container = createList(3);
             const { callbacks, deactivated, counter } = makeCallbacks();
             const ac = new AbortController();
+            const itemSelector = '[role="option"]';
             const nav = createListFocusNavigation(
-                { type: 'list', container, itemSelector: '[role="option"]' },
+                {
+                    type: 'list',
+                    container,
+                    itemSelector,
+                    getActiveItem: makeGetActiveItem(container, itemSelector),
+                },
                 callbacks,
                 ac.signal,
             );
@@ -709,8 +934,15 @@ describe('createListFocusNavigation', () => {
             const container = createList(3);
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
+            const itemSelector = '[role="option"]';
             const nav = createListFocusNavigation(
-                { type: 'list', container, itemSelector: '[role="option"]', direction: 'vertical' },
+                {
+                    type: 'list',
+                    container,
+                    itemSelector,
+                    direction: 'vertical',
+                    getActiveItem: makeGetActiveItem(container, itemSelector),
+                },
                 callbacks,
                 ac.signal,
             );
@@ -733,8 +965,15 @@ describe('createListFocusNavigation', () => {
             const container = createList(5);
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
+            const itemSelector = '[role="option"]';
             const nav = createListFocusNavigation(
-                { type: 'list', container, itemSelector: '[role="option"]', direction: 'vertical' },
+                {
+                    type: 'list',
+                    container,
+                    itemSelector,
+                    direction: 'vertical',
+                    getActiveItem: makeGetActiveItem(container, itemSelector),
+                },
                 callbacks,
                 ac.signal,
             );
@@ -753,8 +992,15 @@ describe('createListFocusNavigation', () => {
             const container = createList(3);
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
+            const itemSelector = '[role="option"]';
             const nav = createListFocusNavigation(
-                { type: 'list', container, itemSelector: '[role="option"]', direction: 'vertical' },
+                {
+                    type: 'list',
+                    container,
+                    itemSelector,
+                    direction: 'vertical',
+                    getActiveItem: makeGetActiveItem(container, itemSelector),
+                },
                 callbacks,
                 ac.signal,
             );
@@ -764,11 +1010,9 @@ describe('createListFocusNavigation', () => {
             // Remove the active item from the DOM.
             container.querySelector('#opt-1')!.remove();
 
-            // The active item reference is stale but still held.
-            // Navigating should fail gracefully (the stale element is no longer in the tree,
-            // so the TreeWalker won't find siblings from it).
-            // Clearing and re-navigating should work.
-            nav.clear();
+            // With stateless approach, getActiveItem returns null since the element
+            // is no longer in the DOM. Navigating should start from first/last.
+            expect(nav.activeItem).toBeNull();
             expect(nav.goToFirst()).toBe(true);
             expect(nav.activeItem?.id).toBe('opt-0');
         });
@@ -777,13 +1021,15 @@ describe('createListFocusNavigation', () => {
             const container = createList(3);
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
+            const itemSelector = '[role="option"]';
             const nav = createListFocusNavigation(
                 {
                     type: 'list',
                     container,
-                    itemSelector: '[role="option"]',
+                    itemSelector,
                     itemDisabledSelector: '[aria-disabled="true"]',
                     direction: 'vertical',
+                    getActiveItem: makeGetActiveItem(container, itemSelector),
                 },
                 callbacks,
                 ac.signal,
@@ -803,8 +1049,14 @@ describe('createListFocusNavigation', () => {
             const container = createList(2);
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
+            const itemSelector = '[role="option"]';
             const nav = createListFocusNavigation(
-                { type: 'list', container, itemSelector: '[role="option"]' },
+                {
+                    type: 'list',
+                    container,
+                    itemSelector,
+                    getActiveItem: makeGetActiveItem(container, itemSelector),
+                },
                 callbacks,
                 ac.signal,
             );
@@ -821,8 +1073,14 @@ describe('createListFocusNavigation', () => {
             const container = createContainer('<div role="listbox"></div>');
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
+            const itemSelector = '[role="option"]';
             const nav = createListFocusNavigation(
-                { type: 'list', container, itemSelector: '[role="option"]' },
+                {
+                    type: 'list',
+                    container,
+                    itemSelector,
+                    getActiveItem: makeGetActiveItem(container, itemSelector),
+                },
                 callbacks,
                 ac.signal,
             );

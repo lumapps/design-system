@@ -19,6 +19,13 @@ export interface UseRovingTabIndexContainerOptions {
      * Disabled items are skipped during keyboard navigation.
      */
     itemDisabledSelector?: string;
+    /**
+     * Attribute name indicating the selected item (e.g. `'aria-selected'`, `'aria-checked'`).
+     * When set, the roving tabindex will keep `tabindex="0"` in sync with the item
+     * whose attribute value is `"true"`.
+     * Default: `'aria-selected'`.
+     */
+    itemSelectedAttr?: string;
 }
 
 /**
@@ -32,6 +39,7 @@ export function useRovingTabIndexContainer({
     onItemFocused,
     direction,
     itemDisabledSelector,
+    itemSelectedAttr,
 }: UseRovingTabIndexContainerOptions): void {
     watchEffect((onCleanup) => {
         const container = containerRef.value;
@@ -39,7 +47,7 @@ export function useRovingTabIndexContainer({
 
         const abortController = new AbortController();
         setupRovingTabIndex(
-            { container, itemSelector, direction, itemDisabledSelector, onItemFocused },
+            { container, itemSelector, direction, itemDisabledSelector, itemSelectedAttr, onItemFocused },
             abortController.signal,
         );
 
