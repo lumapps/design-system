@@ -1,6 +1,7 @@
 import { computed, defineComponent, useAttrs, useTemplateRef, type VNodeArrayChildren } from 'vue';
 
 import { getTextProps, type TextProps as UIProps } from '@lumx/core/js/components/Text';
+import { useClassName } from '@lumx/vue/composables/useClassName';
 
 import { useOverflowTooltipLabel } from '../../composables/useOverflowTooltipLabel';
 import { useSlot } from '../../composables/useSlot';
@@ -22,10 +23,11 @@ const Text = defineComponent(
         const labelRef = useTemplateRef<HTMLElement>('tooltip-label');
         const { tooltipLabel } = useOverflowTooltipLabel(labelRef);
 
+        const className = useClassName(() => props.class);
         const textProps = computed(() =>
             getTextProps({
                 ...props,
-                className: (props.class || attrs.class || attrs.className) as string,
+                className: className.value,
             }),
         );
 

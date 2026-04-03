@@ -10,6 +10,7 @@ import {
 } from '@lumx/core/js/components/Tabs/Tab';
 
 import { useDisableStateProps } from '../../composables/useDisableStateProps';
+import { useClassName } from '../../composables/useClassName';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { Icon } from '../icon';
 import { Text } from '../text';
@@ -30,6 +31,7 @@ export { CLASSNAME, COMPONENT_NAME, DEFAULT_PROPS };
 const Tab = defineComponent(
     (props: TabProps) => {
         const attrs = useAttrs();
+        const className = useClassName(() => props.class);
         const { isAnyDisabled } = useDisableStateProps(computed(() => ({ ...props, ...attrs })));
         const tabState = useTabProviderContext('tab', props.id as string | undefined);
         const isActive = computed(() => props.isActive || tabState.value?.isActive);
@@ -40,7 +42,7 @@ const Tab = defineComponent(
                 <TabUI
                     {...restAttrs}
                     id={props.id}
-                    className={props.class}
+                    className={className.value}
                     icon={props.icon}
                     iconProps={props.iconProps}
                     label={props.label}

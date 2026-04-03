@@ -6,6 +6,7 @@ import {
     COMPONENT_NAME,
     DEFAULT_PROPS,
 } from '@lumx/core/js/components/Badge/BadgeWrapper';
+import { useClassName } from '../../composables/useClassName';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import type { JSXElement } from '@lumx/core/js/types';
 
@@ -16,13 +17,14 @@ export { CLASSNAME, COMPONENT_NAME, DEFAULT_PROPS };
 const BadgeWrapper = defineComponent(
     (props: BadgeWrapperProps, { slots }) => {
         const attrs = useAttrs();
+        const className = useClassName(() => props.class);
 
         return () => {
             return (
                 <BadgeWrapperUI
                     {...props}
                     {...attrs}
-                    className={props.class}
+                    className={className.value}
                     badge={(props.badge || slots.badge?.()) as JSXElement}
                     children={slots.default?.() as JSXElement}
                 />

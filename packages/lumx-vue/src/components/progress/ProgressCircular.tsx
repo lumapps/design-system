@@ -9,6 +9,7 @@ import {
     element,
 } from '@lumx/core/js/components/ProgressCircular';
 import { useTheme } from '../../composables/useTheme';
+import { useClassName } from '../../composables/useClassName';
 import { keysOf, type VueToJSXProps } from '../../utils/VueToJSX';
 
 export type ProgressCircularProps = VueToJSXProps<UIProps, 'ref' | 'svgProps' | 'circleProps'>;
@@ -20,13 +21,14 @@ const ProgressCircular = defineComponent(
     (props: ProgressCircularProps) => {
         const attrs = useAttrs();
         const defaultTheme = useTheme();
+        const className = useClassName(() => props.class);
 
         return () => {
             return (
                 <ProgressCircularUI
                     {...props}
                     {...attrs}
-                    className={props.class}
+                    className={className.value}
                     theme={props.theme || defaultTheme.value}
                     circleProps={{
                         class: element('path'),

@@ -7,17 +7,8 @@ import { commonTestsSuiteVTL, SetupRenderOptions } from '@lumx/vue/testing';
 import { TextField } from '.';
 
 describe('<TextField />', () => {
-    const renderTextField = (props: any, options?: SetupRenderOptions<any>) => {
-        const { isDisabled, className, ...restProps } = props;
-        return render(TextField, {
-            ...options,
-            props: {
-                class: className,
-                ...restProps,
-                ...(isDisabled ? { isDisabled } : {}),
-            },
-        });
-    };
+    const renderTextField = ({ isDisabled, ...props }: any, options?: SetupRenderOptions<any>) =>
+        render(TextField, { props: { ...props, ...(isDisabled ? { isDisabled } : {}) }, ...options });
 
     BaseTextFieldTests({ render: renderTextField, screen });
 

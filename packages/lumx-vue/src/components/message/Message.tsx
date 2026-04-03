@@ -2,6 +2,7 @@ import { defineComponent, useAttrs } from 'vue';
 import { Message as MessageUI, type MessageProps as UIProps } from '@lumx/core/js/components/Message';
 import type { JSXElement } from '@lumx/core/js/types';
 
+import { useClassName } from '../../composables/useClassName';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 
 export type MessageProps = VueToJSXProps<Omit<UIProps, 'closeButtonProps'>> & {
@@ -24,12 +25,13 @@ const Message = defineComponent(
     (props: MessageProps, { slots, emit }) => {
         const attrs = useAttrs();
         const { closeButtonLabel } = props;
+        const className = useClassName(() => props.class);
 
         return () => (
             <MessageUI
                 {...props}
                 {...attrs}
-                className={props.class}
+                className={className.value}
                 children={slots.default?.() as JSXElement}
                 closeButtonProps={
                     closeButtonLabel

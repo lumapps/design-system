@@ -1,5 +1,7 @@
 import { computed, defineComponent } from 'vue';
 
+import { useClassName } from '../../composables/useClassName';
+
 import {
     ComboboxPopover as UI,
     type ComboboxPopoverProps as UIProps,
@@ -14,20 +16,6 @@ import type { PopoverProps } from '../popover/Popover';
 import { useComboboxContext } from './context/ComboboxContext';
 import { useComboboxOpen } from './context/useComboboxOpen';
 import { FlexBox } from '../flex-box';
-
-/**
- * Adapter: maps core's `className` prop to Vue's `class` prop for Popover.
- * Also maps `anchorRef` (passed as CommonRef from core) to a Vue-compatible ref.
- * Children are received as Vue slots and forwarded to the Popover component.
- */
-const PopoverAdapter = (p: any, { slots }: any) => {
-    const { className, onClose, anchorRef, ...rest } = p;
-    return (
-        <Popover class={className} anchorRef={anchorRef} onClose={onClose} {...rest}>
-            {{ default: slots.default }}
-        </Popover>
-    );
-};
 
 /**
  * Props type extends the core ComboboxPopover props (via VueToJSXProps) with additional
@@ -45,6 +33,7 @@ export type ComboboxPopoverProps = VueToJSXProps<UIProps, 'isOpen' | 'anchorRef'
  */
 const ComboboxPopover = defineComponent(
     (props: ComboboxPopoverProps, { slots }) => {
+        const className = useClassName(() => props.class);
         const { anchorRef } = useComboboxContext();
         const { isOpen, setIsOpen } = useComboboxOpen();
 
@@ -52,18 +41,18 @@ const ComboboxPopover = defineComponent(
         const popoverAnchorRef = computed(() => anchorRef.value ?? undefined);
 
         return () => {
-            const { class: className, ...popoverProps } = props;
+            const { class: _class, ...popoverProps } = props;
 
             return UI(
                 {
                     ...popoverProps,
                     children: slots.default?.() as JSXElement,
-                    className,
+                    className: className.value,
                     isOpen: isOpen.value,
                     anchorRef: popoverAnchorRef as any,
                     handleClose: () => setIsOpen(false),
                 },
-                { Popover: PopoverAdapter, FlexBox },
+                { Popover, FlexBox },
             );
         };
     },

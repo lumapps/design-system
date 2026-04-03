@@ -9,6 +9,7 @@ import {
 } from '@lumx/core/js/components/Skeleton';
 
 import { useTheme } from '../../composables/useTheme';
+import { useClassName } from '../../composables/useClassName';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 
 export type SkeletonTypographyProps = VueToJSXProps<UIProps>;
@@ -25,13 +26,14 @@ const SkeletonTypography = defineComponent(
     (props: SkeletonTypographyProps) => {
         const attrs = useAttrs();
         const defaultTheme = useTheme();
+        const className = useClassName(() => props.class);
 
         return () => {
             return (
                 <SkeletonTypographyUI
                     {...props}
                     {...attrs}
-                    className={props.class}
+                    className={className.value}
                     theme={props.theme || defaultTheme.value}
                 />
             );

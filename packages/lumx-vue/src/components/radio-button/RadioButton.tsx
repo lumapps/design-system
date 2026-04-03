@@ -9,6 +9,7 @@ import {
 } from '@lumx/core/js/components/RadioButton';
 
 import { useTheme } from '../../composables/useTheme';
+import { useClassName } from '../../composables/useClassName';
 import { useDisableStateProps } from '../../composables/useDisableStateProps';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { useId } from '../../composables/useId';
@@ -31,6 +32,7 @@ const RadioButton = defineComponent(
     (props: RadioButtonProps, { emit }) => {
         const attrs = useAttrs();
         const defaultTheme = useTheme();
+        const className = useClassName(() => props.class);
         const generatedInputId = useId();
         const inputId = computed(() => props.id || generatedInputId);
 
@@ -50,7 +52,7 @@ const RadioButton = defineComponent(
             return (
                 <RadioButtonUI
                     {...otherProps.value}
-                    className={props.class}
+                    className={className.value}
                     theme={props.theme || defaultTheme.value}
                     inputId={inputId.value}
                     isDisabled={isAnyDisabled.value}

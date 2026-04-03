@@ -10,6 +10,7 @@ import {
 import type { JSXElement } from '@lumx/core/js/types';
 
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { useClassName } from '../../composables/useClassName';
 import { useWatchDisposable } from '../../composables/useWatchDisposable';
 import { useComboboxContext } from './context/ComboboxContext';
 
@@ -23,6 +24,7 @@ export type ComboboxOptionSkeletonProps = VueToJSXProps<UIProps, ComboboxOptionS
  */
 const ComboboxOptionSkeleton = defineComponent(
     (props: ComboboxOptionSkeletonProps, { slots, attrs }) => {
+        const className = useClassName(() => props.class);
         const { handle } = useComboboxContext();
 
         // Register once with the combobox handle on mount
@@ -33,7 +35,14 @@ const ComboboxOptionSkeleton = defineComponent(
             const after = attrs.after as JSXElement;
             const children = slots.default?.() as JSXElement;
 
-            return UI({ ...attrs, className: props.class, count: props.count, before, after, children } as any);
+            return UI({
+                ...attrs,
+                className: className.value,
+                count: props.count,
+                before,
+                after,
+                children,
+            } as any);
         };
     },
     {

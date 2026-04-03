@@ -11,6 +11,7 @@ import { AspectRatio } from '@lumx/core/js/constants';
 import type { GenericProps, JSXElement } from '@lumx/core/js/types';
 
 import { useTheme } from '../../composables/useTheme';
+import { useClassName } from '../../composables/useClassName';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { Thumbnail, type ThumbnailProps } from '../thumbnail';
 
@@ -33,18 +34,10 @@ const Avatar = defineComponent(
     (props: AvatarProps, { slots }) => {
         const attrs = useAttrs();
         const defaultTheme = useTheme();
+        const className = useClassName(() => props.class);
 
         return () => {
-            const {
-                image,
-                alt,
-                size = DEFAULT_PROPS.size,
-                theme,
-                linkProps,
-                linkAs,
-                thumbnailProps,
-                class: className,
-            } = props;
+            const { image, alt, size = DEFAULT_PROPS.size, theme, linkProps, linkAs, thumbnailProps } = props;
             const resolvedTheme = theme || defaultTheme.value;
 
             // Extract event handlers from attrs to forward to Thumbnail (not to root div)
@@ -56,7 +49,7 @@ const Avatar = defineComponent(
             return (
                 <AvatarUI
                     {...restAttrs}
-                    className={className}
+                    className={className.value}
                     theme={resolvedTheme}
                     size={size}
                     actions={actionsContent}

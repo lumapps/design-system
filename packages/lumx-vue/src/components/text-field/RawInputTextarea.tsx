@@ -7,6 +7,7 @@ import {
 } from '@lumx/core/js/components/TextField/RawInputTextarea';
 
 import { useTheme } from '../../composables/useTheme';
+import { useClassName } from '../../composables/useClassName';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { useFitRowsToContent } from './useFitRowsToContent';
 
@@ -30,6 +31,7 @@ const RawInputTextarea = defineComponent(
     (props: RawInputTextareaProps, { emit }) => {
         const attrs = useAttrs();
         const defaultTheme = useTheme();
+        const className = useClassName(() => props.class);
 
         const textareaRef = ref<HTMLTextAreaElement | null>(null);
         const rows = useFitRowsToContent(
@@ -55,7 +57,7 @@ const RawInputTextarea = defineComponent(
                     value={props.value}
                     rows={rows.value}
                     name={props.name}
-                    className={props.class}
+                    className={className.value}
                     theme={props.theme || defaultTheme.value}
                     handleChange={handleChange}
                     handleInput={handleInput}

@@ -8,17 +8,12 @@ import {
 } from '@lumx/core/js/components/FlexBox';
 import type { JSXElement } from '@lumx/core/js/types';
 
+import { useClassName } from '../../composables/useClassName';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 
 export type FlexBoxProps = VueToJSXProps<UIProps, 'vAlign' | 'hAlign'> & {
     /** Customize the root element. */
     as?: string;
-    /**
-     * @deprecated please use `class`
-     * custom class name, used for compatibility when using
-     * FlexBox as a nested component.
-     */
-    className?: string;
     /** FlexBox vertical alignment */
     verticalAlign?: UIProps['vAlign'];
     /** FlexBox horizontal alignment */
@@ -36,6 +31,7 @@ export { CLASSNAME, COMPONENT_NAME };
 const FlexBox = defineComponent(
     (props: FlexBoxProps, { slots }) => {
         const attrs = useAttrs();
+        const className = useClassName(() => props.class);
 
         return () => {
             // Cast to keyof JSX.IntrinsicElements because Vue TSX doesn't automatically infer
@@ -45,7 +41,7 @@ const FlexBox = defineComponent(
             const computedProps = getFlexBoxProps({
                 ...props,
                 ...attrs,
-                className: props.class || props.className,
+                className: className.value,
                 vAlign: props.verticalAlign,
                 hAlign: props.horizontalAlign,
             });
@@ -60,7 +56,6 @@ const FlexBox = defineComponent(
         props: keysOf<FlexBoxProps>()(
             'as',
             'fillSpace',
-            'className',
             'gap',
             'horizontalAlign',
             'marginAuto',

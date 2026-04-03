@@ -10,6 +10,7 @@ import {
 } from '@lumx/core/js/components/Button/Button';
 
 import { useTheme } from '../../composables/useTheme';
+import { useClassName } from '../../composables/useClassName';
 import { useDisableStateProps } from '../../composables/useDisableStateProps';
 import { type HyphenatedAriaProps, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { ResetTheme } from '../../utils/theme';
@@ -36,6 +37,7 @@ const Button = defineComponent(
         const slots = useSlots();
         const attrs = useAttrs();
         const defaultTheme = useTheme();
+        const className = useClassName(() => props.class);
 
         const { isAnyDisabled, disabledStateProps, otherProps } = useDisableStateProps(
             computed(() => ({ ...props, ...attrs })),
@@ -91,7 +93,7 @@ const Button = defineComponent(
                     {...rest}
                     linkAs={toRaw(linkAs)}
                     {...disabledStateProps.value}
-                    className={props.class}
+                    className={className.value}
                     theme={props.theme || defaultTheme.value}
                     handleClick={handleClick as any}
                     children={children as JSXElement}

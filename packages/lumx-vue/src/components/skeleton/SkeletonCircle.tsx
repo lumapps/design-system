@@ -9,6 +9,7 @@ import {
 } from '@lumx/core/js/components/Skeleton';
 
 import { useTheme } from '../../composables/useTheme';
+import { useClassName } from '../../composables/useClassName';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 
 export type SkeletonCircleProps = VueToJSXProps<UIProps>;
@@ -25,13 +26,14 @@ const SkeletonCircle = defineComponent(
     (props: SkeletonCircleProps) => {
         const attrs = useAttrs();
         const defaultTheme = useTheme();
+        const className = useClassName(() => props.class);
 
         return () => {
             return (
                 <SkeletonCircleUI
                     {...props}
                     {...attrs}
-                    className={props.class}
+                    className={className.value}
                     theme={props.theme || defaultTheme.value}
                 />
             );

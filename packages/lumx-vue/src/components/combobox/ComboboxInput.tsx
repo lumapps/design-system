@@ -3,6 +3,7 @@ import { defineComponent, onMounted, onUnmounted, ref, watch } from 'vue';
 import { ComboboxInput as UI, COMPONENT_NAME, CLASSNAME } from '@lumx/core/js/components/Combobox/ComboboxInput';
 import { setupComboboxInput } from '@lumx/core/js/components/Combobox/setupComboboxInput';
 
+import { useClassName } from '../../composables/useClassName';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import type { TextFieldProps } from '../text-field/TextField';
 import { TextField } from '../text-field';
@@ -10,23 +11,6 @@ import { IconButton } from '../button';
 import type { IconButtonProps } from '../button/IconButton';
 import { useComboboxContext } from './context/ComboboxContext';
 import { useComboboxOpen } from './context/useComboboxOpen';
-
-/**
- * Adapter: maps core's `className` prop to Vue's `class` prop for the TextField.
- */
-const TextFieldAdapter = (p: any) => {
-    const { className, ...rest } = p;
-    return <TextField class={className} {...rest} />;
-};
-
-/**
- * Adapter: maps core's `className` prop to Vue's `class` prop for the IconButton.
- * Also maps `tabIndex` to lowercase `tabindex` for Vue compatibility.
- */
-const IconButtonAdapter = (p: any) => {
-    const { className, tabIndex, ...rest } = p;
-    return <IconButton class={className} tabindex={tabIndex} {...rest} />;
-};
 
 /**
  * Props for Combobox.Input component.
@@ -56,6 +40,7 @@ export type ComboboxInputProps = VueToJSXProps<TextFieldProps, 'inputRef' | 'tex
  */
 const ComboboxInput = defineComponent(
     (props: ComboboxInputProps, { emit, attrs }) => {
+        const className = useClassName(() => props.class);
         const { listboxId, anchorRef, setHandle, handle } = useComboboxContext();
         const { isOpen, setIsOpen } = useComboboxOpen();
 
@@ -100,13 +85,7 @@ const ComboboxInput = defineComponent(
         };
 
         return () => {
-            const {
-                toggleButtonProps,
-                onSelect: _onSelect,
-                autoFilter: _af,
-                class: className,
-                ...forwardedProps
-            } = props;
+            const { toggleButtonProps, onSelect: _onSelect, autoFilter: _af, class: _class, ...forwardedProps } = props;
 
             // Event handlers are framework-specific and forwarded through the core template's
             // spread to the TextField adapter. They are not in the core ComboboxInputProps type.
@@ -133,9 +112,9 @@ const ComboboxInput = defineComponent(
                     },
                     toggleButtonProps,
                     handleToggle,
-                    className,
+                    className: className.value,
                 },
-                { TextField: TextFieldAdapter, IconButton: IconButtonAdapter },
+                { TextField, IconButton },
             );
         };
     },

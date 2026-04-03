@@ -11,6 +11,7 @@ import {
 import { JSXElement } from '@lumx/core/js/types';
 
 import { useTheme } from '../../composables/useTheme';
+import { useClassName } from '../../composables/useClassName';
 import { useDisableStateProps } from '../../composables/useDisableStateProps';
 import { useHasEventListener } from '../../composables/useHasEventListener';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
@@ -37,6 +38,7 @@ const Chip = defineComponent(
         const slots = useSlots();
         const attrs = useAttrs();
         const defaultTheme = useTheme();
+        const className = useClassName(() => props.class);
 
         const hasOnClick = useHasEventListener('onClick');
         const hasAfterClick = useHasEventListener('onAfterClick');
@@ -83,7 +85,7 @@ const Chip = defineComponent(
         return () => (
             <ChipUI
                 {...otherProps.value}
-                className={props.class}
+                className={className.value}
                 theme={props.theme || defaultTheme.value}
                 handleClick={handleClick as any}
                 handleAfterClick={handleAfterClick as any}
