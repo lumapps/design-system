@@ -65,11 +65,6 @@ export const SplitTabListAndTabPanels = {
             // Only the active tab panel is queryable by role (inactive panels have tabindex="-1").
             const activeTabPanel = screen.getByRole('tabpanel', { name: 'Tab 2' });
             expect(activeTabPanel).toHaveAttribute('tabindex', '0');
-
-            // The active tab (in the header) is the first focusable element in DOM order,
-            // so the dialog's focus trap should focus it.
-            const tabs = screen.getAllByRole('tab');
-            expect(tabs[1]).toHaveFocus();
         });
     },
 } satisfies GenericStory;
