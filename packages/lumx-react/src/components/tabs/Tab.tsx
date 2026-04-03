@@ -48,7 +48,8 @@ export interface TabProps extends GenericProps, ReactToJSX<UIProps, TabPropsToOv
 export const Tab = forwardRef<TabProps, HTMLButtonElement>((props, ref) => {
     const { isAnyDisabled, otherProps } = useDisableStateProps(props);
     const { isActive: propIsActive, id, onFocus, onKeyPress, ...forwardedProps } = otherProps;
-    const state = useTabProviderContext('tab', id);
+    const tabState = useTabProviderContext('tab', id);
+    const { isLazy: _isLazy, ...state } = tabState ?? ({} as Partial<NonNullable<typeof tabState>>);
     const isActive = propIsActive || state?.isActive;
 
     return UI({

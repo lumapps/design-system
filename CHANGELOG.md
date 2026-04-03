@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `@lumx/react`:
     -   `TabProvider`: fix infinite render loop ("Maximum update depth exceeded") when used with Redux `connect()`/`useSelector` or other `useSyncExternalStore`-based state management
+    -   `Tab`: fix `isLazy` prop leaking to DOM on `<button>` element
 
 ## [4.9.0][] - 2026-04-02
 
