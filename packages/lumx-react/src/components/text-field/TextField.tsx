@@ -1,6 +1,6 @@
 import { Ref, RefObject, SyntheticEvent, useRef, useState } from 'react';
 
-import { IconButton, IconButtonProps, InputLabelProps, Theme } from '@lumx/react';
+import { Theme } from '@lumx/core/js/constants';
 import { GenericProps } from '@lumx/react/utils/type';
 import { mergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { useId } from '@lumx/react/hooks/useId';
@@ -17,6 +17,8 @@ import {
     generateAccessibilityIds,
 } from '@lumx/core/js/components/TextField/TextField';
 import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
+import { type InputLabelProps } from '../input-label';
+import { IconButton, type IconButtonProps } from '../button';
 import { RawInputText } from './RawInputText';
 import { RawInputTextarea } from './RawInputTextarea';
 

@@ -10,6 +10,7 @@ import { TextField } from '../text-field';
 import { IconButton } from '../button';
 import type { IconButtonProps } from '../button/IconButton';
 import { useComboboxContext } from './context/ComboboxContext';
+import { useComboboxEvent } from './context/useComboboxEvent';
 import { useComboboxOpen } from './context/useComboboxOpen';
 
 /**
@@ -92,7 +93,11 @@ const ComboboxInput = defineComponent(
             setHandle(null);
         });
 
+        // Track whether the option list is empty to disable the toggle button.
+        const optionsState = useComboboxEvent('optionsChange', undefined);
+
         const handleToggle = () => {
+            if (optionsState.value?.optionsLength === 0) return;
             setIsOpen(!isOpen.value);
             inputEl.value?.focus();
         };

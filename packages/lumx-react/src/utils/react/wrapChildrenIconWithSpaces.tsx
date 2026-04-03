@@ -1,6 +1,6 @@
 import React, { Children } from 'react';
 import { isComponentType } from '@lumx/react/utils/type';
-import { Icon } from '@lumx/react';
+import { Icon } from '@lumx/react/components/icon';
 
 /** Force wrap spaces around icons to make sure they are never stuck against text. */
 export function wrapChildrenIconWithSpaces(children: React.ReactNode): React.ReactNode {
