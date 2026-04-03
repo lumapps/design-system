@@ -17,6 +17,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   `@lumx/core`:
     -   Moved `LinkPreview` stories and tests from `@lumx/react`
 
+### Fixed
+
+-   `@lumx/react`:
+    -   `TabProvider`: fix infinite render loop ("Maximum update depth exceeded") when used with Redux `connect()`/`useSelector` or other `useSyncExternalStore`-based state management
+    -   `Tab`: fix `isLazy` prop leaking to DOM on `<button>` element
+
 ## [4.9.0][] - 2026-04-02
 
 ### Added
@@ -35,7 +41,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   Create the `Tabs` component family (`Tab`, `TabList`, `TabPanel`, `TabProvider`)
     -   Create the `ImageBlock` component
     -   Create the `Combobox` component family
-    -   `TextField`, `RawInputText`, `RawInputTextarea`: add `input` event 
+    -   `TextField`, `RawInputText`, `RawInputTextarea`: add `input` event
 -   `@lumx/react`:
     -   Create the `Combobox` component family
 
