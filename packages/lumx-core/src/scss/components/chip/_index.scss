@@ -191,23 +191,10 @@
    ========================================================================== */
 
 .#{$lumx-base-prefix}-selection-chip-group {
-  max-width: 100%;
+    align-content: flex-start;
 
-  &:empty {
-    display: none;
-  }
-
-  &__item {
-    display: flex;
-    overflow: hidden;
-  }
-
-  &__chip {
-    overflow: hidden;
-
-    .#{$lumx-base-prefix}-chip__label {
-      overflow: hidden;
-      text-overflow: ellipsis;
+    // Shrink chips in constrained space
+    &, & .#{$lumx-base-prefix}-chip, & .#{$lumx-base-prefix}-chip__label {
+        min-width: 0;
     }
-  }
 }

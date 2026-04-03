@@ -1,15 +1,21 @@
 import React from 'react';
 
 import { mdiClose } from '@lumx/icons';
-import { Chip, ChipGroup, Icon, LumxClassName, Tooltip, type Theme } from '@lumx/react';
+import type { LumxClassName } from '@lumx/core/js/types';
+import { type Theme } from '@lumx/core/js/constants';
 import { GenericProps } from '@lumx/react/utils/type';
 import { Selector } from '@lumx/core/js/types/Selector';
 import { getWithSelector } from '@lumx/core/js/utils/selectors';
 import { classNames } from '@lumx/core/js/utils';
 
+import { Chip } from './Chip';
+import { ChipGroup } from './ChipGroup';
+import { Icon } from '../icon';
+import { Text } from '../text';
+import { Tooltip } from '../tooltip';
+import { Text } from '../text';
 import { isComponentType } from '../../utils/type/isComponentType';
 
-import { useFocusLastChipOnBackspace } from '../../hooks/useFocusLastChipOnBackspace';
 
 export interface SelectionChipGroupProps<O> extends GenericProps {
     /**
@@ -34,17 +40,9 @@ export interface SelectionChipGroupProps<O> extends GenericProps {
      */
     inputRef?: React.RefObject<HTMLInputElement>;
     /**
-     * Input label, used to generate the chip group aria description
-     */
-    inputLabel?: string;
-    /**
      * Customize how chips should render
      */
     renderChip?: (option: O) => React.ReactNode;
-    /**
-     * Scope for tracking purposes
-     */
-    scope?: string;
     /**
      * LumX theme
      */
@@ -53,10 +51,14 @@ export interface SelectionChipGroupProps<O> extends GenericProps {
      * Disabled state
      */
     isDisabled?: boolean;
-    /** label to be used for accessibility purposes */
+    /**
+     * Label to be used for accessibility purposes
+     */
     label: string;
-    /** callback for generating the tooltip for each individual chip */
-    chipTooltipLabel: (chip: string) => string;
+    /**
+     * Label for the remove action (used in visually hidden text for accessibility)
+     */
+    chipRemoveLabel?: string;
 }
 
 /**
@@ -83,56 +85,55 @@ export const SelectionChipGroup = <O,>({
     getOptionId,
     getOptionName,
     inputRef,
-    inputLabel,
     renderChip,
     theme,
     isDisabled,
-    chipTooltipLabel,
     label,
+    chipRemoveLabel,
     ...forwardedProps
 }: SelectionChipGroupProps<O>) => {
-    const chipRefs = React.useRef<React.RefObject<HTMLElement>[]>([]);
-    const { findPreviousEnabledChip } = useFocusLastChipOnBackspace(chipRefs, inputRef);
+    const containerRef = React.useRef<HTMLDivElement>(null);
+
+    // Store latest values in refs so the event handlers always access current state.
+    const valueRef = React.useRef(value);
+    valueRef.current = value;
+    const onChangeRef = React.useRef(onChange);
+    onChangeRef.current = onChange;
+
+    // Attach event listeners
+    React.useEffect(() => {
+        return setupSelectionChipGroupEvents({
+            getContainer: () => containerRef.current,
+            getInput: () => inputRef?.current,
+            onChange: (newValue) => onChangeRef.current?.(newValue),
+            getValue: () => valueRef.current,
+            getOptionId,
+        });
+    }, [inputRef, getOptionId]);
+
+    if (!value || value.length === 0) {
+        return null;
+    }
 
     return (
-        <ChipGroup role="group" aria-label={label} className={block()} {...forwardedProps}>
+        <ChipGroup
+            ref={containerRef}
+            role="group"
+            aria-label={label}
+            className={block()}
+            onClick={handleClick}
+            onKeyDown={handleKeyDown}
+            {...forwardedProps}
+        >
             {value?.map((v, index) => {
                 const name = getWithSelector(getOptionName, v);
                 const id = getWithSelector(getOptionId, v);
-                const onClick = () => {
-                    const newValue = [...value];
-                    const existingIndex = value.findIndex((vi) => getWithSelector(getOptionId, vi) === id);
-                    if (existingIndex === -1) {
-                        return;
-                    }
-                    // Remove value
-                    newValue.splice(existingIndex, 1);
-
-                    onChange?.(newValue);
-                };
-                const onKeyDown = (evt: React.KeyboardEvent) => {
-                    if (evt.key !== 'Backspace') {
-                        return;
-                    }
-                    // Activate (remove value) on Backspace pressed
-                    onClick();
-
-                    const previousChip = findPreviousEnabledChip(index - 1);
-                    const input = inputRef?.current;
-                    // Focus the previous chip or the input
-                    (previousChip || input)?.focus();
-                };
-
-                if (!chipRefs.current[index]) {
-                    chipRefs.current[index] = React.createRef<HTMLElement>();
-                }
-                const ref: React.Ref<HTMLElement> | undefined = chipRefs.current[index];
 
                 const customChip = renderChip?.(v);
                 const props = isComponentType(Chip)(customChip) ? customChip.props : undefined;
                 const chipIsDisabled = props?.isDisabled || isDisabled;
                 const chipName = typeof props?.children === 'string' ? props.children : name;
-                const tooltipLabel = chipTooltipLabel(chipName);
+                const tooltipLabel = chipRemoveLabel ? `${chipName} \u2014 ${chipRemoveLabel}` : chipName;
 
                 return (
                     <Tooltip
@@ -146,14 +147,22 @@ export const SelectionChipGroup = <O,>({
                             after={<Icon icon={mdiClose} />}
                             className={element('chip', [props?.className])}
                             size="s"
-                            ref={ref as any}
-                            onClick={onClick}
-                            onKeyDown={onKeyDown}
+                            data-option-index={index}
+                            isClickable
+                            role="button"
                             theme={theme}
                             isDisabled={chipIsDisabled}
                             tabIndex={chipIsDisabled ? -1 : 0}
                         >
-                            {props?.children || name}
+                            <Text as="span" truncate>
+                                {props?.children || name}
+                            </Text>
+                            {chipRemoveLabel && (
+                                <Text as="span" className={classNames.visuallyHidden()}>
+                                    {` \u2014 `}
+                                    {chipRemoveLabel}
+                                </Text>
+                            )}
                         </Chip>
                     </Tooltip>
                 );

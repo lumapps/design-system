@@ -1,19 +1,8 @@
 import { Chip, SelectionChipGroup } from '@lumx/react';
-import { useState } from 'react';
+import { withResizableBox } from '@lumx/react/stories/decorators/withResizableBox';
+import { withValueOnChange } from '@lumx/react/stories/decorators/withValueOnChange';
 
-export default {
-    title: 'LumX components/chip/SelectionChipGroup',
-    component: SelectionChipGroup,
-    argTypes: {},
-};
-
-interface FruitOption {
-    id: string;
-    name: string;
-    disabled?: boolean;
-}
-
-const fruits: FruitOption[] = [
+const fruits = [
     { id: '1', name: 'Apricot' },
     { id: '2', name: 'Apple' },
     { id: '3', name: 'Banana' },
@@ -21,38 +10,31 @@ const fruits: FruitOption[] = [
     { id: '5', name: 'Lemon' },
     { id: '6', name: 'Orange' },
 ];
+type FruitOption = (typeof fruits)[number];
 
-const Template = (args: any) => {
-    const [selectedFruits, setSelectedFruits] = useState<FruitOption[]>(args.value || []);
-
-    return <SelectionChipGroup {...args} value={selectedFruits} onChange={setSelectedFruits} />;
+export default {
+    title: 'LumX components/chip/SelectionChipGroup',
+    component: SelectionChipGroup,
+    args: {
+        value: [fruits[0], fruits[1], fruits[2]],
+        getOptionId: 'id',
+        getOptionName: 'name',
+        label: 'Selected fruits',
+        chipRemoveLabel: 'Remove',
+    },
+    decorators: [withValueOnChange()],
 };
 
 /**
  * Default selection chip group
  */
-export const Default = {
-    render: Template,
-    args: {
-        value: [fruits[0], fruits[1], fruits[2]],
-        getOptionId: 'id',
-        getOptionName: 'name',
-        label: 'Selected fruits',
-        chipTooltipLabel: (chip: string) => `Remove ${chip}`,
-    },
-};
+export const Default = {};
 
 /**
  * Selection chip group with custom render
  */
 export const CustomRender = {
-    render: Template,
     args: {
-        value: [fruits[0], fruits[1], fruits[2]],
-        getOptionId: 'id',
-        getOptionName: 'name',
-        label: 'Selected fruits',
-        chipTooltipLabel: (chip: string) => `Remove ${chip}`,
         renderChip: (option: FruitOption) => <Chip>🍎 {option.name}</Chip>,
     },
 };
@@ -61,13 +43,7 @@ export const CustomRender = {
  * Disabled selection chip group
  */
 export const Disabled = {
-    render: Template,
     args: {
-        value: [fruits[0], fruits[1], fruits[2]],
-        getOptionId: 'id',
-        getOptionName: 'name',
-        label: 'Selected fruits',
-        chipTooltipLabel: (chip: string) => `Remove ${chip}`,
         isDisabled: true,
     },
 };
@@ -76,13 +52,7 @@ export const Disabled = {
  * Selection chip group with individually disabled chips
  */
 export const IndividuallyDisabled = {
-    render: Template,
     args: {
-        value: [fruits[0], fruits[1], fruits[2]],
-        getOptionId: 'id',
-        getOptionName: 'name',
-        label: 'Selected fruits',
-        chipTooltipLabel: (chip: string) => `Remove ${chip}`,
         renderChip: (option: FruitOption) => <Chip isDisabled={option.id === '2'}>{option.name}</Chip>,
     },
 };
@@ -91,12 +61,22 @@ export const IndividuallyDisabled = {
  * Empty selection chip group
  */
 export const Empty = {
-    render: Template,
     args: {
         value: [],
-        getOptionId: 'id',
-        getOptionName: 'name',
-        label: 'Selected fruits',
-        chipTooltipLabel: (chip: string) => `Remove ${chip}`,
+    },
+};
+
+/**
+ * Test in constrained space, chips should have text overflow ellipsis
+ */
+export const ConstrainedSpace = {
+    decorators: [withResizableBox({ width: '400px', height: '100px' })],
+    args: {
+        value: [
+            fruits[0],
+            fruits[1],
+            { name: 'Very very very very very long text' },
+            { name: 'Very very very very very very very very very very very long text' },
+        ],
     },
 };

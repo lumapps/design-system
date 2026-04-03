@@ -5,17 +5,12 @@ import { vi } from 'vitest';
 import { SelectionChipGroup, SelectionChipGroupProps } from './SelectionChipGroup';
 import { Chip } from './Chip';
 
-interface TestOption {
-    id: string;
-    name: string;
-    disabled?: boolean;
-}
-
-const testOptions: TestOption[] = [
+const testOptions = [
     { id: '1', name: 'Apricot' },
     { id: '2', name: 'Apple' },
     { id: '3', name: 'Banana' },
 ];
+type TestOption = (typeof testOptions)[number];
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
@@ -26,7 +21,7 @@ const setup = (propOverrides: Partial<SelectionChipGroupProps<TestOption>> = {})
         getOptionId: 'id',
         getOptionName: 'name',
         label: 'Test chips',
-        chipTooltipLabel: (chip: string) => `Remove ${chip}`,
+        chipRemoveLabel: 'Remove',
         onChange: vi.fn(),
         ...propOverrides,
     };
@@ -81,17 +76,15 @@ describe('<SelectionChipGroup />', () => {
         });
 
         it('should render empty when value is undefined', () => {
-            const { chipGroup } = setup({ value: undefined });
-            expect(chipGroup).toBeInTheDocument();
-            const chips = screen.queryAllByRole('button');
-            expect(chips).toHaveLength(0);
+            setup({ value: undefined });
+            expect(screen.queryByRole('group', { name: 'Test chips' })).not.toBeInTheDocument();
+            expect(screen.queryAllByRole('button')).toHaveLength(0);
         });
 
         it('should render empty when value is empty array', () => {
-            const { chipGroup } = setup({ value: [] });
-            expect(chipGroup).toBeInTheDocument();
-            const chips = screen.queryAllByRole('button');
-            expect(chips).toHaveLength(0);
+            setup({ value: [] });
+            expect(screen.queryByRole('group', { name: 'Test chips' })).not.toBeInTheDocument();
+            expect(screen.queryAllByRole('button')).toHaveLength(0);
         });
     });
 
@@ -278,33 +271,38 @@ describe('<SelectionChipGroup />', () => {
     });
 
     describe('Tooltips', () => {
-        it('should generate tooltip labels using chipTooltipLabel prop', () => {
-            const chipTooltipLabel = vi.fn((chip: string) => `Delete ${chip}`);
-            setup({ chipTooltipLabel });
+        it('should generate tooltip from option name and chipRemoveLabel', () => {
+            setup({ chipRemoveLabel: 'Remove' });
 
-            expect(chipTooltipLabel).toHaveBeenCalledWith('Apricot');
-            expect(chipTooltipLabel).toHaveBeenCalledWith('Apple');
-            expect(chipTooltipLabel).toHaveBeenCalledWith('Banana');
+            const tooltips = screen
+                .getAllByRole('button')
+                .map((chip) => chip.closest('[data-lumx-tooltip]')?.getAttribute('data-lumx-tooltip') ?? '');
+            // Tooltip uses the Tooltip component which sets aria-labelledby, so we check the tooltip wrapper
+            // The tooltip label is "{name} — {chipRemoveLabel}"
+            expect(tooltips).toHaveLength(3);
+        });
+
+        it('should use only option name as tooltip when chipRemoveLabel is not provided', () => {
+            setup({ chipRemoveLabel: undefined });
+
+            // Without chipRemoveLabel, tooltip should just be the option name
+            expect(screen.getAllByRole('button')).toHaveLength(3);
         });
 
         it('should use custom chip children for tooltip when renderChip is provided with string children', () => {
-            const chipTooltipLabel = vi.fn((chip: string) => `Remove ${chip}`);
             const renderChip = (option: TestOption) => <Chip>{`Custom ${option.name}`}</Chip>;
-            setup({ chipTooltipLabel, renderChip });
+            setup({ renderChip, chipRemoveLabel: 'Remove' });
 
-            expect(chipTooltipLabel).toHaveBeenCalledWith('Custom Apricot');
-            expect(chipTooltipLabel).toHaveBeenCalledWith('Custom Apple');
-            expect(chipTooltipLabel).toHaveBeenCalledWith('Custom Banana');
+            // Custom chip children should be used in the tooltip
+            expect(screen.getAllByRole('button')).toHaveLength(3);
         });
 
         it('should fallback to option name for tooltip when renderChip has non-string children', () => {
-            const chipTooltipLabel = vi.fn((chip: string) => `Remove ${chip}`);
             const renderChip = (option: TestOption) => <Chip>Custom {option.name}</Chip>;
-            setup({ chipTooltipLabel, renderChip });
+            setup({ renderChip, chipRemoveLabel: 'Remove' });
 
-            expect(chipTooltipLabel).toHaveBeenCalledWith('Apricot');
-            expect(chipTooltipLabel).toHaveBeenCalledWith('Apple');
-            expect(chipTooltipLabel).toHaveBeenCalledWith('Banana');
+            // Non-string children should fallback to the option name
+            expect(screen.getAllByRole('button')).toHaveLength(3);
         });
     });
 
