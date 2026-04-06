@@ -2976,7 +2976,7 @@ __metadata:
     tinycolor2: "npm:^1.4.1"
     typescript: "npm:^5.4.3"
     version-changelog: "npm:^3.1.1"
-    vite: "npm:^7.3.1"
+    vite: "npm:^7.3.2"
     vite-tsconfig-paths: "npm:^5.1.4"
     vitest: "npm:^4.0.18"
   languageName: unknown
@@ -3065,7 +3065,7 @@ __metadata:
     rollup-plugin-ts-paths-resolve: "npm:^1.7.1"
     storybook: "npm:^10.2.19"
     typescript: "npm:^5.4.3"
-    vite: "npm:^7.3.1"
+    vite: "npm:^7.3.2"
     vite-tsconfig-paths: "npm:^5.1.4"
     vitest: "npm:^4.0.18"
   peerDependencies:
@@ -3123,7 +3123,7 @@ __metadata:
     jsdom: "npm:^27.2.0"
     storybook: "npm:^10.2.19"
     typescript: "npm:^5.4.3"
-    vite: "npm:^7.3.1"
+    vite: "npm:^7.3.2"
     vite-plugin-dts: "npm:^4.5.4"
     vite-plugin-static-copy: "npm:^3.1.4"
     vite-tsconfig-paths: "npm:^5.1.4"
@@ -24399,7 +24399,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^6.0.0 || ^7.0.0, vite@npm:^7.3.1":
+"vite@npm:^6.0.0 || ^7.0.0, vite@npm:^7.3.2":
   version: 7.3.2
   resolution: "vite@npm:7.3.2"
   dependencies:
