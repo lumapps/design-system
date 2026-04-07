@@ -364,6 +364,8 @@ jobs:
             package: lumx-react
             token_secret: CHROMATIC_TOKEN_LUMX_REACT
             environment: storybook-lumx-react
+            # Deploy at the tagged commit (PR head) so Chromatic can match it with the GitHub Release
+            ref: ${{ github.event.pull_request.head.sha || github.sha }}
         secrets: inherit
 
     deploy_storybook_vue:
@@ -375,4 +377,6 @@ jobs:
             package: lumx-vue
             token_secret: CHROMATIC_TOKEN_LUMX_VUE
             environment: storybook-lumx-vue
+            # Deploy at the tagged commit (PR head) so Chromatic can match it with the GitHub Release
+            ref: ${{ github.event.pull_request.head.sha || github.sha }}
         secrets: inherit

@@ -21,6 +21,11 @@ on:
                 required: false
                 type: string
                 default: ''
+            ref:
+                description: 'Git ref to checkout (defaults to the GitHub event default ref)'
+                required: false
+                type: string
+                default: ''
         outputs:
             storybook_url:
                 description: 'Chromatic permalink for the deployed Storybook'
@@ -46,6 +51,7 @@ jobs:
             - name: 'Checkout repository'
               uses: actions/checkout@v6
               with:
+                  ref: ${{ inputs.ref || '' }}
                   fetch-depth: 0
 
             - name: 'Init variables'
@@ -60,7 +66,8 @@ jobs:
 
                       const package_path = `packages/${packageName}`;
                       const run_html_url = getRunURL(context.payload.repository.html_url, context.runId, prNumber);
-                      const shortSHA = await getShortSHA(context.sha);
+                      // Use HEAD (checked-out ref) to match what Chromatic will record as the build commit
+                      const shortSHA = await getShortSHA('HEAD');
                       const storybook_url = getStoryBookURL(shortSHA, packageName);
 
                       core.setOutput('storybook_url', storybook_url);
