@@ -11,7 +11,9 @@ const { extractLatestVersionSection } = require('../../../dev-packages/changelog
  */
 async function main({ github, context }) {
     const [shortSHA, changelog] = await Promise.all([
-        getShortSHA(context.sha),
+        // Use HEAD (checked-out commit) instead of context.sha (merge commit) so the
+        // Storybook URL matches the tagged commit, enabling Chromatic version correlation.
+        getShortSHA('HEAD'),
         fs.promises.readFile(CHANGELOG_PATH, 'utf8'),
     ]);
     const { version, text: versionChangelog } = extractLatestVersionSection(changelog);
