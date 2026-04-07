@@ -7,6 +7,7 @@ import { ThemeSentinel } from '@lumx/react/testing/utils/ThemeSentinel';
 import { Heading, HeadingLevelProvider } from '@lumx/react';
 import { vi } from 'vitest';
 import { DIALOG_TRANSITION_DURATION } from '@lumx/react/constants';
+import BaseDialogTests from '@lumx/core/js/components/Dialog/Tests';
 
 const CLASSNAME = Dialog.className as string;
 
@@ -27,11 +28,21 @@ const setup = (props: Partial<DialogProps> = {}, { wrapper }: SetupRenderOptions
 };
 
 describe(`<${Dialog.displayName}>`, () => {
-    it('should render default', () => {
-        const { dialog, container } = setup();
-        expect(dialog).toBeInTheDocument();
-        expect(container).toBe(screen.queryByRole('dialog'));
-        expect(container).toHaveAttribute('aria-modal', 'true');
+    // Run core tests
+    BaseDialogTests({
+        render: (props: DialogProps) => render(<Dialog {...props} />),
+        screen,
+    });
+
+    describe('Structure', () => {
+        it('should render header and footer from props', () => {
+            setup({
+                header: <div>Header Prop</div>,
+                footer: <div>Footer Prop</div>,
+            });
+            expect(screen.getByText('Header Prop').parentElement).toHaveClass(`${CLASSNAME}__header`);
+            expect(screen.getByText('Footer Prop').parentElement).toHaveClass(`${CLASSNAME}__footer`);
+        });
     });
 
     it('should have reset the heading level context', () => {
@@ -47,17 +58,6 @@ describe(`<${Dialog.displayName}>`, () => {
         );
         // Heading inside should use the dialog heading level 2
         expect(screen.queryByRole('heading', { name: 'Title', level: 2 })).toBeInTheDocument();
-    });
-
-    describe('Structure', () => {
-        it('should render header and footer from props', () => {
-            setup({
-                header: <div>Header Prop</div>,
-                footer: <div>Footer Prop</div>,
-            });
-            expect(screen.getByText('Header Prop').parentElement).toHaveClass(`${CLASSNAME}__header`);
-            expect(screen.getByText('Footer Prop').parentElement).toHaveClass(`${CLASSNAME}__footer`);
-        });
     });
 
     describe('Events', () => {
@@ -160,14 +160,6 @@ describe(`<${Dialog.displayName}>`, () => {
                 </Dialog>,
             );
             expect(queryByClassName(document.body, CLASSNAME)).toHaveClass(`${CLASSNAME}--is-hidden`);
-        });
-    });
-
-    describe('Loading', () => {
-        it('should render progress indicator when isLoading is true', () => {
-            setup({ isLoading: true });
-            const progress = document.querySelector('.lumx-progress');
-            expect(progress).toBeInTheDocument();
         });
     });
 
