@@ -34,9 +34,9 @@ export interface UseSelectionChipGroupEventsOptions<O> {
 }
 
 /**
- * Hook that manages all event handling for a SelectionChipGroup:
+ * Hook that manages all event handling for a SelectionChipGroup (listbox pattern):
  * - Delegated click on the chip group container to remove a chip.
- * - Delegated keydown (Backspace/Enter) on the chip group container to remove a chip
+ * - Delegated keydown (Backspace/Delete) on the chip group container to remove a chip
  *   and move focus to the previous enabled chip or the input.
  * - Backspace on the input field (cursor at position 0) focuses the last enabled chip.
  *
@@ -149,10 +149,10 @@ export function useSelectionChipGroupEvents<O>({
         [onRemove],
     );
 
-    // Delegated keydown handler on the chip group container.
+    // Delegated keydown handler on the chip group container (Backspace/Delete to remove).
     const handleKeyDown = React.useCallback(
         (evt: React.KeyboardEvent) => {
-            if (evt.key !== 'Backspace' && evt.key !== 'Enter') return;
+            if (evt.key !== 'Backspace' && evt.key !== 'Delete') return;
 
             const index = getChipIndex(evt.target);
             if (index == null) return;

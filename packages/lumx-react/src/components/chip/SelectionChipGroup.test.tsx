@@ -27,7 +27,7 @@ const setup = (propOverrides: Partial<SelectionChipGroupProps<TestOption>> = {})
     };
 
     const result = render(<SelectionChipGroup {...props} />);
-    const chipGroup = screen.getByRole('group', { name: props.label });
+    const chipGroup = screen.getByRole('listbox', { name: props.label });
 
     return { props, chipGroup, ...result };
 };
@@ -66,7 +66,7 @@ describe('<SelectionChipGroup />', () => {
                 getOptionId: (option) => option.id,
                 onChange,
             });
-            const chips = screen.getAllByRole('button');
+            const chips = screen.getAllByRole('option');
             expect(chips).toHaveLength(3);
         });
 
@@ -76,15 +76,31 @@ describe('<SelectionChipGroup />', () => {
         });
 
         it('should render empty when value is undefined', () => {
-            setup({ value: undefined });
-            expect(screen.queryByRole('group', { name: 'Test chips' })).not.toBeInTheDocument();
-            expect(screen.queryAllByRole('button')).toHaveLength(0);
+            render(
+                <SelectionChipGroup<TestOption>
+                    value={undefined}
+                    getOptionId="id"
+                    getOptionName="name"
+                    label="Test chips"
+                    onChange={vi.fn()}
+                />,
+            );
+            expect(screen.queryByRole('listbox', { name: 'Test chips' })).not.toBeInTheDocument();
+            expect(screen.queryAllByRole('option')).toHaveLength(0);
         });
 
         it('should render empty when value is empty array', () => {
-            setup({ value: [] });
-            expect(screen.queryByRole('group', { name: 'Test chips' })).not.toBeInTheDocument();
-            expect(screen.queryAllByRole('button')).toHaveLength(0);
+            render(
+                <SelectionChipGroup<TestOption>
+                    value={[]}
+                    getOptionId="id"
+                    getOptionName="name"
+                    label="Test chips"
+                    onChange={vi.fn()}
+                />,
+            );
+            expect(screen.queryByRole('listbox', { name: 'Test chips' })).not.toBeInTheDocument();
+            expect(screen.queryAllByRole('option')).toHaveLength(0);
         });
     });
 
@@ -175,7 +191,7 @@ describe('<SelectionChipGroup />', () => {
             (inputRef as any).current = input;
             container.appendChild(input);
 
-            const chips = screen.getAllByRole('button');
+            const chips = screen.getAllByRole('option');
             const firstChip = chips[0];
 
             firstChip.focus();
@@ -190,7 +206,7 @@ describe('<SelectionChipGroup />', () => {
             const onChange = vi.fn();
             setup({ onChange });
 
-            const chips = screen.getAllByRole('button');
+            const chips = screen.getAllByRole('option');
             const secondChip = chips[1];
 
             secondChip.focus();
@@ -217,7 +233,7 @@ describe('<SelectionChipGroup />', () => {
             const onChange = vi.fn();
             setup({ isDisabled: true, onChange });
 
-            const chips = screen.getAllByRole('button');
+            const chips = screen.getAllByRole('option');
             chips.forEach((chip) => {
                 expect(chip).toHaveAttribute('aria-disabled', 'true');
                 expect(chip).toHaveAttribute('tabIndex', '-1');
@@ -232,7 +248,7 @@ describe('<SelectionChipGroup />', () => {
             const renderChip = (option: TestOption) => <Chip isDisabled={option.id === '2'}>{option.name}</Chip>;
             setup({ renderChip });
 
-            const chips = screen.getAllByRole('button');
+            const chips = screen.getAllByRole('option');
             expect(chips[0]).not.toHaveAttribute('aria-disabled');
             expect(chips[1]).toHaveAttribute('aria-disabled', 'true');
             expect(chips[2]).not.toHaveAttribute('aria-disabled');
@@ -242,7 +258,7 @@ describe('<SelectionChipGroup />', () => {
             const renderChip = (option: TestOption) => <Chip isDisabled={option.id === '1'}>{option.name}</Chip>;
             setup({ renderChip, isDisabled: false });
 
-            const chips = screen.getAllByRole('button');
+            const chips = screen.getAllByRole('option');
             expect(chips[0]).toHaveAttribute('aria-disabled', 'true');
             expect(chips[1]).not.toHaveAttribute('aria-disabled');
         });
@@ -250,7 +266,7 @@ describe('<SelectionChipGroup />', () => {
         it('should not show tooltip for disabled chips', () => {
             setup({ isDisabled: true });
 
-            const chips = screen.getAllByRole('button');
+            const chips = screen.getAllByRole('option');
             // Tooltip should not be rendered for disabled chips
             // The tooltip label is conditionally set to undefined for disabled chips
             chips.forEach((chip) => {
@@ -263,7 +279,7 @@ describe('<SelectionChipGroup />', () => {
         it('should pass theme to chips', () => {
             setup({ theme: 'dark' });
 
-            const chips = screen.getAllByRole('button');
+            const chips = screen.getAllByRole('option');
             chips.forEach((chip) => {
                 expect(chip.className).toContain('lumx-chip--color-light');
             });
@@ -275,7 +291,7 @@ describe('<SelectionChipGroup />', () => {
             setup({ chipRemoveLabel: 'Remove' });
 
             const tooltips = screen
-                .getAllByRole('button')
+                .getAllByRole('option')
                 .map((chip) => chip.closest('[data-lumx-tooltip]')?.getAttribute('data-lumx-tooltip') ?? '');
             // Tooltip uses the Tooltip component which sets aria-labelledby, so we check the tooltip wrapper
             // The tooltip label is "{name} — {chipRemoveLabel}"
@@ -286,7 +302,7 @@ describe('<SelectionChipGroup />', () => {
             setup({ chipRemoveLabel: undefined });
 
             // Without chipRemoveLabel, tooltip should just be the option name
-            expect(screen.getAllByRole('button')).toHaveLength(3);
+            expect(screen.getAllByRole('option')).toHaveLength(3);
         });
 
         it('should use custom chip children for tooltip when renderChip is provided with string children', () => {
@@ -294,7 +310,7 @@ describe('<SelectionChipGroup />', () => {
             setup({ renderChip, chipRemoveLabel: 'Remove' });
 
             // Custom chip children should be used in the tooltip
-            expect(screen.getAllByRole('button')).toHaveLength(3);
+            expect(screen.getAllByRole('option')).toHaveLength(3);
         });
 
         it('should fallback to option name for tooltip when renderChip has non-string children', () => {
@@ -302,30 +318,42 @@ describe('<SelectionChipGroup />', () => {
             setup({ renderChip, chipRemoveLabel: 'Remove' });
 
             // Non-string children should fallback to the option name
-            expect(screen.getAllByRole('button')).toHaveLength(3);
+            expect(screen.getAllByRole('option')).toHaveLength(3);
         });
     });
 
     describe('Accessibility', () => {
-        it('should have role="group" with aria-label', () => {
+        it('should have role="listbox" with aria-label and aria-multiselectable', () => {
             const { chipGroup } = setup({ label: 'Selected fruits' });
-            expect(chipGroup).toHaveAttribute('role', 'group');
+            expect(chipGroup).toHaveAttribute('role', 'listbox');
             expect(chipGroup).toHaveAttribute('aria-label', 'Selected fruits');
+            expect(chipGroup).toHaveAttribute('aria-multiselectable', 'true');
+            expect(chipGroup).toHaveAttribute('aria-orientation', 'horizontal');
+        });
+
+        it('should have role="option" with aria-selected on each chip', () => {
+            setup();
+
+            const chips = screen.getAllByRole('option');
+            chips.forEach((chip) => {
+                expect(chip).toHaveAttribute('aria-selected', 'true');
+            });
         });
 
         it('should have correct tabIndex for enabled chips', () => {
             setup();
 
-            const chips = screen.getAllByRole('button');
-            chips.forEach((chip) => {
-                expect(chip).toHaveAttribute('tabIndex', '0');
+            const chips = screen.getAllByRole('option');
+            // First chip focusable, the other are not (need Arrow key nav via roving tabindex pattern)
+            chips.forEach((chip, index) => {
+                expect(chip).toHaveAttribute('tabIndex', index === 0 ? '0' : '-1');
             });
         });
 
         it('should have correct tabIndex for disabled chips', () => {
             setup({ isDisabled: true });
 
-            const chips = screen.getAllByRole('button');
+            const chips = screen.getAllByRole('option');
             chips.forEach((chip) => {
                 expect(chip).toHaveAttribute('tabIndex', '-1');
             });
@@ -336,7 +364,7 @@ describe('<SelectionChipGroup />', () => {
         it('should create refs for each chip', () => {
             setup();
 
-            const chips = screen.getAllByRole('button');
+            const chips = screen.getAllByRole('option');
             expect(chips).toHaveLength(3);
             chips.forEach((chip) => {
                 expect(chip).toBeInstanceOf(HTMLElement);
@@ -346,12 +374,12 @@ describe('<SelectionChipGroup />', () => {
         it('should maintain stable refs on re-render', () => {
             const { rerender, props } = setup();
 
-            const firstRenderChips = screen.getAllByRole('button');
+            const firstRenderChips = screen.getAllByRole('option');
             const firstChipElement = firstRenderChips[0];
 
             rerender(<SelectionChipGroup {...props} />);
 
-            const secondRenderChips = screen.getAllByRole('button');
+            const secondRenderChips = screen.getAllByRole('option');
             expect(secondRenderChips[0]).toBe(firstChipElement);
         });
     });

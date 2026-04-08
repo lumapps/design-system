@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -  `TextField`: improve clear button a11y linking it to the input label via `aria-describedby`
     -   `Combobox.Input`: replace `autoFilter` with `filter` and `openOnFocus` props
     -   `SelectionChipGroup`: simplify chip labeling; remove unused `inputLabel` and `scope` props
+    -   `SelectionChipGroup`: implement ARIA listbox pattern
 -  `@lumx/vue`:
     -  `TextField`: improve clear button a11y linking it to the input label via `aria-describedby`
     -   `Combobox.Input`: replace `autoFilter` with `filter` and `openOnFocus` props

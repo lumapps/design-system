@@ -3,6 +3,7 @@ import React from 'react';
 import { mdiClose } from '@lumx/icons';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { type Theme } from '@lumx/core/js/constants';
+import { CLASSNAME as CHIP_CLASSNAME } from '@lumx/core/js/components/Chip';
 import { GenericProps } from '@lumx/react/utils/type';
 import { Selector } from '@lumx/core/js/types/Selector';
 import { getWithSelector } from '@lumx/core/js/utils/selectors';
@@ -15,6 +16,7 @@ import { Text } from '../text';
 import { Tooltip } from '../tooltip';
 import { Text } from '../text';
 import { isComponentType } from '../../utils/type/isComponentType';
+import { useRovingTabIndexContainer } from '../../hooks/useRovingTabIndexContainer';
 
 
 export interface SelectionChipGroupProps<O> extends GenericProps {
@@ -86,6 +88,7 @@ export const SelectionChipGroup = <O,>({
     getOptionName,
     inputRef,
     renderChip,
+    getChipProps: getChipPropsProp,
     theme,
     isDisabled,
     label,
@@ -111,6 +114,12 @@ export const SelectionChipGroup = <O,>({
         });
     }, [inputRef, getOptionId]);
 
+    useRovingTabIndexContainer({
+        containerRef,
+        itemSelector: `.${CHIP_CLASSNAME}`,
+        itemDisabledSelector: `.${CHIP_CLASSNAME}[aria-disabled="true"]`,
+    });
+
     if (!value || value.length === 0) {
         return null;
     }
@@ -118,8 +127,10 @@ export const SelectionChipGroup = <O,>({
     return (
         <ChipGroup
             ref={containerRef}
-            role="group"
+            role="listbox"
             aria-label={label}
+            aria-multiselectable
+            aria-orientation="horizontal"
             className={block()}
             onClick={handleClick}
             onKeyDown={handleKeyDown}
@@ -149,10 +160,10 @@ export const SelectionChipGroup = <O,>({
                             size="s"
                             data-option-index={index}
                             isClickable
-                            role="button"
+                            role="option"
+                            aria-selected
                             theme={theme}
                             isDisabled={chipIsDisabled}
-                            tabIndex={chipIsDisabled ? -1 : 0}
                         >
                             <Text as="span" truncate>
                                 {props?.children || name}
