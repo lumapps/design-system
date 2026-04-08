@@ -1,20 +1,24 @@
 ---
-frameworks: ['react']
+frameworks: ['react', 'vue']
 ---
 
-import * as DemoDefault from './react/default.tsx';
-import * as DemoConfirmDialog from './react/confirm-dialog.tsx';
-import * as DemoAlertDialog from './react/alert-dialog.tsx';
-import * as DemoSizes from './react/sizes.tsx';
-import * as DemoProcessingState from './react/processing-state.tsx';
+import * as ReactDemoDefault from './react/default.tsx';
+import * as ReactDemoConfirmDialog from './react/confirm-dialog.tsx';
+import * as ReactDemoAlertDialog from './react/alert-dialog.tsx';
+import * as ReactDemoSizes from './react/sizes.tsx';
+import * as ReactDemoProcessingState from './react/processing-state.tsx';
+import * as VueDemoDefault from './vue/default.vue';
+import * as VueDemoSizes from './vue/sizes.vue';
+import * as VueDemoProcessingState from './vue/processing-state.vue';
 import ReactDialog from 'lumx-docs:@lumx/react/components/dialog/Dialog';
 import ReactAlertDialog from 'lumx-docs:@lumx/react/components/alert-dialog/AlertDialog';
+import VueDialog from 'lumx-docs:@lumx/vue/components/dialog/Dialog';
 
 # Dialog
 
 **Inform users about a task and can contain critical information, require decisions, or involve multiple tasks.**
 
-<DemoBlock orientation="horizontal" vAlign="center" demo={{ react: DemoDefault }} />
+<DemoBlock orientation="horizontal" vAlign="center" demo={{ react: ReactDemoDefault, vue: VueDemoDefault }} />
 
 ## Anatomy
 
@@ -27,29 +31,29 @@ On user scroll, the header stays fixed on top and the footer at the bottom of th
 
 Confirmation dialogs cannot be dismissed until users confirm a choice.
 
-<DemoBlock orientation="horizontal" vAlign="center" demo={{ react: DemoConfirmDialog }} />
+<DemoBlock orientation="horizontal" vAlign="center" demo={{ react: ReactDemoConfirmDialog }} />
 
 ### Alert dialog
 
 Use alert dialogs to interrupt users with urgent information, details, or action requests.
 
-<DemoBlock orientation="horizontal" vAlign="center" demo={{ react: DemoAlertDialog }} />
+<DemoBlock orientation="horizontal" vAlign="center" demo={{ react: ReactDemoAlertDialog }} />
 
 ## Sizes
 
 Dialogs come in four sizes: `tiny` (400dp), `regular` (600dp), `big` (800dp), and `huge` (full screen).
 
-<DemoBlock orientation="horizontal" vAlign="center" demo={{ react: DemoSizes }} />
+<DemoBlock orientation="horizontal" vAlign="center" demo={{ react: ReactDemoSizes, vue: VueDemoSizes }} />
 
 ## Processing state
 
 Use processing state when dialogs contain a form which submission takes an extended amount of time to process.
 
-<DemoBlock orientation="horizontal" vAlign="center" demo={{ react: DemoProcessingState }} />
+<DemoBlock orientation="horizontal" vAlign="center" demo={{ react: ReactDemoProcessingState, vue: VueDemoProcessingState }} />
 
 ### Properties
 
-<PropTable docs={{ react: ReactDialog }} />
+<PropTable docs={{ react: ReactDialog, vue: VueDialog }} />
 
 ### Alert Dialog Properties
 
