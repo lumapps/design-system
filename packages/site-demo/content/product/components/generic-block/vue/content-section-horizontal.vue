@@ -5,7 +5,7 @@
         vertical-align="center"
         gap="big"
         :style="{ maxWidth: '216px' }"
-        :content-props="{ verticalAlign: 'left', gap: 'tiny', className: classNames.padding('horizontal', 'big') }"
+        :content-props="{ verticalAlign: 'left', gap: 'tiny', class: classNames.padding('horizontal', 'big') }"
     >
         <template #figure>
             <Placeholder name="2" :height="154" :width="216" />

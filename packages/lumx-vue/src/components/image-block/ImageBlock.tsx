@@ -11,6 +11,7 @@ import {
 } from '@lumx/core/js/components/ImageBlock';
 
 import { useTheme } from '../../composables/useTheme';
+import { useClassName } from '../../composables/useClassName';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { Thumbnail, ThumbnailProps } from '../thumbnail';
 import ImageCaption from './ImageCaption';
@@ -32,9 +33,10 @@ const ImageBlock = defineComponent(
     (props: ImageBlockProps, { slots }) => {
         const attrs = useAttrs();
         const defaultTheme = useTheme();
+        const className = useClassName(() => props.class);
 
         return () => {
-            const { class: className, theme, tags: tagsProp, actions: actionsProp, ...restProps } = props as any;
+            const { class: _class, theme, tags: tagsProp, actions: actionsProp, ...restProps } = props as any;
             const tags = (slots.tags?.() ?? tagsProp) as any;
             const actions = (slots.actions?.() ?? actionsProp) as any;
 
@@ -42,7 +44,7 @@ const ImageBlock = defineComponent(
                 <UI
                     {...(restProps as any)}
                     {...attrs}
-                    className={className}
+                    className={className.value}
                     theme={theme || defaultTheme.value}
                     tags={tags}
                     actions={actions}

@@ -102,8 +102,12 @@ export const Component = forwardRef<Props, HTMLDivElement>((props, ref) => {
 
 ```typescript
 // Vue wrapper with JSX
+import { useClassName } from '../../composables/useClassName';
+
 const Component = defineComponent(
     (props, { emit, slots }) => {
+        // Merge props.class + attrs.className (from core parent components)
+        const className = useClassName(() => props.class);
         const inputId = computed(() => props.id || useId());
 
         const handleChange = (...args) => {
@@ -120,6 +124,7 @@ const Component = defineComponent(
                 <ComponentUI
                     {...rest}
                     linkAs={toRaw(linkAs)}
+                    className={classNAme.value}
                     inputId={inputId.value}
                     label={(props.label || slots.default?.()) as JSXElement}
                     onChange={handleChange}
@@ -130,7 +135,7 @@ const Component = defineComponent(
     {
         name: 'LumxComponent',  // ← Prefix with 'Lumx'
         inheritAttrs: false,
-        props: keysOf<Props>()('prop1', 'prop2', ...),
+        props: keysOf<Props>()('class', 'prop1', 'prop2', ...),
         emits: { change: (...args) => validation },
     }
 );
@@ -138,14 +143,15 @@ const Component = defineComponent(
 
 ## Common Props Mappings
 
-| React            | Core        | Notes           |
-| ---------------- | ----------- | --------------- |
-| `children`       | `label`     | JSXElement type |
-| `id` (generated) | `inputId`   | Required prop   |
-| `ref`            | `ref`       | Same            |
-| `className`      | `className` | Same            |
-| `theme`          | `theme`     | Same            |
-| `onChange`       | `onChange`  | Same signature  |
+| React            | Core        | Vue                                                 | Notes                                                          |
+| ---------------- | ----------- | --------------------------------------------------- | -------------------------------------------------------------- |
+| `children`       | `label`     | `slots.default`                                     | JSXElement type                                                |
+| `id` (generated) | `inputId`   | `useId()`                                           | Required prop                                                  |
+| `ref`            | `ref`       | `ref`                                               | Same                                                           |
+| `className`      | `className` | `useClassName(() => props.class).value`             | Merges `props.class` + `attrs.className` via `classNames.join` |
+| `tabIndex` etc.  | `tabIndex`  | `useAttrFallback(() => attrs.tabindex, 'tabIndex')` | For other React-named attrs landing in `$attrs`                |
+| `theme`          | `theme`     | `useTheme()`                                        | Same                                                           |
+| `onChange`       | `onChange`  | `emit('change')`                                    | Vue uses emit                                                  |
 
 ## Test File Templates
 

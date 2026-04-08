@@ -11,6 +11,7 @@ import { TABS_CLASSNAME as CLASSNAME } from '@lumx/core/js/components/Tabs/const
 import { type JSXElement } from '@lumx/core/js/types';
 
 import { useTheme } from '../../composables/useTheme';
+import { useClassName } from '../../composables/useClassName';
 import { useRovingTabIndexContainer } from '../../composables/useRovingTabIndexContainer';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 
@@ -36,6 +37,7 @@ const TabList = defineComponent(
         const attrs = useAttrs();
         const slots = useSlots();
         const defaultTheme = useTheme();
+        const className = useClassName(() => props.class);
         const containerRef = ref<HTMLElement | null>(null);
 
         useRovingTabIndexContainer({
@@ -48,7 +50,7 @@ const TabList = defineComponent(
                 {...attrs}
                 ref={containerRef}
                 aria-label={attrs['aria-label'] as string}
-                className={props.class}
+                className={className.value}
                 theme={props.theme || defaultTheme.value}
                 layout={props.layout}
                 position={props.position}

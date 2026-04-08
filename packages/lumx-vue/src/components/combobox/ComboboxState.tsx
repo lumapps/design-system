@@ -15,20 +15,6 @@ import { Text } from '../text';
 import { useComboboxContext } from './context/ComboboxContext';
 import { useComboboxEvent } from './context/useComboboxEvent';
 
-/**
- * Adapter: maps core's `className` prop to Vue's `class` prop for GenericBlock.
- * Also maps hAlign/vAlign to GenericBlock's horizontalAlign/verticalAlign props.
- * Children are received as Vue slots and forwarded to the GenericBlock component.
- */
-const GenericBlockAdapter = (p: any, { slots }: any) => {
-    const { className, hAlign, vAlign, ...rest } = p;
-    return (
-        <GenericBlock class={className} horizontalAlign={hAlign} verticalAlign={vAlign} {...rest}>
-            {{ default: slots.default }}
-        </GenericBlock>
-    );
-};
-
 export type ComboboxStateProps = VueToJSXProps<UIProps, 'state'>;
 
 /**
@@ -74,7 +60,7 @@ const ComboboxState = defineComponent(
                     loadingMessage,
                     state,
                 },
-                { GenericBlock: GenericBlockAdapter, Text: Text as any },
+                { GenericBlock, Text: Text as any },
             );
         };
     },

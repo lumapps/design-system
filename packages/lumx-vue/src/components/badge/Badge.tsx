@@ -3,6 +3,7 @@ import { defineComponent, useAttrs } from 'vue';
 import { Badge as BadgeUI, type BadgeProps as UIProps } from '@lumx/core/js/components/Badge';
 import { type JSXElement } from '@lumx/core/js/types';
 
+import { useClassName } from '../../composables/useClassName';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 
 export type BadgeProps = VueToJSXProps<UIProps>;
@@ -16,9 +17,10 @@ export type BadgeProps = VueToJSXProps<UIProps>;
 const Badge = defineComponent(
     (props: BadgeProps, { slots }) => {
         const attrs = useAttrs();
+        const className = useClassName(() => props.class);
 
         return () => (
-            <BadgeUI {...props} {...attrs} className={props.class} children={slots.default?.() as JSXElement} />
+            <BadgeUI {...props} {...attrs} className={className.value} children={slots.default?.() as JSXElement} />
         );
     },
     {

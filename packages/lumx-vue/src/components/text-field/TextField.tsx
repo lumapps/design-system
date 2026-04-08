@@ -10,6 +10,7 @@ import { type InputLabelProps } from '@lumx/core/js/components/InputLabel';
 import { CLASSNAME, COMPONENT_NAME } from '@lumx/core/js/components/TextField/constants';
 
 import { useTheme } from '../../composables/useTheme';
+import { useClassName } from '../../composables/useClassName';
 import { useId } from '../../composables/useId';
 import { useDisableStateProps } from '../../composables/useDisableStateProps';
 import { useSlot } from '../../composables/useSlot';
@@ -17,15 +18,6 @@ import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { IconButton } from '../button';
 import RawInputText from './RawInputText';
 import RawInputTextarea from './RawInputTextarea';
-
-/**
- * Adapter for the Vue IconButton that maps `className` (used by the core component)
- * to Vue's `class` prop.
- */
-const IconButtonAdapter = (p: any) => {
-    const { className, ...rest } = p;
-    return <IconButton class={className} {...rest} />;
-};
 
 export type TextFieldProps = VueToJSXProps<UIProps, TextFieldPropsToOverride | 'chips'> & {
     /** Native input id property (generated if not provided). */
@@ -72,6 +64,7 @@ const TextField = defineComponent(
         const attrs = useAttrs();
         const getChipsSlot = useSlot('chips');
         const defaultTheme = useTheme();
+        const className = useClassName(() => props.class);
         const generatedId = useId();
         const textFieldId = computed(() => props.id || generatedId);
         const isFocus = ref(false);
@@ -130,6 +123,7 @@ const TextField = defineComponent(
             // are forwarded to the native input element.
             const {
                 class: _class,
+                className: _cn,
                 'aria-describedby': _ab,
                 disabled: _d,
                 isDisabled: _id,
@@ -185,7 +179,7 @@ const TextField = defineComponent(
                     multiline={props.multiline}
                     placeholder={props.placeholder}
                     value={props.value}
-                    className={props.class}
+                    className={className.value}
                     theme={theme}
                     id={textFieldId.value}
                     isAnyDisabled={isAnyDisabled.value}
@@ -194,7 +188,7 @@ const TextField = defineComponent(
                     isFocus={isFocus.value}
                     input={input}
                     textFieldRef={props.textFieldRef}
-                    IconButton={IconButtonAdapter as any}
+                    IconButton={IconButton as any}
                     clearButtonProps={
                         props.clearButtonProps ? { ...props.clearButtonProps, onClick: handleClear } : undefined
                     }

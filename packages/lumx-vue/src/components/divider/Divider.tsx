@@ -9,6 +9,7 @@ import {
 } from '@lumx/core/js/components/Divider';
 
 import { useTheme } from '../../composables/useTheme';
+import { useClassName } from '../../composables/useClassName';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 
 export type DividerProps = VueToJSXProps<UIProps>;
@@ -25,10 +26,16 @@ const Divider = defineComponent(
     (props: DividerProps) => {
         const attrs = useAttrs();
         const defaultTheme = useTheme();
+        const className = useClassName(() => props.class);
 
         return () => {
             return (
-                <DividerUI {...attrs} {...props} className={props.class} theme={props.theme || defaultTheme.value} />
+                <DividerUI
+                    {...attrs}
+                    {...props}
+                    className={className.value}
+                    theme={props.theme || defaultTheme.value}
+                />
             );
         };
     },

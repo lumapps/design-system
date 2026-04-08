@@ -6,6 +6,7 @@ import {
 } from '@lumx/core/js/components/TextField/RawInputText';
 
 import { useTheme } from '../../composables/useTheme';
+import { useClassName } from '../../composables/useClassName';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 
 export type RawInputTextProps = VueToJSXProps<UIProps>;
@@ -28,6 +29,7 @@ const RawInputText = defineComponent(
     (props: RawInputTextProps, { emit }) => {
         const attrs = useAttrs();
         const defaultTheme = useTheme();
+        const className = useClassName(() => props.class);
 
         const handleChange = (value: string, name?: string, event?: any) => {
             event?.stopImmediatePropagation();
@@ -45,7 +47,7 @@ const RawInputText = defineComponent(
                     value={props.value}
                     type={props.type}
                     name={props.name}
-                    className={props.class}
+                    className={className.value}
                     theme={props.theme || defaultTheme.value}
                     handleChange={handleChange}
                     handleInput={handleInput}

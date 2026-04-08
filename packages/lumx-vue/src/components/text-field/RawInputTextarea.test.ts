@@ -7,13 +7,8 @@ import { commonTestsSuiteVTL, SetupRenderOptions } from '@lumx/vue/testing';
 import { RawInputTextarea } from '.';
 
 describe('<RawInputTextarea />', () => {
-    const renderRawInputTextarea = (props: any, options?: SetupRenderOptions<any>) => {
-        const { handleChange, className, ...restProps } = props;
-        return render(RawInputTextarea, {
-            ...options,
-            props: restProps,
-        });
-    };
+    const renderRawInputTextarea = ({ handleChange, ...props }: any, options?: SetupRenderOptions<any>) =>
+        render(RawInputTextarea, { props, ...options });
 
     BaseRawInputTextareaTests({ render: renderRawInputTextarea, screen });
 

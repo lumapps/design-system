@@ -1,6 +1,7 @@
 import { computed, defineComponent, useAttrs } from 'vue';
 
 import { getHeadingProps, type HeadingProps } from '@lumx/core/js/components/Heading';
+import { useClassName } from '@lumx/vue/composables/useClassName';
 
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { Text } from '../text';
@@ -18,13 +19,14 @@ const Heading = defineComponent(
     (props: HeadingVueProps, { slots }) => {
         const attrs = useAttrs();
         const context = useHeadingLevel();
+        const mergedClassName = useClassName(() => props.class);
 
         const uiProps = computed(() => {
             const { className, ...headingProps } = getHeadingProps(
                 {
                     ...attrs,
                     ...props,
-                    className: (props.class || attrs.class || attrs.className) as string,
+                    className: mergedClassName.value,
                 },
                 context.headingElement,
             );

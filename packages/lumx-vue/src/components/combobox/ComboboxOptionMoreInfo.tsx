@@ -1,5 +1,7 @@
 import { defineComponent, isRef, ref, watchEffect } from 'vue';
 
+import { useClassName } from '../../composables/useClassName';
+
 import {
     ComboboxOptionMoreInfo as UI,
     type ComboboxOptionMoreInfoProps as UIProps,
@@ -36,6 +38,8 @@ export type ComboboxOptionMoreInfoProps = VueToJSXProps<
  */
 const ComboboxOptionMoreInfo = defineComponent(
     (props: ComboboxOptionMoreInfoProps, { slots }) => {
+        const mergedClassName = useClassName(() => props.class);
+
         // Ref to the IconButton component instance (with exposed `$el`).
         const iconButtonRef = ref<any>(null);
 
@@ -59,39 +63,31 @@ const ComboboxOptionMoreInfo = defineComponent(
         const popoverId = `${optionId}-more-info`;
 
         /**
-         * IconButton adapter (closure) that maps core `className` → Vue `class`,
-         * core `onMouseEnter`/`onMouseLeave` → Vue `onMouseenter`/`onMouseleave`, and
-         * binds the given `iconButtonRef` to the IconButton component instance.
+         * IconButton adapter (closure) that maps core `onMouseEnter`/`onMouseLeave`
+         * → Vue `onMouseenter`/`onMouseleave`
          *
          * The ref resolves to the IconButton's exposed proxy (with `$el` pointing to the
          * actual `<button>` DOM element), which is then used by `watchEffect` to extract
          * the anchor element for popover positioning.
          */
         function IconButtonAdapter(coreProps: any) {
-            const { className, onMouseEnter, onMouseLeave, ...rest } = coreProps;
+            const { onMouseEnter, onMouseLeave, ...rest } = coreProps;
             return (
                 <IconButton
                     ref={iconButtonRef}
-                    class={className}
                     {...{ onMouseenter: onMouseEnter, onMouseleave: onMouseLeave }}
                     {...rest}
                 />
             );
         }
         /**
-         * Adapter for Popover (closure): maps core `className` → Vue `class`,
-         * replaces `anchorRef` with the resolved DOM element, wraps children
-         * in a `<div id>` for aria-describedby, and overrides `closeMode` to `"hide"`
-         * so the popover content stays in the DOM for screen reader references.
+         * Adapter for Popover (closure): `anchorRef` with the resolved DOM element
          */
         const PopoverAdapter = (coreProps: any, { slots: popoverSlots }: any) => {
-            const { className, id, closeMode, anchorRef: _coreAnchorRef, children, ...rest } = coreProps;
-            // Children come via Vue slots (from the core template's JSX children) or
-            // as a `children` prop — try both for compatibility.
-            const content = popoverSlots?.default?.() ?? children;
+            const { anchorRef: _coreAnchorRef, ...rest } = coreProps;
             return (
-                <Popover id={id} class={className} anchorRef={anchorEl} closeMode={closeMode} {...rest}>
-                    {content}
+                <Popover anchorRef={anchorEl} {...rest}>
+                    {popoverSlots}
                 </Popover>
             );
         };
@@ -111,7 +107,7 @@ const ComboboxOptionMoreInfo = defineComponent(
                     // By passing `undefined`, the outer VNode has no ref and only the adapter's
                     // inner ref binding takes effect.
                     ref: undefined,
-                    className: props.class,
+                    className: mergedClassName.value,
                     isOpen,
                     popoverId,
                     children,

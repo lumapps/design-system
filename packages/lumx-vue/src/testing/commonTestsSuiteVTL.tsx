@@ -76,6 +76,16 @@ export function commonTestsSuiteVTL<S extends GenericProps>(setup: SetupFunction
                 const wrappers = await setup(modifiedProps);
                 expect(wrappers[forwardClassName]).toHaveClass(modifiedProps.class);
             });
+
+            it('should forward className attr and merge it with class prop', async () => {
+                const modifiedProps = {
+                    class: 'from-class-prop',
+                    className: 'from-class-name-attr',
+                };
+                const wrappers = await setup(modifiedProps);
+                expect(wrappers[forwardClassName]).toHaveClass('from-class-prop');
+                expect(wrappers[forwardClassName]).toHaveClass('from-class-name-attr');
+            });
         }
     });
 }

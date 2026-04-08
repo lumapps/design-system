@@ -8,6 +8,7 @@ import {
 import type { JSXElement } from '@lumx/core/js/types';
 
 import { useDisableStateProps } from '../../composables/useDisableStateProps';
+import { useClassName } from '../../composables/useClassName';
 import { useHasEventListener } from '../../composables/useHasEventListener';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import ListItemAction from './ListItemAction';
@@ -29,6 +30,7 @@ export const emitSchema = {
 const ListItem = defineComponent(
     (props: ListItemProps, { emit, slots }) => {
         const attrs = useAttrs();
+        const className = useClassName(() => props.class);
 
         const hasOnClick = useHasEventListener('onClick');
 
@@ -49,7 +51,7 @@ const ListItem = defineComponent(
             return (
                 <ListItemUI
                     {...rest}
-                    className={props.class}
+                    className={className.value}
                     isDisabled={disabledStateProps.value.disabled}
                     aria-disabled={disabledStateProps.value['aria-disabled']}
                     linkAs={toRaw(linkAs)}

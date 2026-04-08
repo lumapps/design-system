@@ -13,6 +13,7 @@ import { classNames } from '@lumx/core/js/utils';
 import { JSXElement } from '@lumx/core/js/types';
 
 import { useTheme } from '../../composables/useTheme';
+import { useClassName } from '../../composables/useClassName';
 import { useDisableStateProps } from '../../composables/useDisableStateProps';
 import { useHasEventListener } from '../../composables/useHasEventListener';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
@@ -48,6 +49,7 @@ const Thumbnail = defineComponent(
     (props: ThumbnailProps, { emit, slots }) => {
         const attrs = useAttrs();
         const defaultTheme = useTheme();
+        const className = useClassName(() => props.class);
         const imgElement = ref<HTMLImageElement>();
 
         const hasClickListener = useHasEventListener('onClick');
@@ -100,7 +102,7 @@ const Thumbnail = defineComponent(
                 <ThumbnailUI
                     {...restProps}
                     linkAs={toRaw(linkAs)}
-                    className={props.class}
+                    className={className.value}
                     theme={props.theme || defaultTheme.value}
                     isAnyDisabled={isAnyDisabled.value}
                     disabledStateProps={disabledStateProps.value}

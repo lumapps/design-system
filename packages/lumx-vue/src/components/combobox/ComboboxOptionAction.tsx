@@ -9,6 +9,7 @@ import {
 import type { JSXElement } from '@lumx/core/js/types';
 
 import { useId } from '../../composables/useId';
+import { useClassName } from '../../composables/useClassName';
 import { useDisableStateProps } from '../../composables/useDisableStateProps';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 
@@ -28,18 +29,19 @@ export type ComboboxOptionActionProps = Pick<VueToJSXProps<UIProps>, 'isDisabled
 const ComboboxOptionAction = defineComponent(
     (props: ComboboxOptionActionProps, { slots, attrs }) => {
         const actionId = useId();
+        const className = useClassName(() => props.class);
         const { disabledStateProps, otherProps } = useDisableStateProps(props as any);
 
         return () => {
             const children = slots.default?.() as JSXElement;
-            const { onClick, class: className, ...forwardedProps } = otherProps.value as any;
+            const { onClick, class: _class, ...forwardedProps } = otherProps.value as any;
             return UI({
                 as: 'button' as any,
                 ...forwardedProps,
                 ...attrs,
                 ...disabledStateProps.value,
                 id: actionId,
-                className,
+                className: className.value,
                 handleClick: onClick,
                 children,
             });

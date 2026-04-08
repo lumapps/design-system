@@ -1120,6 +1120,7 @@ import {
     Component as ComponentUI,
     type ComponentProps as UIProps,
 } from '@lumx/core/js/components/Component';
+import { useClassName } from '../../composables/useClassName';
 import { useTheme, useDisableStateProps, useId } from '../../composables/...';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { JSXElement } from '@lumx/core/js/types';
@@ -1133,6 +1134,7 @@ export const emitSchema = {
 const Component = defineComponent(
     (props: ComponentProps, { emit, slots }) => {
         const attrs = useAttrs();
+        const className = useClassName(() => props.class);
         const defaultTheme = useTheme();
         const generatedInputId = useId();
         const inputId = computed(() => props.id || generatedInputId);
@@ -1157,7 +1159,7 @@ const Component = defineComponent(
                 <ComponentUI
                     {...rest}
                     linkAs={toRaw(linkAs)}
-                    className={props.class}
+                    className={className.value}
                     theme={props.theme || defaultTheme}
                     inputId={inputId.value}
                     isDisabled={isAnyDisabled.value}
@@ -1232,7 +1234,12 @@ export default Component;
 19. **Vue `index.ts` should export components and types only** - Do NOT export `CLASSNAME`, `COMPONENT_NAME`, or `DEFAULT_PROPS` from Vue index files. Only export components (using `default as` syntax) and types (props, enums)
 20. **Always check for existing core implementation first** - Before creating UI/Stories/Tests in core, verify they don't already exist. If they do, reuse them and only make changes after user approval
 21. **Use ReactToJSX and VueToJSXProps type utilities** - Don't manually list all props to omit; use the new type utilities that automatically handle PropsToOverride
-22. **🛑 Use `toRaw()` on props that accept Vue component references** — Props like `linkAs` accept a Vue component object (e.g., a custom `RouterLink`). When this component object flows through Vue's reactivity system (props → `computed` → spread in `useDisableStateProps`), it becomes a reactive proxy. Passing a reactive component to JSX causes: `[Vue warn]: Vue received a Component that was made a reactive object`. Use `toRaw()` to unwrap reactivity before passing to the core UI component.
+22. **🛑 Always use `useClassName` composable for merging `class` prop with `className` attr** — Core JSX components pass `className` (React convention) when rendering Vue sub-components. Since `className` is not a declared Vue prop, it lands in `$attrs`. Use `useClassName(() => props.class)` to merge both sources with `classNames.join()`. Always pass a **getter** (`() => props.class`), not `props.class` directly — the plain string loses reactivity. `useClassName` is built on `useAttrFallback` — a generic composable that falls back to any `$attrs` value when a Vue prop is absent (e.g., `tabIndex` from core lands as `attrs.tabindex` in Vue). Use `useAttrFallback` directly for other React-named attrs besides `className`.
+    - ✅ `const className = useClassName(() => props.class);` then `className={className.value}`
+    - ✅ `const tabIndex = useAttrFallback(() => attrs.tabindex, 'tabIndex');` (for non-className attrs)
+    - ❌ `className={props.class}` (ignores `attrs.className` from core parent components)
+    - ❌ `const className = useClassName(props.class);` (loses reactivity — captures stale value at setup time)
+23. **🛑 Use `toRaw()` on props that accept Vue component references** — Props like `linkAs` accept a Vue component object (e.g., a custom `RouterLink`). When this component object flows through Vue's reactivity system (props → `computed` → spread in `useDisableStateProps`), it becomes a reactive proxy. Passing a reactive component to JSX causes: `[Vue warn]: Vue received a Component that was made a reactive object`. Use `toRaw()` to unwrap reactivity before passing to the core UI component.
     - ✅ `const { linkAs, ...rest } = otherProps.value; <CoreUI {...rest} linkAs={toRaw(linkAs)} />`
     - ❌ `<CoreUI {...otherProps.value} />` (linkAs is still a reactive proxy)
     - **When does this apply?** Only for props whose value can be a **component reference** (function or object), like `linkAs`. Props like `as` on Text/Heading/FlexBox only accept **string** tag names (`'span'`, `'p'`, `'h1'`, `'div'`), which are primitives immune to reactivity — no `toRaw()` needed for those.
