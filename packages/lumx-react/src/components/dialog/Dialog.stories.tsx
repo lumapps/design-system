@@ -19,38 +19,16 @@ import {
     TextField,
     Toolbar,
 } from '@lumx/react';
-import { DIALOG_TRANSITION_DURATION } from '@lumx/core/js/constants';
 import { useBooleanState } from '@lumx/react/hooks/useBooleanState';
-import { getSelectArgType } from '@lumx/core/stories/controls/selectArgType';
-import { loremIpsum } from '@lumx/core/stories/utils/lorem';
 import { withChromaticForceScreenSize } from '@lumx/react/stories/decorators/withChromaticForceScreenSize';
+import { loremIpsum } from '@lumx/core/stories/utils/lorem';
+import { setup } from '@lumx/core/js/components/Dialog/Stories';
 
 import { Dialog } from './Dialog';
 
-const CLOSE_MODES = ['hide', 'unmount'];
-const dialogSizes = [Size.tiny, Size.regular, Size.big, Size.huge];
-
-export default {
-    title: 'LumX components/dialog/Dialog',
+const { meta, ...stories } = setup({
     component: Dialog,
-    parameters: {
-        // Delay Chromatic snapshot to wait for dialog to open.
-        chromatic: {
-            pauseAnimationAtEnd: true,
-            delay: DIALOG_TRANSITION_DURATION,
-        },
-    },
-    decorators: [
-        // Force minimum chromatic screen size to make sure the dialog appears in view.
-        withChromaticForceScreenSize(),
-    ],
-    args: Dialog.defaultProps,
-    argTypes: {
-        size: getSelectArgType(dialogSizes),
-        onVisibilityChange: { action: true },
-        children: { control: false },
-        closeMode: { control: { type: 'inline-radio' as const }, options: CLOSE_MODES },
-    },
+    decorators: { withChromaticForceScreenSize },
     render(props: any) {
         const buttonRef = useRef<HTMLButtonElement>(null);
         const [isOpen, close, open] = useBooleanState(true);
@@ -63,84 +41,44 @@ export default {
             </>
         );
     },
-};
+});
 
-/**
- * Default dialog
- */
-export const Default = {
-    args: { children: loremIpsum('short') },
-};
+export default { title: 'LumX components/dialog/Dialog', ...meta };
 
-/**
- * Loading state
- */
-export const Loading = {
-    args: { ...Default.args, isLoading: true },
-};
-
-/**
- * Basic header/footer props
- */
-export const WithHeaderFooter = {
-    args: { ...Default.args, header: 'Dialog header', footer: 'Dialog footer' },
-};
+export const Default = { ...stories.Default };
+export const Loading = { ...stories.Loading };
+export const WithHeaderFooter = { ...stories.WithHeaderFooter };
+export const ForceDivider = { ...stories.ForceDivider };
+export const LongContent = { ...stories.LongContent };
+export const PreventAutoClose = { ...stories.PreventAutoClose };
+export const PreventCloseOnEscape = { ...stories.PreventCloseOnEscape };
+export const PreventCloseOnClick = { ...stories.PreventCloseOnClick };
 
 /**
  * More complex header/footer in children
  */
-export const WithHeaderFooterChildren = {
-    args: {
-        children: [
-            <header key="header">
-                <Toolbar
-                    label={<Heading typography="title">Dialog heading</Heading>}
-                    after={<IconButton label="Close" emphasis="low" icon={mdiClose} />}
-                />
-            </header>,
-            <div key="content" className="lumx-spacing-padding-huge">
-                {loremIpsum('short')}
-            </div>,
-            <footer key="footer">
-                <Toolbar after={<Button>Close</Button>} />
-            </footer>,
-        ],
-    },
-};
-
-/**
- * Forcing header/footer dividers
- */
-export const ForceDivider = {
-    args: { ...WithHeaderFooter.args, forceFooterDivider: true, forceHeaderDivider: true },
-};
-
-/**
- * Long scrollable content
- */
-export const LongContent = {
-    args: { ...WithHeaderFooter.args, children: loremIpsum('long') },
-};
-
-/**
- * Prevent auto close (click outside & close on escape)
- */
-export const PreventAutoClose = {
-    args: { ...Default.args, preventAutoClose: true },
-};
-
-/**
- * Prevent close on escape
- */
-export const PreventCloseOnEscape = {
-    args: { ...Default.args, preventCloseOnEscape: true },
-};
-
-/**
- * Prevent close on click outside
- */
-export const PreventCloseOnClick = {
-    args: { ...Default.args, preventCloseOnClick: true },
+export const WithHeaderFooterChildren = () => {
+    const buttonRef = useRef<HTMLButtonElement>(null);
+    const [isOpen, close, open] = useBooleanState(true);
+    return (
+        <>
+            <Button ref={buttonRef} onClick={open}>
+                Open dialog
+            </Button>
+            <Dialog isOpen={isOpen} onClose={close} parentElement={buttonRef}>
+                <header>
+                    <Toolbar
+                        label={<Heading typography="title">Dialog heading</Heading>}
+                        after={<IconButton label="Close" emphasis="low" icon={mdiClose} />}
+                    />
+                </header>
+                <div className="lumx-spacing-padding-huge">{loremIpsum('short')}</div>
+                <footer>
+                    <Toolbar after={<Button>Close</Button>} />
+                </footer>
+            </Dialog>
+        </>
+    );
 };
 
 /**
