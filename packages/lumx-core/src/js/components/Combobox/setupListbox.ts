@@ -76,6 +76,10 @@ export function setupListbox(
                 // Filtered options don't render [role="option"] at all (they render only a
                 // hidden placeholder), so no :not([data-filtered]) filter is needed here.
                 itemSelector: '[role="option"]',
+                getActiveItem: () => {
+                    const id = trigger.getAttribute('aria-activedescendant');
+                    return id ? (document.getElementById(id) as HTMLElement | null) : null;
+                },
             },
             focusCallbacks,
             signal,

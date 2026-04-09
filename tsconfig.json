@@ -5,7 +5,7 @@
         "esModuleInterop": true,
         "declaration": true,
         "forceConsistentCasingInFileNames": true,
-        "lib": ["es2021", "dom"],
+        "lib": ["es2021", "dom", "dom.iterable"],
         "module": "ESNext",
         "moduleResolution": "bundler",
         "noEmit": true,
@@ -30,5 +30,11 @@
         "downlevelIteration": true,
         "allowImportingTsExtensions": true
     },
-    "exclude": ["**/dist/", "**/public/", "node_modules", "packages/lumx-vue/vite.config.mts", "packages/lumx-vue/vitest.setup.ts"]
+    "exclude": [
+        "**/dist/",
+        "**/public/",
+        "node_modules",
+        "packages/lumx-vue/vite.config.mts",
+        "packages/lumx-vue/vitest.setup.ts"
+    ]
 }
