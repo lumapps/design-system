@@ -18,6 +18,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   `@lumx/core`:
     -   Moved `Dialog` from `@lumx/react`
     -   `setupRovingTabIndex`: add MutationObserver-based tabindex normalization (mount, removal recovery, insertion, disabled-state, selection)
+-  `@lumx/react`:
+    -  `TextField`: improve clear button a11y linking it to the input label via `aria-describedby`
+-  `@lumx/vue`:
+    -  `TextField`: improve clear button a11y linking it to the input label via `aria-describedby`
 
 ## [4.10.0][] - 2026-04-03
 

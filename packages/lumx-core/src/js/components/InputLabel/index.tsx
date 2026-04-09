@@ -12,6 +12,8 @@ export interface InputLabelProps extends HasClassName, HasTheme {
     children: JSXElement;
     /** Native htmlFor property. */
     htmlFor: string;
+    /** Native id property. */
+    id?: string;
     /** Whether the component is required or not. */
     isRequired?: boolean;
     /** ref to the root element */

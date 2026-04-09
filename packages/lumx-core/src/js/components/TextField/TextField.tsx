@@ -36,6 +36,8 @@ export interface TextFieldProps extends HasClassName, HasTheme, HasAriaDisabled,
     helperId?: string;
     /** Generated error id for accessibility attributes. */
     errorId?: string;
+    /** Generated label id for accessibility attributes (used to link the clear button to the field label). */
+    labelId?: string;
     /** Whether the component is required or not. */
     isRequired?: boolean;
     /** Whether the text field is displayed with valid style or not. */
@@ -74,6 +76,7 @@ export type TextFieldPropsToOverride =
     | 'clearButtonProps'
     | 'helperId'
     | 'errorId'
+    | 'labelId'
     | 'isAnyDisabled'
     | 'isFocus';
 
@@ -92,13 +95,15 @@ export function generateAccessibilityIds(
     error: TextFieldProps['error'],
     generatedId: string,
     existingAriaDescribedBy?: string,
-): { helperId?: string; errorId?: string; describedById?: string } {
+    label?: TextFieldProps['label'],
+): { helperId?: string; errorId?: string; describedById?: string; labelId?: string } {
     const helperId = helper ? `text-field-helper-${generatedId}` : undefined;
     const errorId = error ? `text-field-error-${generatedId}` : undefined;
+    const labelId = label ? `text-field-label-${generatedId}` : undefined;
     const describedByIds = [errorId, helperId, existingAriaDescribedBy].filter(Boolean);
     const describedById = describedByIds.length === 0 ? undefined : describedByIds.join(' ');
 
-    return { helperId, errorId, describedById };
+    return { helperId, errorId, describedById, labelId };
 }
 
 /**
@@ -130,6 +135,7 @@ export const TextField = (props: TextFieldProps) => {
         textFieldRef,
         helperId,
         errorId,
+        labelId,
         theme,
         value,
         afterElement,
@@ -169,6 +175,7 @@ export const TextField = (props: TextFieldProps) => {
                     {label &&
                         InputLabel({
                             ...labelProps,
+                            id: labelId,
                             htmlFor: textFieldId as string,
                             className: element('label'),
                             isRequired,
@@ -214,6 +221,7 @@ export const TextField = (props: TextFieldProps) => {
 
                 {clearButtonProps && isNotEmpty && !isAnyDisabled && (
                     <IconButton
+                        aria-describedby={labelId}
                         {...clearButtonProps}
                         className={element('input-clear')}
                         icon={mdiCloseCircle}

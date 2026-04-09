@@ -35,7 +35,7 @@ const InputLabel = defineComponent(
         name: 'InputLabel',
         inheritAttrs: false,
         // Redefine properties so that they come in as `props` on the `defineComponent` function
-        props: keysOf<InputLabelProps>()('htmlFor', 'isRequired', 'typography', 'theme', 'class'),
+        props: keysOf<InputLabelProps>()('htmlFor', 'id', 'isRequired', 'typography', 'theme', 'class'),
     },
 );
 
