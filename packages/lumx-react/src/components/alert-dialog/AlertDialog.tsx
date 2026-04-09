@@ -1,28 +1,17 @@
 import React from 'react';
 
-import {
-    DialogProps,
-    Dialog,
-    Button,
-    Emphasis,
-    ColorPalette,
-    Icon,
-    Size,
-    Kind,
-    Toolbar,
-    ButtonProps,
-} from '@lumx/react';
-import { mdiAlert, mdiAlertCircle, mdiCheckCircle, mdiInformation } from '@lumx/icons';
+import { DialogProps, Dialog, Button, Icon, Toolbar, ButtonProps } from '@lumx/react';
 import { useId } from '@lumx/react/hooks/useId';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
-import type { LumxClassName } from '@lumx/react/utils/type';
-import { classNames } from '@lumx/core/js/utils';
+import {
+    AlertDialog as UI,
+    BaseAlertDialogProps as UIProps,
+    CLASSNAME,
+    COMPONENT_NAME,
+    DEFAULT_PROPS,
+} from '@lumx/core/js/components/AlertDialog';
 
-export interface AlertDialogProps extends Omit<DialogProps, 'header' | 'footer'> {
-    /** Message variant. */
-    kind?: Kind;
-    /** Dialog title. */
-    title?: string;
+export interface AlertDialogProps extends Omit<DialogProps, 'header' | 'footer'>, UIProps {
     /** Props forwarded to the confirm button */
     confirmProps: ButtonProps & {
         label: string;
@@ -34,40 +23,7 @@ export interface AlertDialogProps extends Omit<DialogProps, 'header' | 'footer'>
     cancelProps?: ButtonProps & {
         label: string;
     };
-    /**
-     * Children
-     */
-    children?: React.ReactNode;
 }
-
-/**
- * Associative map from message kind to color and icon.
- */
-const CONFIG = {
-    [Kind.error]: { color: ColorPalette.red, icon: mdiAlert },
-    [Kind.info]: { color: ColorPalette.blue, icon: mdiInformation },
-    [Kind.success]: { color: ColorPalette.green, icon: mdiCheckCircle },
-    [Kind.warning]: { color: ColorPalette.yellow, icon: mdiAlertCircle },
-};
-
-/**
- * Component display name.
- */
-const COMPONENT_NAME = 'AlertDialog';
-
-/**
- * Component default class name and class prefix.
- */
-const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-alert-dialog';
-const { block } = classNames.bem(CLASSNAME);
-
-/**
- * Component default props.
- */
-const DEFAULT_PROPS: Partial<DialogProps> = {
-    size: Size.tiny,
-    kind: Kind.info,
-};
 
 /**
  * AlertDialog component.
@@ -79,106 +35,39 @@ const DEFAULT_PROPS: Partial<DialogProps> = {
  * Children of this component should only be strings, paragraphs or links.
  */
 export const AlertDialog = forwardRef<AlertDialogProps, HTMLDivElement>((props, ref) => {
-    const {
-        id,
-        title,
-        className,
-        cancelProps,
-        confirmProps,
-        kind = DEFAULT_PROPS.kind,
-        size = DEFAULT_PROPS.size,
-        dialogProps,
-        children,
-        ...forwardedProps
-    } = props;
+    const { id, title, className, cancelProps, confirmProps, kind, size, dialogProps, children, ...forwardedProps } =
+        props;
 
     const cancelButtonRef = React.useRef(null);
     const confirmationButtonRef = React.useRef(null);
-    const { color, icon } = CONFIG[kind as Kind] || {};
 
     // Define a unique ID to target title and description for aria attributes.
     const generatedId = useId();
     const uniqueId = id || generatedId;
-    const titleId = `${uniqueId}-title`;
-    const descriptionId = `${uniqueId}-description`;
 
     // If content is a string, set in a paragraph.
     const DescriptionElement = typeof children === 'string' ? 'p' : 'div';
 
-    const { label: confirmLabel, onClick: confirmOnClick, ...forwardedConfirmProps } = confirmProps;
-    const { label: cancelLabel, onClick: cancelOnClick, ...forwardedCancelProps } = cancelProps || {};
-
-    return (
-        <Dialog
-            ref={ref}
-            focusElement={cancelProps ? cancelButtonRef : confirmationButtonRef}
-            size={size}
-            dialogProps={{
-                id: uniqueId,
-                role: 'alertdialog',
-                'aria-labelledby': titleId,
-                'aria-describedby': descriptionId,
-                ...dialogProps,
-            }}
-            className={classNames.join(
-                className,
-                block({
-                    [`kind-${kind}`]: Boolean(kind),
-                }),
-            )}
-            {...forwardedProps}
-        >
-            <header>
-                <Toolbar
-                    className="lumx-spacing-margin-horizontal"
-                    before={<Icon icon={icon} size={Size.s} color={color} />}
-                    label={
-                        <h2 id={titleId} className="lumx-typography-title">
-                            {title}
-                        </h2>
-                    }
-                />
-            </header>
-
-            {children && (
-                <DescriptionElement
-                    id={descriptionId}
-                    className="lumx-typography-body2 lumx-spacing-padding-vertical-big lumx-spacing-padding-horizontal-huge"
-                >
-                    {children}
-                </DescriptionElement>
-            )}
-
-            <footer>
-                <Toolbar
-                    className="lumx-spacing-margin-horizontal"
-                    after={
-                        <>
-                            {cancelProps && (
-                                <Button
-                                    {...forwardedCancelProps}
-                                    ref={cancelButtonRef}
-                                    emphasis={Emphasis.medium}
-                                    onClick={cancelOnClick}
-                                >
-                                    {cancelLabel}
-                                </Button>
-                            )}
-                            <Button
-                                {...forwardedConfirmProps}
-                                ref={confirmationButtonRef}
-                                color={color}
-                                className="lumx-spacing-margin-left-regular"
-                                onClick={confirmOnClick}
-                            >
-                                {confirmLabel}
-                            </Button>
-                        </>
-                    }
-                />
-            </footer>
-        </Dialog>
-    );
+    return UI({
+        Button,
+        confirmProps,
+        DescriptionElement,
+        Dialog,
+        Icon,
+        id: uniqueId,
+        Toolbar,
+        cancelButtonRef,
+        cancelProps,
+        children,
+        className,
+        confirmationButtonRef,
+        dialogProps,
+        kind,
+        ref,
+        size,
+        title,
+        ...forwardedProps,
+    });
 });
 
 AlertDialog.displayName = COMPONENT_NAME;

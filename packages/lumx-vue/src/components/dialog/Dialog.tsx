@@ -1,4 +1,4 @@
-import { computed, defineComponent, ref, type Ref } from 'vue';
+import { Comment, computed, defineComponent, ref, type Ref } from 'vue';
 import { useIntersectionObserver } from '@vueuse/core';
 
 import { Dialog as UI, type BaseDialogProps, type DialogSizes, DEFAULT_PROPS } from '@lumx/core/js/components/Dialog';
@@ -137,6 +137,16 @@ const Dialog = defineComponent(
         return () => {
             if (!isMounted.value) return null;
 
+            // Support React-style children where <header> and <footer> are passed inline
+            // (used by core component JSX). Falls back to named slots for regular Dialog usage.
+            const defaultChildren = slots.default?.() ?? [];
+            const headerVnode = defaultChildren.find((c: any) => c.type === 'header');
+            const footerVnode = defaultChildren.find((c: any) => c.type === 'footer');
+            const hasPartitioned = Boolean(headerVnode || footerVnode);
+            const bodyChildren = hasPartitioned
+                ? defaultChildren.filter((c: any) => c.type !== 'header' && c.type !== 'footer' && c.type !== Comment)
+                : defaultChildren;
+
             return UI({
                 ...attrs,
                 ClickAwayProvider,
@@ -146,11 +156,11 @@ const Dialog = defineComponent(
                 ProgressCircular,
                 className: className.value,
                 clickAwayRefs,
-                content: slots.default?.() as JSXElement,
+                content: (bodyChildren.length ? bodyChildren : undefined) as JSXElement,
                 contentRef: contentRefCallback,
                 dialogProps: props.dialogProps,
                 footer: undefined,
-                footerChildContent: slots.footer?.() as JSXElement | undefined,
+                footerChildContent: (slots.footer?.() ?? (footerVnode as any)?.children) as JSXElement | undefined,
                 footerChildProps: undefined,
                 forceFooterDivider: props.forceFooterDivider,
                 forceHeaderDivider: props.forceHeaderDivider,
@@ -158,7 +168,7 @@ const Dialog = defineComponent(
                 hasBottomIntersection: hasBottomIntersection.value,
                 hasTopIntersection: hasTopIntersection.value,
                 header: undefined,
-                headerChildContent: slots.header?.() as JSXElement | undefined,
+                headerChildContent: (slots.header?.() ?? (headerVnode as any)?.children) as JSXElement | undefined,
                 headerChildProps: undefined,
                 isLoading: props.isLoading,
                 isOpen: props.isOpen,
