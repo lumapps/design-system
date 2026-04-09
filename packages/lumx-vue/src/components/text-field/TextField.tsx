@@ -88,6 +88,7 @@ const TextField = defineComponent(
                 props.error,
                 generatedId,
                 (attrs['aria-describedby'] as string) || undefined,
+                props.label,
             ),
         );
 
@@ -117,7 +118,7 @@ const TextField = defineComponent(
 
         return () => {
             const theme = props.theme || defaultTheme.value;
-            const { helperId, errorId, describedById } = accessibilityIds.value;
+            const { helperId, errorId, describedById, labelId } = accessibilityIds.value;
 
             // Filter out attrs handled explicitly so that unknown attrs (e.g. data-*, aria-*)
             // are forwarded to the native input element.
@@ -184,6 +185,7 @@ const TextField = defineComponent(
                     id={textFieldId.value}
                     isAnyDisabled={isAnyDisabled.value}
                     helperId={helperId}
+                    labelId={labelId}
                     errorId={errorId}
                     isFocus={isFocus.value}
                     input={input}

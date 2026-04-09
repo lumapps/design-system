@@ -1,6 +1,12 @@
 import partition from 'lodash/partition';
 
-import { getByClassName, getByTagName, queryAllByClassName, queryByTagName } from '../../../testing/queries';
+import {
+    getByClassName,
+    getByTagName,
+    queryAllByClassName,
+    queryByClassName,
+    queryByTagName,
+} from '../../../testing/queries';
 import { SetupOptions } from '../../../testing';
 
 const CLASSNAME = 'lumx-text-field';
@@ -207,6 +213,38 @@ export default (renderOptions: SetupOptions<any>) => {
             it('should not forward "labelProps" to the native input element', () => {
                 const { inputNative } = setup({ labelProps: { className: 'custom-label' } }, renderOptions);
                 expect(inputNative).not.toHaveAttribute('labelprops');
+            });
+
+            it('should link the clear button to the field label via aria-describedby', () => {
+                setup(
+                    {
+                        label: 'My label',
+                        value: 'some value',
+                        clearButtonProps: { label: 'Clear' },
+                    },
+                    renderOptions,
+                );
+
+                const clearButton = queryByClassName(document.body, 'lumx-text-field__input-clear') as HTMLElement;
+
+                expect(clearButton).toBeInTheDocument();
+                expect(clearButton).toHaveAccessibleName('Clear');
+                expect(clearButton).toHaveAccessibleDescription('My label');
+            });
+
+            it('should not set accessible description on clear button when there is no label', () => {
+                setup(
+                    {
+                        value: 'some value',
+                        clearButtonProps: { label: 'Clear' },
+                    },
+                    renderOptions,
+                );
+
+                const clearButton = queryByClassName(document.body, 'lumx-text-field__input-clear') as HTMLElement;
+
+                expect(clearButton).toBeInTheDocument();
+                expect(clearButton).not.toHaveAccessibleDescription();
             });
         });
 

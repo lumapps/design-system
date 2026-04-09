@@ -104,11 +104,12 @@ export const TextField = forwardRef<TextFieldProps, HTMLDivElement>((props, ref)
     /** Merge prop input ref and local input ref */
     const inputRef = mergeRefs(localInputRef, inputRefProps);
 
-    const { helperId, errorId, describedById } = generateAccessibilityIds(
+    const { helperId, errorId, describedById, labelId } = generateAccessibilityIds(
         helper,
         error,
         generatedTextFieldId,
         forwardedProps['aria-describedby'],
+        label,
     );
 
     const [isFocus, setFocus] = useState(false);
@@ -183,6 +184,7 @@ export const TextField = forwardRef<TextFieldProps, HTMLDivElement>((props, ref)
         afterElement,
         hasError,
         helperId,
+        labelId,
         multiline,
         maxLength,
         isRequired,
