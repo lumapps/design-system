@@ -25,13 +25,22 @@ export interface ComboboxInputProps extends TextFieldProps {
     /** Called when an option is selected. */
     onSelect?: (option: { value: string }) => void;
     /**
-     * When true (default), the combobox automatically filters options as the user types.
-     * Each `Combobox.Option` registers itself and hides when it doesn't match the input value.
+     * Controls how the combobox filters options as the user types.
      *
-     * Set to false when you handle filtering yourself (e.g. async search, consumer-side
-     * pre-filtering). Options will not be auto-filtered.
+     * - `'auto'` (default) — Options are automatically filtered client-side.
+     * - `'manual'` — Filtering is the consumer's responsibility.
+     * - `'off'` — Like `'manual'`, but the input is rendered as `readOnly`
+     *   and `openOnFocus` defaults to `true`.
      */
-    autoFilter?: boolean;
+    filter?: 'auto' | 'manual' | 'off';
+    /**
+     * When true, the combobox opens automatically when the input receives focus.
+     * When false (default, unless `filter` is `'off'`), the combobox only opens
+     * on click, typing, or keyboard navigation.
+     *
+     * @default false (true when filter is 'off')
+     */
+    openOnFocus?: boolean;
 }
 
 /**
@@ -45,7 +54,7 @@ export interface ComboboxInputProps extends TextFieldProps {
 export const ComboboxInput = forwardRef<ComboboxInputProps, HTMLDivElement>((props, ref) => {
     const { listboxId, anchorRef, setHandle } = useComboboxContext();
     const [isOpen, setIsOpen] = useComboboxOpen();
-    const { inputRef: externalInputRef, toggleButtonProps, onSelect, autoFilter, ...otherProps } = props;
+    const { inputRef: externalInputRef, toggleButtonProps, onSelect, filter, openOnFocus, ...otherProps } = props;
     const internalInputRef = useRef<HTMLInputElement>(null);
     const mergedInputRef = useMergeRefs(externalInputRef, internalInputRef);
 
@@ -65,14 +74,15 @@ export const ComboboxInput = forwardRef<ComboboxInputProps, HTMLDivElement>((pro
                 onChangeRef.current?.(option.value);
                 onSelectRef.current?.(option);
             },
-            autoFilter,
+            filter,
+            openOnFocus,
         });
         setHandle(handle);
         return () => {
             handle.destroy();
             setHandle(null);
         };
-    }, [autoFilter, setHandle]);
+    }, [filter, openOnFocus, setHandle]);
 
     const handleToggle = useCallback(() => {
         setIsOpen(!isOpen);
@@ -85,6 +95,7 @@ export const ComboboxInput = forwardRef<ComboboxInputProps, HTMLDivElement>((pro
             ref,
             listboxId,
             isOpen,
+            filter,
             inputRef: mergedInputRef,
             textFieldRef: anchorRef as Ref<HTMLDivElement>,
             toggleButtonProps,

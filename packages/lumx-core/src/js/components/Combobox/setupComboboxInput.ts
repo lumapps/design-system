@@ -4,14 +4,22 @@ import { setupCombobox } from './setupCombobox';
 /** Options for configuring the input-mode combobox controller. */
 export interface SetupComboboxInputOptions extends ComboboxCallbacks {
     /**
-     * When true (default), the combobox automatically filters options as the user types.
-     * Each registered `Combobox.Option` receives filter state updates and hides itself
-     * when it does not match the current input value.
+     * Controls how the combobox filters options as the user types.
      *
-     * Set to false when you want to handle filtering yourself (e.g. async search,
-     * consumer-side pre-filtering). Options will not be registered for auto-filtering.
+     * - `'auto'` (default) — Options are automatically filtered client-side.
+     * - `'manual'` — Filtering is the consumer's responsibility.
+     * - `'off'` — Like `'manual'`, and `openOnFocus` defaults to `true`.
+     *   The core template renders the input as `readOnly`.
      */
-    autoFilter?: boolean;
+    filter?: 'auto' | 'manual' | 'off';
+    /**
+     * When true, the combobox opens automatically when the input receives focus.
+     * When false (default, unless `filter` is `'off'`), the combobox only opens
+     * on click, typing, or keyboard navigation.
+     *
+     * @default false (true when filter is 'off')
+     */
+    openOnFocus?: boolean;
 }
 
 /**
@@ -29,7 +37,9 @@ export interface SetupComboboxInputOptions extends ComboboxCallbacks {
  * @returns A ComboboxHandle for interacting with the combobox.
  */
 export function setupComboboxInput(input: HTMLInputElement, options: SetupComboboxInputOptions): ComboboxHandle {
-    const { autoFilter = true, onSelect: optionOnSelect } = options;
+    const { filter = 'auto', onSelect: optionOnSelect } = options;
+    const openOnFocus = options.openOnFocus ?? filter === 'off';
+    const autoFilter = filter === 'auto';
 
     /** Check if the input is disabled (native `disabled` attribute or `aria-disabled="true"`). */
     const isDisabled = () => input.disabled || input.getAttribute('aria-disabled') === 'true';
@@ -83,13 +93,15 @@ export function setupComboboxInput(input: HTMLInputElement, options: SetupCombob
             { signal },
         );
 
-        // Open on focus.
+        // Open on focus (only when openOnFocus is enabled).
         input.addEventListener(
             'focus',
             () => {
                 if (isDisabled()) return;
                 combobox.focusNav?.clear();
-                combobox.setIsOpen(true);
+                if (openOnFocus) {
+                    combobox.setIsOpen(true);
+                }
             },
             { signal },
         );

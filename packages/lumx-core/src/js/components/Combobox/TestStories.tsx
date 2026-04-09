@@ -163,6 +163,81 @@ export function setup({
         },
     };
 
+    // ─── Browser-only filter templates ─────────────────────────
+
+    const filterOffStory = {
+        args: { value: '' },
+        decorators: [withValueOnChange()],
+        render: ({ value, onChange, onSelect }: any) => (
+            <Combobox.Provider>
+                <Combobox.Input
+                    value={value}
+                    onChange={onChange}
+                    onSelect={onSelect}
+                    filter="off"
+                    placeholder="Pick a fruit…"
+                    toggleButtonProps={{ label: 'Fruits' }}
+                />
+                <Combobox.Popover>
+                    <Combobox.List aria-label="Fruits">
+                        {[
+                            'Apple',
+                            'Apricot',
+                            'Banana',
+                            'Blueberry',
+                            'Cherry',
+                            'Grape',
+                            'Lemon',
+                            'Orange',
+                            'Peach',
+                            'Strawberry',
+                        ].map((fruit) => (
+                            <Combobox.Option key={fruit} value={fruit}>
+                                {fruit}
+                            </Combobox.Option>
+                        ))}
+                    </Combobox.List>
+                </Combobox.Popover>
+            </Combobox.Provider>
+        ),
+    };
+
+    /**
+     * Verifies that filter="off" makes the input readOnly, opens on focus,
+     * and allows selecting via keyboard navigation.
+     */
+    const FilterOffOpenOnFocus = {
+        ...filterOffStory,
+        play: async ({ canvasElement }: any) => {
+            const input = getInput(canvasElement);
+
+            // Input should be readOnly
+            expect(input.readOnly).toBe(true);
+
+            // Should open on focus
+            input.focus();
+            await waitFor(() => {
+                expect(input).toHaveAttribute('aria-expanded', 'true');
+            });
+
+            // All 10 options visible (no filtering)
+            const visibleOptions = getVisibleOptions();
+            expect(visibleOptions).toHaveLength(10);
+
+            // Navigate and select
+            await userEvent.keyboard('{ArrowDown}');
+            await waitFor(() => {
+                expect(getActiveOption()!.textContent).toBe('Apple');
+            });
+
+            await userEvent.keyboard('{Enter}');
+            await waitFor(() => {
+                expect(input.value).toBe('Apple');
+                expect(input).toHaveAttribute('aria-expanded', 'false');
+            });
+        },
+    };
+
     const MouseHoverDoesNotActivateOption = {
         ...comboboxInputStory,
         play: async ({ canvasElement }: any) => {
@@ -379,6 +454,7 @@ export function setup({
     return {
         meta,
         AutoFilterOptions,
+        FilterOffOpenOnFocus,
         SelectOptionUpdatesInput,
         MouseHoverDoesNotActivateOption,
         ClickAwayClosesPopup,

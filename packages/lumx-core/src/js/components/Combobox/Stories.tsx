@@ -317,6 +317,7 @@ export function setup({
                     value={value}
                     onChange={onChange}
                     placeholder="Pick a fruit…"
+                    openOnFocus
                     toggleButtonProps={{ label: 'Fruits' }}
                 />
                 <Combobox.Popover>
@@ -339,7 +340,12 @@ export function setup({
     const ComboboxWithErrorState = {
         render: () => (
             <Combobox.Provider>
-                <Combobox.Input value="" placeholder="Pick a fruit…" toggleButtonProps={{ label: 'Fruits' }} />
+                <Combobox.Input
+                    value=""
+                    placeholder="Pick a fruit…"
+                    openOnFocus
+                    toggleButtonProps={{ label: 'Fruits' }}
+                />
                 <Combobox.Popover>
                     <Combobox.List aria-label="Fruits" />
                     <Combobox.State errorMessage="Service unavailable" errorTryReloadMessage="Please try again later" />
@@ -356,7 +362,12 @@ export function setup({
     const ComboboxWithLoading = {
         render: () => (
             <Combobox.Provider>
-                <Combobox.Input value="" placeholder="Pick a fruit…" toggleButtonProps={{ label: 'Fruits' }} />
+                <Combobox.Input
+                    value=""
+                    placeholder="Pick a fruit…"
+                    openOnFocus
+                    toggleButtonProps={{ label: 'Fruits' }}
+                />
                 <Combobox.Popover>
                     <Combobox.List aria-label="Fruits">
                         <Combobox.OptionSkeleton count={3} />

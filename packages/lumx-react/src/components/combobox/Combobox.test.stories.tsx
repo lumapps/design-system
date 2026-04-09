@@ -29,6 +29,9 @@ export default {
 // Browser-only: auto-filter test
 export const AutoFilterOptions = { ...testStories.AutoFilterOptions };
 
+// Browser-only: filter="off" test (readOnly input, opens on focus)
+export const FilterOffOpenOnFocus = { ...testStories.FilterOffOpenOnFocus };
+
 // Browser-only: select updates input (withValueOnChange decorator integration)
 export const SelectOptionUpdatesInput = { ...testStories.SelectOptionUpdatesInput };
 

@@ -26,10 +26,22 @@ export type ComboboxInputProps = VueToJSXProps<TextFieldProps, 'inputRef' | 'tex
     /** Called when an option is selected. */
     onSelect?: (option: { value: string }) => void;
     /**
-     * When true (default), the combobox automatically filters options as the user types.
-     * Set to false when you handle filtering yourself (e.g. async search).
+     * Controls how the combobox filters options as the user types.
+     *
+     * - `'auto'` (default) — Options are automatically filtered client-side.
+     * - `'manual'` — Filtering is the consumer's responsibility.
+     * - `'off'` — Like `'manual'`, but the input is rendered as `readOnly`
+     *   and `openOnFocus` defaults to `true`.
      */
-    autoFilter?: boolean;
+    filter?: 'auto' | 'manual' | 'off';
+    /**
+     * When true, the combobox opens automatically when the input receives focus.
+     * When false (default, unless `filter` is `'off'`), the combobox only opens
+     * on click, typing, or keyboard navigation.
+     *
+     * @default false (true when filter is 'off')
+     */
+    openOnFocus?: boolean;
 };
 
 /**
@@ -69,7 +81,8 @@ const ComboboxInput = defineComponent(
                         props.onSelect?.(option);
                         emit('select', option);
                     },
-                    autoFilter: props.autoFilter,
+                    filter: props.filter,
+                    openOnFocus: props.openOnFocus,
                 }),
             );
         });
@@ -85,7 +98,14 @@ const ComboboxInput = defineComponent(
         };
 
         return () => {
-            const { toggleButtonProps, onSelect: _onSelect, autoFilter: _af, class: _class, ...forwardedProps } = props;
+            const {
+                toggleButtonProps,
+                onSelect: _onSelect,
+                filter,
+                openOnFocus: _oof,
+                class: _class,
+                ...forwardedProps
+            } = props;
 
             // Event handlers are framework-specific and forwarded through the core template's
             // spread to the TextField adapter. They are not in the core ComboboxInputProps type.
@@ -97,13 +117,19 @@ const ComboboxInput = defineComponent(
                 onClear: (event?: MouseEvent) => emit('clear', event),
             };
 
+            // Vue normalizes 'aria-disabled' prop to camelCase 'ariaDisabled'.
+            // Re-map it to kebab-case for the core template which expects 'aria-disabled'.
+            const { ariaDisabled: fwdAriaDisabled, ...restForwardedProps } = forwardedProps as any;
+
             return UI(
                 {
                     ...attrs,
-                    ...forwardedProps,
+                    ...restForwardedProps,
+                    'aria-disabled': fwdAriaDisabled ?? (attrs as any).ariaDisabled,
                     ...eventHandlers,
                     listboxId,
                     isOpen: isOpen.value,
+                    filter,
                     textFieldRef: (el: HTMLElement | null) => {
                         textFieldEl.value = el;
                     },
@@ -148,7 +174,8 @@ const ComboboxInput = defineComponent(
             'minimumRows',
             'toggleButtonProps',
             'onSelect',
-            'autoFilter',
+            'filter',
+            'openOnFocus',
         ),
         emits: {
             select: (option: { value: string }) => !!option,

@@ -147,6 +147,130 @@ export function createTemplates(Combobox: ComboboxNamespace, IconButton: any) {
         </Combobox.Provider>
     );
 
+    /** Combobox with filter="manual" — no auto-filtering, consumer handles it. */
+    const manualFilterTemplate = ({
+        value,
+        onChange,
+        onSelect,
+    }: {
+        value: string;
+        onChange: (v: string) => void;
+        onSelect?: (option: { value: string }) => void;
+    }) => (
+        <Combobox.Provider>
+            <Combobox.Input
+                value={value}
+                onChange={onChange}
+                onSelect={onSelect}
+                filter="manual"
+                placeholder="Pick a fruit…"
+                toggleButtonProps={{ label: 'Fruits' }}
+            />
+            <Combobox.Popover>
+                <Combobox.List aria-label="Fruits">
+                    {FRUITS.map((fruit) => (
+                        <Combobox.Option key={fruit} value={fruit}>
+                            {fruit}
+                        </Combobox.Option>
+                    ))}
+                </Combobox.List>
+            </Combobox.Popover>
+        </Combobox.Provider>
+    );
+
+    /** Combobox with filter="off" — read-only input, opens on focus. */
+    const filterOffTemplate = ({
+        value,
+        onChange,
+        onSelect,
+    }: {
+        value: string;
+        onChange: (v: string) => void;
+        onSelect?: (option: { value: string }) => void;
+    }) => (
+        <Combobox.Provider>
+            <Combobox.Input
+                value={value}
+                onChange={onChange}
+                onSelect={onSelect}
+                filter="off"
+                placeholder="Pick a fruit…"
+                toggleButtonProps={{ label: 'Fruits' }}
+            />
+            <Combobox.Popover>
+                <Combobox.List aria-label="Fruits">
+                    {FRUITS.map((fruit) => (
+                        <Combobox.Option key={fruit} value={fruit}>
+                            {fruit}
+                        </Combobox.Option>
+                    ))}
+                </Combobox.List>
+            </Combobox.Popover>
+        </Combobox.Provider>
+    );
+
+    /** Combobox with explicit openOnFocus={true}. */
+    const openOnFocusTemplate = ({
+        value,
+        onChange,
+        onSelect,
+    }: {
+        value: string;
+        onChange: (v: string) => void;
+        onSelect?: (option: { value: string }) => void;
+    }) => (
+        <Combobox.Provider>
+            <Combobox.Input
+                value={value}
+                onChange={onChange}
+                onSelect={onSelect}
+                openOnFocus
+                placeholder="Pick a fruit…"
+                toggleButtonProps={{ label: 'Fruits' }}
+            />
+            <Combobox.Popover>
+                <Combobox.List aria-label="Fruits">
+                    {FRUITS.map((fruit) => (
+                        <Combobox.Option key={fruit} value={fruit}>
+                            {fruit}
+                        </Combobox.Option>
+                    ))}
+                </Combobox.List>
+            </Combobox.Popover>
+        </Combobox.Provider>
+    );
+
+    /** Combobox with explicit openOnFocus={false} (default behavior). */
+    const noOpenOnFocusTemplate = ({
+        value,
+        onChange,
+        onSelect,
+    }: {
+        value: string;
+        onChange: (v: string) => void;
+        onSelect?: (option: { value: string }) => void;
+    }) => (
+        <Combobox.Provider>
+            <Combobox.Input
+                value={value}
+                onChange={onChange}
+                onSelect={onSelect}
+                openOnFocus={false}
+                placeholder="Pick a fruit…"
+                toggleButtonProps={{ label: 'Fruits' }}
+            />
+            <Combobox.Popover>
+                <Combobox.List aria-label="Fruits">
+                    {FRUITS.map((fruit) => (
+                        <Combobox.Option key={fruit} value={fruit}>
+                            {fruit}
+                        </Combobox.Option>
+                    ))}
+                </Combobox.List>
+            </Combobox.Popover>
+        </Combobox.Provider>
+    );
+
     /** Select-only combobox with button trigger and 10 fruit options. */
     const buttonTemplate = ({ value, onSelect }: { value: string; onSelect: (option: { value: string }) => void }) => (
         <Combobox.Provider>
@@ -537,6 +661,10 @@ export function createTemplates(Combobox: ComboboxNamespace, IconButton: any) {
 
     return {
         inputTemplate,
+        manualFilterTemplate,
+        filterOffTemplate,
+        openOnFocusTemplate,
+        noOpenOnFocusTemplate,
         buttonTemplate,
         showLabelButtonTemplate,
         showTooltipButtonTemplate,
@@ -1645,6 +1773,171 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
             expect(button.textContent).toBe('');
             expect(button).toHaveAttribute('role', 'combobox');
             expect(button).toHaveAttribute('aria-haspopup', 'listbox');
+        });
+    });
+
+    // ───────────────────────────────────────────────────────────────
+    // Filter Prop
+    // ───────────────────────────────────────────────────────────────
+
+    describe('filter="manual"', () => {
+        it('should not auto-filter options when typing', async () => {
+            renderWithState(t.manualFilterTemplate);
+            const input = getInput();
+            await userEvent.click(input);
+
+            await waitFor(() => {
+                expect(input).toHaveAttribute('aria-expanded', 'true');
+            });
+
+            expect(getVisibleOptions().length).toBe(FRUITS.length);
+
+            await userEvent.type(input, 'bl');
+
+            // All options should remain visible — no auto-filter
+            await waitFor(() => {
+                expect(getVisibleOptions().length).toBe(FRUITS.length);
+            });
+        });
+
+        it('should still allow selecting options', async () => {
+            const onSelect = vi.fn();
+            renderWithState(t.manualFilterTemplate, { value: '', onSelect });
+            const input = getInput();
+            await userEvent.click(input);
+
+            await waitFor(() => {
+                expect(input).toHaveAttribute('aria-expanded', 'true');
+            });
+
+            await userEvent.keyboard('{ArrowDown}');
+            await waitFor(() => {
+                expect(getActiveOption()!.textContent).toBe('Apple');
+            });
+
+            await userEvent.keyboard('{Enter}');
+            await waitFor(() => {
+                expect(input.value).toBe('Apple');
+            });
+
+            expect(onSelect).toHaveBeenCalled();
+        });
+
+        it('should not have readOnly on the input', async () => {
+            renderWithState(t.manualFilterTemplate);
+            const input = getInput();
+            expect(input.readOnly).toBe(false);
+        });
+    });
+
+    describe('filter="off"', () => {
+        it('should set input to readOnly', async () => {
+            renderWithState(t.filterOffTemplate);
+            const input = getInput();
+
+            await waitFor(() => {
+                expect(input.readOnly).toBe(true);
+            });
+        });
+
+        it('should open on focus (openOnFocus defaults to true)', async () => {
+            renderWithState(t.filterOffTemplate);
+            const input = getInput();
+
+            expect(input).toHaveAttribute('aria-expanded', 'false');
+
+            fireEvent.focus(input);
+
+            await waitFor(() => {
+                expect(input).toHaveAttribute('aria-expanded', 'true');
+            });
+        });
+
+        it('should still allow selecting options', async () => {
+            const onSelect = vi.fn();
+            renderWithState(t.filterOffTemplate, { value: '', onSelect });
+            const input = getInput();
+            await userEvent.click(input);
+
+            await waitFor(() => {
+                expect(input).toHaveAttribute('aria-expanded', 'true');
+            });
+
+            await userEvent.keyboard('{ArrowDown}');
+            await waitFor(() => {
+                expect(getActiveOption()!.textContent).toBe('Apple');
+            });
+
+            await userEvent.keyboard('{Enter}');
+            await waitFor(() => {
+                expect(input.value).toBe('Apple');
+            });
+
+            expect(onSelect).toHaveBeenCalled();
+        });
+
+        it('should show all options (no filtering)', async () => {
+            renderWithState(t.filterOffTemplate);
+            const input = getInput();
+            await userEvent.click(input);
+
+            await waitFor(() => {
+                expect(input).toHaveAttribute('aria-expanded', 'true');
+            });
+
+            expect(getVisibleOptions().length).toBe(FRUITS.length);
+        });
+    });
+
+    describe('openOnFocus', () => {
+        it('should open on focus when openOnFocus is true', async () => {
+            renderWithState(t.openOnFocusTemplate);
+            const input = getInput();
+
+            expect(input).toHaveAttribute('aria-expanded', 'false');
+
+            fireEvent.focus(input);
+
+            await waitFor(() => {
+                expect(input).toHaveAttribute('aria-expanded', 'true');
+            });
+        });
+
+        it('should not open on focus when openOnFocus is false', async () => {
+            renderWithState(t.noOpenOnFocusTemplate);
+            const input = getInput();
+
+            expect(input).toHaveAttribute('aria-expanded', 'false');
+
+            fireEvent.focus(input);
+
+            // Should remain closed — only opens on click or typing
+            expect(input).toHaveAttribute('aria-expanded', 'false');
+        });
+
+        it('should open on click even when openOnFocus is false', async () => {
+            renderWithState(t.noOpenOnFocusTemplate);
+            const input = getInput();
+
+            expect(input).toHaveAttribute('aria-expanded', 'false');
+
+            await userEvent.click(input);
+
+            await waitFor(() => {
+                expect(input).toHaveAttribute('aria-expanded', 'true');
+            });
+        });
+
+        it('should default to not opening on focus (filter="auto")', async () => {
+            renderWithState(t.inputTemplate);
+            const input = getInput();
+
+            expect(input).toHaveAttribute('aria-expanded', 'false');
+
+            fireEvent.focus(input);
+
+            // Default filter="auto" should not open on focus
+            expect(input).toHaveAttribute('aria-expanded', 'false');
         });
     });
 

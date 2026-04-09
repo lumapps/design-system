@@ -28,7 +28,7 @@ export interface ComboboxSectionProps extends GenericProps, ReactToJSX<UIProps, 
  *
  * Returns null when children is empty so the section header is not rendered as an orphan.
  *
- * When autoFilter is active, the section registers itself with the combobox handle.
+ * When filter="auto" is active, the section registers itself with the combobox handle.
  * The handle monitors registered options within this section and notifies when all
  * are filtered out. When hidden, the core template renders a bare `<li hidden>` wrapper
  * so children (options) stay mounted and registered.

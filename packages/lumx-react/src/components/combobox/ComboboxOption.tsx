@@ -48,7 +48,7 @@ export interface ComboboxOptionProps extends GenericProps, ReactToJSX<UIProps, C
 /**
  * Combobox.Option component - wraps ListItem with option role and data-value.
  *
- * When autoFilter is enabled on the parent Combobox.Input, each option registers itself
+ * When filter="auto" is enabled on the parent Combobox.Input, each option registers itself
  * with the combobox handle (via an internal ref to its root <li>). When the filter changes,
  * the handle calls back with the new match state. When filtered out, the core template renders
  * a bare `<li hidden>` — no ARIA roles, no CSS classes — keeping the element in the DOM so
