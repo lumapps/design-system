@@ -101,8 +101,14 @@ async function scanPackage(artifactRoot) {
     }));
     const diffRelPaths = new Set(diffs.map((e) => e.relPath));
 
-    // New screenshots: in baselines after tests but NOT in cached baselines manifest
-    const newScreenshots = cachedBaselines ? baselineEntries.filter((e) => !cachedBaselines.has(e.relPath)) : [];
+    // New screenshots: produced by this test run but NOT in cached baselines manifest.
+    // Check both __baselines__ (vitest-plugin-vis writes here on first run) and __results__
+    // (screenshots may only land in results when no baseline exists yet).
+    const newFromBaselines = cachedBaselines ? baselineEntries.filter((e) => !cachedBaselines.has(e.relPath)) : [];
+    const newFromResults = cachedBaselines
+        ? resultEntries.filter((e) => !cachedBaselines.has(e.relPath) && !baselineSrcMap.has(e.relPath))
+        : [];
+    const newScreenshots = [...newFromBaselines, ...newFromResults];
     const newRelPaths = new Set(newScreenshots.map((e) => e.relPath));
 
     // Unchanged screenshots: in cached baselines AND in results AND NOT in diffs
@@ -510,7 +516,7 @@ async function consolidateImages(packages, crossFramework, artifactsDir, outputD
             if (entry.resultSrcPath) copies.push(copyFile(entry.resultSrcPath, dest(entry, 'current')));
         }
 
-        // New screenshots: current only (from baselines, since vitest-plugin-vis writes new baselines)
+        // New screenshots: current only (from baselines or results, whichever is available)
         for (const entry of pkg.newScreenshots) {
             copies.push(copyFile(entry.srcPath, dest(entry, 'current')));
         }
