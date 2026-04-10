@@ -18,6 +18,21 @@
 
     &__scroll {
         overflow-y: auto;
+        scroll-snap-type: y proximity;
+        @media (prefers-reduced-motion: no-preference) {
+            scroll-behavior: smooth;
+        }
+
+        &::before {
+          content: '';
+          display: block;
+          scroll-snap-align: start;
+        }
+        &::after {
+          content: '';
+          display: block;
+          scroll-snap-align: end;
+        }
     }
 }
 

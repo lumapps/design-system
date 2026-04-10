@@ -32,6 +32,7 @@ export function setupListbox(
     const trigger = handle.trigger!;
     const listbox = handle.listbox!;
     const isGrid = listbox.getAttribute('role') === 'grid';
+    const itemSelector = '[role="option"]';
 
     // ── Focus navigation ──────────────────────────────────────
 
@@ -39,10 +40,25 @@ export function setupListbox(
         onActivate: (item: HTMLElement) => {
             item.setAttribute('data-focus-visible-added', 'true');
             trigger.setAttribute('aria-activedescendant', item.id);
-            // Scroll to the element in listbox or else the item
-            const toScrollTo = item.closest('[role=listbox] > *') || item;
-            toScrollTo.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             notify('activeDescendantChange', item.id);
+
+            requestAnimationFrame(() => {
+                // Last item in listbox
+                const lastItem =
+                    !isGrid &&
+                    // Last item: find last element containing itemSelector and not followed by elements containing itemSelector and then get the itemSelector inside
+                    listbox.querySelector(
+                        `:scope > :has(${itemSelector}):not(:has(~ * ${itemSelector})) ${itemSelector}`,
+                    );
+                if (item === lastItem) {
+                    // Scroll to the end of the listbox (shouldsnap to the end of the scroll container thanks to CSS scroll snap)
+                    listbox.lastElementChild?.scrollIntoView({ block: 'nearest' });
+                } else {
+                    // Scroll to the element in listbox or else the item
+                    const toScrollTo = item.closest('[role=listbox] > *') || item;
+                    toScrollTo.scrollIntoView({ block: 'nearest' });
+                }
+            });
         },
         onDeactivate: (item: HTMLElement) => {
             item.removeAttribute('data-focus-visible-added');
@@ -73,9 +89,7 @@ export function setupListbox(
             {
                 type: 'list',
                 container: listbox,
-                // Filtered options don't render [role="option"] at all (they render only a
-                // hidden placeholder), so no :not([data-filtered]) filter is needed here.
-                itemSelector: '[role="option"]',
+                itemSelector,
                 getActiveItem: () => {
                     const id = trigger.getAttribute('aria-activedescendant');
                     return id ? (document.getElementById(id) as HTMLElement | null) : null;
