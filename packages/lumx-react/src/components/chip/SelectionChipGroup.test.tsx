@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { vi } from 'vitest';
+
+import BaseSelectionChipGroupTests from '@lumx/core/js/components/Chip/SelectionChipGroupTests';
 import { SelectionChipGroup, SelectionChipGroupProps } from './SelectionChipGroup';
 import { Chip } from './Chip';
 
@@ -27,360 +29,114 @@ const setup = (propOverrides: Partial<SelectionChipGroupProps<TestOption>> = {})
     };
 
     const result = render(<SelectionChipGroup {...props} />);
-    const chipGroup = screen.getByRole('listbox', { name: props.label });
+    const chipGroup = screen.queryByRole('listbox', { name: props.label });
 
     return { props, chipGroup, ...result };
 };
 
+const StatefulSelectionChipGroup = (props: Partial<SelectionChipGroupProps<TestOption>>) => {
+    const [value, setValue] = useState(props.value ?? testOptions);
+    return (
+        <SelectionChipGroup
+            getOptionId="id"
+            getOptionName="name"
+            label="Test chips"
+            chipRemoveLabel="Remove"
+            {...props}
+            value={value}
+            onChange={(newValue) => setValue(newValue ?? [])}
+        />
+    );
+};
+
 describe('<SelectionChipGroup />', () => {
-    describe('Props', () => {
-        it('should render default', () => {
-            const { chipGroup } = setup();
-            expect(chipGroup).toBeInTheDocument();
-            expect(chipGroup).toHaveClass('lumx-selection-chip-group');
-        });
-
-        it('should render all chips from value array', () => {
-            setup();
-            expect(screen.getByText('Apricot')).toBeInTheDocument();
-            expect(screen.getByText('Apple')).toBeInTheDocument();
-            expect(screen.getByText('Banana')).toBeInTheDocument();
-        });
-
-        it('should render with custom getOptionName selector', () => {
-            const customOptions = [
-                { id: '1', name: 'Name 1', label: 'Custom 1' },
-                { id: '2', name: 'Name 2', label: 'Custom 2' },
-            ];
-            setup({
-                value: customOptions as any,
-                getOptionName: 'label' as any,
-            });
-            expect(screen.getByText('Custom 1')).toBeInTheDocument();
-            expect(screen.getByText('Custom 2')).toBeInTheDocument();
-        });
-
-        it('should render with function selector for getOptionId', () => {
-            const onChange = vi.fn();
-            setup({
-                getOptionId: (option) => option.id,
-                onChange,
-            });
-            const chips = screen.getAllByRole('option');
-            expect(chips).toHaveLength(3);
-        });
-
-        it('should render with aria-label from label prop', () => {
-            const { chipGroup } = setup({ label: 'Selected items' });
-            expect(chipGroup).toHaveAttribute('aria-label', 'Selected items');
-        });
-
-        it('should render empty when value is undefined', () => {
-            render(
-                <SelectionChipGroup<TestOption>
-                    value={undefined}
-                    getOptionId="id"
-                    getOptionName="name"
-                    label="Test chips"
-                    onChange={vi.fn()}
-                />,
-            );
-            expect(screen.queryByRole('listbox', { name: 'Test chips' })).not.toBeInTheDocument();
-            expect(screen.queryAllByRole('option')).toHaveLength(0);
-        });
-
-        it('should render empty when value is empty array', () => {
-            render(
-                <SelectionChipGroup<TestOption>
-                    value={[]}
-                    getOptionId="id"
-                    getOptionName="name"
-                    label="Test chips"
-                    onChange={vi.fn()}
-                />,
-            );
-            expect(screen.queryByRole('listbox', { name: 'Test chips' })).not.toBeInTheDocument();
-            expect(screen.queryAllByRole('option')).toHaveLength(0);
-        });
+    // Core tests
+    BaseSelectionChipGroupTests({
+        render: (props: any) => render(<SelectionChipGroup {...props} />),
+        renderStateful: () => render(<StatefulSelectionChipGroup />),
+        screen,
     });
 
-    describe('Custom rendering', () => {
-        it('should use custom renderChip when provided', () => {
-            const renderChip = (option: TestOption) => (
-                <Chip data-testid={`custom-${option.id}`}>Custom: {option.name}</Chip>
-            );
-            setup({ renderChip });
-            expect(screen.getByText('Custom: Apricot')).toBeInTheDocument();
-            expect(screen.getByTestId('custom-1')).toBeInTheDocument();
-        });
-
-        it('should merge custom chip props with default props', () => {
-            const renderChip = (option: TestOption) => <Chip className="custom-class">{option.name}</Chip>;
-            setup({ renderChip });
-            const chip = screen.getByText('Apricot').closest('.lumx-chip');
-            expect(chip).toHaveClass('lumx-selection-chip-group__chip');
-            expect(chip).toHaveClass('custom-class');
-        });
-
-        it('should use custom chip children over option name', () => {
-            const renderChip = (option: TestOption) => <Chip>Override: {option.name}</Chip>;
-            setup({ renderChip });
-            expect(screen.getByText('Override: Apricot')).toBeInTheDocument();
-        });
-    });
-
-    describe('Events', () => {
-        it('should call onChange when chip is clicked', async () => {
-            const onChange = vi.fn();
-            setup({ onChange });
-
-            const firstChip = screen.getByText('Apricot');
-            await userEvent.click(firstChip);
-
-            expect(onChange).toHaveBeenCalledTimes(1);
-            expect(onChange).toHaveBeenCalledWith([testOptions[1], testOptions[2]]);
-        });
-
-        it('should remove correct chip when clicking different chips', async () => {
-            const onChange = vi.fn();
-            setup({ onChange });
-
-            const secondChip = screen.getByText('Apple');
-            await userEvent.click(secondChip);
-
-            expect(onChange).toHaveBeenCalledWith([testOptions[0], testOptions[2]]);
-        });
-
-        it('should call onChange with empty array when removing last chip', async () => {
-            const onChange = vi.fn();
-            setup({ value: [testOptions[0]], onChange });
-
-            const chip = screen.getByText('Apricot');
-            await userEvent.click(chip);
-
-            expect(onChange).toHaveBeenCalledWith([]);
-        });
-
-        it('should not call onChange when chip is not in value array', async () => {
-            const onChange = vi.fn();
-            const renderChip = (option: TestOption) => <Chip>{option.name}</Chip>;
-            setup({
-                value: [testOptions[0]],
-                onChange,
-                renderChip,
+    describe('React', () => {
+        describe('Custom rendering with renderChip', () => {
+            it('should use custom renderChip when provided', () => {
+                const renderChip = (option: TestOption) => (
+                    <Chip data-testid={`custom-${option.id}`}>Custom: {option.name}</Chip>
+                );
+                setup({ renderChip });
+                expect(screen.getByText('Custom: Apricot')).toBeInTheDocument();
+                expect(screen.getByTestId('custom-1')).toBeInTheDocument();
             });
 
-            // This test ensures the code handles edge cases, though in practice
-            // this shouldn't happen
-            expect(onChange).not.toHaveBeenCalled();
-        });
-    });
-
-    describe('Keyboard navigation', () => {
-        it('should remove chip and focus input on Backspace', async () => {
-            const onChange = vi.fn();
-            const inputRef = React.createRef<HTMLInputElement>();
-            const { container } = setup({
-                value: [testOptions[0]],
-                onChange,
-                inputRef,
+            it('should merge custom chip className with default', () => {
+                const renderChip = (option: TestOption) => <Chip className="custom-class">{option.name}</Chip>;
+                setup({ renderChip });
+                const chip = screen.getByText('Apricot').closest('.lumx-chip');
+                expect(chip).toHaveClass('lumx-selection-chip-group__chip');
+                expect(chip).toHaveClass('custom-class');
             });
 
-            // Create and attach input to test focus restoration
-            const input = document.createElement('input');
-            (inputRef as any).current = input;
-            container.appendChild(input);
-
-            const chips = screen.getAllByRole('option');
-            const firstChip = chips[0];
-
-            firstChip.focus();
-            await userEvent.keyboard('{Backspace}');
-
-            expect(onChange).toHaveBeenCalledTimes(1);
-            expect(onChange).toHaveBeenCalledWith([]);
-            expect(input).toHaveFocus();
-        });
-
-        it('should focus previous chip on Backspace when not last chip', async () => {
-            const onChange = vi.fn();
-            setup({ onChange });
-
-            const chips = screen.getAllByRole('option');
-            const secondChip = chips[1];
-
-            secondChip.focus();
-            await userEvent.keyboard('{Backspace}');
-
-            expect(onChange).toHaveBeenCalledTimes(1);
-            expect(chips[0]).toHaveFocus();
-        });
-
-        it('should not trigger removal on other keys', async () => {
-            const onChange = vi.fn();
-            setup({ onChange });
-
-            const chip = screen.getByText('Apricot');
-            chip.focus();
-            await userEvent.keyboard('{Enter}');
-
-            expect(onChange).not.toHaveBeenCalled();
-        });
-    });
-
-    describe('Disabled state', () => {
-        it('should render all chips as disabled when isDisabled is true', async () => {
-            const onChange = vi.fn();
-            setup({ isDisabled: true, onChange });
-
-            const chips = screen.getAllByRole('option');
-            chips.forEach((chip) => {
-                expect(chip).toHaveAttribute('aria-disabled', 'true');
-                expect(chip).toHaveAttribute('tabIndex', '-1');
+            it('should use custom chip children string over option name', () => {
+                const renderChip = (option: TestOption) => <Chip>Override: {option.name}</Chip>;
+                setup({ renderChip });
+                expect(screen.getByText('Override: Apricot')).toBeInTheDocument();
             });
 
-            await userEvent.click(chips[0]);
-            // Click should still work on aria-disabled, but we're testing the attribute is set
-            expect(chips[0]).toHaveAttribute('aria-disabled', 'true');
-        });
+            it('should render individual chip as disabled when specified in renderChip', () => {
+                const renderChip = (option: TestOption) => <Chip isDisabled={option.id === '2'}>{option.name}</Chip>;
+                setup({ renderChip });
 
-        it('should render individual chip as disabled when specified in renderChip', () => {
-            const renderChip = (option: TestOption) => <Chip isDisabled={option.id === '2'}>{option.name}</Chip>;
-            setup({ renderChip });
-
-            const chips = screen.getAllByRole('option');
-            expect(chips[0]).not.toHaveAttribute('aria-disabled');
-            expect(chips[1]).toHaveAttribute('aria-disabled', 'true');
-            expect(chips[2]).not.toHaveAttribute('aria-disabled');
-        });
-
-        it('should merge global and individual disabled states', () => {
-            const renderChip = (option: TestOption) => <Chip isDisabled={option.id === '1'}>{option.name}</Chip>;
-            setup({ renderChip, isDisabled: false });
-
-            const chips = screen.getAllByRole('option');
-            expect(chips[0]).toHaveAttribute('aria-disabled', 'true');
-            expect(chips[1]).not.toHaveAttribute('aria-disabled');
-        });
-
-        it('should not show tooltip for disabled chips', () => {
-            setup({ isDisabled: true });
-
-            const chips = screen.getAllByRole('option');
-            // Tooltip should not be rendered for disabled chips
-            // The tooltip label is conditionally set to undefined for disabled chips
-            chips.forEach((chip) => {
-                expect(chip).toHaveAttribute('aria-disabled', 'true');
-            });
-        });
-    });
-
-    describe('Theme', () => {
-        it('should pass theme to chips', () => {
-            setup({ theme: 'dark' });
-
-            const chips = screen.getAllByRole('option');
-            chips.forEach((chip) => {
-                expect(chip.className).toContain('lumx-chip--color-light');
-            });
-        });
-    });
-
-    describe('Tooltips', () => {
-        it('should generate tooltip from option name and chipRemoveLabel', () => {
-            setup({ chipRemoveLabel: 'Remove' });
-
-            const tooltips = screen
-                .getAllByRole('option')
-                .map((chip) => chip.closest('[data-lumx-tooltip]')?.getAttribute('data-lumx-tooltip') ?? '');
-            // Tooltip uses the Tooltip component which sets aria-labelledby, so we check the tooltip wrapper
-            // The tooltip label is "{name} — {chipRemoveLabel}"
-            expect(tooltips).toHaveLength(3);
-        });
-
-        it('should use only option name as tooltip when chipRemoveLabel is not provided', () => {
-            setup({ chipRemoveLabel: undefined });
-
-            // Without chipRemoveLabel, tooltip should just be the option name
-            expect(screen.getAllByRole('option')).toHaveLength(3);
-        });
-
-        it('should use custom chip children for tooltip when renderChip is provided with string children', () => {
-            const renderChip = (option: TestOption) => <Chip>{`Custom ${option.name}`}</Chip>;
-            setup({ renderChip, chipRemoveLabel: 'Remove' });
-
-            // Custom chip children should be used in the tooltip
-            expect(screen.getAllByRole('option')).toHaveLength(3);
-        });
-
-        it('should fallback to option name for tooltip when renderChip has non-string children', () => {
-            const renderChip = (option: TestOption) => <Chip>Custom {option.name}</Chip>;
-            setup({ renderChip, chipRemoveLabel: 'Remove' });
-
-            // Non-string children should fallback to the option name
-            expect(screen.getAllByRole('option')).toHaveLength(3);
-        });
-    });
-
-    describe('Accessibility', () => {
-        it('should have role="listbox" with aria-label and aria-multiselectable', () => {
-            const { chipGroup } = setup({ label: 'Selected fruits' });
-            expect(chipGroup).toHaveAttribute('role', 'listbox');
-            expect(chipGroup).toHaveAttribute('aria-label', 'Selected fruits');
-            expect(chipGroup).toHaveAttribute('aria-multiselectable', 'true');
-            expect(chipGroup).toHaveAttribute('aria-orientation', 'horizontal');
-        });
-
-        it('should have role="option" with aria-selected on each chip', () => {
-            setup();
-
-            const chips = screen.getAllByRole('option');
-            chips.forEach((chip) => {
-                expect(chip).toHaveAttribute('aria-selected', 'true');
+                const chips = screen.getAllByRole('option');
+                expect(chips[0]).not.toHaveAttribute('aria-disabled');
+                expect(chips[1]).toHaveAttribute('aria-disabled', 'true');
+                expect(chips[2]).not.toHaveAttribute('aria-disabled');
             });
         });
 
-        it('should have correct tabIndex for enabled chips', () => {
-            setup();
+        describe('Keyboard navigation', () => {
+            it('should remove chip and focus input on Backspace', async () => {
+                const onChange = vi.fn();
+                const inputRef = React.createRef<HTMLInputElement>();
+                const { container } = setup({
+                    value: [testOptions[0]],
+                    onChange,
+                    inputRef,
+                });
 
-            const chips = screen.getAllByRole('option');
-            // First chip focusable, the other are not (need Arrow key nav via roving tabindex pattern)
-            chips.forEach((chip, index) => {
-                expect(chip).toHaveAttribute('tabIndex', index === 0 ? '0' : '-1');
+                const input = document.createElement('input');
+                (inputRef as any).current = input;
+                container.appendChild(input);
+
+                const chips = screen.getAllByRole('option');
+                const firstChip = chips[0];
+
+                firstChip.focus();
+                await userEvent.keyboard('{Backspace}');
+
+                expect(onChange).toHaveBeenCalledTimes(1);
+                expect(onChange).toHaveBeenCalledWith([]);
+                expect(input).toHaveFocus();
             });
         });
 
-        it('should have correct tabIndex for disabled chips', () => {
-            setup({ isDisabled: true });
+        describe('Accessibility', () => {
+            it('should have correct tabIndex for enabled chips (roving tabindex)', () => {
+                setup();
 
-            const chips = screen.getAllByRole('option');
-            chips.forEach((chip) => {
-                expect(chip).toHaveAttribute('tabIndex', '-1');
+                const chips = screen.getAllByRole('option');
+                for (const [index, chip] of chips.entries()) {
+                    expect(chip).toHaveAttribute('tabIndex', index === 0 ? '0' : '-1');
+                }
             });
-        });
-    });
 
-    describe('Chip refs', () => {
-        it('should create refs for each chip', () => {
-            setup();
+            it('should have correct tabIndex for disabled chips', () => {
+                setup({ isDisabled: true });
 
-            const chips = screen.getAllByRole('option');
-            expect(chips).toHaveLength(3);
-            chips.forEach((chip) => {
-                expect(chip).toBeInstanceOf(HTMLElement);
+                const chips = screen.getAllByRole('option');
+                for (const chip of chips) {
+                    expect(chip).toHaveAttribute('tabIndex', '-1');
+                }
             });
-        });
-
-        it('should maintain stable refs on re-render', () => {
-            const { rerender, props } = setup();
-
-            const firstRenderChips = screen.getAllByRole('option');
-            const firstChipElement = firstRenderChips[0];
-
-            rerender(<SelectionChipGroup {...props} />);
-
-            const secondRenderChips = screen.getAllByRole('option');
-            expect(secondRenderChips[0]).toBe(firstChipElement);
         });
     });
 });

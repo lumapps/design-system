@@ -1,82 +1,78 @@
-import { Chip, SelectionChipGroup } from '@lumx/react';
+/* eslint-disable react-hooks/rules-of-hooks */
+import { useRef, useState } from 'react';
+import { mdiFoodApple, mdiFruitCherries, mdiFruitCitrus, mdiFruitGrapes, mdiFruitWatermelon } from '@lumx/icons';
+import { Chip, Icon, SelectionChipGroup, TextField } from '@lumx/react';
 import { withResizableBox } from '@lumx/react/stories/decorators/withResizableBox';
 import { withValueOnChange } from '@lumx/react/stories/decorators/withValueOnChange';
+import { setup } from '@lumx/core/js/components/Chip/SelectionChipGroupStories';
 
-const fruits = [
-    { id: '1', name: 'Apricot' },
-    { id: '2', name: 'Apple' },
-    { id: '3', name: 'Banana' },
-    { id: '4', name: 'Blueberry' },
-    { id: '5', name: 'Lemon' },
-    { id: '6', name: 'Orange' },
-];
-type FruitOption = (typeof fruits)[number];
+const { meta, ...stories } = setup({
+    component: SelectionChipGroup,
+    decorators: { withValueOnChange, withResizableBox },
+});
 
 export default {
     title: 'LumX components/chip/SelectionChipGroup',
-    component: SelectionChipGroup,
-    args: {
-        value: [fruits[0], fruits[1], fruits[2]],
-        getOptionId: 'id',
-        getOptionName: 'name',
-        label: 'Selected fruits',
-        chipRemoveLabel: 'Remove',
-    },
-    decorators: [withValueOnChange()],
+    ...meta,
 };
 
-/**
- * Default selection chip group
- */
-export const Default = {};
+export const Default = { ...stories.Default };
+export const Disabled = { ...stories.Disabled };
+export const IndividuallyDisabled = { ...stories.IndividuallyDisabled };
+export const Empty = { ...stories.Empty };
+export const ConstrainedSpace = { ...stories.ConstrainedSpace };
 
-/**
- * Selection chip group with custom render
- */
+/** Selection chip group with custom chip render */
 export const CustomRender = {
-    args: {
-        renderChip: (option: FruitOption) => <Chip>🍎 {option.name}</Chip>,
+    render() {
+        const [value, setValue] = useState([
+            { id: 'Apple', icon: mdiFoodApple },
+            { id: 'Cherries', icon: mdiFruitCherries },
+            { id: 'Citrus', icon: mdiFruitCitrus },
+            { id: 'Grapes', icon: mdiFruitGrapes },
+            { id: 'Watermelon', icon: mdiFruitWatermelon },
+        ]);
+        return (
+            <SelectionChipGroup
+                value={value}
+                getOptionId="id"
+                label="Selected fruits"
+                chipRemoveLabel="Remove"
+                onChange={(newValue) => setValue(newValue ?? [])}
+                renderChip={(option) => <Chip before={<Icon icon={option.icon} size="xs" />} />}
+            />
+        );
     },
 };
 
-/**
- * Disabled selection chip group
- */
-export const Disabled = {
-    args: {
-        isDisabled: true,
-    },
-};
-
-/**
- * Selection chip group with individually disabled chips
- */
-export const IndividuallyDisabled = {
-    args: {
-        renderChip: (option: FruitOption) => <Chip isDisabled={option.id === '2'}>{option.name}</Chip>,
-    },
-};
-
-/**
- * Empty selection chip group
- */
-export const Empty = {
-    args: {
-        value: [],
-    },
-};
-
-/**
- * Test in constrained space, chips should have text overflow ellipsis
- */
-export const ConstrainedSpace = {
-    decorators: [withResizableBox({ width: '400px', height: '100px' })],
-    args: {
-        value: [
-            fruits[0],
-            fruits[1],
-            { name: 'Very very very very very long text' },
-            { name: 'Very very very very very very very very very very very long text' },
-        ],
+/** Selection chip group inside a TextField chips slot with inputRef for keyboard navigation */
+export const InTextField = {
+    render() {
+        const inputRef = useRef<HTMLInputElement>(null);
+        const [value, setValue] = useState([
+            { id: '1', name: 'Apricot' },
+            { id: '2', name: 'Apple' },
+            { id: '3', name: 'Banana' },
+        ]);
+        const [text, setText] = useState('');
+        return (
+            <TextField
+                label="Fruits"
+                inputRef={inputRef}
+                value={text}
+                onChange={setText}
+                chips={
+                    <SelectionChipGroup
+                        value={value}
+                        getOptionId="id"
+                        getOptionName="name"
+                        label="Selected fruits"
+                        chipRemoveLabel="Remove"
+                        onChange={(newValue) => setValue(newValue ?? [])}
+                        inputRef={inputRef}
+                    />
+                }
+            />
+        );
     },
 };
