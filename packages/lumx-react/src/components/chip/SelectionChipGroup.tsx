@@ -1,80 +1,40 @@
 import React from 'react';
 
-import { mdiClose } from '@lumx/icons';
-import { Chip, ChipGroup, Icon, LumxClassName, Tooltip, type Theme } from '@lumx/react';
+import { CLASSNAME as CHIP_CLASSNAME } from '@lumx/core/js/components/Chip';
+import {
+    SelectionChipGroup as UI,
+    CLASSNAME,
+    COMPONENT_NAME,
+    type SelectionChipGroupProps as UIProps,
+} from '@lumx/core/js/components/Chip/SelectionChipGroup';
+import { setupSelectionChipGroupEvents } from '@lumx/core/js/components/Chip/setupSelectionChipGroupEvents';
 import { GenericProps } from '@lumx/react/utils/type';
-import { Selector } from '@lumx/core/js/types/Selector';
-import { getWithSelector } from '@lumx/core/js/utils/selectors';
-import { classNames } from '@lumx/core/js/utils';
+import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 
+import { Chip } from './Chip';
+import { ChipGroup } from './ChipGroup';
+import { Icon } from '../icon';
+import { Text } from '../text';
+import { Tooltip } from '../tooltip';
 import { isComponentType } from '../../utils/type/isComponentType';
+import { useRovingTabIndexContainer } from '../../hooks/useRovingTabIndexContainer';
 
-import { useFocusLastChipOnBackspace } from '../../hooks/useFocusLastChipOnBackspace';
-
-export interface SelectionChipGroupProps<O> extends GenericProps {
-    /**
-     * Option object id selector (either the property name or a function to get the id)
-     */
-    getOptionId: Selector<O>;
-    /**
-     * Option object name selector (either the property name or a function to get the name)
-     * Fallbacks on the ID if not defined
-     */
-    getOptionName?: Selector<O, string | undefined | null>;
-    /**
-     * Selected options array
-     */
-    value?: O[];
-    /**
-     * Callback on option array selected
-     */
+/**
+ * Defines the props of the component.
+ */
+export interface SelectionChipGroupProps<O> extends GenericProps, ReactToJSX<UIProps<O>> {
+    /** Callback on option array selected */
     onChange?(newValue?: O[]): void;
-    /**
-     * Input ref to restore focus
-     */
+    /** Input ref to restore focus */
     inputRef?: React.RefObject<HTMLInputElement>;
-    /**
-     * Input label, used to generate the chip group aria description
-     */
-    inputLabel?: string;
-    /**
-     * Customize how chips should render
-     */
+    /** Customize how chips should render (return a <Chip> element to override chip props) */
     renderChip?: (option: O) => React.ReactNode;
-    /**
-     * Scope for tracking purposes
-     */
-    scope?: string;
-    /**
-     * LumX theme
-     */
-    theme?: Theme;
-    /**
-     * Disabled state
-     */
-    isDisabled?: boolean;
-    /** label to be used for accessibility purposes */
-    label: string;
-    /** callback for generating the tooltip for each individual chip */
-    chipTooltipLabel: (chip: string) => string;
 }
-
-/**
- * Component display name.
- */
-const COMPONENT_NAME = 'SelectionChipGroup';
-
-/**
- * Component default class name and class prefix.
- */
-const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-selection-chip-group';
-const { block, element } = classNames.bem(CLASSNAME);
 
 /**
  * SelectionChipGroup component.
  *
  * @param  props Component props.
- * @param  ref   Component ref.
  * @return React element.
  */
 export const SelectionChipGroup = <O,>({
@@ -83,81 +43,62 @@ export const SelectionChipGroup = <O,>({
     getOptionId,
     getOptionName,
     inputRef,
-    inputLabel,
     renderChip,
+    getChipProps: getChipPropsProp,
     theme,
     isDisabled,
-    chipTooltipLabel,
     label,
+    chipRemoveLabel,
     ...forwardedProps
 }: SelectionChipGroupProps<O>) => {
-    const chipRefs = React.useRef<React.RefObject<HTMLElement>[]>([]);
-    const { findPreviousEnabledChip } = useFocusLastChipOnBackspace(chipRefs, inputRef);
+    const containerRef = React.useRef<HTMLDivElement>(null);
 
-    return (
-        <ChipGroup role="group" aria-label={label} className={block()} {...forwardedProps}>
-            {value?.map((v, index) => {
-                const name = getWithSelector(getOptionName, v);
-                const id = getWithSelector(getOptionId, v);
-                const onClick = () => {
-                    const newValue = [...value];
-                    const existingIndex = value.findIndex((vi) => getWithSelector(getOptionId, vi) === id);
-                    if (existingIndex === -1) {
-                        return;
-                    }
-                    // Remove value
-                    newValue.splice(existingIndex, 1);
+    // Store latest values in refs so the event handlers always access current state.
+    const valueRef = React.useRef(value);
+    valueRef.current = value;
+    const onChangeRef = React.useRef(onChange);
+    onChangeRef.current = onChange;
 
-                    onChange?.(newValue);
-                };
-                const onKeyDown = (evt: React.KeyboardEvent) => {
-                    if (evt.key !== 'Backspace') {
-                        return;
-                    }
-                    // Activate (remove value) on Backspace pressed
-                    onClick();
+    // Attach event listeners
+    React.useEffect(() => {
+        return setupSelectionChipGroupEvents({
+            getContainer: () => containerRef.current,
+            getInput: () => inputRef?.current,
+            onChange: (newValue) => onChangeRef.current?.(newValue),
+            getValue: () => valueRef.current,
+            getOptionId,
+        });
+    }, [inputRef, getOptionId]);
 
-                    const previousChip = findPreviousEnabledChip(index - 1);
-                    const input = inputRef?.current;
-                    // Focus the previous chip or the input
-                    (previousChip || input)?.focus();
-                };
+    useRovingTabIndexContainer({
+        containerRef,
+        itemSelector: `.${CHIP_CLASSNAME}`,
+        itemDisabledSelector: `.${CHIP_CLASSNAME}[aria-disabled="true"]`,
+    });
 
-                if (!chipRefs.current[index]) {
-                    chipRefs.current[index] = React.createRef<HTMLElement>();
-                }
-                const ref: React.Ref<HTMLElement> | undefined = chipRefs.current[index];
+    // Handle renderChip or fallback to getChipProps from props
+    const getChipProps = renderChip
+        ? (option: O) => {
+              const customChip = renderChip(option);
+              return (isComponentType(Chip)(customChip) && customChip.props) || {};
+          }
+        : getChipPropsProp;
 
-                const customChip = renderChip?.(v);
-                const props = isComponentType(Chip)(customChip) ? customChip.props : undefined;
-                const chipIsDisabled = props?.isDisabled || isDisabled;
-                const chipName = typeof props?.children === 'string' ? props.children : name;
-                const tooltipLabel = chipTooltipLabel(chipName);
-
-                return (
-                    <Tooltip
-                        key={id}
-                        label={!chipIsDisabled ? tooltipLabel : undefined}
-                        closeMode="hide"
-                        ariaLinkMode="aria-labelledby"
-                    >
-                        <Chip
-                            {...props}
-                            after={<Icon icon={mdiClose} />}
-                            className={element('chip', [props?.className])}
-                            size="s"
-                            ref={ref as any}
-                            onClick={onClick}
-                            onKeyDown={onKeyDown}
-                            theme={theme}
-                            isDisabled={chipIsDisabled}
-                            tabIndex={chipIsDisabled ? -1 : 0}
-                        >
-                            {props?.children || name}
-                        </Chip>
-                    </Tooltip>
-                );
-            })}
-        </ChipGroup>
+    return UI(
+        {
+            ...forwardedProps,
+            value,
+            getOptionId,
+            getOptionName,
+            theme,
+            isDisabled,
+            label,
+            chipRemoveLabel,
+            getChipProps,
+            ref: containerRef,
+        },
+        { Chip, ChipGroup, Icon, Text, Tooltip },
     );
 };
+SelectionChipGroup.displayName = COMPONENT_NAME;
+SelectionChipGroup.className = CLASSNAME;
