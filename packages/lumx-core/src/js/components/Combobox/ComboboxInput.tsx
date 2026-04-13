@@ -20,6 +20,11 @@ export interface ComboboxInputProps extends HasClassName, HasTheme {
     toggleButtonProps?: Record<string, any>;
     /** Toggle callback for the chevron button. */
     handleToggle?(): void;
+    /**
+     * Controls how the combobox filters options as the user types.
+     * When `'off'`, the input is rendered as `readOnly`.
+     */
+    filter?: 'auto' | 'manual' | 'off';
 }
 
 /**
@@ -62,6 +67,7 @@ export const ComboboxInput = (props: ComboboxInputProps, { TextField, IconButton
         textFieldRef,
         toggleButtonProps,
         handleToggle,
+        filter,
         theme,
         ...forwardedProps
     } = props;
@@ -73,6 +79,7 @@ export const ComboboxInput = (props: ComboboxInputProps, { TextField, IconButton
     return (
         <TextField
             autoComplete="off"
+            readOnly={filter === 'off' || undefined}
             {...forwardedProps}
             ref={ref}
             role="combobox"

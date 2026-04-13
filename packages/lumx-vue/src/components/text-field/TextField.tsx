@@ -148,7 +148,7 @@ const TextField = defineComponent(
                 'aria-invalid': props.hasError || undefined,
                 'aria-describedby': describedById,
                 ...disabledStateProps.value,
-                readOnly: !!disabledStateProps.value['aria-disabled'],
+                readOnly: !!(inputAttrs as any).readOnly || !!disabledStateProps.value['aria-disabled'],
                 onChange: handleChange,
                 onInput: handleInput,
                 onFocus: handleFocus,
