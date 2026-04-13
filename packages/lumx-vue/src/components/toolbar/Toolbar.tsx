@@ -20,14 +20,16 @@ const Toolbar = defineComponent(
         const className = useClassName(() => props.class);
 
         return () => {
+            // Fall back to attrs for before/label/after to support core JSX calling
+            // Toolbar with props (React-style) instead of named slots (Vue-style).
             return (
                 <ToolbarUI
                     {...props}
                     {...attrs}
                     className={className.value}
-                    label={slots.default?.() as JSXElement}
-                    before={slots.before?.() as JSXElement}
-                    after={slots.after?.() as JSXElement}
+                    label={(slots.default?.() ?? (attrs as any).label) as JSXElement}
+                    before={(slots.before?.() ?? (attrs as any).before) as JSXElement}
+                    after={(slots.after?.() ?? (attrs as any).after) as JSXElement}
                 />
             );
         };

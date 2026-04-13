@@ -10,12 +10,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 -   `@lumx/vue`:
+    -   Create the `AlertDialog` component
     -   Create the `Dialog` component
     -   Create the `InfiniteScroll` utility component (available from `@lumx/vue/utils`)
 
 ### Changed
 
 -   `@lumx/core`:
+    -   Moved `AlertDialog` stories and tests from `@lumx/react`
     -   Moved `Dialog` from `@lumx/react`
     -   `setupRovingTabIndex`: add MutationObserver-based tabindex normalization (mount, removal recovery, insertion, disabled-state, selection)
     -   `Combobox`: replace `autoFilter` boolean with `filter` prop (`'auto'` | `'manual'` | `'off'`) and add `openOnFocus` prop
