@@ -76,13 +76,23 @@ export const SelectionChipGroup = <O,>({
         itemDisabledSelector: `.${CHIP_CLASSNAME}[aria-disabled="true"]`,
     });
 
-    // Handle renderChip or fallback to getChipProps from props
-    const getChipProps = renderChip
-        ? (option: O) => {
-              const customChip = renderChip(option);
-              return (isComponentType(Chip)(customChip) && customChip.props) || {};
-          }
-        : getChipPropsProp;
+    // Merge getChipProps and renderChip: getChipProps provides base props, renderChip overrides them,
+    // and the core JSX template props take final priority (applied in the core component).
+    const getChipProps = (option: O) => {
+        const chipProps = getChipPropsProp?.(option) || {};
+        let renderChipProps: Record<string, any> = {};
+        if (renderChip) {
+            const customChip = renderChip(option);
+            if (isComponentType(Chip)(customChip)) {
+                renderChipProps = customChip.props || {};
+            }
+        }
+        // Filter out undefined values from renderChipProps so they don't override chipProps
+        const definedRenderChipProps = Object.fromEntries(
+            Object.entries(renderChipProps).filter(([, v]) => v !== undefined),
+        );
+        return { ...chipProps, ...definedRenderChipProps };
+    };
 
     return UI(
         {
