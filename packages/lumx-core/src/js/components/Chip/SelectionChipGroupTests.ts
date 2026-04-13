@@ -87,6 +87,34 @@ export default (renderOptions: CoreTestOptions) => {
                 }
             });
 
+            it('should concatenate chip name and chipRemoveLabel in chip aria-label', () => {
+                setup({ chipRemoveLabel: 'Remove' }, renderOptions);
+                const chips = screen.getAllByRole('option');
+                expect(chips[0]).toHaveAttribute('aria-label', 'Apricot - Remove');
+                expect(chips[1]).toHaveAttribute('aria-label', 'Apple - Remove');
+                expect(chips[2]).toHaveAttribute('aria-label', 'Banana - Remove');
+            });
+
+            it('should use chip name as aria-label when chipRemoveLabel is not provided', () => {
+                setup({ chipRemoveLabel: undefined }, renderOptions);
+                const chips = screen.getAllByRole('option');
+                expect(chips[0]).toHaveAttribute('aria-label', 'Apricot');
+                expect(chips[1]).toHaveAttribute('aria-label', 'Apple');
+                expect(chips[2]).toHaveAttribute('aria-label', 'Banana');
+            });
+
+            it('should use custom children string from getChipProps in chip aria-label', () => {
+                setup(
+                    {
+                        chipRemoveLabel: 'Remove',
+                        getChipProps: (option: any) => ({ children: `Custom ${option.name}` }),
+                    },
+                    renderOptions,
+                );
+                const chips = screen.getAllByRole('option');
+                expect(chips[0]).toHaveAttribute('aria-label', 'Custom Apricot - Remove');
+            });
+
             it('should render empty when value is undefined', () => {
                 setup({ value: undefined }, renderOptions);
                 expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
