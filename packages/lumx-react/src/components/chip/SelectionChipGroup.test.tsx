@@ -180,6 +180,51 @@ describe('<SelectionChipGroup />', () => {
             });
         });
 
+        describe('Event listeners after container mount', () => {
+            it('should attach click listeners when value transitions from empty to non-empty', async () => {
+                const onChange = vi.fn();
+
+                // Start with an empty value so the container is not rendered.
+                const { rerender } = render(
+                    <SelectionChipGroup
+                        value={[]}
+                        getOptionId="id"
+                        getOptionName="name"
+                        label="Test chips"
+                        chipRemoveLabel="Remove"
+                        onChange={onChange}
+                    />,
+                );
+
+                // No chip group rendered yet.
+                expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+
+                // Transition to non-empty: the container mounts for the first time.
+                rerender(
+                    <SelectionChipGroup
+                        value={testOptions}
+                        getOptionId="id"
+                        getOptionName="name"
+                        label="Test chips"
+                        chipRemoveLabel="Remove"
+                        onChange={onChange}
+                    />,
+                );
+
+                const chipGroup = screen.getByRole('listbox', { name: 'Test chips' });
+                expect(chipGroup).toBeInTheDocument();
+
+                // Click the first chip to trigger removal and verify event listeners are attached.
+                const chips = screen.getAllByRole('option');
+                await userEvent.click(chips[0]);
+
+                // The first option should have been removed — proves event listeners were attached
+                // after the container mounted.
+                expect(onChange).toHaveBeenCalledTimes(1);
+                expect(onChange).toHaveBeenCalledWith([testOptions[1], testOptions[2]]);
+            });
+        });
+
         describe('Accessibility', () => {
             it('should have correct tabIndex for enabled chips (roving tabindex)', () => {
                 setup();

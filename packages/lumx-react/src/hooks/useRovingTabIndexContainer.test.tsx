@@ -248,7 +248,7 @@ describe('useRovingTabIndexContainer', () => {
         });
     });
 
-    it('should do nothing when containerRef is null', () => {
+    it('should do nothing when containerRef is a ref with null current', () => {
         const NullRefComponent = () => {
             useRovingTabIndexContainer({
                 containerRef: { current: null } as React.RefObject<HTMLElement>,
@@ -258,5 +258,17 @@ describe('useRovingTabIndexContainer', () => {
         };
         // Should not throw
         render(<NullRefComponent />);
+    });
+
+    it('should do nothing when containerRef is null', () => {
+        const NullElementComponent = () => {
+            useRovingTabIndexContainer({
+                containerRef: null,
+                itemSelector: '.item',
+            });
+            return null;
+        };
+        // Should not throw
+        render(<NullElementComponent />);
     });
 });
