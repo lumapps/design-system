@@ -25,10 +25,12 @@ export type ComboboxOptionProps = VueToJSXProps<
 > & {
     /** Props forwarded to a Tooltip wrapping the option trigger element. */
     tooltipProps?: Partial<TooltipProps>;
-    /** On option clicked (or activated with keyboard). */
-    onClick?: () => void;
     /** Props forwarded to the inner action element (e.g. `{ as: 'a', href: '/foo' }`). */
     actionProps?: Record<string, any>;
+};
+
+export const emitSchema = {
+    click: () => true,
 };
 
 /**
@@ -38,7 +40,7 @@ export type ComboboxOptionProps = VueToJSXProps<
  * @return Vue element.
  */
 const ComboboxOption = defineComponent(
-    (props: ComboboxOptionProps, { slots }) => {
+    (props: ComboboxOptionProps, { slots, emit }) => {
         const attrs = useAttrs();
         const className = useClassName(() => props.class);
         const { type } = useComboboxListContext();
@@ -53,12 +55,11 @@ const ComboboxOption = defineComponent(
         provideComboboxOptionContext({ optionId });
 
         // Register option with the combobox handle when both are available
-        useWatchDisposable([handle, optionRef], ([h, element]) => {
-            if (h && element) {
-                return h.registerOption(element, (filtered) => {
-                    isFiltered.value = filtered;
-                });
-            }
+        useWatchDisposable([handle, optionRef], ([handleValue, element]) => {
+            if (!handleValue || !element) return;
+            return handleValue.registerOption(element, (filtered) => {
+                isFiltered.value = filtered;
+            });
         });
 
         // Re-evaluate filter state when the option value changes.
@@ -77,6 +78,12 @@ const ComboboxOption = defineComponent(
         // Update optionRef when the option element is mounted/unmounted
         const setOptionRef = (el: Element | null) => {
             optionRef.value = el as HTMLElement | null;
+        };
+
+        const handleClick = () => {
+            emit('click');
+            // Also call attrs.onClick for compatibility with core JSX
+            (attrs.onClick as any)?.();
         };
 
         /** Get slot content, falling back to attrs (JSX prop syntax used in tests). */
@@ -99,7 +106,7 @@ const ComboboxOption = defineComponent(
                     isGrid,
                     before,
                     after,
-                    handleClick: props.onClick,
+                    handleClick,
                     actionProps: props.actionProps,
                     id: optionId,
                     descriptionId,
@@ -119,10 +126,10 @@ const ComboboxOption = defineComponent(
             'isDisabled',
             'isSelected',
             'tooltipProps',
-            'onClick',
             'actionProps',
             'class',
         ),
+        emits: emitSchema,
     },
 );
 
