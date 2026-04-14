@@ -1,11 +1,8 @@
-import { RefObject, useRef, useEffect, AriaAttributes } from 'react';
+import { RefObject, useRef, useEffect } from 'react';
 
-import { mdiClose } from '@lumx/icons';
 import { HeadingLevelProvider, IconButton, IconButtonProps } from '@lumx/react';
 import { DIALOG_TRANSITION_DURATION, DOCUMENT } from '@lumx/react/constants';
-import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
+import { GenericProps } from '@lumx/react/utils/type';
 
 import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
 import { useDisableBodyScroll } from '@lumx/react/hooks/useDisableBodyScroll';
@@ -18,39 +15,30 @@ import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 import { Portal } from '@lumx/react/utils';
 
+import {
+    Lightbox as UI,
+    CLASSNAME,
+    COMPONENT_NAME,
+    BaseLightboxProps as UIProps,
+} from '@lumx/core/js/components/Lightbox';
+import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
+
 /**
  * Defines the props of the component.
  */
-export interface LightboxProps extends GenericProps, HasTheme, Pick<AriaAttributes, 'aria-label' | 'aria-labelledby'> {
+export interface LightboxProps extends GenericProps, ReactToJSX<UIProps> {
     /** Props to pass to the close button (minus those already set by the Lightbox props). */
     closeButtonProps?: Pick<IconButtonProps, 'label'> &
         Omit<IconButtonProps, 'label' | 'onClick' | 'icon' | 'emphasis' | 'color'>;
-    /** Whether the component is open or not. */
-    isOpen?: boolean;
     /** Reference to the element that triggered modal opening to set focus on. */
     parentElement: RefObject<any>;
     /** Reference to the element that should get the focus when the lightbox opens. By default, the close button or the lightbox itself will take focus. */
     focusElement?: RefObject<HTMLElement>;
-    /** Whether to keep the dialog open on clickaway or escape press. */
-    preventAutoClose?: boolean;
-    /** Z-axis position. */
-    zIndex?: number;
     /** On close callback. */
     onClose?(): void;
     /** Children */
     children?: React.ReactNode;
 }
-
-/**
- * Component display name.
- */
-const COMPONENT_NAME = 'Lightbox';
-
-/**
- * Component default class name and class prefix.
- */
-const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-lightbox';
-const { block, element } = classNames.bem(CLASSNAME);
 
 /**
  * Lightbox component.
@@ -61,10 +49,6 @@ const { block, element } = classNames.bem(CLASSNAME);
  */
 export const Lightbox = forwardRef<LightboxProps, HTMLDivElement>((props, ref) => {
     const {
-        'aria-labelledby': propAriaLabelledBy,
-        ariaLabelledBy = propAriaLabelledBy,
-        'aria-label': propAriaLabel,
-        ariaLabel = propAriaLabel,
         children,
         className,
         closeButtonProps,
@@ -128,52 +112,29 @@ export const Lightbox = forwardRef<LightboxProps, HTMLDivElement>((props, ref) =
 
     if (!isOpen && !isVisible) return null;
 
-    return (
-        <Portal>
-            <div
-                ref={mergeRefs(ref, wrapperRef)}
-                {...forwardedProps}
-                aria-label={ariaLabel}
-                aria-labelledby={ariaLabelledBy}
-                aria-modal="true"
-                role="dialog"
-                tabIndex={-1}
-                className={classNames.join(
-                    className,
-                    block({
-                        'is-hidden': !isOpen,
-                        'is-shown': isOpen || isVisible,
-                        [`theme-${theme}`]: Boolean(theme),
-                    }),
-                )}
-                style={{ zIndex }}
-            >
-                {closeButtonProps && (
-                    <div className={element('close')}>
-                        <IconButton
-                            {...closeButtonProps}
-                            ref={closeButtonRef}
-                            emphasis="low"
-                            hasBackground
-                            icon={mdiClose}
-                            theme="dark"
-                            type="button"
-                            onClick={onClose}
-                        />
-                    </div>
-                )}
-                <HeadingLevelProvider level={2}>
-                    <ThemeProvider value={undefined}>
-                        <ClickAwayProvider callback={!preventAutoClose && onClose} childrenRefs={clickAwayRefs}>
-                            <div ref={childrenRef} className={element('wrapper')} role="presentation">
-                                {children}
-                            </div>
-                        </ClickAwayProvider>
-                    </ThemeProvider>
-                </HeadingLevelProvider>
-            </div>
-        </Portal>
-    );
+    return UI({
+        ClickAwayProvider,
+        HeadingLevelProvider,
+        IconButton,
+        parentElement,
+        Portal,
+        ThemeProvider,
+        children,
+        childrenRef,
+        className,
+        clickAwayRefs,
+        closeButtonProps,
+        closeButtonRef,
+        focusElement,
+        isOpen,
+        isVisible,
+        ref: mergeRefs(ref, wrapperRef),
+        theme,
+        zIndex,
+        preventAutoClose,
+        handleClose: onClose,
+        ...forwardedProps,
+    });
 });
 Lightbox.displayName = COMPONENT_NAME;
 Lightbox.className = CLASSNAME;

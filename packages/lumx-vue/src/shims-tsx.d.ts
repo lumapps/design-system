@@ -9,6 +9,7 @@ declare module 'vue' {
     interface HTMLAttributes {
         className?: string;
         htmlFor?: string;
+        tabIndex?: number;
     }
 
     interface LabelHTMLAttributes {
