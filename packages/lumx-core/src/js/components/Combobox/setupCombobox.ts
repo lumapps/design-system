@@ -178,8 +178,6 @@ export function setupCombobox(
         onKeydown?: (event: KeyboardEvent) => boolean,
     ) {
         function handleKeydown(event: KeyboardEvent) {
-            if (event.ctrlKey || event.shiftKey) return;
-
             // Let the mode-specific handler run first.
             if (onKeydown?.(event)) {
                 event.stopPropagation();

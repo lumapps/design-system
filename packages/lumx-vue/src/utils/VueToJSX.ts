@@ -39,3 +39,18 @@ export const keysOf = <T>() => {
         );
     };
 };
+
+/**
+ * Derive the typed Vue emits map from a runtime `emitSchema` object.
+ *
+ * @example
+ * export const emitSchema = {
+ *     change: (_newValue?: unknown) => true,
+ *     search: (_text: string) => true,
+ * };
+ * export type MyEmits<O> = EmitsOf<typeof emitSchema>
+ */
+export type EmitsOf<S> = {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    [K in keyof S]: S[K] extends (...args: infer A) => any ? (...args: A) => void : never;
+};

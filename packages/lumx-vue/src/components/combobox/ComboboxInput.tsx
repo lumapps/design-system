@@ -1,4 +1,4 @@
-import { defineComponent, onMounted, onUnmounted, ref, watch } from 'vue';
+import { defineComponent, onMounted, onUnmounted, ref } from 'vue';
 
 import { ComboboxInput as UI, COMPONENT_NAME, CLASSNAME } from '@lumx/core/js/components/Combobox/ComboboxInput';
 import { setupComboboxInput } from '@lumx/core/js/components/Combobox/setupComboboxInput';
@@ -58,16 +58,6 @@ const ComboboxInput = defineComponent(
         const { isOpen, setIsOpen } = useComboboxOpen();
 
         const inputEl = ref<HTMLInputElement | null>(null);
-        const textFieldEl = ref<HTMLElement | null>(null);
-
-        // Sync the anchor ref when the text field element is set (via the adapter ref callback).
-        watch(
-            textFieldEl,
-            (el) => {
-                anchorRef.value = el;
-            },
-            { flush: 'sync' },
-        );
 
         // Get the input element from the TextField component after mount
         onMounted(() => {
@@ -136,10 +126,11 @@ const ComboboxInput = defineComponent(
                     isOpen: isOpen.value,
                     filter,
                     textFieldRef: (el: HTMLElement | null) => {
-                        textFieldEl.value = el;
+                        anchorRef.value = el;
                     },
                     inputRef: (el: HTMLInputElement | null) => {
                         inputEl.value = el;
+                        (attrs as any).inputRef?.(el);
                     },
                     toggleButtonProps,
                     handleToggle,

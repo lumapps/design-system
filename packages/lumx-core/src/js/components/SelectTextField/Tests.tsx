@@ -1113,6 +1113,26 @@ export default function selectTextFieldTests({ components, renderWithState }: Se
                 expect(getVisibleOptions()).toHaveLength(FRUITS.length);
             });
         });
+
+        it('should focus the last selected chip when pressing Backspace at the start of an empty input', async () => {
+            renderWithState(multiTemplate, { value: [FRUITS[0], FRUITS[2]] }); // Apple, Banana
+            const input = getInput();
+
+            await waitFor(() => {
+                expect(getChips().length).toBe(2);
+            });
+
+            // Focus the empty input (cursor naturally at position 0).
+            await userEvent.click(input);
+            expect(document.activeElement).toBe(input);
+
+            await userEvent.keyboard('{Backspace}');
+
+            // The last selected chip should receive focus, not the input.
+            const chips = getChips();
+            const lastChip = chips[chips.length - 1];
+            expect(document.activeElement).toBe(lastChip);
+        });
     });
 
     // ─── Empty and option count messages ────────────────────────

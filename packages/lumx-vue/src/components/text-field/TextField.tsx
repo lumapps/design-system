@@ -134,7 +134,7 @@ const TextField = defineComponent(
                 onInput: _oi,
                 onFocus: _of,
                 onBlur: _ob,
-                chips: _chips,
+                chips: chipsAttr,
                 ...inputAttrs
             } = attrs as any;
 
@@ -165,7 +165,7 @@ const TextField = defineComponent(
 
             return (
                 <TextFieldUI
-                    chips={getChipsSlot() ?? undefined}
+                    chips={(getChipsSlot() ?? chipsAttr) || undefined}
                     error={props.error}
                     forceFocusStyle={props.forceFocusStyle}
                     hasError={props.hasError}

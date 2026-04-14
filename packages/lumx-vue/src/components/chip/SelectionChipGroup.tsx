@@ -1,4 +1,14 @@
-import { type ComponentPublicInstance, computed, defineComponent, ref, useAttrs, watchEffect } from 'vue';
+import {
+    type ComponentPublicInstance,
+    type EmitFn,
+    type EmitsToProps,
+    type PublicProps,
+    computed,
+    defineComponent,
+    ref,
+    useAttrs,
+    watchEffect,
+} from 'vue';
 
 import {
     SelectionChipGroup as UI,
@@ -23,15 +33,38 @@ import ChipGroup from './ChipGroup';
  * Props omit 'ref' (handled internally).
  * inputRef is added here for Vue (ref to an associated input element for backspace focus handling).
  */
-export type SelectionChipGroupProps = VueToJSXProps<UIProps<any>> & {
+export type SelectionChipGroupProps<O = any> = VueToJSXProps<UIProps<O>> & {
     /** Ref to the associated input element (for focus restoration on backspace) */
     inputRef?: HTMLInputElement | null;
 };
 
+/** SelectionChipGroup emit schema */
 export const emitSchema = {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     change: (_newValue?: any[]) => true,
 };
+
+/**
+ * SelectionChipGroup emits adapted to the value generic type
+ */
+export type SelectionChipGroupEmits<O> = {
+    change: (newValue: O[] | undefined) => void;
+};
+
+/**
+ * SelectionChipGroup component constructor with generic type attached to props
+ *
+ * Vue's `defineComponent` setup-fn overload cannot carry an unbound generic from the setup
+ * signature to the resulting component constructor, so the generic is layered on via cast.
+ */
+export interface SelectionChipGroupConstructor {
+    new <O = any>(
+        props: SelectionChipGroupProps<O> & EmitsToProps<SelectionChipGroupEmits<O>> & PublicProps,
+    ): {
+        $props: SelectionChipGroupProps<O> & EmitsToProps<SelectionChipGroupEmits<O>>;
+        $emit: EmitFn<SelectionChipGroupEmits<O>>;
+    };
+}
 
 /**
  * SelectionChipGroup component.
@@ -40,7 +73,8 @@ export const emitSchema = {
  * @return Vue element.
  */
 const SelectionChipGroup = defineComponent(
-    (props: SelectionChipGroupProps, { emit, slots }) => {
+    // The component is internally typed against `any` — the generic is layered on at export time
+    (props: SelectionChipGroupProps<any>, { emit, slots }) => {
         const attrs = useAttrs();
         const className = useClassName(() => props.class);
         const defaultTheme = useTheme();
@@ -71,7 +105,7 @@ const SelectionChipGroup = defineComponent(
         return () => {
             // Merge getChipProps and chip slot: getChipProps provides base props, slot overrides them,
             // and the core JSX template props take final priority (applied in the core component).
-            const getChipProps = (option: any) => {
+            const getChipProps = (option: unknown) => {
                 const chipProps = props.getChipProps?.(option) || {};
                 let slotProps: Record<string, any> = {};
                 if (slots.chip) {
@@ -91,10 +125,19 @@ const SelectionChipGroup = defineComponent(
 
             const { class: _class, ...restProps } = props;
 
+            /*
+             * Selector<O> is not assignable to Selector<any>/Selector<unknown> due to function
+             * parameter contravariance. The core template is generic, so we let it infer `unknown`
+             * by casting the selectors.
+             */
             return UI(
                 {
                     ...attrs,
                     ...restProps,
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    getOptionId: props.getOptionId as any,
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    getOptionName: props.getOptionName as any,
                     className: className.value,
                     theme: props.theme || defaultTheme.value,
                     getChipProps,
@@ -123,4 +166,4 @@ const SelectionChipGroup = defineComponent(
     },
 );
 
-export default SelectionChipGroup;
+export default SelectionChipGroup as unknown as SelectionChipGroupConstructor & typeof SelectionChipGroup;
