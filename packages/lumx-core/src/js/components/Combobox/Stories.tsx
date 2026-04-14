@@ -304,13 +304,19 @@ export function setup({
     };
 
     /**
-     * Combobox with empty state — shown when no options match the current input.
-     * Try typing something that matches no fruit (e.g. "xyz") to see the empty state.
-     * Uses `Combobox.State` with an `emptyMessage` callback that includes the input value.
+     * Combobox with empty state and option count message.
+     * Uses `Combobox.State` with both `emptyMessage` and `nbOptionMessage`.
+     * - When options are visible, shows the option count (e.g. "10 result(s) available").
+     * - When all options are filtered out (e.g. type "xyz"), shows the empty message.
+     * Try typing to filter and see the count update, or type a non-matching query to see the empty state.
      */
     const ComboboxWithEmptyState = {
         args: { value: '' },
         decorators: [withValueOnChange()],
+        async play({ canvas }: any) {
+            await userEvent.click(await canvas.findByRole('combobox'));
+            await userEvent.keyboard('Lime');
+        },
         render: ({ value, onChange }: { value: string; onChange: (v: string) => void }) => (
             <Combobox.Provider>
                 <Combobox.Input
@@ -321,11 +327,18 @@ export function setup({
                     toggleButtonProps={{ label: 'Fruits' }}
                 />
                 <Combobox.Popover>
-                    <Combobox.List aria-label="Fruits" />
+                    <Combobox.List aria-label="Fruits">
+                        {FRUITS.map((fruit) => (
+                            <Combobox.Option key={fruit} value={fruit}>
+                                {fruit}
+                            </Combobox.Option>
+                        ))}
+                    </Combobox.List>
                     <Combobox.State
                         emptyMessage={(inputValue: string) =>
                             inputValue ? `No results for "${inputValue}"` : 'No results'
                         }
+                        nbOptionMessage={(n: number) => `${n} result(s) available`}
                     />
                 </Combobox.Popover>
             </Combobox.Provider>

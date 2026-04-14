@@ -24,6 +24,14 @@ export interface ComboboxStateProps {
      */
     emptyMessage?: string | ((inputValue: string) => string);
     /**
+     * Message callback to display the number of available options.
+     * Called with the current visible option count and should return a human-readable string
+     * (e.g. `(n) => \`${n} result(s) available\``).
+     * Displayed when the combobox is open, not empty, not loading, and not in error.
+     * When omitted, no option count message is shown.
+     */
+    nbOptionMessage?: (optionsLength: number) => string;
+    /**
      * Error state title message.
      * When provided, the error state is active (takes priority over the empty state).
      * When omitted, the error state is not shown.
@@ -44,10 +52,10 @@ export interface ComboboxStateProps {
      */
     state?: {
         /**
-         * Whether the list currently has no visible options.
-         * Driven by the framework wrapper via the combobox handle's `emptyChange` event.
+         * The number of currently visible options.
+         * Driven by the framework wrapper via the combobox handle's `optionsChange` event.
          */
-        isEmpty?: boolean;
+        optionsLength?: number;
         /**
          * The current value of the combobox input.
          * Passed to `emptyMessage` when it is a function.
@@ -83,29 +91,35 @@ export interface ComboboxStateComponents {
 
 /**
  * ComboboxState core template.
- * Renders empty/error state messages inside the combobox popover.
+ * Renders empty/error/option-count state messages inside the combobox popover.
  * The block itself acts as a screen reader live region (`role="status" aria-live="polite"`).
  *
  * Activation rules:
  * - Error state: active when `errorMessage` is provided (presence-based).
- * - Empty state: active when `isEmpty` is true and `emptyMessage` is provided, and there is no error.
+ * - Empty state: active when `optionsLength` is 0 and `emptyMessage` is provided, and there is no error.
+ * - Option count: active when `nbOptionMessage` is provided, the list is not empty, not loading, and not in error.
  *
  * @param props Component props.
  * @param components Injected framework-specific components.
  * @return JSX element or null when no state is active.
  */
 export const ComboboxState = (props: ComboboxStateProps, { GenericBlock, Text }: ComboboxStateComponents) => {
-    const { emptyMessage, errorMessage, errorTryReloadMessage, loadingMessage, state } = props;
+    const { emptyMessage, nbOptionMessage, errorMessage, errorTryReloadMessage, loadingMessage, state } = props;
     const isOpen = state?.isOpen ?? true;
+    const optionsLength = state?.optionsLength ?? 0;
+    const isEmpty = optionsLength === 0;
     const showError = !!errorMessage;
     const resolvedEmptyMessage =
         typeof emptyMessage === 'function' ? emptyMessage(state?.inputValue || '') : emptyMessage;
     // Suppress empty while loading (immediate flag prevents false "no results" before data arrives)
-    const showEmpty = state?.isEmpty && !showError && !state?.isLoading && !!resolvedEmptyMessage;
+    const showEmpty = isEmpty && !showError && !state?.isLoading && !!resolvedEmptyMessage;
     // Show loading message when provided and not in error state.
     // The framework wrapper gates `loadingMessage` via the debounced `loadingAnnouncement` event,
     // passing `undefined` until the 500ms threshold is reached.
     const showLoading = !showError && !!loadingMessage;
+    // Show option count message when the list is open, not empty, not loading, and not in error.
+    const resolvedNbOptionMessage =
+        !isEmpty && !showError && !state?.isLoading && nbOptionMessage ? nbOptionMessage(optionsLength) : undefined;
     const show = showEmpty || showError;
     const alignProps = { hAlign: 'center', vAlign: 'center' };
 
@@ -132,6 +146,11 @@ export const ComboboxState = (props: ComboboxStateProps, { GenericBlock, Text }:
             {renderContent && showLoading && (
                 <Text as="p" typography="body1" color="dark-L2">
                     {loadingMessage}
+                </Text>
+            )}
+            {renderContent && !!resolvedNbOptionMessage && (
+                <Text as="p" typography="body1" color="dark-L2">
+                    {resolvedNbOptionMessage}
                 </Text>
             )}
             {renderContent && !!errorMessage && (

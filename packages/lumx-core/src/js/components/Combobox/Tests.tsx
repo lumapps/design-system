@@ -571,6 +571,28 @@ export function createTemplates(Combobox: ComboboxNamespace, IconButton: any) {
         </Combobox.Provider>
     );
 
+    /** Combobox with nbOptionMessage — shows option count when list is not empty. */
+    const nbOptionMessageTemplate = ({ value, onChange }: { value: string; onChange: (v: string) => void }) => (
+        <Combobox.Provider>
+            <Combobox.Input
+                value={value}
+                onChange={onChange}
+                placeholder="Pick a fruit…"
+                toggleButtonProps={{ label: 'Fruits' }}
+            />
+            <Combobox.Popover>
+                <Combobox.List aria-label="Fruits">
+                    {FRUITS.map((fruit) => (
+                        <Combobox.Option key={fruit} value={fruit}>
+                            {fruit}
+                        </Combobox.Option>
+                    ))}
+                </Combobox.List>
+                <Combobox.State emptyMessage="No results" nbOptionMessage={(n: number) => `${n} result(s) available`} />
+            </Combobox.Popover>
+        </Combobox.Provider>
+    );
+
     /** Combobox with skeleton loading — no options yet, skeletons shown. */
     const loadingTemplate = ({ value, onChange }: { value: string; onChange: (v: string) => void }) => (
         <Combobox.Provider>
@@ -675,6 +697,7 @@ export function createTemplates(Combobox: ComboboxNamespace, IconButton: any) {
         gridInputTemplate,
         gridButtonTemplate,
         emptyStateTemplate,
+        nbOptionMessageTemplate,
         errorStateTemplate,
         loadingTemplate,
         loadMoreTemplate,
@@ -2613,6 +2636,67 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
             await userEvent.type(input, 'z');
             await waitFor(() => {
                 expect(getStateContainer()).toHaveTextContent('No results for "zz"');
+            });
+        });
+    });
+
+    describe('Combobox.State - Option count message', () => {
+        it('should show option count message when list has options', async () => {
+            renderWithState(t.nbOptionMessageTemplate);
+            const input = getInput();
+            await userEvent.click(input);
+
+            await waitFor(() => {
+                expect(input).toHaveAttribute('aria-expanded', 'true');
+            });
+
+            await waitFor(() => {
+                const stateEl = getStateContainer();
+                expect(stateEl).toBeInTheDocument();
+                expect(stateEl).toHaveTextContent('10 result(s) available');
+            });
+        });
+
+        it('should update option count when filtering reduces visible options', async () => {
+            renderWithState(t.nbOptionMessageTemplate);
+            const input = getInput();
+            await userEvent.click(input);
+
+            await waitFor(() => {
+                expect(input).toHaveAttribute('aria-expanded', 'true');
+            });
+
+            await userEvent.type(input, 'bl');
+
+            await waitFor(() => {
+                expect(getVisibleOptions().length).toBe(1);
+            });
+
+            await waitFor(() => {
+                const stateEl = getStateContainer();
+                expect(stateEl).toHaveTextContent('1 result(s) available');
+            });
+        });
+
+        it('should show empty message instead of option count when all options are filtered out', async () => {
+            renderWithState(t.nbOptionMessageTemplate);
+            const input = getInput();
+            await userEvent.click(input);
+
+            await waitFor(() => {
+                expect(input).toHaveAttribute('aria-expanded', 'true');
+            });
+
+            await userEvent.type(input, 'z');
+
+            await waitFor(() => {
+                expect(getVisibleOptions().length).toBe(0);
+            });
+
+            await waitFor(() => {
+                const stateEl = getStateContainer();
+                expect(stateEl).toHaveTextContent('No results');
+                expect(stateEl).not.toHaveTextContent('result(s) available');
             });
         });
     });

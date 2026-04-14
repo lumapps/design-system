@@ -44,13 +44,15 @@ export interface ComboboxStateProps extends ReactToJSX<UIProps, 'state'> {
  *   mounted for at least 500ms. Suppresses the empty state while loading.
  * - **Empty state**: active when `emptyMessage` is provided and the list has no visible options
  *   and is not loading.
+ * - **Option count**: active when `nbOptionMessage` is provided and the list is not empty,
+ *   not loading, and not in error.
  *
  * @param props Component props.
  * @return React element.
  */
 export const ComboboxState = (props: ComboboxStateProps) => {
     const { handle } = useComboboxContext();
-    const emptyState = useComboboxEvent('emptyChange', undefined);
+    const optionsState = useComboboxEvent('optionsChange', undefined);
 
     const [isLoading, setIsLoading] = useState(false);
     const [shouldAnnounce, setShouldAnnounce] = useState(false);
@@ -61,7 +63,7 @@ export const ComboboxState = (props: ComboboxStateProps) => {
         return subscribeComboboxState(handle, { setIsLoading, setShouldAnnounce, setIsOpen });
     }, [handle]);
 
-    const state = { ...emptyState, isLoading, isOpen };
+    const state = { ...optionsState, isLoading, isOpen };
 
     // Only pass loadingMessage to core after the 500ms debounce threshold
     const loadingMessage = shouldAnnounce ? props.loadingMessage : undefined;

@@ -63,17 +63,17 @@ export function setupCombobox(
     /** AbortController for all structural event listeners. */
     let abortController: AbortController | null = null;
 
-    /** Last notified isEmpty state, to avoid redundant `emptyChange` notifications. */
-    let lastIsEmpty = true;
+    /** Last notified visible option count, to avoid redundant `optionsChange` notifications. */
+    let lastOptionsLength = 0;
 
-    /** Last notified input value, to re-fire `emptyChange` when the user keeps typing while empty. */
+    /** Last notified input value, to re-fire `optionsChange` when the user keeps typing while empty. */
     let lastInputValue = '';
 
     /** Event subscribers managed by the handle. */
     const subscribers: { [K in keyof ComboboxEventMap]: Set<(value: ComboboxEventMap[K]) => void> } = {
         open: new Set(),
         activeDescendantChange: new Set(),
-        emptyChange: new Set(),
+        optionsChange: new Set(),
         loadingChange: new Set(),
         loadingAnnouncement: new Set(),
     };
@@ -84,7 +84,7 @@ export function setupCombobox(
     }
 
     /**
-     * Notify all registered sections and fire `emptyChange` if the visible option count changed
+     * Notify all registered sections and fire `optionsChange` if the visible option count changed
      * or if the input value changed while the list is empty (so `emptyMessage` callbacks get
      * the updated query string).
      * Called whenever the set of visible options may have changed (option register/unregister, filter change).
@@ -98,12 +98,12 @@ export function setupCombobox(
         for (const reg of optionRegistrations.values()) {
             if (!reg.lastFiltered) visibleCount += 1;
         }
-        const isEmpty = visibleCount === 0;
         const inputValue = trigger?.value ?? '';
-        if (isEmpty !== lastIsEmpty || (isEmpty && inputValue !== lastInputValue)) {
-            lastIsEmpty = isEmpty;
+        const isEmpty = visibleCount === 0;
+        if (visibleCount !== lastOptionsLength || (isEmpty && inputValue !== lastInputValue)) {
+            lastOptionsLength = visibleCount;
             lastInputValue = inputValue;
-            notify('emptyChange', { isEmpty, inputValue });
+            notify('optionsChange', { optionsLength: visibleCount, inputValue });
         }
     }
 
@@ -365,14 +365,14 @@ export function setupCombobox(
             trigger?.setAttribute('aria-expanded', String(isOpen));
             notify('open', isOpen);
 
-            // When opening, always notify the current empty state so that
+            // When opening, always notify the current options state so that
             // subscribers (ComboboxState) get the correct initial value.
-            // Without this, a list that starts empty never fires `emptyChange`
-            // because `lastIsEmpty` is initialized to `true` and `notifyVisibilityChange`
+            // Without this, a list that starts empty never fires `optionsChange`
+            // because `lastOptionsLength` is initialized to `0` and `notifyVisibilityChange`
             // only fires on *changes*.
             if (isOpen) {
                 const inputValue = trigger?.value ?? '';
-                notify('emptyChange', { isEmpty: lastIsEmpty, inputValue });
+                notify('optionsChange', { optionsLength: lastOptionsLength, inputValue });
             }
         },
 
@@ -496,7 +496,7 @@ export function setupCombobox(
             trigger = null;
             listbox = null;
             filterValue = '';
-            lastIsEmpty = true;
+            lastOptionsLength = 0;
             lastInputValue = '';
             optionRegistrations.clear();
             sectionRegistrations.clear();
