@@ -1,4 +1,4 @@
-import { defineComponent, ref, useAttrs } from 'vue';
+import { defineComponent, ref, useAttrs, watch, toRef } from 'vue';
 
 import {
     ComboboxOption as UI,
@@ -60,6 +60,19 @@ const ComboboxOption = defineComponent(
                 });
             }
         });
+
+        // Re-evaluate filter state when the option value changes.
+        watch(
+            toRef(props, 'value'),
+            () => {
+                const handleValue = handle.value;
+                const element = optionRef.value;
+                if (!handleValue || !element) return;
+                handleValue.refilterOption(element);
+            },
+            // ensuring data-value is committed before re-evaluating the filter.
+            { flush: 'post' },
+        );
 
         // Update optionRef when the option element is mounted/unmounted
         const setOptionRef = (el: Element | null) => {

@@ -409,6 +409,19 @@ export function setupCombobox(
             notifyVisibilityChange();
         },
 
+        refilterOption(element: HTMLElement) {
+            const reg = optionRegistrations.get(element);
+            if (!reg) return;
+            const filterLower = filterValue.toLowerCase();
+            const text = getOptionValue(element).toLowerCase();
+            const isFiltered = filterLower.length > 0 && !text.includes(filterLower);
+            if (isFiltered !== reg.lastFiltered) {
+                reg.lastFiltered = isFiltered;
+                reg.callback(isFiltered);
+                notifyVisibilityChange();
+            }
+        },
+
         registerSection(
             element: HTMLElement,
             callback: (state: { hidden: boolean; 'aria-hidden': boolean }) => void,

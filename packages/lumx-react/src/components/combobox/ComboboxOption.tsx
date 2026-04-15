@@ -91,6 +91,13 @@ export const ComboboxOption = forwardRef<ComboboxOptionProps, HTMLLIElement>((pr
         return handle.registerOption(element, setIsFiltered);
     }, [handle]);
 
+    // Re-evaluate filter state when the option value changes.
+    useEffect(() => {
+        const element = internalRef.current;
+        if (!element || !handle) return;
+        handle.refilterOption(element);
+    }, [handle, value]);
+
     // Wrap `after` content in an option context so sub-components (e.g. OptionMoreInfo)
     // can access the parent option's ID for keyboard highlight detection.
     const optionContextValue = useMemo(() => ({ optionId }), [optionId]);

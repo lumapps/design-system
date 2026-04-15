@@ -92,6 +92,13 @@ export interface ComboboxHandle {
      */
     setFilter(filterValue: string): void;
     /**
+     * Re-evaluate the filter state of a single registered option.
+     * Call this after the option's `data-value` or textContent has been updated
+     * (e.g. after a framework re-render) to ensure its filtered/visible state
+     * is consistent with the current filter value.
+     */
+    refilterOption(element: HTMLElement): void;
+    /**
      * Register a section DOM element for state notifications.
      * The callback is invoked immediately with the current state, and again whenever
      * the state changes after a filter update or option un/registration.
