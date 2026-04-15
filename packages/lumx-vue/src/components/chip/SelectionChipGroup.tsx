@@ -69,18 +69,25 @@ const SelectionChipGroup = defineComponent(
         });
 
         return () => {
-            // Handle scoped slot or fallback to getChipProps
-            const getChipProps = slots.chip
-                ? (option: any) => {
-                      const vnodes = slots.chip?.({ option });
-                      const customChip = vnodes?.find(isComponentType(Chip));
-                      const chipProps = customChip?.props || {};
-                      // Handle the before slot
-                      const beforeSlot = (customChip?.children as any)?.before;
-                      if (beforeSlot) chipProps.before = beforeSlot();
-                      return chipProps;
-                  }
-                : props.getChipProps;
+            // Merge getChipProps and chip slot: getChipProps provides base props, slot overrides them,
+            // and the core JSX template props take final priority (applied in the core component).
+            const getChipProps = (option: any) => {
+                const chipProps = props.getChipProps?.(option) || {};
+                let slotProps: Record<string, any> = {};
+                if (slots.chip) {
+                    const vnodes = slots.chip({ option });
+                    const customChip = vnodes?.find(isComponentType(Chip));
+                    slotProps = customChip?.props || {};
+                    // Handle the before slot
+                    const beforeSlot = (customChip?.children as any)?.before;
+                    if (beforeSlot) slotProps.before = beforeSlot();
+                }
+                // Filter out undefined values from slotProps so they don't override chipProps
+                const definedSlotProps = Object.fromEntries(
+                    Object.entries(slotProps).filter(([, v]) => v !== undefined),
+                );
+                return { ...chipProps, ...definedSlotProps };
+            };
 
             const { class: _class, ...restProps } = props;
 

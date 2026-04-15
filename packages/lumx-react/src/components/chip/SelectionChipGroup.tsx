@@ -51,7 +51,7 @@ export const SelectionChipGroup = <O,>({
     chipRemoveLabel,
     ...forwardedProps
 }: SelectionChipGroupProps<O>) => {
-    const containerRef = React.useRef<HTMLDivElement>(null);
+    const [container, setContainer] = React.useState<HTMLDivElement | null>(null);
 
     // Store latest values in refs so the event handlers always access current state.
     const valueRef = React.useRef(value);
@@ -59,30 +59,40 @@ export const SelectionChipGroup = <O,>({
     const onChangeRef = React.useRef(onChange);
     onChangeRef.current = onChange;
 
-    // Attach event listeners
+    // Attach event listeners. Re-runs when the container mounts/unmounts, inputRef or getOptionId change.
     React.useEffect(() => {
         return setupSelectionChipGroupEvents({
-            getContainer: () => containerRef.current,
+            getContainer: () => container,
             getInput: () => inputRef?.current,
             onChange: (newValue) => onChangeRef.current?.(newValue),
             getValue: () => valueRef.current,
             getOptionId,
         });
-    }, [inputRef, getOptionId]);
+    }, [container, inputRef, getOptionId]);
 
     useRovingTabIndexContainer({
-        containerRef,
+        containerRef: container,
         itemSelector: `.${CHIP_CLASSNAME}`,
         itemDisabledSelector: `.${CHIP_CLASSNAME}[aria-disabled="true"]`,
     });
 
-    // Handle renderChip or fallback to getChipProps from props
-    const getChipProps = renderChip
-        ? (option: O) => {
-              const customChip = renderChip(option);
-              return (isComponentType(Chip)(customChip) && customChip.props) || {};
-          }
-        : getChipPropsProp;
+    // Merge getChipProps and renderChip: getChipProps provides base props, renderChip overrides them,
+    // and the core JSX template props take final priority (applied in the core component).
+    const getChipProps = (option: O) => {
+        const chipProps = getChipPropsProp?.(option) || {};
+        let renderChipProps: Record<string, any> = {};
+        if (renderChip) {
+            const customChip = renderChip(option);
+            if (isComponentType(Chip)(customChip)) {
+                renderChipProps = customChip.props || {};
+            }
+        }
+        // Filter out undefined values from renderChipProps so they don't override chipProps
+        const definedRenderChipProps = Object.fromEntries(
+            Object.entries(renderChipProps).filter(([, v]) => v !== undefined),
+        );
+        return { ...chipProps, ...definedRenderChipProps };
+    };
 
     return UI(
         {
@@ -95,7 +105,7 @@ export const SelectionChipGroup = <O,>({
             label,
             chipRemoveLabel,
             getChipProps,
-            ref: containerRef,
+            ref: setContainer,
         },
         { Chip, ChipGroup, Icon, Text, Tooltip },
     );

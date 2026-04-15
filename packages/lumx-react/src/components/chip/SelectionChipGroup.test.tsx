@@ -93,6 +93,67 @@ describe('<SelectionChipGroup />', () => {
             });
         });
 
+        describe('Merging renderChip and getChipProps', () => {
+            it('should use getChipProps when renderChip is not provided', () => {
+                setup({ getChipProps: (option) => ({ children: `Via getChipProps: ${option.name}` }) });
+                expect(screen.getByText('Via getChipProps: Apricot')).toBeInTheDocument();
+            });
+
+            it('should let renderChip override getChipProps props', () => {
+                const getChipProps = (option: TestOption) => ({
+                    children: `FromGetChipProps: ${option.name}`,
+                });
+                const renderChip = (option: TestOption) => (
+                    <Chip className="from-render">{`Render: ${option.name}`}</Chip>
+                );
+                setup({ renderChip, getChipProps });
+
+                // renderChip children should win over getChipProps children
+                expect(screen.getByText('Render: Apricot')).toBeInTheDocument();
+                expect(screen.queryByText('FromGetChipProps: Apricot')).not.toBeInTheDocument();
+            });
+
+            it('should keep getChipProps props when renderChip does not override them', () => {
+                const getChipProps = () => ({ className: 'from-get-chip-props' }) as any;
+                const renderChip = () => <Chip />;
+                setup({ renderChip, getChipProps });
+
+                // className from getChipProps should be kept (merged by the core template)
+                const chips = screen.getAllByRole('option');
+                for (const chip of chips) {
+                    expect(chip).toHaveClass('from-get-chip-props');
+                }
+            });
+
+            it('should let core template props take priority over both', () => {
+                // Core template always sets size="s" and role="option"
+                const renderChip = () => <Chip role="button" />;
+                const getChipProps = () => ({ role: 'button' }) as any;
+                setup({ renderChip, getChipProps });
+
+                // Core template overrides role to "option"
+                const chips = screen.getAllByRole('option');
+                expect(chips).toHaveLength(3);
+            });
+
+            it('should merge isDisabled from getChipProps and renderChip', () => {
+                // getChipProps disables all chips, renderChip overrides chip 2 to not disabled
+                const getChipProps = () => ({ isDisabled: true });
+                const renderChip = (option: TestOption) => (
+                    <Chip isDisabled={option.id === '2' ? false : undefined}>{option.name}</Chip>
+                );
+                setup({ renderChip, getChipProps });
+
+                const chips = screen.getAllByRole('option');
+                // Chip 1: getChipProps sets isDisabled=true, renderChip returns undefined => getChipProps wins
+                expect(chips[0]).toHaveAttribute('aria-disabled', 'true');
+                // Chip 2: renderChip sets isDisabled=false => renderChip overrides getChipProps
+                expect(chips[1]).not.toHaveAttribute('aria-disabled');
+                // Chip 3: getChipProps sets isDisabled=true, renderChip returns undefined => getChipProps wins
+                expect(chips[2]).toHaveAttribute('aria-disabled', 'true');
+            });
+        });
+
         describe('Keyboard navigation', () => {
             it('should remove chip and focus input on Backspace', async () => {
                 const onChange = vi.fn();
@@ -116,6 +177,51 @@ describe('<SelectionChipGroup />', () => {
                 expect(onChange).toHaveBeenCalledTimes(1);
                 expect(onChange).toHaveBeenCalledWith([]);
                 expect(input).toHaveFocus();
+            });
+        });
+
+        describe('Event listeners after container mount', () => {
+            it('should attach click listeners when value transitions from empty to non-empty', async () => {
+                const onChange = vi.fn();
+
+                // Start with an empty value so the container is not rendered.
+                const { rerender } = render(
+                    <SelectionChipGroup
+                        value={[]}
+                        getOptionId="id"
+                        getOptionName="name"
+                        label="Test chips"
+                        chipRemoveLabel="Remove"
+                        onChange={onChange}
+                    />,
+                );
+
+                // No chip group rendered yet.
+                expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+
+                // Transition to non-empty: the container mounts for the first time.
+                rerender(
+                    <SelectionChipGroup
+                        value={testOptions}
+                        getOptionId="id"
+                        getOptionName="name"
+                        label="Test chips"
+                        chipRemoveLabel="Remove"
+                        onChange={onChange}
+                    />,
+                );
+
+                const chipGroup = screen.getByRole('listbox', { name: 'Test chips' });
+                expect(chipGroup).toBeInTheDocument();
+
+                // Click the first chip to trigger removal and verify event listeners are attached.
+                const chips = screen.getAllByRole('option');
+                await userEvent.click(chips[0]);
+
+                // The first option should have been removed — proves event listeners were attached
+                // after the container mounted.
+                expect(onChange).toHaveBeenCalledTimes(1);
+                expect(onChange).toHaveBeenCalledWith([testOptions[1], testOptions[2]]);
             });
         });
 

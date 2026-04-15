@@ -4,10 +4,11 @@ import { setupRovingTabIndex } from '@lumx/core/js/utils/focusNavigation';
 
 import { useEventCallback } from './useEventCallback';
 import { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect';
+import { unref } from '../utils/react/unref';
 
 export interface UseRovingTabIndexContainerOptions {
-    /** Ref to the container element holding the focusable items. */
-    containerRef: RefObject<HTMLElement>;
+    /** Container element or ref to the container element holding the focusable items. */
+    containerRef: RefObject<HTMLElement> | HTMLElement | null;
     /** CSS selector to identify focusable items within the container. */
     itemSelector: string;
     /** Callback invoked when an item receives focus via keyboard navigation. */
@@ -42,7 +43,7 @@ export const useRovingTabIndexContainer = ({
     const onItemFocused = useEventCallback(unstableOnItemFocused);
 
     useIsomorphicLayoutEffect(() => {
-        const container = containerRef?.current;
+        const container = unref(containerRef);
         if (!container) {
             return undefined;
         }

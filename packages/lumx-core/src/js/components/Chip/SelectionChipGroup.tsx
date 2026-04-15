@@ -105,12 +105,12 @@ export const SelectionChipGroup = <O,>(
                 const customProps = getChipProps?.(v) || {};
                 const chipIsDisabled = customProps.isDisabled || isDisabled;
                 const chipName = typeof customProps.children === 'string' ? customProps.children : name;
-                const ariaLabel = chipRemoveLabel ? `${chipName} \u2014 ${chipRemoveLabel}` : chipName;
+                const ariaLabel = chipRemoveLabel ? `${chipName} - ${chipRemoveLabel}` : chipName;
 
                 return (
                     <Tooltip key={id} label={!chipIsDisabled ? ariaLabel : undefined}>
                         <Chip
-                            aria-label={label}
+                            aria-label={ariaLabel}
                             {...customProps}
                             size="s"
                             after={<Icon icon={mdiClose} />}
