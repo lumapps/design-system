@@ -71,7 +71,7 @@ module.exports = {
                 getDocumentsForTypes: {
                     // Index site page with at least a title.
                     async SitePage({ context = {} }) {
-                        const { title, slug, frameworks } = context;
+                        const { title, slug, frameworks, deprecated } = context;
                         if (!title) return;
                         let content;
                         if (process.env.NODE_ENV === 'production') {
@@ -85,7 +85,7 @@ module.exports = {
                             content = context.excerpt;
                         }
                         const parentTitlePath = getParentTitlePath(context);
-                        return { title, content, slug, parentTitlePath, frameworks };
+                        return { title, content, slug, parentTitlePath, frameworks, deprecated };
                     },
                 },
                 fields: [
@@ -94,6 +94,7 @@ module.exports = {
                     { name: 'slug', index: false, store: true },
                     { name: 'parentTitlePath', index: false, store: true },
                     { name: 'frameworks', index: false, store: true },
+                    { name: 'deprecated', index: false, store: true },
                 ],
             },
         },
