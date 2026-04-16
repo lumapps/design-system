@@ -1,6 +1,8 @@
 ---
 frameworks: ['react']
+deprecated: true
 ---
+
 import * as DemoSingleSelection from './react/single-selection.tsx';
 import * as DemoSingleSelectionWithSearch from './react/single-selection-with-search.tsx';
 import * as DemoMultiSelection from './react/multi-selection.tsx';
@@ -14,6 +16,10 @@ import ReactSelect from 'lumx-docs:@lumx/react/components/select/Select';
 import ReactSelectMultiple from 'lumx-docs:@lumx/react/components/select/SelectMultiple';
 
 # Select
+
+<DeprecationNotice>
+    This component is deprecated for it's poor accessibility and developper API. Use [Select text field](../select-text-field) instead.
+</DeprecationNotice>
 
 **Selects display options in a list and present the users choice in the list box.**\
 Use it when users need to select one or more options.

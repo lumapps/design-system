@@ -16,6 +16,7 @@ const query = graphql`
                     label
                     hasDynamicChildren
                     frameworks
+                    deprecated
                     children {
                         id
                     }
@@ -39,14 +40,14 @@ function getChildren(
             .filter((childPath) => childPath.startsWith(menuEntry.path) && childPath !== menuEntry.path)
             // Get children menu entries.
             .map((path) => menuEntryByPath[path])
-            // Sort dynamic children: matching framework first, then by label
+            // Sort dynamic children: non-deprecated & matching framework first, then by label
             .sort((a, b) => {
-                const aMatches = a.frameworks?.includes(selectedFramework);
-                const bMatches = b.frameworks?.includes(selectedFramework);
-                if (aMatches === bMatches) {
+                const aDimmed = a.deprecated || (a.frameworks && !a.frameworks.includes(selectedFramework));
+                const bDimmed = b.deprecated || (b.frameworks && !b.frameworks.includes(selectedFramework));
+                if (aDimmed === bDimmed) {
                     return a.label.localeCompare(b.label);
                 }
-                return aMatches ? -1 : 1;
+                return aDimmed ? 1 : -1;
             });
         return children.length ? children : null;
     }

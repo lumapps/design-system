@@ -32,6 +32,7 @@ exports.createPages = async ({ graphql, actions }) => {
                         fields {
                             slug
                             frameworks
+                            deprecated
                         }
                         tableOfContents
                         internal {
@@ -57,11 +58,12 @@ exports.createPages = async ({ graphql, actions }) => {
         const title = mdxUtils.getFirstH1Text(page.node.tableOfContents) || slugToTitle(slug);
         const excerpt = cleanExcerpt(page.node.excerpt, title);
         const frameworks = page.node.fields?.frameworks;
+        const deprecated = page.node.fields?.deprecated;
 
         createPage({
             path: slug,
             component: `${pageTemplate}?__contentFilePath=${page.node.internal.contentFilePath}`,
-            context: { slug, title, excerpt, frameworks },
+            context: { slug, title, excerpt, frameworks, deprecated },
         });
     }
 };
@@ -72,6 +74,7 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
     if (node.internal.type === 'Mdx') {
         const value = createFilePath({ node, getNode });
         const frameworks = node.frontmatter?.frameworks;
+        const deprecated = node.frontmatter?.deprecated || false;
 
         createNodeField({
             name: 'slug',
@@ -83,6 +86,12 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
             name: 'frameworks',
             node,
             value: frameworks,
+        });
+
+        createNodeField({
+            name: 'deprecated',
+            node,
+            value: deprecated,
         });
     }
 };
@@ -108,7 +117,7 @@ exports.onCreateWebpackConfig = async ({ actions, stage }) => {
             plugins: [new TsconfigPathsPlugin({ extensions: ['.ts', '.tsx'] })],
             alias: {
                 '@lumx/core/scss': path.resolve(__dirname, '../lumx-core/src/scss'),
-            }
+            },
         },
     });
 };
