@@ -74,6 +74,15 @@ jobs:
                       core.setOutput('run_html_url', run_html_url);
                       core.setOutput('package_path', package_path);
 
+                      // When a custom ref is checked out (e.g. release deploys), we end up
+                      // in detached HEAD and Chromatic can't auto-detect the commit/branch.
+                      // Export the full SHA so we can set CHROMATIC_SHA to override detection.
+                      if ('${{ inputs.ref }}') {
+                          const exec = require('util').promisify(require('child_process').exec);
+                          const fullSHA = (await exec('git rev-parse HEAD')).stdout.trim();
+                          core.setOutput('chromatic_sha', fullSHA);
+                      }
+
             - name: 'Update PR body: Deploying state'
               id: update-pr-deploying
               if: inputs.pr_number != ''
@@ -101,6 +110,11 @@ jobs:
               id: deploy
               env:
                   CHROMATIC_PROJECT_TOKEN: ${{ secrets[inputs.token_secret] }}
+                  # When a custom ref is checked out (e.g. release deploys), override
+                  # Chromatic's GitHub PR commit detection which would fall back to the
+                  # merge commit (GITHUB_SHA) instead of the checked-out commit.
+                  CHROMATIC_SHA: ${{ steps.vars.outputs.chromatic_sha || '' }}
+                  CHROMATIC_BRANCH: ${{ steps.vars.outputs.chromatic_sha && 'master' || '' }}
               run: yarn dlx chromatic --exit-once-uploaded
               working-directory: ${{ steps.vars.outputs.package_path }}
 
