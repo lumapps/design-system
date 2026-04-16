@@ -49,7 +49,7 @@
         "rollup-plugin-ts-paths-resolve": "^1.7.1",
         "storybook": "^10.2.19",
         "typescript": "^5.4.3",
-        "vite": "^7.3.1",
+        "vite": "^7.3.2",
         "vite-tsconfig-paths": "^5.1.4",
         "vitest": "^4.0.18"
     },
