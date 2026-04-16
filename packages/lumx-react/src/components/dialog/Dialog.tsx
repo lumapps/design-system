@@ -22,9 +22,11 @@ import {
     Dialog as UI,
     CLASSNAME,
     COMPONENT_NAME,
-    DialogSizes,
+    type DialogSizes,
     BaseDialogProps as UIProps,
 } from '@lumx/core/js/components/Dialog';
+
+export type { DialogSizes } from '@lumx/core/js/components/Dialog';
 
 /**
  * Defines the props of the component.
@@ -69,8 +71,6 @@ const DEFAULT_PROPS: Partial<DialogProps> = {
     size: Size.big,
     disableBodyScroll: true,
 };
-
-export { type DialogSizes };
 
 /**
  * Dialog component.
