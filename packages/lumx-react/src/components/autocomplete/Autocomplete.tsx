@@ -198,6 +198,7 @@ const DEFAULT_PROPS: Partial<AutocompleteProps> = {
 /**
  * Autocomplete component.
  *
+ * @deprecated use `SelectTextField` instead
  * @param  props Component props.
  * @param  ref   Component ref.
  * @return React element.
