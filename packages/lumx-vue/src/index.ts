@@ -9,6 +9,7 @@ export * from './components/button';
 export * from './components/checkbox';
 export * from './components/chip';
 export * from './components/dialog';
+export * from './components/lightbox';
 export * from './components/divider';
 export * from './components/drag-handle';
 export * from './components/expansion-panel';

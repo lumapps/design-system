@@ -1,14 +1,16 @@
 ---
-frameworks: ['react']
+frameworks: ['react', 'vue']
 ---
-import * as DemoDefault from './react/default.tsx';
+import * as ReactDemoDefault from './react/default.tsx';
+import * as VueDemoDefault from './vue/default.vue';
 import ReactLightbox from 'lumx-docs:@lumx/react/components/lightbox/Lightbox';
+import VueLightbox from 'lumx-docs:@lumx/vue/components/lightbox/Lightbox';
 
 # Lightbox
 
 **Reveals elements above the page and on a backdrop after clicking on a trigger.**
 
-<DemoBlock vAlign="center" demo={{ react: DemoDefault }} />
+<DemoBlock vAlign="center" demo={{ react: ReactDemoDefault, vue: VueDemoDefault }} />
 
 See the [ImageLightbox](/product/components/image-lightbox) component a fully featured image and image slideshow lightbox.
 
@@ -26,4 +28,4 @@ This component uses the `dialog` accessible pattern, a few specific behaviors ar
 
 ### Properties
 
-<PropTable docs={{ react: ReactLightbox }} />
+<PropTable docs={{ react: ReactLightbox, vue: VueLightbox }} />
