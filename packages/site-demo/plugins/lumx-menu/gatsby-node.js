@@ -7,11 +7,12 @@ const debug = require('../utils/debug');
 const { createFilePath } = require('gatsby-source-filesystem');
 const { createContentDigest } = require('gatsby-core-utils');
 
-function createMenuEntry({ parent, children, hasDynamicChildren = false, frameworks, ...node }) {
+function createMenuEntry({ parent, children, hasDynamicChildren = false, frameworks, deprecated, ...node }) {
     const path = node.path || nodePath.join(parent, lodash.kebabCase(node.label), '/');
     const label = node.label || lodash.upperFirst(lodash.startCase(nodePath.basename(path)).toLowerCase());
     const menuEntry = { id: path, path, label, children, hasDynamicChildren };
     if (frameworks) menuEntry.frameworks = frameworks;
+    if (deprecated) menuEntry.deprecated = deprecated;
     return menuEntry;
 }
 
@@ -30,7 +31,8 @@ function addMDXAsMenuEntry({ actions, getNode, node }) {
     const path = createFilePath({ node, getNode });
     const mdxNode = getNode(node.id);
     const frameworks = mdxNode.frontmatter?.frameworks;
-    const menuEntry = createMenuEntry({ path, frameworks });
+    const deprecated = mdxNode.frontmatter?.deprecated;
+    const menuEntry = createMenuEntry({ path, frameworks, deprecated });
 
     // Merge with existing node if present (preserves menu.yml fields like hasDynamicChildren)
     addMenuEntry({ actions, getNode, menuEntry });
@@ -43,6 +45,7 @@ exports.createSchemaCustomization = ({ actions }) => {
           label: String
           hasDynamicChildren: Boolean
           frameworks: [String]
+          deprecated: Boolean
         }
     `);
 };

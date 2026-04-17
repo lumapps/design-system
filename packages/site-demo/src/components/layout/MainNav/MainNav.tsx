@@ -34,19 +34,17 @@ const renderNavItem = (
     menuEntry: MenuEntry,
     currentFramework: Framework,
 ) => {
-    const { label, path, frameworks } = menuEntry;
+    const { label, path, frameworks, deprecated } = menuEntry;
     const children = getChildren(menuEntry);
     const level = path.split('/').length - 2;
+    const isDimmed = !children?.length && (deprecated || (frameworks && !frameworks?.includes(currentFramework)));
     const props: SideNavigationItemProps = {
         label,
         closeMode: 'hide',
         emphasis: EMPHASIS_BY_LEVEL[level],
         isSelected: locationPath === path,
         toggleButtonProps: { label: 'Toggle' },
-        className:
-            !children?.length && frameworks && !frameworks?.includes(currentFramework)
-                ? 'main-nav__item--dimmed'
-                : undefined,
+        className: isDimmed ? 'main-nav__item--dimmed' : undefined,
     };
 
     if (!children?.length) {

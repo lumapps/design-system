@@ -96,6 +96,7 @@ export const SearchDialog: React.FC<SearchDialogProps> = (props) => {
                                 {result.frameworks && !result.frameworks.includes(framework) && (
                                     <Flag color="yellow" label={`${otherFramework} only`} />
                                 )}
+                                {result.deprecated && <Flag color="yellow" label="Deprecated" />}
                             </FlexBox>
                             {result.content && (
                                 <p

@@ -1,64 +1,24 @@
 ---
 frameworks: ['react']
+deprecated: true
 ---
+
 import * as DemoSingleSelection from './react/single-selection.tsx';
-import * as DemoSingleSelectionWithSearch from './react/single-selection-with-search.tsx';
-import * as DemoMultiSelection from './react/multi-selection.tsx';
-import * as DemoMultiSelectionWithSearch from './react/multi-selection-with-search.tsx';
-import * as DemoDisabled from './react/disabled.tsx';
-import * as DemoValid from './react/valid.tsx';
-import * as DemoInvalid from './react/invalid.tsx';
-import * as DemoChipVariant from './react/chip-variant.tsx';
-import * as DemoMultiChipSelection from './react/multi-chip-selection.tsx';
 import ReactSelect from 'lumx-docs:@lumx/react/components/select/Select';
 import ReactSelectMultiple from 'lumx-docs:@lumx/react/components/select/SelectMultiple';
 
 # Select
 
+<DeprecationNotice>
+    This component is deprecated for it's poor accessibility and developper API. Use [Select text field](../select-text-field) instead.
+</DeprecationNotice>
+
 **Selects display options in a list and present the users choice in the list box.**\
 Use it when users need to select one or more options.
 
-## Single selection
+## Default
 
 <DemoBlock withThemeSwitcher demo={{ react: DemoSingleSelection }} />
-
-## Single selection with search
-
-<DemoBlock withThemeSwitcher demo={{ react: DemoSingleSelectionWithSearch }} />
-
-## Multi selection
-
-<DemoBlock withThemeSwitcher demo={{ react: DemoMultiSelection }} />
-
-## Multi selection with search
-
-<DemoBlock withThemeSwitcher demo={{ react: DemoMultiSelectionWithSearch }} />
-
-## States
-
-There are three states: _disabled_, _valid_, and _invalid_.
-
-### Disabled
-
-<DemoBlock withThemeSwitcher demo={{ react: DemoDisabled }} />
-
-### Valid
-
-<DemoBlock withThemeSwitcher demo={{ react: DemoValid }} />
-
-### Invalid
-
-<DemoBlock withThemeSwitcher demo={{ react: DemoInvalid }} />
-
-## Chip variant
-
-Use chip variant when selects behave like filters (see [filter chip](../chip)).
-
-<DemoBlock withThemeSwitcher demo={{ react: DemoChipVariant }} />
-
-## Multi Chip selection
-
-<DemoBlock withThemeSwitcher demo={{ react: DemoMultiChipSelection }} />
 
 ### Select properties
 

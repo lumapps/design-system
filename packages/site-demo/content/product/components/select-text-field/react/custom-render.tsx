@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { Chip, Combobox, Icon, SelectTextField } from '@lumx/react';
+import { Chip, Icon, SelectTextField } from '@lumx/react';
 import {
     mdiFoodApple,
     mdiFoodForkDrink,
@@ -84,7 +84,9 @@ export default () => {
                 ) : undefined
             }
             renderOption={(fruit) => (
-                <Combobox.Option before={<Icon icon={fruit.icon} size="xs" />}>{fruit.name}</Combobox.Option>
+                <SelectTextField.Option before={<Icon icon={fruit.icon} size="xs" />}>
+                    {fruit.name}
+                </SelectTextField.Option>
             )}
             renderSectionTitle={(sectionId, options) => (
                 <>
