@@ -1,4 +1,4 @@
-import { defineComponent, reactive, ref } from 'vue';
+import { computed, defineComponent, reactive, ref } from 'vue';
 
 import { useClassName } from '../../composables/useClassName';
 
@@ -28,25 +28,23 @@ const ComboboxSection = defineComponent(
     (props: ComboboxSectionProps, { slots }) => {
         const className = useClassName(() => props.class);
         const { handle } = useComboboxContext();
-        const sectionRef = ref<HTMLElement | null>(null);
         const sectionState = reactive({ hidden: false, 'aria-hidden': false });
 
-        // Register with the combobox handle for section state notifications.
-        // Watch both handle and sectionRef so registration fires as soon as both are available.
-        useWatchDisposable([handle, sectionRef], ([h, element]) => {
-            if (h && element) {
-                return h.registerSection(element, (state) => {
-                    sectionState.hidden = state.hidden;
-                    sectionState['aria-hidden'] = state['aria-hidden'];
-                });
-            }
-        });
+        // Ref to the ListSection component instance (with exposed `$el`).
+        const listSectionRef = ref<any>(null);
+        // Resolved DOM element (<li>) from the ListSection's exposed $el.
+        const sectionEl = computed(() => listSectionRef.value?.$el as HTMLElement | undefined);
 
-        const setSectionRef = (el: any) => {
-            // When ListSection is used directly (no adapter), `el` is the component instance.
-            // Unwrap `$el` to get the root DOM element.
-            sectionRef.value = (el?.$el ?? el) as HTMLElement | null;
-        };
+        // Register with the combobox handle for section state notifications.
+        // Watch both handle and sectionEl so registration fires as soon as both are available.
+        useWatchDisposable([handle, sectionEl], ([h, element]) => {
+            if (!h || !element) return;
+
+            return h.registerSection(element, (state) => {
+                sectionState.hidden = state.hidden;
+                sectionState['aria-hidden'] = state['aria-hidden'];
+            });
+        });
 
         return () => {
             const children = slots.default?.();
@@ -63,7 +61,7 @@ const ComboboxSection = defineComponent(
                     className: className.value,
                     hidden: sectionState.hidden,
                     'aria-hidden': sectionState['aria-hidden'] || undefined,
-                    ref: setSectionRef as any,
+                    ref: listSectionRef,
                     children: children as JSXElement,
                 },
                 { ListSection },

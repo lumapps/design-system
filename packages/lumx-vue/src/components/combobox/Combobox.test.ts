@@ -143,5 +143,23 @@ describe('<Combobox>', () => {
                 defaultTheme: 'light',
             },
         });
+
+        it('should expose the button element via $el (matching React forwardRef)', () => {
+            const comboboxButtonRef = ref();
+            render(
+                defineComponent({
+                    components: { ComboboxProvider, ComboboxButton },
+                    setup() {
+                        return { comboboxButtonRef };
+                    },
+                    template: `<ComboboxProvider><ComboboxButton ref="comboboxButtonRef" label="Select" /></ComboboxProvider>`,
+                }),
+            );
+
+            // ComboboxButton renders through Tooltip (Fragment root). The exposed $el
+            // should resolve to the <button> element, matching React's forwardRef behavior.
+            const button = document.body.querySelector('[role="combobox"]') as HTMLElement;
+            expect(comboboxButtonRef.value?.$el).toBe(button);
+        });
     });
 });
