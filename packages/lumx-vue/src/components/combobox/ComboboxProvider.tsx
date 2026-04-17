@@ -1,4 +1,4 @@
-import { defineComponent, ref, shallowRef } from 'vue';
+import { defineComponent, onWatcherCleanup, ref, shallowRef, useAttrs, watch } from 'vue';
 
 import type { ComboboxHandle } from '@lumx/core/js/components/Combobox/types';
 
@@ -20,7 +20,8 @@ export interface ComboboxProviderProps {}
  * @return Vue element.
  */
 const ComboboxProvider = defineComponent(
-    (_props: ComboboxProviderProps, { slots }) => {
+    (_props: ComboboxProviderProps, { slots, emit }) => {
+        const attrs = useAttrs();
         const listboxId = useId();
         const anchorRef = ref<HTMLElement | null>(null);
         const handle = shallowRef<ComboboxHandle | null>(null);
@@ -30,12 +31,26 @@ const ComboboxProvider = defineComponent(
 
         provideComboboxContext({ handle, setHandle, listboxId, anchorRef });
 
+        // Subscribe to the combobox open event and forward to the onOpen callback.
+        watch(handle, (handleValue) => {
+            if (!handleValue) return;
+            const unsubscribe = handleValue.subscribe('open', (isOpen) => {
+                (attrs.onOpen as any)?.(isOpen);
+                emit('open', isOpen);
+            });
+            onWatcherCleanup(unsubscribe);
+        });
+
         return () => slots.default?.();
     },
     {
         name: 'LumxComboboxProvider',
         inheritAttrs: false,
         props: {},
+        emits: {
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            open: (isOpen: boolean) => true,
+        },
     },
 );
 

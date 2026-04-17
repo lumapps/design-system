@@ -25,10 +25,10 @@ export interface ComboboxEventMap {
     /** Fired when the active descendant changes (visual focus). Payload: the option id or null. */
     activeDescendantChange: string | null;
     /**
-     * Fired when the visible option count transitions between empty and non-empty.
-     * Payload: whether the list is empty plus the current input value.
+     * Fired when the visible option count changes.
+     * Payload: the number of visible options plus the current input value.
      */
-    emptyChange: { isEmpty?: boolean; inputValue?: string } | undefined;
+    optionsChange: { optionsLength: number; inputValue?: string } | undefined;
     /**
      * Fired immediately when the aggregate loading state changes (skeleton count transitions
      * between 0 and >0). Used for empty suppression in ComboboxState and for aria-busy on the listbox.
@@ -91,6 +91,13 @@ export interface ComboboxHandle {
      * An empty filter value clears filtering (all options become visible).
      */
     setFilter(filterValue: string): void;
+    /**
+     * Re-evaluate the filter state of a single registered option.
+     * Call this after the option's `data-value` or textContent has been updated
+     * (e.g. after a framework re-render) to ensure its filtered/visible state
+     * is consistent with the current filter value.
+     */
+    refilterOption(element: HTMLElement): void;
     /**
      * Register a section DOM element for state notifications.
      * The callback is invoked immediately with the current state, and again whenever

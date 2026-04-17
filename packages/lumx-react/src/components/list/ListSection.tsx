@@ -1,6 +1,5 @@
 import { ReactNode } from 'react';
 
-import { Text } from '@lumx/react';
 import { GenericProps } from '@lumx/react/utils/type';
 import {
     CLASSNAME,
@@ -12,6 +11,8 @@ import {
 import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useId } from '@lumx/react/hooks/useId';
+
+import { Text } from '../text';
 
 /**
  * Defines the props of the component.

@@ -1,0 +1,118 @@
+---
+frameworks: ['react']
+---
+
+import * as ReactDemoSingleSelection from './react/single-selection.tsx';
+import * as ReactDemoMultipleSelection from './react/multiple-selection.tsx';
+import * as ReactDemoWithSections from './react/with-sections.tsx';
+import * as ReactDemoCustomRender from './react/custom-render.tsx';
+import * as ReactDemoLoading from './react/loading.tsx';
+import * as ReactDemoLoadingMore from './react/loading-more.tsx';
+import * as ReactDemoEmpty from './react/empty.tsx';
+import * as ReactDemoListError from './react/list-error.tsx';
+import ReactSelectTextField from 'lumx-docs:@lumx/react/components/select-text-field/SelectTextField';
+
+# Select text field
+
+**Select text fields let users choose from a list of options with built-in search and filtering.**\
+Use them when users need to select one or more items from a searchable dropdown list.
+
+## Single selection
+
+Set `selectionType="single"` for single selection mode. Users can type to filter options and select one.
+
+<DemoBlock demo={{ react: ReactDemoSingleSelection }} />
+
+## Multiple selection
+
+Set `selectionType="multiple"` to allow selecting multiple options. Selected values are displayed as chips below the input.
+
+<DemoBlock demo={{ react: ReactDemoMultipleSelection  }} />
+
+## Options
+
+Each option is an object. Use selector props to tell the component how to read each option:
+
+- `getOptionId` **(required)** — resolves a unique identifier for each option (used internally for selection tracking and as the combobox `value`).
+- `getOptionName` — resolves the display label shown in the dropdown and in the input when selected. Falls back to the id when not provided.
+- `getOptionDescription` — resolves an optional secondary line of text displayed below the option name.
+
+### Sections
+
+Options can be grouped in sections via `getSectionId`.
+
+<DemoBlock demo={{ react: ReactDemoWithSections }} />
+
+### Custom rendering
+
+Beyond simple text customization, options, section title and chips (multiple selection only) can be customized.
+
+Extra options can also be injected at the top of the dropdown list — for example, a "Create" option that lets users add new entries on the fly.
+
+<DemoBlock demo={{ react: ReactDemoCustomRender  }} />
+
+## Input options
+
+The select text field input shares the same options as the [TextField](/product/components/text-field):
+
+- `isDisabled`/`aria-disabled` — prevents interaction with the field.
+- `hasError` and `error` — displays an error state with a message.
+- `isValid` — displays a success state (green border and check icon).
+- `isRequired` — marks the field as required (asterisk indicator).
+
+## List states
+
+The select text field dropdown list have alternative states to handle server-backed listing and search.
+
+### Loading
+
+Set `listStatus="loading"` to display skeleton placeholders while options are being fetched. Real options are hidden until loading completes.
+
+<DemoBlock demo={{ react: ReactDemoLoading  }} />
+
+### Loading more
+
+Set `listStatus="loadingMore"` to append a skeleton placeholder at the bottom of the existing options, indicating that more items are being loaded (e.g. during infinite scroll pagination).
+
+<DemoBlock demo={{ react: ReactDemoLoadingMore  }} />
+
+### Empty
+
+Provide `translations.emptyMessage` to display a message when no options are available. The message can be a static string or a function receiving the current input value for dynamic messages.
+
+<DemoBlock demo={{ react: ReactDemoEmpty  }} />
+
+### Error
+
+Set `listStatus="error"` to display an error state inside the dropdown. Use `translations.errorMessage` for the error title and optionally `translations.errorTryReloadMessage` for a secondary message.
+
+<DemoBlock demo={{ react: ReactDemoListError  }} />
+
+## Filter types
+
+The `filter` prop controls how option filtering behaves:
+
+- **`"auto"`** — Options that do not match the input value are automatically hidden client-side. Best for small, static option lists.
+- **`"manual"`** — All options remain visible; filtering is the consumer's responsibility. Use this when options are fetched from a server in response to the `onSearch` callback.
+- **`"off"`** — The input is set to read-only (no typing). The dropdown opens on focus, acting as a pure picker. Useful for static dropdowns where search is not needed.
+
+## Accessibility concerns
+
+`SelectTextField` is built on the combobox pattern and uses the WAI-ARIA combobox role internally.
+
+- Always provide a `label` prop so the field is properly announced by screen readers.
+- The `translations` prop is required and must include an accessible label for the clear button (`clearLabel`). Optionally provide `showSuggestionsLabel` for the toggle button; when omitted, the toggle button is not rendered.
+- In multiple selection mode, also provide `chipGroupLabel` (accessible label for the chip group) and `chipRemoveLabel` (appended to each chip's aria-label to indicate it can be removed, e.g. "Apple - Remove").
+- Provide `loadingMessage` so screen readers announce when options are being loaded (announced via a live region after a short debounce).
+- Provide `nbOptionMessage` to announce the number of available options when the list updates.
+
+Select text fields can be disabled in two ways:
+
+- `isDisabled` which completely disables the select text field. It's not focusable and pointer events (hover, click, etc.) are
+  all disabled too. You'll have to find another way to indicate to users that the field is here and why it is disabled.
+- `aria-disabled` only disable editing the select text field (read only) so it's still focusable and accessible. You'll have
+  to setup either a `helper`, a tooltip or an aria description to explain to the user why this field is disabled.
+
+## Properties
+
+<PropTable docs={{ react: ReactSelectTextField  }} />

@@ -26,7 +26,7 @@ export type ComboboxStateProps = VueToJSXProps<UIProps, 'state'>;
 const ComboboxState = defineComponent(
     (props: ComboboxStateProps) => {
         const { handle } = useComboboxContext();
-        const emptyState = useComboboxEvent('emptyChange', undefined);
+        const optionsState = useComboboxEvent('optionsChange', undefined);
         const isLoading = ref(false);
         const shouldAnnounce = ref(false);
         const isOpen = ref(false);
@@ -48,13 +48,14 @@ const ComboboxState = defineComponent(
         });
 
         return () => {
-            const state = { ...emptyState.value, isLoading: isLoading.value, isOpen: isOpen.value };
+            const state = { ...optionsState.value, isLoading: isLoading.value, isOpen: isOpen.value };
             // Only pass loadingMessage to core after the 500ms debounce threshold
             const loadingMessage = shouldAnnounce.value ? props.loadingMessage : undefined;
 
             return UI(
                 {
                     emptyMessage: props.emptyMessage,
+                    nbOptionMessage: props.nbOptionMessage,
                     errorMessage: props.errorMessage,
                     errorTryReloadMessage: props.errorTryReloadMessage,
                     loadingMessage,
@@ -69,6 +70,7 @@ const ComboboxState = defineComponent(
         inheritAttrs: false,
         props: keysOf<ComboboxStateProps>()(
             'emptyMessage',
+            'nbOptionMessage',
             'errorMessage',
             'errorTryReloadMessage',
             'loadingMessage',
