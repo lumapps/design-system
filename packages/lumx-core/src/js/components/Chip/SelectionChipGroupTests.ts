@@ -1,4 +1,4 @@
-import { waitFor } from '@testing-library/dom';
+import { fireEvent, waitFor } from '@testing-library/dom';
 import userEvent from '@testing-library/user-event';
 import { vi } from 'vitest';
 
@@ -133,6 +133,44 @@ export default (renderOptions: CoreTestOptions) => {
                 for (const chip of chips) {
                     expect(chip).toHaveAttribute('aria-disabled', 'true');
                 }
+            });
+
+            it('should not call onChange when a disabled chip is clicked', async () => {
+                const onChange = vi.fn();
+                setup({ isDisabled: true, onChange }, renderOptions);
+
+                await userEvent.click(screen.getByText('Apricot'));
+
+                expect(onChange).not.toHaveBeenCalled();
+            });
+
+            it('should not call onChange when a per-chip disabled chip is clicked', async () => {
+                const onChange = vi.fn();
+                setup(
+                    {
+                        onChange,
+                        getChipProps: (option: any) => ({ isDisabled: option.id === '1' }),
+                    },
+                    renderOptions,
+                );
+
+                await userEvent.click(screen.getByText('Apricot'));
+
+                expect(onChange).not.toHaveBeenCalled();
+            });
+
+            it('should not call onChange when Enter/Space/Backspace is dispatched on a disabled chip', () => {
+                const onChange = vi.fn();
+                setup({ isDisabled: true, onChange }, renderOptions);
+
+                // Disabled chips are not focusable via roving tabindex, but a key event can
+                // still be dispatched on them programmatically (e.g. via fireEvent or AT).
+                const chips = screen.getAllByRole('option');
+                for (const key of ['Enter', ' ', 'Backspace']) {
+                    fireEvent.keyDown(chips[0], { key });
+                }
+
+                expect(onChange).not.toHaveBeenCalled();
             });
         });
 
