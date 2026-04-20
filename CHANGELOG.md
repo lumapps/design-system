@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `@lumx/react`, `@lumx/vue`:
     -   `SelectionChipGroup`: fix disabled chip event
+    -   `Flag`: fix opaque white background
 
 ## [4.11.0][] - 2026-04-15
 

@@ -12,6 +12,7 @@
     padding: 0 $lumx-spacing-unit;
     margin: 0;
     border-radius: math.div(map.get($lumx-sizes, lumx-base-const("size", "XS")), 2);
+    background-color: lumx-color-variant("light", "N");
 
     &--is-truncated {
         max-width: 100%;
