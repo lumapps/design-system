@@ -15,7 +15,7 @@ import './Layout.scss';
 interface Props {
     location?: Location;
     children?: React.ReactNode;
-    pageContext?: { frameworks?: Framework[] };
+    pageContext?: { frameworks?: Framework[]; deprecated?: boolean };
 }
 
 export const Layout: React.FC<Props> = ({ children, location, pageContext }) => {
@@ -43,7 +43,8 @@ export const Layout: React.FC<Props> = ({ children, location, pageContext }) => 
             <main className="main">
                 <div className="main__wrapper">
                     <MainHeader openNavButtonRef={openNavButtonRef} openMenu={openMenu} />
-                    {/* Warning when selected framework is not supported on this page */}
+                    {/* Warning when selected framework is not supported on this page.
+                        Deprecation notices are rendered per-page via the <DeprecationNotice> MDX component. */}
                     {pageFrameworks && !pageFrameworks.includes(framework) && (
                         <Message kind="warning" hasBackground className={classNames.margin('vertical')}>
                             This page does not provide documentation for {upperFirst(framework)}

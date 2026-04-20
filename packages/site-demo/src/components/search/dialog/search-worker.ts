@@ -9,10 +9,14 @@ export interface SearchDocument {
     slug: string;
     content: string;
     frameworks?: string[];
+    deprecated?: boolean;
 }
 
 /** Document fields in which we want to have search term highlighted */
 const HIGHLITHED_FIELDS = ['title', 'content'] satisfies Array<keyof SearchDocument>;
+
+/** Score multiplier applied to deprecated entries to push them down the result list. */
+const DEPRECATED_SCORE_PENALTY = 0.1;
 
 interface SearchIndex {
     index: lunr.Index;
@@ -43,8 +47,16 @@ async function search(rawQuery: string) {
         }
     });
 
+    // Penalize deprecated entries so they rank below non-deprecated ones, then re-sort by score.
+    const adjustedResults = rawResults
+        .map(({ ref, score }) => ({
+            ref,
+            score: store[ref]?.deprecated ? score * DEPRECATED_SCORE_PENALTY : score,
+        }))
+        .sort((a, b) => b.score - a.score);
+
     const results = [];
-    for (const { ref } of rawResults) {
+    for (const { ref } of adjustedResults) {
         if (results.length === 10) {
             break;
         }

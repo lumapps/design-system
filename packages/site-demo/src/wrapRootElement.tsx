@@ -3,6 +3,7 @@ import { CodeBlock } from '@lumx/demo/components/content/CodeBlock/CodeBlock';
 import { DemoBlock } from '@lumx/demo/components/content/DemoBlock/DemoBlock';
 import { PropTable } from '@lumx/demo/components/content/PropTable/PropTable';
 import { FrameworkOnly } from '@lumx/demo/components/content/FrameworkOnly';
+import { DeprecationNotice } from '@lumx/demo/components/content/DeprecationNotice';
 import { FrameworkProvider } from '@lumx/demo/components/layout/FrameworkContext';
 import { Link } from '@lumx/demo/components/base/Link';
 import { Message } from '@lumx/react';
@@ -29,6 +30,7 @@ const mdxComponents = {
     PropTable,
     Message,
     FrameworkOnly,
+    DeprecationNotice,
 };
 
 /**
