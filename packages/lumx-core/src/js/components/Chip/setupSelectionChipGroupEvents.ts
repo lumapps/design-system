@@ -10,6 +10,9 @@ const ENABLED_CHIP_SELECTOR = `.${CHIP_CLASSNAME}:not([aria-disabled="true"])`;
 const getChip = (target: EventTarget | null) =>
     (target as HTMLElement | null)?.closest?.<HTMLElement>(`.${CHIP_CLASSNAME}`) || null;
 
+/** Whether the chip is marked as disabled via aria-disabled. */
+const isChipDisabled = (chip: HTMLElement | null) => chip?.getAttribute('aria-disabled') === 'true';
+
 /**
  * Options for setting up selection chip group event handlers.
  * All option accessors are wrapped in getters so that React/Vue can provide
@@ -79,7 +82,9 @@ export function setupSelectionChipGroupEvents<O>(options: SetupSelectionChipGrou
     const handleClick = (evt: Event) => {
         const chip = getChip(evt.target);
         const optionId = chip?.dataset.optionId;
-        if (optionId == null) return;
+        if (optionId == null || isChipDisabled(chip)) {
+            return;
+        }
 
         evt.stopImmediatePropagation();
         removeOption(options, optionId);
@@ -93,7 +98,9 @@ export function setupSelectionChipGroupEvents<O>(options: SetupSelectionChipGrou
         const chip = getChip(evt.target);
         const optionId = chip?.dataset.optionId;
         const activatingKey = evt.key === 'Enter' || evt.key === ' ' || evt.key === 'Backspace';
-        if (optionId == null || !activatingKey) return;
+        if (optionId == null || !activatingKey || isChipDisabled(chip)) {
+            return;
+        }
 
         if (evt.key === 'Backspace') {
             // Move focus to previous option (instead of next in listbox)
