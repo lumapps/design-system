@@ -1,5 +1,4 @@
 import type { HasAriaDisabled } from '../../types/HasAriaDisabled';
-import type { HasClassName } from '../../types/HasClassName';
 import type { HasTheme } from '../../types/HasTheme';
 import type { JSXElement, Selector } from '../../types';
 
@@ -135,7 +134,6 @@ export interface BaseSelectTextFieldWrapperProps<O>
             'options' | 'getOptionId' | 'getOptionName' | 'getOptionDescription' | 'getSectionId'
         >,
         HasAriaDisabled,
-        HasClassName,
         HasTheme {
     /** Selection type: 'single' or 'multiple'. */
     selectionType: 'single' | 'multiple';

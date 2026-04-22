@@ -5,13 +5,13 @@ import { getWithSelector } from '@lumx/core/js/utils/selectors';
 import { type RenderOptionContext, type BaseSelectTextFieldWrapperProps } from '@lumx/core/js/utils/select/types';
 import { getOptionDisplayName } from '@lumx/core/js/utils/select/getOptionDisplayName';
 import { SelectTextField as UI } from '@lumx/core/js/components/SelectTextField';
-import { isComponentType } from '@lumx/react/utils/type';
+import { HasClassName, isComponentType } from '@lumx/react/utils/type';
 import { Combobox, type ComboboxPopoverProps } from '../combobox';
 import { InfiniteScroll } from '../../utils/InfiniteScroll';
 import { useMergeRefs } from '../../utils/react/mergeRefs';
 import { SelectionChipGroup } from '../chip/SelectionChipGroup';
 
-interface BaseSelectTextFieldProps<O = any> extends BaseSelectTextFieldWrapperProps<O> {
+interface BaseSelectTextFieldProps<O = any> extends BaseSelectTextFieldWrapperProps<O>, HasClassName {
     /**
      * Custom option render function. Must return a `<Combobox.Option>` element with custom
      * children/props. Core-computed props (`value`, `isSelected`, `description`, `key`) are

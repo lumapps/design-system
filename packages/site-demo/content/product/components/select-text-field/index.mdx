@@ -1,5 +1,5 @@
 ---
-frameworks: ['react']
+frameworks: ['react', 'vue']
 ---
 
 import * as ReactDemoSingleSelection from './react/single-selection.tsx';
@@ -10,7 +10,16 @@ import * as ReactDemoLoading from './react/loading.tsx';
 import * as ReactDemoLoadingMore from './react/loading-more.tsx';
 import * as ReactDemoEmpty from './react/empty.tsx';
 import * as ReactDemoListError from './react/list-error.tsx';
+import * as VueDemoSingleSelection from './vue/single-selection.vue';
+import * as VueDemoMultipleSelection from './vue/multiple-selection.vue';
+import * as VueDemoWithSections from './vue/with-sections.vue';
+import * as VueDemoCustomRender from './vue/custom-render.vue';
+import * as VueDemoLoading from './vue/loading.vue';
+import * as VueDemoLoadingMore from './vue/loading-more.vue';
+import * as VueDemoEmpty from './vue/empty.vue';
+import * as VueDemoListError from './vue/list-error.vue';
 import ReactSelectTextField from 'lumx-docs:@lumx/react/components/select-text-field/SelectTextField';
+import VueSelectTextField from 'lumx-docs:@lumx/vue/components/select-text-field/SelectTextField';
 
 # Select text field
 
@@ -21,13 +30,13 @@ Use them when users need to select one or more items from a searchable dropdown 
 
 Set `selectionType="single"` for single selection mode. Users can type to filter options and select one.
 
-<DemoBlock demo={{ react: ReactDemoSingleSelection }} />
+<DemoBlock demo={{ react: ReactDemoSingleSelection, vue: VueDemoSingleSelection }} />
 
 ## Multiple selection
 
 Set `selectionType="multiple"` to allow selecting multiple options. Selected values are displayed as chips below the input.
 
-<DemoBlock demo={{ react: ReactDemoMultipleSelection  }} />
+<DemoBlock demo={{ react: ReactDemoMultipleSelection, vue: VueDemoMultipleSelection }} />
 
 ## Options
 
@@ -41,7 +50,7 @@ Each option is an object. Use selector props to tell the component how to read e
 
 Options can be grouped in sections via `getSectionId`.
 
-<DemoBlock demo={{ react: ReactDemoWithSections }} />
+<DemoBlock demo={{ react: ReactDemoWithSections, vue: VueDemoWithSections }} />
 
 ### Custom rendering
 
@@ -49,7 +58,7 @@ Beyond simple text customization, options, section title and chips (multiple sel
 
 Extra options can also be injected at the top of the dropdown list — for example, a "Create" option that lets users add new entries on the fly.
 
-<DemoBlock demo={{ react: ReactDemoCustomRender  }} />
+<DemoBlock demo={{ react: ReactDemoCustomRender, vue: VueDemoCustomRender }} />
 
 ## Input options
 
@@ -68,25 +77,25 @@ The select text field dropdown list have alternative states to handle server-bac
 
 Set `listStatus="loading"` to display skeleton placeholders while options are being fetched. Real options are hidden until loading completes.
 
-<DemoBlock demo={{ react: ReactDemoLoading  }} />
+<DemoBlock demo={{ react: ReactDemoLoading, vue: VueDemoLoading }} />
 
 ### Loading more
 
 Set `listStatus="loadingMore"` to append a skeleton placeholder at the bottom of the existing options, indicating that more items are being loaded (e.g. during infinite scroll pagination).
 
-<DemoBlock demo={{ react: ReactDemoLoadingMore  }} />
+<DemoBlock demo={{ react: ReactDemoLoadingMore, vue: VueDemoLoadingMore }} />
 
 ### Empty
 
 Provide `translations.emptyMessage` to display a message when no options are available. The message can be a static string or a function receiving the current input value for dynamic messages.
 
-<DemoBlock demo={{ react: ReactDemoEmpty  }} />
+<DemoBlock demo={{ react: ReactDemoEmpty, vue: VueDemoEmpty }} />
 
 ### Error
 
 Set `listStatus="error"` to display an error state inside the dropdown. Use `translations.errorMessage` for the error title and optionally `translations.errorTryReloadMessage` for a secondary message.
 
-<DemoBlock demo={{ react: ReactDemoListError  }} />
+<DemoBlock demo={{ react: ReactDemoListError, vue: VueDemoListError }} />
 
 ## Filter types
 
@@ -115,4 +124,4 @@ Select text fields can be disabled in two ways:
 
 ## Properties
 
-<PropTable docs={{ react: ReactSelectTextField  }} />
+<PropTable docs={{ react: ReactSelectTextField, vue: VueSelectTextField }} />

@@ -82,6 +82,35 @@ function getVueComponentName(sourceFile) {
 }
 
 /**
+ * Parse a JSDoc block from a node's leading comment trivia.
+ *
+ * Used for object-property declarations (e.g. `emitSchema.change`) where TS-morph's
+ * `getJsDocs()` returns nothing — JSDoc parsing in the TS compiler is opt-in for
+ * `JSDocableNode` declarations only.
+ *
+ * @param {Node} node - The AST node whose leading comments to inspect
+ * @returns {string} - The first JSDoc block's description text, or '' if none.
+ */
+function extractJsDocFromLeadingComments(node) {
+    const ranges = node.getLeadingCommentRanges?.() || [];
+    for (const range of ranges) {
+        const text = range.getText();
+        if (!text.startsWith('/**')) continue;
+        // Strip the `/**`, `*/`, and per-line ` * ` markers, ignoring `@tag` lines.
+        const inner = text
+            .replace(/^\/\*\*/, '')
+            .replace(/\*\/$/, '')
+            .split('\n')
+            .map((line) => line.replace(/^\s*\*\s?/, '').trimEnd())
+            .filter((line) => !line.startsWith('@'))
+            .join('\n')
+            .trim();
+        if (inner) return inner;
+    }
+    return '';
+}
+
+/**
  * Extract events from a Vue component.
  * Supports two patterns:
  *   1. `emitSchema` const objects with validator functions
@@ -103,15 +132,20 @@ function extractEmits(sourceFile) {
         for (const prop of initializer.getProperties()) {
             if (prop.getKindName() !== 'PropertyAssignment') continue;
 
-            const eventName = prop.getName();
-            const description = getJsDocFromDeclaration(prop);
+            // Strip surrounding quotes for string-literal property names (e.g. `'load-more'`).
+            const eventName = prop.getName().replace(/^['"]|['"]$/g, '');
+            // PropertyAssignment doesn't expose JSDoc via `getJsDocs()` — fall back to
+            // parsing leading comment trivia.
+            const description = getJsDocFromDeclaration(prop) || extractJsDocFromLeadingComments(prop);
             const parameters = [];
 
             // Parse the validator function's parameters for type info
             const validator = prop.getInitializer();
             if (validator && validator.getKindName() === 'ArrowFunction') {
                 for (const param of validator.getParameters()) {
-                    const paramName = param.getName();
+                    // Strip the leading underscore convention (`_event` → `event`) — used
+                    // when the validator can't actually validate (e.g. `unknown` payloads).
+                    const paramName = param.getName().replace(/^_/, '');
                     const paramType = param.getTypeNode()?.getText() || param.getType().getText();
                     const optional = param.hasQuestionToken() || param.hasInitializer();
                     parameters.push({ name: paramName, type: paramType, optional });

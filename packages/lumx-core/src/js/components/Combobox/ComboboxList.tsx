@@ -14,7 +14,7 @@ export type ComboboxListType = 'listbox' | 'grid';
  */
 export interface ComboboxListProps extends HasClassName {
     /** Accessible label for the listbox (required for accessibility). */
-    'aria-label': string;
+    'aria-label'?: string;
     /**
      * Indicates that the listbox content is incomplete (loading).
      * Set to `true` when skeleton placeholders are present and no real options have loaded yet.

@@ -34,19 +34,13 @@ const ComboboxList = defineComponent(
         provideComboboxListContext({ type: props.type || 'listbox' });
 
         // Register the list as the listbox when both handle and list element are available
-        useWatchDisposable([handle, listRef], ([h, list]) => {
-            if (h && list) {
-                return h.registerListbox(list);
-            }
+        useWatchDisposable([handle, listRef], ([handleValue, list]) => {
+            if (!handleValue || !list) return;
+            return handleValue.registerListbox(list);
         });
 
         // Track loading state for aria-busy
         const isLoading = useComboboxEvent('loadingChange', false);
-
-        // Update listRef when the list element is mounted/unmounted
-        const setListRef = (el: Element | null) => {
-            listRef.value = el as HTMLElement | null;
-        };
 
         return () => {
             const children = slots.default?.() as JSXElement;
@@ -59,7 +53,7 @@ const ComboboxList = defineComponent(
                 'aria-multiselectable': ariaMultiselectable || undefined,
                 'aria-busy': isLoading.value || undefined,
                 className: className.value,
-                ref: setListRef as any,
+                ref: listRef as any,
                 id: listboxId,
                 type: props.type || 'listbox',
                 children,
