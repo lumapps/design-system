@@ -43,8 +43,33 @@ export interface ComboboxEventMap {
 
 /** Callbacks provided by the consumer (React/Vue) to react to combobox state changes. */
 export interface ComboboxCallbacks {
-    /** Called when an option is selected (click or keyboard). Receives the combobox handle for post-selection side effects. */
-    onSelect(option: { value: string }, handle: ComboboxHandle): void;
+    /** Called when an option is selected (click or keyboard). */
+    onSelect?(option: { value: string }): void;
+}
+
+/**
+ * Behavioral options for input-mode combobox (autocomplete/filter pattern).
+ * Shared between the core JSX template props (`ComboboxInputProps`) and the
+ * runtime controller options (`SetupComboboxInputOptions`).
+ */
+export interface ComboboxInputOptions {
+    /**
+     * Controls how the combobox filters options as the user types.
+     *
+     * - `'auto'` (default) — Options are automatically filtered client-side.
+     * - `'manual'` — Filtering is the consumer's responsibility.
+     * - `'off'` — Like `'manual'`, but the input is rendered as `readOnly`
+     *   and `openOnFocus` defaults to `true`.
+     */
+    filter?: 'auto' | 'manual' | 'off';
+    /**
+     * When true, the combobox opens automatically when the input receives focus.
+     * When false (default, unless `filter` is `'off'`), the combobox only opens
+     * on click, typing, or keyboard navigation.
+     *
+     * @default false (true when filter is 'off')
+     */
+    openOnFocus?: boolean;
 }
 
 /** Handle returned by `setupCombobox`. Used by framework wrappers and mode controllers. */
