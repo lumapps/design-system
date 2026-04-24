@@ -1,26 +1,8 @@
-import type { ComboboxCallbacks, ComboboxHandle } from './types';
+import type { ComboboxCallbacks, ComboboxHandle, ComboboxInputOptions } from './types';
 import { setupCombobox } from './setupCombobox';
 
 /** Options for configuring the input-mode combobox controller. */
-export interface SetupComboboxInputOptions extends ComboboxCallbacks {
-    /**
-     * Controls how the combobox filters options as the user types.
-     *
-     * - `'auto'` (default) — Options are automatically filtered client-side.
-     * - `'manual'` — Filtering is the consumer's responsibility.
-     * - `'off'` — Like `'manual'`, and `openOnFocus` defaults to `true`.
-     *   The core template renders the input as `readOnly`.
-     */
-    filter?: 'auto' | 'manual' | 'off';
-    /**
-     * When true, the combobox opens automatically when the input receives focus.
-     * When false (default, unless `filter` is `'off'`), the combobox only opens
-     * on click, typing, or keyboard navigation.
-     *
-     * @default false (true when filter is 'off')
-     */
-    openOnFocus?: boolean;
-}
+export interface SetupComboboxInputOptions extends ComboboxCallbacks, ComboboxInputOptions {}
 
 /**
  * Set up a combobox with an input trigger (autocomplete/filter pattern).
@@ -37,6 +19,7 @@ export interface SetupComboboxInputOptions extends ComboboxCallbacks {
  * @returns A ComboboxHandle for interacting with the combobox.
  */
 export function setupComboboxInput(input: HTMLInputElement, options: SetupComboboxInputOptions): ComboboxHandle {
+    let handle: ComboboxHandle;
     const { filter = 'auto', onSelect: optionOnSelect } = options;
     const openOnFocus = options.openOnFocus ?? filter === 'off';
     const autoFilter = filter === 'auto';
@@ -55,22 +38,22 @@ export function setupComboboxInput(input: HTMLInputElement, options: SetupCombob
      * Wraps the consumer's onSelect to perform input-mode side effects after selection:
      * clears the active descendant, resets the filter, and re-opens the popup.
      */
-    const onSelect = (option: { value: string }, combobox: ComboboxHandle) => {
-        optionOnSelect(option, combobox);
+    const onSelect = (option: { value: string }) => {
+        optionOnSelect?.(option);
 
         // Clear the active item. In multi-select, keep visual focus so the
         // user can continue navigating after selection.
-        if (!combobox.isMultiSelect) {
-            combobox.focusNav?.clear();
+        if (!handle.isMultiSelect) {
+            handle.focusNav?.clear();
         }
         userHasTyped = false;
-        combobox.setIsOpen(true);
+        handle.setIsOpen(true);
         if (autoFilter) {
-            combobox.setFilter('');
+            handle.setFilter('');
         }
     };
 
-    const handle = setupCombobox({ onSelect }, { wrapNavigation: true }, (combobox, signal) => {
+    handle = setupCombobox({ onSelect }, { wrapNavigation: true }, (combobox, signal) => {
         signal.addEventListener('abort', () => {
             userHasTyped = false;
         });

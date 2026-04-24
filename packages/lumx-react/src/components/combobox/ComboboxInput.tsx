@@ -1,9 +1,16 @@
 import { type Ref, useCallback, useEffect, useRef } from 'react';
 
 import { setupComboboxInput } from '@lumx/core/js/components/Combobox/setupComboboxInput';
-import { ComboboxInput as UI, COMPONENT_NAME, CLASSNAME } from '@lumx/core/js/components/Combobox/ComboboxInput';
+import {
+    ComboboxInput as UI,
+    ComboboxInputProps as UIProps,
+    ComboboxInputPropsToOverride,
+    COMPONENT_NAME,
+    CLASSNAME,
+} from '@lumx/core/js/components/Combobox/ComboboxInput';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';
+import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 import { IconButton, IconButtonProps } from '../button';
 import { TextField, TextFieldProps } from '../text-field';
 import { useComboboxContext } from './context/ComboboxContext';
@@ -13,34 +20,13 @@ import { useComboboxOpen } from './context/useComboboxOpen';
  * Props for Combobox.Input component.
  * Note: role, aria-autocomplete, aria-controls, aria-expanded are set internally and cannot be overridden.
  */
-export interface ComboboxInputProps extends TextFieldProps {
-    /** Reference to the input element. */
-    inputRef?: Ref<HTMLInputElement>;
+export interface ComboboxInputProps extends TextFieldProps, ReactToJSX<UIProps, ComboboxInputPropsToOverride> {
     /**
      * Props for the toggle button.
      * When provided, a chevron button will be rendered in the text field's afterElement
      * to toggle the listbox visibility.
      */
     toggleButtonProps?: Pick<IconButtonProps, 'label'> & Partial<Omit<IconButtonProps, 'label'>>;
-    /** Called when an option is selected. */
-    onSelect?: (option: { value: string }) => void;
-    /**
-     * Controls how the combobox filters options as the user types.
-     *
-     * - `'auto'` (default) — Options are automatically filtered client-side.
-     * - `'manual'` — Filtering is the consumer's responsibility.
-     * - `'off'` — Like `'manual'`, but the input is rendered as `readOnly`
-     *   and `openOnFocus` defaults to `true`.
-     */
-    filter?: 'auto' | 'manual' | 'off';
-    /**
-     * When true, the combobox opens automatically when the input receives focus.
-     * When false (default, unless `filter` is `'off'`), the combobox only opens
-     * on click, typing, or keyboard navigation.
-     *
-     * @default false (true when filter is 'off')
-     */
-    openOnFocus?: boolean;
 }
 
 /**

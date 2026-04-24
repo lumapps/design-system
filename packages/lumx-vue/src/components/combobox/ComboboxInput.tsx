@@ -1,6 +1,12 @@
 import { defineComponent, onMounted, onUnmounted, ref } from 'vue';
 
-import { ComboboxInput as UI, COMPONENT_NAME, CLASSNAME } from '@lumx/core/js/components/Combobox/ComboboxInput';
+import {
+    ComboboxInput as UI,
+    ComboboxInputProps as UIProps,
+    ComboboxInputPropsToOverride,
+    COMPONENT_NAME,
+    CLASSNAME,
+} from '@lumx/core/js/components/Combobox/ComboboxInput';
 import { setupComboboxInput } from '@lumx/core/js/components/Combobox/setupComboboxInput';
 
 import { useClassName } from '../../composables/useClassName';
@@ -17,33 +23,14 @@ import { useComboboxOpen } from './context/useComboboxOpen';
  * Props for Combobox.Input component.
  * Note: role, aria-autocomplete, aria-controls, aria-expanded are set internally and cannot be overridden.
  */
-export type ComboboxInputProps = VueToJSXProps<TextFieldProps, 'inputRef' | 'textFieldRef'> & {
+export interface ComboboxInputProps extends TextFieldProps, VueToJSXProps<UIProps, ComboboxInputPropsToOverride> {
     /**
      * Props for the toggle button.
      * When provided, a chevron button will be rendered in the text field's afterElement
      * to toggle the listbox visibility.
      */
     toggleButtonProps?: Pick<IconButtonProps, 'label'> & Partial<Omit<IconButtonProps, 'label'>>;
-    /** Called when an option is selected. */
-    onSelect?: (option: { value: string }) => void;
-    /**
-     * Controls how the combobox filters options as the user types.
-     *
-     * - `'auto'` (default) — Options are automatically filtered client-side.
-     * - `'manual'` — Filtering is the consumer's responsibility.
-     * - `'off'` — Like `'manual'`, but the input is rendered as `readOnly`
-     *   and `openOnFocus` defaults to `true`.
-     */
-    filter?: 'auto' | 'manual' | 'off';
-    /**
-     * When true, the combobox opens automatically when the input receives focus.
-     * When false (default, unless `filter` is `'off'`), the combobox only opens
-     * on click, typing, or keyboard navigation.
-     *
-     * @default false (true when filter is 'off')
-     */
-    openOnFocus?: boolean;
-};
+}
 
 /**
  * Combobox.Input component - wraps TextField with combobox ARIA attributes.
@@ -127,10 +114,11 @@ const ComboboxInput = defineComponent(
                     filter,
                     textFieldRef: (el: HTMLElement | null) => {
                         anchorRef.value = el;
+                        props.textFieldRef?.(el);
                     },
                     inputRef: (el: HTMLInputElement | null) => {
                         inputEl.value = el;
-                        (attrs as any).inputRef?.(el);
+                        props.inputRef?.(el);
                     },
                     toggleButtonProps,
                     handleToggle,
@@ -168,6 +156,8 @@ const ComboboxInput = defineComponent(
             'name',
             'type',
             'minimumRows',
+            'inputRef',
+            'textFieldRef',
             'toggleButtonProps',
             'onSelect',
             'filter',
