@@ -70,6 +70,7 @@ export function createTooltipOpenManager(options: TooltipOpenManagerOptions): To
 
     return {
         attachAnchor(anchorElement: HTMLElement): void {
+            if (!anchorElement) return;
             anchorController = new AbortController();
             const { signal } = anchorController;
 

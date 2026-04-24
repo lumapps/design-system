@@ -10,6 +10,20 @@ import { classNames } from '../../utils';
 export type ComboboxButtonLabelDisplayMode = 'show-selection' | 'show-label' | 'show-tooltip';
 
 /**
+ * Custom render function replacing the default `<Button>`. Receives the merged button props
+ * (ARIA attrs, ref, className and any forwarded caller props) and the resolved children string
+ * (computed from `labelDisplayMode`; `null` when `labelDisplayMode='show-tooltip'`).
+ *
+ * The `<Tooltip>` wrapper is **always** rendered around the result, keeping accessibility
+ * semantics consistent regardless of which element the render function returns.
+ *
+ * The `buttonProps` object **must** be spread onto the slot's root element so that the
+ * combobox ARIA attributes (`role`, `aria-controls`, `aria-haspopup`, `aria-expanded`,
+ * `aria-activedescendant`) and the `ref` callback reach the underlying DOM node.
+ */
+export type ComboboxRenderButton<E = JSXElement> = (buttonProps: Record<string, any>, children: string | null) => E;
+
+/**
  * Defines the props for the core ComboboxButton template.
  */
 export interface ComboboxButtonProps extends HasClassName {
@@ -25,6 +39,8 @@ export interface ComboboxButtonProps extends HasClassName {
     isOpen?: boolean;
     /** ref to the root button element. */
     ref?: CommonRef;
+    /** Custom render button */
+    renderButton?: ComboboxRenderButton;
 }
 
 /**
@@ -67,18 +83,34 @@ export const ComboboxButton = (props: ComboboxButtonProps, { Button, Tooltip }: 
         listboxId,
         isOpen,
         ref,
+        renderButton,
         ...forwardedProps
     } = props;
 
-    // Determine what content to display
+    // Determine what children to display
     const showSelection = labelDisplayMode === 'show-selection';
     const tooltipOnly = labelDisplayMode === 'show-tooltip';
 
     const selectionLabel = showSelection && value ? value : null;
-    const content: JSXElement = tooltipOnly ? null : selectionLabel || label;
+    const children: string | null = tooltipOnly ? null : selectionLabel || label;
 
-    // Hide tooltip if the displayed content equals the label or when open
-    const hideTooltip = label === content || isOpen;
+    // Hide tooltip if the displayed children equal the label or when open
+    const hideTooltip = label === children || isOpen;
+
+    // Build the merged props object that must be spread on the rendered button root.
+    // These props include the required combobox ARIA attributes, the ref callback, and
+    // any additional caller-provided forwarded props.
+    const buttonProps: Record<string, any> = {
+        ref,
+        ...forwardedProps,
+        tabIndex: 0,
+        className: classNames.join(className, CLASSNAME),
+        role: 'combobox',
+        'aria-controls': listboxId,
+        'aria-haspopup': 'listbox',
+        'aria-expanded': isOpen,
+        'aria-activedescendant': '',
+    };
 
     return (
         <Tooltip
@@ -87,18 +119,7 @@ export const ComboboxButton = (props: ComboboxButtonProps, { Button, Tooltip }: 
             closeMode="hide"
             ariaLinkMode="aria-labelledby"
         >
-            <Button
-                ref={ref}
-                {...forwardedProps}
-                className={classNames.join(className, CLASSNAME)}
-                role="combobox"
-                aria-controls={listboxId}
-                aria-haspopup="listbox"
-                aria-expanded={isOpen}
-                aria-activedescendant=""
-            >
-                {content}
-            </Button>
+            {renderButton ? renderButton(buttonProps, children) : <Button {...buttonProps}>{children}</Button>}
         </Tooltip>
     );
 };
