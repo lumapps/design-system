@@ -1,11 +1,12 @@
 import { mdiChevronUp, mdiChevronDown } from '@lumx/icons';
 import type { CommonRef, HasClassName, HasTheme, LumxClassName } from '../../types';
 import { getDisabledState } from '../../utils/disabledState';
+import type { ComboboxCallbacks, ComboboxInputOptions } from './types';
 
 /**
  * Defines the props for the core ComboboxInput template.
  */
-export interface ComboboxInputProps extends HasClassName, HasTheme {
+export interface ComboboxInputProps extends HasClassName, HasTheme, ComboboxCallbacks, ComboboxInputOptions {
     /** The ID of the listbox element (for aria-controls). */
     listboxId?: string;
     /** Whether the combobox is open. */
@@ -20,12 +21,21 @@ export interface ComboboxInputProps extends HasClassName, HasTheme {
     toggleButtonProps?: Record<string, any>;
     /** Toggle callback for the chevron button. */
     handleToggle?(): void;
-    /**
-     * Controls how the combobox filters options as the user types.
-     * When `'off'`, the input is rendered as `readOnly`.
-     */
-    filter?: 'auto' | 'manual' | 'off';
 }
+
+/**
+ * Props from the core `ComboboxInputProps` that framework wrappers (React/Vue)
+ * are expected to provide internally or re-type with framework-specific equivalents
+ * (e.g. React refs, framework-specific button props). Wrappers should omit these
+ * keys when exposing the core props to consumers.
+ */
+export type ComboboxInputPropsToOverride =
+    | 'listboxId'
+    | 'isOpen'
+    | 'inputRef'
+    | 'textFieldRef'
+    | 'toggleButtonProps'
+    | 'handleToggle';
 
 /**
  * Injected framework-specific components for ComboboxInput rendering.

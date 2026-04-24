@@ -375,7 +375,7 @@ export function setupCombobox(
         },
 
         select(option: HTMLElement | null) {
-            callbacks.onSelect({ value: option ? getOptionValue(option) : '' }, handle);
+            callbacks.onSelect?.({ value: option ? getOptionValue(option) : '' });
         },
 
         registerOption(element: HTMLElement, callback: (isFiltered: boolean) => void): () => void {

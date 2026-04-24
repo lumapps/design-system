@@ -23,8 +23,6 @@ export type ComboboxButtonProps = VueToJSXProps<UIProps, 'label'> & {
     value?: string;
     /** Controls how the label/value is displayed. @default 'show-selection' */
     labelDisplayMode?: ComboboxButtonLabelDisplayMode;
-    /** Called when an option is selected. */
-    onSelect?: (option: { value: string }) => void;
 };
 
 /**

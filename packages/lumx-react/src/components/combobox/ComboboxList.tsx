@@ -4,28 +4,16 @@ import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import {
     ComboboxList as UI,
+    ComboboxListProps as UIProps,
     COMPONENT_NAME,
     CLASSNAME,
-    type ComboboxListType,
 } from '@lumx/core/js/components/Combobox/ComboboxList';
-import { ListProps } from '@lumx/react/components/list';
+import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 import { useComboboxContext } from './context/ComboboxContext';
 import { ComboboxListContext } from './context/ComboboxListContext';
 
-/**
- * Props for Combobox.List component.
- * Note: role, id are set internally and cannot be overridden.
- */
-export interface ComboboxListProps extends ListProps {
-    /** Accessible label for the listbox (required for accessibility). */
-    'aria-label': string;
-    /**
-     * The popup type. Set to "grid" when options have action buttons (Combobox.OptionAction).
-     * Enables 2D keyboard navigation and switches ARIA roles from listbox/option to grid/gridcell.
-     * @default 'listbox'
-     */
-    type?: ComboboxListType;
-}
+/** Props for Combobox.List component. */
+export interface ComboboxListProps extends ReactToJSX<UIProps, 'aria-busy'> {}
 
 /**
  * Combobox.List component - wraps List with listbox ARIA attributes.
