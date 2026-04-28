@@ -1,5 +1,6 @@
 import type { CommonRef, HasClassName, JSXElement, LumxClassName } from '../../types';
 import { classNames } from '../../utils';
+import type { ComboboxCallbacks } from './types';
 
 /**
  * Label display mode for the ComboboxButton.
@@ -12,7 +13,7 @@ export type ComboboxButtonLabelDisplayMode = 'show-selection' | 'show-label' | '
 /**
  * Defines the props for the core ComboboxButton template.
  */
-export interface ComboboxButtonProps extends HasClassName {
+export interface ComboboxButtonProps extends HasClassName, ComboboxCallbacks {
     /** The label for the button (used for ARIA and tooltip). */
     label: string;
     /** The currently selected value to display. */

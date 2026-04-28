@@ -27,10 +27,7 @@ export type ComboboxButtonProps<E extends ElementType = typeof Button> = Omit<
     'children' | 'role' | 'aria-controls' | 'aria-haspopup' | 'aria-expanded' | 'aria-activedescendant'
 > &
     HasRequiredLinkHref<E> &
-    ReactToJSX<UIProps> & {
-        /** Called when an option is selected. */
-        onSelect?: (option: { value: string }) => void;
-    };
+    ReactToJSX<UIProps>;
 
 /**
  * Combobox.Button component - Button trigger for select-only combobox mode.
