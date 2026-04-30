@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `@lumx/react`:
     -   Create the `SelectButton` component
+    -   Create the `TimePickerField` component
 -   `@lumx/core`:
     -   Allow single string additional class argument to BEM `block` and `element` functions
 
