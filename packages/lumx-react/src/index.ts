@@ -59,6 +59,7 @@ export * from './components/tabs';
 export * from './components/text';
 export * from './components/text-field';
 export * from './components/thumbnail';
+export * from './components/time-picker-field';
 export * from './components/toolbar';
 export * from './components/tooltip';
 export * from './components/uploader';

@@ -2,7 +2,7 @@ import React, { SyntheticEvent, useCallback, useRef } from 'react';
 
 import { DatePicker, IconButtonProps, Placement, PopoverDialog, TextField, TextFieldProps } from '@lumx/react';
 import { GenericProps } from '@lumx/react/utils/type';
-import { getCurrentLocale } from '@lumx/react/utils/locale/getCurrentLocale';
+import { getCurrentLocale } from '@lumx/core/js/utils/locale/getCurrentLocale';
 import { useBooleanState } from '@lumx/react/hooks/useBooleanState';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';
