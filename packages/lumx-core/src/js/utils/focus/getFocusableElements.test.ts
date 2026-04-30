@@ -96,21 +96,24 @@ describe(getFocusableElements.name, () => {
                 ]
             `);
         });
+
+        it('should keep aria-disabled (focusable per ARIA semantics)', () => {
+            const element = htmlToElement('<div><button aria-disabled /><button /></div>');
+            const focusable = getFocusableElements(element);
+            expect(focusable).toMatchInlineSnapshot(`
+                [
+                  <button
+                    aria-disabled=""
+                  />,
+                  <button />,
+                ]
+            `);
+        });
     });
 
     describe('skip disabled elements', () => {
         it('should skip disabled', () => {
             const element = htmlToElement('<div><button disabled /><button /></div>');
-            const focusable = getFocusableElements(element);
-            expect(focusable).toMatchInlineSnapshot(`
-                [
-                  <button />,
-                ]
-            `);
-        });
-
-        it('should skip aria-disabled', () => {
-            const element = htmlToElement('<div><button aria-disabled /><button /></div>');
             const focusable = getFocusableElements(element);
             expect(focusable).toMatchInlineSnapshot(`
                 [

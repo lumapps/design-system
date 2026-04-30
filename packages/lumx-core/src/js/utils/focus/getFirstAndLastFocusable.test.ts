@@ -99,17 +99,21 @@ describe(getFirstAndLastFocusable.name, () => {
                 />
             `);
         });
+
+        it('should keep aria-disabled (focusable per ARIA semantics)', () => {
+            const element = htmlToElement('<div><button aria-disabled /><button /></div>');
+            const focusable = getFirstAndLastFocusable(element);
+            expect(focusable.first).toMatchInlineSnapshot(`
+                <button
+                  aria-disabled=""
+                />
+            `);
+        });
     });
 
     describe('skip disabled elements', () => {
         it('should skip disabled', () => {
             const element = htmlToElement('<div><button disabled /><button /></div>');
-            const focusable = getFirstAndLastFocusable(element);
-            expect(focusable.first).toMatchInlineSnapshot('<button />');
-        });
-
-        it('should skip aria-disabled', () => {
-            const element = htmlToElement('<div><button aria-disabled /><button /></div>');
             const focusable = getFirstAndLastFocusable(element);
             expect(focusable.first).toMatchInlineSnapshot('<button />');
         });
