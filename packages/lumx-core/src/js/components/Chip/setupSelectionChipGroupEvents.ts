@@ -32,24 +32,34 @@ export interface SetupSelectionChipGroupEventsOptions<O> {
 }
 
 /**
- * Finds the previous enabled chip before the given chip element using a TreeWalker.
- * If no currentChip is provided, returns the last enabled chip in the container.
+ * Find the nearest enabled chip in the given direction relative to `anchor`.
+ *
+ * - When `anchor` is provided, walks one step in `direction` from it.
+ * - When `anchor` is omitted, returns the first enabled chip from the matching
+ *   end of the container (last chip for 'previous', first for 'next').
  */
-function findPreviousChip(container: HTMLElement, currentChip?: Element | null): HTMLElement | undefined {
+function findSiblingChip(
+    container: HTMLElement,
+    direction: 'next' | 'previous',
+    anchor?: Element | null,
+): HTMLElement | undefined {
     const walker = createSelectorTreeWalker(container, ENABLED_CHIP_SELECTOR);
 
-    if (!currentChip) {
-        // Find the last enabled chip by walking to the end.
+    if (anchor) {
+        walker.currentNode = anchor;
+        const node = direction === 'next' ? walker.nextNode() : walker.previousNode();
+        return (node as HTMLElement) || undefined;
+    }
+
+    // No anchor: walk from the matching end of the container.
+    if (direction === 'previous') {
         let last: HTMLElement | undefined;
         while (walker.nextNode()) {
             last = walker.currentNode as HTMLElement;
         }
         return last;
     }
-
-    // Position the walker at the current chip and walk backward.
-    walker.currentNode = currentChip;
-    return (walker.previousNode() as HTMLElement) || undefined;
+    return (walker.nextNode() as HTMLElement) || undefined;
 }
 
 /** Remove an option by its id and call onChange. */
@@ -91,9 +101,6 @@ export function setupSelectionChipGroupEvents<O>(options: SetupSelectionChipGrou
     };
 
     // Delegated keydown handler on the chip group container.
-    // Enter/Space trigger removal (like click).
-    // Backspace also removes but explicitly moves focus to previous chip (overriding the
-    // roving tabindex MutationObserver which defaults to moving focus forward).
     const handleKeyDown = (evt: KeyboardEvent) => {
         const chip = getChip(evt.target);
         const optionId = chip?.dataset.optionId;
@@ -102,14 +109,23 @@ export function setupSelectionChipGroupEvents<O>(options: SetupSelectionChipGrou
             return;
         }
 
+        // Compute focus fallback target before removing the chip.
+        let focusTarget: HTMLElement | undefined;
         if (evt.key === 'Backspace') {
-            // Move focus to previous option (instead of next in listbox)
-            const previousChip = findPreviousChip(container, chip);
-            const focusTarget = previousChip || options.getInput?.();
-            if (focusTarget) {
-                focusTarget.focus();
-                focusTarget.setAttribute('tabindex', '0');
-            }
+            // Custom behavior (not WAI-ARIA recommendation) => focus the previous chip, fallback on input (no more chips)
+            focusTarget = findSiblingChip(container, 'previous', chip) || options.getInput?.() || undefined;
+        } else {
+            // WAI-ARIA recommendation when removing an option in a listbox => focus the next chip, fallback on previous chip
+            // (bonus: we fallback on input when there is no more chips)
+            focusTarget =
+                findSiblingChip(container, 'next', chip) ||
+                findSiblingChip(container, 'previous', chip) ||
+                options.getInput?.() ||
+                undefined;
+        }
+        if (focusTarget) {
+            focusTarget.focus();
+            focusTarget.setAttribute('tabindex', '0');
         }
 
         evt.preventDefault();
@@ -132,7 +148,7 @@ export function setupSelectionChipGroupEvents<O>(options: SetupSelectionChipGrou
             evt.stopPropagation();
             evt.preventDefault();
 
-            const lastChip = findPreviousChip(container);
+            const lastChip = findSiblingChip(container, 'previous');
             lastChip?.focus();
         };
         input.addEventListener('keydown', inputHandler);

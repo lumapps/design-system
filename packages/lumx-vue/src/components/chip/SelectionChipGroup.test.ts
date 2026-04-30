@@ -12,23 +12,33 @@ const testOptions = [
     { id: '3', name: 'Banana' },
 ];
 
-const StatefulWrapper = defineComponent({
-    setup() {
-        const value = ref([...testOptions]);
-        const onChange = (newValue?: any[]) => {
-            value.value = newValue ?? [];
-        };
-        return () =>
-            h(SelectionChipGroup, {
-                value: value.value,
-                getOptionId: 'id',
-                getOptionName: 'name',
-                label: 'Test chips',
-                chipRemoveLabel: 'Remove',
-                onChange,
-            });
-    },
-});
+const createStatefulWrapper = (initialValue: any[] = [...testOptions]) =>
+    defineComponent({
+        setup() {
+            const value = ref([...initialValue]);
+            const inputRef = ref<HTMLInputElement | null>(null);
+            const onChange = (newValue?: any[]) => {
+                value.value = newValue ?? [];
+            };
+            return () =>
+                h('div', [
+                    h(SelectionChipGroup, {
+                        value: value.value,
+                        getOptionId: 'id',
+                        getOptionName: 'name',
+                        label: 'Test chips',
+                        chipRemoveLabel: 'Remove',
+                        inputRef: inputRef.value,
+                        onChange,
+                    }),
+                    h('input', {
+                        ref: (el: any) => {
+                            inputRef.value = el;
+                        },
+                    }),
+                ]);
+        },
+    });
 
 describe('<SelectionChipGroup />', () => {
     const renderComponent = (props: any, options?: any) =>
@@ -40,7 +50,7 @@ describe('<SelectionChipGroup />', () => {
     // Core tests
     BaseSelectionChipGroupTests({
         render: renderComponent,
-        renderStateful: () => render(StatefulWrapper),
+        renderStateful: (initialValue?: any[]) => render(createStatefulWrapper(initialValue)),
         screen,
     });
 

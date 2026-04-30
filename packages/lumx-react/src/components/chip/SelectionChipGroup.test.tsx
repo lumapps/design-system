@@ -36,16 +36,21 @@ const setup = (propOverrides: Partial<SelectionChipGroupProps<TestOption>> = {})
 
 const StatefulSelectionChipGroup = (props: Partial<SelectionChipGroupProps<TestOption>>) => {
     const [value, setValue] = useState(props.value ?? testOptions);
+    const inputRef = React.useRef<HTMLInputElement>(null);
     return (
-        <SelectionChipGroup
-            getOptionId="id"
-            getOptionName="name"
-            label="Test chips"
-            chipRemoveLabel="Remove"
-            {...props}
-            value={value}
-            onChange={(newValue) => setValue(newValue ?? [])}
-        />
+        <>
+            <SelectionChipGroup
+                getOptionId="id"
+                getOptionName="name"
+                label="Test chips"
+                chipRemoveLabel="Remove"
+                {...props}
+                value={value}
+                onChange={(newValue) => setValue(newValue ?? [])}
+                inputRef={inputRef}
+            />
+            <input ref={inputRef} />
+        </>
     );
 };
 
@@ -53,7 +58,7 @@ describe('<SelectionChipGroup />', () => {
     // Core tests
     BaseSelectionChipGroupTests({
         render: (props: any) => render(<SelectionChipGroup {...props} />),
-        renderStateful: () => render(<StatefulSelectionChipGroup />),
+        renderStateful: (initialValue?: TestOption[]) => render(<StatefulSelectionChipGroup value={initialValue} />),
         screen,
     });
 
@@ -151,32 +156,6 @@ describe('<SelectionChipGroup />', () => {
                 expect(chips[1]).not.toHaveAttribute('aria-disabled');
                 // Chip 3: getChipProps sets isDisabled=true, renderChip returns undefined => getChipProps wins
                 expect(chips[2]).toHaveAttribute('aria-disabled', 'true');
-            });
-        });
-
-        describe('Keyboard navigation', () => {
-            it('should remove chip and focus input on Backspace', async () => {
-                const onChange = vi.fn();
-                const inputRef = React.createRef<HTMLInputElement>();
-                const { container } = setup({
-                    value: [testOptions[0]],
-                    onChange,
-                    inputRef,
-                });
-
-                const input = document.createElement('input');
-                (inputRef as any).current = input;
-                container.appendChild(input);
-
-                const chips = screen.getAllByRole('option');
-                const firstChip = chips[0];
-
-                firstChip.focus();
-                await userEvent.keyboard('{Backspace}');
-
-                expect(onChange).toHaveBeenCalledTimes(1);
-                expect(onChange).toHaveBeenCalledWith([]);
-                expect(input).toHaveFocus();
             });
         });
 

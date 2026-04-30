@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `@lumx/react`, `@lumx/vue`:
     -   `Combobox`: align prop types across core, React and Vue (single source of truth for `filter`, `openOnFocus`, `onSelect`)
+    -   `SelectionChipGroup`: on Enter/Space chip removal, move focus to the next chip (fallback to previous chip, then to the input)
 
 ## [4.12.0][] - 2026-04-22
 
