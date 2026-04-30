@@ -32,9 +32,14 @@ export const setup = (propsOverride: any = {}, { render, ...options }: SetupOpti
 interface CoreTestOptions extends SetupOptions<any> {
     /**
      * Render a stateful SelectionChipGroup that updates its own value on change.
-     * When provided, enables roving tabindex recovery tests.
+     * Should also render a sibling `<input>` element wired via `inputRef` so the
+     * keyboard navigation tests can assert focus fallback to the input.
+     *
+     * When provided, enables roving tabindex recovery and keyboard navigation tests.
+     *
+     * @param initialValue Optional initial value (defaults to all 3 testOptions).
      */
-    renderStateful?: () => void;
+    renderStateful?: (initialValue?: any[]) => void;
 }
 
 export default (renderOptions: CoreTestOptions) => {
@@ -265,6 +270,30 @@ export default (renderOptions: CoreTestOptions) => {
                 expect(onChange).toHaveBeenCalledWith([testOptions[0], testOptions[2]]);
             });
 
+            it('should focus next chip on Enter/Space when chip is removed', async () => {
+                setup({}, renderOptions);
+                const chips = screen.getAllByRole('option');
+                chips[0].focus();
+                await userEvent.keyboard('{Enter}');
+                expect(chips[1]).toHaveFocus();
+            });
+
+            it('should focus next chip on Space when chip is removed', async () => {
+                setup({}, renderOptions);
+                const chips = screen.getAllByRole('option');
+                chips[1].focus();
+                await userEvent.keyboard(' ');
+                expect(chips[2]).toHaveFocus();
+            });
+
+            it('should fall back to previous chip on Enter when last chip is removed', async () => {
+                setup({}, renderOptions);
+                const chips = screen.getAllByRole('option');
+                chips[2].focus();
+                await userEvent.keyboard('{Enter}');
+                expect(chips[1]).toHaveFocus();
+            });
+
             it('should not trigger onChange on other keys', async () => {
                 const onChange = vi.fn();
                 setup({ onChange }, renderOptions);
@@ -305,6 +334,26 @@ export default (renderOptions: CoreTestOptions) => {
                         expect(remainingChips).toHaveLength(2);
                         expect(remainingChips[0]).toHaveAttribute('tabIndex', '0');
                         expect(remainingChips[0]).toHaveFocus();
+                    });
+                });
+            });
+
+            describe.each([
+                ['{Backspace}', 'Backspace'],
+                ['{Enter}', 'Enter'],
+                [' ', 'Space'],
+            ])('Keyboard navigation focus fallback to input on %s', (key) => {
+                it('should focus input when no chip remains', async () => {
+                    renderStateful([testOptions[0]]);
+
+                    const input = screen.getByRole('textbox');
+                    const chips = screen.getAllByRole('option');
+                    chips[0].focus();
+                    await userEvent.keyboard(key);
+
+                    await waitFor(() => {
+                        expect(screen.queryAllByRole('option')).toHaveLength(0);
+                        expect(input).toHaveFocus();
                     });
                 });
             });
