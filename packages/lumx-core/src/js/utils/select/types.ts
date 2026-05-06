@@ -21,6 +21,8 @@ export interface RenderOptionContext {
     index: number;
     /** Resolved option id (from `getOptionId`). Should be passed as `value` to `<Combobox.Option>`. */
     value: any;
+    /** Resolved option name (from `getOptionName`, falling back to `getOptionId`). */
+    name: string;
     /** Whether this option is currently selected. Should be forwarded as `isSelected`. */
     isSelected: boolean;
     /** Resolved description string (from `getOptionDescription`), if any. Should be forwarded as `description`. */

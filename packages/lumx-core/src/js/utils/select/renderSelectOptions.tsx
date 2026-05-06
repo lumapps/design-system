@@ -55,8 +55,8 @@ export function renderSelectOptions<O>(
         : undefined;
 
     return options?.map((item, index) => {
-        const id = getWithSelector(getOptionId || getOptionName, item);
-        const name = getWithSelector(getOptionName || getOptionId, item);
+        const id = getWithSelector(getOptionId || getOptionName, item) as string;
+        const name = getWithSelector(getOptionName || getOptionId, item) || id;
         const description = getOptionDescription && getWithSelector(getOptionDescription, item);
         const isSelected = selectedIds?.has(id) ?? false;
 
@@ -64,7 +64,7 @@ export function renderSelectOptions<O>(
         // The consumer receives core-computed context and is responsible for rendering
         // a <Combobox.Option> with those values forwarded.
         if (renderOption) {
-            return renderOption(item, { index, value: id, isSelected, description }) as any;
+            return renderOption(item, { index, value: id, name, isSelected, description }) as any;
         }
 
         return (

@@ -19,6 +19,7 @@ type WrappedRenderOption<O> = (option: O, context: RenderOptionContext) => JSXEl
  * - If `renderOption` is `undefined`, returns `undefined` (no custom rendering).
  * - If the consumer returns a `<Combobox.Option>`, its props/children are merged with the
  *   core-computed `value` / `isSelected` / `description` / `key`.
+ *   When the consumer's `<Combobox.Option>` has no children, falls back to the option `name`.
  * - If the consumer returns anything else, returns `null` (skips the option).
  *
  * @param renderOption Consumer-provided render function.
@@ -28,13 +29,13 @@ export function wrapRenderOption<O>(
     renderOption: ((option: O, index: number) => React.ReactNode) | undefined,
 ): WrappedRenderOption<O> | undefined {
     if (!renderOption) return undefined;
-    return (option, { index, value: optionValue, isSelected, description }) => {
+    return (option, { index, value: optionValue, isSelected, description, name }) => {
         const node = renderOption(option, index);
         if (!isComponentType(ComboboxOption)(node)) {
             return null;
         }
 
-        const { children, ...customProps } = (node as React.ReactElement).props;
+        const { children = name, ...customProps } = (node as React.ReactElement).props;
         return (
             <ComboboxOption
                 key={optionValue}
