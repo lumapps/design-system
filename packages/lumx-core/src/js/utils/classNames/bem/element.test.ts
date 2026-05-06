@@ -26,4 +26,14 @@ describe(element, () => {
             'class-a my-button__icon my-button__icon--active',
         );
     });
+
+    it('should accept a single string as additional classes', () => {
+        expect(element('my-button', 'icon', 'class-a')).toBe('class-a my-button__icon');
+    });
+
+    it('should accept a single string as additional classes with modifiers', () => {
+        expect(element('my-button', 'icon', { active: true }, 'class-a')).toBe(
+            'class-a my-button__icon my-button__icon--active',
+        );
+    });
 });

@@ -1,6 +1,6 @@
 import classnames from 'classnames';
-import { ClassValue } from 'classnames/types';
-import { modifier, type Modifier } from './modifier';
+import { modifier } from './modifier';
+import type { AdditionalClasses, Modifier } from './types';
 
 /**
  * Generates a BEM block + modifier class name string.
@@ -14,17 +14,17 @@ import { modifier, type Modifier } from './modifier';
  * block('button'); // 'button'
  * block('button', { active: true, disabled: false }); // 'button button--active'
  */
-export function block(baseName: string, additionalClasses: ClassValue[]): string;
-export function block(baseName: string, modifiers?: Modifier, additionalClasses?: ClassValue[]): string;
+export function block(baseName: string, additionalClasses: AdditionalClasses): string;
+export function block(baseName: string, modifiers?: Modifier, additionalClasses?: AdditionalClasses): string;
 export function block(
     baseName: string,
-    modifiersOrAdditionalClasses?: Modifier | ClassValue[],
-    additionalClasses?: ClassValue[],
+    modifiersOrAdditionalClasses?: Modifier | AdditionalClasses,
+    additionalClasses?: AdditionalClasses,
 ) {
     let modifiers: Modifier | undefined;
-    let classes: ClassValue[] | undefined;
+    let classes: AdditionalClasses | undefined;
 
-    if (Array.isArray(modifiersOrAdditionalClasses)) {
+    if (typeof modifiersOrAdditionalClasses === 'string' || Array.isArray(modifiersOrAdditionalClasses)) {
         classes = modifiersOrAdditionalClasses;
     } else {
         modifiers = modifiersOrAdditionalClasses;

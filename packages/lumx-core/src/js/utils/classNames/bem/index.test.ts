@@ -19,6 +19,14 @@ describe(bem, () => {
         it('should generate block class with modifiers and additional classes', () => {
             expect(block({ active: true }, ['class-a'])).toBe('class-a button button--active');
         });
+
+        it('should accept a single string as additional classes', () => {
+            expect(block('class-a')).toBe('class-a button');
+        });
+
+        it('should accept a single string as additional classes with modifiers', () => {
+            expect(block({ active: true }, 'class-a')).toBe('class-a button button--active');
+        });
     });
 
     describe('element', () => {
@@ -36,6 +44,14 @@ describe(bem, () => {
 
         it('should generate element class with modifiers and additional classes', () => {
             expect(element('icon', { active: true }, ['class-a'])).toBe('class-a button__icon button__icon--active');
+        });
+
+        it('should accept a single string as additional classes', () => {
+            expect(element('icon', 'class-a')).toBe('class-a button__icon');
+        });
+
+        it('should accept a single string as additional classes with modifiers', () => {
+            expect(element('icon', { active: true }, 'class-a')).toBe('class-a button__icon button__icon--active');
         });
     });
 });
