@@ -16,6 +16,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   `SelectTextField`: fallback on the default option name (`getOptionName`) if `option` slot does not provide the option label
 
 
+### Fixed
+
+-   `@lumx/react`, `@lumx/vue`:
+    -   `Combobox`: fix `Enter` key not propagating when on input without active option
+
 ## [4.12.1][] - 2026-04-30
 
 ### Fixed
@@ -23,7 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   `@lumx/react`, `@lumx/vue`:
     -   `Combobox`: align prop types across core, React and Vue (single source of truth for `filter`, `openOnFocus`, `onSelect`)
     -   `SelectionChipGroup`: on Enter/Space chip removal, move focus to the next chip (fallback to previous chip, then to the input)
-    -   `Dialog`, `Lightbox`, `Popover`: allow focus on `aria-disabled` and correclty fallback to the container instead of staying on the trigger when no focusable are detected
+    -   `Dialog`, `Lightbox`, `Popover`: allow focus on `aria-disabled` and correctly fallback to the container instead of staying on the trigger when no focusable are detected
 
 ## [4.12.0][] - 2026-04-22
 
