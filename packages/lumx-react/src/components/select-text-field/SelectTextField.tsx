@@ -1,12 +1,13 @@
 import React, { SyntheticEvent, useCallback, useEffect, useRef, useState } from 'react';
 
 import type { ChipProps } from '@lumx/core/js/components/Chip';
-import { getWithSelector } from '@lumx/core/js/utils/selectors';
-import { type RenderOptionContext, type BaseSelectTextFieldWrapperProps } from '@lumx/core/js/utils/select/types';
+import { type BaseSelectTextFieldWrapperProps } from '@lumx/core/js/utils/select/types';
 import { getOptionDisplayName } from '@lumx/core/js/utils/select/getOptionDisplayName';
+import { toggleSelection } from '@lumx/core/js/utils/select/toggleSelection';
 import { SelectTextField as UI } from '@lumx/core/js/components/SelectTextField';
-import { HasClassName, isComponentType } from '@lumx/react/utils/type';
+import { HasClassName } from '@lumx/react/utils/type';
 import { Combobox, type ComboboxPopoverProps } from '../combobox';
+import { wrapRenderOption } from '../combobox/wrapRenderOption';
 import { InfiniteScroll } from '../../utils/InfiniteScroll';
 import { useMergeRefs } from '../../utils/react/mergeRefs';
 import { SelectionChipGroup } from '../chip/SelectionChipGroup';
@@ -149,28 +150,9 @@ export const SelectTextField = <O,>(props: SelectTextFieldProps<O>) => {
     const renderChip = isMultiple ? (props as MultipleSelectTextFieldProps<O>).renderChip : undefined;
     const getChipProps = isMultiple ? (props as MultipleSelectTextFieldProps<O>).getChipProps : undefined;
 
-    /* Wrap the consumer's renderOption to inject core-computed props.
-     * The consumer returns a <Combobox.Option> with custom children/props.
-     * This wrapper validates the element type, extracts the consumer's props, and
-     * re-renders a <Combobox.Option> merging them with core-computed value/isSelected/description/key. */
-    const wrappedRenderOption = renderOption
-        ? (option: O, { index, value: optionValue, isSelected, description }: RenderOptionContext) => {
-              const node = renderOption(option, index);
-              if (!isComponentType(Combobox.Option)(node)) return null;
-              const { children, ...customProps } = (node as React.ReactElement).props;
-              return (
-                  <Combobox.Option
-                      key={optionValue}
-                      {...customProps}
-                      value={optionValue}
-                      isSelected={isSelected}
-                      description={description}
-                  >
-                      {children}
-                  </Combobox.Option>
-              );
-          }
-        : undefined;
+    // Wrap the consumer's renderOption to inject core-computed props
+    // (`value`, `isSelected`, `description`, `key`) into the returned <Combobox.Option>.
+    const wrappedRenderOption = wrapRenderOption(renderOption);
 
     const [listElement, setListElement] = useState<HTMLElement | null>(null);
     const localInputRef = useRef<HTMLInputElement>(null);
@@ -198,33 +180,19 @@ export const SelectTextField = <O,>(props: SelectTextFieldProps<O>) => {
         displayValue = getOptionDisplayName(value as O | undefined, getOptionName, getOptionId);
     }
 
-    // Map option id selection to option object selection.
+    // Map option id selection to option object(s) selection (delegates the toggle math to core).
     const handleSelect = useCallback(
         (selectedOption: { value: string }) => {
-            const selectedValue = selectedOption.value;
-            const newOption =
-                selectedValue && options?.find((option) => getWithSelector(getOptionId, option) === selectedValue);
-
-            if (!isMultiple) {
-                onChange?.(newOption as any);
-            } else {
-                const currentValue = (value as any[]) || [];
-                const existingIndex = currentValue.findIndex(
-                    (item) => getWithSelector(getOptionId, item) === selectedValue,
-                );
-
-                if (existingIndex === -1) {
-                    // Skip if no matching option found (e.g. beforeOptions custom actions).
-                    if (newOption) {
-                        onChange?.([...currentValue, newOption] as any);
-                    }
-                } else {
-                    // Remove option (toggle off)
-                    const updated = [...currentValue];
-                    updated.splice(existingIndex, 1);
-                    onChange?.(updated as any);
-                }
-            }
+            const next = toggleSelection(
+                options,
+                getOptionId,
+                value as O | O[] | undefined,
+                selectedOption.value,
+                isMultiple,
+            );
+            // In multi mode, `toggleSelection` skips when no option matches and returns the
+            // unchanged current array — the onChange call is a no-op for the consumer.
+            onChange?.(next as any);
 
             // Reset search state after selection.
             setIsSearching(false);

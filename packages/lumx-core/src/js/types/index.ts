@@ -27,3 +27,4 @@ export type { AriaAttributes } from './AriaAttributes';
 export type { Selector } from './Selector';
 export type { PropsToOverride } from './jsx/PropsToOverride';
 export type { PartialBy, PartialExcept } from './PartialBy';
+export type { NamedProps } from './NamedProps';

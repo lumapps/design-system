@@ -26,6 +26,8 @@ export interface ComboboxButtonProps extends HasClassName, ComboboxCallbacks {
     isOpen?: boolean;
     /** ref to the root button element. */
     ref?: CommonRef;
+    /** Custom render button */
+    renderButton?: (buttonProps: Record<string, any>) => JSXElement;
 }
 
 /**
@@ -68,6 +70,7 @@ export const ComboboxButton = (props: ComboboxButtonProps, { Button, Tooltip }: 
         listboxId,
         isOpen,
         ref,
+        renderButton,
         ...forwardedProps
     } = props;
 
@@ -81,6 +84,8 @@ export const ComboboxButton = (props: ComboboxButtonProps, { Button, Tooltip }: 
     // Hide tooltip if the displayed content equals the label or when open
     const hideTooltip = label === content || isOpen;
 
+    const Component = renderButton || Button;
+
     return (
         <Tooltip
             className={hideTooltip ? classNames.visuallyHidden() : undefined}
@@ -88,7 +93,7 @@ export const ComboboxButton = (props: ComboboxButtonProps, { Button, Tooltip }: 
             closeMode="hide"
             ariaLinkMode="aria-labelledby"
         >
-            <Button
+            <Component
                 ref={ref}
                 {...forwardedProps}
                 className={classNames.join(className, CLASSNAME)}
@@ -99,7 +104,7 @@ export const ComboboxButton = (props: ComboboxButtonProps, { Button, Tooltip }: 
                 aria-activedescendant=""
             >
                 {content}
-            </Button>
+            </Component>
         </Tooltip>
     );
 };
