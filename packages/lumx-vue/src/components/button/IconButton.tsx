@@ -53,9 +53,16 @@ const IconButton = defineComponent(
             emit('click', event);
         };
 
-        // Ref to the underlying button DOM element, exposed so template refs resolve to the button.
-        const buttonRef = ref<HTMLElement>();
-        expose({ $el: buttonRef });
+        // Ref to the underlying button DOM element.
+        const buttonRef = ref<HTMLElement | null>(null);
+        const setButtonRef = (el: any) => {
+            buttonRef.value = (el?.$el ?? el) as HTMLElement | null;
+        };
+        expose({
+            get $el() {
+                return buttonRef.value;
+            },
+        });
 
         return () => {
             const { linkAs, tooltipProps, hideTooltip, ...rest } = otherProps.value;
@@ -63,7 +70,7 @@ const IconButton = defineComponent(
                 <Tooltip label={hideTooltip ? '' : props.label} {...tooltipProps}>
                     <IconButtonUI
                         {...rest}
-                        ref={buttonRef}
+                        ref={setButtonRef}
                         linkAs={toRaw(linkAs)}
                         {...disabledStateProps.value}
                         className={className.value}
