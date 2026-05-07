@@ -893,6 +893,42 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
             });
         });
 
+        it('should NOT open listbox on Enter when closed (lets form submit)', async () => {
+            renderWithState(t.inputTemplate);
+            const input = getInput();
+            // Focus input without clicking (click would open the popup).
+            input.focus();
+            expect(input).toHaveAttribute('aria-expanded', 'false');
+
+            // fireEvent.keyDown returns `false` if the listener called preventDefault.
+            const notPrevented = fireEvent.keyDown(input, { key: 'Enter' });
+
+            // Popup must remain closed.
+            expect(input).toHaveAttribute('aria-expanded', 'false');
+            // Default must NOT be prevented — required for the surrounding form to submit on Enter.
+            expect(notPrevented).toBe(true);
+        });
+
+        it('should close listbox on Enter when open with no active descendant (and prevent default)', async () => {
+            renderWithState(t.inputTemplate);
+            const input = getInput();
+            await userEvent.click(input);
+
+            await waitFor(() => {
+                expect(input).toHaveAttribute('aria-expanded', 'true');
+            });
+            // Sanity: no option is virtually focused.
+            expect(input).toHaveAttribute('aria-activedescendant', '');
+
+            const notPrevented = fireEvent.keyDown(input, { key: 'Enter' });
+
+            await waitFor(() => {
+                expect(input).toHaveAttribute('aria-expanded', 'false');
+            });
+            // The combobox consumed Enter to close the popup → default IS prevented
+            expect(notPrevented).toBe(false);
+        });
+
         it('should close listbox on Escape then clear on second Escape', async () => {
             renderWithState(t.inputTemplate);
             const input = getInput();

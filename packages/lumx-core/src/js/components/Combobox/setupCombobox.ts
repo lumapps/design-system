@@ -203,11 +203,14 @@ export function setupCombobox(
                         if (!handle.isMultiSelect && !isActionCell(activeItem)) {
                             handle.setIsOpen(false);
                         }
-                    } else if (!handle.isMultiSelect) {
-                        // No active item — toggle open/close.
-                        handle.setIsOpen(!handle.isOpen);
+                        flag = true;
+                    } else if (handle.isOpen && !handle.isMultiSelect) {
+                        // Open with no active item (single select) => close the popup.
+                        handle.setIsOpen(false);
+                        flag = true;
                     }
-                    flag = true;
+                    // Otherwise (closed popup, or multi-select with no active item),
+                    // let Enter pass through so it can submit a surrounding form
                     break;
 
                 case 'ArrowDown':
