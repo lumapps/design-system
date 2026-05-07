@@ -246,7 +246,10 @@ const SelectTextField = defineComponent(
             const renderOptionSlot = slots.option;
             if (!renderOptionSlot) return undefined;
 
-            return (option: unknown, { index, value: optionValue, isSelected, description }: RenderOptionContext) => {
+            return (
+                option: unknown,
+                { index, value: optionValue, isSelected, description, name }: RenderOptionContext,
+            ) => {
                 const vnodes = renderOptionSlot({ option, index });
                 const customOption = vnodes?.find(isComponentType(ComboboxOption));
 
@@ -269,6 +272,9 @@ const SelectTextField = defineComponent(
                 }
                 if (afterProp !== undefined && !slotChildren.after) {
                     slotChildren.after = () => afterProp;
+                }
+                if (!slotChildren.default) {
+                    slotChildren.default = name;
                 }
 
                 return (

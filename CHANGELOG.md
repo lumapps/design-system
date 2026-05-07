@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `@lumx/react`:
     -   Create the `SelectButton` component
+    -   `SelectTextField`: fallback on the default option name (`getOptionName`) if `renderOption` does not provide the option label
+-   `@lumx/vue`:
+    -   `SelectTextField`: fallback on the default option name (`getOptionName`) if `option` slot does not provide the option label
+
 
 ## [4.12.1][] - 2026-04-30
 
