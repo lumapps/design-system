@@ -1,7 +1,5 @@
-import { ClassValue } from 'classnames/types';
-
 import { block } from './block';
-import type { Modifier } from './modifier';
+import type { AdditionalClasses, Modifier } from './types';
 
 /**
  * Creates a BEM element class generator function for the given base class.
@@ -16,21 +14,18 @@ import type { Modifier } from './modifier';
  * element('my-button', 'icon'); // 'my-button__icon'
  * element('my-button', 'icon', { active: true }); // 'my-button__icon my-button__icon--active'
  */
-export function element(baseClass: string, elem: string, additionalClasses: ClassValue[]): string;
+export function element(baseClass: string, elem: string, additionalClasses: AdditionalClasses): string;
 export function element(
     baseClass: string,
     elem: string,
     modifiers?: Modifier,
-    additionalClasses?: ClassValue[],
+    additionalClasses?: AdditionalClasses,
 ): string;
 export function element(
     baseClass: string,
     elem: string,
-    modifiersOrAdditionalClasses?: Modifier | ClassValue[],
-    additionalClasses?: ClassValue[],
+    modifiersOrAdditionalClasses?: Modifier | AdditionalClasses,
+    additionalClasses?: AdditionalClasses,
 ) {
-    if (Array.isArray(modifiersOrAdditionalClasses)) {
-        return block(`${baseClass}__${elem}`, modifiersOrAdditionalClasses);
-    }
-    return block(`${baseClass}__${elem}`, modifiersOrAdditionalClasses, additionalClasses);
+    return block(`${baseClass}__${elem}`, modifiersOrAdditionalClasses as Modifier, additionalClasses);
 }

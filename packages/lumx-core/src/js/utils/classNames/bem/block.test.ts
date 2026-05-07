@@ -38,5 +38,13 @@ describe(block, () => {
         it('should append additional classes with modifiers', () => {
             expect(block('button', { active: true }, ['class-a'])).toBe('class-a button button--active');
         });
+
+        it('should accept a single string as additional classes', () => {
+            expect(block('button', 'class-a')).toBe('class-a button');
+        });
+
+        it('should accept a single string as additional classes with modifiers', () => {
+            expect(block('button', { active: true }, 'class-a')).toBe('class-a button button--active');
+        });
     });
 });

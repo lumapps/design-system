@@ -1,8 +1,4 @@
-/**
- * Modifier
- * @example { 'is-disabled': true, 'is-selected': false }
- */
-export type Modifier = Record<string, boolean | undefined | null>;
+import type { Modifier } from './types';
 
 /**
  * Generates BEM modifier class names.

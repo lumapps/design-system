@@ -1,33 +1,29 @@
-import { ClassValue } from 'classnames/types';
-
 import { block } from './block';
 import { element } from './element';
-import { modifier, type Modifier } from './modifier';
+import { modifier } from './modifier';
+import type { AdditionalClasses, Modifier } from './types';
 
 /**
  * Setup BEM block & element generation for a given base name.
  */
 export function bem(baseName: string) {
-    function blockFn(additionalClasses: ClassValue[]): string;
-    function blockFn(modifiers?: Modifier, additionalClasses?: ClassValue[]): string;
-    function blockFn(modifiersOrAdditionalClasses?: Modifier | ClassValue[], additionalClasses?: ClassValue[]) {
-        if (Array.isArray(modifiersOrAdditionalClasses)) {
-            return block(baseName, modifiersOrAdditionalClasses);
-        }
-        return block(baseName, modifiersOrAdditionalClasses, additionalClasses);
+    function blockFn(additionalClasses: AdditionalClasses): string;
+    function blockFn(modifiers?: Modifier, additionalClasses?: AdditionalClasses): string;
+    function blockFn(
+        modifiersOrAdditionalClasses?: Modifier | AdditionalClasses,
+        additionalClasses?: AdditionalClasses,
+    ) {
+        return block(baseName, modifiersOrAdditionalClasses as Modifier, additionalClasses);
     }
 
-    function elementFn(elem: string, additionalClasses: ClassValue[]): string;
-    function elementFn(elem: string, modifiers?: Modifier, additionalClasses?: ClassValue[]): string;
+    function elementFn(elem: string, additionalClasses: AdditionalClasses): string;
+    function elementFn(elem: string, modifiers?: Modifier, additionalClasses?: AdditionalClasses): string;
     function elementFn(
         elem: string,
-        modifiersOrAdditionalClasses?: Modifier | ClassValue[],
-        additionalClasses?: ClassValue[],
+        modifiersOrAdditionalClasses?: Modifier | AdditionalClasses,
+        additionalClasses?: AdditionalClasses,
     ) {
-        if (Array.isArray(modifiersOrAdditionalClasses)) {
-            return element(baseName, elem, modifiersOrAdditionalClasses);
-        }
-        return element(baseName, elem, modifiersOrAdditionalClasses, additionalClasses);
+        return element(baseName, elem, modifiersOrAdditionalClasses as Modifier, additionalClasses);
     }
 
     return {
