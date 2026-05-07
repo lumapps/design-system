@@ -1,4 +1,4 @@
-import { computed, defineComponent, ref, useAttrs } from 'vue';
+import { computed, defineComponent, useAttrs } from 'vue';
 
 import { ListItemAction as ListItemActionUI } from '@lumx/core/js/components/List/ListItemAction';
 import type { BaseClickableProps, ClickableElement } from '@lumx/core/js/components/RawClickable';
@@ -27,12 +27,9 @@ export const emitSchema = {
  * @return Vue element.
  */
 const ListItemAction = defineComponent(
-    (props: ListItemActionProps, { emit, slots, expose }) => {
+    (props: ListItemActionProps, { emit, slots }) => {
         const attrs = useAttrs();
         const userClassName = useClassName(() => props.class);
-
-        const actionRef = ref<HTMLElement>();
-        expose({ $el: actionRef });
 
         const { isAnyDisabled, disabledStateProps, otherProps } = useDisableStateProps(
             computed(() => ({ ...props, ...attrs })),
@@ -50,7 +47,6 @@ const ListItemAction = defineComponent(
             return (
                 <ListItemActionUI
                     {...rest}
-                    ref={actionRef}
                     className={classNames.join(userClassName.value, coreClassName) as string}
                     isDisabled={disabledStateProps.value.disabled}
                     aria-disabled={disabledStateProps.value['aria-disabled']}

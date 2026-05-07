@@ -1,18 +1,30 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { useCallback, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
 import { setup } from '@lumx/core/js/components/SelectButton/TestStories';
 import { FRUITS, Fruit } from '@lumx/core/js/components/SelectButton/Stories';
+import { withValueOnChange } from '@lumx/react/stories/decorators/withValueOnChange';
 
 import { SelectButton } from '.';
 
+function renderWithState(template: (props: any) => React.JSX.Element) {
+    const Wrapper = () => {
+        const [value, setValue] = useState<any>(undefined);
+        return template({ value, onChange: setValue });
+    };
+    return <Wrapper />;
+}
+
 const { meta, ...testStories } = setup({
     components: { SelectButton },
+    decorators: { withValueOnChange },
+    renderWithState,
 });
 
 export default { ...meta, title: 'LumX components/select-button/SelectButton/Tests' };
 
 export const ClickOutsideCloses = { ...testStories.ClickOutsideCloses };
+export const SelectionUpdates = { ...testStories.SelectionUpdates };
 
 // React-specific test stories (use React hooks for stateful rendering)
 

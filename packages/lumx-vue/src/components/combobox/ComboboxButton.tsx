@@ -23,6 +23,10 @@ export type ComboboxButtonProps = VueToJSXProps<UIProps, 'label' | 'renderButton
     value?: string;
     /** Controls how the label/value is displayed. @default 'show-selection' */
     labelDisplayMode?: ComboboxButtonLabelDisplayMode;
+    /** Called when an option is selected. */
+    onSelect?: (option: { value: string }) => void;
+    /** Custom render function replacing the default `<Button>`. See `ComboboxButtonProps.renderButton` in core. */
+    renderButton?: UIProps['renderButton'];
 };
 
 /**
@@ -65,7 +69,14 @@ const ComboboxButton = defineComponent(
         });
 
         return () => {
-            const { label, value, labelDisplayMode = 'show-selection', class: _class, ...forwardedProps } = props;
+            const {
+                label,
+                value,
+                labelDisplayMode = 'show-selection',
+                renderButton,
+                class: _class,
+                ...forwardedProps
+            } = props;
             return UI(
                 {
                     ...attrs,
@@ -73,6 +84,7 @@ const ComboboxButton = defineComponent(
                     label,
                     value,
                     labelDisplayMode,
+                    renderButton,
                     listboxId,
                     isOpen: isOpen.value,
                     ref: (el: any) => {
@@ -94,6 +106,7 @@ const ComboboxButton = defineComponent(
             'label',
             'value',
             'labelDisplayMode',
+            'renderButton',
             'listboxId',
             'isOpen',
             'onSelect',

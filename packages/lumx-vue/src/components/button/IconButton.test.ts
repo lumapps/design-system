@@ -56,7 +56,7 @@ describe('<IconButton />', () => {
             expect(tooltip).toBeInTheDocument();
         });
 
-        it('should forward ref to the underlying button element', () => {
+        it('should expose the underlying button element via $el', () => {
             const iconButtonRef = ref<HTMLElement>();
             render(
                 defineComponent({
@@ -67,9 +67,8 @@ describe('<IconButton />', () => {
                     template: `<IconButton ref="iconButtonRef" label="Icon" />`,
                 }),
             );
-            // The ref exposes { $el } pointing to the underlying button element,
-            // so that @floating-ui/vue can resolve it correctly as an anchor.
-            expect((iconButtonRef.value as any)?.$el).toBe(screen.getByRole('button', { name: 'Icon' }));
+            const button = screen.getByRole('button', { name: 'Icon' });
+            expect((iconButtonRef.value as any)?.$el).toBe(button);
         });
 
         it('should hide tooltip when hideTooltip is true', async () => {
