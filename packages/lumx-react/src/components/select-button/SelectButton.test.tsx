@@ -1,13 +1,22 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { expectTypeOf } from 'vitest';
 
 import selectButtonTests from '@lumx/core/js/components/SelectButton/Tests';
+import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 import { SelectButton, type SelectButtonProps, type SingleSelectButtonProps, type MultipleSelectButtonProps } from '.';
 import { Combobox } from '../combobox';
 import { IconButton } from '../button';
 import { Chip } from '../chip';
 import { Link } from '../link';
+
+/**
+ * Setup a basic SelectButton
+ */
+function setup(props: Partial<SelectButtonProps<string>> = {}, options: SetupRenderOptions = {}) {
+    render(<SelectButton label="Select a fruit" options={[]} getOptionId={String} {...props} />, options);
+    return { button: screen.getByRole('combobox') };
+}
 
 /**
  * Render a SelectButton template with controlled state management.
@@ -160,5 +169,13 @@ describe('<SelectButton>', () => {
             } as const;
             expectTypeOf(linkProps).toExtend<SelectButtonProps<Fruit, typeof Link>>();
         });
+    });
+
+    // Common tests suite (classes, refs and attributes forwarding)
+    commonTestsSuiteRTL(setup, {
+        baseClassName: 'lumx-combobox-button',
+        forwardRef: 'button',
+        forwardClassName: 'button',
+        forwardAttributes: 'button',
     });
 });

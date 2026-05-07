@@ -1,4 +1,4 @@
-import React, { ElementType, useCallback, useState } from 'react';
+import React, { ElementType, type ForwardedRef, useCallback, useState } from 'react';
 
 import { mdiMenuDown } from '@lumx/icons';
 import { toggleSelection } from '@lumx/core/js/utils/select/toggleSelection';
@@ -136,16 +136,27 @@ export type MultipleSelectButtonProps<O, E extends ElementType = typeof DefaultB
 >;
 
 /**
+ * `React.forwardRef` re-typed to preserve our polymorphic generics
+ * `<O, E, S>` (which the stock `React.forwardRef` would erase).
+ */
+type ForwardRefSelectButton = (
+    render: (
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        props: any,
+        ref: ForwardedRef<unknown>,
+    ) => React.ReactNode,
+) => {
+    <O, E extends ElementType = typeof DefaultButton, S extends 'single' | 'multiple' = 'single'>(
+        props: SelectButtonProps<O, E, S>,
+    ): React.ReactNode;
+    displayName?: string;
+};
+
+/**
  * A button trigger with a dropdown to select an option (single mode) or
  * options (multi mode) from a list. Polymorphic — pass `as` to customize the trigger element.
  */
-export const SelectButton = <
-    O,
-    E extends ElementType = typeof DefaultButton,
-    S extends 'single' | 'multiple' = 'single',
->(
-    props: SelectButtonProps<O, E, S>,
-) => {
+export const SelectButton = (React.forwardRef as ForwardRefSelectButton)((props, ref) => {
     const {
         options,
         getOptionId,
@@ -165,10 +176,8 @@ export const SelectButton = <
         listStatus,
         translations,
         as,
-        ref,
         ...buttonProps
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } = props as any;
+    } = props;
     const [listElement, setListElement] = useState<HTMLElement | null>(null);
 
     const isMultiple = selectionType === 'multiple';
@@ -198,8 +207,7 @@ export const SelectButton = <
             isMultiselectable: isMultiple,
             label,
             labelDisplayMode,
-            // With no `as`, the default trigger adds the chevron. With `as`, the
-            // caller is responsible for any trailing affordance.
+            // With no `as`, the default trigger adds the chevron.
             buttonProps: { ...buttonProps, as: as ?? DefaultButton, ref },
             popoverProps,
             listProps: { ref: setListElement },
@@ -212,6 +220,6 @@ export const SelectButton = <
         },
         { Combobox, InfiniteScroll },
     );
-};
+});
 
 SelectButton.displayName = 'SelectButton';
