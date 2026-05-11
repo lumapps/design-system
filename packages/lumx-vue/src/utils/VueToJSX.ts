@@ -1,4 +1,11 @@
 import { PropsToOverride } from '@lumx/core/js/types';
+
+/**
+ * Mirrors the value types accepted by Vue's class binding (and `normalizeClass`):
+ * a string, an object mapping class names to booleans, an array of any of the above, or falsy.
+ */
+export type ClassValue = string | number | boolean | null | undefined | ClassValue[] | Record<string, unknown>;
+
 /**
  * Props interface for components wrapped with VueToJSX.
  * It omits JSX-specific props like `children` and `className` and adds Vue's `class`.
@@ -11,7 +18,7 @@ export type VueToJSXProps<Props, OmitProps extends keyof Props = never> = Omit<
     PropsToOverride | 'children' | 'className' | OmitProps
 > & {
     /** Class name forwarded to the root element of the component. */
-    class?: string;
+    class?: ClassValue;
 };
 
 /**

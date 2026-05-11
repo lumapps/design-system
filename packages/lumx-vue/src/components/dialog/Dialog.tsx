@@ -17,12 +17,12 @@ import { useFocusTrap } from '../../composables/useFocusTrap';
 import { useRestoreFocusOnClose } from '../../composables/useRestoreFocusOnClose';
 import { useTransitionVisibility } from '../../composables/useTransitionVisibility';
 import { useDisableBodyScroll } from '../../composables/useDisableBodyScroll';
-import { keysOf } from '../../utils/VueToJSX';
+import { keysOf, type ClassValue } from '../../utils/VueToJSX';
 
 export type DialogProps = Pick<BaseDialogProps, 'forceFooterDivider' | 'forceHeaderDivider' | 'isLoading'> &
     HasCloseMode & {
         /** Additional class name. */
-        class?: string;
+        class?: ClassValue;
         /** Whether the dialog is open. */
         isOpen?: boolean;
         /** Size variant. */

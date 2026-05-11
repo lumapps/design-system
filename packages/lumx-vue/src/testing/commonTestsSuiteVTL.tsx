@@ -69,22 +69,41 @@ export function commonTestsSuiteVTL<S extends GenericProps>(setup: SetupFunction
         }
 
         if (forwardClassName) {
-            it('should forward any CSS class', async () => {
-                const modifiedProps = {
-                    class: 'component component--is-tested',
-                };
-                const wrappers = await setup(modifiedProps);
-                expect(wrappers[forwardClassName]).toHaveClass(modifiedProps.class);
+            /** Assert that no class token appears more than once on an element. */
+            const expectNoDuplicateClass = (el: HTMLElement) => {
+                const classList = Array.from(el.classList);
+                expect(new Set(classList).size).toBe(classList.length);
+            };
+
+            it('should forward any CSS class without duplication', async () => {
+                const wrappers = await setup({ class: 'component component--is-tested' });
+                const el = wrappers[forwardClassName] as HTMLElement;
+                expect(el).toHaveClass('component component--is-tested');
+                expectNoDuplicateClass(el);
             });
 
-            it('should forward className attr and merge it with class prop', async () => {
-                const modifiedProps = {
-                    class: 'from-class-prop',
-                    className: 'from-class-name-attr',
-                };
-                const wrappers = await setup(modifiedProps);
-                expect(wrappers[forwardClassName]).toHaveClass('from-class-prop');
-                expect(wrappers[forwardClassName]).toHaveClass('from-class-name-attr');
+            it('should accept an array of class names', async () => {
+                const wrappers = await setup({ class: ['class-a', 'class-b'] });
+                const el = wrappers[forwardClassName] as HTMLElement;
+                expect(el).toHaveClass('class-a');
+                expect(el).toHaveClass('class-b');
+                expectNoDuplicateClass(el);
+            });
+
+            it('should accept an object of conditional class names', async () => {
+                const wrappers = await setup({ class: { 'class-active': true, 'class-disabled': false } });
+                const el = wrappers[forwardClassName] as HTMLElement;
+                expect(el).toHaveClass('class-active');
+                expect(el).not.toHaveClass('class-disabled');
+                expectNoDuplicateClass(el);
+            });
+
+            it('should merge className attr with class prop without duplication', async () => {
+                const wrappers = await setup({ class: 'from-class-prop', className: 'from-class-name-attr' });
+                const el = wrappers[forwardClassName] as HTMLElement;
+                expect(el).toHaveClass('from-class-prop');
+                expect(el).toHaveClass('from-class-name-attr');
+                expectNoDuplicateClass(el);
             });
         }
     });

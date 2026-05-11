@@ -15,7 +15,7 @@ import { getOptionDisplayName } from '@lumx/core/js/utils/select/getOptionDispla
 import { SelectTextField as UI } from '@lumx/core/js/components/SelectTextField';
 import type { JSXElement } from '@lumx/core/js/types';
 
-import { keysOf, type EmitsOf } from '../../utils/VueToJSX';
+import { keysOf, type ClassValue, type EmitsOf } from '../../utils/VueToJSX';
 import { isComponentType } from '../../utils/isComponentType';
 import { Combobox } from '../combobox';
 import ComboboxOption from '../combobox/ComboboxOption';
@@ -30,7 +30,7 @@ interface BaseSelectTextFieldProps<O = any> extends BaseSelectTextFieldWrapperPr
     /** Content to render before the options list. */
     beforeOptions?: JSXElement;
     /** CSS class. */
-    class?: string;
+    class?: ClassValue;
 }
 
 /** Props specific to single selection mode. */
