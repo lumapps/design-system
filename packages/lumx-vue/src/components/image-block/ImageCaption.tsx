@@ -4,7 +4,7 @@ import { ImageCaption as UI } from '@lumx/core/js/components/ImageBlock/ImageCap
 import { type HorizontalAlignment, type Theme } from '@lumx/core/js/constants';
 
 import { useTheme } from '../../composables/useTheme';
-import { keysOf } from '../../utils/VueToJSX';
+import { keysOf, type ClassValue } from '../../utils/VueToJSX';
 import { FlexBox } from '../flex-box';
 import { Text } from '../text';
 
@@ -13,7 +13,7 @@ type ImageCaptionProps = {
     align?: HorizontalAlignment;
     baseClassName?: string;
     captionStyle?: Record<string, any>;
-    class?: string;
+    class?: ClassValue;
     description?: any;
     descriptionProps?: Record<string, any>;
     tags?: any;

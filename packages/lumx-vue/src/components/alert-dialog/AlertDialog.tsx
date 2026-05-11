@@ -5,7 +5,7 @@ import type { GenericProps, JSXElement } from '@lumx/core/js/types';
 
 import { useId } from '../../composables/useId';
 import { useClassName } from '../../composables/useClassName';
-import { keysOf } from '../../utils/VueToJSX';
+import { keysOf, type ClassValue } from '../../utils/VueToJSX';
 
 import Dialog from '../dialog/Dialog';
 import Button from '../button/Button';
@@ -20,7 +20,7 @@ type ButtonActionProps = {
 
 export interface AlertDialogProps extends Pick<BaseAlertDialogProps, 'kind' | 'title'> {
     /** Additional class name. */
-    class?: string;
+    class?: ClassValue;
     /** Size variant. */
     size?: DialogSizes;
     /** Whether the dialog is open. */

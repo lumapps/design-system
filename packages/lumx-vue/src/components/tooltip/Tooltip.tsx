@@ -15,7 +15,7 @@ import { useCallbackOnEscape } from '../../composables/useCallbackOnEscape';
 import { useTooltipOpen } from './useTooltipOpen';
 import { useInjectTooltipRef } from './useInjectTooltipRef';
 import { provideTooltipContext } from './context';
-import { keysOf } from '../../utils/VueToJSX';
+import { keysOf, type ClassValue } from '../../utils/VueToJSX';
 import { Portal } from '../../utils/Portal';
 
 export type { TooltipPlacement };
@@ -25,7 +25,7 @@ export type { TooltipPlacement };
  */
 export interface TooltipProps extends CoreTooltipProps {
     /** Class name forwarded to the tooltip popup */
-    class?: string;
+    class?: ClassValue;
 }
 
 /**

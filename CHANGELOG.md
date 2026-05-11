@@ -21,8 +21,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
--   `@lumx/react`, `@lumx/vue`:
+-   `@lumx/react`:
     -   `Combobox`: fix `Enter` key not propagating when on input without active option
+-   `@lumx/vue`:
+    -   `Combobox`: fix `Enter` key not propagating when on input without active option
+    -   `class` attr can now be a string, an array of strings or an array of objects.
 
 ## [4.12.1][] - 2026-04-30
 
