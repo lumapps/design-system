@@ -45,7 +45,7 @@
         "vue": "^3.5.27"
     },
     "devDependencies": {
-        "@babel/plugin-transform-react-jsx": "^7.27.1",
+        "@babel/plugin-transform-react-jsx": "7.28.6",
         "@lumx/storybook-testing": "workspace:*",
         "@rollup/plugin-node-resolve": "^16.0.3",
         "@storybook/addon-a11y": "^10.2.19",

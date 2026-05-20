@@ -12,9 +12,9 @@
         "body-scroll-lock": "^3.1.5"
     },
     "devDependencies": {
-        "@babel/core": "^7.26.10",
-        "@babel/preset-react": "^7.26.3",
-        "@babel/preset-typescript": "^7.26.0",
+        "@babel/core": "7.29.0",
+        "@babel/preset-react": "7.28.5",
+        "@babel/preset-typescript": "7.28.5",
         "@lumx/storybook-testing": "workspace:*",
         "@rollup/plugin-babel": "^6.1.0",
         "@rollup/plugin-commonjs": "^29.0.0",
