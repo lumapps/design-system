@@ -19,7 +19,7 @@ import { useTransitionVisibility } from '../../composables/useTransitionVisibili
 import { useDisableBodyScroll } from '../../composables/useDisableBodyScroll';
 import { keysOf, type ClassValue } from '../../utils/VueToJSX';
 
-export type DialogProps = Pick<BaseDialogProps, 'forceFooterDivider' | 'forceHeaderDivider' | 'isLoading'> &
+export type DialogProps = Partial<Pick<BaseDialogProps, 'forceFooterDivider' | 'forceHeaderDivider' | 'isLoading'>> &
     HasCloseMode & {
         /** Additional class name. */
         class?: ClassValue;

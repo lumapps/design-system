@@ -12,6 +12,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   `@lumx/vue`:
     -   Create the `SelectButton` component
 
+### Fixed
+
+-   `@lumx/vue`:
+    -   `Dialog`: props `forceFooterDivider` `forceHeaderDivider` and `isLoading` are optional as they should
+
 ## [4.13.0][] - 2026-05-11
 
 ### Added
