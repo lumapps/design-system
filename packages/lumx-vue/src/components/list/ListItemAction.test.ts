@@ -1,6 +1,7 @@
+/* eslint-disable vue/one-component-per-file */
 import { render, screen } from '@testing-library/vue';
 import userEvent from '@testing-library/user-event';
-import { defineComponent, h } from 'vue';
+import { defineComponent, h, ref } from 'vue';
 import { vi } from 'vitest';
 
 import { CLASSNAME } from '@lumx/core/js/components/List/ListItemAction';
@@ -33,6 +34,22 @@ describe('<ListItemAction />', () => {
             });
             await userEvent.click(screen.getByRole('button', { name: 'Label' }));
             expect(wrapper.emitted('click')).toBeTruthy();
+        });
+
+        it('should expose the underlying action element via $el', () => {
+            const actionRef = ref<HTMLElement>();
+            render(
+                defineComponent({
+                    components: { ListItemAction },
+                    setup() {
+                        return { actionRef };
+                    },
+                    template: `<ListItemAction ref="actionRef" @click="() => {}">Action</ListItemAction>`,
+                }),
+            );
+            const button = screen.getByRole('button', { name: 'Action' });
+            // Vue auto-derives `$el` from the rendered VNode tree — no explicit expose() needed.
+            expect((actionRef.value as any)?.$el).toBe(button);
         });
 
         it('should render as a custom component', () => {

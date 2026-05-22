@@ -1,27 +1,25 @@
 import { userEvent } from 'storybook/test';
+import { mdiFruitCherries, mdiFruitCitrus, mdiFruitGrapes, mdiFruitWatermelon } from '@lumx/icons';
 
 import type { SetupStoriesOptions } from '@lumx/core/stories/types';
 import { TRANSLATIONS } from './Tests';
 
-export interface Fruit {
-    id: string;
-    name: string;
-    category: string;
-    description?: string;
-}
+const CAT_STONE = { category: 'Stone', categoryIcon: mdiFruitCherries };
+const CAT_BERRY = { category: 'Berry', categoryIcon: mdiFruitGrapes };
+const CAT_CITRUS = { category: 'Citrus', categoryIcon: mdiFruitCitrus };
 
-export const FRUITS: Fruit[] = [
-    { id: 'apple', name: 'Apple', category: 'Pome', description: 'A sweet red fruit' },
-    { id: 'apricot', name: 'Apricot', category: 'Stone', description: 'A soft orange fruit' },
-    { id: 'banana', name: 'Banana', category: 'Tropical', description: 'A long yellow fruit' },
-    { id: 'blueberry', name: 'Blueberry', category: 'Berry', description: 'A small blue fruit' },
-    { id: 'cherry', name: 'Cherry', category: 'Stone', description: 'A small red fruit' },
-    { id: 'grape', name: 'Grape', category: 'Berry', description: 'A small purple fruit' },
-    { id: 'lemon', name: 'Lemon', category: 'Citrus', description: 'A sour yellow fruit' },
-    { id: 'orange', name: 'Orange', category: 'Citrus', description: 'A citrus fruit' },
-    { id: 'peach', name: 'Peach', category: 'Stone', description: 'A soft fuzzy fruit' },
-    { id: 'strawberry', name: 'Strawberry', category: 'Berry', description: 'A sweet red berry' },
+export const FRUITS = [
+    { id: '0', name: 'Apricot', icon: mdiFruitCherries, description: 'A soft orange fruit', ...CAT_STONE },
+    { id: '1', name: 'Blueberry', icon: mdiFruitGrapes, description: 'A small blue fruit', ...CAT_BERRY },
+    { id: '2', name: 'Cherry', icon: mdiFruitCherries, description: 'A small red fruit', ...CAT_STONE },
+    { id: '3', name: 'Grape', icon: mdiFruitGrapes, description: 'A small purple fruit', ...CAT_BERRY },
+    { id: '4', name: 'Lemon', icon: mdiFruitCitrus, description: 'A sour yellow fruit', ...CAT_CITRUS },
+    { id: '5', name: 'Orange', icon: mdiFruitCitrus, description: 'A citrus fruit', ...CAT_CITRUS },
+    { id: '6', name: 'Peach', icon: mdiFruitCherries, description: 'A soft fuzzy fruit', ...CAT_STONE },
+    { id: '7', name: 'Strawberry', icon: mdiFruitWatermelon, description: 'A sweet red berry', ...CAT_BERRY },
 ];
+
+export type Fruit = (typeof FRUITS)[number];
 
 /**
  * Setup SelectButton stories for a specific framework (React or Vue).

@@ -1,5 +1,5 @@
 import isEmpty from 'lodash/isEmpty';
-import { computed, defineComponent, toRaw, useAttrs, useSlots } from 'vue';
+import { Comment, computed, defineComponent, toRaw, useAttrs, useSlots } from 'vue';
 
 import {
     Button as ButtonUI,
@@ -59,15 +59,18 @@ const Button = defineComponent(
          */
         const renderContent = () => {
             const children = slots.default?.();
-            if (!children || children.length === 0) return null;
+
+            // Filter vnodes (Matches React behavior where `{null}` renders nothing — avoids an empty wrapping)
+            const visibleChildren = children?.filter((vnode) => vnode != null && vnode.type !== Comment);
+            if (!visibleChildren?.length) return null;
 
             // If single Text component, render directly
-            if (children.length === 1 && children[0].type === Text) {
-                return children[0];
+            if (visibleChildren.length === 1 && visibleChildren[0].type === Text) {
+                return visibleChildren[0];
             }
 
             // Otherwise wrap in span
-            return <span>{children}</span>;
+            return <span>{visibleChildren}</span>;
         };
 
         return () => {

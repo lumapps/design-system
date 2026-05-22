@@ -84,7 +84,17 @@ export const ComboboxButton = (props: ComboboxButtonProps, { Button, Tooltip }: 
     // Hide tooltip if the displayed content equals the label or when open
     const hideTooltip = label === content || isOpen;
 
-    const Component = renderButton || Button;
+    const componentProps = {
+        ref,
+        ...forwardedProps,
+        className: classNames.join(className, CLASSNAME),
+        role: 'combobox',
+        'aria-controls': listboxId,
+        'aria-haspopup': 'listbox',
+        'aria-expanded': isOpen,
+        'aria-activedescendant': '',
+        children: content,
+    };
 
     return (
         <Tooltip
@@ -93,18 +103,7 @@ export const ComboboxButton = (props: ComboboxButtonProps, { Button, Tooltip }: 
             closeMode="hide"
             ariaLinkMode="aria-labelledby"
         >
-            <Component
-                ref={ref}
-                {...forwardedProps}
-                className={classNames.join(className, CLASSNAME)}
-                role="combobox"
-                aria-controls={listboxId}
-                aria-haspopup="listbox"
-                aria-expanded={isOpen}
-                aria-activedescendant=""
-            >
-                {content}
-            </Component>
+            {renderButton ? renderButton(componentProps) : <Button {...componentProps}>{content}</Button>}
         </Tooltip>
     );
 };
