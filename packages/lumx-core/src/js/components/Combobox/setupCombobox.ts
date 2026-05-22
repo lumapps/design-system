@@ -205,9 +205,9 @@ export function setupCombobox(
                         }
                         flag = true;
                     } else if (handle.isOpen && !handle.isMultiSelect) {
-                        // Open with no active item (single select) => close the popup.
+                        // Open with no active item (single select) => close the popup,
+                        // but let Enter propagate so it can submit a surrounding form.
                         handle.setIsOpen(false);
-                        flag = true;
                     }
                     // Otherwise (closed popup, or multi-select with no active item),
                     // let Enter pass through so it can submit a surrounding form
