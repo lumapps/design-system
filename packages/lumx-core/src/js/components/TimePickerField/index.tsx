@@ -15,10 +15,84 @@ export const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-time-picker
 const { block } = classNames.bem(CLASSNAME);
 
 /**
+ * Default values for `TimePickerFieldWrapperProps`.
+ */
+export const DEFAULT_PROPS: Partial<TimePickerFieldWrapperProps> = {
+    step: 30,
+};
+
+/**
  * Translations consumed by `TimePickerField` (forwarded as-is to the underlying
  * `SelectTextField`).
  */
 export type TimePickerFieldTranslations = Pick<SelectTextFieldTranslations, 'clearLabel' | 'showSuggestionsLabel'>;
+
+/**
+ * Wrapper-level props shared by React and Vue `TimePickerField`.
+ *
+ * These represent the public API that framework wrappers expose to consumers
+ * (as opposed to the core template props which use pre-computed `TimeOfDay` values).
+ */
+export interface TimePickerFieldWrapperProps {
+    /**
+     * Currently selected time. Only the time-of-day component is consumed; the
+     * date part is preserved when emitting change.
+     */
+    value?: Date;
+
+    /**
+     * BCP-47 locale string (e.g. `'en-US'`, `'fr-FR'`).
+     */
+    locale?: string;
+
+    /**
+     * Minute interval between option entries.
+     */
+    step?: number;
+
+    /**
+     * Lower bound. Options strictly before this time remain **visible** in the
+     * dropdown but are rendered as disabled (cannot be picked). Typed input
+     * below this bound is snapped up to it on blur.
+     */
+    minTime?: Date;
+
+    /**
+     * Upper bound. Options strictly after this time remain **visible** in the
+     * dropdown but are rendered as disabled (cannot be picked). Typed input
+     * above this bound is snapped down to it on blur.
+     */
+    maxTime?: Date;
+
+    /**
+     * Translations label for clear and show suggestions buttons.
+     */
+    translations: TimePickerFieldTranslations;
+}
+
+/**
+ * `SelectTextField` props managed internally by the `TimePickerField` wrappers
+ * (omitted from the inherited `SelectTextField` props in both React and Vue).
+ */
+export type TimePickerFieldOwnedSelectProps =
+    | 'value'
+    | 'listStatus'
+    | 'translations'
+    | 'options'
+    | 'getOptionId'
+    | 'getOptionName'
+    | 'getOptionDescription'
+    | 'getSectionId'
+    | 'renderOption'
+    | 'filter'
+    | 'onBlur'
+    | 'onSearch'
+    | 'selectionType'
+    | 'maxLength'
+    | 'searchInputValue'
+    | 'openOnFocus'
+    | 'beforeOptions'
+    | 'popoverProps';
 
 /**
  * Core props for the `TimePickerField` template.

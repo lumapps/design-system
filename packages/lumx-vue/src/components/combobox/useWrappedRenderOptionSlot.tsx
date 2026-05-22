@@ -1,4 +1,5 @@
-import { type ComputedRef, type Slot, computed } from 'vue';
+import { type ComputedRef, type Slot, computed, useAttrs } from 'vue';
+import castArray from 'lodash/castArray';
 
 import type { JSXElement } from '@lumx/core/js/types';
 import type { RenderOptionContext } from '@lumx/core/js/utils/select/types';
@@ -9,17 +10,26 @@ import ComboboxOption from './ComboboxOption';
 /** Render function passed as `renderOption` to a core Select* template. */
 type WrappedRenderOption = (option: unknown, context: RenderOptionContext) => JSXElement;
 
+/** Raw callback shape accepted as the `renderOption` attr fallback. */
+type RenderOptionCallback = (option: unknown, context: RenderOptionContext) => unknown;
+
 /**
  * Adapts a Vue scoped slot returning a `<ComboboxOption>` into the `renderOption`
  * callback shape expected by the core Select* templates.
  */
 export function useWrappedRenderOptionSlot(slot: Slot | undefined): ComputedRef<WrappedRenderOption | undefined> {
-    return computed(() => {
-        if (!slot) return undefined;
+    const attrs = useAttrs();
 
-        return (option: unknown, { index, value: optionValue, isSelected, description, name }: RenderOptionContext) => {
-            const vnodes = slot({ option, index });
-            const customOption = vnodes?.find(isComponentType(ComboboxOption));
+    return computed(() => {
+        const renderOptionAttr = attrs.renderOption as RenderOptionCallback | undefined;
+
+        if (!slot && !renderOptionAttr) return undefined;
+
+        return (option: unknown, context: RenderOptionContext) => {
+            const { index, value: optionValue, isSelected, description, name } = context;
+            // Use slot or fallback on attrs.renderOption (needed for lumx-core compat)
+            const vnodes = slot?.({ option, index }) || renderOptionAttr?.(option, context);
+            const customOption = castArray(vnodes)?.find(isComponentType(ComboboxOption));
 
             // Fallback: consumer didn't return a <Combobox.Option> — render their VNodes as-is.
             if (!customOption) return vnodes as unknown as JSXElement;

@@ -4,9 +4,11 @@ import type { HasClassName, HasTheme } from '@lumx/core/js/types';
 import {
     TimePickerField as UI,
     type TimePickerFieldProps as UIProps,
-    type TimePickerFieldTranslations,
+    type TimePickerFieldWrapperProps,
+    type TimePickerFieldOwnedSelectProps,
     CLASSNAME,
     COMPONENT_NAME,
+    DEFAULT_PROPS,
 } from '@lumx/core/js/components/TimePickerField';
 import { getCurrentLocale } from '@lumx/react/utils/locale/getCurrentLocale';
 import {
@@ -21,37 +23,24 @@ import {
 
 import { SelectTextField, SingleSelectTextFieldProps } from '../select-text-field';
 
-export { CLASSNAME, COMPONENT_NAME };
+export { CLASSNAME, COMPONENT_NAME, DEFAULT_PROPS };
 
 /**
  * Inherited SelectTextField props (less the parts owned by TimePickerField).
  */
 type InheritedSelectTextFieldProps = Omit<
     SingleSelectTextFieldProps<TimeOfDay>,
-    | 'value'
-    | 'onChange'
-    | 'listStatus'
-    | 'translations'
-    | 'options'
-    | 'getOptionId'
-    | 'getOptionName'
-    | 'renderOption'
-    | 'filter'
-    | 'onBlur'
-    | 'onSearch'
-    | 'selectionType'
+    TimePickerFieldOwnedSelectProps | 'onChange'
 >;
 
 /**
  * `TimePickerField` props.
  */
-export interface TimePickerFieldProps extends HasClassName, HasTheme, InheritedSelectTextFieldProps {
-    /**
-     * Currently selected time. Only the time-of-day component is consumed; the
-     * date part is preserved when emitting `onChange`.
-     */
-    value?: Date;
-
+export interface TimePickerFieldProps
+    extends HasClassName,
+        HasTheme,
+        InheritedSelectTextFieldProps,
+        TimePickerFieldWrapperProps {
     /**
      * Change handler. Called with a new `Date` whose date part is inherited from
      * the previous `value` (or today, if none) and whose time-of-day matches the
@@ -59,35 +48,6 @@ export interface TimePickerFieldProps extends HasClassName, HasTheme, InheritedS
      * cleared.
      */
     onChange(value: Date | undefined, name?: string, event?: SyntheticEvent): void;
-
-    /**
-     * BCP-47 locale string (e.g. `'en-US'`, `'fr-FR'`).
-     */
-    locale?: string;
-
-    /**
-     * Minute interval between option entries.
-     */
-    step?: number;
-
-    /**
-     * Lower bound. Options strictly before this time remain **visible** in the
-     * dropdown but are rendered as disabled (cannot be picked). Typed input
-     * below this bound is snapped up to it on blur.
-     */
-    minTime?: Date;
-
-    /**
-     * Upper bound. Options strictly after this time remain **visible** in the
-     * dropdown but are rendered as disabled (cannot be picked). Typed input
-     * above this bound is snapped down to it on blur.
-     */
-    maxTime?: Date;
-
-    /**
-     * Translations label for clear and show suggestions buttons
-     */
-    translations: TimePickerFieldTranslations;
 }
 
 /**
@@ -107,7 +67,7 @@ export const TimePickerField: React.FC<TimePickerFieldProps> = (props) => {
         value,
         onChange,
         locale = getCurrentLocale(),
-        step = 30,
+        step = DEFAULT_PROPS.step,
         minTime,
         maxTime,
         className,
