@@ -54,7 +54,7 @@ export default {
                 target: 'ESNext',
                 module: 'ESNext',
             },
-            include: path.join(SRC_PATH, '**', '*.ts'),
+            include: path.join(SRC_PATH, '**', '*.{ts,tsx}'),
             exclude: ['**/*.test.*'],
         }),
         copy({
