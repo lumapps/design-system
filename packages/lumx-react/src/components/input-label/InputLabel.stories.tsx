@@ -25,3 +25,4 @@ export default {
 export const Default = { ...stories.Default };
 export const IsRequired = { ...stories.IsRequired };
 export const WithCustomTypography = { ...stories.WithCustomTypography };
+export const AsLegend = { ...stories.AsLegend };

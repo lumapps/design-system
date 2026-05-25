@@ -18,6 +18,8 @@ export interface InputLabelProps extends HasClassName, HasTheme {
     isRequired?: boolean;
     /** ref to the root element */
     ref?: CommonRef;
+    /** HTML tag for rendering the label, defaults to `label` */
+    as?: 'label' | 'legend';
 }
 
 const CLASSNAME = InputLabelClassName;
@@ -29,10 +31,11 @@ const DEFAULT_PROPS: Partial<InputLabelProps> = {};
  * InputLabel component.
  */
 export function InputLabel(props: InputLabelProps) {
-    const { children, className, htmlFor, isRequired, theme, typography, ref, ...forwardedProps } = props;
+    const { children, className, htmlFor, isRequired, theme, as, typography, ref, ...forwardedProps } = props;
+    const ComponentToUse = as || 'label';
 
     return (
-        <label
+        <ComponentToUse
             ref={ref}
             {...forwardedProps}
             htmlFor={htmlFor}
@@ -47,7 +50,7 @@ export function InputLabel(props: InputLabelProps) {
             )}
         >
             {children}
-        </label>
+        </ComponentToUse>
     );
 }
 

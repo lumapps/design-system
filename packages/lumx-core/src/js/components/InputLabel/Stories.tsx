@@ -32,5 +32,10 @@ export function setup({ component: InputLabel }: SetupStoriesOptions) {
         WithCustomTypography: {
             args: { typography: Typography.subtitle1 },
         },
+
+        /** Input label as legend */
+        AsLegend: {
+            args: { as: 'legend' },
+        },
     };
 }
