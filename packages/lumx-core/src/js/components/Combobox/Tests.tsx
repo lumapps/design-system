@@ -909,7 +909,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
             expect(notPrevented).toBe(true);
         });
 
-        it('should close listbox on Enter when open with no active descendant (and prevent default)', async () => {
+        it('should close listbox on Enter when open with no active descendant (without preventing default)', async () => {
             renderWithState(t.inputTemplate);
             const input = getInput();
             await userEvent.click(input);
@@ -925,8 +925,8 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
             await waitFor(() => {
                 expect(input).toHaveAttribute('aria-expanded', 'false');
             });
-            // The combobox consumed Enter to close the popup → default IS prevented
-            expect(notPrevented).toBe(false);
+            // Default must NOT be prevented — required for the surrounding form to submit on Enter.
+            expect(notPrevented).toBe(true);
         });
 
         it('should close listbox on Escape then clear on second Escape', async () => {

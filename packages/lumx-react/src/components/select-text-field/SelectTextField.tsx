@@ -231,15 +231,21 @@ export const SelectTextField = <O,>(props: SelectTextFieldProps<O>) => {
         [onChange, onSearch, externalOnClear],
     );
 
-    // Handle blur: reset input to selected value name, then call consumer's onBlur.
+    // Handle blur: notify consumer, then reset search state.
     const handleBlur = useCallback(
         (event?: React.FocusEvent) => {
-            setIsSearching(false);
-            setSearchText('');
             onSearch?.('');
             externalOnBlur?.(event as React.FocusEvent);
+
+            if (externalSearchValue) {
+                setSearchText(externalSearchValue);
+                setIsSearching(true);
+            } else {
+                setSearchText('');
+                setIsSearching(false);
+            }
         },
-        [externalOnBlur, onSearch],
+        [externalOnBlur, externalSearchValue, onSearch],
     );
 
     const showClear = !isMultiple && !isAnyDisabled && hasClearButton && value !== undefined && value !== null;

@@ -14,7 +14,7 @@ import {
 import { mdiChevronLeft, mdiChevronRight } from '@lumx/icons';
 import { getMonthCalendar } from '@lumx/react/utils/date/getMonthCalendar';
 import { isSameDay } from '@lumx/react/utils/date/isSameDay';
-import { getCurrentLocale } from '@lumx/react/utils/locale/getCurrentLocale';
+import { getCurrentLocale } from '@lumx/core/js/utils/locale/getCurrentLocale';
 import { parseLocale } from '@lumx/react/utils/locale/parseLocale';
 import { Locale } from '@lumx/react/utils/locale/types';
 import { usePreviousValue } from '@lumx/react/hooks/usePreviousValue';

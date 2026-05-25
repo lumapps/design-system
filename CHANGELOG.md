@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `@lumx/vue`:
     -   Create the `SelectButton` component
+-   `@lumx/react`:
+    -   Create the `TimePickerField` component
 
 ### Fixed
 
@@ -18,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   Include `tsx` components when generating ts declarations
 -   `@lumx/react`, `@lumx/vue`:
     -   `Dialog`, `Popover`: fix focus trap not working when rendered inside a shadow DOM
+    -   `Combobox`: let `Enter` key propagate to submit a surrounding form when the popup is open with no active option
 
 ## [4.13.0][] - 2026-05-11
 

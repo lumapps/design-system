@@ -1,4 +1,1 @@
-/**
- * Get current browser locale.
- */
-export const getCurrentLocale = (): string => navigator.languages?.[0] || navigator.language;
+export { getCurrentLocale } from '@lumx/core/js/utils/locale/getCurrentLocale';
