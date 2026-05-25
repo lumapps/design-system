@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.14.0][] - 2026-05-25
+
 ### Added
 
 -   `@lumx/vue`:
@@ -2850,7 +2852,8 @@ _Failed released_
 [3.7.0]: https://github.com/lumapps/design-system/compare/v3.6.8...v3.7.0
 [3.6.8]: https://github.com/lumapps/design-system/compare/v3.6.7...v3.6.8
 [3.6.7]: https://github.com/lumapps/design-system/tree/v3.6.7
-[Unreleased]: https://github.com/lumapps/design-system/compare/4.13.0...HEAD
+[Unreleased]: https://github.com/lumapps/design-system/compare/4.14.0...HEAD
+[4.14.0]: https://github.com/lumapps/design-system/compare/4.13.0...4.14.0
 [4.13.0]: https://github.com/lumapps/design-system/compare/4.12.1...4.13.0
 [4.12.1]: https://github.com/lumapps/design-system/compare/4.12.0...4.12.1
 [4.12.0]: https://github.com/lumapps/design-system/compare/4.11.0...4.12.0
