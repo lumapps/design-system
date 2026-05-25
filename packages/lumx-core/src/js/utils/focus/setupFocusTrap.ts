@@ -1,4 +1,3 @@
-import { DOCUMENT } from '../../constants/browser';
 import { makeListenerTowerContext, type Listener } from '../function/listenerTower';
 import { getFirstAndLastFocusable } from './getFirstAndLastFocusable';
 
@@ -41,14 +40,12 @@ export interface SetupFocusTrapOptions {
 export function setupFocusTrap(options: SetupFocusTrapOptions, signal: AbortSignal): void {
     const { focusZoneElement, focusElement } = options;
 
-    // Body element can be undefined in SSR context.
-    const rootElement = DOCUMENT?.body;
-    if (!rootElement || !focusZoneElement || signal.aborted) {
+    if (!focusZoneElement || signal.aborted) {
         return;
     }
 
-    // Use the shadow root as focus zone when available.
-    const focusZoneElementOrShadowRoot: HTMLElement | ShadowRoot = focusZoneElement.shadowRoot || focusZoneElement;
+    // The root node is either the Document (regular DOM) or a ShadowRoot (shadow DOM portal).
+    const rootNode = focusZoneElement.getRootNode() as Document | ShadowRoot;
 
     // Track whether we added a `tabindex="-1"` so we can restore the original state on teardown.
     let addedTabIndex = false;
@@ -73,7 +70,7 @@ export function setupFocusTrap(options: SetupFocusTrapOptions, signal: AbortSign
             return;
         }
 
-        const focusable = getFirstAndLastFocusable(focusZoneElementOrShadowRoot);
+        const focusable = getFirstAndLastFocusable(focusZoneElement);
 
         // Prevent focus switch if no focusable available — pin focus on the zone itself.
         if (!focusable.first) {
@@ -82,9 +79,7 @@ export function setupFocusTrap(options: SetupFocusTrapOptions, signal: AbortSign
             return;
         }
 
-        const activeElement = focusZoneElement.shadowRoot
-            ? focusZoneElement.shadowRoot.activeElement
-            : DOCUMENT?.activeElement;
+        const { activeElement } = rootNode;
 
         if (
             // No previous focus.
@@ -92,7 +87,7 @@ export function setupFocusTrap(options: SetupFocusTrapOptions, signal: AbortSign
             // Previous focus is at the end of the focus zone.
             (!evt.shiftKey && activeElement === focusable.last) ||
             // Previous focus is outside the focus zone.
-            !focusZoneElementOrShadowRoot.contains(activeElement)
+            !focusZoneElement.contains(activeElement)
         ) {
             focusable.first.focus();
             evt.preventDefault();
@@ -110,17 +105,18 @@ export function setupFocusTrap(options: SetupFocusTrapOptions, signal: AbortSign
         }
     };
 
+    const keydownHandler = trapTabFocusInFocusZone as EventListener;
     const focusTrap: Listener = {
-        enable: () => rootElement.addEventListener('keydown', trapTabFocusInFocusZone),
-        disable: () => rootElement.removeEventListener('keydown', trapTabFocusInFocusZone),
+        enable: () => rootNode.addEventListener('keydown', keydownHandler),
+        disable: () => rootNode.removeEventListener('keydown', keydownHandler),
     };
 
     // SETUP: focus initial element.
-    if (focusElement && focusZoneElementOrShadowRoot.contains(focusElement)) {
+    if (focusElement && focusZoneElement.contains(focusElement)) {
         // Focus the given element.
         focusElement.focus({ preventScroll: true });
     } else {
-        const firstFocusable = getFirstAndLastFocusable(focusZoneElementOrShadowRoot).first;
+        const firstFocusable = getFirstAndLastFocusable(focusZoneElement).first;
         if (firstFocusable) {
             // Focus the first focusable descendant.
             firstFocusable.focus({ preventScroll: true });

@@ -16,6 +16,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `@lumx/vue`:
     -   Include `tsx` components when generating ts declarations
+-   `@lumx/react`, `@lumx/vue`:
+    -   `Dialog`, `Popover`: fix focus trap not working when rendered inside a shadow DOM
 
 ## [4.13.0][] - 2026-05-11
 
