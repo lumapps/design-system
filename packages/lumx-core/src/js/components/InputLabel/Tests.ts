@@ -51,5 +51,15 @@ export default (renderOptions: SetupOptions<InputLabelProps>) => {
             expect(label).toHaveClass(CLASSNAME);
             expect(label).toHaveClass(classNames.typography(Typography.body1));
         });
+
+        it('should render as a legend', () => {
+            const { label } = setup(
+                { children: 'The label', as: 'legend', typography: Typography.body1 },
+                renderOptions,
+            );
+            expect(label).toHaveClass(CLASSNAME);
+            expect(label).toHaveClass(classNames.typography(Typography.body1));
+            expect(label.tagName.toLowerCase()).toBe('legend');
+        });
     });
 };

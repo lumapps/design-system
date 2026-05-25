@@ -11,8 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `@lumx/vue`:
     -   Create the `SelectButton` component
+       `InputLabel`: Added prop `as` to specify the HTML element to use for rendering
 -   `@lumx/react`:
     -   Create the `TimePickerField` component
+    -   `InputLabel`: Added prop `as` to specify the HTML element to use for rendering
 
 ### Fixed
 
