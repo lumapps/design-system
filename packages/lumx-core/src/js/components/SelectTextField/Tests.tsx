@@ -1,6 +1,6 @@
 /* eslint-disable no-await-in-loop */
 import userEvent from '@testing-library/user-event';
-import { getByRole, getConfig, waitFor } from '@testing-library/dom';
+import { getByRole, getConfig, screen, waitFor } from '@testing-library/dom';
 
 // ─── Fixtures ────────────────────────────────────────────────────
 
@@ -191,7 +191,7 @@ export default function selectTextFieldTests({ components, renderWithState }: Se
 
         it('should render the toggle button', () => {
             renderWithState(defaultTemplate);
-            const toggleButton = document.body.querySelector<HTMLButtonElement>('[aria-label="Show suggestions"]');
+            const toggleButton = screen.queryByRole('button', { name: 'Show suggestions' });
             expect(toggleButton).toBeTruthy();
         });
 
@@ -205,19 +205,19 @@ export default function selectTextFieldTests({ components, renderWithState }: Se
 
         it('should render the clear button when value is set', () => {
             renderWithState(defaultTemplate, { value: FRUITS[0] });
-            const clearButton = document.body.querySelector<HTMLButtonElement>('[aria-label="Clear"]');
+            const clearButton = screen.queryByRole('button', { name: 'Clear' });
             expect(clearButton).toBeTruthy();
         });
 
         it('should not render clear button when hasClearButton is false', () => {
             renderWithState(defaultTemplate, { value: FRUITS[0], hasClearButton: false });
-            const clearButton = document.body.querySelector<HTMLButtonElement>('[aria-label="Clear"]');
+            const clearButton = screen.queryByRole('button', { name: 'Clear' });
             expect(clearButton).toBeNull();
         });
 
         it('should not render clear button when no value is selected', () => {
             renderWithState(defaultTemplate);
-            const clearButton = document.body.querySelector<HTMLButtonElement>('[aria-label="Clear"]');
+            const clearButton = screen.queryByRole('button', { name: 'Clear' });
             expect(clearButton).toBeNull();
         });
 
@@ -347,7 +347,7 @@ export default function selectTextFieldTests({ components, renderWithState }: Se
 
             expect(input.value).toBe('Apple');
 
-            const clearButton = document.body.querySelector<HTMLButtonElement>('[aria-label="Clear"]')!;
+            const clearButton = screen.queryByRole('button', { name: 'Clear' })!;
             await userEvent.click(clearButton);
 
             await waitFor(() => {
@@ -358,7 +358,7 @@ export default function selectTextFieldTests({ components, renderWithState }: Se
         it('should not show clear button when hasClearButton is false', async () => {
             renderWithState(defaultTemplate, { value: FRUITS[0], hasClearButton: false });
             expect(getInput().value).toBe('Apple');
-            expect(document.body.querySelector('[aria-label="Clear"]')).toBeNull();
+            expect(screen.queryByRole('button', { name: 'Clear' })).toBeNull();
         });
     });
 
@@ -471,7 +471,7 @@ export default function selectTextFieldTests({ components, renderWithState }: Se
 
             expect(input.value).toBe('Apple');
 
-            const clearButton = document.body.querySelector<HTMLButtonElement>('[aria-label="Clear"]')!;
+            const clearButton = screen.queryByRole('button', { name: 'Clear' })!;
             await userEvent.click(clearButton);
             await waitFor(() => {
                 expect(input.value).toBe('');
@@ -775,7 +775,7 @@ export default function selectTextFieldTests({ components, renderWithState }: Se
 
         it('should not show clear button when disabled', () => {
             renderWithState(defaultTemplate, { isDisabled: true, value: FRUITS[0] });
-            const clearButton = document.body.querySelector<HTMLButtonElement>('[aria-label="Clear"]');
+            const clearButton = screen.queryByRole('button', { name: 'Clear' });
             expect(clearButton).toBeNull();
         });
 
@@ -855,7 +855,7 @@ export default function selectTextFieldTests({ components, renderWithState }: Se
 
         it('should not show clear button when aria-disabled', () => {
             renderWithState(defaultTemplate, { 'aria-disabled': true, value: FRUITS[0] });
-            const clearButton = document.body.querySelector<HTMLButtonElement>('[aria-label="Clear"]');
+            const clearButton = screen.queryByRole('button', { name: 'Clear' });
             expect(clearButton).toBeNull();
         });
 
@@ -867,8 +867,8 @@ export default function selectTextFieldTests({ components, renderWithState }: Se
 
         it('should disable the toggle button when aria-disabled', () => {
             renderWithState(defaultTemplate, { 'aria-disabled': true });
-            const toggleButton = document.body.querySelector<HTMLButtonElement>('[aria-label="Show suggestions"]');
-            expect(toggleButton?.disabled).toBe(true);
+            const toggleButton = screen.queryByRole('button', { name: 'Show suggestions' });
+            expect(toggleButton).toBeDisabled();
         });
     });
 
@@ -1065,7 +1065,7 @@ export default function selectTextFieldTests({ components, renderWithState }: Se
 
         it('should not show a clear button in multi mode', () => {
             renderWithState(multiTemplate, { value: [FRUITS[0]] });
-            expect(document.body.querySelector('[aria-label="Clear"]')).toBeNull();
+            expect(screen.queryByRole('button', { name: 'Clear' })).toBeNull();
         });
 
         it('should call onSearch when typing in multi mode', async () => {

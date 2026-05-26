@@ -35,10 +35,15 @@ export default (renderOptions: SetupOptions<IconButtonProps>) => {
                 expect(img).not.toBeInTheDocument();
             });
 
-            it('should render label', () => {
+            it('should render label as aria-label and visually-hidden text', () => {
                 const label = 'Label';
                 const { iconButton } = setup({ label }, renderOptions);
+                // The accessible name resolves to the label.
                 expect(iconButton).toBe(screen.queryByRole('button', { name: label }));
+                // The label is rendered as in-DOM visually-hidden text.
+                expect(screen.getByText(label)).toBeInTheDocument();
+                // aria-label is still set for backward compatibility.
+                expect(iconButton).toHaveAttribute('aria-label', label);
             });
 
             it('should render icon button with an image', () => {
