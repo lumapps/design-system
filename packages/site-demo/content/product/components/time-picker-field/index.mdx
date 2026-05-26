@@ -1,0 +1,57 @@
+---
+frameworks: ['react', 'vue']
+---
+
+import * as ReactDemoDefault from './react/default.tsx';
+import * as ReactDemoBounds from './react/bounds.tsx';
+import * as ReactDemoLocale from './react/locale.tsx';
+import * as VueDemoDefault from './vue/default.vue';
+import * as VueDemoBounds from './vue/bounds.vue';
+import * as VueDemoLocale from './vue/locale.vue';
+import ReactTimePickerField from 'lumx-docs:@lumx/react/components/time-picker-field/TimePickerField';
+import VueTimePickerField from 'lumx-docs:@lumx/vue/components/time-picker-field/TimePickerField';
+
+# Time picker field
+
+**Time picker fields let users pick a time of day.**\
+The field generates time suggestions in a dropdonw list with configurable minute interval and also accepts free-form typed input (e.g. `"10:30 PM"`, `"14"`, `"930"`), parsed on blur.
+
+<DemoBlock demo={{ react: ReactDemoDefault, vue: VueDemoDefault }} />
+
+## Bounds
+
+Restrict the pickable range with `minTime` and `maxTime`. Options outside the range remain **visible** in the dropdown but are rendered as disabled. Typed input outside the range is snapped to the nearest bound on blur.
+
+<DemoBlock demo={{ react: ReactDemoBounds, vue: VueDemoBounds }} />
+
+## Locale
+
+Pass a BCP-47 `locale` string to control time formatting. Locales using 24-hour conventions (e.g. `fr-FR`) display options without an AM/PM suffix.
+
+<DemoBlock demo={{ react: ReactDemoLocale, vue: VueDemoLocale }} />
+
+## Step
+
+The `step` prop (default `30`) controls the minute interval between generated options. A `step` of `15` produces 96 entries per day.
+
+## Input options
+
+The time picker field shares the same input options as the [TextField](/product/components/text-field):
+
+- `isDisabled`/`aria-disabled` — prevents interaction with the field.
+- `hasError` and `error` — displays an error state with a message.
+- `isValid` — displays a success state.
+- `isRequired` — marks the field as required.
+- `helper` — displays helper text below the field.
+
+## Accessibility concerns
+
+`TimePickerField` is built on top of [SelectTextField](/product/components/select-text-field) and inherits the combobox pattern.
+
+- Always provide a `label` so the field is properly announced by screen readers.
+- The `translations` prop is required and must include `clearLabel` (for the clear button) and `showSuggestionsLabel` (for the toggle button).
+- Use `helper` to hint at the expected time format for the current locale (e.g. `"e.g. 2:30 PM"`, `"e.g. 14:30"`) and surface any active bounds, so keyboard users typing input know what's accepted.
+
+## Properties
+
+<PropTable docs={{ react: ReactTimePickerField, vue: VueTimePickerField }} />
