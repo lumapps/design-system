@@ -1,15 +1,17 @@
 import { userEvent } from 'storybook/test';
-import { mdiAccount, mdiCog, mdiHelpCircle, mdiLogout } from '@lumx/icons';
+import { mdiAccount, mdiCog, mdiHelpCircle, mdiLogout, mdiPencil, mdiTrashCan } from '@lumx/icons';
 import type { SetupStoriesOptions } from '@lumx/core/stories/types';
 
 export function setup({
     components: { MenuButton, MenuItem, MenuDivider },
+    decorators: { withCombinations },
 }: SetupStoriesOptions<{
     components: {
         MenuButton: any;
         MenuItem: any;
         MenuDivider: any;
     };
+    decorators: 'withCombinations';
 }>) {
     const meta = {
         component: MenuButton,
@@ -25,37 +27,75 @@ export function setup({
         },
     };
 
+    /** Default menu button config */
     const Default = {
         argTypes: {
-            onProfile: { action: true },
-            onSettings: { action: true },
-            onHelp: { action: true },
-            onLogout: { action: true },
+            onItemClick: { action: true },
         },
-        args: {
-            emphasis: 'high',
-        },
-        render: ({ onProfile, onSettings, onHelp, onLogout, ...args }: any) => (
+        render: ({ onItemClick, ...args }: any) => (
             <MenuButton {...args}>
-                <MenuItem icon={mdiAccount} onClick={onProfile}>
+                <MenuItem icon={mdiAccount} onClick={onItemClick}>
                     Profile
                 </MenuItem>
-                <MenuItem icon={mdiCog} onClick={onSettings}>
+                <MenuItem icon={mdiCog} onClick={onItemClick}>
                     Settings
                 </MenuItem>
                 <MenuDivider />
-                <MenuItem icon={mdiHelpCircle} onClick={onHelp}>
+                <MenuItem icon={mdiHelpCircle} onClick={onItemClick}>
                     Help
                 </MenuItem>
-                <MenuItem icon={mdiLogout} onClick={onLogout}>
+                <MenuItem icon={mdiLogout} onClick={onItemClick}>
                     Logout
                 </MenuItem>
             </MenuButton>
         ),
     };
 
+    /** All MenuButton variants */
+    const Variants = {
+        argTypes: {
+            onItemClick: { action: true },
+        },
+        decorators: [
+            withCombinations({
+                combinations: {
+                    cols: {
+                        Button: {},
+                        'Icon button': { variant: 'icon-button', label: 'More actions', emphasis: 'low' },
+                        Chip: { variant: 'chip', label: 'Filter by' },
+                        Link: { variant: 'link', label: 'Open as link' },
+                    },
+                },
+            }),
+        ],
+        render: (args: any) => () => (
+            <MenuButton {...args}>
+                <MenuItem icon={mdiPencil} onClick={args.onItemClick}>
+                    Edit
+                </MenuItem>
+                <MenuItem onClick={args.onItemClick}>Duplicate</MenuItem>
+                <MenuDivider />
+                <MenuItem icon={mdiTrashCan} color="red" onClick={args.onItemClick}>
+                    Delete
+                </MenuItem>
+            </MenuButton>
+        ),
+    };
+
+    const WithLinkItems = {
+        argTypes: {
+            onItemClick: { action: true },
+        },
+        args: {
+            label: 'Actions',
+            emphasis: 'low',
+        },
+    };
+
     return {
         meta,
         Default,
+        Variants,
+        WithLinkItems,
     };
 }

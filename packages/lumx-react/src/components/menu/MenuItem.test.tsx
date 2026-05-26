@@ -40,6 +40,12 @@ describe(`<${MenuItem.displayName}>`, () => {
         forwardAttributes: 'element',
         forwardRef: 'element',
     });
+
+    // ── afterIcon ──────────────────────────────────────────────
+    it('should render afterIcon', () => {
+        renderMenuItem({ children: 'Item', afterIcon: 'test-icon' });
+        expect(getByClassName(document.body, 'lumx-icon')).toBeInTheDocument();
+    });
 });
 
 // ── Type-level tests ──────────────────────────────────────────

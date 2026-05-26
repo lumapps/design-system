@@ -1,27 +1,14 @@
-import type { CommonRef, HasClassName, JSXElement, LumxClassName } from '../../types';
+import type { HasClassName, JSXElement, LumxClassName } from '../../types';
 import type { Placement } from '../Popover/constants';
 import { classNames } from '../../utils';
+import { PopoverProps } from '../Popover';
 
 /** MenuPopover props. */
-export interface MenuPopoverProps extends HasClassName {
+export interface MenuPopoverProps
+    extends HasClassName,
+        Pick<PopoverProps, 'placement' | 'anchorRef' | 'isOpen' | 'handleClose'> {
     /** Popover content (a `Menu`). */
     children?: JSXElement;
-    /** Whether the popover is open. */
-    isOpen?: boolean;
-    /** Placement relative to the anchor. Defaults to `'bottom-start'`. */
-    placement?: Placement;
-    /** Reference to the anchor element. */
-    anchorRef?: CommonRef;
-    /** Callback invoked when the popover requests to close (click away, escape). */
-    handleClose?(): void;
-    /** Whether the popover should close when clicking outside. Default: true. */
-    closeOnClickAway?: boolean;
-    /** Whether the popover should close on Escape. Default: true. */
-    closeOnEscape?: boolean;
-    /** Whether to render in a portal. Default: false (avoid stacking-context surprises). */
-    usePortal?: boolean;
-    /** Whether to focus the anchor on close. Default: true. */
-    focusAnchorOnClose?: boolean;
 }
 
 /** Framework components injected by wrappers. */
@@ -46,10 +33,6 @@ export const MenuPopover = (props: MenuPopoverProps, { Popover, FlexBox }: MenuP
         placement = 'bottom-start' as Placement,
         anchorRef,
         handleClose,
-        closeOnClickAway = true,
-        closeOnEscape = true,
-        usePortal = false,
-        focusAnchorOnClose = true,
         ...forwardedProps
     } = props;
 
@@ -60,10 +43,10 @@ export const MenuPopover = (props: MenuPopoverProps, { Popover, FlexBox }: MenuP
             anchorRef={anchorRef}
             isOpen={isOpen}
             onClose={handleClose}
-            closeOnClickAway={closeOnClickAway}
-            closeOnEscape={closeOnEscape}
-            usePortal={usePortal}
-            focusAnchorOnClose={focusAnchorOnClose}
+            closeOnClickAway
+            closeOnEscape
+            usePortal={false}
+            focusAnchorOnClose
             withFocusTrap={false}
             closeMode="hide"
             fitToAnchorWidth={false}
