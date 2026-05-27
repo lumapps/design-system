@@ -3,14 +3,14 @@ import type { HasTheme } from '../../types/HasTheme';
 import type { JSXElement, Selector } from '../../types';
 
 /**
- * Status of the SelectTextField dropdown list.
+ * Status of the select dropdown list.
  *
  * - `'idle'` — Default state, no loading indicators.
  * - `'loading'` — Full loading: shows skeleton placeholders, hides real options.
  * - `'loadingMore'` — Paginated loading: appends a skeleton after existing options.
  * - `'error'` — Error state: shows an error message in the dropdown.
  */
-export type SelectTextFieldStatus = 'idle' | 'loading' | 'loadingMore' | 'error';
+export type SelectListStatus = 'idle' | 'loading' | 'loadingMore' | 'error';
 
 /**
  * Context passed to the `renderOption` callback alongside the option object.
@@ -171,7 +171,7 @@ export interface BaseSelectButtonWrapperProps<O>
      * Status of the dropdown list.
      * @default 'idle'
      */
-    listStatus?: SelectTextFieldStatus;
+    listStatus?: SelectListStatus;
     /** Optional translations for screen-reader announcements (loading/empty/error/option count). */
     translations?: SelectButtonTranslations;
 }
@@ -194,7 +194,7 @@ export interface BaseSelectTextFieldWrapperProps<O>
      * Status of the dropdown list.
      * @default 'idle'
      */
-    listStatus?: SelectTextFieldStatus;
+    listStatus?: SelectListStatus;
     /**
      * Controls how the combobox filters options as the user types.
      *

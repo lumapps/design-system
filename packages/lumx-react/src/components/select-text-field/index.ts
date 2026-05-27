@@ -10,7 +10,8 @@ export {
     type SingleSelectTextFieldProps,
     type MultipleSelectTextFieldProps,
 } from './SelectTextField';
-export type { SelectTextFieldStatus, SelectTextFieldTranslations } from '@lumx/core/js/utils/select/types';
+export type { SelectListStatus, SelectListStatus as SelectTextFieldStatus } from '@lumx/core/js/utils/select/types';
+export type { SelectTextFieldTranslations } from '@lumx/core/js/utils/select/types';
 
 /**
  * SelectTextField compound component.

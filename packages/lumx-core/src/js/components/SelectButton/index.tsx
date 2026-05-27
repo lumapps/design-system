@@ -8,7 +8,7 @@ import {
     BaseSelectComponents,
     BaseSelectProps,
     SelectButtonTranslations,
-    SelectTextFieldStatus,
+    SelectListStatus,
 } from '../../utils/select/types';
 
 /**
@@ -50,7 +50,7 @@ export interface SelectButtonProps<O> extends BaseSelectProps<O> {
      * - `'error'` — Error state: shows an error message in the dropdown.
      * @default 'idle'
      */
-    listStatus?: SelectTextFieldStatus;
+    listStatus?: SelectListStatus;
     /** Optional translations for screen-reader announcements (loading/empty/error/option count). */
     translations?: SelectButtonTranslations;
     /** Callback fired when the dropdown open state changes. */

@@ -10,7 +10,8 @@ export {
     type MultipleSelectTextFieldProps,
     default as SelectTextField,
 } from './SelectTextField';
-export type { SelectTextFieldStatus, SelectTextFieldTranslations } from '@lumx/core/js/utils/select/types';
+export type { SelectListStatus, SelectListStatus as SelectTextFieldStatus } from '@lumx/core/js/utils/select/types';
+export type { SelectTextFieldTranslations } from '@lumx/core/js/utils/select/types';
 
 /** Selectable option within the dropdown list. */
 export const SelectTextFieldOption = _ComboboxOption;

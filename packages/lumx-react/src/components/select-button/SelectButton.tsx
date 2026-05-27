@@ -5,7 +5,7 @@ import { toggleSelection } from '@lumx/core/js/utils/select/toggleSelection';
 import type { GenericProps, NamedProps } from '@lumx/core/js/types';
 import { SelectButton as UI, type SelectButtonProps as UIProps } from '@lumx/core/js/components/SelectButton';
 import { type ComboboxButtonLabelDisplayMode } from '@lumx/core/js/components/Combobox/ComboboxButton';
-import { type SelectButtonTranslations, type SelectTextFieldStatus } from '@lumx/core/js/utils/select/types';
+import { type SelectButtonTranslations, type SelectListStatus } from '@lumx/core/js/utils/select/types';
 import { ComponentRef } from '@lumx/react/utils/type';
 import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
@@ -70,7 +70,7 @@ type CommonSelectButtonProps<O> = SelectButtonSelectProps<O> &
          * Status of the dropdown list (loading, error, etc.).
          * @default 'idle'
          */
-        listStatus?: SelectTextFieldStatus;
+        listStatus?: SelectListStatus;
         /** Screen-reader translations (loading/empty/error/option count). */
         translations?: SelectButtonTranslations;
     };
