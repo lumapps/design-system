@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   `SelectButton`: render menu-down icon with `as=Button` (same as when `as` is empty)
 -   `@lumx/react`, `@lumx/vue`:
     -   `SelectButton`, `SelectTextField`: allow undefined section id in `getSectionId`
+    -   `SelectButton`: `onChange` should provides a value (no `undefined`) and Escape key should not clear selection
 
 ## [4.15.0][] - 2026-06-01
 

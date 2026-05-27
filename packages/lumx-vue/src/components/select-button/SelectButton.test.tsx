@@ -337,9 +337,7 @@ describe('<SelectButton>', () => {
 
             it('narrows the change payload per selectionType', () => {
                 expectTypeOf<SingleEmit>().toBeCallableWith('change', FRUIT);
-                expectTypeOf<SingleEmit>().toBeCallableWith('change', undefined);
                 expectTypeOf<MultipleEmit>().toBeCallableWith('change', [FRUIT]);
-                expectTypeOf<MultipleEmit>().toBeCallableWith('change', undefined);
             });
 
             it('types common event payloads on $emit', () => {

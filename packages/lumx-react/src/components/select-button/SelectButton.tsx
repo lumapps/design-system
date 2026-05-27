@@ -85,8 +85,8 @@ type CommonSelectButtonProps<O> = SelectButtonSelectProps<O> &
  * fully replaced and only props valid for that component apply.
  *
  * Discriminated on `selectionType`:
- * - default / `'single'` → `value?: O`, `onChange?: (newValue?: O) => void`.
- * - `'multiple'`         → `value?: O[]`, `onChange?: (newValue?: O[]) => void`.
+ * - default / `'single'` → `value?: O`, `onChange?: (newValue: O) => void`.
+ * - `'multiple'`         → `value?: O[]`, `onChange?: (newValue: O[]) => void`.
  *
  * `as` and `selectionType` are top-level on this type (rather than buried in
  * an intersection or union member) so that TS can infer `E` from `as` and
@@ -115,7 +115,7 @@ export type SelectButtonProps<
         /** Selected option(s). Shape depends on `selectionType`. */
         value?: S extends 'multiple' ? O[] : O;
         /** Called when the selection changes. Shape depends on `selectionType`. */
-        onChange?: S extends 'multiple' ? (newValue?: O[]) => void : (newValue?: O) => void;
+        onChange?: S extends 'multiple' ? (newValue: O[]) => void : (newValue: O) => void;
     };
 
 /**

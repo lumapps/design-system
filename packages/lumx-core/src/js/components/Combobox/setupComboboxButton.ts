@@ -98,6 +98,13 @@ export function setupComboboxButton(button: HTMLButtonElement, callbacks: Combob
                     }
                     return false;
 
+                case 'Escape':
+                    // Close if open; never clear selection (button-mode has no text input).
+                    if (combobox.isOpen) {
+                        combobox.setIsOpen(false);
+                    }
+                    return true;
+
                 default:
                     // Printable characters → typeahead.
                     if (isPrintableKey(event)) {

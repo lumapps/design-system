@@ -118,13 +118,13 @@ export type SelectButtonProps<O = any> = SingleSelectButtonProps<O> | MultipleSe
 export const emitSchema = {
     /**
      * Selection change. Payload type depends on `selectionType`:
-     * - default / `'single'` → `O | undefined` (option on select).
-     * - `'multiple'`         → `O[] | undefined` (toggled array).
+     * - default / `'single'` → `O` (selected option).
+     * - `'multiple'`         → `O[]` (toggled array).
      *
      * The runtime validator uses `unknown` since the typed payload can't be expressed
      * without the component generic. The typed payload is restored via `SelectButtonEmits`.
      */
-    change: (_newValue?: unknown) => true,
+    change: (_newValue: unknown) => true,
     /** Bottom of the options list reached — consumer should fetch the next page. */
     'load-more': () => true,
     /** Dropdown opened or closed. */
@@ -136,7 +136,7 @@ export const emitSchema = {
  * SelectButton emits typed over the option type O and the selection type S.
  */
 type SelectButtonEmits<O, S extends 'single' | 'multiple'> = Omit<EmitsOf<typeof emitSchema>, 'change'> & {
-    change: (newValue: (S extends 'multiple' ? O[] : O) | undefined) => void;
+    change: (newValue: S extends 'multiple' ? O[] : O) => void;
 };
 
 type SingleSelectButtonPublicProps<O> = SingleSelectButtonProps<O> & EmitsToProps<SelectButtonEmits<O, 'single'>>;
@@ -228,8 +228,7 @@ const SelectButton = defineComponent(
                 selectedOption?.value,
                 isMultiple.value,
             );
-            // Preserve previous behaviour of normalizing falsy single-mode results to `undefined`.
-            emit('change', next || undefined);
+            emit('change', next);
         };
 
         /*
