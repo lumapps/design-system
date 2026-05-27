@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `@lumx/react`:
     -   `SelectButton`: fix `SingleSelectButtonProps` and `MultipleSelectButtonProps` generic type
+    -   `SelectButton`: render menu-down icon with `as=Button` (same as when `as` is empty)
 -   `@lumx/react`, `@lumx/vue`:
     -   `SelectButton`, `SelectTextField`: allow undefined section id in `getSectionId`
 

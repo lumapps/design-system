@@ -191,6 +191,9 @@ export const SelectButton = (React.forwardRef as ForwardRefSelectButton)((props,
         [getOptionId, isMultiple, onChange, options, value],
     );
 
+    // If as is defined and not the Button, render as, else render DefaultButton (with mdiMenuDown right icon)
+    const buttonAs = as && as !== Button ? as : DefaultButton;
+
     return UI(
         {
             options,
@@ -204,8 +207,7 @@ export const SelectButton = (React.forwardRef as ForwardRefSelectButton)((props,
             isMultiselectable: isMultiple,
             label,
             labelDisplayMode,
-            // With no `as`, the default trigger adds the chevron.
-            buttonProps: { ...buttonProps, as: as ?? DefaultButton, ref },
+            buttonProps: { ...buttonProps, as: buttonAs, ref },
             popoverProps,
             listProps: { ref: setListElement },
             handleSelect,
