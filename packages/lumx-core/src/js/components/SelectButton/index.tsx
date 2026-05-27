@@ -1,7 +1,7 @@
 import castArray from 'lodash/castArray';
 
 import type { LumxClassName } from '../../types';
-import { getWithSelector } from '../../utils/selectors';
+import { getOptionDisplayName } from '../../utils/select/getOptionDisplayName';
 import { renderSelectOptions } from '../../utils/select/renderSelectOptions';
 import type { ComboboxButtonLabelDisplayMode } from '../Combobox/ComboboxButton';
 import {
@@ -126,7 +126,7 @@ export const SelectButton = <O,>(props: SelectButtonProps<O>, { Combobox, Infini
     const displayValue =
         value != null
             ? castArray(value)
-                  .map((v) => v != null && getWithSelector(getOptionName, v))
+                  .map((v) => getOptionDisplayName(v, getOptionName, getOptionId))
                   .filter(Boolean)
                   .join(', ')
             : '';
