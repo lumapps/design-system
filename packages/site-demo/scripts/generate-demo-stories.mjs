@@ -135,20 +135,39 @@ function once(fn) {
  * @param {string} ext - file extension including dot (e.g. '.tsx' or '.vue')
  * @param {(msg: string) => void} log
  */
-function generateDemoStories(fw, outputDir, ext, log) {
-    fs.mkdirSync(outputDir, { recursive: true });
+async function generateDemoStories(fw, outputDir, ext, log) {
+    await fs.promises.mkdir(outputDir, { recursive: true });
+
+    // Promise list of existing demos before generation
+    const existingPromise = fs.promises.readdir(outputDir)
+        .then((files) => new Set(files.filter((file) => file.endsWith('.stories.tsx'))))
+        .catch(() => new Set());
+
     const groups = scanDemos(fw, ext);
     const importExt = ext === '.tsx' ? '' : ext;
 
+    const generated = new Set();
     let count = 0;
     for (const { folder, sourceDir, storyTitle, demos } of groups.values()) {
         const prefix = path.relative(outputDir, sourceDir);
-        fs.writeFileSync(
-            path.join(outputDir, `${folder}.stories.tsx`),
+        const fileName = `${folder}.stories.tsx`;
+        generated.add(fileName);
+        await fs.promises.writeFile(
+            path.join(outputDir, fileName),
             generateStories(folder, demos, { prefix, fw, importExt, storyTitle }),
         );
         count++;
     }
+
+    // Delete stale files that were not re-generated
+    const existing = await existingPromise;
+    for (const file of existing) {
+        if (!generated.has(file)) {
+            await fs.promises.unlink(path.join(outputDir, file));
+            log(`  Deleted stale demo story file: ${file}`);
+        }
+    }
+
     log(`Generated ${count} ${fw} demo story files in ${outputDir}`);
 }
 
@@ -157,7 +176,7 @@ function generateDemoStories(fw, outputDir, ext, log) {
  * @param {(msg: string) => void} [log] - Optional log function (e.g. Rollup's `this.info`). Falls back to `console.log`.
  */
 export const generateReactDemoStories = once(async function generateReactDemoStories(log = console.log) {
-    generateDemoStories('react', REACT_OUTPUT_DIR, '.tsx', log);
+    await generateDemoStories('react', REACT_OUTPUT_DIR, '.tsx', log);
 });
 
 /**
@@ -165,7 +184,7 @@ export const generateReactDemoStories = once(async function generateReactDemoSto
  * @param {(msg: string) => void} [log] - Optional log function (e.g. Rollup's `this.info`). Falls back to `console.log`.
  */
 export const generateVueDemoStories = once(async function generateVueDemoStories(log = console.log) {
-    generateDemoStories('vue', VUE_OUTPUT_DIR, '.vue', log);
+    await generateDemoStories('vue', VUE_OUTPUT_DIR, '.vue', log);
 });
 
 // Run directly when executed as a script
