@@ -30,12 +30,14 @@ export { DEFAULT_PROPS };
  */
 export const RawInputText = forwardRef<RawInputTextProps, HTMLInputElement>((props, ref) => {
     const defaultTheme = useTheme() || Theme.light;
-    const { theme = defaultTheme, onChange, ...restOfProps } = props;
+    const { theme = defaultTheme, onChange, onFocus, onBlur, ...restOfProps } = props;
 
     return UI({
         ...restOfProps,
         ref,
         theme,
         handleChange: onChange,
+        handleFocus: onFocus as any,
+        handleBlur: onBlur as any,
     });
 });

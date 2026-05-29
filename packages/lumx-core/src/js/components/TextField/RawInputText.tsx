@@ -17,6 +17,8 @@ export interface RawInputTextProps extends HasTheme, HasClassName {
     ref?: CommonRef;
     handleChange?: (value: string, name?: string, event?: any) => void;
     handleInput?: (value: string, name?: string, event?: any) => void;
+    handleFocus?: (event?: any) => void;
+    handleBlur?: (event?: any) => void;
 }
 /**
  * Component default props.
@@ -36,6 +38,8 @@ export const RawInputText = (props: RawInputTextProps) => {
         value,
         handleChange,
         handleInput,
+        handleFocus,
+        handleBlur,
         type = DEFAULT_PROPS.type,
         name,
         ref,
@@ -65,6 +69,8 @@ export const RawInputText = (props: RawInputTextProps) => {
             )}
             onChange={handleOnChange}
             onInput={handleOnInput}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
             value={value}
         />
     );

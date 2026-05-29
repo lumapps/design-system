@@ -28,19 +28,28 @@ export { CLASSNAME, COMPONENT_NAME, DEFAULT_PROPS };
  * @param  props Component props.
  * @return Vue element.
  */
+export const emitSchema = {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    focus: (_event?: FocusEvent) => true,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    keypress: (_event?: KeyboardEvent) => true,
+};
+
 const Tab = defineComponent(
-    (props: TabProps) => {
+    (props: TabProps, { emit }) => {
         const attrs = useAttrs();
         const className = useClassName(() => props.class);
         const { isAnyDisabled } = useDisableStateProps(computed(() => ({ ...props, ...attrs })));
         const tabState = useTabProviderContext('tab', props.id as string | undefined);
         const isActive = computed(() => props.isActive || tabState.value?.isActive);
 
+        const handleFocus = (event: FocusEvent) => emit('focus', event);
+        const handleKeyPress = (event: KeyboardEvent) => emit('keypress', event);
+
         return () => {
-            const { onFocus, onKeypress, onKeyPress, ...restAttrs } = attrs as any;
             return (
                 <TabUI
-                    {...restAttrs}
+                    {...attrs}
                     id={props.id}
                     className={className.value}
                     icon={props.icon}
@@ -53,8 +62,8 @@ const Tab = defineComponent(
                     changeToTab={tabState.value?.changeToTab}
                     tabId={tabState.value?.tabId}
                     tabPanelId={tabState.value?.tabPanelId}
-                    handleFocus={(event: FocusEvent) => (onFocus as any)?.(event)}
-                    handleKeyPress={(event: KeyboardEvent) => ((onKeypress || onKeyPress) as any)?.(event)}
+                    handleFocus={handleFocus}
+                    handleKeyPress={handleKeyPress}
                     keyPressProp="onKeypress"
                     tabIndexProp="tabindex"
                     Icon={Icon}
@@ -67,6 +76,7 @@ const Tab = defineComponent(
         name: 'LumxTab',
         inheritAttrs: false,
         props: keysOf<TabProps>()('icon', 'iconProps', 'id', 'isActive', 'isDisabled', 'label', 'class'),
+        emits: emitSchema,
     },
 );
 

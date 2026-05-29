@@ -39,6 +39,20 @@ describe('<RawInputTextarea />', () => {
             expect(inputEvents).toHaveLength(1);
             expect((inputEvents as any)[0][0]).toBe('hello');
         });
+
+        it('should emit focus event when textarea is focused', async () => {
+            const { emitted } = render(RawInputTextarea, { props: { value: '' } });
+            const textarea = document.querySelector('textarea') as HTMLTextAreaElement;
+            await fireEvent.focus(textarea);
+            expect(emitted('focus')).toHaveLength(1);
+        });
+
+        it('should emit blur event when textarea is blurred', async () => {
+            const { emitted } = render(RawInputTextarea, { props: { value: '' } });
+            const textarea = document.querySelector('textarea') as HTMLTextAreaElement;
+            await fireEvent.blur(textarea);
+            expect(emitted('blur')).toHaveLength(1);
+        });
     });
 
     commonTestsSuiteVTL(setupRawInputTextarea, {

@@ -11,6 +11,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `@lumx/vue`:
     -   Create the `TimePickerField` component
+    -   `RawInputText`, `RawInputTextarea`: add `focus` and `blur` events
+
+### Fixed
+
+-   `@lumx/react`:
+    -   `RawInputText`, `RawInputTextarea`: fix `onFocus`/`onBlur` callbacks being silently discarded
+-   `@lumx/vue`:
+    -   `Avatar`: fix `click` and `keypress` event forwarding
+    -   `Tab`: fix `focus` and `keypress` event forwarding
 
 ## [4.14.0][] - 2026-05-25
 

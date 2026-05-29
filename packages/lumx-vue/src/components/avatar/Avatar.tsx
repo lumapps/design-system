@@ -30,25 +30,32 @@ export type AvatarProps = VueToJSXProps<UIProps, 'image' | 'actions' | 'badge'> 
     thumbnailProps?: Omit<ThumbnailProps, 'image' | 'alt' | 'size' | 'theme' | 'aspectRatio'>;
 };
 
+export const emitSchema = {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    click: (_event?: MouseEvent) => true,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    keypress: (_event?: KeyboardEvent) => true,
+};
+
 const Avatar = defineComponent(
-    (props: AvatarProps, { slots }) => {
+    (props: AvatarProps, { emit, slots }) => {
         const attrs = useAttrs();
         const defaultTheme = useTheme();
         const className = useClassName(() => props.class);
 
+        const handleClick = (event: Event) => emit('click', event as MouseEvent);
+        const handleKeyPress = (event: Event) => emit('keypress', event as KeyboardEvent);
+
         return () => {
             const { image, alt, size = DEFAULT_PROPS.size, theme, linkProps, linkAs, thumbnailProps } = props;
             const resolvedTheme = theme || defaultTheme.value;
-
-            // Extract event handlers from attrs to forward to Thumbnail (not to root div)
-            const { onClick, onKeyPress, ...restAttrs } = { ...attrs } as any;
 
             const actionsContent = slots.actions?.() as JSXElement;
             const badgeContent = slots.badge?.() as JSXElement;
 
             return (
                 <AvatarUI
-                    {...restAttrs}
+                    {...(attrs as any)}
                     className={className.value}
                     theme={resolvedTheme}
                     size={size}
@@ -59,8 +66,8 @@ const Avatar = defineComponent(
                             linkProps={linkProps}
                             linkAs={linkAs}
                             class={element('thumbnail')}
-                            onClick={onClick}
-                            onKeyPress={onKeyPress}
+                            onClick={handleClick}
+                            onKeyPress={handleKeyPress}
                             {...thumbnailProps}
                             aspectRatio={AspectRatio.square}
                             size={size}
@@ -77,6 +84,7 @@ const Avatar = defineComponent(
         name: 'LumxAvatar',
         inheritAttrs: false,
         props: keysOf<AvatarProps>()('image', 'alt', 'size', 'theme', 'linkProps', 'linkAs', 'thumbnailProps', 'class'),
+        emits: emitSchema,
     },
 );
 
