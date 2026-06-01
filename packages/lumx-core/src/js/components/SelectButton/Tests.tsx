@@ -114,7 +114,7 @@ export default function selectButtonTests({ components, renderWithState }: Selec
         it('should render options in the listbox', async () => {
             renderWithState(defaultTemplate);
             await userEvent.click(screen.getByRole('combobox'));
-            const options = (await screen.findAllByRole('option')).filter((o) => !o.hasAttribute('data-filtered'));
+            const options = screen.getAllByRole('option');
             expect(options).toHaveLength(FRUITS.length);
             expect(options[0].textContent).toBe('Apple');
         });
@@ -122,7 +122,7 @@ export default function selectButtonTests({ components, renderWithState }: Selec
         it('should mark selected option with aria-selected', async () => {
             renderWithState(defaultTemplate, { value: FRUITS[1] });
             await userEvent.click(screen.getByRole('combobox'));
-            const options = (await screen.findAllByRole('option')).filter((o) => !o.hasAttribute('data-filtered'));
+            const options = screen.getAllByRole('option');
             expect(options[0].getAttribute('aria-selected')).toBe('false');
             expect(options[1].getAttribute('aria-selected')).toBe('true');
             expect(options[2].getAttribute('aria-selected')).toBe('false');
@@ -131,7 +131,7 @@ export default function selectButtonTests({ components, renderWithState }: Selec
         it('should render option descriptions when getOptionDescription is provided', async () => {
             renderWithState(defaultTemplate, { getOptionDescription: 'description' });
             await userEvent.click(screen.getByRole('combobox'));
-            const options = (await screen.findAllByRole('option')).filter((o) => !o.hasAttribute('data-filtered'));
+            const options = screen.getAllByRole('option');
             const describedBy = options[0].getAttribute('aria-describedby');
             expect(describedBy).toBeTruthy();
             const descriptionId = describedBy!.split(' ')[0];

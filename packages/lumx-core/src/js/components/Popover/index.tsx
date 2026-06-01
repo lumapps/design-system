@@ -184,6 +184,7 @@ export const Popover = (props: PopoverUIProps, { Portal, ClickAwayProvider, Them
                         'is-hidden': Boolean(isHidden),
                     }),
                 )}
+                hidden={isHidden || undefined}
                 style={isHidden ? undefined : popoverStyle}
                 data-popper-placement={position}
             >
