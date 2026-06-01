@@ -18,6 +18,10 @@ export const emitSchema = {
     change: (value: string, _name?: string, _event?: Event) => typeof value === 'string',
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     input: (value: string, _name?: string, _event?: Event) => typeof value === 'string',
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    focus: (_event?: FocusEvent) => true,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    blur: (_event?: FocusEvent) => true,
 };
 
 /**
@@ -49,6 +53,14 @@ const RawInputTextarea = defineComponent(
             emit('input', value, name, event);
         };
 
+        const handleFocus = (event?: any) => {
+            emit('focus', event);
+        };
+
+        const handleBlur = (event?: any) => {
+            emit('blur', event);
+        };
+
         return () => {
             return (
                 <RawInputTextareaUI
@@ -61,6 +73,8 @@ const RawInputTextarea = defineComponent(
                     theme={props.theme || defaultTheme.value}
                     handleChange={handleChange}
                     handleInput={handleInput}
+                    handleFocus={handleFocus}
+                    handleBlur={handleBlur}
                 />
             );
         };

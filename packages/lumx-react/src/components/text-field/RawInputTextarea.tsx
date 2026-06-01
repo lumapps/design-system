@@ -41,6 +41,8 @@ export const RawInputTextarea = forwardRef<Omit<RawInputTextareaProps, 'type'>, 
         minimumRows = DEFAULT_PROPS.minimumRows as number,
         value,
         onChange,
+        onFocus,
+        onBlur,
         ...restOfProps
     } = props;
     const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -54,5 +56,7 @@ export const RawInputTextarea = forwardRef<Omit<RawInputTextareaProps, 'type'>, 
         value,
         rows,
         handleChange: onChange,
+        handleFocus: onFocus as any,
+        handleBlur: onBlur as any,
     });
 });

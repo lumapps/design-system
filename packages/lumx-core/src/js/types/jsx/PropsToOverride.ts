@@ -7,6 +7,7 @@ export type PropsToOverride =
     | 'handleKeyPress'
     | 'handleClose'
     | 'handleFocus'
+    | 'handleBlur'
     | 'handleBeforeClick'
     | 'handleAfterClick'
     | 'handleMouseEnter'

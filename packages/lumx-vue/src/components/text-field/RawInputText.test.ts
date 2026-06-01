@@ -39,6 +39,20 @@ describe('<RawInputText />', () => {
             expect(inputEvents).toHaveLength(1);
             expect((inputEvents as any)[0][0]).toBe('a');
         });
+
+        it('should emit focus event when input is focused', async () => {
+            const { emitted } = render(RawInputText, { props: { value: '' } });
+            const input = document.querySelector('input') as HTMLInputElement;
+            await fireEvent.focus(input);
+            expect(emitted('focus')).toHaveLength(1);
+        });
+
+        it('should emit blur event when input is blurred', async () => {
+            const { emitted } = render(RawInputText, { props: { value: '' } });
+            const input = document.querySelector('input') as HTMLInputElement;
+            await fireEvent.blur(input);
+            expect(emitted('blur')).toHaveLength(1);
+        });
     });
 
     commonTestsSuiteVTL(setupRawInputText, {
