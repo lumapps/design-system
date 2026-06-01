@@ -24,7 +24,7 @@ interface BaseSelectTextFieldProps<O = any> extends BaseSelectTextFieldWrapperPr
      * in that section. Returns custom JSX to display as the section header.
      * When not provided, the section id is used as a plain text label.
      */
-    renderSectionTitle?: (sectionId: string, options: O[]) => React.ReactNode;
+    renderSectionTitle?: (sectionId: string | undefined, options: O[]) => React.ReactNode;
     /**
      * Callback fired when the search input text changes.
      * Independent of `filter`: both can be used together (e.g. client-side

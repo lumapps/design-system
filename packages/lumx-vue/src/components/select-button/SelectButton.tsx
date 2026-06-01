@@ -286,7 +286,7 @@ const SelectButton = defineComponent(
             /** Custom option rendering inside a `<SelectButtonOption>`. */
             option: { option: unknown; index: number };
             /** Custom section header rendering. */
-            sectionTitle: { sectionId: string; options: unknown[] };
+            sectionTitle: { sectionId: string | undefined; options: unknown[] };
         }>,
         props: keysOf<SelectButtonProps<unknown>>()(
             'options',

@@ -57,13 +57,13 @@ export interface BaseSelectProps<O> {
      * section id are grouped together. The id is also used as the default displayed
      * label unless `renderSectionTitle` is provided.
      */
-    getSectionId?: Selector<O, string>;
+    getSectionId?: Selector<O, string | undefined>;
     /**
      * Custom section title render function. Receives the section id and the options
      * in that section. Returns custom JSX to display as the section header.
      * When not provided, the section id is used as a plain text label.
      */
-    renderSectionTitle?: (sectionId: string, options: O[]) => JSXElement;
+    renderSectionTitle?: (sectionId: string | undefined, options: O[]) => JSXElement;
 }
 
 export interface BaseSelectComponents {

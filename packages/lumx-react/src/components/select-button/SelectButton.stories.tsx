@@ -56,7 +56,7 @@ export const CustomRender = () => {
             isClickable
             isSelected={!!value}
             after={<Icon icon={mdiMenuDown} />}
-            renderSectionTitle={(sectionId: string, options: Fruit[]) => (
+            renderSectionTitle={(sectionId, options) => (
                 <>
                     <Icon icon={options[0].categoryIcon} size="xs" />
                     {sectionId}

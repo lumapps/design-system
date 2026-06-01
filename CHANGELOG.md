@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+-   `@lumx/react`, `@lumx/vue`:
+    -   `SelectButton`, `SelectTextField`: allow undefined section id in `getSectionId`
+
+### Fixed
+
+-   `@lumx/react`, `@lumx/vue`:
+    -   `SelectButton`, `SelectTextField`: allow undefined section id in `getSectionId`
+
 ## [4.15.0][] - 2026-06-01
 
 ### Added
