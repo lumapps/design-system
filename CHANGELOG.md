@@ -14,6 +14,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+-   `@lumx/react`:
+    -   `SelectButton`: fix `SingleSelectButtonProps` and `MultipleSelectButtonProps` generic type
 -   `@lumx/react`, `@lumx/vue`:
     -   `SelectButton`, `SelectTextField`: allow undefined section id in `getSectionId`
 

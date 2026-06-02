@@ -50,7 +50,7 @@ type SelectButtonSelectProps<O> = Omit<
  * Forwarded trigger props for a given element `E`, minus the keys that the
  * component manages internally.
  */
-type TriggerProps<E extends ElementType> = Omit<NamedProps<React.ComponentPropsWithoutRef<E>>, OmittedKeys>;
+type TriggerProps<E extends ElementType> = Omit<NamedProps<React.ComponentProps<E>>, OmittedKeys>;
 
 /**
  * Common base — Select-specific props plus the ARIA / label / popover layer.
@@ -120,19 +120,16 @@ export type SelectButtonProps<
 
 /**
  * Single-selection props (`selectionType` defaults to `'single'`).
- * Backwards-compatible alias — existing consumers do not need to set `selectionType`.
  */
-export type SingleSelectButtonProps<O, E extends ElementType = typeof DefaultButton> = SelectButtonProps<
-    O,
-    E,
-    'single'
+export type SingleSelectButtonProps<O, E extends ElementType = typeof DefaultButton> = NamedProps<
+    SelectButtonProps<O, E, 'single'>
 >;
 
-/** Multi-selection props (`selectionType: 'multiple'` is required to opt in). */
-export type MultipleSelectButtonProps<O, E extends ElementType = typeof DefaultButton> = SelectButtonProps<
-    O,
-    E,
-    'multiple'
+/**
+ * Multi-selection props (`selectionType: 'multiple'` is required to opt in).
+ */
+export type MultipleSelectButtonProps<O, E extends ElementType = typeof DefaultButton> = NamedProps<
+    SelectButtonProps<O, E, 'multiple'>
 >;
 
 /**
