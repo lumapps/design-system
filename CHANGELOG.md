@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+-   `@lumx/react`, `@lumx/vue`:
+    -   `SelectButton`, `SelectTextField`: allow undefined section id in `getSectionId`
+
+### Fixed
+
+-   `@lumx/react`:
+    -   `SelectButton`: fix `SingleSelectButtonProps` and `MultipleSelectButtonProps` generic type
+    -   `SelectButton`: render menu-down icon with `as=Button` (same as when `as` is empty)
+    -   `SelectButton`: fix update button ref on re-render
+-   `@lumx/react`, `@lumx/vue`:
+    -   `SelectButton`, `SelectTextField`: allow undefined section id in `getSectionId`
+    -   `SelectButton`: `onChange` should provides a value (no `undefined`) and Escape key should not clear selection
+    -   `SelectButton`: Fall back to `getOptionId` for the button label when no `getOptionName` is provided
+
 ## [4.15.0][] - 2026-06-01
 
 ### Added

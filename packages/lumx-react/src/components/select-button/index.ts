@@ -1,7 +1,11 @@
 import { ComboboxOption } from '../combobox/ComboboxOption';
 import { SelectButton as _SelectButton } from './SelectButton';
 
-export type { SelectTextFieldStatus, SelectButtonTranslations } from '@lumx/core/js/utils/select/types';
+export type {
+    SelectListStatus,
+    SelectListStatus as SelectButtonStatus,
+    SelectButtonTranslations,
+} from '@lumx/core/js/utils/select/types';
 export type { SelectButtonProps, SingleSelectButtonProps, MultipleSelectButtonProps } from './SelectButton';
 
 /**

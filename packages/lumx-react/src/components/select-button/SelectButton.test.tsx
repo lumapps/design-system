@@ -58,7 +58,7 @@ describe('<SelectButton>', () => {
             // Option-typed props
             expectTypeOf<Props['options']>().toEqualTypeOf<Fruit[] | undefined>();
             expectTypeOf<Props['value']>().toEqualTypeOf<Fruit | undefined>();
-            expectTypeOf<Props['onChange']>().toEqualTypeOf<((newValue?: Fruit) => void) | undefined>();
+            expectTypeOf<Props['onChange']>().toEqualTypeOf<((newValue: Fruit) => void) | undefined>();
 
             // Selector functions on Fruit
             expectTypeOf<(o: Fruit) => string>().toExtend<Props['getOptionId']>();
@@ -78,7 +78,7 @@ describe('<SelectButton>', () => {
             type Props = MultipleSelectButtonProps<Fruit>;
 
             expectTypeOf<Props['value']>().toEqualTypeOf<Fruit[] | undefined>();
-            expectTypeOf<Props['onChange']>().toEqualTypeOf<((newValue?: Fruit[]) => void) | undefined>();
+            expectTypeOf<Props['onChange']>().toEqualTypeOf<((newValue: Fruit[]) => void) | undefined>();
             // `selectionType` is the inference site for `S` and is therefore
             // optional at the type level. Runtime still requires `'multiple'`
             // to opt into multi-select.
@@ -94,7 +94,7 @@ describe('<SelectButton>', () => {
                 getOptionId: 'id',
                 value: aFruit,
                 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                onChange: (newValue?: Fruit) => undefined,
+                onChange: (newValue: Fruit) => undefined,
             } as const;
             expectTypeOf(singleProps).toExtend<SelectButtonProps<Fruit>>();
 
@@ -105,7 +105,7 @@ describe('<SelectButton>', () => {
                 selectionType: 'multiple' as const,
                 value: [aFruit] as Fruit[],
                 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                onChange: (newValue?: Fruit[]) => undefined,
+                onChange: (newValue: Fruit[]) => undefined,
             };
             // For multi-select, use the dedicated alias (which sets `S='multiple'`).
             expectTypeOf(multiProps).toExtend<MultipleSelectButtonProps<Fruit>>();
@@ -121,9 +121,31 @@ describe('<SelectButton>', () => {
                 size: 'm',
                 value: aFruit,
                 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                onChange: (newValue?: Fruit) => undefined,
+                onChange: (newValue: Fruit) => undefined,
             } as const;
             expectTypeOf(buttonOnlyProps).toExtend<SelectButtonProps<Fruit>>();
+        });
+
+        it('inherits Button props (isDisabled, …) on the default trigger aliases', () => {
+            expectTypeOf<SingleSelectButtonProps<Fruit>['isDisabled']>().toEqualTypeOf<boolean | undefined>();
+            expectTypeOf<MultipleSelectButtonProps<Fruit>['isDisabled']>().toEqualTypeOf<boolean | undefined>();
+
+            // Other LumX Button props must also survive on the default trigger.
+            expectTypeOf<'isDisabled'>().toExtend<keyof SingleSelectButtonProps<Fruit>>();
+            expectTypeOf<'emphasis'>().toExtend<keyof SingleSelectButtonProps<Fruit>>();
+            expectTypeOf<'size'>().toExtend<keyof SingleSelectButtonProps<Fruit>>();
+            expectTypeOf<'leftIcon'>().toExtend<keyof SingleSelectButtonProps<Fruit>>();
+
+            const disabledProps = {
+                label: 'Pick',
+                options: [] as Fruit[],
+                getOptionId: 'id',
+                isDisabled: true,
+                value: aFruit,
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                onChange: (newValue: Fruit) => undefined,
+            } as const;
+            expectTypeOf(disabledProps).toExtend<SelectButtonProps<Fruit>>();
         });
 
         it('exposes IconButton-specific props when as={IconButton}', () => {
@@ -136,7 +158,7 @@ describe('<SelectButton>', () => {
                 icon: 'mdi-apple',
                 value: aFruit,
                 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                onChange: (newValue?: Fruit) => undefined,
+                onChange: (newValue: Fruit) => undefined,
             } as const;
             expectTypeOf(iconProps).toExtend<SelectButtonProps<Fruit, typeof IconButton>>();
         });
@@ -151,7 +173,7 @@ describe('<SelectButton>', () => {
                 size: 's',
                 value: aFruit,
                 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                onChange: (newValue?: Fruit) => undefined,
+                onChange: (newValue: Fruit) => undefined,
             } as const;
             expectTypeOf(chipProps).toExtend<SelectButtonProps<Fruit, typeof Chip>>();
         });
@@ -165,9 +187,17 @@ describe('<SelectButton>', () => {
                 rightIcon: 'mdi-down',
                 value: aFruit,
                 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                onChange: (newValue?: Fruit) => undefined,
+                onChange: (newValue: Fruit) => undefined,
             } as const;
             expectTypeOf(linkProps).toExtend<SelectButtonProps<Fruit, typeof Link>>();
+        });
+
+        it('strips the GenericProps index signature from the public aliases', () => {
+            // The raw props type still carries `GenericProps`'s `[propName: string]: any`.
+            expectTypeOf<string>().toExtend<keyof SelectButtonProps<Fruit>>();
+            // `NamedProps` removes it from the exported aliases.
+            expectTypeOf<string>().not.toExtend<keyof SingleSelectButtonProps<Fruit>>();
+            expectTypeOf<string>().not.toExtend<keyof MultipleSelectButtonProps<Fruit>>();
         });
     });
 

@@ -1,4 +1,4 @@
-import { ElementType, useEffect, useRef } from 'react';
+import { ElementType, useEffect, useRef, useState } from 'react';
 
 import { setupComboboxButton } from '@lumx/core/js/components/Combobox/setupComboboxButton';
 import {
@@ -51,9 +51,9 @@ export const ComboboxButton = Object.assign(
             // If `as` is provided, use it directly; otherwise use the LumX Button (full theme/disabled behavior).
             const ButtonComp = as ?? Button;
 
-            const internalRef = useRef<HTMLButtonElement>(null);
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            const mergedRef = useMergeRefs(ref as any, internalRef, anchorRef as any);
+            // Track the button DOM element via state (instead of useRef) so it re-triggers the useEffect
+            const [buttonElement, setButtonElement] = useState<HTMLButtonElement | null>(null);
+            const mergedRef = useMergeRefs(ref as any, setButtonElement, anchorRef as any);
 
             // Keep onSelect in a ref to avoid re-creating the handle on every render
             const onSelectRef = useRef(onSelect);
@@ -61,9 +61,8 @@ export const ComboboxButton = Object.assign(
 
             // Create the combobox handle with button-mode controller on mount
             useEffect(() => {
-                const button = internalRef.current;
-                if (!button) return undefined;
-                const handle = setupComboboxButton(button, {
+                if (!buttonElement) return undefined;
+                const handle = setupComboboxButton(buttonElement, {
                     onSelect(option) {
                         onSelectRef.current?.(option);
                     },
@@ -73,7 +72,7 @@ export const ComboboxButton = Object.assign(
                     handle.destroy();
                     setHandle(null);
                 };
-            }, [setHandle]);
+            }, [buttonElement, setHandle]);
 
             return UI(
                 {

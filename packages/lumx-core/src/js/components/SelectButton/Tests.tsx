@@ -102,6 +102,15 @@ export default function selectButtonTests({ components, renderWithState }: Selec
             expect(button.textContent).toContain('Banana');
         });
 
+        it('should fall back to getOptionId for display value when getOptionName is not provided', () => {
+            renderWithState(defaultTemplate, {
+                getOptionName: undefined,
+                value: FRUITS[2],
+            });
+            const button = screen.getByRole('combobox');
+            expect(button.textContent).toContain('banana');
+        });
+
         it('should render options in the listbox', () => {
             renderWithState(defaultTemplate);
             const options = screen.getAllByRole('option');

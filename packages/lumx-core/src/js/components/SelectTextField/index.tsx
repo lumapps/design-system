@@ -1,6 +1,6 @@
 import type { JSXElement, LumxClassName } from '../../types';
 import { renderSelectOptions } from '../../utils/select/renderSelectOptions';
-import { BaseSelectComponents, BaseSelectProps, SelectTextFieldStatus } from '../../utils/select/types';
+import { BaseSelectComponents, BaseSelectProps, SelectListStatus } from '../../utils/select/types';
 
 /**
  * Defines the props for the core SelectTextField template.
@@ -32,7 +32,7 @@ export interface SelectTextFieldProps<O = any> extends BaseSelectProps<O> {
      * - `'error'` — Error state: shows an error message in the dropdown.
      * @default 'idle'
      */
-    listStatus?: SelectTextFieldStatus;
+    listStatus?: SelectListStatus;
 
     /** Screen reader loading announcement (e.g. "Loading…"). */
     loadingMessage?: string;

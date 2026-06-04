@@ -5,7 +5,7 @@ import { toggleSelection } from '@lumx/core/js/utils/select/toggleSelection';
 import type { GenericProps, NamedProps } from '@lumx/core/js/types';
 import { SelectButton as UI, type SelectButtonProps as UIProps } from '@lumx/core/js/components/SelectButton';
 import { type ComboboxButtonLabelDisplayMode } from '@lumx/core/js/components/Combobox/ComboboxButton';
-import { type SelectButtonTranslations, type SelectTextFieldStatus } from '@lumx/core/js/utils/select/types';
+import { type SelectButtonTranslations, type SelectListStatus } from '@lumx/core/js/utils/select/types';
 import { ComponentRef } from '@lumx/react/utils/type';
 import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
@@ -50,7 +50,7 @@ type SelectButtonSelectProps<O> = Omit<
  * Forwarded trigger props for a given element `E`, minus the keys that the
  * component manages internally.
  */
-type TriggerProps<E extends ElementType> = Omit<NamedProps<React.ComponentPropsWithoutRef<E>>, OmittedKeys>;
+type TriggerProps<E extends ElementType> = Omit<NamedProps<React.ComponentProps<E>>, OmittedKeys>;
 
 /**
  * Common base — Select-specific props plus the ARIA / label / popover layer.
@@ -70,7 +70,7 @@ type CommonSelectButtonProps<O> = SelectButtonSelectProps<O> &
          * Status of the dropdown list (loading, error, etc.).
          * @default 'idle'
          */
-        listStatus?: SelectTextFieldStatus;
+        listStatus?: SelectListStatus;
         /** Screen-reader translations (loading/empty/error/option count). */
         translations?: SelectButtonTranslations;
     };
@@ -85,8 +85,8 @@ type CommonSelectButtonProps<O> = SelectButtonSelectProps<O> &
  * fully replaced and only props valid for that component apply.
  *
  * Discriminated on `selectionType`:
- * - default / `'single'` → `value?: O`, `onChange?: (newValue?: O) => void`.
- * - `'multiple'`         → `value?: O[]`, `onChange?: (newValue?: O[]) => void`.
+ * - default / `'single'` → `value?: O`, `onChange?: (newValue: O) => void`.
+ * - `'multiple'`         → `value?: O[]`, `onChange?: (newValue: O[]) => void`.
  *
  * `as` and `selectionType` are top-level on this type (rather than buried in
  * an intersection or union member) so that TS can infer `E` from `as` and
@@ -115,24 +115,21 @@ export type SelectButtonProps<
         /** Selected option(s). Shape depends on `selectionType`. */
         value?: S extends 'multiple' ? O[] : O;
         /** Called when the selection changes. Shape depends on `selectionType`. */
-        onChange?: S extends 'multiple' ? (newValue?: O[]) => void : (newValue?: O) => void;
+        onChange?: S extends 'multiple' ? (newValue: O[]) => void : (newValue: O) => void;
     };
 
 /**
  * Single-selection props (`selectionType` defaults to `'single'`).
- * Backwards-compatible alias — existing consumers do not need to set `selectionType`.
  */
-export type SingleSelectButtonProps<O, E extends ElementType = typeof DefaultButton> = SelectButtonProps<
-    O,
-    E,
-    'single'
+export type SingleSelectButtonProps<O, E extends ElementType = typeof DefaultButton> = NamedProps<
+    SelectButtonProps<O, E, 'single'>
 >;
 
-/** Multi-selection props (`selectionType: 'multiple'` is required to opt in). */
-export type MultipleSelectButtonProps<O, E extends ElementType = typeof DefaultButton> = SelectButtonProps<
-    O,
-    E,
-    'multiple'
+/**
+ * Multi-selection props (`selectionType: 'multiple'` is required to opt in).
+ */
+export type MultipleSelectButtonProps<O, E extends ElementType = typeof DefaultButton> = NamedProps<
+    SelectButtonProps<O, E, 'multiple'>
 >;
 
 /**
@@ -194,6 +191,9 @@ export const SelectButton = (React.forwardRef as ForwardRefSelectButton)((props,
         [getOptionId, isMultiple, onChange, options, value],
     );
 
+    // If as is defined and not the Button, render as, else render DefaultButton (with mdiMenuDown right icon)
+    const buttonAs = as && as !== Button ? as : DefaultButton;
+
     return UI(
         {
             options,
@@ -207,8 +207,7 @@ export const SelectButton = (React.forwardRef as ForwardRefSelectButton)((props,
             isMultiselectable: isMultiple,
             label,
             labelDisplayMode,
-            // With no `as`, the default trigger adds the chevron.
-            buttonProps: { ...buttonProps, as: as ?? DefaultButton, ref },
+            buttonProps: { ...buttonProps, as: buttonAs, ref },
             popoverProps,
             listProps: { ref: setListElement },
             handleSelect,

@@ -1,14 +1,14 @@
 import castArray from 'lodash/castArray';
 
 import type { LumxClassName } from '../../types';
-import { getWithSelector } from '../../utils/selectors';
+import { getOptionDisplayName } from '../../utils/select/getOptionDisplayName';
 import { renderSelectOptions } from '../../utils/select/renderSelectOptions';
 import type { ComboboxButtonLabelDisplayMode } from '../Combobox/ComboboxButton';
 import {
     BaseSelectComponents,
     BaseSelectProps,
     SelectButtonTranslations,
-    SelectTextFieldStatus,
+    SelectListStatus,
 } from '../../utils/select/types';
 
 /**
@@ -50,7 +50,7 @@ export interface SelectButtonProps<O> extends BaseSelectProps<O> {
      * - `'error'` — Error state: shows an error message in the dropdown.
      * @default 'idle'
      */
-    listStatus?: SelectTextFieldStatus;
+    listStatus?: SelectListStatus;
     /** Optional translations for screen-reader announcements (loading/empty/error/option count). */
     translations?: SelectButtonTranslations;
     /** Callback fired when the dropdown open state changes. */
@@ -126,7 +126,7 @@ export const SelectButton = <O,>(props: SelectButtonProps<O>, { Combobox, Infini
     const displayValue =
         value != null
             ? castArray(value)
-                  .map((v) => v != null && getWithSelector(getOptionName, v))
+                  .map((v) => getOptionDisplayName(v, getOptionName, getOptionId))
                   .filter(Boolean)
                   .join(', ')
             : '';

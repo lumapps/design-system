@@ -61,7 +61,7 @@ export const CustomRender = () => {
             renderOption={(fruit: Fruit) => (
                 <Combobox.Option value={fruit.id} before={<Icon icon={fruit.icon} size="xs" />} />
             )}
-            renderSectionTitle={(sectionId: string, options: Fruit[]) => (
+            renderSectionTitle={(sectionId, options) => (
                 <>
                     <Icon icon={options[0].categoryIcon} size="xs" />
                     {sectionId}
