@@ -2,6 +2,7 @@ import { Emphasis, Size } from '../../constants';
 import { BaseButtonProps, ButtonRoot } from './ButtonRoot';
 import { Icon } from '../Icon';
 import type { LumxClassName, JSXElement } from '../../types';
+import { classNames } from '../../utils';
 
 export interface IconButtonProps extends BaseButtonProps {
     /**
@@ -57,7 +58,7 @@ export const IconButton = (props: IconButtonProps) => {
         ...forwardedProps
     } = props;
 
-    const defaultChildren = (image ? (
+    const iconNode = (image ? (
         <img
             // no need to set alt as an aria-label is already set on the button
             alt=""
@@ -73,7 +74,12 @@ export const IconButton = (props: IconButtonProps) => {
         ...forwardedProps,
         'aria-label': label,
         variant: 'icon',
-        children: defaultChildren,
+        children: (
+            <>
+                {iconNode}
+                <span className={classNames.visuallyHidden()}>{label}</span>
+            </>
+        ) as unknown as JSXElement,
     });
 };
 

@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `@lumx/react`, `@lumx/vue`:
     -   `SelectButton`, `SelectTextField`: allow undefined section id in `getSectionId`
+    -   `IconButton`: render the label as visually hidden text inside the button (kept `aria-label` for backward compat)
 
 ### Fixed
 
