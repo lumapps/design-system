@@ -1,12 +1,5 @@
 import { type FocusNavigationController } from '../../utils/focusNavigation';
-import {
-    getOptionValue,
-    goToSelectedOrFirst,
-    goToSelectedOrLast,
-    isActionCell,
-    isOptionDisabled,
-    notifySection,
-} from './utils';
+import { getOptionValue, isActionCell, isOptionDisabled, isSelected, notifySection } from './utils';
 import { setupListbox } from './setupListbox';
 import type {
     ComboboxCallbacks,
@@ -191,10 +184,10 @@ export function setupCombobox(
 
             switch (event.key) {
                 case 'Enter':
-                    if (handle.isOpen && nav?.hasActiveItem && nav.activeItem) {
+                    if (handle.isOpen && nav?.selectors.activeItem) {
                         // Capture activeItem before click — the click handler may close
                         // the popover and clear the focus navigation state.
-                        const { activeItem } = nav;
+                        const { activeItem } = nav.selectors;
                         // "Click" on active option
                         if (!isOptionDisabled(activeItem)) {
                             activeItem.click();
@@ -213,41 +206,37 @@ export function setupCombobox(
                     // let Enter pass through so it can submit a surrounding form
                     break;
 
+                // Open if closed, else move focus within listbox (wrap if enabled).
                 case 'ArrowDown':
-                    if (nav?.hasNavigableItems) {
-                        if (handle.isOpen && !altKey) {
-                            if (nav.hasActiveItem) {
-                                if (nav.type === 'grid') {
-                                    nav.goDown();
-                                } else if (!nav.goToOffset(1) && wrapNavigation) {
-                                    nav.goToFirst();
-                                }
-                            } else {
-                                goToSelectedOrFirst(nav);
-                            }
+                    if (!handle.isOpen) {
+                        handle.setIsOpen(true);
+                        // Focus first or selected item on open.
+                        if (!altKey) nav?.goTo((s) => s.getMatching(isSelected) ?? s.getFirst());
+                    } else if (nav?.selectors.hasNavigableItems && !altKey) {
+                        if (nav.selectors.activeItem) {
+                            // Go down
+                            nav.goDown();
                         } else {
-                            // Open the listbox and focus selected option, fall back to first.
-                            handle.setIsOpen(true);
-                            if (!altKey) goToSelectedOrFirst(nav);
+                            // Focus first or selected item when no active item.
+                            nav.goTo((s) => s.getMatching(isSelected) ?? s.getFirst());
                         }
                     }
                     flag = true;
                     break;
 
+                // Open if closed, else move focus within listbox (wrap if enabled).
                 case 'ArrowUp':
-                    if (nav?.hasNavigableItems) {
-                        if (!handle.isOpen && !altKey) {
-                            // Open the listbox and focus selected option, fall back to last.
-                            handle.setIsOpen(true);
-                            goToSelectedOrLast(nav);
-                        } else if (handle.isOpen && nav.hasActiveItem) {
-                            if (nav.type === 'grid') {
-                                nav.goUp();
-                            } else if (!nav.goToOffset(-1) && wrapNavigation) {
-                                nav.goToLast();
-                            }
-                        } else if (handle.isOpen && !nav.hasActiveItem && !altKey) {
-                            goToSelectedOrLast(nav);
+                    if (!handle.isOpen && !altKey) {
+                        handle.setIsOpen(true);
+                        // Focus last or selected item on open.
+                        nav?.goTo((s) => s.getMatching(isSelected) ?? s.getLast());
+                    } else if (handle.isOpen && nav?.selectors.hasNavigableItems) {
+                        if (nav.selectors.activeItem) {
+                            // Go up
+                            nav.goUp();
+                        } else if (!altKey) {
+                            // Focus last or selected item when no active item.
+                            nav.goTo((s) => s.getMatching(isSelected) ?? s.getLast());
                         }
                     }
                     flag = true;
@@ -264,14 +253,14 @@ export function setupCombobox(
                     break;
 
                 case 'PageUp':
-                    if (handle.isOpen && nav?.hasActiveItem) {
+                    if (handle.isOpen && nav?.selectors.activeItem) {
                         nav.goToOffset(-10);
                     }
                     flag = true;
                     break;
 
                 case 'PageDown':
-                    if (handle.isOpen && nav?.hasActiveItem) {
+                    if (handle.isOpen && nav?.selectors.activeItem) {
                         nav.goToOffset(10);
                     }
                     flag = true;
@@ -322,7 +311,7 @@ export function setupCombobox(
         }
 
         if (listbox && !focusNav) {
-            focusNav = setupListbox(handle, abortController.signal, notify);
+            focusNav = setupListbox(handle, abortController.signal, notify, { wrapNavigation });
         }
     }
 
@@ -365,20 +354,15 @@ export function setupCombobox(
             // Update aria-expanded on trigger
             trigger?.setAttribute('aria-expanded', String(isOpen));
             notify('open', isOpen);
-
-            // When opening, always notify the current options state so that
-            // subscribers (ComboboxState) get the correct initial value.
-            // Without this, a list that starts empty never fires `optionsChange`
-            // because `lastOptionsLength` is initialized to `0` and `notifyVisibilityChange`
-            // only fires on *changes*.
-            if (isOpen) {
-                const inputValue = trigger?.value ?? '';
-                notify('optionsChange', { optionsLength: lastOptionsLength, inputValue });
-            }
         },
 
         select(option: HTMLElement | null) {
             callbacks.onSelect?.({ value: option ? getOptionValue(option) : '' });
+        },
+
+        flushPendingNavigation() {
+            // Do navigations actions we could not do because the combobox items were not mounted yet
+            focusNav?.flushPendingNavigation();
         },
 
         registerOption(element: HTMLElement, callback: (isFiltered: boolean) => void): () => void {
@@ -477,7 +461,7 @@ export function setupCombobox(
             if (trigger && abortController) {
                 if (!hadListbox) {
                     // First listbox — set up focus nav and listbox listeners
-                    focusNav = setupListbox(handle, abortController.signal, notify);
+                    focusNav = setupListbox(handle, abortController.signal, notify, { wrapNavigation });
                 } else {
                     // Replacing listbox — full re-attach
                     detach();

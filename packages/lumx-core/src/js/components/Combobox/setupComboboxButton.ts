@@ -2,7 +2,7 @@ import type { ComboboxCallbacks, ComboboxHandle } from './types';
 import { setupCombobox } from './setupCombobox';
 import { createTypeahead } from '../../utils/typeahead';
 import { createSelectorTreeWalker } from '../../utils/browser/createSelectorTreeWalker';
-import { getOptionValue } from './utils';
+import { getOptionLabel } from './utils';
 
 /** Is the key a single printable character (not Space, no modifier keys)? */
 function isPrintableKey({ key, altKey, ctrlKey, metaKey }: KeyboardEvent): boolean {
@@ -33,7 +33,7 @@ export function setupComboboxButton(button: HTMLButtonElement, callbacks: Combob
                 const selector = combobox.focusNav?.type === 'grid' ? '[role="gridcell"]' : '[role="option"]';
                 return createSelectorTreeWalker(combobox.listbox, selector);
             },
-            getOptionValue,
+            getOptionLabel,
             signal,
         );
 
@@ -46,17 +46,17 @@ export function setupComboboxButton(button: HTMLButtonElement, callbacks: Combob
             switch (event.key) {
                 case 'Tab':
                     // Selects the focused option
-                    if (combobox.isOpen && nav?.hasActiveItem && nav.activeItem) {
-                        combobox.select(nav.activeItem);
+                    if (combobox.isOpen && nav?.selectors.activeItem) {
+                        combobox.select(nav.selectors.activeItem);
                     }
                     // Return false to continue normal 'Tab' behavior (focus next).
                     return false;
 
                 case ' ':
                     // Space acts like Enter in button mode.
-                    if (combobox.isOpen && nav?.hasActiveItem && nav.activeItem) {
+                    if (combobox.isOpen && nav?.selectors.activeItem) {
                         // Click the active item — delegated handler handles select + close.
-                        nav.activeItem.click();
+                        nav.selectors.activeItem.click();
                     } else {
                         combobox.setIsOpen(true);
                     }
@@ -64,8 +64,8 @@ export function setupComboboxButton(button: HTMLButtonElement, callbacks: Combob
 
                 case 'ArrowUp':
                     // Alt+ArrowUp: select the focused option and close.
-                    if (event.altKey && combobox.isOpen && nav?.hasActiveItem && nav.activeItem) {
-                        combobox.select(nav.activeItem);
+                    if (event.altKey && combobox.isOpen && nav?.selectors.activeItem) {
+                        combobox.select(nav.selectors.activeItem);
                         combobox.setIsOpen(false);
                         return true;
                     }
@@ -73,18 +73,20 @@ export function setupComboboxButton(button: HTMLButtonElement, callbacks: Combob
                     return false;
 
                 case 'Home':
+                    // `goTo` focuses the first option immediately when open, or defers
+                    // until the options commit when opening from closed.
                     combobox.setIsOpen(true);
-                    nav?.goToFirst();
+                    nav?.goTo((n) => n.getFirst());
                     return true;
 
                 case 'End':
                     combobox.setIsOpen(true);
-                    nav?.goToLast();
+                    nav?.goTo((n) => n.getLast());
                     return true;
 
                 case 'ArrowLeft':
                     // Grid mode: navigate to previous cell.
-                    if (nav?.type === 'grid' && combobox.isOpen && nav.hasActiveItem) {
+                    if (nav?.type === 'grid' && combobox.isOpen && nav.selectors.activeItem) {
                         nav.goLeft();
                         return true;
                     }
@@ -92,7 +94,7 @@ export function setupComboboxButton(button: HTMLButtonElement, callbacks: Combob
 
                 case 'ArrowRight':
                     // Grid mode: navigate to next cell.
-                    if (nav?.type === 'grid' && combobox.isOpen && nav.hasActiveItem) {
+                    if (nav?.type === 'grid' && combobox.isOpen && nav.selectors.activeItem) {
                         nav.goRight();
                         return true;
                     }
@@ -109,10 +111,8 @@ export function setupComboboxButton(button: HTMLButtonElement, callbacks: Combob
                     // Printable characters → typeahead.
                     if (isPrintableKey(event)) {
                         combobox.setIsOpen(true);
-                        const match = typeahead.handle(event.key, nav?.activeItem ?? null);
-                        if (match && nav) {
-                            nav.goToItem(match);
-                        }
+                        typeahead.handle(event.key, nav?.selectors.activeItem ?? null);
+                        nav?.goTo((n) => typeahead.rematch(n.activeItem));
                         return true;
                     }
                     return false;

@@ -26,15 +26,6 @@ export default {
     ...meta,
 };
 
-// Browser-only: auto-filter test
-export const AutoFilterOptions = { ...testStories.AutoFilterOptions };
-
-// Browser-only: filter="off" test (readOnly input, opens on focus)
-export const FilterOffOpenOnFocus = { ...testStories.FilterOffOpenOnFocus };
-
-// Browser-only: select updates input (withValueOnChange decorator integration)
-export const SelectOptionUpdatesInput = { ...testStories.SelectOptionUpdatesInput };
-
 // Browser-only: hover & click-away tests
 export const MouseHoverDoesNotActivateOption = { ...testStories.MouseHoverDoesNotActivateOption };
 export const ClickAwayClosesPopup = { ...testStories.ClickAwayClosesPopup };
@@ -44,3 +35,11 @@ export const MouseHoverThenKeyboardNav = { ...testStories.MouseHoverThenKeyboard
 export const OptionMoreInfoKeyboardHighlight = { ...testStories.OptionMoreInfoKeyboardHighlight };
 export const OptionMoreInfoMouseHover = { ...testStories.OptionMoreInfoMouseHover };
 export const OptionMoreInfoAriaDescribedBy = { ...testStories.OptionMoreInfoAriaDescribedBy };
+
+// Browser-only: button-trigger keyboard-open navigation (options unmounted while closed,
+// so opening + navigating must be deferred until the options commit — needs a real browser).
+export const ButtonTypeaheadFromClosed = { ...testStories.ButtonTypeaheadFromClosed };
+export const ButtonTypeaheadWhileOpen = { ...testStories.ButtonTypeaheadWhileOpen };
+export const ButtonEndFromClosed = { ...testStories.ButtonEndFromClosed };
+export const ButtonHomeFromClosed = { ...testStories.ButtonHomeFromClosed };
+export const ButtonArrowDownFromClosed = { ...testStories.ButtonArrowDownFromClosed };

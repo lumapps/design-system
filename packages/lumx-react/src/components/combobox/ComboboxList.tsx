@@ -11,6 +11,8 @@ import {
 import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 import { useComboboxContext } from './context/ComboboxContext';
 import { ComboboxListContext } from './context/ComboboxListContext';
+import { useComboboxOpen } from './context/useComboboxOpen';
+import { useComboboxEvent } from './context/useComboboxEvent';
 
 /** Props for Combobox.List component. */
 export interface ComboboxListProps extends ReactToJSX<UIProps, 'aria-busy'> {}
@@ -30,27 +32,31 @@ export const ComboboxList = forwardRef<ComboboxListProps, HTMLUListElement>((pro
     const { 'aria-label': ariaLabel, type = 'listbox', className, children, ...forwardedProps } = props;
     const internalRef = useRef<HTMLUListElement>(null);
     const mergedRef = useMergeRefs(ref, internalRef);
-
     const listContextValue = useMemo(() => ({ type }), [type]);
+    const [isOpen] = useComboboxOpen();
+    const options = useComboboxEvent('optionsChange', undefined);
+    const visibleCount = options?.optionsLength ?? 0;
 
-    // Register the list as the listbox when the handle becomes available
+    // Register list as listbox when handle is available.
     useEffect(() => {
         const list = internalRef.current;
         if (!list) return undefined;
         return handle?.registerListbox(list);
     }, [handle]);
 
-    // Track loading state for aria-busy (auto-derived from skeleton registrations).
-    // Uses both the handle's synchronous getter (for initial state) and the loadingChange event
-    // (for subsequent updates), because child useEffects (skeleton registration) run before
-    // parent subscriptions — relying on events alone would miss the initial notification.
+    // Track loading state for aria-busy
     const [isLoading, setIsLoading] = useState(false);
     useEffect(() => {
         if (!handle) return undefined;
-        // Read current state synchronously (catches registrations that happened before subscription)
+        // Read current state synchronously (catches registrations before subscription).
         setIsLoading(handle.isLoading);
         return handle.subscribe('loadingChange', setIsLoading);
     }, [handle]);
+
+    // Flush pending keyboard navigation after options commit on open.
+    useEffect(() => {
+        if (isOpen) handle?.flushPendingNavigation();
+    }, [isOpen, visibleCount, handle]);
 
     return (
         <ComboboxListContext.Provider value={listContextValue}>
@@ -62,7 +68,7 @@ export const ComboboxList = forwardRef<ComboboxListProps, HTMLUListElement>((pro
                 ref: mergedRef,
                 id: listboxId,
                 type,
-                children,
+                children: isOpen ? children : null,
             })}
         </ComboboxListContext.Provider>
     );

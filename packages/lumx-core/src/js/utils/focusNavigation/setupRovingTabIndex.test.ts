@@ -34,7 +34,7 @@ describe('setupRovingTabIndex', () => {
             const container = createTabList(3);
             const ac = new AbortController();
             const nav = setupRovingTabIndex({ container, itemSelector: '[role="tab"]' }, ac.signal);
-            expect(nav.activeItem?.id).toBe('tab-0');
+            expect(nav.selectors.activeItem?.id).toBe('tab-0');
         });
 
         it('should return a focus navigation controller', () => {
@@ -42,8 +42,8 @@ describe('setupRovingTabIndex', () => {
             const ac = new AbortController();
             const nav = setupRovingTabIndex({ container, itemSelector: '[role="tab"]' }, ac.signal);
             expect(nav.type).toBe('list');
-            expect(nav.hasActiveItem).toBe(true);
-            expect(nav.hasNavigableItems).toBe(true);
+            expect(nav.selectors.activeItem).not.toBeNull();
+            expect(nav.selectors.hasNavigableItems).toBe(true);
         });
     });
 
@@ -55,8 +55,8 @@ describe('setupRovingTabIndex', () => {
             const nav = setupRovingTabIndex({ container, itemSelector: '[role="tab"]', onItemFocused }, ac.signal);
 
             // Navigate to the middle item.
-            nav.goToItem(container.querySelector('#tab-1') as HTMLElement);
-            expect(nav.activeItem?.id).toBe('tab-1');
+            nav.goTo(() => container.querySelector('#tab-1') as HTMLElement);
+            expect(nav.selectors.activeItem?.id).toBe('tab-1');
             onItemFocused.mockClear();
 
             // Simulate container having focus by focusing the active item.
@@ -67,7 +67,7 @@ describe('setupRovingTabIndex', () => {
             await flushObservers();
 
             // The next sibling (tab-2) should now be active with tabindex="0" and focused.
-            expect(nav.activeItem?.id).toBe('tab-2');
+            expect(nav.selectors.activeItem?.id).toBe('tab-2');
             expect(container.querySelector('#tab-2')!.getAttribute('tabindex')).toBe('0');
             expect(document.activeElement?.id).toBe('tab-2');
             expect(onItemFocused).toHaveBeenCalledWith(container.querySelector('#tab-2'));
@@ -79,8 +79,8 @@ describe('setupRovingTabIndex', () => {
             const nav = setupRovingTabIndex({ container, itemSelector: '[role="tab"]' }, ac.signal);
 
             // Navigate to the last item.
-            nav.goToItem(container.querySelector('#tab-2') as HTMLElement);
-            expect(nav.activeItem?.id).toBe('tab-2');
+            nav.goTo(() => container.querySelector('#tab-2') as HTMLElement);
+            expect(nav.selectors.activeItem?.id).toBe('tab-2');
 
             // Simulate container having focus.
             (container.querySelector('#tab-2') as HTMLElement).focus();
@@ -90,7 +90,7 @@ describe('setupRovingTabIndex', () => {
             await flushObservers();
 
             // The previous sibling (tab-1) should now be active.
-            expect(nav.activeItem?.id).toBe('tab-1');
+            expect(nav.selectors.activeItem?.id).toBe('tab-1');
             expect(container.querySelector('#tab-1')!.getAttribute('tabindex')).toBe('0');
             expect(document.activeElement?.id).toBe('tab-1');
         });
@@ -102,8 +102,8 @@ describe('setupRovingTabIndex', () => {
             const nav = setupRovingTabIndex({ container, itemSelector: '[role="tab"]', onItemFocused }, ac.signal);
 
             // Navigate to the middle item.
-            nav.goToItem(container.querySelector('#tab-1') as HTMLElement);
-            expect(nav.activeItem?.id).toBe('tab-1');
+            nav.goTo(() => container.querySelector('#tab-1') as HTMLElement);
+            expect(nav.selectors.activeItem?.id).toBe('tab-1');
             onItemFocused.mockClear();
 
             // Focus something outside the container to simulate no focus inside.
@@ -121,8 +121,8 @@ describe('setupRovingTabIndex', () => {
             expect(container.querySelector('#tab-2')!.getAttribute('tabindex')).toBe('0');
             expect(document.activeElement?.id).toBe('external');
             // The fallback item has tabindex="0", so getActiveItem reads it from DOM.
-            expect(nav.hasActiveItem).toBe(true);
-            expect(nav.activeItem?.id).toBe('tab-2');
+            expect(nav.selectors.activeItem).not.toBeNull();
+            expect(nav.selectors.activeItem?.id).toBe('tab-2');
             // onItemFocused should NOT have been called.
             expect(onItemFocused).not.toHaveBeenCalled();
         });
@@ -131,7 +131,7 @@ describe('setupRovingTabIndex', () => {
             const container = createTabList(2);
             const ac = new AbortController();
             const nav = setupRovingTabIndex({ container, itemSelector: '[role="tab"]' }, ac.signal);
-            expect(nav.activeItem?.id).toBe('tab-0');
+            expect(nav.selectors.activeItem?.id).toBe('tab-0');
 
             // Focus the active item.
             (container.querySelector('#tab-0') as HTMLElement).focus();
@@ -142,22 +142,22 @@ describe('setupRovingTabIndex', () => {
             await flushObservers();
 
             // No fallback available — nav should be cleared.
-            expect(nav.hasActiveItem).toBe(false);
-            expect(nav.activeItem).toBeNull();
+            expect(nav.selectors.activeItem).toBeNull();
+            expect(nav.selectors.activeItem).toBeNull();
         });
 
         it('should not react when a non-active item is removed', async () => {
             const container = createTabList(3);
             const ac = new AbortController();
             const nav = setupRovingTabIndex({ container, itemSelector: '[role="tab"]' }, ac.signal);
-            expect(nav.activeItem?.id).toBe('tab-0');
+            expect(nav.selectors.activeItem?.id).toBe('tab-0');
 
             // Remove a non-active item.
             container.querySelector('#tab-2')!.remove();
             await flushObservers();
 
             // Active item should be unchanged.
-            expect(nav.activeItem?.id).toBe('tab-0');
+            expect(nav.selectors.activeItem?.id).toBe('tab-0');
             expect(container.querySelector('#tab-0')!.getAttribute('tabindex')).toBe('0');
         });
 
@@ -175,8 +175,8 @@ describe('setupRovingTabIndex', () => {
             );
 
             // Navigate to tab-1.
-            nav.goToItem(container.querySelector('#tab-1') as HTMLElement);
-            expect(nav.activeItem?.id).toBe('tab-1');
+            nav.goTo(() => container.querySelector('#tab-1') as HTMLElement);
+            expect(nav.selectors.activeItem?.id).toBe('tab-1');
 
             // Mark tab-2 as disabled.
             container.querySelector('#tab-2')!.setAttribute('aria-disabled', 'true');
@@ -189,7 +189,7 @@ describe('setupRovingTabIndex', () => {
             await flushObservers();
 
             // tab-2 is disabled, so fallback should be tab-3.
-            expect(nav.activeItem?.id).toBe('tab-3');
+            expect(nav.selectors.activeItem?.id).toBe('tab-3');
             expect(container.querySelector('#tab-3')!.getAttribute('tabindex')).toBe('0');
         });
 
@@ -197,7 +197,7 @@ describe('setupRovingTabIndex', () => {
             const container = createTabList(3);
             const ac = new AbortController();
             const nav = setupRovingTabIndex({ container, itemSelector: '[role="tab"]' }, ac.signal);
-            expect(nav.activeItem?.id).toBe('tab-0');
+            expect(nav.selectors.activeItem?.id).toBe('tab-0');
 
             // Focus the first (active) item.
             (container.querySelector('#tab-0') as HTMLElement).focus();
@@ -207,7 +207,7 @@ describe('setupRovingTabIndex', () => {
             await flushObservers();
 
             // Next sibling (tab-1) should become active.
-            expect(nav.activeItem?.id).toBe('tab-1');
+            expect(nav.selectors.activeItem?.id).toBe('tab-1');
             expect(container.querySelector('#tab-1')!.getAttribute('tabindex')).toBe('0');
             expect(document.activeElement?.id).toBe('tab-1');
         });
@@ -216,7 +216,7 @@ describe('setupRovingTabIndex', () => {
             const container = createTabList(3);
             const ac = new AbortController();
             const nav = setupRovingTabIndex({ container, itemSelector: '[role="tab"]' }, ac.signal);
-            expect(nav.activeItem?.id).toBe('tab-0');
+            expect(nav.selectors.activeItem?.id).toBe('tab-0');
 
             // Focus the active item.
             (container.querySelector('#tab-0') as HTMLElement).focus();
@@ -244,7 +244,7 @@ describe('setupRovingTabIndex', () => {
             `);
             const ac = new AbortController();
             const nav = setupRovingTabIndex({ container, itemSelector: '[role="tab"]' }, ac.signal);
-            expect(nav.activeItem?.id).toBe('tab-0');
+            expect(nav.selectors.activeItem?.id).toBe('tab-0');
 
             // Focus the active item.
             (container.querySelector('#tab-0') as HTMLElement).focus();
@@ -254,7 +254,7 @@ describe('setupRovingTabIndex', () => {
             await flushObservers();
 
             // The next wrapper's tab should become active.
-            expect(nav.activeItem?.id).toBe('tab-1');
+            expect(nav.selectors.activeItem?.id).toBe('tab-1');
             expect(container.querySelector('#tab-1')!.getAttribute('tabindex')).toBe('0');
             expect(document.activeElement?.id).toBe('tab-1');
         });
@@ -277,8 +277,8 @@ describe('setupRovingTabIndex', () => {
             expect(container.querySelector('#tab-1')!.getAttribute('tabindex')).toBe('0');
             expect(document.activeElement).toBe(document.body);
             // The fallback item has tabindex="0", so getActiveItem reads it from DOM.
-            expect(nav.hasActiveItem).toBe(true);
-            expect(nav.activeItem?.id).toBe('tab-1');
+            expect(nav.selectors.activeItem).not.toBeNull();
+            expect(nav.selectors.activeItem?.id).toBe('tab-1');
             expect(onItemFocused).not.toHaveBeenCalled();
         });
     });
@@ -579,7 +579,7 @@ describe('setupRovingTabIndex', () => {
                 },
                 ac.signal,
             );
-            expect(nav.activeItem?.id).toBe('tab-0');
+            expect(nav.selectors.activeItem?.id).toBe('tab-0');
 
             // Disable the active item (no focus in container).
             container.querySelector('#tab-0')!.setAttribute('aria-disabled', 'true');
@@ -590,8 +590,8 @@ describe('setupRovingTabIndex', () => {
             // A fallback should have tabindex="0".
             expect(container.querySelector('#tab-1')!.getAttribute('tabindex')).toBe('0');
             // The fallback item has tabindex="0", so getActiveItem reads it from DOM.
-            expect(nav.hasActiveItem).toBe(true);
-            expect(nav.activeItem?.id).toBe('tab-1');
+            expect(nav.selectors.activeItem).not.toBeNull();
+            expect(nav.selectors.activeItem?.id).toBe('tab-1');
         });
 
         it('should move focus to fallback when the active item becomes disabled (container has focus)', async () => {
@@ -605,7 +605,7 @@ describe('setupRovingTabIndex', () => {
                 },
                 ac.signal,
             );
-            expect(nav.activeItem?.id).toBe('tab-0');
+            expect(nav.selectors.activeItem?.id).toBe('tab-0');
 
             // Focus the active item.
             (container.querySelector('#tab-0') as HTMLElement).focus();
@@ -617,7 +617,7 @@ describe('setupRovingTabIndex', () => {
             // Active item forced to tabindex="-1".
             expect(container.querySelector('#tab-0')!.getAttribute('tabindex')).toBe('-1');
             // Fallback should be activated and focused.
-            expect(nav.activeItem?.id).toBe('tab-1');
+            expect(nav.selectors.activeItem?.id).toBe('tab-1');
             expect(container.querySelector('#tab-1')!.getAttribute('tabindex')).toBe('0');
             expect(document.activeElement?.id).toBe('tab-1');
         });
@@ -645,7 +645,7 @@ describe('setupRovingTabIndex', () => {
             await flushObservers();
 
             // Nothing should change.
-            expect(nav.activeItem?.id).toBe('tab-0');
+            expect(nav.selectors.activeItem?.id).toBe('tab-0');
             expect(container.querySelector('#tab-0')!.getAttribute('tabindex')).toBe('0');
         });
     });
@@ -668,7 +668,7 @@ describe('setupRovingTabIndex', () => {
                 },
                 ac.signal,
             );
-            expect(nav.activeItem?.id).toBe('tab-0');
+            expect(nav.selectors.activeItem?.id).toBe('tab-0');
 
             // Re-enable tab-1.
             container.querySelector('#tab-1')!.removeAttribute('aria-disabled');
@@ -678,7 +678,7 @@ describe('setupRovingTabIndex', () => {
             expect(container.querySelector('#tab-1')!.getAttribute('tabindex')).toBe('-1');
             // tab-0 should still be the active tab stop.
             expect(container.querySelector('#tab-0')!.getAttribute('tabindex')).toBe('0');
-            expect(nav.activeItem?.id).toBe('tab-0');
+            expect(nav.selectors.activeItem?.id).toBe('tab-0');
         });
     });
 
@@ -696,7 +696,7 @@ describe('setupRovingTabIndex', () => {
                 { container, itemSelector: '[role="option"]', direction: 'vertical' },
                 ac.signal,
             );
-            expect(nav.activeItem?.id).toBe('opt-0');
+            expect(nav.selectors.activeItem?.id).toBe('opt-0');
 
             // Focus the active item.
             (container.querySelector('#opt-0') as HTMLElement).focus();
@@ -704,12 +704,12 @@ describe('setupRovingTabIndex', () => {
             // ArrowDown should navigate to the next item.
             const downEvent = new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true });
             container.querySelector('#opt-0')!.dispatchEvent(downEvent);
-            expect(nav.activeItem?.id).toBe('opt-1');
+            expect(nav.selectors.activeItem?.id).toBe('opt-1');
 
             // ArrowUp should navigate back.
             const upEvent = new KeyboardEvent('keydown', { key: 'ArrowUp', bubbles: true });
             container.querySelector('#opt-1')!.dispatchEvent(upEvent);
-            expect(nav.activeItem?.id).toBe('opt-0');
+            expect(nav.selectors.activeItem?.id).toBe('opt-0');
         });
 
         it('should ignore ArrowLeft/ArrowRight in vertical mode', () => {
@@ -731,12 +731,12 @@ describe('setupRovingTabIndex', () => {
             // ArrowRight should be a no-op.
             const rightEvent = new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true });
             container.querySelector('#opt-0')!.dispatchEvent(rightEvent);
-            expect(nav.activeItem?.id).toBe('opt-0');
+            expect(nav.selectors.activeItem?.id).toBe('opt-0');
 
             // ArrowLeft should be a no-op.
             const leftEvent = new KeyboardEvent('keydown', { key: 'ArrowLeft', bubbles: true });
             container.querySelector('#opt-0')!.dispatchEvent(leftEvent);
-            expect(nav.activeItem?.id).toBe('opt-0');
+            expect(nav.selectors.activeItem?.id).toBe('opt-0');
         });
     });
 
@@ -750,7 +750,7 @@ describe('setupRovingTabIndex', () => {
             );
 
             // Navigate to tab-1.
-            nav.goToItem(container.querySelector('#tab-1') as HTMLElement);
+            nav.goTo(() => container.querySelector('#tab-1') as HTMLElement);
 
             // Focus outside the container.
             const external = document.createElement('button');
@@ -762,8 +762,8 @@ describe('setupRovingTabIndex', () => {
             await flushObservers();
 
             // tab-2 now has tabindex="0" — getActiveItem reads it from DOM.
-            expect(nav.hasActiveItem).toBe(true);
-            expect(nav.activeItem?.id).toBe('tab-2');
+            expect(nav.selectors.activeItem).not.toBeNull();
+            expect(nav.selectors.activeItem?.id).toBe('tab-2');
             expect(container.querySelector('#tab-2')!.getAttribute('tabindex')).toBe('0');
 
             // Simulate Tab-back-in: user focuses tab-2 and presses ArrowRight.
@@ -773,7 +773,7 @@ describe('setupRovingTabIndex', () => {
             tab2.dispatchEvent(keydown);
 
             // Navigation should move from tab-2 to tab-3.
-            expect(nav.activeItem?.id).toBe('tab-3');
+            expect(nav.selectors.activeItem?.id).toBe('tab-3');
         });
     });
 });

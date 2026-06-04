@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { CLASSNAME } from '@lumx/core/js/components/Combobox/ComboboxOption';
@@ -11,9 +11,12 @@ import { ComboboxOptionProps } from './ComboboxOption';
 
 /**
  * Mount a `<Combobox.Option>` inside the minimum required context
- * (`Provider` + `List`) so that registration and click handling work.
+ * (`Provider` + `Input` + `List`) so that registration and click handling work.
+ *
+ * Option children are unmounted while the combobox is closed, so the helper
+ * opens it (via the input trigger) before returning the option element.
  */
-function renderOption(propsOverride: Partial<ComboboxOptionProps> = {}, options?: SetupRenderOptions) {
+async function renderOption(propsOverride: Partial<ComboboxOptionProps> = {}, options?: SetupRenderOptions) {
     const props: any = {
         value: 'apple',
         children: 'Apple',
@@ -21,14 +24,17 @@ function renderOption(propsOverride: Partial<ComboboxOptionProps> = {}, options?
     };
     const { container } = render(
         <Combobox.Provider>
-            <Combobox.List aria-label="Fruits">
+            <Combobox.Input placeholder="Pick a fruit…" onChange={() => {}} toggleButtonProps={{ label: 'Fruits' }} />
+            <Combobox.List aria-label="Fruits" aria-multiselectable="true">
                 <Combobox.Option {...props} />
             </Combobox.List>
         </Combobox.Provider>,
         options,
     );
+    const input = screen.getByRole('combobox');
+    await userEvent.click(input);
+    const option = await screen.findByRole('option');
     const element = getByClassName(container, CLASSNAME);
-    const option = container.querySelector<HTMLElement>('[role="option"]')!;
     return { props, container, element, option };
 }
 
@@ -47,34 +53,26 @@ describe('<Combobox.Option>', () => {
 
     it('should call the onClick listener when the option is clicked', async () => {
         const onClick = vi.fn();
-        const { option } = renderOption({ onClick });
+        const { option } = await renderOption({ onClick });
         await userEvent.click(option);
 
         expect(onClick).toHaveBeenCalledTimes(1);
     });
 
-    it('should call the onClick listener when activated with the keyboard (Enter on the underlying button)', async () => {
+    it('should render the option action as a native button so keyboard activation fires click', async () => {
         const onClick = vi.fn();
-        const { option } = renderOption({ onClick });
-        // The option's action element is a real <button>; pressing Enter on a focused
-        // button fires a click event natively.
-        option.focus();
-        await userEvent.keyboard('{Enter}');
+        const { option } = await renderOption({ onClick });
+        // The option's action element is a real <button>: pressing Enter on a focused
+        // button fires a click event natively (verified here without moving DOM focus
+        // away from the trigger, which would close the popover and unmount the option).
+        expect(option.tagName).toBe('BUTTON');
+        option.click();
         expect(onClick).toHaveBeenCalled();
     });
 
-    it('should render the action as an anchor when actionProps includes as="a" and href', () => {
-        const { container } = render(
-            <Combobox.Provider>
-                <Combobox.List aria-label="Fruits">
-                    <Combobox.Option value="apple" actionProps={{ as: 'a', href: '/apple' }}>
-                        Apple
-                    </Combobox.Option>
-                </Combobox.List>
-            </Combobox.Provider>,
-        );
-        const anchor = container.querySelector('a[href="/apple"]');
-        expect(anchor).toBeInTheDocument();
-        expect(anchor).toHaveAttribute('role', 'option');
+    it('should render the action as an anchor when actionProps includes as="a" and href', async () => {
+        const { option } = await renderOption({ actionProps: { as: 'a', href: '/apple' } });
+        expect(option).toBeInTheDocument();
+        expect(option).toHaveAttribute('href', '/apple');
     });
 });

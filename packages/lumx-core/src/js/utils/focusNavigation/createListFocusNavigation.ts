@@ -1,20 +1,11 @@
+import { createPendingNavigation } from './createPendingNavigation';
+import type {
+    FocusNavigationCallbacks,
+    ListFocusNavigationController,
+    ListFocusNavigationSelectors,
+    ListNavigationOptions,
+} from './types';
 import { createSelectorTreeWalker } from '../browser/createSelectorTreeWalker';
-import type { FocusNavigationCallbacks, ListFocusNavigationController, ListNavigationOptions } from './types';
-
-/**
- * Transition the active item: deactivate the current one (if any) and activate the new one.
- * Reads the current active item via `getActiveItem` so there is no internal state to desync.
- */
-function transition(
-    getActiveItem: () => HTMLElement | null,
-    callbacks: FocusNavigationCallbacks,
-    newItem: HTMLElement,
-): void {
-    const current = getActiveItem();
-    if (current === newItem) return;
-    if (current) callbacks.onDeactivate(current);
-    callbacks.onActivate(newItem);
-}
 
 /**
  * Create a focus navigation controller for a 1D list.
@@ -46,10 +37,7 @@ export function createListFocusNavigation(
     /** Combined CSS selector matching enabled (non-disabled) items. */
     const enabledItemSelector = itemDisabledSelector ? `${itemSelector}:not(${itemDisabledSelector})` : itemSelector;
 
-    /**
-     * Create a TreeWalker over items in the container.
-     * @param enabledOnly When true (default), disabled items are skipped.
-     */
+    /** Create a TreeWalker over items in the container. */
     function createItemWalker(enabledOnly = true): TreeWalker {
         const selector = enabledOnly ? enabledItemSelector : itemSelector;
         return createSelectorTreeWalker(container, selector);
@@ -66,123 +54,84 @@ export function createListFocusNavigation(
         return items.length > 0 ? items[items.length - 1] : null;
     }
 
-    /** Navigate to the first enabled item and activate it. */
-    function goToFirst(): boolean {
-        const first = findFirstEnabled();
-        if (!first) return false;
-        transition(getActiveItem, callbacks, first);
-        return true;
-    }
+    // Deferred navigation intent (replayed once items are committed to the DOM)
+    const pending = createPendingNavigation(signal);
 
-    /** Navigate to the last enabled item and activate it. */
-    function goToLast(): boolean {
-        const last = findLastEnabled();
-        if (!last) return false;
-        transition(getActiveItem, callbacks, last);
-        return true;
-    }
-
-    function navigateByOffset(offset: number): boolean {
-        const active = getActiveItem();
-        if (offset === 0) return active !== null;
-
+    /** Find item at offset (lazily walk nodes) */
+    function findAtOffset(offset: number): HTMLElement | null {
         const forward = offset > 0;
         const stepsNeeded = Math.abs(offset);
+        const active = getActiveItem();
 
-        // No active item — fall back to first/last.
-        if (!active) {
-            const started = forward ? goToFirst() : goToLast();
-            if (!started) return false;
-            if (stepsNeeded === 1) return true;
-            return navigateByOffset(forward ? offset - 1 : offset + 1);
+        const walker = createItemWalker();
+        const step = forward ? () => walker.nextNode() : () => walker.previousNode();
+
+        let target: HTMLElement | null = null;
+        let remaining = stepsNeeded;
+
+        if (active) {
+            // Walk from the active item.
+            walker.currentNode = active;
+        } else if (!forward) {
+            // Walking backward with no active item: position at the last enabled item
+            target = walker.lastChild() as HTMLElement | null;
+            if (!target) return null;
+            remaining -= 1;
         }
 
-        // Walk from the active item using a TreeWalker.
-        const walker = createItemWalker();
-        walker.currentNode = active;
-
-        const step = forward ? () => walker.nextNode() : () => walker.previousNode();
-        let stepsCompleted = 0;
-        let lastFound: HTMLElement | null = null;
-
-        for (let i = 0; i < stepsNeeded; i++) {
+        for (let i = 0; i < remaining; i++) {
             const next = step() as HTMLElement | null;
             if (next) {
-                lastFound = next;
-                stepsCompleted += 1;
-            } else if (wrap) {
-                // Hit boundary — wrap around to the opposite end.
+                target = next;
+            } else if (active && wrap) {
+                // Hit boundary with an active item — wrap around to the opposite end.
                 const wrapped = forward ? findFirstEnabled() : findLastEnabled();
                 if (!wrapped || wrapped === active) break;
-                lastFound = wrapped;
-                stepsCompleted += 1;
+                target = wrapped;
                 walker.currentNode = wrapped;
             } else {
                 break;
             }
         }
-
-        if (stepsCompleted === 0) return false;
-        transition(getActiveItem, callbacks, lastFound!);
-        return true;
+        return target;
     }
 
-    const navigateForward = () => navigateByOffset(1);
-    const navigateBackward = () => navigateByOffset(-1);
+    function findMatching(predicate: (item: HTMLElement) => boolean): HTMLElement | null {
+        const walker = createItemWalker(false);
+        let node = walker.nextNode() as HTMLElement | null;
+        while (node) {
+            if (predicate(node)) return node;
+            node = walker.nextNode() as HTMLElement | null;
+        }
+        return null;
+    }
 
-    /** Clear the active item. */
+    /** Clear the active item and discard any pending navigation intent. */
     function clear(): void {
         const current = getActiveItem();
         if (current) {
             callbacks.onDeactivate(current);
         }
+        pending.clear();
         callbacks.onClear?.();
     }
 
     // Cleanup on abort.
     signal.addEventListener('abort', clear);
 
-    return {
-        type: 'list',
+    const selectors: ListFocusNavigationSelectors = {
         enabledItemSelector,
 
         get activeItem() {
             return getActiveItem();
         },
-        get hasActiveItem() {
-            return getActiveItem() !== null;
-        },
         get hasNavigableItems() {
             return container.querySelector(enabledItemSelector) !== null;
         },
 
-        goToFirst,
-        goToLast,
-
-        goToItem(item: HTMLElement): boolean {
-            if (!item.matches(itemSelector)) return false;
-            if (!container.contains(item)) return false;
-            transition(getActiveItem, callbacks, item);
-            return true;
-        },
-
-        goToOffset(offset: number): boolean {
-            return navigateByOffset(offset);
-        },
-
-        goToItemMatching(predicate: (item: HTMLElement) => boolean): boolean {
-            const walker = createItemWalker(false);
-            let node = walker.nextNode() as HTMLElement | null;
-            while (node) {
-                if (predicate(node)) {
-                    transition(getActiveItem, callbacks, node);
-                    return true;
-                }
-                node = walker.nextNode() as HTMLElement | null;
-            }
-            return false;
-        },
-
+        getFirst: findFirstEnabled,
+        getLast: findLastEnabled,
+        getMatching: findMatching,
         findNearestEnabled(anchor: Node): HTMLElement | null {
             if (!container.contains(anchor)) return findFirstEnabled();
 
@@ -201,23 +150,65 @@ export function createListFocusNavigation(
             walker.currentNode = anchor;
             return walker.previousNode() as HTMLElement | null;
         },
+    };
+
+    /**
+     * Navigate via a resolver. The resolver receives the selectors to find the target.
+     * If the target is valid, focus is committed (deactivate current, activate target).
+     * If the target is not resolvable yet, the intent is deferred for later replay.
+     */
+    function goTo(resolve: (selectors: ListFocusNavigationSelectors) => HTMLElement | null): boolean {
+        const target = resolve(selectors);
+        if (target && target.matches(itemSelector) && container.contains(target)) {
+            const current = getActiveItem();
+            if (current !== target) {
+                if (current) callbacks.onDeactivate(current);
+                callbacks.onActivate(target);
+            }
+            pending.clear();
+            return true;
+        }
+        // Target not resolvable yet (e.g. items not committed to the DOM) — defer
+        pending.defer(() => goTo(resolve));
+        return false;
+    }
+
+    /** Go to the item at the given offset from the active item. */
+    function goToOffset(offset: number): boolean {
+        if (offset === 0) return getActiveItem() !== null;
+        const target = findAtOffset(offset);
+        if (!target) return false;
+        return goTo(() => target);
+    }
+
+    return {
+        type: 'list',
+        selectors,
+
+        goToOffset,
 
         clear,
 
+        goTo,
+
+        flushPendingNavigation(): void {
+            pending.flush();
+        },
+
         goUp(): boolean {
-            return direction === 'vertical' ? navigateBackward() : false;
+            return direction === 'vertical' ? goToOffset(-1) : false;
         },
 
         goDown(): boolean {
-            return direction === 'vertical' ? navigateForward() : false;
+            return direction === 'vertical' ? goToOffset(1) : false;
         },
 
         goLeft(): boolean {
-            return direction === 'horizontal' ? navigateBackward() : false;
+            return direction === 'horizontal' ? goToOffset(-1) : false;
         },
 
         goRight(): boolean {
-            return direction === 'horizontal' ? navigateForward() : false;
+            return direction === 'horizontal' ? goToOffset(1) : false;
         },
     };
 }

@@ -30,8 +30,8 @@ export function setup({
     const meta = {
         component: Combobox.Provider,
         async play() {
-            userEvent.tab();
-            userEvent.keyboard('{ArrowDown}');
+            await userEvent.tab();
+            await userEvent.keyboard('{ArrowDown}');
         },
     };
 

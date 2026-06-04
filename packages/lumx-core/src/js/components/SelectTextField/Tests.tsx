@@ -67,6 +67,19 @@ function getInput(): HTMLInputElement {
     return document.body.querySelector<HTMLInputElement>('[role="combobox"]')!;
 }
 
+/**
+ * Open the dropdown by clicking the combobox input and wait for it to be expanded.
+ * Option / section / skeleton children are unmounted while the dropdown is closed,
+ * so any assertion on their presence must open the dropdown first.
+ */
+async function openByClick(): Promise<void> {
+    const input = getInput();
+    await userEvent.click(input);
+    await waitFor(() => {
+        expect(input.getAttribute('aria-expanded')).toBe('true');
+    });
+}
+
 function getListbox(): HTMLElement | null {
     return document.body.querySelector<HTMLElement>('.lumx-combobox-list[role="listbox"]');
 }
@@ -221,8 +234,9 @@ export default function selectTextFieldTests({ components, renderWithState }: Se
             expect(clearButton).toBeNull();
         });
 
-        it('should render options in the listbox', () => {
+        it('should render options in the listbox', async () => {
             renderWithState(defaultTemplate);
+            await openByClick();
             const options = getAllOptions();
             expect(options).toHaveLength(FRUITS.length);
             expect(options[0].textContent).toBe('Apple');
@@ -230,8 +244,9 @@ export default function selectTextFieldTests({ components, renderWithState }: Se
             expect(options[2].textContent).toBe('Banana');
         });
 
-        it('should render option descriptions when getOptionDescription is provided', () => {
+        it('should render option descriptions when getOptionDescription is provided', async () => {
             renderWithState(defaultTemplate, { getOptionDescription: 'description' });
+            await openByClick();
             const options = getAllOptions();
             const describedBy = options[0].getAttribute('aria-describedby');
             expect(describedBy).toBeTruthy();
@@ -240,8 +255,9 @@ export default function selectTextFieldTests({ components, renderWithState }: Se
             expect(description?.textContent).toBe('A sweet red fruit');
         });
 
-        it('should mark selected option with aria-selected', () => {
+        it('should mark selected option with aria-selected', async () => {
             renderWithState(defaultTemplate, { value: FRUITS[1] }); // Apricot
+            await openByClick();
             const options = getAllOptions();
             expect(options[0].getAttribute('aria-selected')).toBe('false');
             expect(options[1].getAttribute('aria-selected')).toBe('true');
@@ -255,18 +271,20 @@ export default function selectTextFieldTests({ components, renderWithState }: Se
             expect(input.value).toBe('Apple');
         });
 
-        it('should render sections when getSectionId is provided', () => {
+        it('should render sections when getSectionId is provided', async () => {
             renderWithState(defaultTemplate, {
                 getSectionId: 'category',
             });
+            await openByClick();
             const groups = document.body.querySelectorAll('[role="group"]');
             expect(groups.length).toBeGreaterThan(0);
         });
 
-        it('should render beforeOptions content', () => {
+        it('should render beforeOptions content', async () => {
             renderWithState(defaultTemplate, {
                 beforeOptions: <div data-testid="before-content">Before</div>,
             });
+            await openByClick();
             const beforeContent = document.body.querySelector('[data-testid="before-content"]');
             expect(beforeContent).toBeTruthy();
             expect(beforeContent?.textContent).toBe('Before');

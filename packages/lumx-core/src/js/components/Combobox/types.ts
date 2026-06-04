@@ -103,6 +103,14 @@ export interface ComboboxHandle {
     select(option: HTMLElement | null): void;
 
     /**
+     * Replay the pending navigation intent stored on the focus navigation controller via
+     * its `goTo` resolver. Called by the framework wrapper after the option children
+     * commit (keyboard opens from the closed state defer navigation until then). No-op
+     * when nothing is pending.
+     */
+    flushPendingNavigation(): void;
+
+    /**
      * Register an option DOM element for filter notifications.
      * The element's textContent is used as the searchable text.
      * The callback is invoked immediately with the current filter state,

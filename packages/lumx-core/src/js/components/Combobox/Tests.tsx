@@ -1,7 +1,8 @@
 /* eslint-disable no-await-in-loop */
 import userEvent from '@testing-library/user-event';
-import { fireEvent, waitFor } from '@testing-library/dom';
+import { fireEvent, screen, waitFor, within } from '@testing-library/dom';
 import { mdiDelete, mdiPencil } from '@lumx/icons';
+import { queryByClassName, queryAllByClassName } from '../../../testing/queries';
 import { CLASSNAME as COMBOBOX_LIST_CLASSNAME } from './ComboboxList';
 import { CLASSNAME as COMBOBOX_OPTION_CLASSNAME } from './ComboboxOption';
 import { CLASSNAME as COMBOBOX_OPTION_SKELETON_CLASSNAME } from './ComboboxOptionSkeleton';
@@ -64,50 +65,20 @@ export interface ComboboxTestSetup {
 }
 
 // ─── DOM Helpers ─────────────────────────────────────────────────
-// Options are rendered in a portal (document.body), outside the component container.
-// All option/listbox queries target document.body.
 
-function getInput(): HTMLInputElement {
-    return document.body.querySelector<HTMLInputElement>('input[placeholder="Pick a fruit…"]')!;
-}
-
-function getButtonTrigger(): HTMLButtonElement {
-    return document.body.querySelector<HTMLButtonElement>('[data-testid="combobox-button"]')!;
-}
-
-function getToggleButton(): HTMLButtonElement | null {
-    return document.body.querySelector<HTMLButtonElement>('button[aria-controls]');
-}
-
-function getStateContainer(): HTMLElement | null {
-    return document.body.querySelector<HTMLElement>(`.${COMBOBOX_STATE_CLASSNAME}`);
-}
-
-function getActiveOption(): HTMLElement | null {
-    return document.body.querySelector('[role="option"][data-focus-visible-added="true"]');
-}
-
-function getVisibleOptions(): HTMLElement[] {
-    return Array.from(document.body.querySelectorAll<HTMLElement>('[role="option"]:not([data-filtered])'));
-}
-
-function getAllOptions(): HTMLElement[] {
-    return Array.from(document.body.querySelectorAll<HTMLElement>('[role="option"]'));
-}
-
-function getListbox(listboxId: string): HTMLElement | null {
-    return document.getElementById(listboxId);
+export function getActiveOption(): HTMLElement | null {
+    return screen.queryAllByRole('option').find((el) => el.hasAttribute('data-focus-visible-added')) ?? null;
 }
 
 function getActiveCell(): HTMLElement | null {
-    return document.body.querySelector('[role="gridcell"][data-focus-visible-added="true"]');
+    return screen.queryAllByRole('gridcell').find((el) => el.hasAttribute('data-focus-visible-added')) ?? null;
 }
 
 function getVisibleGridOptions(): HTMLElement[] {
-    const rows = Array.from(document.body.querySelectorAll('[role="row"]')) as HTMLElement[];
+    const rows = screen.queryAllByRole('row');
     return rows
-        .map((row) => row.querySelector('[role="gridcell"]') as HTMLElement | null)
-        .filter((cell): cell is HTMLElement => cell !== null && !cell.hasAttribute('data-filtered'));
+        .map((row) => within(row).queryAllByRole('gridcell')[0])
+        .filter((cell): cell is HTMLElement => cell !== undefined);
 }
 
 // ─── Templates ───────────────────────────────────────────────────
@@ -725,7 +696,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
     describe('Input trigger - ARIA attributes', () => {
         it('should have correct textbox ARIA attributes', async () => {
             renderWithState(t.inputTemplate);
-            const input = getInput();
+            const input = screen.getByRole<HTMLInputElement>('combobox');
 
             expect(input).toHaveAttribute('role', 'combobox');
             expect(input).toHaveAttribute('aria-autocomplete', 'list');
@@ -741,15 +712,14 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
             });
 
             await waitFor(() => {
-                const listbox = getListbox(controlsId);
-                expect(listbox).not.toBeNull();
-                expect(listbox).toHaveAttribute('role', 'listbox');
+                const listbox = screen.getByRole('listbox');
+                expect(controlsId).toBe(listbox.id);
             });
         });
 
         it('should have correct listbox ARIA attributes', async () => {
             renderWithState(t.inputTemplate);
-            const input = getInput();
+            const input = screen.getByRole<HTMLInputElement>('combobox');
             await userEvent.click(input);
 
             await waitFor(() => {
@@ -757,26 +727,23 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
             });
 
             // Verify the scroll wrapper is rendered inside the popover
-            const popover = document.body.querySelector(`.${COMBOBOX_POPOVER_CLASSNAME}`);
+            const popover = queryByClassName(document.body, COMBOBOX_POPOVER_CLASSNAME);
             expect(popover).not.toBeNull();
-            const scrollWrapper = popover!.querySelector(`.${COMBOBOX_POPOVER_CLASSNAME}__scroll`);
+            const scrollWrapper = queryByClassName(popover!, `${COMBOBOX_POPOVER_CLASSNAME}__scroll`);
             expect(scrollWrapper).not.toBeNull();
 
-            const listboxId = input.getAttribute('aria-controls')!;
-            const listbox = getListbox(listboxId)!;
+            const listbox = screen.getByRole('listbox');
 
             expect(listbox).toHaveAttribute('role', 'listbox');
             expect(listbox).toHaveAttribute('aria-label', 'Fruits');
             expect(listbox.classList.contains(COMBOBOX_LIST_CLASSNAME)).toBe(true);
 
-            const options = Array.from(listbox.querySelectorAll('[role="option"]'));
+            const options = within(listbox).queryAllByRole('option');
             expect(options.length).toBe(FRUITS.length);
 
             for (const opt of options) {
                 expect(opt.id).toBeTruthy();
-                // Each option trigger should have the combobox option trigger class
                 expect(opt.classList.contains(`${COMBOBOX_OPTION_CLASSNAME}__action`)).toBe(true);
-                // The parent list item should have the combobox option class
                 const listItem = opt.closest(`.${COMBOBOX_OPTION_CLASSNAME}`);
                 expect(listItem).not.toBeNull();
             }
@@ -784,22 +751,22 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
         it('should render option description with correct class', async () => {
             renderWithState(t.descriptionTemplate);
-            const input = getInput();
+            const input = screen.getByRole<HTMLInputElement>('combobox');
             await userEvent.click(input);
 
             await waitFor(() => {
                 expect(input).toHaveAttribute('aria-expanded', 'true');
             });
 
-            const descriptionEl = document.body.querySelector(`.${COMBOBOX_OPTION_CLASSNAME}__description`);
+            const descriptionEl = queryByClassName(document.body, `${COMBOBOX_OPTION_CLASSNAME}__description`);
             expect(descriptionEl).not.toBeNull();
             expect(descriptionEl!.textContent).toBe('A round red fruit');
         });
 
         it('should have toggle button with correct ARIA attributes', async () => {
             renderWithState(t.inputTemplate);
-            const input = getInput();
-            const button = getToggleButton()!;
+            const input = screen.getByRole<HTMLInputElement>('combobox');
+            const button = screen.queryByRole('button', { name: 'Fruits' })!;
             expect(button).not.toBeNull();
 
             expect(button).toHaveAttribute('tabindex', '-1');
@@ -823,7 +790,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
     describe('Input trigger - Keyboard support', () => {
         it('should open and focus first option on ArrowDown', async () => {
             renderWithState(t.inputTemplate);
-            const input = getInput();
+            const input = screen.getByRole<HTMLInputElement>('combobox');
             await userEvent.click(input);
 
             await waitFor(() => {
@@ -844,7 +811,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
         it('should open without moving focus on Alt+ArrowDown', async () => {
             renderWithState(t.inputTemplate);
-            const input = getInput();
+            const input = screen.getByRole<HTMLInputElement>('combobox');
             await userEvent.click(input);
 
             await waitFor(() => {
@@ -859,7 +826,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
         it('should focus last option on ArrowUp', async () => {
             renderWithState(t.inputTemplate);
-            const input = getInput();
+            const input = screen.getByRole<HTMLInputElement>('combobox');
             await userEvent.click(input);
 
             await waitFor(() => {
@@ -880,7 +847,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
         it('should close listbox on Enter', async () => {
             renderWithState(t.inputTemplate);
-            const input = getInput();
+            const input = screen.getByRole<HTMLInputElement>('combobox');
             await userEvent.click(input);
 
             await waitFor(() => {
@@ -895,7 +862,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
         it('should NOT open listbox on Enter when closed (lets form submit)', async () => {
             renderWithState(t.inputTemplate);
-            const input = getInput();
+            const input = screen.getByRole<HTMLInputElement>('combobox');
             // Focus input without clicking (click would open the popup).
             input.focus();
             expect(input).toHaveAttribute('aria-expanded', 'false');
@@ -911,7 +878,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
         it('should close listbox on Enter when open with no active descendant (without preventing default)', async () => {
             renderWithState(t.inputTemplate);
-            const input = getInput();
+            const input = screen.getByRole<HTMLInputElement>('combobox');
             await userEvent.click(input);
 
             await waitFor(() => {
@@ -931,7 +898,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
         it('should close listbox on Escape then clear on second Escape', async () => {
             renderWithState(t.inputTemplate);
-            const input = getInput();
+            const input = screen.getByRole<HTMLInputElement>('combobox');
             await userEvent.click(input);
 
             await waitFor(() => {
@@ -959,7 +926,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
         it('should select on Enter and close', async () => {
             const onSelect = vi.fn();
             renderWithState(t.inputTemplate, { value: '', onSelect });
-            const input = getInput();
+            const input = screen.getByRole<HTMLInputElement>('combobox');
             await userEvent.click(input);
 
             await waitFor(() => {
@@ -984,7 +951,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
         it('should close on Escape and clear active descendant', async () => {
             renderWithState(t.inputTemplate);
-            const input = getInput();
+            const input = screen.getByRole<HTMLInputElement>('combobox');
             await userEvent.click(input);
 
             await waitFor(() => {
@@ -1006,7 +973,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
         it('should cycle options with ArrowDown', async () => {
             renderWithState(t.inputTemplate);
-            const input = getInput();
+            const input = screen.getByRole<HTMLInputElement>('combobox');
             await userEvent.click(input);
 
             await waitFor(() => {
@@ -1032,7 +999,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
         it('should cycle options with ArrowUp', async () => {
             renderWithState(t.inputTemplate);
-            const input = getInput();
+            const input = screen.getByRole<HTMLInputElement>('combobox');
             await userEvent.click(input);
 
             await waitFor(() => {
@@ -1055,7 +1022,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
         it('should return focus to input on ArrowRight', async () => {
             renderWithState(t.inputTemplate);
-            const input = getInput();
+            const input = screen.getByRole<HTMLInputElement>('combobox');
             await userEvent.click(input);
             await userEvent.type(input, 'A');
 
@@ -1075,7 +1042,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
         it('should return focus to input on ArrowLeft', async () => {
             renderWithState(t.inputTemplate);
-            const input = getInput();
+            const input = screen.getByRole<HTMLInputElement>('combobox');
             await userEvent.click(input);
             await userEvent.type(input, 'A');
 
@@ -1095,7 +1062,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
         it('should return focus to input on Home', async () => {
             renderWithState(t.inputTemplate);
-            const input = getInput();
+            const input = screen.getByRole<HTMLInputElement>('combobox');
             await userEvent.click(input);
             await userEvent.type(input, 'App');
 
@@ -1116,7 +1083,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
         it('should return focus to input on End', async () => {
             renderWithState(t.inputTemplate);
-            const input = getInput();
+            const input = screen.getByRole<HTMLInputElement>('combobox');
             await userEvent.click(input);
             await userEvent.type(input, 'App');
 
@@ -1137,7 +1104,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
         it('should return focus to input and filter on typing', async () => {
             renderWithState(t.inputTemplate);
-            const input = getInput();
+            const input = screen.getByRole<HTMLInputElement>('combobox');
             await userEvent.click(input);
 
             await waitFor(() => {
@@ -1154,7 +1121,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
             await waitFor(() => {
                 // Banana, Blueberry, Strawberry (includes match)
-                expect(getVisibleOptions().length).toBe(3);
+                expect(screen.queryAllByRole('option').length).toBe(3);
             });
         });
     });
@@ -1166,7 +1133,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
     describe('Input trigger - DOM focus', () => {
         it('should keep DOM focus on textbox during navigation', async () => {
             renderWithState(t.inputTemplate);
-            const input = getInput();
+            const input = screen.getByRole<HTMLInputElement>('combobox');
             await userEvent.click(input);
 
             await waitFor(() => {
@@ -1190,7 +1157,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
         it('should remove toggle button from tab sequence', () => {
             renderWithState(t.inputTemplate);
-            const button = getToggleButton()!;
+            const button = screen.queryByRole('button', { name: 'Fruits' })!;
             expect(button).toHaveAttribute('tabindex', '-1');
         });
     });
@@ -1203,14 +1170,14 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
         it('should select option on click', async () => {
             const onSelect = vi.fn();
             renderWithState(t.inputTemplate, { value: '', onSelect });
-            const input = getInput();
+            const input = screen.getByRole<HTMLInputElement>('combobox');
             await userEvent.click(input);
 
             await waitFor(() => {
                 expect(input).toHaveAttribute('aria-expanded', 'true');
             });
 
-            const orangeOption = getVisibleOptions().find((o) => o.textContent === 'Orange')!;
+            const orangeOption = screen.queryAllByRole('option').find((o) => o.textContent === 'Orange')!;
             await userEvent.click(orangeOption);
 
             expect(input.value).toBe('Orange');
@@ -1220,7 +1187,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
         it('should filter options by typing', async () => {
             renderWithState(t.inputTemplate);
-            const input = getInput();
+            const input = screen.getByRole<HTMLInputElement>('combobox');
             await userEvent.click(input);
 
             await waitFor(() => {
@@ -1230,14 +1197,14 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
             await userEvent.type(input, 'bl');
 
             await waitFor(() => {
-                expect(getVisibleOptions().length).toBe(1);
-                expect(getVisibleOptions()[0].textContent).toBe('Blueberry');
+                expect(screen.queryAllByRole('option').length).toBe(1);
+                expect(screen.queryAllByRole('option')[0].textContent).toBe('Blueberry');
             });
         });
 
         it('should select after filtering', async () => {
             renderWithState(t.inputTemplate);
-            const input = getInput();
+            const input = screen.getByRole<HTMLInputElement>('combobox');
             await userEvent.click(input);
 
             await waitFor(() => {
@@ -1247,7 +1214,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
             await userEvent.type(input, 'lem');
 
             await waitFor(() => {
-                expect(getVisibleOptions().length).toBe(1);
+                expect(screen.queryAllByRole('option').length).toBe(1);
             });
 
             await userEvent.keyboard('{ArrowDown}');
@@ -1264,8 +1231,8 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
         it('should open and focus input on toggle button click', async () => {
             renderWithState(t.inputTemplate);
-            const input = getInput();
-            const button = getToggleButton()!;
+            const input = screen.getByRole<HTMLInputElement>('combobox');
+            const button = screen.queryByRole('button', { name: 'Fruits' })!;
 
             expect(input).toHaveAttribute('aria-expanded', 'false');
 
@@ -1290,14 +1257,14 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
         it('should select option on click and fire onSelect', async () => {
             const onSelect = vi.fn();
             renderWithState(t.inputTemplate, { value: '', onSelect });
-            const input = getInput();
+            const input = screen.getByRole<HTMLInputElement>('combobox');
             await userEvent.click(input);
 
             await waitFor(() => {
                 expect(input).toHaveAttribute('aria-expanded', 'true');
             });
 
-            const grapeOption = getVisibleOptions().find((o) => o.textContent === 'Grape')!;
+            const grapeOption = screen.queryAllByRole('option').find((o) => o.textContent === 'Grape')!;
             await userEvent.click(grapeOption);
 
             expect(input.value).toBe('Grape');
@@ -1308,14 +1275,14 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
         it('should keep focus on input after clicking option', async () => {
             renderWithState(t.inputTemplate);
-            const input = getInput();
+            const input = screen.getByRole<HTMLInputElement>('combobox');
             await userEvent.click(input);
 
             await waitFor(() => {
                 expect(input).toHaveAttribute('aria-expanded', 'true');
             });
 
-            const orangeOption = getVisibleOptions().find((o) => o.textContent === 'Orange')!;
+            const orangeOption = screen.queryAllByRole('option').find((o) => o.textContent === 'Orange')!;
             await userEvent.click(orangeOption);
 
             expect(document.activeElement).toBe(input);
@@ -1323,7 +1290,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
         it('should reopen listbox when typing after Escape', async () => {
             renderWithState(t.inputTemplate);
-            const input = getInput();
+            const input = screen.getByRole<HTMLInputElement>('combobox');
             await userEvent.click(input);
 
             await waitFor(() => {
@@ -1333,7 +1300,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
             await userEvent.type(input, 'ap');
             await waitFor(() => {
                 // Apple, Apricot, Grape (includes match)
-                expect(getVisibleOptions().length).toBe(3);
+                expect(screen.queryAllByRole('option').length).toBe(3);
             });
 
             await userEvent.keyboard('{Escape}');
@@ -1346,9 +1313,55 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
             await waitFor(() => {
                 expect(input).toHaveAttribute('aria-expanded', 'true');
                 expect(input.value).toBe('app');
-                expect(getVisibleOptions().length).toBe(1);
-                expect(getVisibleOptions()[0].textContent).toBe('Apple');
+                expect(screen.queryAllByRole('option').length).toBe(1);
+                expect(screen.queryAllByRole('option')[0].textContent).toBe('Apple');
             });
+        });
+    });
+
+    // ───────────────────────────────────────────────────────────────
+    // Children unmounted while closed
+    // ───────────────────────────────────────────────────────────────
+    //
+    // NOTE: keyboard-open *navigation* (ArrowDown/Up/Home/End/typeahead landing on
+    // an option when opening from closed) is deferred until the option children
+    // commit. That timing only reproduces reliably in a real browser, so those
+    // assertions live in the browser test stories (TestStories.tsx), not here.
+
+    describe('Children unmounted while closed', () => {
+        it('should not render option children while closed', () => {
+            renderWithState(t.inputTemplate);
+            const input = screen.getByRole<HTMLInputElement>('combobox');
+            expect(input).toHaveAttribute('aria-expanded', 'false');
+            // Children are gated on isOpen — nothing mounted while closed.
+            expect(screen.queryAllByRole('option').length).toBe(0);
+        });
+
+        it('should render option children once opened', async () => {
+            renderWithState(t.inputTemplate);
+            await userEvent.click(screen.getByRole('combobox'));
+            await waitFor(() => {
+                expect(screen.queryAllByRole('option').length).toBe(FRUITS.length);
+            });
+        });
+
+        it('should not navigate after quickly closing then reopening (intent cleared)', async () => {
+            renderWithState(t.inputTemplate);
+            const input = screen.getByRole<HTMLInputElement>('combobox');
+            input.focus();
+
+            // Open with ArrowDown (stores a navigation intent)…
+            await userEvent.keyboard('{ArrowDown}');
+            // …then immediately close before/at the same tick (Escape clears the intent).
+            await userEvent.keyboard('{Escape}');
+            await waitFor(() => {
+                expect(input).toHaveAttribute('aria-expanded', 'false');
+            });
+
+            // Reopen via click — no stored intent, so no option should be virtually focused.
+            await userEvent.click(screen.getByRole('combobox'));
+            expect(getActiveOption()).toBeNull();
+            expect(input).toHaveAttribute('aria-activedescendant', '');
         });
     });
 
@@ -1359,7 +1372,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
     describe('Button trigger - ARIA attributes', () => {
         it('should have correct button ARIA attributes', async () => {
             renderWithState(t.buttonTemplate, { value: '' }, BUTTON_STATE);
-            const button = getButtonTrigger();
+            const button = screen.getByTestId('combobox-button');
 
             expect(button).toHaveAttribute('role', 'combobox');
             expect(button).toHaveAttribute('aria-haspopup', 'listbox');
@@ -1372,10 +1385,10 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
                 expect(button).toHaveAttribute('aria-expanded', 'true');
             });
 
-            const listbox = document.body.querySelector('[role="listbox"]')!;
+            const listbox = screen.getByRole('listbox');
             expect(listbox).toHaveAttribute('role', 'listbox');
 
-            const options = getAllOptions();
+            const options = screen.queryAllByRole('option');
             for (const opt of options) {
                 expect(opt.id).toBeTruthy();
             }
@@ -1385,7 +1398,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
     describe('Button trigger - Open/close', () => {
         it('should open on Enter', async () => {
             renderWithState(t.buttonTemplate, { value: '' }, BUTTON_STATE);
-            const button = getButtonTrigger();
+            const button = screen.getByTestId('combobox-button');
             button.focus();
 
             await waitFor(() => {
@@ -1401,7 +1414,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
         it('should open on Space', async () => {
             renderWithState(t.buttonTemplate, { value: '' }, BUTTON_STATE);
-            const button = getButtonTrigger();
+            const button = screen.getByTestId('combobox-button');
             button.focus();
 
             await waitFor(() => {
@@ -1416,7 +1429,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
         it('should close on Escape without selecting', async () => {
             renderWithState(t.buttonTemplate, { value: '' }, BUTTON_STATE);
-            const button = getButtonTrigger();
+            const button = screen.getByTestId('combobox-button');
             button.focus();
 
             await userEvent.keyboard('{End}');
@@ -1435,7 +1448,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
         it('should toggle on click', async () => {
             renderWithState(t.buttonTemplate, { value: '' }, BUTTON_STATE);
-            const button = getButtonTrigger();
+            const button = screen.getByTestId('combobox-button');
 
             await userEvent.click(button);
             await waitFor(() => {
@@ -1452,18 +1465,18 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
     describe('Button trigger - Navigation', () => {
         it('should navigate with ArrowDown', async () => {
             renderWithState(t.buttonTemplate, { value: '' }, BUTTON_STATE);
-            const button = getButtonTrigger();
+            const button = screen.getByTestId('combobox-button');
             button.focus();
 
             await userEvent.keyboard('{ArrowDown}');
-            const firstOption = getAllOptions()[0]!;
+            const firstOption = screen.queryAllByRole('option')[0]!;
             await waitFor(() => {
                 expect(button).toHaveAttribute('aria-expanded', 'true');
                 expect(button).toHaveAttribute('aria-activedescendant', firstOption.id);
             });
 
             await userEvent.keyboard('{ArrowDown}');
-            const options = getAllOptions();
+            const options = screen.queryAllByRole('option');
             await waitFor(() => {
                 expect(button).toHaveAttribute('aria-activedescendant', options[1].id);
             });
@@ -1471,17 +1484,17 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
         it('should not wrap on ArrowDown at last option', async () => {
             renderWithState(t.buttonTemplate, { value: '' }, BUTTON_STATE);
-            const button = getButtonTrigger();
+            const button = screen.getByTestId('combobox-button');
             button.focus();
 
             await userEvent.keyboard('{Enter}');
             await waitFor(() => {
                 expect(button).toHaveAttribute('aria-expanded', 'true');
-                expect(getAllOptions().length).toBeGreaterThan(0);
+                expect(screen.queryAllByRole('option').length).toBeGreaterThan(0);
             });
 
             await userEvent.keyboard('{End}');
-            const options = getAllOptions();
+            const options = screen.queryAllByRole('option');
             const lastOption = options[options.length - 1];
             await waitFor(() => {
                 expect(button).toHaveAttribute('aria-activedescendant', lastOption.id);
@@ -1495,17 +1508,17 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
         it('should not wrap on ArrowUp at first option', async () => {
             renderWithState(t.buttonTemplate, { value: '' }, BUTTON_STATE);
-            const button = getButtonTrigger();
+            const button = screen.getByTestId('combobox-button');
             button.focus();
 
             await userEvent.keyboard('{Enter}');
             await waitFor(() => {
                 expect(button).toHaveAttribute('aria-expanded', 'true');
-                expect(getAllOptions().length).toBeGreaterThan(0);
+                expect(screen.queryAllByRole('option').length).toBeGreaterThan(0);
             });
 
             await userEvent.keyboard('{ArrowDown}');
-            const firstOption = getAllOptions()[0]!;
+            const firstOption = screen.queryAllByRole('option')[0]!;
             await waitFor(() => {
                 expect(button).toHaveAttribute('aria-activedescendant', firstOption.id);
             });
@@ -1518,16 +1531,16 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
         it('should navigate with Home and End', async () => {
             renderWithState(t.buttonTemplate, { value: '' }, BUTTON_STATE);
-            const button = getButtonTrigger();
+            const button = screen.getByTestId('combobox-button');
             button.focus();
 
             await userEvent.keyboard('{Enter}');
             await waitFor(() => {
                 expect(button).toHaveAttribute('aria-expanded', 'true');
-                expect(getAllOptions().length).toBeGreaterThan(0);
+                expect(screen.queryAllByRole('option').length).toBeGreaterThan(0);
             });
 
-            const options = getAllOptions();
+            const options = screen.queryAllByRole('option');
             const first = options[0];
             const last = options[options.length - 1];
 
@@ -1542,18 +1555,21 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
             });
         });
 
+        // NOTE: Home/End *from closed* (open + jump in one key press) is deferred until
+        // the option children commit and is covered by the browser test stories.
+
         it('should jump to last option on PageDown', async () => {
             renderWithState(t.buttonTemplate, { value: '' }, BUTTON_STATE);
-            const button = getButtonTrigger();
+            const button = screen.getByTestId('combobox-button');
             button.focus();
 
             await userEvent.keyboard('{Enter}');
             await waitFor(() => {
                 expect(button).toHaveAttribute('aria-expanded', 'true');
-                expect(getAllOptions().length).toBeGreaterThan(0);
+                expect(screen.queryAllByRole('option').length).toBeGreaterThan(0);
             });
 
-            const options = getAllOptions();
+            const options = screen.queryAllByRole('option');
             await userEvent.keyboard('{Home}');
             await waitFor(() => {
                 expect(button).toHaveAttribute('aria-activedescendant', options[0].id);
@@ -1567,16 +1583,16 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
         it('should jump to first option on PageUp', async () => {
             renderWithState(t.buttonTemplate, { value: '' }, BUTTON_STATE);
-            const button = getButtonTrigger();
+            const button = screen.getByTestId('combobox-button');
             button.focus();
 
             await userEvent.keyboard('{Enter}');
             await waitFor(() => {
                 expect(button).toHaveAttribute('aria-expanded', 'true');
-                expect(getAllOptions().length).toBeGreaterThan(0);
+                expect(screen.queryAllByRole('option').length).toBeGreaterThan(0);
             });
 
-            const options = getAllOptions();
+            const options = screen.queryAllByRole('option');
             await userEvent.keyboard('{End}');
             await waitFor(() => {
                 expect(button).toHaveAttribute('aria-activedescendant', options[options.length - 1].id);
@@ -1590,7 +1606,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
         it('should toggle data-focus-visible-added on navigation', async () => {
             renderWithState(t.buttonTemplate, { value: '' }, BUTTON_STATE);
-            const button = getButtonTrigger();
+            const button = screen.getByTestId('combobox-button');
             button.focus();
 
             await userEvent.keyboard('{ArrowDown}');
@@ -1613,14 +1629,14 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
         it('should select on Enter', async () => {
             const onSelect = vi.fn();
             renderWithState(t.buttonTemplate, { value: '', onSelect }, BUTTON_STATE);
-            const button = getButtonTrigger();
+            const button = screen.getByTestId('combobox-button');
             button.focus();
 
             await userEvent.keyboard('{ArrowDown}');
             await userEvent.keyboard('{ArrowDown}');
             await userEvent.keyboard('{ArrowDown}');
 
-            const options = getAllOptions();
+            const options = screen.queryAllByRole('option');
             await waitFor(() => {
                 expect(button).toHaveAttribute('aria-activedescendant', options[2].id);
             });
@@ -1636,16 +1652,16 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
         it('should select on Space', async () => {
             renderWithState(t.buttonTemplate, { value: '' }, BUTTON_STATE);
-            const button = getButtonTrigger();
+            const button = screen.getByTestId('combobox-button');
             button.focus();
 
             await userEvent.keyboard('{Enter}');
             await waitFor(() => {
                 expect(button).toHaveAttribute('aria-expanded', 'true');
-                expect(getAllOptions().length).toBeGreaterThan(0);
+                expect(screen.queryAllByRole('option').length).toBeGreaterThan(0);
             });
 
-            const options = getAllOptions();
+            const options = screen.queryAllByRole('option');
             const last = options[options.length - 1];
             await userEvent.keyboard('{End}');
             await waitFor(() => {
@@ -1661,7 +1677,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
         it('should select on Tab', async () => {
             renderWithState(t.buttonTemplate, { value: '' }, BUTTON_STATE);
-            const button = getButtonTrigger();
+            const button = screen.getByTestId('combobox-button');
             button.focus();
 
             await userEvent.keyboard('{ArrowDown}');
@@ -1669,7 +1685,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
                 await userEvent.keyboard('{ArrowDown}');
             }
 
-            const options = getAllOptions();
+            const options = screen.queryAllByRole('option');
             await waitFor(() => {
                 expect(button).toHaveAttribute('aria-activedescendant', options[4].id);
             });
@@ -1683,14 +1699,14 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
         it('should select option on click', async () => {
             const onSelect = vi.fn();
             renderWithState(t.buttonTemplate, { value: '', onSelect }, BUTTON_STATE);
-            const button = getButtonTrigger();
+            const button = screen.getByTestId('combobox-button');
 
             await userEvent.click(button);
             await waitFor(() => {
                 expect(button).toHaveAttribute('aria-expanded', 'true');
             });
 
-            const options = getAllOptions();
+            const options = screen.queryAllByRole('option');
             const grape = options.find((o) => o.textContent === 'Grape')!;
             await userEvent.click(grape);
             await waitFor(() => {
@@ -1703,13 +1719,20 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
         it('should select on Alt+ArrowUp', async () => {
             renderWithState(t.buttonTemplate, { value: '' }, BUTTON_STATE);
-            const button = getButtonTrigger();
+            const button = screen.getByTestId('combobox-button');
             button.focus();
 
-            await userEvent.keyboard('{ArrowDown}');
+            // Open first so the typeahead below runs against committed options (the
+            // open-from-closed deferral is covered by the browser test stories).
+            await userEvent.keyboard('{Enter}');
+            await waitFor(() => {
+                expect(button).toHaveAttribute('aria-expanded', 'true');
+                expect(screen.queryAllByRole('option').length).toBeGreaterThan(0);
+            });
+
             await userEvent.keyboard('o');
 
-            const options = getAllOptions();
+            const options = screen.queryAllByRole('option');
             const orange = options.find((o) => o.textContent === 'Orange')!;
             await waitFor(() => {
                 expect(button).toHaveAttribute('aria-activedescendant', orange.id);
@@ -1724,18 +1747,22 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
     });
 
     describe('Button trigger - Typeahead', () => {
+        // NOTE: typeahead *from closed* (open + jump to match in one key press) is
+        // deferred until the option children commit and is covered by the browser
+        // test stories (TestStories.tsx). The tests below open first, then typeahead.
+
         it('should navigate to matching option on single char', async () => {
             renderWithState(t.buttonTemplate, { value: '' }, BUTTON_STATE);
-            const button = getButtonTrigger();
+            const button = screen.getByTestId('combobox-button');
             button.focus();
 
             await userEvent.keyboard('{Enter}');
             await waitFor(() => {
                 expect(button).toHaveAttribute('aria-expanded', 'true');
-                expect(getAllOptions().length).toBeGreaterThan(0);
+                expect(screen.queryAllByRole('option').length).toBeGreaterThan(0);
             });
 
-            const options = getAllOptions();
+            const options = screen.queryAllByRole('option');
             const banana = options.find((o) => o.textContent === 'Banana')!;
             await userEvent.keyboard('b');
             await waitFor(() => {
@@ -1745,11 +1772,19 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
         it('should navigate to matching option on multi char', async () => {
             renderWithState(t.buttonTemplate, { value: '' }, BUTTON_STATE);
-            const button = getButtonTrigger();
+            const button = screen.getByTestId('combobox-button');
             button.focus();
 
+            // Open first so this jsdom test exercises multi-char matching only, not the
+            // deferred open-from-closed path (covered by the browser test stories).
+            await userEvent.keyboard('{Enter}');
+            await waitFor(() => {
+                expect(button).toHaveAttribute('aria-expanded', 'true');
+                expect(screen.queryAllByRole('option').length).toBeGreaterThan(0);
+            });
+
             await userEvent.keyboard('bl');
-            const options = getAllOptions();
+            const options = screen.queryAllByRole('option');
             const blueberry = options.find((o) => o.textContent === 'Blueberry')!;
             await waitFor(() => {
                 expect(button).toHaveAttribute('aria-activedescendant', blueberry.id);
@@ -1758,16 +1793,16 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
         it('should cycle through matches on repeated single char', async () => {
             renderWithState(t.buttonTemplate, { value: '' }, BUTTON_STATE);
-            const button = getButtonTrigger();
+            const button = screen.getByTestId('combobox-button');
             button.focus();
 
             await userEvent.keyboard('{Enter}');
             await waitFor(() => {
                 expect(button).toHaveAttribute('aria-expanded', 'true');
-                expect(getAllOptions().length).toBeGreaterThan(0);
+                expect(screen.queryAllByRole('option').length).toBeGreaterThan(0);
             });
 
-            const options = getAllOptions();
+            const options = screen.queryAllByRole('option');
             const apple = options.find((o) => o.textContent === 'Apple')!;
             const apricot = options.find((o) => o.textContent === 'Apricot')!;
 
@@ -1786,7 +1821,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
     describe('Button trigger - Label display', () => {
         it('should display selected value', async () => {
             renderWithState(t.buttonTemplate, { value: 'Apple' }, BUTTON_STATE);
-            const button = getButtonTrigger();
+            const button = screen.getByTestId('combobox-button');
 
             expect(button.textContent).toBe('Apple');
 
@@ -1795,7 +1830,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
                 expect(button).toHaveAttribute('aria-expanded', 'true');
             });
 
-            const options = getAllOptions();
+            const options = screen.queryAllByRole('option');
             const banana = options.find((o) => o.textContent === 'Banana')!;
             await userEvent.click(banana);
 
@@ -1806,7 +1841,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
         it('should always show label when labelDisplayMode="show-label"', async () => {
             renderWithState(t.showLabelButtonTemplate, { value: 'Apple' }, BUTTON_STATE);
-            const button = getButtonTrigger();
+            const button = screen.getByTestId('combobox-button');
 
             expect(button.textContent).toBe('Select a fruit');
 
@@ -1815,7 +1850,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
                 expect(button).toHaveAttribute('aria-expanded', 'true');
             });
 
-            const options = getAllOptions();
+            const options = screen.queryAllByRole('option');
             const banana = options.find((o) => o.textContent === 'Banana')!;
             await userEvent.click(banana);
 
@@ -1827,7 +1862,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
         it('should show empty text when labelDisplayMode="show-tooltip"', () => {
             renderWithState(t.showTooltipButtonTemplate, { value: 'Apple' }, BUTTON_STATE);
-            const button = getButtonTrigger();
+            const button = screen.getByTestId('combobox-button');
 
             expect(button.textContent).toBe('');
             expect(button).toHaveAttribute('role', 'combobox');
@@ -1842,27 +1877,27 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
     describe('filter="manual"', () => {
         it('should not auto-filter options when typing', async () => {
             renderWithState(t.manualFilterTemplate);
-            const input = getInput();
+            const input = screen.getByRole<HTMLInputElement>('combobox');
             await userEvent.click(input);
 
             await waitFor(() => {
                 expect(input).toHaveAttribute('aria-expanded', 'true');
             });
 
-            expect(getVisibleOptions().length).toBe(FRUITS.length);
+            expect(screen.queryAllByRole('option').length).toBe(FRUITS.length);
 
             await userEvent.type(input, 'bl');
 
             // All options should remain visible — no auto-filter
             await waitFor(() => {
-                expect(getVisibleOptions().length).toBe(FRUITS.length);
+                expect(screen.queryAllByRole('option').length).toBe(FRUITS.length);
             });
         });
 
         it('should still allow selecting options', async () => {
             const onSelect = vi.fn();
             renderWithState(t.manualFilterTemplate, { value: '', onSelect });
-            const input = getInput();
+            const input = screen.getByRole<HTMLInputElement>('combobox');
             await userEvent.click(input);
 
             await waitFor(() => {
@@ -1884,7 +1919,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
         it('should not have readOnly on the input', async () => {
             renderWithState(t.manualFilterTemplate);
-            const input = getInput();
+            const input = screen.getByRole<HTMLInputElement>('combobox');
             expect(input.readOnly).toBe(false);
         });
     });
@@ -1892,7 +1927,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
     describe('filter="off"', () => {
         it('should set input to readOnly', async () => {
             renderWithState(t.filterOffTemplate);
-            const input = getInput();
+            const input = screen.getByRole<HTMLInputElement>('combobox');
 
             await waitFor(() => {
                 expect(input.readOnly).toBe(true);
@@ -1901,7 +1936,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
         it('should open on focus (openOnFocus defaults to true)', async () => {
             renderWithState(t.filterOffTemplate);
-            const input = getInput();
+            const input = screen.getByRole<HTMLInputElement>('combobox');
 
             expect(input).toHaveAttribute('aria-expanded', 'false');
 
@@ -1915,7 +1950,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
         it('should still allow selecting options', async () => {
             const onSelect = vi.fn();
             renderWithState(t.filterOffTemplate, { value: '', onSelect });
-            const input = getInput();
+            const input = screen.getByRole<HTMLInputElement>('combobox');
             await userEvent.click(input);
 
             await waitFor(() => {
@@ -1937,21 +1972,21 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
         it('should show all options (no filtering)', async () => {
             renderWithState(t.filterOffTemplate);
-            const input = getInput();
+            const input = screen.getByRole<HTMLInputElement>('combobox');
             await userEvent.click(input);
 
             await waitFor(() => {
                 expect(input).toHaveAttribute('aria-expanded', 'true');
             });
 
-            expect(getVisibleOptions().length).toBe(FRUITS.length);
+            expect(screen.queryAllByRole('option').length).toBe(FRUITS.length);
         });
     });
 
     describe('openOnFocus', () => {
         it('should open on focus when openOnFocus is true', async () => {
             renderWithState(t.openOnFocusTemplate);
-            const input = getInput();
+            const input = screen.getByRole<HTMLInputElement>('combobox');
 
             expect(input).toHaveAttribute('aria-expanded', 'false');
 
@@ -1964,7 +1999,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
         it('should not open on focus when openOnFocus is false', async () => {
             renderWithState(t.noOpenOnFocusTemplate);
-            const input = getInput();
+            const input = screen.getByRole<HTMLInputElement>('combobox');
 
             expect(input).toHaveAttribute('aria-expanded', 'false');
 
@@ -1976,7 +2011,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
         it('should open on click even when openOnFocus is false', async () => {
             renderWithState(t.noOpenOnFocusTemplate);
-            const input = getInput();
+            const input = screen.getByRole<HTMLInputElement>('combobox');
 
             expect(input).toHaveAttribute('aria-expanded', 'false');
 
@@ -1989,7 +2024,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
         it('should default to not opening on focus (filter="auto")', async () => {
             renderWithState(t.inputTemplate);
-            const input = getInput();
+            const input = screen.getByRole<HTMLInputElement>('combobox');
 
             expect(input).toHaveAttribute('aria-expanded', 'false');
 
@@ -2007,14 +2042,14 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
     describe('Edge cases', () => {
         it('should fall back to textContent when option has no value prop', async () => {
             renderWithState(t.noValueButtonTemplate, { value: '' }, BUTTON_STATE);
-            const button = getButtonTrigger();
+            const button = screen.getByTestId('combobox-button');
 
             await userEvent.click(button);
             await waitFor(() => {
                 expect(button).toHaveAttribute('aria-expanded', 'true');
             });
 
-            const grape = getAllOptions().find((o) => o.textContent === 'Grape')!;
+            const grape = screen.queryAllByRole('option').find((o) => o.textContent === 'Grape')!;
             expect(grape).not.toHaveAttribute('data-value');
             await userEvent.click(grape);
 
@@ -2025,7 +2060,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
         it('should jump to selected option on ArrowDown', async () => {
             renderWithState(t.selectedButtonTemplate, { value: 'Cherry' }, BUTTON_STATE);
-            const button = getButtonTrigger();
+            const button = screen.getByTestId('combobox-button');
             button.focus();
 
             await userEvent.keyboard('{ArrowDown}');
@@ -2033,7 +2068,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
                 expect(button).toHaveAttribute('aria-expanded', 'true');
             });
 
-            const cherry = getAllOptions().find((o) => o.textContent === 'Cherry')!;
+            const cherry = screen.queryAllByRole('option').find((o) => o.textContent === 'Cherry')!;
             await waitFor(() => {
                 expect(button).toHaveAttribute('aria-activedescendant', cherry.id);
             });
@@ -2041,7 +2076,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
         it('should not change open state on blur then re-focus', async () => {
             renderWithState(t.inputTemplate);
-            const input = getInput();
+            const input = screen.getByRole<HTMLInputElement>('combobox');
 
             await userEvent.click(input);
             await waitFor(() => {
@@ -2061,7 +2096,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
     describe('Disabled options', () => {
         it('should navigate to disabled option but not select it (input trigger)', async () => {
             renderWithState(t.disabledInputTemplate);
-            const input = getInput();
+            const input = screen.getByRole<HTMLInputElement>('combobox');
             await userEvent.click(input);
             await waitFor(() => {
                 expect(input).toHaveAttribute('aria-expanded', 'true');
@@ -2092,13 +2127,13 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
                 expect(input).toHaveAttribute('aria-expanded', 'true');
             });
 
-            const bananaOption = getVisibleOptions().find((o) => o.textContent === 'Banana')!;
+            const bananaOption = screen.queryAllByRole('option').find((o) => o.textContent === 'Banana')!;
             await userEvent.click(bananaOption);
 
             expect(input.value).toBe('');
             expect(input).toHaveAttribute('aria-expanded', 'true');
 
-            const cherryOption = getVisibleOptions().find((o) => o.textContent === 'Cherry')!;
+            const cherryOption = screen.queryAllByRole('option').find((o) => o.textContent === 'Cherry')!;
             await userEvent.click(cherryOption);
             await waitFor(() => {
                 expect(input.value).toBe('Cherry');
@@ -2108,7 +2143,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
         it('should navigate to disabled option but not select it (button trigger)', async () => {
             renderWithState(t.disabledButtonTemplate, { value: '' }, BUTTON_STATE);
-            const button = getButtonTrigger();
+            const button = screen.getByTestId('combobox-button');
             button.focus();
 
             await userEvent.keyboard('{ArrowDown}');
@@ -2136,13 +2171,13 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
                 expect(button).toHaveAttribute('aria-expanded', 'true');
             });
 
-            const bananaOption = getAllOptions().find((o) => o.textContent === 'Banana')!;
+            const bananaOption = screen.queryAllByRole('option').find((o) => o.textContent === 'Banana')!;
             await userEvent.click(bananaOption);
 
             expect(button.textContent).toBe('Select a fruit');
             expect(button).toHaveAttribute('aria-expanded', 'true');
 
-            const cherryOption = getAllOptions().find((o) => o.textContent === 'Cherry')!;
+            const cherryOption = screen.queryAllByRole('option').find((o) => o.textContent === 'Cherry')!;
             await userEvent.click(cherryOption);
             await waitFor(() => {
                 expect(button.textContent).toBe('Cherry');
@@ -2158,7 +2193,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
     describe('Grid combobox - ARIA attributes', () => {
         it('should have correct grid ARIA attributes (input trigger)', async () => {
             renderWithState(t.gridInputTemplate);
-            const input = getInput();
+            const input = screen.getByRole<HTMLInputElement>('combobox');
             await userEvent.click(input);
 
             await waitFor(() => {
@@ -2168,35 +2203,34 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
             expect(input).toHaveAttribute('aria-haspopup', 'grid');
 
             const controlsId = input.getAttribute('aria-controls')!;
-            const grid = document.getElementById(controlsId)!;
+            const grid = screen.getByRole('grid');
+            expect(controlsId).toBe(grid.id);
             expect(grid).toHaveAttribute('role', 'grid');
             expect(grid.classList.contains(COMBOBOX_LIST_CLASSNAME)).toBe(true);
 
-            const rows = Array.from(grid.querySelectorAll('[role="row"]'));
+            const rows = within(grid).queryAllByRole('row');
             expect(rows.length).toBe(GRID_FRUITS.length);
 
             for (const row of rows) {
-                const cells = row.querySelectorAll('[role="gridcell"]');
+                const cells = within(row).queryAllByRole('gridcell');
                 expect(cells.length).toBe(3);
 
-                const firstCell = cells[0] as HTMLElement;
+                const firstCell = cells[0];
                 expect(firstCell).toHaveAttribute('data-value');
                 expect(firstCell).toHaveAttribute('aria-selected');
-                // First cell (option trigger) should have the option trigger class
                 expect(firstCell.classList.contains(`${COMBOBOX_OPTION_CLASSNAME}__action`)).toBe(true);
 
-                for (const cell of Array.from(cells)) {
-                    expect((cell as HTMLElement).id).toBeTruthy();
+                for (const cell of cells) {
+                    expect(cell.id).toBeTruthy();
                 }
 
-                // Row should have the combobox option class
                 expect(row.classList.contains(COMBOBOX_OPTION_CLASSNAME)).toBe(true);
             }
         });
 
         it('should have correct grid ARIA attributes (button trigger)', async () => {
             renderWithState(t.gridButtonTemplate, { value: '' }, BUTTON_STATE);
-            const button = getButtonTrigger();
+            const button = screen.getByTestId('combobox-button');
             await userEvent.click(button);
 
             await waitFor(() => {
@@ -2205,13 +2239,13 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
             expect(button).toHaveAttribute('aria-haspopup', 'grid');
 
-            const grid = document.body.querySelector('[role="grid"]')!;
+            const grid = screen.getByRole('grid');
             expect(grid).not.toBeNull();
 
-            const rows = Array.from(grid.querySelectorAll('[role="row"]'));
+            const rows = within(grid).queryAllByRole('row');
             expect(rows.length).toBe(GRID_FRUITS.length);
             for (const row of rows) {
-                const cells = row.querySelectorAll('[role="gridcell"]');
+                const cells = within(row).queryAllByRole('gridcell');
                 expect(cells.length).toBe(2);
             }
         });
@@ -2220,7 +2254,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
     describe('Grid combobox - Input trigger keyboard', () => {
         it('should navigate rows with ArrowDown/Up', async () => {
             renderWithState(t.gridInputTemplate);
-            const input = getInput();
+            const input = screen.getByRole<HTMLInputElement>('combobox');
             await userEvent.click(input);
 
             await waitFor(() => {
@@ -2254,7 +2288,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
         it('should navigate cells with ArrowLeft/Right', async () => {
             renderWithState(t.gridInputTemplate);
-            const input = getInput();
+            const input = screen.getByRole<HTMLInputElement>('combobox');
             await userEvent.click(input);
 
             await waitFor(() => {
@@ -2278,8 +2312,8 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
             await userEvent.keyboard('{ArrowLeft}');
             active = getActiveCell()!;
-            const row = active.closest('[role="row"]')!;
-            const firstCell = row.querySelector('[role="gridcell"]') as HTMLElement;
+            const row = active.closest<HTMLElement>('[role="row"]')!;
+            const firstCell = within(row).queryAllByRole('gridcell')[0]!;
             expect(firstCell.textContent).toBe('Apple');
 
             expect(document.activeElement).toBe(input);
@@ -2288,7 +2322,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
         it('should select option on Enter', async () => {
             const onSelect = vi.fn();
             renderWithState(t.gridInputTemplate, { value: '', onSelect });
-            const input = getInput();
+            const input = screen.getByRole<HTMLInputElement>('combobox');
             await userEvent.click(input);
 
             await waitFor(() => {
@@ -2314,7 +2348,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
             const onEdit = vi.fn();
             const onDelete = vi.fn();
             renderWithState(t.gridInputTemplate, { value: '', onEdit, onDelete });
-            const input = getInput();
+            const input = screen.getByRole<HTMLInputElement>('combobox');
             await userEvent.click(input);
 
             await waitFor(() => {
@@ -2330,8 +2364,8 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
             await userEvent.keyboard('{ArrowRight}');
 
             const active = getActiveCell()!;
-            const row = active.closest('[role="row"]')!;
-            const firstCell = row.querySelector('[role="gridcell"]');
+            const row = active.closest<HTMLElement>('[role="row"]')!;
+            const firstCell = within(row).queryAllByRole('gridcell')[0];
             expect(active).not.toBe(firstCell);
 
             await userEvent.keyboard('{Enter}');
@@ -2345,7 +2379,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
         it('should remember column position across rows', async () => {
             renderWithState(t.gridInputTemplate);
-            const input = getInput();
+            const input = screen.getByRole<HTMLInputElement>('combobox');
             await userEvent.click(input);
 
             await waitFor(() => {
@@ -2359,30 +2393,30 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
             await userEvent.keyboard('{ArrowRight}');
             const editCellApple = getActiveCell()!;
-            const appleRow = editCellApple.closest('[role="row"]')!;
-            const appleCells = Array.from(appleRow.querySelectorAll('[role="gridcell"]'));
+            const appleRow = editCellApple.closest<HTMLElement>('[role="row"]')!;
+            const appleCells = within(appleRow).queryAllByRole('gridcell');
             expect(appleCells.indexOf(editCellApple)).toBe(1);
 
             await userEvent.keyboard('{ArrowDown}');
             const editCellBanana = getActiveCell()!;
-            const bananaRow = editCellBanana.closest('[role="row"]')!;
-            const bananaCells = Array.from(bananaRow.querySelectorAll('[role="gridcell"]'));
+            const bananaRow = editCellBanana.closest<HTMLElement>('[role="row"]')!;
+            const bananaCells = within(bananaRow).queryAllByRole('gridcell');
             expect(bananaCells.indexOf(editCellBanana)).toBe(1);
-            const bananaFirstCell = bananaCells[0] as HTMLElement;
+            const bananaFirstCell = bananaCells[0];
             expect(bananaFirstCell.textContent).toBe('Banana');
 
             await userEvent.keyboard('{ArrowDown}');
             const editCellCherry = getActiveCell()!;
-            const cherryRow = editCellCherry.closest('[role="row"]')!;
-            const cherryCells = Array.from(cherryRow.querySelectorAll('[role="gridcell"]'));
+            const cherryRow = editCellCherry.closest<HTMLElement>('[role="row"]')!;
+            const cherryCells = within(cherryRow).queryAllByRole('gridcell');
             expect(cherryCells.indexOf(editCellCherry)).toBe(1);
-            const cherryFirstCell = cherryCells[0] as HTMLElement;
+            const cherryFirstCell = cherryCells[0];
             expect(cherryFirstCell.textContent).toBe('Cherry');
         });
 
         it('should filter grid options by typing', async () => {
             renderWithState(t.gridInputTemplate);
-            const input = getInput();
+            const input = screen.getByRole<HTMLInputElement>('combobox');
             await userEvent.click(input);
 
             await waitFor(() => {
@@ -2415,7 +2449,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
         it('should select grid option on click', async () => {
             const onSelect = vi.fn();
             renderWithState(t.gridInputTemplate, { value: '', onSelect });
-            const input = getInput();
+            const input = screen.getByRole<HTMLInputElement>('combobox');
             await userEvent.click(input);
 
             await waitFor(() => {
@@ -2434,18 +2468,18 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
             const onEdit = vi.fn();
             const onDelete = vi.fn();
             renderWithState(t.gridInputTemplate, { value: '', onEdit, onDelete });
-            const input = getInput();
+            const input = screen.getByRole<HTMLInputElement>('combobox');
             await userEvent.click(input);
 
             await waitFor(() => {
                 expect(input).toHaveAttribute('aria-expanded', 'true');
             });
 
-            const grid = document.body.querySelector('[role="grid"]')!;
-            const rows = Array.from(grid.querySelectorAll('[role="row"]'));
+            const grid = screen.getByRole('grid');
+            const rows = within(grid).queryAllByRole('row');
             const appleRow = rows[0];
-            const cells = Array.from(appleRow.querySelectorAll('[role="gridcell"]'));
-            const deleteCell = cells[cells.length - 1] as HTMLElement;
+            const cells = within(appleRow).queryAllByRole('gridcell');
+            const deleteCell = cells[cells.length - 1];
 
             await userEvent.click(deleteCell);
 
@@ -2458,7 +2492,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
     describe('Grid combobox - Button trigger keyboard', () => {
         it('should navigate rows with ArrowDown/Up', async () => {
             renderWithState(t.gridButtonTemplate, { value: '' }, BUTTON_STATE);
-            const button = getButtonTrigger();
+            const button = screen.getByTestId('combobox-button');
             button.focus();
 
             await userEvent.keyboard('{ArrowDown}');
@@ -2484,7 +2518,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
         it('should navigate cells with ArrowLeft/Right', async () => {
             renderWithState(t.gridButtonTemplate, { value: '' }, BUTTON_STATE);
-            const button = getButtonTrigger();
+            const button = screen.getByTestId('combobox-button');
             button.focus();
 
             await userEvent.keyboard('{ArrowDown}');
@@ -2495,8 +2529,8 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
             await userEvent.keyboard('{ArrowRight}');
             const active = getActiveCell()!;
-            const row = active.closest('[role="row"]')!;
-            const firstCell = row.querySelector('[role="gridcell"]') as HTMLElement;
+            const row = active.closest<HTMLElement>('[role="row"]')!;
+            const firstCell = within(row).queryAllByRole('gridcell')[0]!;
             expect(active).not.toBe(firstCell);
 
             await userEvent.keyboard('{ArrowRight}');
@@ -2504,15 +2538,15 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
             await userEvent.keyboard('{ArrowLeft}');
             const backActive = getActiveCell()!;
-            const backRow = backActive.closest('[role="row"]')!;
-            const backFirstCell = backRow.querySelector('[role="gridcell"]') as HTMLElement;
+            const backRow = backActive.closest<HTMLElement>('[role="row"]')!;
+            const backFirstCell = within(backRow).queryAllByRole('gridcell')[0]!;
             expect(backFirstCell.textContent).toBe('Apple');
         });
 
         it('should select option on Enter', async () => {
             const onSelect = vi.fn();
             renderWithState(t.gridButtonTemplate, { value: '', onSelect }, BUTTON_STATE);
-            const button = getButtonTrigger();
+            const button = screen.getByTestId('combobox-button');
             button.focus();
 
             await userEvent.keyboard('{ArrowDown}');
@@ -2534,7 +2568,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
         it('should fire action on Space on action cell', async () => {
             const onDelete = vi.fn();
             renderWithState(t.gridButtonTemplate, { value: '', onDelete }, BUTTON_STATE);
-            const button = getButtonTrigger();
+            const button = screen.getByTestId('combobox-button');
             button.focus();
 
             await userEvent.keyboard('{ArrowDown}');
@@ -2544,8 +2578,8 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
             await userEvent.keyboard('{ArrowRight}');
             const active = getActiveCell()!;
-            const row = active.closest('[role="row"]')!;
-            const firstCell = row.querySelector('[role="gridcell"]') as HTMLElement;
+            const row = active.closest<HTMLElement>('[role="row"]')!;
+            const firstCell = within(row).queryAllByRole('gridcell')[0]!;
             expect(active).not.toBe(firstCell);
 
             await userEvent.keyboard(' ');
@@ -2562,7 +2596,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
     describe('Combobox.State - Live region', () => {
         it('should always render a live region element', () => {
             renderWithState(t.emptyStateTemplate);
-            const stateEl = getStateContainer();
+            const stateEl = queryByClassName(document.body, COMBOBOX_STATE_CLASSNAME);
             expect(stateEl).toBeInTheDocument();
             expect(stateEl).toHaveAttribute('role', 'status');
             expect(stateEl).toHaveAttribute('aria-live', 'polite');
@@ -2573,7 +2607,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
     describe('Combobox.State - Empty state', () => {
         it('should be visually hidden when list has options', async () => {
             renderWithState(t.emptyStateTemplate);
-            const input = getInput();
+            const input = screen.getByRole<HTMLInputElement>('combobox');
             await userEvent.click(input);
 
             await waitFor(() => {
@@ -2581,14 +2615,14 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
             });
 
             // Options are visible — state container should be visually hidden
-            const stateEl = getStateContainer();
+            const stateEl = queryByClassName(document.body, COMBOBOX_STATE_CLASSNAME);
             expect(stateEl).toBeInTheDocument();
             expect(stateEl!.className).toContain(VISUALLY_HIDDEN);
         });
 
         it('should show empty message when all options are filtered out', async () => {
             renderWithState(t.emptyStateTemplate);
-            const input = getInput();
+            const input = screen.getByRole<HTMLInputElement>('combobox');
             await userEvent.click(input);
 
             await waitFor(() => {
@@ -2599,11 +2633,11 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
             await userEvent.type(input, 'z');
 
             await waitFor(() => {
-                expect(getVisibleOptions().length).toBe(0);
+                expect(screen.queryAllByRole('option').length).toBe(0);
             });
 
             await waitFor(() => {
-                const stateEl = getStateContainer();
+                const stateEl = queryByClassName(document.body, COMBOBOX_STATE_CLASSNAME);
                 expect(stateEl).toBeInTheDocument();
                 expect(stateEl!.className).not.toContain(VISUALLY_HIDDEN);
                 expect(stateEl).toHaveTextContent('No results for "z"');
@@ -2612,7 +2646,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
         it('should hide empty message when options reappear', async () => {
             renderWithState(t.emptyStateTemplate);
-            const input = getInput();
+            const input = screen.getByRole<HTMLInputElement>('combobox');
             await userEvent.click(input);
 
             await waitFor(() => {
@@ -2622,21 +2656,23 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
             // Filter to empty
             await userEvent.type(input, 'z');
             await waitFor(() => {
-                expect(getVisibleOptions().length).toBe(0);
-                expect(getStateContainer()!.className).not.toContain(VISUALLY_HIDDEN);
+                expect(screen.queryAllByRole('option').length).toBe(0);
+                expect(queryByClassName(document.body, COMBOBOX_STATE_CLASSNAME)!.className).not.toContain(
+                    VISUALLY_HIDDEN,
+                );
             });
 
             // Clear input — options reappear
             await userEvent.clear(input);
             await waitFor(() => {
-                expect(getVisibleOptions().length).toBeGreaterThan(0);
-                expect(getStateContainer()!.className).toContain(VISUALLY_HIDDEN);
+                expect(screen.queryAllByRole('option').length).toBeGreaterThan(0);
+                expect(queryByClassName(document.body, COMBOBOX_STATE_CLASSNAME)!.className).toContain(VISUALLY_HIDDEN);
             });
         });
 
         it('should pass input value to emptyMessage callback', async () => {
             renderWithState(t.emptyStateTemplate);
-            const input = getInput();
+            const input = screen.getByRole<HTMLInputElement>('combobox');
             await userEvent.click(input);
 
             await waitFor(() => {
@@ -2645,17 +2681,19 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
             await userEvent.type(input, 'z');
             await waitFor(() => {
-                expect(getVisibleOptions().length).toBe(0);
+                expect(screen.queryAllByRole('option').length).toBe(0);
             });
 
             await waitFor(() => {
-                expect(getStateContainer()).toHaveTextContent('No results for "z"');
+                expect(queryByClassName(document.body, COMBOBOX_STATE_CLASSNAME)).toHaveTextContent(
+                    'No results for "z"',
+                );
             });
         });
 
         it('should update input value in emptyMessage when typing while empty', async () => {
             renderWithState(t.emptyStateTemplate);
-            const input = getInput();
+            const input = screen.getByRole<HTMLInputElement>('combobox');
             await userEvent.click(input);
 
             await waitFor(() => {
@@ -2665,13 +2703,17 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
             // Type "z" — list becomes empty
             await userEvent.type(input, 'z');
             await waitFor(() => {
-                expect(getStateContainer()).toHaveTextContent('No results for "z"');
+                expect(queryByClassName(document.body, COMBOBOX_STATE_CLASSNAME)).toHaveTextContent(
+                    'No results for "z"',
+                );
             });
 
             // Keep typing "zz" — list stays empty, message should update
             await userEvent.type(input, 'z');
             await waitFor(() => {
-                expect(getStateContainer()).toHaveTextContent('No results for "zz"');
+                expect(queryByClassName(document.body, COMBOBOX_STATE_CLASSNAME)).toHaveTextContent(
+                    'No results for "zz"',
+                );
             });
         });
     });
@@ -2679,7 +2721,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
     describe('Combobox.State - Option count message', () => {
         it('should show option count message when list has options', async () => {
             renderWithState(t.nbOptionMessageTemplate);
-            const input = getInput();
+            const input = screen.getByRole<HTMLInputElement>('combobox');
             await userEvent.click(input);
 
             await waitFor(() => {
@@ -2687,7 +2729,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
             });
 
             await waitFor(() => {
-                const stateEl = getStateContainer();
+                const stateEl = queryByClassName(document.body, COMBOBOX_STATE_CLASSNAME);
                 expect(stateEl).toBeInTheDocument();
                 expect(stateEl).toHaveTextContent('10 result(s) available');
             });
@@ -2695,7 +2737,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
         it('should update option count when filtering reduces visible options', async () => {
             renderWithState(t.nbOptionMessageTemplate);
-            const input = getInput();
+            const input = screen.getByRole<HTMLInputElement>('combobox');
             await userEvent.click(input);
 
             await waitFor(() => {
@@ -2705,18 +2747,18 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
             await userEvent.type(input, 'bl');
 
             await waitFor(() => {
-                expect(getVisibleOptions().length).toBe(1);
+                expect(screen.queryAllByRole('option').length).toBe(1);
             });
 
             await waitFor(() => {
-                const stateEl = getStateContainer();
+                const stateEl = queryByClassName(document.body, COMBOBOX_STATE_CLASSNAME);
                 expect(stateEl).toHaveTextContent('1 result(s) available');
             });
         });
 
         it('should show empty message instead of option count when all options are filtered out', async () => {
             renderWithState(t.nbOptionMessageTemplate);
-            const input = getInput();
+            const input = screen.getByRole<HTMLInputElement>('combobox');
             await userEvent.click(input);
 
             await waitFor(() => {
@@ -2726,11 +2768,11 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
             await userEvent.type(input, 'z');
 
             await waitFor(() => {
-                expect(getVisibleOptions().length).toBe(0);
+                expect(screen.queryAllByRole('option').length).toBe(0);
             });
 
             await waitFor(() => {
-                const stateEl = getStateContainer();
+                const stateEl = queryByClassName(document.body, COMBOBOX_STATE_CLASSNAME);
                 expect(stateEl).toHaveTextContent('No results');
                 expect(stateEl).not.toHaveTextContent('result(s) available');
             });
@@ -2740,7 +2782,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
     describe('Combobox.State - Error state', () => {
         it('should show error message', async () => {
             renderWithState(t.errorStateTemplate);
-            const input = getInput();
+            const input = screen.getByRole<HTMLInputElement>('combobox');
             await userEvent.click(input);
 
             await waitFor(() => {
@@ -2750,7 +2792,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
             // Content is deferred after open to allow the aria-live region
             // to become visible in the accessibility tree first.
             await waitFor(() => {
-                const stateEl = getStateContainer();
+                const stateEl = queryByClassName(document.body, COMBOBOX_STATE_CLASSNAME);
                 expect(stateEl).toBeInTheDocument();
                 expect(stateEl!.className).not.toContain(VISUALLY_HIDDEN);
                 expect(stateEl).toHaveTextContent('Service unavailable');
@@ -2759,7 +2801,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
         it('should show secondary error message', async () => {
             renderWithState(t.errorStateTemplate);
-            const input = getInput();
+            const input = screen.getByRole<HTMLInputElement>('combobox');
             await userEvent.click(input);
 
             await waitFor(() => {
@@ -2767,14 +2809,16 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
             });
 
             await waitFor(() => {
-                expect(getStateContainer()).toHaveTextContent('Please try again later');
+                expect(queryByClassName(document.body, COMBOBOX_STATE_CLASSNAME)).toHaveTextContent(
+                    'Please try again later',
+                );
             });
         });
 
         it('should have role=status on the state container', () => {
             renderWithState(t.errorStateTemplate);
-            expect(getStateContainer()).toHaveAttribute('role', 'status');
-            expect(getStateContainer()).toHaveAttribute('aria-live', 'polite');
+            expect(queryByClassName(document.body, COMBOBOX_STATE_CLASSNAME)).toHaveAttribute('role', 'status');
+            expect(queryByClassName(document.body, COMBOBOX_STATE_CLASSNAME)).toHaveAttribute('aria-live', 'polite');
         });
     });
 
@@ -2783,36 +2827,45 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
     // ───────────────────────────────────────────────────────────────
 
     describe('Combobox.OptionSkeleton - Rendering', () => {
-        it('should render skeleton items with role="none"', () => {
+        it('should render skeleton items with role="none"', async () => {
             renderWithState(t.loadingTemplate);
-            const skeletons = document.body.querySelectorAll(`.${COMBOBOX_OPTION_SKELETON_CLASSNAME}`);
+            await userEvent.click(screen.getByRole('combobox'));
+            const skeletons = queryAllByClassName(document.body, COMBOBOX_OPTION_SKELETON_CLASSNAME);
             expect(skeletons.length).toBe(3);
 
-            for (const skeleton of Array.from(skeletons)) {
+            for (const skeleton of skeletons) {
                 expect(skeleton).toHaveAttribute('role', 'none');
             }
         });
 
-        it('should not render any role="option" elements', () => {
+        it('should not render any role="option" elements', async () => {
             renderWithState(t.loadingTemplate);
-            const options = getAllOptions();
+            await userEvent.click(screen.getByRole('combobox'));
+            const options = screen.queryAllByRole('option');
             expect(options.length).toBe(0);
+        });
+
+        it('should not render skeleton children while closed', () => {
+            renderWithState(t.loadingTemplate);
+            const skeletons = queryAllByClassName(document.body, COMBOBOX_OPTION_SKELETON_CLASSNAME);
+            expect(skeletons.length).toBe(0);
         });
 
         it('should set aria-busy on the listbox when skeletons are mounted', async () => {
             renderWithState(t.loadingTemplate);
+            await userEvent.click(screen.getByRole('combobox'));
             await waitFor(() => {
-                const listbox = document.body.querySelector('[role="listbox"]');
-                expect(listbox).toHaveAttribute('aria-busy', 'true');
+                expect(screen.queryByRole('listbox')).toHaveAttribute('aria-busy', 'true');
             });
         });
     });
 
     describe('Combobox.OptionSkeleton - Load more pattern', () => {
-        it('should render skeletons appended after real options', () => {
+        it('should render skeletons appended after real options', async () => {
             renderWithState(t.loadMoreTemplate);
-            const options = getAllOptions();
-            const skeletons = document.body.querySelectorAll(`.${COMBOBOX_OPTION_SKELETON_CLASSNAME}`);
+            await userEvent.click(screen.getByRole('combobox'));
+            const options = screen.queryAllByRole('option');
+            const skeletons = queryAllByClassName(document.body, COMBOBOX_OPTION_SKELETON_CLASSNAME);
 
             expect(options.length).toBe(FRUITS.length);
             expect(skeletons.length).toBe(3);
@@ -2820,43 +2873,44 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
         it('should set aria-busy on the listbox when skeletons are appended', async () => {
             renderWithState(t.loadMoreTemplate);
+            await userEvent.click(screen.getByRole('combobox'));
             await waitFor(() => {
-                const listbox = document.body.querySelector('[role="listbox"]');
-                expect(listbox).toHaveAttribute('aria-busy', 'true');
+                expect(screen.queryByRole('listbox')).toHaveAttribute('aria-busy', 'true');
             });
         });
     });
 
     describe('Combobox.OptionSkeleton - Section loading', () => {
-        it('should render skeletons inside a section', () => {
+        it('should render skeletons inside a section', async () => {
             renderWithState(t.sectionLoadingTemplate);
-            const skeletons = document.body.querySelectorAll(`.${COMBOBOX_OPTION_SKELETON_CLASSNAME}`);
+            await userEvent.click(screen.getByRole('combobox'));
+            const skeletons = queryAllByClassName(document.body, COMBOBOX_OPTION_SKELETON_CLASSNAME);
             expect(skeletons.length).toBe(3);
 
             // Real options should still be present in the other section
-            const options = getAllOptions();
+            const options = screen.queryAllByRole('option');
             expect(options.length).toBe(3);
         });
 
         it('should aria-hide a skeleton-only section', async () => {
             renderWithState(t.sectionLoadingTemplate);
+            await userEvent.click(screen.getByRole('combobox'));
 
             await waitFor(() => {
                 // Re-query to get fresh elements after state updates
-                const secs = document.body.querySelectorAll(`.${COMBOBOX_SECTION_CLASSNAME}`);
+                const secs = queryAllByClassName(document.body, COMBOBOX_SECTION_CLASSNAME);
                 expect(secs.length).toBeGreaterThanOrEqual(1);
 
                 // The section with real options should NOT be aria-hidden
-                const optionSection = Array.from(secs).find((s) => s.querySelector('[role="option"]'));
+                const optionSection = secs.find((s) => within(s).queryAllByRole('option').length > 0);
                 if (optionSection) {
                     expect(optionSection).not.toHaveAttribute('aria-hidden');
                 }
 
-                // The skeleton-only section should be aria-hidden
-                const skeletonSection = Array.from(secs).find(
+                const skeletonSection = secs.find(
                     (s) =>
-                        s.querySelector(`.${COMBOBOX_OPTION_SKELETON_CLASSNAME}`) &&
-                        !s.querySelector('[role="option"]'),
+                        queryAllByClassName(s, COMBOBOX_OPTION_SKELETON_CLASSNAME).length > 0 &&
+                        within(s).queryAllByRole('option').length === 0,
                 );
                 expect(skeletonSection).toBeTruthy();
                 expect(skeletonSection).toHaveAttribute('aria-hidden', 'true');
@@ -2865,9 +2919,10 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
     });
 
     describe('Combobox.State - Loading state', () => {
-        it('should suppress empty message while skeletons are mounted', () => {
+        it('should suppress empty message while skeletons are mounted', async () => {
             renderWithState(t.loadingTemplate);
-            const stateEl = getStateContainer();
+            await userEvent.click(screen.getByRole('combobox'));
+            const stateEl = queryByClassName(document.body, COMBOBOX_STATE_CLASSNAME);
             expect(stateEl).toBeInTheDocument();
             // Should not show "No results" since we have skeletons (loading)
             expect(stateEl).not.toHaveTextContent('No results');
