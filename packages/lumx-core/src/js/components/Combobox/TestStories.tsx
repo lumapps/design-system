@@ -7,9 +7,11 @@
  *
  * The majority of combobox tests have been migrated to jsdom in Tests.tsx.
  */
-import { expect, userEvent, within, waitFor } from 'storybook/test';
+import { expect, screen, userEvent, within, waitFor } from 'storybook/test';
 import type { SetupStoriesOptions } from '@lumx/core/stories/types';
-import { createTemplates, type ComboboxNamespace } from './Tests';
+import { queryAllByClassName } from '../../../testing/queries';
+import { CLASSNAME as COMBOBOX_OPTION_MORE_INFO_CLASSNAME } from './ComboboxOptionMoreInfo';
+import { createTemplates, getActiveOption, type ComboboxNamespace } from './Tests';
 
 // ─── Fixtures ────────────────────────────────────────────────────
 
@@ -17,26 +19,10 @@ const MORE_INFO_FRUITS = ['Apple', 'Banana', 'Cherry'];
 
 // ─── Helpers ─────────────────────────────────────────────────────
 
-function getInput(canvasElement: HTMLElement): HTMLInputElement {
-    return within(canvasElement).getByPlaceholderText('Pick a fruit…') as HTMLInputElement;
-}
-
-function getActiveOption(): HTMLElement | null {
-    return document.body.querySelector('[role="option"][data-focus-visible-added="true"]');
-}
-
-function getVisibleOptions(): HTMLElement[] {
-    return Array.from(document.body.querySelectorAll<HTMLElement>('[role="option"]:not([data-filtered])'));
-}
-
-/** Helper: get all OptionMoreInfo info icon buttons. */
-function getMoreInfoButtons(): HTMLElement[] {
-    return Array.from(document.body.querySelectorAll<HTMLElement>('.lumx-combobox-option-more-info'));
-}
-
 /** Helper: get a visible (open) OptionMoreInfo popover element. */
 function getVisibleMoreInfoPopover(): HTMLElement | null {
-    return document.body.querySelector('.lumx-combobox-option-more-info__popover:not(.lumx-popover--is-hidden)');
+    const popovers = queryAllByClassName(document.body, 'lumx-combobox-option-more-info__popover');
+    return popovers.find((p) => !p.classList.contains('lumx-popover--is-hidden')) ?? null;
 }
 
 // ═══════════════════════════════════════════════════════════════════
@@ -54,8 +40,8 @@ export function setup({
     };
     decorators: 'withValueOnChange';
 }>) {
-    // Reuse templates from Tests.tsx for the input template
-    const { inputTemplate } = createTemplates(Combobox, IconButton);
+    // Reuse templates from Tests.tsx for the input and button templates
+    const { inputTemplate, buttonTemplate } = createTemplates(Combobox, IconButton);
 
     // ─── Browser-only templates ──────────────────────────────────
 
@@ -104,6 +90,12 @@ export function setup({
         render: inputTemplate,
     };
 
+    const comboboxButtonStory = {
+        args: { value: '' },
+        decorators: [withValueOnChange({ onChangeProp: 'onSelect', valueExtract: (v: any) => v?.value })],
+        render: buttonTemplate,
+    };
+
     const optionMoreInfoStory = {
         args: { value: '' },
         argTypes: { onToggle: { action: 'toggle' } },
@@ -121,134 +113,17 @@ export function setup({
     // Browser-only tests
     // ═══════════════════════════════════════════════════════════════
 
-    const AutoFilterOptions = {
-        ...comboboxInputStory,
-        play: async ({ canvasElement }: any) => {
-            const input = getInput(canvasElement);
-            await userEvent.click(input);
-
-            await waitFor(() => {
-                expect(input).toHaveAttribute('aria-expanded', 'true');
-            });
-
-            // All 10 options should be visible initially
-            let visibleOptions = getVisibleOptions();
-            expect(visibleOptions).toHaveLength(10);
-
-            // Type "B" → "Banana", "Blueberry" and "Strawberry" match (case-insensitive includes)
-            await userEvent.type(input, 'B');
-
-            await waitFor(() => {
-                visibleOptions = getVisibleOptions();
-                expect(visibleOptions).toHaveLength(3);
-                expect(visibleOptions.map((o) => o.textContent)).toEqual(['Banana', 'Blueberry', 'Strawberry']);
-            });
-
-            // Continue typing "a" (input now "Ba") → only "Banana" matches
-            await userEvent.type(input, 'a');
-
-            await waitFor(() => {
-                visibleOptions = getVisibleOptions();
-                expect(visibleOptions).toHaveLength(1);
-                expect(visibleOptions[0].textContent).toBe('Banana');
-            });
-
-            // Clear input → all options visible again
-            await userEvent.clear(input);
-
-            await waitFor(() => {
-                visibleOptions = getVisibleOptions();
-                expect(visibleOptions).toHaveLength(10);
-            });
-        },
-    };
-
-    // ─── Browser-only filter templates ─────────────────────────
-
-    const filterOffStory = {
-        args: { value: '' },
-        decorators: [withValueOnChange()],
-        render: ({ value, onChange, onSelect }: any) => (
-            <Combobox.Provider>
-                <Combobox.Input
-                    value={value}
-                    onChange={onChange}
-                    onSelect={onSelect}
-                    filter="off"
-                    placeholder="Pick a fruit…"
-                    toggleButtonProps={{ label: 'Fruits' }}
-                />
-                <Combobox.Popover>
-                    <Combobox.List aria-label="Fruits">
-                        {[
-                            'Apple',
-                            'Apricot',
-                            'Banana',
-                            'Blueberry',
-                            'Cherry',
-                            'Grape',
-                            'Lemon',
-                            'Orange',
-                            'Peach',
-                            'Strawberry',
-                        ].map((fruit) => (
-                            <Combobox.Option key={fruit} value={fruit}>
-                                {fruit}
-                            </Combobox.Option>
-                        ))}
-                    </Combobox.List>
-                </Combobox.Popover>
-            </Combobox.Provider>
-        ),
-    };
-
-    /**
-     * Verifies that filter="off" makes the input readOnly, opens on focus,
-     * and allows selecting via keyboard navigation.
-     */
-    const FilterOffOpenOnFocus = {
-        ...filterOffStory,
-        play: async ({ canvasElement }: any) => {
-            const input = getInput(canvasElement);
-
-            // Input should be readOnly
-            expect(input.readOnly).toBe(true);
-
-            // Should open on focus
-            input.focus();
-            await waitFor(() => {
-                expect(input).toHaveAttribute('aria-expanded', 'true');
-            });
-
-            // All 10 options visible (no filtering)
-            const visibleOptions = getVisibleOptions();
-            expect(visibleOptions).toHaveLength(10);
-
-            // Navigate and select
-            await userEvent.keyboard('{ArrowDown}');
-            await waitFor(() => {
-                expect(getActiveOption()!.textContent).toBe('Apple');
-            });
-
-            await userEvent.keyboard('{Enter}');
-            await waitFor(() => {
-                expect(input.value).toBe('Apple');
-                expect(input).toHaveAttribute('aria-expanded', 'false');
-            });
-        },
-    };
-
     const MouseHoverDoesNotActivateOption = {
         ...comboboxInputStory,
         play: async ({ canvasElement }: any) => {
-            const input = getInput(canvasElement);
+            const input = within(canvasElement).getByRole<HTMLInputElement>('combobox');
             await userEvent.click(input);
 
             await waitFor(() => {
                 expect(input).toHaveAttribute('aria-expanded', 'true');
             });
 
-            const options = getVisibleOptions();
+            const options = screen.queryAllByRole('option');
             const bananaOption = options.find((o) => o.textContent === 'Banana')!;
             await userEvent.hover(bananaOption);
 
@@ -269,7 +144,7 @@ export function setup({
             </div>
         ),
         play: async ({ canvasElement }: any) => {
-            const input = getInput(canvasElement);
+            const input = within(canvasElement).getByRole<HTMLInputElement>('combobox');
 
             await userEvent.click(input);
             await waitFor(() => {
@@ -288,14 +163,14 @@ export function setup({
     const MouseHoverThenKeyboardNav = {
         ...comboboxInputStory,
         play: async ({ canvasElement }: any) => {
-            const input = getInput(canvasElement);
+            const input = within(canvasElement).getByRole<HTMLInputElement>('combobox');
             await userEvent.click(input);
 
             await waitFor(() => {
                 expect(input).toHaveAttribute('aria-expanded', 'true');
             });
 
-            const options = getVisibleOptions();
+            const options = screen.queryAllByRole('option');
             const cherryOption = options.find((o) => o.textContent === 'Cherry')!;
             await userEvent.hover(cherryOption);
             await expect(getActiveOption()).toBeNull();
@@ -315,7 +190,7 @@ export function setup({
     const OptionMoreInfoKeyboardHighlight = {
         ...optionMoreInfoStory,
         play: async ({ canvasElement }: any) => {
-            const input = getInput(canvasElement);
+            const input = within(canvasElement).getByRole<HTMLInputElement>('combobox');
             await userEvent.click(input);
 
             await waitFor(() => {
@@ -353,7 +228,7 @@ export function setup({
     const OptionMoreInfoMouseHover = {
         ...optionMoreInfoStory,
         play: async ({ canvasElement }: any) => {
-            const input = getInput(canvasElement);
+            const input = within(canvasElement).getByRole<HTMLInputElement>('combobox');
             await userEvent.click(input);
 
             await waitFor(() => {
@@ -362,7 +237,7 @@ export function setup({
 
             await expect(getVisibleMoreInfoPopover()).toBeNull();
 
-            const infoButtons = getMoreInfoButtons();
+            const infoButtons = queryAllByClassName(document.body, COMBOBOX_OPTION_MORE_INFO_CLASSNAME);
             await expect(infoButtons.length).toBeGreaterThan(0);
             await userEvent.hover(infoButtons[0]);
 
@@ -397,7 +272,7 @@ export function setup({
     const OptionMoreInfoAriaDescribedBy = {
         ...optionMoreInfoStory,
         play: async ({ canvasElement }: any) => {
-            const input = getInput(canvasElement);
+            const input = within(canvasElement).getByRole<HTMLInputElement>('combobox');
             await userEvent.click(input);
 
             await waitFor(() => {
@@ -422,45 +297,112 @@ export function setup({
         },
     };
 
-    /**
-     * Verifies the withValueOnChange decorator correctly propagates the
-     * selected option value back into the input.
-     */
-    const SelectOptionUpdatesInput = {
-        ...comboboxInputStory,
+    const ButtonTypeaheadFromClosed = {
+        ...comboboxButtonStory,
         play: async ({ canvasElement }: any) => {
-            const input = getInput(canvasElement);
-            await userEvent.click(input);
+            const button = within(canvasElement).getByTestId('combobox-button');
+            button.focus();
+            await expect(button).toHaveAttribute('aria-expanded', 'false');
 
+            // Single printable char from closed: opens and lands on the first match.
+            await userEvent.keyboard('b');
             await waitFor(() => {
-                expect(input).toHaveAttribute('aria-expanded', 'true');
+                expect(button).toHaveAttribute('aria-expanded', 'true');
+                const banana = screen.queryAllByRole('option').find((o) => o.textContent === 'Banana');
+                expect(banana).toBeTruthy();
+                expect(button).toHaveAttribute('aria-activedescendant', banana!.id);
             });
+        },
+    };
 
-            // Navigate to "Cherry" (5th option) and select it with Enter
-            // eslint-disable-next-line no-await-in-loop
-            for (let i = 0; i < 5; i++) await userEvent.keyboard('{ArrowDown}');
-            await waitFor(() => {
-                expect(getActiveOption()!.textContent).toBe('Cherry');
-            });
+    const ButtonTypeaheadWhileOpen = {
+        ...comboboxButtonStory,
+        play: async ({ canvasElement }: any) => {
+            const button = within(canvasElement).getByTestId('combobox-button');
+            button.focus();
 
+            // Open first (no active option).
             await userEvent.keyboard('{Enter}');
             await waitFor(() => {
-                expect(input.value).toBe('Cherry');
-                expect(input).toHaveAttribute('aria-expanded', 'false');
+                expect(button).toHaveAttribute('aria-expanded', 'true');
+                expect(screen.queryAllByRole('option').length).toBeGreaterThan(0);
+            });
+            await expect(button).toHaveAttribute('aria-activedescendant', '');
+
+            // Typeahead while open lands on the match synchronously.
+            await userEvent.keyboard('o');
+            await waitFor(() => {
+                const orange = screen.queryAllByRole('option').find((o) => o.textContent === 'Orange');
+                expect(orange).toBeTruthy();
+                expect(button).toHaveAttribute('aria-activedescendant', orange!.id);
+            });
+        },
+    };
+
+    const ButtonEndFromClosed = {
+        ...comboboxButtonStory,
+        play: async ({ canvasElement }: any) => {
+            const button = within(canvasElement).getByTestId('combobox-button');
+            button.focus();
+            await expect(button).toHaveAttribute('aria-expanded', 'false');
+
+            await userEvent.keyboard('{End}');
+            await waitFor(() => {
+                expect(button).toHaveAttribute('aria-expanded', 'true');
+                const options = screen.queryAllByRole('option');
+                const last = options[options.length - 1];
+                expect(last).toBeTruthy();
+                expect(button).toHaveAttribute('aria-activedescendant', last.id);
+            });
+        },
+    };
+
+    const ButtonHomeFromClosed = {
+        ...comboboxButtonStory,
+        play: async ({ canvasElement }: any) => {
+            const button = within(canvasElement).getByTestId('combobox-button');
+            button.focus();
+            await expect(button).toHaveAttribute('aria-expanded', 'false');
+
+            await userEvent.keyboard('{Home}');
+            await waitFor(() => {
+                expect(button).toHaveAttribute('aria-expanded', 'true');
+                const first = screen.queryAllByRole('option')[0];
+                expect(first).toBeTruthy();
+                expect(button).toHaveAttribute('aria-activedescendant', first.id);
+            });
+        },
+    };
+
+    const ButtonArrowDownFromClosed = {
+        ...comboboxButtonStory,
+        play: async ({ canvasElement }: any) => {
+            const button = within(canvasElement).getByTestId('combobox-button');
+            button.focus();
+            await expect(button).toHaveAttribute('aria-expanded', 'false');
+
+            await userEvent.keyboard('{ArrowDown}');
+            await waitFor(() => {
+                expect(button).toHaveAttribute('aria-expanded', 'true');
+                const first = screen.queryAllByRole('option')[0];
+                expect(first).toBeTruthy();
+                expect(button).toHaveAttribute('aria-activedescendant', first.id);
             });
         },
     };
 
     return {
         meta,
-        AutoFilterOptions,
-        FilterOffOpenOnFocus,
-        SelectOptionUpdatesInput,
         MouseHoverDoesNotActivateOption,
         ClickAwayClosesPopup,
         MouseHoverThenKeyboardNav,
         OptionMoreInfoKeyboardHighlight,
         OptionMoreInfoMouseHover,
         OptionMoreInfoAriaDescribedBy,
+        ButtonTypeaheadFromClosed,
+        ButtonTypeaheadWhileOpen,
+        ButtonEndFromClosed,
+        ButtonHomeFromClosed,
+        ButtonArrowDownFromClosed,
     };
 }

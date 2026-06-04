@@ -74,7 +74,7 @@ const ComboboxInput = defineComponent(
         const optionsState = useComboboxEvent('optionsChange', undefined);
 
         const handleToggle = () => {
-            if (optionsState.value?.optionsLength === 0) return;
+            if (isOpen.value && optionsState.value?.optionsLength === 0) return;
             setIsOpen(!isOpen.value);
             inputEl.value?.focus();
         };

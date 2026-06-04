@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 import { createListFocusNavigation } from './createListFocusNavigation';
 
-import type { FocusNavigationCallbacks } from './types';
+import type { FocusNavigationCallbacks, FocusNavigationSelectors } from './types';
 
 function createContainer(html: string): HTMLElement {
     const div = document.createElement('div');
@@ -86,8 +86,8 @@ describe('createListFocusNavigation', () => {
                 callbacks,
                 ac.signal,
             );
-            expect(nav.activeItem).toBeNull();
-            expect(nav.hasActiveItem).toBe(false);
+            expect(nav.selectors.activeItem).toBeNull();
+            expect(nav.selectors.activeItem).toBeNull();
         });
 
         it('should detect navigable items', () => {
@@ -105,7 +105,7 @@ describe('createListFocusNavigation', () => {
                 callbacks,
                 ac.signal,
             );
-            expect(nav.hasNavigableItems).toBe(true);
+            expect(nav.selectors.hasNavigableItems).toBe(true);
         });
 
         it('should detect no navigable items in empty container', () => {
@@ -123,11 +123,11 @@ describe('createListFocusNavigation', () => {
                 callbacks,
                 ac.signal,
             );
-            expect(nav.hasNavigableItems).toBe(false);
+            expect(nav.selectors.hasNavigableItems).toBe(false);
         });
     });
 
-    describe('goToFirst / goToLast', () => {
+    describe('goTo getFirst / getLast', () => {
         it('should navigate to first item', () => {
             const container = createList(3);
             const { callbacks, activated } = makeCallbacks();
@@ -143,8 +143,8 @@ describe('createListFocusNavigation', () => {
                 callbacks,
                 ac.signal,
             );
-            expect(nav.goToFirst()).toBe(true);
-            expect(nav.activeItem?.id).toBe('opt-0');
+            expect(nav.goTo((s) => s.getFirst())).toBe(true);
+            expect(nav.selectors.activeItem?.id).toBe('opt-0');
             expect(activated).toHaveLength(1);
         });
 
@@ -163,8 +163,8 @@ describe('createListFocusNavigation', () => {
                 callbacks,
                 ac.signal,
             );
-            expect(nav.goToLast()).toBe(true);
-            expect(nav.activeItem?.id).toBe('opt-2');
+            expect(nav.goTo((s) => s.getLast())).toBe(true);
+            expect(nav.selectors.activeItem?.id).toBe('opt-2');
         });
 
         it('should return false on empty list', () => {
@@ -182,8 +182,8 @@ describe('createListFocusNavigation', () => {
                 callbacks,
                 ac.signal,
             );
-            expect(nav.goToFirst()).toBe(false);
-            expect(nav.goToLast()).toBe(false);
+            expect(nav.goTo((s) => s.getFirst())).toBe(false);
+            expect(nav.goTo((s) => s.getLast())).toBe(false);
         });
     });
 
@@ -203,9 +203,9 @@ describe('createListFocusNavigation', () => {
                 callbacks,
                 ac.signal,
             );
-            nav.goToFirst();
+            nav.goTo((s) => s.getFirst());
             expect(nav.goToOffset(2)).toBe(true);
-            expect(nav.activeItem?.id).toBe('opt-2');
+            expect(nav.selectors.activeItem?.id).toBe('opt-2');
         });
 
         it('should navigate backward by offset', () => {
@@ -223,9 +223,9 @@ describe('createListFocusNavigation', () => {
                 callbacks,
                 ac.signal,
             );
-            nav.goToLast();
+            nav.goTo((s) => s.getLast());
             expect(nav.goToOffset(-2)).toBe(true);
-            expect(nav.activeItem?.id).toBe('opt-2');
+            expect(nav.selectors.activeItem?.id).toBe('opt-2');
         });
 
         it('should clamp at boundaries without wrap', () => {
@@ -244,9 +244,9 @@ describe('createListFocusNavigation', () => {
                 callbacks,
                 ac.signal,
             );
-            nav.goToLast();
+            nav.goTo((s) => s.getLast());
             expect(nav.goToOffset(5)).toBe(false);
-            expect(nav.activeItem?.id).toBe('opt-2');
+            expect(nav.selectors.activeItem?.id).toBe('opt-2');
         });
 
         it('should wrap with wrap enabled', () => {
@@ -265,9 +265,9 @@ describe('createListFocusNavigation', () => {
                 callbacks,
                 ac.signal,
             );
-            nav.goToLast();
+            nav.goTo((s) => s.getLast());
             expect(nav.goToOffset(1)).toBe(true);
-            expect(nav.activeItem?.id).toBe('opt-0');
+            expect(nav.selectors.activeItem?.id).toBe('opt-0');
         });
 
         it('should start from first when no active item and offset is positive', () => {
@@ -286,7 +286,7 @@ describe('createListFocusNavigation', () => {
                 ac.signal,
             );
             expect(nav.goToOffset(1)).toBe(true);
-            expect(nav.activeItem?.id).toBe('opt-0');
+            expect(nav.selectors.activeItem?.id).toBe('opt-0');
         });
 
         it('should start from last when no active item and offset is negative', () => {
@@ -305,7 +305,7 @@ describe('createListFocusNavigation', () => {
                 ac.signal,
             );
             expect(nav.goToOffset(-1)).toBe(true);
-            expect(nav.activeItem?.id).toBe('opt-4');
+            expect(nav.selectors.activeItem?.id).toBe('opt-4');
         });
     });
 
@@ -327,7 +327,7 @@ describe('createListFocusNavigation', () => {
             );
             const item = container.querySelector('#opt-1') as HTMLElement;
             expect(nav.goToItem(item)).toBe(true);
-            expect(nav.activeItem?.id).toBe('opt-1');
+            expect(nav.selectors.activeItem?.id).toBe('opt-1');
         });
 
         it('should return false for item not matching selector', () => {
@@ -350,7 +350,7 @@ describe('createListFocusNavigation', () => {
         });
     });
 
-    describe('goToItemMatching', () => {
+    describe('goTo with getMatching', () => {
         it('should navigate to first item matching predicate', () => {
             const container = createContainer(`
                 <div>
@@ -372,11 +372,11 @@ describe('createListFocusNavigation', () => {
                 callbacks,
                 ac.signal,
             );
-            expect(nav.goToItemMatching((el) => el.getAttribute('aria-selected') === 'true')).toBe(true);
-            expect(nav.activeItem?.id).toBe('opt-1');
+            expect(nav.goTo((n) => n.getMatching((el) => el.getAttribute('aria-selected') === 'true'))).toBe(true);
+            expect(nav.selectors.activeItem?.id).toBe('opt-1');
         });
 
-        it('should return false when no item matches', () => {
+        it('should defer when no item matches', () => {
             const container = createList(3);
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
@@ -391,7 +391,8 @@ describe('createListFocusNavigation', () => {
                 callbacks,
                 ac.signal,
             );
-            expect(nav.goToItemMatching(() => false)).toBe(false);
+            expect(nav.goTo((n) => n.getMatching(() => false))).toBe(false);
+            expect(nav.selectors.activeItem).toBeNull();
         });
     });
 
@@ -411,10 +412,10 @@ describe('createListFocusNavigation', () => {
                 callbacks,
                 ac.signal,
             );
-            nav.goToFirst();
+            nav.goTo((s) => s.getFirst());
             nav.clear();
-            expect(nav.activeItem).toBeNull();
-            expect(nav.hasActiveItem).toBe(false);
+            expect(nav.selectors.activeItem).toBeNull();
+            expect(nav.selectors.activeItem).toBeNull();
             expect(deactivated).toHaveLength(1);
             expect(counter.clearCount).toBe(1);
         });
@@ -437,9 +438,9 @@ describe('createListFocusNavigation', () => {
                 callbacks,
                 ac.signal,
             );
-            nav.goToFirst();
+            nav.goTo((s) => s.getFirst());
             expect(nav.goDown()).toBe(true);
-            expect(nav.activeItem?.id).toBe('opt-1');
+            expect(nav.selectors.activeItem?.id).toBe('opt-1');
         });
 
         it('goUp should navigate backward', () => {
@@ -458,9 +459,9 @@ describe('createListFocusNavigation', () => {
                 callbacks,
                 ac.signal,
             );
-            nav.goToLast();
+            nav.goTo((s) => s.getLast());
             expect(nav.goUp()).toBe(true);
-            expect(nav.activeItem?.id).toBe('opt-1');
+            expect(nav.selectors.activeItem?.id).toBe('opt-1');
         });
 
         it('goLeft/goRight should be no-ops in vertical mode', () => {
@@ -479,7 +480,7 @@ describe('createListFocusNavigation', () => {
                 callbacks,
                 ac.signal,
             );
-            nav.goToFirst();
+            nav.goTo((s) => s.getFirst());
             expect(nav.goLeft()).toBe(false);
             expect(nav.goRight()).toBe(false);
         });
@@ -502,9 +503,9 @@ describe('createListFocusNavigation', () => {
                 callbacks,
                 ac.signal,
             );
-            nav.goToFirst();
+            nav.goTo((s) => s.getFirst());
             expect(nav.goRight()).toBe(true);
-            expect(nav.activeItem?.id).toBe('opt-1');
+            expect(nav.selectors.activeItem?.id).toBe('opt-1');
         });
 
         it('goLeft should navigate backward', () => {
@@ -523,9 +524,9 @@ describe('createListFocusNavigation', () => {
                 callbacks,
                 ac.signal,
             );
-            nav.goToLast();
+            nav.goTo((s) => s.getLast());
             expect(nav.goLeft()).toBe(true);
-            expect(nav.activeItem?.id).toBe('opt-1');
+            expect(nav.selectors.activeItem?.id).toBe('opt-1');
         });
 
         it('goUp/goDown should be no-ops in horizontal mode', () => {
@@ -544,7 +545,7 @@ describe('createListFocusNavigation', () => {
                 callbacks,
                 ac.signal,
             );
-            nav.goToFirst();
+            nav.goTo((s) => s.getFirst());
             expect(nav.goUp()).toBe(false);
             expect(nav.goDown()).toBe(false);
         });
@@ -566,12 +567,12 @@ describe('createListFocusNavigation', () => {
                 callbacks,
                 ac.signal,
             );
-            nav.goToFirst();
-            expect(nav.activeItem?.id).toBe('opt-0');
+            nav.goTo((s) => s.getFirst());
+            expect(nav.selectors.activeItem?.id).toBe('opt-0');
             nav.goDown();
-            expect(nav.activeItem?.id).toBe('opt-2');
+            expect(nav.selectors.activeItem?.id).toBe('opt-2');
             nav.goDown();
-            expect(nav.activeItem?.id).toBe('opt-4');
+            expect(nav.selectors.activeItem?.id).toBe('opt-4');
         });
     });
 
@@ -600,10 +601,10 @@ describe('createListFocusNavigation', () => {
                 callbacks,
                 ac.signal,
             );
-            nav.goToFirst();
-            expect(nav.activeItem?.id).toBe('opt-0');
+            nav.goTo((s) => s.getFirst());
+            expect(nav.selectors.activeItem?.id).toBe('opt-0');
             nav.goDown();
-            expect(nav.activeItem?.id).toBe('opt-3');
+            expect(nav.selectors.activeItem?.id).toBe('opt-3');
         });
 
         it('should skip disabled items when navigating backward', () => {
@@ -622,13 +623,13 @@ describe('createListFocusNavigation', () => {
                 callbacks,
                 ac.signal,
             );
-            nav.goToLast();
-            expect(nav.activeItem?.id).toBe('opt-4');
+            nav.goTo((s) => s.getLast());
+            expect(nav.selectors.activeItem?.id).toBe('opt-4');
             nav.goUp();
-            expect(nav.activeItem?.id).toBe('opt-1');
+            expect(nav.selectors.activeItem?.id).toBe('opt-1');
         });
 
-        it('goToFirst should skip leading disabled items', () => {
+        it('goTo getFirst should skip leading disabled items', () => {
             const container = createListWithDisabled([0, 1]);
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
@@ -644,11 +645,11 @@ describe('createListFocusNavigation', () => {
                 callbacks,
                 ac.signal,
             );
-            expect(nav.goToFirst()).toBe(true);
-            expect(nav.activeItem?.id).toBe('opt-2');
+            expect(nav.goTo((s) => s.getFirst())).toBe(true);
+            expect(nav.selectors.activeItem?.id).toBe('opt-2');
         });
 
-        it('goToLast should skip trailing disabled items', () => {
+        it('goTo getLast should skip trailing disabled items', () => {
             const container = createListWithDisabled([3, 4]);
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
@@ -664,11 +665,11 @@ describe('createListFocusNavigation', () => {
                 callbacks,
                 ac.signal,
             );
-            expect(nav.goToLast()).toBe(true);
-            expect(nav.activeItem?.id).toBe('opt-2');
+            expect(nav.goTo((s) => s.getLast())).toBe(true);
+            expect(nav.selectors.activeItem?.id).toBe('opt-2');
         });
 
-        it('goToFirst should return false when all items are disabled', () => {
+        it('goTo getFirst should return false when all items are disabled', () => {
             const container = createListWithDisabled([0, 1, 2, 3, 4]);
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
@@ -684,7 +685,7 @@ describe('createListFocusNavigation', () => {
                 callbacks,
                 ac.signal,
             );
-            expect(nav.goToFirst()).toBe(false);
+            expect(nav.goTo((s) => s.getFirst())).toBe(false);
         });
 
         it('hasNavigableItems should return false when all items are disabled', () => {
@@ -703,7 +704,7 @@ describe('createListFocusNavigation', () => {
                 callbacks,
                 ac.signal,
             );
-            expect(nav.hasNavigableItems).toBe(false);
+            expect(nav.selectors.hasNavigableItems).toBe(false);
         });
 
         it('should wrap around disabled items', () => {
@@ -726,7 +727,7 @@ describe('createListFocusNavigation', () => {
             nav.goToItem(container.querySelector('#opt-2') as HTMLElement);
             // Next enabled item wrapping around should be opt-0
             expect(nav.goDown()).toBe(true);
-            expect(nav.activeItem?.id).toBe('opt-0');
+            expect(nav.selectors.activeItem?.id).toBe('opt-0');
         });
 
         it('should return false when navigation cannot find an enabled item without wrap', () => {
@@ -768,7 +769,7 @@ describe('createListFocusNavigation', () => {
             );
             const disabledItem = container.querySelector('#opt-1') as HTMLElement;
             expect(nav.goToItem(disabledItem)).toBe(true);
-            expect(nav.activeItem?.id).toBe('opt-1');
+            expect(nav.selectors.activeItem?.id).toBe('opt-1');
         });
 
         it('should skip disabled items with goToOffset > 1', () => {
@@ -787,10 +788,10 @@ describe('createListFocusNavigation', () => {
                 callbacks,
                 ac.signal,
             );
-            nav.goToFirst();
+            nav.goTo((s) => s.getFirst());
             // offset 2 should skip opt-1 (disabled) and land on opt-2, then skip opt-3 (disabled) and land on opt-4
             expect(nav.goToOffset(2)).toBe(true);
-            expect(nav.activeItem?.id).toBe('opt-4');
+            expect(nav.selectors.activeItem?.id).toBe('opt-4');
         });
 
         it('should not land on a disabled item when offset exceeds available enabled items', () => {
@@ -811,11 +812,11 @@ describe('createListFocusNavigation', () => {
                 callbacks,
                 ac.signal,
             );
-            nav.goToFirst();
+            nav.goTo((s) => s.getFirst());
             expect(nav.goToOffset(3)).toBe(true);
             // Should land on opt-4 (the only reachable enabled item), not on a disabled one
-            expect(nav.activeItem?.id).toBe('opt-4');
-            expect(nav.activeItem?.getAttribute('aria-disabled')).not.toBe('true');
+            expect(nav.selectors.activeItem?.id).toBe('opt-4');
+            expect(nav.selectors.activeItem?.getAttribute('aria-disabled')).not.toBe('true');
         });
 
         it('should return false when offset exceeds all enabled items without wrap', () => {
@@ -836,10 +837,10 @@ describe('createListFocusNavigation', () => {
                 callbacks,
                 ac.signal,
             );
-            nav.goToFirst();
+            nav.goTo((s) => s.getFirst());
             expect(nav.goToOffset(2)).toBe(false);
             // Active item must not have changed
-            expect(nav.activeItem?.id).toBe('opt-0');
+            expect(nav.selectors.activeItem?.id).toBe('opt-0');
         });
     });
 
@@ -869,7 +870,7 @@ describe('createListFocusNavigation', () => {
                 },
                 ac.signal,
             );
-            nav.goToFirst();
+            nav.goTo((s) => s.getFirst());
             nav.goDown();
             expect(order).toEqual(['activate:opt-0', 'deactivate:opt-0', 'activate:opt-1']);
         });
@@ -899,7 +900,7 @@ describe('createListFocusNavigation', () => {
                 },
                 ac.signal,
             );
-            nav.goToFirst();
+            nav.goTo((s) => s.getFirst());
             nav.clear();
             expect(order).toEqual(['activate:opt-0', 'deactivate:opt-0', 'clear']);
         });
@@ -921,9 +922,9 @@ describe('createListFocusNavigation', () => {
                 callbacks,
                 ac.signal,
             );
-            nav.goToFirst();
+            nav.goTo((s) => s.getFirst());
             ac.abort();
-            expect(nav.activeItem).toBeNull();
+            expect(nav.selectors.activeItem).toBeNull();
             expect(deactivated).toHaveLength(1);
             expect(counter.clearCount).toBe(1);
         });
@@ -946,8 +947,8 @@ describe('createListFocusNavigation', () => {
                 callbacks,
                 ac.signal,
             );
-            nav.goToLast();
-            expect(nav.activeItem?.id).toBe('opt-2');
+            nav.goTo((s) => s.getLast());
+            expect(nav.selectors.activeItem?.id).toBe('opt-2');
 
             // Dynamically add a new item after the last one.
             const newItem = document.createElement('div');
@@ -958,7 +959,7 @@ describe('createListFocusNavigation', () => {
 
             // Navigation should pick up the new item.
             expect(nav.goDown()).toBe(true);
-            expect(nav.activeItem?.id).toBe('opt-3');
+            expect(nav.selectors.activeItem?.id).toBe('opt-3');
         });
 
         it('should skip a dynamically removed item', () => {
@@ -977,15 +978,15 @@ describe('createListFocusNavigation', () => {
                 callbacks,
                 ac.signal,
             );
-            nav.goToFirst();
-            expect(nav.activeItem?.id).toBe('opt-0');
+            nav.goTo((s) => s.getFirst());
+            expect(nav.selectors.activeItem?.id).toBe('opt-0');
 
             // Remove opt-1 from the DOM.
             container.querySelector('#opt-1')!.remove();
 
             // Navigating forward should skip opt-1 and go to opt-2.
             expect(nav.goDown()).toBe(true);
-            expect(nav.activeItem?.id).toBe('opt-2');
+            expect(nav.selectors.activeItem?.id).toBe('opt-2');
         });
 
         it('should handle navigating when the active item was removed', () => {
@@ -1005,16 +1006,16 @@ describe('createListFocusNavigation', () => {
                 ac.signal,
             );
             nav.goToItem(container.querySelector('#opt-1') as HTMLElement);
-            expect(nav.activeItem?.id).toBe('opt-1');
+            expect(nav.selectors.activeItem?.id).toBe('opt-1');
 
             // Remove the active item from the DOM.
             container.querySelector('#opt-1')!.remove();
 
             // With stateless approach, getActiveItem returns null since the element
             // is no longer in the DOM. Navigating should start from first/last.
-            expect(nav.activeItem).toBeNull();
-            expect(nav.goToFirst()).toBe(true);
-            expect(nav.activeItem?.id).toBe('opt-0');
+            expect(nav.selectors.activeItem).toBeNull();
+            expect(nav.goTo((s) => s.getFirst())).toBe(true);
+            expect(nav.selectors.activeItem?.id).toBe('opt-0');
         });
 
         it('should reflect dynamically changed disabled state', () => {
@@ -1034,15 +1035,15 @@ describe('createListFocusNavigation', () => {
                 callbacks,
                 ac.signal,
             );
-            nav.goToFirst();
-            expect(nav.activeItem?.id).toBe('opt-0');
+            nav.goTo((s) => s.getFirst());
+            expect(nav.selectors.activeItem?.id).toBe('opt-0');
 
             // Dynamically disable opt-1.
             container.querySelector('#opt-1')!.setAttribute('aria-disabled', 'true');
 
             // Navigation should skip the newly disabled item.
             expect(nav.goDown()).toBe(true);
-            expect(nav.activeItem?.id).toBe('opt-2');
+            expect(nav.selectors.activeItem?.id).toBe('opt-2');
         });
 
         it('should update hasNavigableItems after items are removed', () => {
@@ -1060,16 +1061,16 @@ describe('createListFocusNavigation', () => {
                 callbacks,
                 ac.signal,
             );
-            expect(nav.hasNavigableItems).toBe(true);
+            expect(nav.selectors.hasNavigableItems).toBe(true);
 
             // Remove all items.
             container.querySelector('#opt-0')!.remove();
             container.querySelector('#opt-1')!.remove();
 
-            expect(nav.hasNavigableItems).toBe(false);
+            expect(nav.selectors.hasNavigableItems).toBe(false);
         });
 
-        it('should update goToFirst/goToLast after items are added', () => {
+        it('should update getFirst/getLast after items are added', () => {
             const container = createContainer('<div role="listbox"></div>');
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
@@ -1084,8 +1085,8 @@ describe('createListFocusNavigation', () => {
                 callbacks,
                 ac.signal,
             );
-            expect(nav.goToFirst()).toBe(false);
-            expect(nav.goToLast()).toBe(false);
+            expect(nav.goTo((s) => s.getFirst())).toBe(false);
+            expect(nav.goTo((s) => s.getLast())).toBe(false);
 
             // Dynamically add items.
             const item0 = document.createElement('div');
@@ -1098,12 +1099,107 @@ describe('createListFocusNavigation', () => {
             item1.id = 'new-1';
             container.appendChild(item1);
 
-            expect(nav.goToFirst()).toBe(true);
-            expect(nav.activeItem?.id).toBe('new-0');
+            expect(nav.goTo((s) => s.getFirst())).toBe(true);
+            expect(nav.selectors.activeItem?.id).toBe('new-0');
 
             nav.clear();
-            expect(nav.goToLast()).toBe(true);
-            expect(nav.activeItem?.id).toBe('new-1');
+            expect(nav.goTo((s) => s.getLast())).toBe(true);
+            expect(nav.selectors.activeItem?.id).toBe('new-1');
+        });
+    });
+
+    describe('resolve-based navigation (goTo)', () => {
+        const itemSelector = '[role="option"]:not([data-filtered])';
+        const makeNav = (container: HTMLElement, ac: AbortController) => {
+            const { callbacks } = makeCallbacks();
+            return createListFocusNavigation(
+                { type: 'list', container, itemSelector, getActiveItem: makeGetActiveItem(container, itemSelector) },
+                callbacks,
+                ac.signal,
+            );
+        };
+
+        it('should expose read accessors without moving focus', () => {
+            const container = createList(3, [1]); // index 1 filtered out
+            const ac = new AbortController();
+            const nav = makeNav(container, ac);
+
+            expect(nav.selectors.getFirst()?.id).toBe('opt-0');
+            expect(nav.selectors.getLast()?.id).toBe('opt-2');
+            expect(nav.selectors.getMatching((el) => el.id === 'opt-2')?.id).toBe('opt-2');
+            // No accessor moved focus.
+            expect(nav.selectors.activeItem).toBeNull();
+        });
+
+        it('should resolve and move focus immediately when the target exists', () => {
+            const container = createList(3);
+            const ac = new AbortController();
+            const nav = makeNav(container, ac);
+
+            const moved = nav.goTo((n) => n.getFirst());
+            expect(moved).toBe(true);
+            expect(nav.selectors.activeItem?.id).toBe('opt-0');
+        });
+
+        it('should defer and retry until the resolver finds a target', () => {
+            // Start with no items so the resolver returns null.
+            const container = createContainer('<div role="listbox"></div>');
+            const ac = new AbortController();
+            const nav = makeNav(container, ac);
+
+            const moved = nav.goTo((n) => n.getFirst());
+            expect(moved).toBe(false);
+            expect(nav.selectors.activeItem).toBeNull();
+
+            // Items mount, then flush.
+            const option = document.createElement('div');
+            option.setAttribute('role', 'option');
+            option.id = 'late-0';
+            container.appendChild(option);
+
+            nav.flushPendingNavigation();
+            expect(nav.selectors.activeItem?.id).toBe('late-0');
+        });
+
+        it('should re-run the resolver (not cache the element) on each flush', () => {
+            const container = createContainer('<div role="listbox"></div>');
+            const ac = new AbortController();
+            const nav = makeNav(container, ac);
+
+            const resolve = vi.fn((n: FocusNavigationSelectors) => n.getFirst());
+            nav.goTo(resolve);
+            expect(resolve).toHaveBeenCalledTimes(1);
+
+            const option = document.createElement('div');
+            option.setAttribute('role', 'option');
+            option.id = 'late-0';
+            container.appendChild(option);
+
+            nav.flushPendingNavigation();
+            expect(resolve).toHaveBeenCalledTimes(2);
+            expect(nav.selectors.activeItem?.id).toBe('late-0');
+        });
+
+        it('should discard a deferred intent on clear', () => {
+            const container = createContainer('<div role="listbox"></div>');
+            const ac = new AbortController();
+            const nav = makeNav(container, ac);
+
+            const resolve = vi.fn((n: FocusNavigationSelectors) => n.getFirst());
+            nav.goTo(resolve);
+
+            nav.clear();
+
+            // After clear, a flush must not replay the intent — even once items exist.
+            const option = document.createElement('div');
+            option.setAttribute('role', 'option');
+            option.id = 'late-0';
+            container.appendChild(option);
+
+            resolve.mockClear();
+            nav.flushPendingNavigation();
+            expect(resolve).not.toHaveBeenCalled();
+            expect(nav.selectors.activeItem).toBeNull();
         });
     });
 });

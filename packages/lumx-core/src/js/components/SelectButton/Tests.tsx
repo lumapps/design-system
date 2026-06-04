@@ -111,24 +111,27 @@ export default function selectButtonTests({ components, renderWithState }: Selec
             expect(button.textContent).toContain('banana');
         });
 
-        it('should render options in the listbox', () => {
+        it('should render options in the listbox', async () => {
             renderWithState(defaultTemplate);
-            const options = screen.getAllByRole('option');
+            await userEvent.click(screen.getByRole('combobox'));
+            const options = (await screen.findAllByRole('option')).filter((o) => !o.hasAttribute('data-filtered'));
             expect(options).toHaveLength(FRUITS.length);
             expect(options[0].textContent).toBe('Apple');
         });
 
-        it('should mark selected option with aria-selected', () => {
+        it('should mark selected option with aria-selected', async () => {
             renderWithState(defaultTemplate, { value: FRUITS[1] });
-            const options = screen.getAllByRole('option');
+            await userEvent.click(screen.getByRole('combobox'));
+            const options = (await screen.findAllByRole('option')).filter((o) => !o.hasAttribute('data-filtered'));
             expect(options[0].getAttribute('aria-selected')).toBe('false');
             expect(options[1].getAttribute('aria-selected')).toBe('true');
             expect(options[2].getAttribute('aria-selected')).toBe('false');
         });
 
-        it('should render option descriptions when getOptionDescription is provided', () => {
+        it('should render option descriptions when getOptionDescription is provided', async () => {
             renderWithState(defaultTemplate, { getOptionDescription: 'description' });
-            const options = screen.getAllByRole('option');
+            await userEvent.click(screen.getByRole('combobox'));
+            const options = (await screen.findAllByRole('option')).filter((o) => !o.hasAttribute('data-filtered'));
             const describedBy = options[0].getAttribute('aria-describedby');
             expect(describedBy).toBeTruthy();
             const descriptionId = describedBy!.split(' ')[0];

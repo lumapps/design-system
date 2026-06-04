@@ -107,7 +107,7 @@ export function setupRovingTabIndex(options: RovingTabIndexOptions, signal: Abor
         }
 
         if (!hasTabStop) {
-            const fallback = container.querySelector<HTMLElement>(nav.enabledItemSelector);
+            const fallback = container.querySelector<HTMLElement>(nav.selectors.enabledItemSelector);
             if (fallback) setTabIndex(fallback, '0');
         }
     }
@@ -115,7 +115,7 @@ export function setupRovingTabIndex(options: RovingTabIndexOptions, signal: Abor
     /** Enforce the single-tabstop invariant across all items. */
     function normalizeAllItems(): void {
         const items = Array.from(container.querySelectorAll<HTMLElement>(itemSelector));
-        const { activeItem } = nav;
+        const { activeItem } = nav.selectors;
 
         // Prefer either the current active item (from DOM) or the current selected item
         let preferredTabStopIndex = activeItem && items.indexOf(activeItem);
@@ -133,7 +133,8 @@ export function setupRovingTabIndex(options: RovingTabIndexOptions, signal: Abor
     function ensureTabStop(shouldFocus: boolean, anchor?: Node | null): void {
         if (container.querySelector(itemActiveSelector)) return;
         const fallback =
-            (anchor && nav.findNearestEnabled(anchor)) ?? container.querySelector<HTMLElement>(nav.enabledItemSelector);
+            (anchor && nav.selectors.findNearestEnabled(anchor)) ??
+            container.querySelector<HTMLElement>(nav.selectors.enabledItemSelector);
         if (!fallback) return;
         if (shouldFocus) {
             nav.goToItem(fallback);
@@ -207,7 +208,7 @@ export function setupRovingTabIndex(options: RovingTabIndexOptions, signal: Abor
 
         // Handle disabled
         if (disabledTargets.length > 0) {
-            const currentActive = nav.activeItem;
+            const currentActive = nav.selectors.activeItem;
             for (const target of disabledTargets) {
                 setTabIndex(target, '-1');
             }
@@ -243,7 +244,7 @@ export function setupRovingTabIndex(options: RovingTabIndexOptions, signal: Abor
         'keydown',
         (evt: KeyboardEvent) => {
             // Adopt focus target if nothing is active yet.
-            if (!nav.activeItem) {
+            if (!nav.selectors.activeItem) {
                 const target = evt.target as HTMLElement;
                 if (target.matches(itemSelector) && container.contains(target)) {
                     nav.goToItem(target);
@@ -265,10 +266,10 @@ export function setupRovingTabIndex(options: RovingTabIndexOptions, signal: Abor
                     handled = nav.goUp();
                     break;
                 case 'Home':
-                    handled = nav.goToFirst();
+                    handled = nav.goTo((s) => s.getFirst());
                     break;
                 case 'End':
-                    handled = nav.goToLast();
+                    handled = nav.goTo((s) => s.getLast());
                     break;
                 default:
                     break;

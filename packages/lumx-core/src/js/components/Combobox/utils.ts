@@ -1,12 +1,23 @@
-import type { FocusNavigationController } from '../../utils/focusNavigation';
 import type { OptionRegistration, SectionRegistration, SectionState } from './types';
 
 /**
  * Get the value for a combobox option element.
  * Uses `data-value` when set; falls back to the element's trimmed `textContent`.
+ *
+ * This is the *selection* value , which may differ from the visible label
  */
 export function getOptionValue(option: HTMLElement): string {
     if (option.dataset.value !== undefined) return option.dataset.value;
+    return option.textContent?.trim() ?? '';
+}
+
+/**
+ * Get the visible label for a combobox option element (its trimmed `textContent`).
+ *
+ * Used for typeahead matching: the user types the characters they see, which is the
+ * option's label — not its `data-value` (which can be an unrelated id).
+ */
+export function getOptionLabel(option: HTMLElement): string {
     return option.textContent?.trim() ?? '';
 }
 
@@ -22,18 +33,7 @@ export function isActionCell(cell: HTMLElement): boolean {
     return row.querySelector('[role="gridcell"]') !== cell;
 }
 
-/** Predicate matching an option element that carries `aria-selected="true"`. */
 export const isSelected = (el: Element) => el.getAttribute('aria-selected') === 'true';
-
-/** Navigate to the selected option, or to the first option if none is selected. */
-export function goToSelectedOrFirst(nav: FocusNavigationController) {
-    if (!nav.goToItemMatching(isSelected)) nav.goToFirst();
-}
-
-/** Navigate to the selected option, or to the last option if none is selected. */
-export function goToSelectedOrLast(nav: FocusNavigationController) {
-    if (!nav.goToItemMatching(isSelected)) nav.goToLast();
-}
 
 /**
  * Compute the current state of a section and notify when it changed.

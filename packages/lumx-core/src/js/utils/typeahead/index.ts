@@ -8,6 +8,15 @@ export interface Typeahead {
      */
     handle(key: string, currentItem: HTMLElement | null): HTMLElement | null;
 
+    /**
+     * Re-run the match for the *current* accumulated search string against the
+     * live DOM, without appending a new character or resetting the timeout.
+
+     * @param currentItem The currently active item.
+     * @returns The matched item, or null.
+     */
+    rematch(currentItem: HTMLElement | null): HTMLElement | null;
+
     /** Reset the accumulated search string. */
     reset(): void;
 }
@@ -49,18 +58,9 @@ export function createTypeahead(
     }
     signal.addEventListener('abort', reset);
 
-    // Handle typeahead keys
-    function handle(key: string, currentItem: HTMLElement | null): HTMLElement | null {
-        // Clear any pending reset timeout.
-        if (searchTimeout !== undefined) {
-            clearTimeout(searchTimeout);
-        }
-
-        // Accumulate the character.
-        searchString += key.toLowerCase();
-
-        // Schedule clearing the search string after inactivity.
-        searchTimeout = setTimeout(reset, SEARCH_TIMEOUT);
+    // Match the current accumulated search string against the live DOM.
+    function match(currentItem: HTMLElement | null): HTMLElement | null {
+        if (!searchString) return null;
 
         const walker = getWalker();
         if (!walker) return null;
@@ -124,5 +124,26 @@ export function createTypeahead(
         }
     }
 
-    return { handle, reset };
+    // Handle typeahead keys
+    function handle(key: string, currentItem: HTMLElement | null): HTMLElement | null {
+        // Clear any pending reset timeout.
+        if (searchTimeout !== undefined) {
+            clearTimeout(searchTimeout);
+        }
+
+        // Accumulate the character.
+        searchString += key.toLowerCase();
+
+        // Schedule clearing the search string after inactivity.
+        searchTimeout = setTimeout(reset, SEARCH_TIMEOUT);
+
+        return match(currentItem);
+    }
+
+    // Re-run the match for the current buffer without mutating it.
+    function rematch(currentItem: HTMLElement | null): HTMLElement | null {
+        return match(currentItem);
+    }
+
+    return { handle, rematch, reset };
 }
