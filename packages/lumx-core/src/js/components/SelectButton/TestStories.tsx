@@ -122,10 +122,76 @@ export function setup({
         },
     };
 
+    // ─── Typeahead (options unmounted while closed) ──────────────
+
+    const TYPEAHEAD_FRUITS = [
+        { id: '0', name: 'Apricot' },
+        { id: '1', name: 'Apple' },
+        { id: '2', name: 'Banana' },
+        { id: '3', name: 'Blueberry' },
+        { id: '4', name: 'Cherry' },
+        { id: '5', name: 'Orange' },
+    ];
+
+    const typeaheadTemplate = (props: any) => (
+        <SelectButton
+            label="Select a fruit"
+            options={TYPEAHEAD_FRUITS}
+            getOptionId="id"
+            getOptionName="name"
+            {...props}
+        />
+    );
+
+    const getActiveOptionId = (button: HTMLElement) => button.getAttribute('aria-activedescendant');
+
+    const TypeaheadWhileOpen = {
+        render: () => renderWithState(typeaheadTemplate),
+        play: async ({ canvasElement }: any) => {
+            const button = within(canvasElement).getByRole('combobox');
+
+            // Open via click (mouse), like the user does.
+            await userEvent.click(button);
+            await waitFor(() => {
+                expect(button).toHaveAttribute('aria-expanded', 'true');
+                expect(screen.getAllByRole('option').length).toBeGreaterThan(0);
+            });
+
+            // Type a printable character: active descendant lands on the first match
+            // by visible label ("Banana"), even though its id ("2") does not start with "b".
+            await userEvent.keyboard('b');
+            await waitFor(() => {
+                const banana = screen.getAllByRole('option').find((o) => o.textContent === 'Banana');
+                expect(banana).toBeTruthy();
+                expect(getActiveOptionId(button)).toBe(banana!.id);
+            });
+        },
+    };
+
+    const TypeaheadFromClosed = {
+        render: () => renderWithState(typeaheadTemplate),
+        play: async ({ canvasElement }: any) => {
+            const button = within(canvasElement).getByRole('combobox');
+            button.focus();
+            await expect(button).toHaveAttribute('aria-expanded', 'false');
+
+            // First keystroke opens AND lands on the first match once options commit.
+            await userEvent.keyboard('b');
+            await waitFor(() => {
+                expect(button).toHaveAttribute('aria-expanded', 'true');
+                const banana = screen.getAllByRole('option').find((o) => o.textContent === 'Banana');
+                expect(banana).toBeTruthy();
+                expect(getActiveOptionId(button)).toBe(banana!.id);
+            });
+        },
+    };
+
     return {
         meta,
         ClickOutsideCloses,
         SelectionUpdates,
         WithInfiniteScroll,
+        TypeaheadWhileOpen,
+        TypeaheadFromClosed,
     };
 }

@@ -1,14 +1,25 @@
-import { createSelectorTreeWalker } from '../browser/createSelectorTreeWalker';
 import { createActiveItemState } from './createActiveItemState';
-import type { FocusNavigationCallbacks, FocusNavigationController, GridNavigationOptions } from './types';
+import { createPendingNavigation } from './createPendingNavigation';
+import type {
+    FocusNavigationCallbacks,
+    FocusNavigationController,
+    FocusNavigationSelectors,
+    GridNavigationOptions,
+} from './types';
+import { lastDescendant } from '../browser/lastDescendant';
+import { createSelectorTreeWalker } from '../browser/createSelectorTreeWalker';
+import { first } from '../iterable/first';
 
 /**
  * Create a focus navigation controller for a 2D grid.
  *
+ * Resolves rows and cells by querying the DOM and commits focus by updating the
+ * active-item state (which fires {@link FocusNavigationCallbacks}).
+ *
  * Supports Up/Down between rows (with column memory) and Left/Right between cells
  * (with wrapping across rows).
  *
- * @param options Grid navigation options (container, rowSelector, cellSelector, isRowVisible, wrap).
+ * @param options Grid navigation options (container, rowSelector, cellSelector, wrap).
  * @param callbacks Callbacks for focus state changes.
  * @param signal AbortSignal for cleanup.
  * @returns FocusNavigationController instance.
@@ -18,89 +29,52 @@ export function createGridFocusNavigation(
     callbacks: FocusNavigationCallbacks,
     signal: AbortSignal,
 ): FocusNavigationController {
-    const { container, rowSelector, cellSelector, isRowVisible, wrap = false } = options;
+    const { container, rowSelector, cellSelector, wrap = false } = options;
     const state = createActiveItemState(callbacks, signal);
-    /** Remembered column index for Up/Down navigation (column memory). */
-    let rememberedCol = 0;
 
-    /** Check if a row element is visible (passes the isRowVisible filter). */
-    function isVisible(row: HTMLElement): boolean {
-        return !isRowVisible || isRowVisible(row);
-    }
+    const isNavigableRow = (row: HTMLElement) => row.querySelector(cellSelector) !== null;
+    const getFirstCell = (row: HTMLElement) => row.querySelector<HTMLElement>(cellSelector);
+    const getRowCells = (row: HTMLElement) => Array.from(row.querySelectorAll<HTMLElement>(cellSelector));
 
-    /** Check if a row is navigable (visible with at least one cell). */
-    function isNavigableRow(row: HTMLElement): boolean {
-        return isVisible(row) && row.querySelector(cellSelector) !== null;
-    }
+    /** Lazily walk navigable rows from `start` in a `direction`, projecting each row through `dive`. */
+    function* findRows(
+        start: HTMLElement | 'first' | 'last' = 'first',
+        direction: 'next' | 'prev' = 'next',
+        dive?: (row: HTMLElement) => HTMLElement | undefined | null,
+    ) {
+        // Tree walker
+        const walker = createSelectorTreeWalker(container, rowSelector);
 
-    /** Create a TreeWalker scoped to row elements within the container. */
-    function createRowWalker(): TreeWalker {
-        return createSelectorTreeWalker(container, rowSelector);
-    }
+        // Start at a specific row
+        if (start instanceof HTMLElement) walker.currentNode = start;
+        // Start from the last
+        else if (start === 'last') walker.currentNode = lastDescendant(container);
 
-    /**
-     * Iterate navigable rows from the container using a TreeWalker.
-     * - `'first'`: returns the first navigable row (or null).
-     * - `'last'`: returns the last navigable row (or null).
-     * - `'all'`: returns all navigable rows as an array.
-     */
-    function findVisibleRows(mode: 'first'): HTMLElement | null;
-    function findVisibleRows(mode: 'last'): HTMLElement | null;
-    function findVisibleRows(mode: 'all'): HTMLElement[];
-    function findVisibleRows(mode: 'first' | 'last' | 'all'): HTMLElement | HTMLElement[] | null {
-        const walker = createRowWalker();
-        if (mode === 'all') {
-            const result: HTMLElement[] = [];
-            let node = walker.nextNode() as HTMLElement | null;
-            while (node) {
-                if (isNavigableRow(node)) result.push(node);
-                node = walker.nextNode() as HTMLElement | null;
+        // Walk nodes
+        let node: HTMLElement | null;
+        do {
+            node = (direction === 'next' ? walker.nextNode() : walker.previousNode()) as HTMLElement | null;
+            if (node && isNavigableRow(node)) {
+                const result = dive ? dive(node) : node;
+                if (result) yield result;
             }
-            return result;
-        }
-        let found: HTMLElement | null = null;
-        let node = walker.nextNode() as HTMLElement | null;
-        while (node) {
-            if (isNavigableRow(node)) {
-                if (mode === 'first') return node;
-                found = node;
-            }
-            node = walker.nextNode() as HTMLElement | null;
-        }
-        return found;
+        } while (node);
     }
 
-    /** Get the cells within a single row element. */
-    function getRowCells(row: HTMLElement): HTMLElement[] {
-        return Array.from(row.querySelectorAll<HTMLElement>(cellSelector));
-    }
+    const findFirstVisibleRow = () => first(findRows());
+    const findLastVisibleRow = () => first(findRows('last', 'prev'));
 
-    /** Find the row element containing a cell, using closest(). */
     function findParentRow(cell: HTMLElement): HTMLElement | null {
         const row = cell.closest<HTMLElement>(rowSelector);
         return row && container.contains(row) ? row : null;
     }
 
-    /**
-     * Walk to the next or previous visible row (with cells) from a given row
-     * using a TreeWalker. Avoids building the full visible rows array.
-     */
-    function findAdjacentVisibleRow(fromRow: HTMLElement, direction: 'next' | 'prev'): HTMLElement | null {
-        const walker = createRowWalker();
-        walker.currentNode = fromRow;
-        const advance = direction === 'next' ? () => walker.nextNode() : () => walker.previousNode();
-        let node = advance() as HTMLElement | null;
-        while (node) {
-            if (isNavigableRow(node)) return node;
-            node = advance() as HTMLElement | null;
-        }
-        return null;
-    }
+    /** Deferred navigation intent (replayed once cells are committed to the DOM). */
+    const pending = createPendingNavigation(signal);
+    /** Remembered column index for Up/Down navigation (column memory). */
+    let rememberedCol = 0;
 
-    /**
-     * Activate the cell at the given column in a row element.
-     * Clamps col to the row's available cells.
-     */
+    /** Activate the cell at the given column in a row element. */
     function focusCellInRow(row: HTMLElement, col: number): boolean {
         const cells = getRowCells(row);
         if (cells.length === 0) return false;
@@ -109,15 +83,29 @@ export function createGridFocusNavigation(
         return true;
     }
 
+    /** Activate the given cell (validates it is in the grid, updates column memory). */
+    function activateCell(item: HTMLElement): boolean {
+        const row = findParentRow(item);
+        if (!row) return false;
+        const cells = getRowCells(row);
+        const col = cells.indexOf(item);
+        if (col === -1) return false;
+        rememberedCol = col;
+        state.setActive(item);
+        return true;
+    }
+
+    /** Got to first cell in first row */
     function goToFirst(): boolean {
-        const row = findVisibleRows('first');
+        const row = findFirstVisibleRow();
         if (!row) return false;
         rememberedCol = 0;
         return focusCellInRow(row, 0);
     }
 
+    /** Got to first cell in last row */
     function goToLast(): boolean {
-        const row = findVisibleRows('last');
+        const row = findLastVisibleRow();
         if (!row) return false;
         rememberedCol = 0;
         return focusCellInRow(row, 0);
@@ -145,8 +133,8 @@ export function createGridFocusNavigation(
 
         // Wrap to the adjacent row (or opposite boundary row), activating the first or last cell.
         const rowDirection = step > 0 ? 'next' : 'prev';
-        const adjacentRow = findAdjacentVisibleRow(currentRow, rowDirection);
-        const targetRow = adjacentRow ?? (step > 0 ? findVisibleRows('first') : findVisibleRows('last'));
+        const adjacentRow = first(findRows(currentRow, rowDirection));
+        const targetRow = adjacentRow ?? (step > 0 ? findFirstVisibleRow() : findLastVisibleRow());
         if (!targetRow) return false;
 
         const targetCells = getRowCells(targetRow);
@@ -167,36 +155,39 @@ export function createGridFocusNavigation(
         const currentRow = findParentRow(state.active);
         if (!currentRow) return false;
 
-        const adjacentRow = findAdjacentVisibleRow(currentRow, direction);
+        const adjacentRow = first(findRows(currentRow, direction));
         if (adjacentRow) return focusCellInRow(adjacentRow, rememberedCol);
 
         if (wrap) {
             // Wrap to the opposite boundary row.
-            const wrapRow = direction === 'next' ? findVisibleRows('first') : findVisibleRows('last');
+            const wrapRow = direction === 'next' ? findFirstVisibleRow() : findLastVisibleRow();
             if (wrapRow) return focusCellInRow(wrapRow, rememberedCol);
         }
         return false;
     }
 
-    return {
-        type: 'grid',
-
+    const selectors: FocusNavigationSelectors = {
         get activeItem() {
             return state.active;
         },
-        get hasActiveItem() {
-            return state.active !== null;
-        },
         get hasNavigableItems() {
-            return findVisibleRows('first') !== null;
+            return first(findRows()) !== null;
         },
+        // First cell in first row
+        getFirst: () => first(findRows('first', 'next', getFirstCell)),
+        // First cell in last row
+        getLast: () => first(findRows('last', 'prev', getFirstCell)),
+        // First cell matching predicate
+        getMatching: (predicate) => first(findRows('first', 'next', (row) => getRowCells(row).find(predicate))),
+    };
 
-        goToFirst,
-        goToLast,
+    return {
+        type: 'grid',
+        selectors,
 
         goToOffset(offset: number): boolean {
             if (offset === 0) return state.active !== null;
-            const visibleRows = findVisibleRows('all');
+            const visibleRows = Array.from(findRows());
             if (visibleRows.length === 0) return false;
 
             if (!state.active) {
@@ -218,40 +209,24 @@ export function createGridFocusNavigation(
             return focusCellInRow(visibleRows[targetIdx], rememberedCol);
         },
 
-        goToItemMatching(predicate: (item: HTMLElement) => boolean): boolean {
-            // Iterate visible rows lazily — short-circuit on first match.
-            const walker = createRowWalker();
-            let row = walker.nextNode() as HTMLElement | null;
-            while (row) {
-                if (isNavigableRow(row)) {
-                    const cells = getRowCells(row);
-                    for (let c = 0; c < cells.length; c++) {
-                        if (predicate(cells[c])) {
-                            rememberedCol = c;
-                            state.setActive(cells[c]);
-                            return true;
-                        }
-                    }
-                }
-                row = walker.nextNode() as HTMLElement | null;
+        clear(): void {
+            state.clear();
+            pending.clear();
+        },
+
+        goTo(resolve: (selectors: FocusNavigationSelectors) => HTMLElement | null): boolean {
+            const target = resolve(selectors);
+            if (target && activateCell(target)) {
+                pending.clear();
+                return true;
             }
+            // Target not resolvable yet (e.g. cells not committed to the DOM) — defer
+            pending.defer(() => this.goTo(resolve));
             return false;
         },
 
-        goToItem(item: HTMLElement): boolean {
-            // Use closest() to find the parent row, then find col within that row only.
-            const row = findParentRow(item);
-            if (!row || !isVisible(row)) return false;
-            const cells = getRowCells(row);
-            const col = cells.indexOf(item);
-            if (col === -1) return false;
-            rememberedCol = col;
-            state.setActive(item);
-            return true;
-        },
-
-        clear(): void {
-            state.clear();
+        flushPendingNavigation(): void {
+            pending.flush();
         },
 
         goUp(): boolean {

@@ -35,6 +35,11 @@ export default {
 export const ClickOutsideCloses = { ...testStories.ClickOutsideCloses };
 export const SelectionUpdates = { ...testStories.SelectionUpdates };
 
+// Typeahead: options are unmounted while closed, so moving the active descendant onto
+// the first match requires a real browser to reproduce the commit timing.
+export const TypeaheadWhileOpen = { ...testStories.TypeaheadWhileOpen };
+export const TypeaheadFromClosed = { ...testStories.TypeaheadFromClosed };
+
 // Vue-specific test stories (use Vue SFCs for stateful rendering)
 
 /** Test infinite scroll loads more options when scrolling to the bottom */

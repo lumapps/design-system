@@ -59,7 +59,14 @@ New components: **always implement in core first**, then add React/Vue wrappers.
 
 ## TESTING
 
-Two suites, both powered by Vitest:
+Two suites, both powered by Vitest. Both use Testing Library (`@testing-library/react` / `@testing-library/vue` / `@testing-library/dom`), so these query conventions apply to **both unit tests and Storybook `play` functions**:
+
+-   Prefer Testing Library queries over `document.body.querySelector`
+    - use `screen.getByRole`/`queryByRole` instead of `[role=...]` selectors
+    - use `screen.getByTestId` instead of `[data-testid=...]` selectors
+    - use the custom queries in `packages/lumx-core/src/testing/queries.ts` (`getByClassName`/`queryByClassName`/`getByTagName`, etc.)
+    - use `find*` queries instead of `waitFor` when possible
+-   Prefer repeating queries and checks in tests rather than factorizing in utils to make the test more self contained
 
 **Unit tests** (`*.test.tsx` / `*.test.ts`) — co-located with components, never in `__tests__/`:
 
@@ -70,7 +77,7 @@ Two suites, both powered by Vitest:
 
 **Storybook tests** (`*.stories.tsx` / `*.stories.ts`) — Vitest browser mode running inside Playwright:
 
--   Stories can define `play` functions for interaction testing
+-   Stories can define `play` functions for interaction testing (with testing-library via the `storybook/test` module)
 -   Screenshots are optionally taken and diffed against baselines stored in `__vis__/`
 -   `yarn test:storybook` — runs all Storybook tests across React and Vue
 

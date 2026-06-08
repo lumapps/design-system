@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 import { createGridFocusNavigation } from './createGridFocusNavigation';
 
-import type { FocusNavigationCallbacks } from './types';
+import type { FocusNavigationCallbacks, FocusNavigationSelectors } from './types';
 
 function createContainer(html: string): HTMLElement {
     const div = document.createElement('div');
@@ -83,8 +83,8 @@ describe('createGridFocusNavigation', () => {
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
             const nav = createGridFocusNavigation({ ...GRID_OPTIONS, container }, callbacks, ac.signal);
-            expect(nav.activeItem).toBeNull();
-            expect(nav.hasActiveItem).toBe(false);
+            expect(nav.selectors.activeItem).toBeNull();
+            expect(nav.selectors.activeItem).toBeNull();
         });
 
         it('should detect navigable items', () => {
@@ -92,7 +92,7 @@ describe('createGridFocusNavigation', () => {
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
             const nav = createGridFocusNavigation({ ...GRID_OPTIONS, container }, callbacks, ac.signal);
-            expect(nav.hasNavigableItems).toBe(true);
+            expect(nav.selectors.hasNavigableItems).toBe(true);
         });
 
         it('should detect no navigable items in empty container', () => {
@@ -100,18 +100,18 @@ describe('createGridFocusNavigation', () => {
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
             const nav = createGridFocusNavigation({ ...GRID_OPTIONS, container }, callbacks, ac.signal);
-            expect(nav.hasNavigableItems).toBe(false);
+            expect(nav.selectors.hasNavigableItems).toBe(false);
         });
     });
 
-    describe('goToFirst / goToLast', () => {
+    describe('goTo getFirst / getLast', () => {
         it('should navigate to first cell (row 0, col 0)', () => {
             const container = createGrid(3, 3);
             const { callbacks, activated } = makeCallbacks();
             const ac = new AbortController();
             const nav = createGridFocusNavigation({ ...GRID_OPTIONS, container }, callbacks, ac.signal);
-            expect(nav.goToFirst()).toBe(true);
-            expect(nav.activeItem?.id).toBe('cell-0-0');
+            expect(nav.goTo((s) => s.getFirst())).toBe(true);
+            expect(nav.selectors.activeItem?.id).toBe('cell-0-0');
             expect(activated).toHaveLength(1);
         });
 
@@ -120,8 +120,8 @@ describe('createGridFocusNavigation', () => {
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
             const nav = createGridFocusNavigation({ ...GRID_OPTIONS, container }, callbacks, ac.signal);
-            expect(nav.goToLast()).toBe(true);
-            expect(nav.activeItem?.id).toBe('cell-2-0');
+            expect(nav.goTo((s) => s.getLast())).toBe(true);
+            expect(nav.selectors.activeItem?.id).toBe('cell-2-0');
         });
 
         it('should return false on empty grid', () => {
@@ -129,8 +129,8 @@ describe('createGridFocusNavigation', () => {
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
             const nav = createGridFocusNavigation({ ...GRID_OPTIONS, container }, callbacks, ac.signal);
-            expect(nav.goToFirst()).toBe(false);
-            expect(nav.goToLast()).toBe(false);
+            expect(nav.goTo((s) => s.getFirst())).toBe(false);
+            expect(nav.goTo((s) => s.getLast())).toBe(false);
         });
     });
 
@@ -140,9 +140,9 @@ describe('createGridFocusNavigation', () => {
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
             const nav = createGridFocusNavigation({ ...GRID_OPTIONS, container }, callbacks, ac.signal);
-            nav.goToFirst();
+            nav.goTo((s) => s.getFirst());
             expect(nav.goDown()).toBe(true);
-            expect(nav.activeItem?.id).toBe('cell-1-0');
+            expect(nav.selectors.activeItem?.id).toBe('cell-1-0');
         });
 
         it('goUp should move to the previous row', () => {
@@ -150,9 +150,9 @@ describe('createGridFocusNavigation', () => {
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
             const nav = createGridFocusNavigation({ ...GRID_OPTIONS, container }, callbacks, ac.signal);
-            nav.goToLast();
+            nav.goTo((s) => s.getLast());
             expect(nav.goUp()).toBe(true);
-            expect(nav.activeItem?.id).toBe('cell-1-0');
+            expect(nav.selectors.activeItem?.id).toBe('cell-1-0');
         });
 
         it('goDown should return false at last row without wrap', () => {
@@ -160,9 +160,9 @@ describe('createGridFocusNavigation', () => {
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
             const nav = createGridFocusNavigation({ ...GRID_OPTIONS, container }, callbacks, ac.signal);
-            nav.goToLast();
+            nav.goTo((s) => s.getLast());
             expect(nav.goDown()).toBe(false);
-            expect(nav.activeItem?.id).toBe('cell-2-0');
+            expect(nav.selectors.activeItem?.id).toBe('cell-2-0');
         });
 
         it('goUp should return false at first row without wrap', () => {
@@ -170,9 +170,9 @@ describe('createGridFocusNavigation', () => {
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
             const nav = createGridFocusNavigation({ ...GRID_OPTIONS, container }, callbacks, ac.signal);
-            nav.goToFirst();
+            nav.goTo((s) => s.getFirst());
             expect(nav.goUp()).toBe(false);
-            expect(nav.activeItem?.id).toBe('cell-0-0');
+            expect(nav.selectors.activeItem?.id).toBe('cell-0-0');
         });
 
         it('goDown with no active item should go to first row', () => {
@@ -181,7 +181,7 @@ describe('createGridFocusNavigation', () => {
             const ac = new AbortController();
             const nav = createGridFocusNavigation({ ...GRID_OPTIONS, container }, callbacks, ac.signal);
             expect(nav.goDown()).toBe(true);
-            expect(nav.activeItem?.id).toBe('cell-0-0');
+            expect(nav.selectors.activeItem?.id).toBe('cell-0-0');
         });
 
         it('goUp with no active item should go to last row', () => {
@@ -190,7 +190,7 @@ describe('createGridFocusNavigation', () => {
             const ac = new AbortController();
             const nav = createGridFocusNavigation({ ...GRID_OPTIONS, container }, callbacks, ac.signal);
             expect(nav.goUp()).toBe(true);
-            expect(nav.activeItem?.id).toBe('cell-2-0');
+            expect(nav.selectors.activeItem?.id).toBe('cell-2-0');
         });
     });
 
@@ -202,16 +202,16 @@ describe('createGridFocusNavigation', () => {
             const nav = createGridFocusNavigation({ ...GRID_OPTIONS, container }, callbacks, ac.signal);
 
             // Navigate to cell-0-2 (row 0, col 2)
-            nav.goToItem(container.querySelector('#cell-0-2') as HTMLElement);
-            expect(nav.activeItem?.id).toBe('cell-0-2');
+            nav.goTo(() => container.querySelector('#cell-0-2') as HTMLElement);
+            expect(nav.selectors.activeItem?.id).toBe('cell-0-2');
 
             // Go down — should stay in col 2
             nav.goDown();
-            expect(nav.activeItem?.id).toBe('cell-1-2');
+            expect(nav.selectors.activeItem?.id).toBe('cell-1-2');
 
             // Go down again — should stay in col 2
             nav.goDown();
-            expect(nav.activeItem?.id).toBe('cell-2-2');
+            expect(nav.selectors.activeItem?.id).toBe('cell-2-2');
         });
 
         it('should clamp column when moving to a shorter row', () => {
@@ -221,52 +221,52 @@ describe('createGridFocusNavigation', () => {
             const nav = createGridFocusNavigation({ ...GRID_OPTIONS, container }, callbacks, ac.signal);
 
             // Navigate to cell-0-2 (row 0 has 3 cells)
-            nav.goToItem(container.querySelector('#cell-0-2') as HTMLElement);
-            expect(nav.activeItem?.id).toBe('cell-0-2');
+            nav.goTo(() => container.querySelector('#cell-0-2') as HTMLElement);
+            expect(nav.selectors.activeItem?.id).toBe('cell-0-2');
 
             // Go down to row 1 (only 1 cell) — col should clamp to 0
             nav.goDown();
-            expect(nav.activeItem?.id).toBe('cell-1-0');
+            expect(nav.selectors.activeItem?.id).toBe('cell-1-0');
 
             // Go down to row 2 (2 cells) — remembered col is still 2, clamps to 1
             nav.goDown();
-            expect(nav.activeItem?.id).toBe('cell-2-1');
+            expect(nav.selectors.activeItem?.id).toBe('cell-2-1');
         });
 
-        it('goToFirst should reset column memory to 0', () => {
+        it('goTo getFirst should reset column memory to 0', () => {
             const container = createGrid(3, 3);
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
             const nav = createGridFocusNavigation({ ...GRID_OPTIONS, container }, callbacks, ac.signal);
 
             // Set column memory to 2
-            nav.goToItem(container.querySelector('#cell-0-2') as HTMLElement);
+            nav.goTo(() => container.querySelector('#cell-0-2') as HTMLElement);
 
-            // goToFirst resets column memory
-            nav.goToFirst();
-            expect(nav.activeItem?.id).toBe('cell-0-0');
+            // goTo getFirst resets column memory
+            nav.goTo((s) => s.getFirst());
+            expect(nav.selectors.activeItem?.id).toBe('cell-0-0');
 
             // Subsequent goDown should use col 0
             nav.goDown();
-            expect(nav.activeItem?.id).toBe('cell-1-0');
+            expect(nav.selectors.activeItem?.id).toBe('cell-1-0');
         });
 
-        it('goToLast should reset column memory to 0', () => {
+        it('goTo getLast should reset column memory to 0', () => {
             const container = createGrid(3, 3);
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
             const nav = createGridFocusNavigation({ ...GRID_OPTIONS, container }, callbacks, ac.signal);
 
             // Set column memory to 2
-            nav.goToItem(container.querySelector('#cell-0-2') as HTMLElement);
+            nav.goTo(() => container.querySelector('#cell-0-2') as HTMLElement);
 
-            // goToLast resets column memory
-            nav.goToLast();
-            expect(nav.activeItem?.id).toBe('cell-2-0');
+            // goTo getLast resets column memory
+            nav.goTo((s) => s.getLast());
+            expect(nav.selectors.activeItem?.id).toBe('cell-2-0');
 
             // Subsequent goUp should use col 0
             nav.goUp();
-            expect(nav.activeItem?.id).toBe('cell-1-0');
+            expect(nav.selectors.activeItem?.id).toBe('cell-1-0');
         });
     });
 
@@ -276,9 +276,9 @@ describe('createGridFocusNavigation', () => {
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
             const nav = createGridFocusNavigation({ ...GRID_OPTIONS, container }, callbacks, ac.signal);
-            nav.goToFirst();
+            nav.goTo((s) => s.getFirst());
             expect(nav.goRight()).toBe(true);
-            expect(nav.activeItem?.id).toBe('cell-0-1');
+            expect(nav.selectors.activeItem?.id).toBe('cell-0-1');
         });
 
         it('goLeft should move to previous cell in the same row', () => {
@@ -286,9 +286,9 @@ describe('createGridFocusNavigation', () => {
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
             const nav = createGridFocusNavigation({ ...GRID_OPTIONS, container }, callbacks, ac.signal);
-            nav.goToItem(container.querySelector('#cell-0-2') as HTMLElement);
+            nav.goTo(() => container.querySelector('#cell-0-2') as HTMLElement);
             expect(nav.goLeft()).toBe(true);
-            expect(nav.activeItem?.id).toBe('cell-0-1');
+            expect(nav.selectors.activeItem?.id).toBe('cell-0-1');
         });
 
         it('goRight should return false at end of row without wrap', () => {
@@ -296,7 +296,7 @@ describe('createGridFocusNavigation', () => {
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
             const nav = createGridFocusNavigation({ ...GRID_OPTIONS, container }, callbacks, ac.signal);
-            nav.goToItem(container.querySelector('#cell-0-2') as HTMLElement);
+            nav.goTo(() => container.querySelector('#cell-0-2') as HTMLElement);
             expect(nav.goRight()).toBe(false);
         });
 
@@ -305,7 +305,7 @@ describe('createGridFocusNavigation', () => {
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
             const nav = createGridFocusNavigation({ ...GRID_OPTIONS, container }, callbacks, ac.signal);
-            nav.goToFirst();
+            nav.goTo((s) => s.getFirst());
             expect(nav.goLeft()).toBe(false);
         });
 
@@ -323,14 +323,14 @@ describe('createGridFocusNavigation', () => {
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
             const nav = createGridFocusNavigation({ ...GRID_OPTIONS, container }, callbacks, ac.signal);
-            nav.goToFirst();
+            nav.goTo((s) => s.getFirst());
             nav.goRight();
             nav.goRight();
-            expect(nav.activeItem?.id).toBe('cell-0-2');
+            expect(nav.selectors.activeItem?.id).toBe('cell-0-2');
 
             // Column memory should be 2 — goDown should land on col 2
             nav.goDown();
-            expect(nav.activeItem?.id).toBe('cell-1-2');
+            expect(nav.selectors.activeItem?.id).toBe('cell-1-2');
         });
     });
 
@@ -340,9 +340,9 @@ describe('createGridFocusNavigation', () => {
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
             const nav = createGridFocusNavigation({ ...GRID_OPTIONS, container, wrap: true }, callbacks, ac.signal);
-            nav.goToLast();
+            nav.goTo((s) => s.getLast());
             expect(nav.goDown()).toBe(true);
-            expect(nav.activeItem?.id).toBe('cell-0-0');
+            expect(nav.selectors.activeItem?.id).toBe('cell-0-0');
         });
 
         it('goUp should wrap from first row to last', () => {
@@ -350,9 +350,9 @@ describe('createGridFocusNavigation', () => {
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
             const nav = createGridFocusNavigation({ ...GRID_OPTIONS, container, wrap: true }, callbacks, ac.signal);
-            nav.goToFirst();
+            nav.goTo((s) => s.getFirst());
             expect(nav.goUp()).toBe(true);
-            expect(nav.activeItem?.id).toBe('cell-2-0');
+            expect(nav.selectors.activeItem?.id).toBe('cell-2-0');
         });
 
         it('goRight should wrap to first cell of next row', () => {
@@ -360,9 +360,9 @@ describe('createGridFocusNavigation', () => {
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
             const nav = createGridFocusNavigation({ ...GRID_OPTIONS, container, wrap: true }, callbacks, ac.signal);
-            nav.goToItem(container.querySelector('#cell-0-1') as HTMLElement);
+            nav.goTo(() => container.querySelector('#cell-0-1') as HTMLElement);
             expect(nav.goRight()).toBe(true);
-            expect(nav.activeItem?.id).toBe('cell-1-0');
+            expect(nav.selectors.activeItem?.id).toBe('cell-1-0');
         });
 
         it('goLeft should wrap to last cell of previous row', () => {
@@ -370,9 +370,9 @@ describe('createGridFocusNavigation', () => {
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
             const nav = createGridFocusNavigation({ ...GRID_OPTIONS, container, wrap: true }, callbacks, ac.signal);
-            nav.goToItem(container.querySelector('#cell-1-0') as HTMLElement);
+            nav.goTo(() => container.querySelector('#cell-1-0') as HTMLElement);
             expect(nav.goLeft()).toBe(true);
-            expect(nav.activeItem?.id).toBe('cell-0-1');
+            expect(nav.selectors.activeItem?.id).toBe('cell-0-1');
         });
 
         it('goRight should wrap from last cell of last row to first cell of first row', () => {
@@ -380,9 +380,9 @@ describe('createGridFocusNavigation', () => {
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
             const nav = createGridFocusNavigation({ ...GRID_OPTIONS, container, wrap: true }, callbacks, ac.signal);
-            nav.goToItem(container.querySelector('#cell-1-1') as HTMLElement);
+            nav.goTo(() => container.querySelector('#cell-1-1') as HTMLElement);
             expect(nav.goRight()).toBe(true);
-            expect(nav.activeItem?.id).toBe('cell-0-0');
+            expect(nav.selectors.activeItem?.id).toBe('cell-0-0');
         });
 
         it('goLeft should wrap from first cell of first row to last cell of last row', () => {
@@ -390,21 +390,21 @@ describe('createGridFocusNavigation', () => {
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
             const nav = createGridFocusNavigation({ ...GRID_OPTIONS, container, wrap: true }, callbacks, ac.signal);
-            nav.goToFirst();
+            nav.goTo((s) => s.getFirst());
             expect(nav.goLeft()).toBe(true);
-            expect(nav.activeItem?.id).toBe('cell-1-1');
+            expect(nav.selectors.activeItem?.id).toBe('cell-1-1');
         });
     });
 
-    describe('goToItem', () => {
+    describe('goTo with item selector', () => {
         it('should navigate to a specific cell', () => {
             const container = createGrid(3, 3);
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
             const nav = createGridFocusNavigation({ ...GRID_OPTIONS, container }, callbacks, ac.signal);
             const cell = container.querySelector('#cell-1-2') as HTMLElement;
-            expect(nav.goToItem(cell)).toBe(true);
-            expect(nav.activeItem?.id).toBe('cell-1-2');
+            expect(nav.goTo(() => cell)).toBe(true);
+            expect(nav.selectors.activeItem?.id).toBe('cell-1-2');
         });
 
         it('should update column memory', () => {
@@ -412,11 +412,11 @@ describe('createGridFocusNavigation', () => {
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
             const nav = createGridFocusNavigation({ ...GRID_OPTIONS, container }, callbacks, ac.signal);
-            nav.goToItem(container.querySelector('#cell-0-2') as HTMLElement);
+            nav.goTo(() => container.querySelector('#cell-0-2') as HTMLElement);
 
             // Column memory should be 2
             nav.goDown();
-            expect(nav.activeItem?.id).toBe('cell-1-2');
+            expect(nav.selectors.activeItem?.id).toBe('cell-1-2');
         });
 
         it('should return false for element not in the grid', () => {
@@ -425,11 +425,11 @@ describe('createGridFocusNavigation', () => {
             const ac = new AbortController();
             const nav = createGridFocusNavigation({ ...GRID_OPTIONS, container }, callbacks, ac.signal);
             const outsider = document.createElement('div');
-            expect(nav.goToItem(outsider)).toBe(false);
+            expect(nav.goTo(() => outsider)).toBe(false);
         });
     });
 
-    describe('goToItemMatching', () => {
+    describe('goTo with getMatching', () => {
         it('should navigate to first cell matching predicate', () => {
             const container = createContainer(`
                 <div role="grid">
@@ -446,16 +446,17 @@ describe('createGridFocusNavigation', () => {
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
             const nav = createGridFocusNavigation({ ...GRID_OPTIONS, container }, callbacks, ac.signal);
-            expect(nav.goToItemMatching((el) => el.getAttribute('aria-selected') === 'true')).toBe(true);
-            expect(nav.activeItem?.id).toBe('cell-0-1');
+            expect(nav.goTo((n) => n.getMatching((el) => el.getAttribute('aria-selected') === 'true'))).toBe(true);
+            expect(nav.selectors.activeItem?.id).toBe('cell-0-1');
         });
 
-        it('should return false when no cell matches', () => {
+        it('should defer when no cell matches', () => {
             const container = createGrid(2, 2);
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
             const nav = createGridFocusNavigation({ ...GRID_OPTIONS, container }, callbacks, ac.signal);
-            expect(nav.goToItemMatching(() => false)).toBe(false);
+            expect(nav.goTo((n) => n.getMatching(() => false))).toBe(false);
+            expect(nav.selectors.activeItem).toBeNull();
         });
 
         it('should update column memory to matched cell column', () => {
@@ -463,12 +464,12 @@ describe('createGridFocusNavigation', () => {
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
             const nav = createGridFocusNavigation({ ...GRID_OPTIONS, container }, callbacks, ac.signal);
-            nav.goToItemMatching((el) => el.id === 'cell-1-2');
-            expect(nav.activeItem?.id).toBe('cell-1-2');
+            nav.goTo((n) => n.getMatching((el) => el.id === 'cell-1-2'));
+            expect(nav.selectors.activeItem?.id).toBe('cell-1-2');
 
             // Column memory should be 2
             nav.goDown();
-            expect(nav.activeItem?.id).toBe('cell-2-2');
+            expect(nav.selectors.activeItem?.id).toBe('cell-2-2');
         });
     });
 
@@ -478,9 +479,9 @@ describe('createGridFocusNavigation', () => {
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
             const nav = createGridFocusNavigation({ ...GRID_OPTIONS, container }, callbacks, ac.signal);
-            nav.goToFirst();
+            nav.goTo((s) => s.getFirst());
             expect(nav.goToOffset(2)).toBe(true);
-            expect(nav.activeItem?.id).toBe('cell-2-0');
+            expect(nav.selectors.activeItem?.id).toBe('cell-2-0');
         });
 
         it('should navigate backward by row offset', () => {
@@ -488,9 +489,9 @@ describe('createGridFocusNavigation', () => {
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
             const nav = createGridFocusNavigation({ ...GRID_OPTIONS, container }, callbacks, ac.signal);
-            nav.goToLast();
+            nav.goTo((s) => s.getLast());
             expect(nav.goToOffset(-2)).toBe(true);
-            expect(nav.activeItem?.id).toBe('cell-2-0');
+            expect(nav.selectors.activeItem?.id).toBe('cell-2-0');
         });
 
         it('should clamp at boundaries', () => {
@@ -498,9 +499,9 @@ describe('createGridFocusNavigation', () => {
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
             const nav = createGridFocusNavigation({ ...GRID_OPTIONS, container }, callbacks, ac.signal);
-            nav.goToLast();
+            nav.goTo((s) => s.getLast());
             expect(nav.goToOffset(5)).toBe(false);
-            expect(nav.activeItem?.id).toBe('cell-2-0');
+            expect(nav.selectors.activeItem?.id).toBe('cell-2-0');
         });
 
         it('should start from first row when no active item and offset is positive', () => {
@@ -509,7 +510,7 @@ describe('createGridFocusNavigation', () => {
             const ac = new AbortController();
             const nav = createGridFocusNavigation({ ...GRID_OPTIONS, container }, callbacks, ac.signal);
             expect(nav.goToOffset(1)).toBe(true);
-            expect(nav.activeItem?.id).toBe('cell-0-0');
+            expect(nav.selectors.activeItem?.id).toBe('cell-0-0');
         });
 
         it('should start from last row when no active item and offset is negative', () => {
@@ -518,7 +519,7 @@ describe('createGridFocusNavigation', () => {
             const ac = new AbortController();
             const nav = createGridFocusNavigation({ ...GRID_OPTIONS, container }, callbacks, ac.signal);
             expect(nav.goToOffset(-1)).toBe(true);
-            expect(nav.activeItem?.id).toBe('cell-4-0');
+            expect(nav.selectors.activeItem?.id).toBe('cell-4-0');
         });
 
         it('should respect column memory with offset', () => {
@@ -526,9 +527,9 @@ describe('createGridFocusNavigation', () => {
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
             const nav = createGridFocusNavigation({ ...GRID_OPTIONS, container }, callbacks, ac.signal);
-            nav.goToItem(container.querySelector('#cell-0-2') as HTMLElement);
+            nav.goTo(() => container.querySelector('#cell-0-2') as HTMLElement);
             expect(nav.goToOffset(3)).toBe(true);
-            expect(nav.activeItem?.id).toBe('cell-3-2');
+            expect(nav.selectors.activeItem?.id).toBe('cell-3-2');
         });
 
         it('offset 0 should return true if active item exists, false otherwise', () => {
@@ -537,7 +538,7 @@ describe('createGridFocusNavigation', () => {
             const ac = new AbortController();
             const nav = createGridFocusNavigation({ ...GRID_OPTIONS, container }, callbacks, ac.signal);
             expect(nav.goToOffset(0)).toBe(false);
-            nav.goToFirst();
+            nav.goTo((s) => s.getFirst());
             expect(nav.goToOffset(0)).toBe(true);
         });
     });
@@ -548,10 +549,10 @@ describe('createGridFocusNavigation', () => {
             const { callbacks, deactivated, counter } = makeCallbacks();
             const ac = new AbortController();
             const nav = createGridFocusNavigation({ ...GRID_OPTIONS, container }, callbacks, ac.signal);
-            nav.goToFirst();
+            nav.goTo((s) => s.getFirst());
             nav.clear();
-            expect(nav.activeItem).toBeNull();
-            expect(nav.hasActiveItem).toBe(false);
+            expect(nav.selectors.activeItem).toBeNull();
+            expect(nav.selectors.activeItem).toBeNull();
             expect(deactivated).toHaveLength(1);
             expect(counter.clearCount).toBe(1);
         });
@@ -571,7 +572,7 @@ describe('createGridFocusNavigation', () => {
                 },
                 ac.signal,
             );
-            nav.goToFirst();
+            nav.goTo((s) => s.getFirst());
             nav.goDown();
             expect(order).toEqual(['activate:cell-0-0', 'deactivate:cell-0-0', 'activate:cell-1-0']);
         });
@@ -589,7 +590,7 @@ describe('createGridFocusNavigation', () => {
                 },
                 ac.signal,
             );
-            nav.goToFirst();
+            nav.goTo((s) => s.getFirst());
             nav.clear();
             expect(order).toEqual(['activate:cell-0-0', 'deactivate:cell-0-0', 'clear']);
         });
@@ -601,107 +602,11 @@ describe('createGridFocusNavigation', () => {
             const { callbacks, deactivated, counter } = makeCallbacks();
             const ac = new AbortController();
             const nav = createGridFocusNavigation({ ...GRID_OPTIONS, container }, callbacks, ac.signal);
-            nav.goToFirst();
+            nav.goTo((s) => s.getFirst());
             ac.abort();
-            expect(nav.activeItem).toBeNull();
+            expect(nav.selectors.activeItem).toBeNull();
             expect(deactivated).toHaveLength(1);
             expect(counter.clearCount).toBe(1);
-        });
-    });
-
-    describe('isRowVisible filtering', () => {
-        it('should skip rows where isRowVisible returns false', () => {
-            const container = createContainer(`
-                <div role="grid">
-                    <div role="row" id="row-0">
-                        <div role="gridcell" id="cell-0-0">A</div>
-                    </div>
-                    <div role="row" id="row-1" data-hidden>
-                        <div role="gridcell" id="cell-1-0">B</div>
-                    </div>
-                    <div role="row" id="row-2">
-                        <div role="gridcell" id="cell-2-0">C</div>
-                    </div>
-                </div>
-            `);
-            const { callbacks } = makeCallbacks();
-            const ac = new AbortController();
-            const nav = createGridFocusNavigation(
-                {
-                    ...GRID_OPTIONS,
-                    container,
-                    isRowVisible: (row) => !row.hasAttribute('data-hidden'),
-                },
-                callbacks,
-                ac.signal,
-            );
-
-            nav.goToFirst();
-            expect(nav.activeItem?.id).toBe('cell-0-0');
-
-            // goDown should skip the hidden row and go to row-2
-            nav.goDown();
-            expect(nav.activeItem?.id).toBe('cell-2-0');
-        });
-
-        it('should report no navigable items when all rows are hidden', () => {
-            const container = createContainer(`
-                <div role="grid">
-                    <div role="row" data-hidden>
-                        <div role="gridcell" id="cell-0-0">A</div>
-                    </div>
-                </div>
-            `);
-            const { callbacks } = makeCallbacks();
-            const ac = new AbortController();
-            const nav = createGridFocusNavigation(
-                {
-                    ...GRID_OPTIONS,
-                    container,
-                    isRowVisible: (row) => !row.hasAttribute('data-hidden'),
-                },
-                callbacks,
-                ac.signal,
-            );
-            expect(nav.hasNavigableItems).toBe(false);
-            expect(nav.goToFirst()).toBe(false);
-        });
-
-        it('should match Combobox usage pattern (isRowVisible via child attribute)', () => {
-            const container = createContainer(`
-                <div role="grid">
-                    <div role="row" id="row-0">
-                        <div role="gridcell" id="cell-0-0">Visible</div>
-                    </div>
-                    <div role="row" id="row-1">
-                        <div role="gridcell" id="cell-1-0" data-filtered>Filtered</div>
-                    </div>
-                    <div role="row" id="row-2">
-                        <div role="gridcell" id="cell-2-0">Visible</div>
-                    </div>
-                </div>
-            `);
-            const { callbacks } = makeCallbacks();
-            const ac = new AbortController();
-            const nav = createGridFocusNavigation(
-                {
-                    ...GRID_OPTIONS,
-                    container,
-                    isRowVisible: (row) => !row.querySelector('[role="gridcell"]')?.hasAttribute('data-filtered'),
-                },
-                callbacks,
-                ac.signal,
-            );
-
-            nav.goToFirst();
-            expect(nav.activeItem?.id).toBe('cell-0-0');
-
-            nav.goDown();
-            expect(nav.activeItem?.id).toBe('cell-2-0');
-
-            // goToLast should land on the last visible row
-            nav.goToLast();
-            expect(nav.activeItem?.id).toBe('cell-2-0');
         });
     });
 
@@ -711,8 +616,8 @@ describe('createGridFocusNavigation', () => {
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
             const nav = createGridFocusNavigation({ ...GRID_OPTIONS, container }, callbacks, ac.signal);
-            nav.goToLast();
-            expect(nav.activeItem?.id).toBe('cell-1-0');
+            nav.goTo((s) => s.getLast());
+            expect(nav.selectors.activeItem?.id).toBe('cell-1-0');
 
             // Dynamically add a new row
             const newRow = document.createElement('div');
@@ -722,7 +627,7 @@ describe('createGridFocusNavigation', () => {
             container.appendChild(newRow);
 
             expect(nav.goDown()).toBe(true);
-            expect(nav.activeItem?.id).toBe('cell-2-0');
+            expect(nav.selectors.activeItem?.id).toBe('cell-2-0');
         });
 
         it('should skip a dynamically removed row', () => {
@@ -730,13 +635,13 @@ describe('createGridFocusNavigation', () => {
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
             const nav = createGridFocusNavigation({ ...GRID_OPTIONS, container }, callbacks, ac.signal);
-            nav.goToFirst();
+            nav.goTo((s) => s.getFirst());
 
             // Remove row-1
             container.querySelector('#row-1')!.remove();
 
             expect(nav.goDown()).toBe(true);
-            expect(nav.activeItem?.id).toBe('cell-2-0');
+            expect(nav.selectors.activeItem?.id).toBe('cell-2-0');
         });
 
         it('should update hasNavigableItems after all rows are removed', () => {
@@ -744,46 +649,73 @@ describe('createGridFocusNavigation', () => {
             const { callbacks } = makeCallbacks();
             const ac = new AbortController();
             const nav = createGridFocusNavigation({ ...GRID_OPTIONS, container }, callbacks, ac.signal);
-            expect(nav.hasNavigableItems).toBe(true);
+            expect(nav.selectors.hasNavigableItems).toBe(true);
 
             container.querySelector('#row-0')!.remove();
-            expect(nav.hasNavigableItems).toBe(false);
+            expect(nav.selectors.hasNavigableItems).toBe(false);
+        });
+    });
+
+    describe('resolve-based navigation (goTo)', () => {
+        const makeNav = (container: HTMLElement, ac: AbortController) => {
+            const { callbacks } = makeCallbacks();
+            return createGridFocusNavigation({ ...GRID_OPTIONS, container }, callbacks, ac.signal);
+        };
+
+        it('should expose read accessors without moving focus', () => {
+            const container = createGrid(2, 2);
+            const ac = new AbortController();
+            const nav = makeNav(container, ac);
+
+            expect(nav.selectors.getFirst()?.id).toBe('cell-0-0');
+            expect(nav.selectors.getLast()?.id).toBe('cell-1-0');
+            expect(nav.selectors.getMatching((el) => el.id === 'cell-1-1')?.id).toBe('cell-1-1');
+            expect(nav.selectors.activeItem).toBeNull();
         });
 
-        it('should reflect dynamically changed row visibility', () => {
-            const container = createContainer(`
-                <div role="grid">
-                    <div role="row" id="row-0">
-                        <div role="gridcell" id="cell-0-0">A</div>
-                    </div>
-                    <div role="row" id="row-1">
-                        <div role="gridcell" id="cell-1-0">B</div>
-                    </div>
-                    <div role="row" id="row-2">
-                        <div role="gridcell" id="cell-2-0">C</div>
-                    </div>
-                </div>
-            `);
-            const { callbacks } = makeCallbacks();
+        it('should resolve and move focus immediately when the target exists', () => {
+            const container = createGrid(2, 2);
             const ac = new AbortController();
-            const nav = createGridFocusNavigation(
-                {
-                    ...GRID_OPTIONS,
-                    container,
-                    isRowVisible: (row) => !row.hasAttribute('data-hidden'),
-                },
-                callbacks,
-                ac.signal,
-            );
+            const nav = makeNav(container, ac);
 
-            nav.goToFirst();
-            expect(nav.activeItem?.id).toBe('cell-0-0');
+            const moved = nav.goTo((n) => n.getFirst());
+            expect(moved).toBe(true);
+            expect(nav.selectors.activeItem?.id).toBe('cell-0-0');
+        });
 
-            // Dynamically hide row-1
-            container.querySelector('#row-1')!.setAttribute('data-hidden', '');
+        it('should defer and retry until rows are available', () => {
+            // Start with an empty grid so the resolver returns null.
+            const container = createContainer('<div role="grid"></div>');
+            const ac = new AbortController();
+            const nav = makeNav(container, ac);
 
-            nav.goDown();
-            expect(nav.activeItem?.id).toBe('cell-2-0');
+            const moved = nav.goTo((n) => n.getFirst());
+            expect(moved).toBe(false);
+            expect(nav.selectors.activeItem).toBeNull();
+
+            // A row with a cell mounts, then flush.
+            container.innerHTML = '<div role="row" id="late-row"><div role="gridcell" id="late-cell">X</div></div>';
+
+            nav.flushPendingNavigation();
+            expect(nav.selectors.activeItem?.id).toBe('late-cell');
+        });
+
+        it('should discard a deferred intent on clear', () => {
+            const container = createContainer('<div role="grid"></div>');
+            const ac = new AbortController();
+            const nav = makeNav(container, ac);
+
+            const resolve = vi.fn((n: FocusNavigationSelectors) => n.getFirst());
+            nav.goTo(resolve);
+
+            nav.clear();
+
+            // After clear, a flush must not replay the intent — even once cells exist.
+            container.innerHTML = '<div role="row" id="late-row"><div role="gridcell" id="late-cell">X</div></div>';
+            resolve.mockClear();
+            nav.flushPendingNavigation();
+            expect(resolve).not.toHaveBeenCalled();
+            expect(nav.selectors.activeItem).toBeNull();
         });
     });
 });

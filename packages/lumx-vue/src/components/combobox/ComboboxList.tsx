@@ -1,4 +1,4 @@
-import { defineComponent, ref, useAttrs } from 'vue';
+import { defineComponent, ref, useAttrs, watch } from 'vue';
 
 import {
     ComboboxList as UI,
@@ -39,11 +39,22 @@ const ComboboxList = defineComponent(
             return handleValue.registerListbox(list);
         });
 
-        // Track loading state for aria-busy
+        // Tracking states
         const isLoading = useComboboxEvent('loadingChange', false);
+        const isOpen = useComboboxEvent('open', false);
+        const options = useComboboxEvent('optionsChange', undefined);
+
+        // Flush pending navigation (that could not run when closed)
+        watch(
+            [isOpen, () => options.value?.optionsLength],
+            () => {
+                if (isOpen.value) handle.value?.flushPendingNavigation();
+            },
+            { flush: 'post' },
+        );
 
         return () => {
-            const children = slots.default?.() as JSXElement;
+            const children = isOpen.value ? (slots.default?.() as JSXElement) : null;
             // Get aria-label and aria-multiselectable from attrs (Vue normalizes hyphenated prop
             // names to camelCase in props, so we read from attrs to get the original values)
             const ariaLabel = (attrs['aria-label'] ?? '') as string;

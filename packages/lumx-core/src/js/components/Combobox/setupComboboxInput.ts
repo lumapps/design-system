@@ -128,7 +128,7 @@ export function setupComboboxInput(input: HTMLInputElement, options: SetupCombob
                 case 'ArrowLeft':
                 case 'ArrowRight':
                     // Grid mode: navigate cells when active item exists.
-                    if (nav?.type === 'grid' && nav.hasActiveItem) {
+                    if (nav?.type === 'grid' && nav.selectors.activeItem) {
                         if (event.key === 'ArrowLeft') nav.goLeft();
                         else nav.goRight();
                         return true;

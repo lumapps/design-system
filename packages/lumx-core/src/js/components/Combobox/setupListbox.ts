@@ -28,6 +28,7 @@ export function setupListbox(
     handle: ComboboxHandle,
     signal: AbortSignal,
     notify: <K extends keyof ComboboxEventMap>(event: K, value: ComboboxEventMap[K]) => void,
+    options?: { wrapNavigation?: boolean },
 ): FocusNavigationController {
     const trigger = handle.trigger!;
     const listbox = handle.listbox!;
@@ -90,6 +91,7 @@ export function setupListbox(
                 type: 'list',
                 container: listbox,
                 itemSelector,
+                wrap: options?.wrapNavigation,
                 getActiveItem: () => {
                     const id = trigger.getAttribute('aria-activedescendant');
                     return id ? (document.getElementById(id) as HTMLElement | null) : null;
