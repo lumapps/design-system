@@ -110,6 +110,7 @@ const DEFAULT_PROPS: Partial<DropdownProps> = {
 /**
  * Dropdown component.
  *
+ * @deprecated Use `MenuButton` for action-based dropdowns, `SelectButton` for selection-based dropdowns, or `Popover` for lower-level control.
  * @param  props Component props.
  * @param  ref   Component ref.
  * @return React element.
