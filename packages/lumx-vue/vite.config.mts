@@ -17,7 +17,7 @@ import fixEsmImports from 'rollup-plugin-lumx-fix-esm-imports';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const ROOT_PATH = path.resolve(__dirname, '../..');
-const DIST_PATH = path.resolve(__dirname, pkg.publishConfig.directory);
+const DIST_PATH = path.resolve(__dirname, 'dist');
 const extensions = ['.js', '.jsx', '.ts', '.tsx'];
 
 /** Set of lumx core exports */
