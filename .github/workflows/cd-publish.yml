@@ -6,9 +6,11 @@ name: 'CD / Publish'
 #   (auto-maintained as a draft PR, freeze by marking it "ready")
 # - Automatic prereleases (tag 'next') triggered when a PR merged into 'master' modifies
 #   any lib package (packages/lumx-*)
-# - Manual prereleases initiated via workflow_dispatch (with prereleaseName)
-# - Manual release retries via workflow_dispatch (without prereleaseName, to retry a failed release
-#   using the version already set in packages). All steps are idempotent: NPM publish skips
+# - Manual prereleases initiated via workflow_dispatch (mode: prerelease, with prereleaseName)
+# - Manual release retries via workflow_dispatch (mode: retry-release, to retry a failed release
+#   using the version already set in packages). The retry reads the version from package.json,
+#   locates the matching "chore(release): release v<version>" commit on the branch and operates
+#   on that exact commit (tag, build, deploy). All steps are idempotent: NPM publish skips
 #   already-published packages, git tag skips existing tags, and release notes are upserted.
 #
 # For releases: it builds and publishes NPM packages, creates Git tags,
@@ -34,8 +36,16 @@ on:
             - closed
     workflow_dispatch:
         inputs:
+            mode:
+                description: 'What to do.'
+                default: 'prerelease'
+                required: true
+                type: choice
+                options:
+                    - prerelease
+                    - retry-release
             prereleaseName:
-                description: 'Prerelease name (Leave empty to retry a release).'
+                description: 'Prerelease name (only used when mode = prerelease).'
                 default: 'alpha'
                 required: false
                 type: string
@@ -58,6 +68,8 @@ jobs:
         outputs:
             version: ${{ steps.check.outputs.version }}
             affected: ${{ steps.check.outputs.affected }}
+            # Commit to operate on for release jobs (tag / build / deploy). Empty for prereleases.
+            releaseSha: ${{ steps.check.outputs.releaseSha }}
         steps:
             - name: 'Checkout repository'
               uses: actions/checkout@v6
@@ -70,6 +82,7 @@ jobs:
                   set -ex
                   version=""
                   affected="false"
+                  releaseSha=""
 
                   if [ "${{ github.event_name }}" = "pull_request" ]; then
                       branch="${{ github.event.pull_request.head.ref }}"
@@ -78,6 +91,8 @@ jobs:
                           if [ -z "$version" ]; then
                               version=$(node -p "require('./packages/lumx-core/package.json').version")
                           fi
+                          # Release commit is the PR head (where versions were bumped)
+                          releaseSha="${{ github.event.pull_request.head.sha }}"
                           # Check if CHANGELOG has unreleased changes (to re-open a release PR after this release)
                           if sed -n '/^## \[Unreleased\]/,/^## \[/p' CHANGELOG.md | grep -q '^### '; then
                               affected="true"
@@ -91,11 +106,23 @@ jobs:
                               affected="true"
                           fi
                       fi
-                  elif [ -z "${{ inputs.prereleaseName }}" ]; then
+                  elif [ "${{ inputs.mode }}" = "retry-release" ]; then
+                      # Retry a failed release: reuse the version already set in package.json and
+                      # locate the matching release commit on this branch so all release jobs
+                      # operate on the exact commit that was published (not a later master HEAD).
                       version=$(node -p "require('./packages/lumx-core/package.json').version")
+                      releaseSha=$(git log --no-merges --fixed-strings \
+                          --grep="chore(release): release v$version" \
+                          --format=%H -n1)
+                      if [ -z "$releaseSha" ]; then
+                          echo "::error::No release commit found for v$version (expected a 'chore(release): release v$version' commit). Cannot retry."
+                          exit 1
+                      fi
+                      echo "Retrying release v$version at commit $releaseSha"
                   fi
 
                   [ -n "$version" ] && echo "version=$version" >> "$GITHUB_OUTPUT"
+                  [ -n "$releaseSha" ] && echo "releaseSha=$releaseSha" >> "$GITHUB_OUTPUT"
                   echo "affected=$affected" >> "$GITHUB_OUTPUT"
 
     prepare_release_next:
@@ -178,7 +205,7 @@ jobs:
             - name: 'Checkout repository'
               uses: actions/checkout@v6
               with:
-                  ref: ${{ github.event.pull_request.head.sha || github.sha }}
+                  ref: ${{ needs.check_trigger.outputs.releaseSha || github.event.pull_request.head.sha || github.sha }}
                   # Need to fetch all for the increment package versions step
                   fetch-depth: 0
 
@@ -199,7 +226,7 @@ jobs:
               id: version
               if: >-
                   !needs.check_trigger.outputs.version && (
-                      (github.event_name == 'workflow_dispatch' && inputs.prereleaseName) ||
+                      (github.event_name == 'workflow_dispatch' && inputs.mode == 'prerelease') ||
                       needs.check_trigger.outputs.affected == 'true'
                   )
               uses: ./.github/actions/increment-package-versions
@@ -242,8 +269,8 @@ jobs:
             - name: 'Checkout repository'
               uses: actions/checkout@v6
               with:
-                  # Tag the release commit (PR head), not the merge commit
-                  ref: ${{ github.event.pull_request.head.sha || github.sha }}
+                  # Tag the release commit (PR head / located retry commit), not the merge commit
+                  ref: ${{ needs.check_trigger.outputs.releaseSha || github.event.pull_request.head.sha || github.sha }}
                   token: '${{ secrets.GITBOT_TOKEN }}'
                   fetch-depth: 0
 
@@ -252,8 +279,17 @@ jobs:
               run: |
                   set -x
 
-                  tag="v${{ needs.check_trigger.outputs.version }}"
+                  version="${{ needs.check_trigger.outputs.version }}"
+                  tag="v$version"
                   echo "tag=$tag" >> $GITHUB_OUTPUT
+
+                  # Safety: the checked-out commit's package version must match the tag being created.
+                  # Guards against tagging the wrong commit (e.g. master HEAD drifted past the release).
+                  checkedOut=$(node -p "require('./packages/lumx-core/package.json').version")
+                  if [ "$checkedOut" != "$version" ]; then
+                      echo "::error::Checked-out version ($checkedOut) does not match release version ($version). Refusing to tag."
+                      exit 1
+                  fi
 
                   # Idempotent: skip if tag already exists on remote
                   if git ls-remote --tags origin "$tag" | grep -q "$tag"; then
@@ -275,7 +311,7 @@ jobs:
             - name: 'Checkout repository'
               uses: actions/checkout@v6
               with:
-                  ref: ${{ github.event.pull_request.head.sha || github.sha }}
+                  ref: ${{ needs.check_trigger.outputs.releaseSha || github.event.pull_request.head.sha || github.sha }}
                   fetch-depth: 0
 
             - name: 'Login to GCR'
@@ -343,7 +379,7 @@ jobs:
             - name: 'Checkout repository'
               uses: actions/checkout@v6
               with:
-                  ref: ${{ github.event.pull_request.head.sha || github.sha }}
+                  ref: ${{ needs.check_trigger.outputs.releaseSha || github.event.pull_request.head.sha || github.sha }}
 
             - name: 'Create release note'
               uses: ./.github/actions/release-note
@@ -378,8 +414,8 @@ jobs:
             package: lumx-react
             token_secret: CHROMATIC_TOKEN_LUMX_REACT
             environment: storybook-lumx-react
-            # Deploy at the tagged commit (PR head) so Chromatic can match it with the GitHub Release
-            ref: ${{ github.event.pull_request.head.sha || github.sha }}
+            # Deploy at the tagged commit (release commit) so Chromatic can match it with the GitHub Release
+            ref: ${{ needs.check_trigger.outputs.releaseSha || github.event.pull_request.head.sha || github.sha }}
         secrets: inherit
 
     deploy_storybook_vue:
@@ -391,6 +427,6 @@ jobs:
             package: lumx-vue
             token_secret: CHROMATIC_TOKEN_LUMX_VUE
             environment: storybook-lumx-vue
-            # Deploy at the tagged commit (PR head) so Chromatic can match it with the GitHub Release
-            ref: ${{ github.event.pull_request.head.sha || github.sha }}
+            # Deploy at the tagged commit (release commit) so Chromatic can match it with the GitHub Release
+            ref: ${{ needs.check_trigger.outputs.releaseSha || github.event.pull_request.head.sha || github.sha }}
         secrets: inherit
