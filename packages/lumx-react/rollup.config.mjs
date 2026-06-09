@@ -18,7 +18,7 @@ const importUrl = new URL(import.meta.url);
 const __dirname = path.dirname(importUrl.pathname);
 
 const ROOT_PATH = path.resolve(__dirname, '..', '..');
-const DIST_PATH = path.resolve(__dirname, pkg.publishConfig.directory);
+const DIST_PATH = path.resolve(__dirname, 'dist');
 const extensions = ['.js', '.jsx', '.ts', '.tsx'];
 
 /**

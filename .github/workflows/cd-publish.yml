@@ -190,10 +190,8 @@ jobs:
             - name: '[prerelease] Detect release type from CHANGELOG'
               id: detect-type
               if: >-
-                  !needs.check_trigger.outputs.version && (
-                      (github.event_name == 'workflow_dispatch' && inputs.prereleaseName) ||
-                      needs.check_trigger.outputs.affected == 'true'
-                  )
+                  !needs.check_trigger.outputs.version &&
+                  needs.check_trigger.outputs.affected == 'true'
               uses: ./.github/actions/detect-release-type
 
             - name: '[prerelease] Increment package versions'
@@ -214,10 +212,22 @@ jobs:
             - name: 'Publish version to NPM'
               env:
                   DIST_TAG: ${{ steps.version.outputs.distTag || 'latest' }}
+              # Idempotent publish: skip packages already published at the target version on the
+              # registry. This allows safely retrying a release that partially published (e.g. when
+              # one package failed after others succeeded) without aborting on "cannot publish over
+              # the previously published versions".
               run: |
                   for package in $(echo packages/lumx-*);
                   do
-                      (echo "Publishing $package"; cd $package/dist; npm publish --tag $DIST_TAG)
+                      dist="$package/dist"
+                      name=$(node -p "require('./$dist/package.json').name")
+                      version=$(node -p "require('./$dist/package.json').version")
+                      if [ -n "$(npm view "$name@$version" version 2>/dev/null)" ]; then
+                          echo "Skipping $name@$version (already published)"
+                          continue
+                      fi
+                      echo "Publishing $name@$version"
+                      (cd "$dist" && npm publish --tag "$DIST_TAG")
                   done
 
     git_tag:

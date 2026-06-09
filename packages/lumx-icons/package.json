@@ -26,9 +26,6 @@
         "type": "git",
         "url": "git+https://github.com/lumapps/design-system.git"
     },
-    "publishConfig": {
-        "directory": "dist"
-    },
     "scripts": {
         "generate:icons": "./override/generate/run-all.cjs",
         "test:css-font": "./override/test-css-font/run.cjs",
