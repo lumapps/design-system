@@ -190,10 +190,8 @@ jobs:
             - name: '[prerelease] Detect release type from CHANGELOG'
               id: detect-type
               if: >-
-                  !needs.check_trigger.outputs.version && (
-                      (github.event_name == 'workflow_dispatch' && inputs.prereleaseName) ||
-                      needs.check_trigger.outputs.affected == 'true'
-                  )
+                  !needs.check_trigger.outputs.version &&
+                  needs.check_trigger.outputs.affected == 'true'
               uses: ./.github/actions/detect-release-type
 
             - name: '[prerelease] Increment package versions'
