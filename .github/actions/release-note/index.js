@@ -30,7 +30,8 @@ async function main({ github, context }) {
     // Release notes
     const body = `${versionChangelog}\n\n${links}`;
 
-    await github.rest.repos.createRelease({
+    // Idempotent: update the release if it already exists, create otherwise.
+    const releaseParams = {
         draft: false,
         generate_release_notes: false,
         prerelease: false,
@@ -39,7 +40,25 @@ async function main({ github, context }) {
         tag_name: versionTag,
         name: versionTag,
         body,
-    });
+    };
+    try {
+        await github.rest.repos.createRelease(releaseParams);
+    } catch (error) {
+        if (error.status === 422) {
+            const { data: existing } = await github.rest.repos.getReleaseByTag({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                tag: versionTag,
+            });
+            await github.rest.repos.updateRelease({
+                ...releaseParams,
+                release_id: existing.id,
+            });
+            console.log(`Release ${versionTag} already existed, updated.`);
+        } else {
+            throw error;
+        }
+    }
 }
 
 module.exports = main;

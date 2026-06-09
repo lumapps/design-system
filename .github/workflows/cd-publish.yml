@@ -8,7 +8,8 @@ name: 'CD / Publish'
 #   any lib package (packages/lumx-*)
 # - Manual prereleases initiated via workflow_dispatch (with prereleaseName)
 # - Manual release retries via workflow_dispatch (without prereleaseName, to retry a failed release
-#   using the version already set in packages)
+#   using the version already set in packages). All steps are idempotent: NPM publish skips
+#   already-published packages, git tag skips existing tags, and release notes are upserted.
 #
 # For releases: it builds and publishes NPM packages, creates Git tags,
 # deploys the demo site, updates Chromatic, and generates GitHub release notes.
@@ -251,13 +252,16 @@ jobs:
               run: |
                   set -x
 
-                  # Create tag
                   tag="v${{ needs.check_trigger.outputs.version }}"
                   echo "tag=$tag" >> $GITHUB_OUTPUT
-                  git tag "$tag"
 
-                  # Push tag
-                  git push origin "$tag"
+                  # Idempotent: skip if tag already exists on remote
+                  if git ls-remote --tags origin "$tag" | grep -q "$tag"; then
+                      echo "Tag $tag already exists, skipping"
+                  else
+                      git tag "$tag"
+                      git push origin "$tag"
+                  fi
 
     deploy_demo_site:
         name: 'Deploy demo site'
