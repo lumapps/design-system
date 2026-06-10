@@ -2,12 +2,8 @@ import type { ComboboxCallbacks, ComboboxHandle } from './types';
 import { setupCombobox } from './setupCombobox';
 import { createTypeahead } from '../../utils/typeahead';
 import { createSelectorTreeWalker } from '../../utils/browser/createSelectorTreeWalker';
+import { isPrintableKey } from '../../utils/browser/isPrintableKey';
 import { getOptionLabel } from './utils';
-
-/** Is the key a single printable character (not Space, no modifier keys)? */
-function isPrintableKey({ key, altKey, ctrlKey, metaKey }: KeyboardEvent): boolean {
-    return key.length === 1 && key !== ' ' && !altKey && !ctrlKey && !metaKey;
-}
 
 /**
  * Set up a combobox with a button trigger (select-only pattern).

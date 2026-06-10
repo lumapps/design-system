@@ -21,11 +21,19 @@ export function useRestoreFocusOnClose(
 
     const tryRestoreFocus = React.useCallback(() => {
         if (!popoverElement || !focusAnchorOnClose) return;
-        const isFocusWithin = popoverElement.contains(document.activeElement);
+        const focusedAtClose = document.activeElement;
+        const isFocusWithin = popoverElement.contains(focusedAtClose);
         if (!isFocusWithin) return;
 
-        // On next render
+        // Defer restore: browser may still move focus after close (e.g. click-away on mousedown).
         setTimeout(() => {
+            // Skip if focus moved to a real element (user intent). Restore if focus stayed
+            // (closeMode="hide") or fell back to body (element removed on unmount).
+            const active = document.activeElement;
+            const focusMovedAway =
+                active && active !== focusedAtClose && active !== document.body && active !== document.documentElement;
+            if (focusMovedAway) return;
+
             const anchor = anchorRef.current;
             const elementToFocus =
                 // Provided parent element
