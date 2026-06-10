@@ -94,7 +94,7 @@ export function setupListbox(
                 wrap: options?.wrapNavigation,
                 getActiveItem: () => {
                     const id = trigger.getAttribute('aria-activedescendant');
-                    return id ? (document.getElementById(id) as HTMLElement | null) : null;
+                    return (id && listbox.querySelector<HTMLElement>(`#${CSS.escape(id)}`)) || null;
                 },
             },
             focusCallbacks,
