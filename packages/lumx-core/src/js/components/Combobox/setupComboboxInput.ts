@@ -42,18 +42,11 @@ export function setupComboboxInput(input: HTMLInputElement, options: SetupCombob
 
     /**
      * Wraps the consumer's onSelect to perform input-mode side effects after selection:
-     * clears the active descendant, resets the filter, and re-opens the popup.
+     * resets the filter and typing state.
      */
     const onSelect = (option: { value: string }) => {
         optionOnSelect?.(option);
-
-        // Clear the active item. In multi-select, keep visual focus so the
-        // user can continue navigating after selection.
-        if (!handle.isMultiSelect) {
-            handle.focusNav?.clear();
-        }
         userHasTyped = false;
-        handle.setIsOpen(true);
         if (autoFilter) {
             handle.setFilter('');
         }

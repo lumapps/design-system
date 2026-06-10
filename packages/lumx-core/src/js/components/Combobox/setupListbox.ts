@@ -124,11 +124,6 @@ export function setupListbox(
 
             handle.select(cell);
             trigger.focus();
-
-            // In multi-select mode, keep visual focus on the selected option
-            if (!handle.isMultiSelect) {
-                handle.setIsOpen(false);
-            }
         },
         { signal },
     );

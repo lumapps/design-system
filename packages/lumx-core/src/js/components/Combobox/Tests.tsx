@@ -2119,11 +2119,6 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
             await userEvent.keyboard('{Enter}');
             expect(input.value).toBe('');
             await waitFor(() => {
-                expect(input).toHaveAttribute('aria-expanded', 'false');
-            });
-
-            await userEvent.click(input);
-            await waitFor(() => {
                 expect(input).toHaveAttribute('aria-expanded', 'true');
             });
 
@@ -2162,11 +2157,6 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
             await userEvent.keyboard('{Enter}');
             expect(button.textContent).toBe('Select a fruit');
-            await waitFor(() => {
-                expect(button).toHaveAttribute('aria-expanded', 'false');
-            });
-
-            await userEvent.click(button);
             await waitFor(() => {
                 expect(button).toHaveAttribute('aria-expanded', 'true');
             });
