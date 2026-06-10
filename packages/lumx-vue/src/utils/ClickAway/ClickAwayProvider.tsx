@@ -11,7 +11,7 @@ import {
 import { setupClickAway, type ClickAwayCallback } from '@lumx/core/js/utils/ClickAway';
 
 interface ContextValue {
-    childrenRefs: HTMLElement[];
+    childrenRefs: Array<Ref<HTMLElement | undefined>>;
     addRefs(...newChildrenRefs: Array<Ref<HTMLElement | undefined>>): void;
 }
 
@@ -32,15 +32,16 @@ export const ClickAwayProvider = defineComponent(
     ) => {
         const parentContext = inject(CLICK_AWAY_KEY, null);
 
-        const contextChildrenRefs: HTMLElement[] = [];
+        // Store raw refs so they are resolved lazily at click time (not at mount time).
+        // This avoids missing elements that are not yet mounted when addRefs is first called.
+        const contextChildrenRefs: Array<Ref<HTMLElement | undefined>> = [];
 
         const currentContext: ContextValue = {
             childrenRefs: contextChildrenRefs,
             addRefs(...newChildrenRefs) {
                 for (const newRef of newChildrenRefs) {
-                    const el = newRef.value;
-                    if (el) {
-                        contextChildrenRefs.push(el);
+                    if (!contextChildrenRefs.includes(newRef)) {
+                        contextChildrenRefs.push(newRef);
                     }
                 }
                 if (parentContext) {
@@ -65,8 +66,12 @@ export const ClickAwayProvider = defineComponent(
             // Setup click away using a closure that always reads the latest callback prop.
             // This handles transitions like closeMode="hide" where the callback changes
             // between open (handleClose) and closed (undefined) without re-creating the listener.
+            // Refs are resolved lazily at click time so late-mounted anchors are included.
             teardown = setupClickAway(
-                () => contextChildrenRefs,
+                () =>
+                    contextChildrenRefs
+                        .map((r) => r.value)
+                        .filter((el): el is HTMLElement => el instanceof HTMLElement),
                 (event) => {
                     const cb = props.callback;
                     if (typeof cb === 'function') cb(event);
