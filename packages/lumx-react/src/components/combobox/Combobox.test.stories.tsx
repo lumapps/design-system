@@ -43,3 +43,5 @@ export const ButtonTypeaheadWhileOpen = { ...testStories.ButtonTypeaheadWhileOpe
 export const ButtonEndFromClosed = { ...testStories.ButtonEndFromClosed };
 export const ButtonHomeFromClosed = { ...testStories.ButtonHomeFromClosed };
 export const ButtonArrowDownFromClosed = { ...testStories.ButtonArrowDownFromClosed };
+
+export const ClearAfterSelect = { ...testStories.ClearAfterSelect };
