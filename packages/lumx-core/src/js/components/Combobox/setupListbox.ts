@@ -94,7 +94,7 @@ export function setupListbox(
                 wrap: options?.wrapNavigation,
                 getActiveItem: () => {
                     const id = trigger.getAttribute('aria-activedescendant');
-                    return id ? (document.getElementById(id) as HTMLElement | null) : null;
+                    return (id && listbox.querySelector<HTMLElement>(`#${CSS.escape(id)}`)) || null;
                 },
             },
             focusCallbacks,
@@ -124,11 +124,6 @@ export function setupListbox(
 
             handle.select(cell);
             trigger.focus();
-
-            // In multi-select mode, keep visual focus on the selected option
-            if (!handle.isMultiSelect) {
-                handle.setIsOpen(false);
-            }
         },
         { signal },
     );

@@ -60,6 +60,10 @@ export const ComboboxInput = forwardRef<ComboboxInputProps, HTMLDivElement>((pro
                 onChangeRef.current?.(option.value);
                 onSelectRef.current?.(option);
             },
+            onInput(value) {
+                // Keep controlled value in sync.
+                onChangeRef.current?.(value);
+            },
             filter,
             openOnFocus,
         });

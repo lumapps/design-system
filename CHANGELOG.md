@@ -12,6 +12,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   `@lumx/react`:
     -   Create the `Menu` component component family
 
+### Fixed
+
+-   `@lumx/react`, `@lumx/vue`:
+    -   `ComboboxInput`: keep controlled value in sync when clearing the input after selecting an option
+    -   `Combobox`: fix list navigation when used inside a shadow DOM boundary
+    -   `Combobox`: fix timing issue delaying closing the combobox on option click
+
 ## [4.16.0][] - 2026-06-08
 
 ### Changed

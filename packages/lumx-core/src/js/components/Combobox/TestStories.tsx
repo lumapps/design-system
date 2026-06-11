@@ -391,6 +391,38 @@ export function setup({
         },
     };
 
+    /** Test combobox input clearing */
+    const ClearAfterSelect = {
+        ...comboboxInputStory,
+        play: async ({ canvasElement }: any) => {
+            const input = within(canvasElement).getByRole<HTMLInputElement>('combobox');
+
+            // Step 1: ArrowDown opens and focuses first option
+            input.focus();
+            await userEvent.keyboard('{ArrowDown}');
+            await waitFor(() => {
+                expect(input).toHaveAttribute('aria-expanded', 'true');
+                expect(getActiveOption()).not.toBeNull();
+            });
+
+            // Step 2: Enter selects the option and closes
+            await userEvent.keyboard('{Enter}');
+            await waitFor(() => {
+                expect(input.value).toBe('Apple');
+                expect(input).toHaveAttribute('aria-expanded', 'false');
+            });
+
+            // Step 3: Select all and delete to clear the input
+            input.setSelectionRange(0, input.value.length);
+            await userEvent.keyboard('{Delete}');
+
+            // The input value should be cleared and stay cleared
+            await waitFor(() => {
+                expect(input.value).toBe('');
+            });
+        },
+    };
+
     return {
         meta,
         MouseHoverDoesNotActivateOption,
@@ -404,5 +436,6 @@ export function setup({
         ButtonEndFromClosed,
         ButtonHomeFromClosed,
         ButtonArrowDownFromClosed,
+        ClearAfterSelect,
     };
 }

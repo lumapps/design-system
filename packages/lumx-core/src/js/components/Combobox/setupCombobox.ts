@@ -1,5 +1,5 @@
 import { type FocusNavigationController } from '../../utils/focusNavigation';
-import { getOptionValue, isActionCell, isOptionDisabled, isSelected, notifySection } from './utils';
+import { getOptionValue, isOptionDisabled, isSelected, notifySection } from './utils';
 import { setupListbox } from './setupListbox';
 import type {
     ComboboxCallbacks,
@@ -192,10 +192,6 @@ export function setupCombobox(
                         if (!isOptionDisabled(activeItem)) {
                             activeItem.click();
                         }
-                        // Only close when not in multi select and not in action cell
-                        if (!handle.isMultiSelect && !isActionCell(activeItem)) {
-                            handle.setIsOpen(false);
-                        }
                         flag = true;
                     } else if (handle.isOpen && !handle.isMultiSelect) {
                         // Open with no active item (single select) => close the popup,
@@ -358,6 +354,15 @@ export function setupCombobox(
 
         select(option: HTMLElement | null) {
             callbacks.onSelect?.({ value: option ? getOptionValue(option) : '' });
+
+            // Close on selection (when not multiselectable)
+            if (option && !handle.isMultiSelect) {
+                handle.focusNav?.clear();
+                // Defer the close to the next frame (to make sure all other click handler resolve).
+                requestAnimationFrame(() => {
+                    handle.setIsOpen(false);
+                });
+            }
         },
 
         flushPendingNavigation() {

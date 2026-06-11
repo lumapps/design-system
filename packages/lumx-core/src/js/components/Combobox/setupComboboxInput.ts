@@ -2,7 +2,13 @@ import type { ComboboxCallbacks, ComboboxHandle, ComboboxInputOptions } from './
 import { setupCombobox } from './setupCombobox';
 
 /** Options for configuring the input-mode combobox controller. */
-export interface SetupComboboxInputOptions extends ComboboxCallbacks, ComboboxInputOptions {}
+export interface SetupComboboxInputOptions extends ComboboxCallbacks, ComboboxInputOptions {
+    /**
+     * Called synchronously on every user input event (typing, paste, delete…)
+     * (Use this in framework wrappers that maintain controlled input state, like React)
+     */
+    onInput?(value: string): void;
+}
 
 /**
  * Set up a combobox with an input trigger (autocomplete/filter pattern).
@@ -20,7 +26,7 @@ export interface SetupComboboxInputOptions extends ComboboxCallbacks, ComboboxIn
  */
 export function setupComboboxInput(input: HTMLInputElement, options: SetupComboboxInputOptions): ComboboxHandle {
     let handle: ComboboxHandle;
-    const { filter = 'auto', onSelect: optionOnSelect } = options;
+    const { filter = 'auto', onSelect: optionOnSelect, onInput: onInputCallback } = options;
     const openOnFocus = options.openOnFocus ?? filter === 'off';
     const autoFilter = filter === 'auto';
 
@@ -36,18 +42,11 @@ export function setupComboboxInput(input: HTMLInputElement, options: SetupCombob
 
     /**
      * Wraps the consumer's onSelect to perform input-mode side effects after selection:
-     * clears the active descendant, resets the filter, and re-opens the popup.
+     * resets the filter and typing state.
      */
     const onSelect = (option: { value: string }) => {
         optionOnSelect?.(option);
-
-        // Clear the active item. In multi-select, keep visual focus so the
-        // user can continue navigating after selection.
-        if (!handle.isMultiSelect) {
-            handle.focusNav?.clear();
-        }
         userHasTyped = false;
-        handle.setIsOpen(true);
         if (autoFilter) {
             handle.setFilter('');
         }
@@ -67,6 +66,10 @@ export function setupComboboxInput(input: HTMLInputElement, options: SetupCombob
 
                 combobox.focusNav?.clear();
                 userHasTyped = true;
+
+                // Notify the framework wrapper of the new input value synchronously.
+                onInputCallback?.(input.value);
+
                 combobox.setIsOpen(true);
 
                 if (autoFilter) {
