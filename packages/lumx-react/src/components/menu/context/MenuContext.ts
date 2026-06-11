@@ -12,11 +12,11 @@ export interface MenuContextValue {
 
 export const MenuContext = createContext<MenuContextValue | undefined>(undefined);
 
-/** Use Menu context. @throws if used outside `Menu.Provider`. */
+/** Use Menu context. @throws if used outside `MenuProvider`. */
 export function useMenuContext(): MenuContextValue {
     const context = useContext(MenuContext);
     if (!context) {
-        throw new Error('Menu sub-components must be used within a Menu.Provider');
+        throw new Error('Menu sub-components must be used within a MenuProvider');
     }
     return context;
 }

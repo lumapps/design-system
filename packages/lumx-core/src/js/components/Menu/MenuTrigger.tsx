@@ -5,6 +5,8 @@ import { classNames } from '../../utils';
 export interface MenuTriggerProps extends HasClassName {
     /** Content of the trigger (label / icon / etc.). */
     children?: JSXElement;
+    /** The id of the trigger element. */
+    id?: string;
     /** The id of the menu container (for `aria-controls`). */
     menuId?: string;
     /** Whether the menu is currently open. */

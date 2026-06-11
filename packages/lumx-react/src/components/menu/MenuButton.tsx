@@ -1,42 +1,49 @@
-import React, { ElementType } from 'react';
+import React, { type ForwardedRef } from 'react';
+
 import {
     MenuButton as UI,
     type MenuButtonProps as UIProps,
+    type MenuButtonVariantsProps,
     COMPONENT_NAME,
 } from '@lumx/core/js/components/Menu/MenuButton';
+import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
-import { forwardRefPolymorphic } from '@lumx/react/utils/react/forwardRefPolymorphic';
-import { ComponentRef } from '@lumx/react/utils/type';
-import { NamedProps } from '@lumx/core/js/types';
+
 import { MenuProvider } from './MenuProvider';
 import { MenuTrigger } from './MenuTrigger';
 import { MenuPopover, type MenuPopoverProps } from './MenuPopover';
 import { MenuList } from './MenuList';
 
-import { Button, IconButton } from '../button';
+import { Button, IconButton, type ButtonProps, type IconButtonProps } from '../button';
+import { Chip, type ChipProps } from '../chip';
+import { Link, type LinkProps } from '../link';
 
-const Menu = {
-    Provider: MenuProvider,
-    Trigger: MenuTrigger,
-    Popover: MenuPopover,
-    List: MenuList,
+/** Props that MenuButton explicitly declares. */
+type MenuButtonBase = ReactToJSX<UIProps, 'triggerProps' | 'variant'> & {
+    children?: React.ReactNode;
+    popoverProps?: MenuPopoverProps;
+    onOpen?: (isOpen: boolean) => void;
+    label: string;
 };
 
-/** Keys managed by MenuButton — omitted from the polymorphic trigger props. */
-type OmittedTriggerKeys = 'aria-haspopup' | 'aria-controls' | 'aria-expanded' | 'label' | 'children' | 'ref';
+/** MenuButton props — discriminated union over the variant to inherit the target component's props. */
+export type MenuButtonProps = MenuButtonVariantsProps<
+    MenuButtonBase,
+    {
+        button: ButtonProps;
+        'icon-button': IconButtonProps;
+        chip: ChipProps;
+        link: LinkProps;
+    }
+>;
 
-/** Polymorphic trigger props with index signature stripped and managed keys removed. */
-type TriggerProps<E extends ElementType> = Omit<NamedProps<React.ComponentProps<E>>, OmittedTriggerKeys>;
-
-/** Menu button props */
-export type MenuButtonProps<E extends ElementType = typeof Button> = TriggerProps<E> &
-    ReactToJSX<UIProps, 'triggerProps'> & {
-        /** Customize the rendered trigger component. */
-        as?: E;
-        children?: React.ReactNode;
-        popoverProps?: MenuPopoverProps;
-        onOpen?: (isOpen: boolean) => void;
-    };
+/** Menu trigger button component by variant */
+const TRIGGER_COMPONENTS = {
+    button: Button,
+    'icon-button': IconButton,
+    chip: Chip,
+    link: Link,
+} as const;
 
 /**
  * MenuButton component.
@@ -44,24 +51,20 @@ export type MenuButtonProps<E extends ElementType = typeof Button> = TriggerProp
  * @param  props Component props.
  * @return React element.
  */
-export const MenuButton = Object.assign(
-    forwardRefPolymorphic(<E extends ElementType = typeof Button>(props: MenuButtonProps<E>, ref: ComponentRef<E>) => {
-        const { label, children, popoverProps, onOpen, as, ...triggerProps } = props as any;
+export const MenuButton = forwardRef<MenuButtonProps>((props, ref: ForwardedRef<HTMLElement>) => {
+    const { label, children, popoverProps, onOpen, variant = 'button', ...triggerProps } = props;
 
-        const isIconButton = as === IconButton;
-        const triggerLabel = isIconButton ? undefined : label;
-        const extraTriggerProps = isIconButton ? ({ label } as any) : {};
+    return UI(
+        {
+            label,
+            children,
+            popoverProps,
+            onOpen,
+            variant,
+            triggerProps: { ...triggerProps, as: TRIGGER_COMPONENTS[variant], ref },
+        },
+        { MenuProvider, MenuTrigger, MenuPopover, MenuList },
+    );
+});
 
-        return UI(
-            {
-                label: triggerLabel,
-                children,
-                popoverProps,
-                onOpen,
-                triggerProps: { ...triggerProps, ...extraTriggerProps, as, ref },
-            },
-            { Menu },
-        );
-    }),
-    { displayName: COMPONENT_NAME },
-);
+MenuButton.displayName = COMPONENT_NAME;

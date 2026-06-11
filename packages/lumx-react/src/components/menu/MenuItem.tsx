@@ -32,6 +32,8 @@ export interface MenuItemProps<E extends ElementType = 'button'>
     onClick?(event: SyntheticEvent): void;
     /** MDI icon rendered as `<Icon size="xs" />` prepended to the `before` slot. */
     icon?: string;
+    /** MDI icon rendered as `<Icon size="xs" />` appended to the `after` slot. */
+    afterIcon?: string;
     /** Foreground color applied to the icon and label text. */
     color?: ColorPalette;
     /** Content rendered before the label (rendered AFTER `icon` if both are provided). */
@@ -55,7 +57,7 @@ export const MenuItem: {
     className: typeof CLASSNAME;
 } = forwardRef<MenuItemProps, HTMLLIElement>((props, ref) => {
     const { handle } = useMenuContext();
-    const { children, icon, color, before, after, isDisabled, onClick, actionProps, ...rest } = props;
+    const { children, icon, afterIcon, color, before, after, isDisabled, onClick, actionProps, ...rest } = props;
 
     const internalRef = useRef<HTMLLIElement>(null);
     const actionRef = useRef<HTMLElement>(null);
@@ -86,12 +88,22 @@ export const MenuItem: {
         before
     );
 
+    // Append the optional `afterIcon` to the `after` slot.
+    const mergedAfter = afterIcon ? (
+        <>
+            {after}
+            <Icon icon={afterIcon} size="xs" color={color} />
+        </>
+    ) : (
+        after
+    );
+
     return UI({
         ...rest,
         ref: mergedRef,
         actionRef,
         before: mergedBefore,
-        after,
+        after: mergedAfter,
         children: (
             <Text as="span" color={color}>
                 {children}

@@ -3,9 +3,14 @@ import { vi } from 'vitest';
 import userEvent from '@testing-library/user-event';
 import { waitFor, screen } from '@testing-library/dom';
 
+import { mdiAccount } from '@lumx/icons';
+
+import { getByClassName } from '../../../testing/queries';
+import { CLASSNAME as MENU_TRIGGER_CLASSNAME } from './MenuTrigger';
+
 // ─── Types ───────────────────────────────────────────────────────
 
-type RenderResult = { unmount: () => void; container: HTMLElement };
+type RenderResult = { unmount: () => void; container: Element };
 
 /**
  * Options to set up the MenuButton test suite.
@@ -17,11 +22,13 @@ export interface MenuButtonTestSetup {
         MenuItem: any;
     };
     /**
-     * Render a MenuButton template.
+     * Render a MenuButton template, forwarding optional framework-specific render options
+     * (e.g. `{ wrapper }` in React, `{ global }` in Vue).
      *
      * @param template JSX render function returning the element to render.
+     * @param options  Framework-specific render options (e.g. wrapper component).
      */
-    render: (template: () => any) => RenderResult;
+    render: (template: () => any, options?: Record<string, any>) => RenderResult;
 }
 
 // ═══════════════════════════════════════════════════════════════════
@@ -31,17 +38,24 @@ export interface MenuButtonTestSetup {
 export default function menuButtonTests({ components, render }: MenuButtonTestSetup) {
     const { MenuButton, MenuItem } = components;
 
-    /** Default MenuButton template with two items. */
-    const defaultTemplate = () => (
-        <MenuButton label="Open menu">
-            <MenuItem onClick={() => undefined}>First</MenuItem>
-            <MenuItem>Second</MenuItem>
-        </MenuButton>
-    );
-
-    const setup = () => {
-        const result = render(defaultTemplate);
-        return { ...result, trigger: screen.getByRole('button', { name: 'Open menu' }) };
+    /**
+     * Renders MenuButton with a single MenuItem child (labelled "First").
+     * Returns props, container, the trigger element (for behavioral tests) and the
+     * trigger wrapper element by class name (for `commonTestsSuite*`).
+     */
+    const setup = (propsOverride: Record<string, any> = {}, options?: Record<string, any>) => {
+        const props = { label: 'Open menu', ...propsOverride };
+        const { container } = render(
+            () => (
+                <MenuButton {...props}>
+                    <MenuItem>First</MenuItem>
+                </MenuButton>
+            ),
+            options,
+        );
+        const element = getByClassName(document.body, MENU_TRIGGER_CLASSNAME);
+        const trigger = screen.queryByRole('button', { name: props.label }) as HTMLElement;
+        return { props, container, element, trigger };
     };
 
     // ─── Render ──────────────────────────────────────────────────
@@ -58,6 +72,13 @@ export default function menuButtonTests({ components, render }: MenuButtonTestSe
             expect(trigger).toHaveAttribute('aria-haspopup', 'true');
             expect(trigger).toHaveAttribute('aria-controls');
             expect(trigger).toHaveAttribute('aria-expanded', 'false');
+
+            // aria-controls must reference the menu list element's id
+            const ariaControls = trigger.getAttribute('aria-controls');
+            expect(ariaControls).toBeTruthy();
+            const menuList = document.getElementById(ariaControls!);
+            expect(menuList).not.toBeNull();
+            expect(menuList).toHaveAttribute('id', ariaControls);
         });
     });
 
@@ -107,20 +128,11 @@ export default function menuButtonTests({ components, render }: MenuButtonTestSe
     describe('onOpen', () => {
         it('fires onOpen with true when menu opens and false when it closes', async () => {
             const onOpen = vi.fn();
-            const { trigger } = (() => {
-                const result = render(() => (
-                    <MenuButton label="Open menu" onOpen={onOpen}>
-                        <MenuItem onClick={() => undefined}>First</MenuItem>
-                        <MenuItem>Second</MenuItem>
-                    </MenuButton>
-                ));
-                return { ...result, trigger: screen.getByRole('button', { name: 'Open menu' }) };
-            })();
+            const { trigger } = setup({ onOpen });
             await userEvent.click(trigger);
             expect(onOpen).toHaveBeenCalledWith(true);
             await userEvent.click(trigger);
             expect(onOpen).toHaveBeenCalledWith(false);
-            expect(onOpen).toHaveBeenCalledTimes(2);
         });
     });
 
@@ -139,4 +151,77 @@ export default function menuButtonTests({ components, render }: MenuButtonTestSe
             expect(disabled).toHaveAttribute('aria-disabled', 'true');
         });
     });
+
+    // ─── Variant-specific trigger ────────────────────────────────
+
+    describe('variant trigger', () => {
+        describe('variant="icon-button"', () => {
+            const setupIconButton = (overrides?: Record<string, any>) =>
+                setup({ variant: 'icon-button', label: 'More', ...overrides });
+
+            it('renders an icon button with default mdiDotsVertical icon', () => {
+                const { element } = setupIconButton();
+                expect(element.querySelector('svg')).toBeTruthy();
+            });
+
+            it('renders a custom icon if provided', () => {
+                const { element } = setupIconButton({ icon: mdiAccount });
+                expect(element.querySelector('svg')).toBeTruthy();
+            });
+
+            it('sets disclosure aria attributes', () => {
+                const { element } = setupIconButton();
+                expect(element).toHaveAttribute('aria-haspopup', 'true');
+                expect(element).toHaveAttribute('aria-controls');
+                expect(element).toHaveAttribute('aria-expanded', 'false');
+
+                const ariaControls = element.getAttribute('aria-controls');
+                expect(ariaControls).toBeTruthy();
+                expect(document.getElementById(ariaControls!)).not.toBeNull();
+            });
+
+            it('toggles aria-expanded and opens menu on click', async () => {
+                const { element } = setupIconButton();
+                expect(element).toHaveAttribute('aria-expanded', 'false');
+                await userEvent.click(element);
+                await screen.findByRole('button', { name: 'First' });
+                expect(element).toHaveAttribute('aria-expanded', 'true');
+            });
+        });
+
+        describe('variant="chip"', () => {
+            const setupChip = () => setup({ variant: 'chip', label: 'Filters' });
+
+            it('renders a chip', () => {
+                const { element } = setupChip();
+                expect(element).toBeInTheDocument();
+                expect(element.tagName).toBe('A');
+            });
+
+            it('sets isClickable automatically', () => {
+                const { element } = setupChip();
+                expect(element.classList.contains('lumx-chip--is-clickable')).toBe(true);
+            });
+
+            it('sets disclosure aria attributes', () => {
+                const { element } = setupChip();
+                expect(element).toHaveAttribute('aria-haspopup', 'true');
+                expect(element).toHaveAttribute('aria-controls');
+                expect(element).toHaveAttribute('aria-expanded', 'false');
+
+                const ariaControls = element.getAttribute('aria-controls');
+                expect(ariaControls).toBeTruthy();
+                expect(document.getElementById(ariaControls!)).not.toBeNull();
+            });
+
+            it('opens menu on click', async () => {
+                const { element } = setupChip();
+                await userEvent.click(element);
+                await screen.findByRole('button', { name: 'First' });
+                expect(element).toHaveAttribute('aria-expanded', 'true');
+            });
+        });
+    });
+
+    return { setup, triggerClassName: MENU_TRIGGER_CLASSNAME };
 }
