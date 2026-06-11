@@ -68,14 +68,14 @@ export function setup({
                 },
             }),
         ],
-        render: (args: any) => () => (
+        render: ({ onItemClick, ...args }: any) => (
             <MenuButton {...args}>
-                <MenuItem icon={mdiPencil} onClick={args.onItemClick}>
+                <MenuItem icon={mdiPencil} onClick={onItemClick}>
                     Edit
                 </MenuItem>
-                <MenuItem onClick={args.onItemClick}>Duplicate</MenuItem>
+                <MenuItem onClick={onItemClick}>Duplicate</MenuItem>
                 <MenuDivider />
-                <MenuItem icon={mdiTrashCan} color="red" onClick={args.onItemClick}>
+                <MenuItem icon={mdiTrashCan} color="red" onClick={onItemClick}>
                     Delete
                 </MenuItem>
             </MenuButton>

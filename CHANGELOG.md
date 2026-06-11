@@ -9,8 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
--   `@lumx/react`:
-    -   Create the `Menu` component component family
+-   `@lumx/react`, `@lumx/vue`:
+    -   Create the `MenuButton` component
 
 ### Fixed
 
