@@ -37,8 +37,11 @@ function lumxDocsWebpackLoader() {
             projectConf.project = createProject(path.resolve(ROOT_PATH, packagePath));
         }
 
-        // Add dependency so webpack watches the component file
+        // Add dependency so webpack watches the component file and the docgen scripts themselves
         this.addDependency(filePath);
+        this.addDependency(require.resolve('./docgen.js'));
+        this.addDependency(require.resolve('./react-docgen.js'));
+        this.addDependency(require.resolve('./vue-docgen.js'));
 
         // Parse with the appropriate framework docgen
         const result = projectConf.parse(projectConf.project, filePath);

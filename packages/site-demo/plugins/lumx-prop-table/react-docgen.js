@@ -5,6 +5,9 @@ const {
     getRootPath,
     findComponentInterface,
     extractPropertiesFromInterface,
+    extractDiscriminatedUnionProps,
+    extractConditionalSelectionVariants,
+    extractTypeParams,
     extractDefaultValues,
     getJsDocDeprecatedFromDeclaration,
 } = require('./docgen.js');
@@ -89,14 +92,30 @@ function parseReactComponent(project, filePath) {
 
     const rootPath = getRootPath(project);
     const defaultValues = extractDefaultValues(sourceFile);
-    const props = extractPropertiesFromInterface(interfaceDecl, sourceFile, rootPath, defaultValues);
     const displayName = getComponentName(sourceFile);
     const deprecated = getComponentDeprecated(sourceFile, displayName);
 
-    const result = { displayName, props };
+    // Detect discriminated union Props (e.g. MenuButton variants) — true TS union
+    const unionResult = extractDiscriminatedUnionProps(interfaceDecl, sourceFile, rootPath, defaultValues);
+    // Detect generic selection-mode Props with conditional types (e.g. SelectButton<O,E,S>)
+    const conditionalResult =
+        !unionResult && extractConditionalSelectionVariants(interfaceDecl, sourceFile, rootPath, defaultValues);
+
+    const splitResult = unionResult || conditionalResult;
+    const result = splitResult
+        ? { displayName, props: splitResult.commonProps, variants: splitResult.variants }
+        : { displayName, props: extractPropertiesFromInterface(interfaceDecl, sourceFile, rootPath, defaultValues) };
+
     if (deprecated !== undefined) {
         result.deprecated = deprecated;
     }
+
+    // Extract @typeParam documentation
+    const typeParams = extractTypeParams(interfaceDecl);
+    if (typeParams.length > 0) {
+        result.typeParams = typeParams;
+    }
+
     return result;
 }
 

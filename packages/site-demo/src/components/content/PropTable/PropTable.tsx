@@ -29,6 +29,32 @@ export interface Property {
     aliases?: string[];
 }
 
+/** A single variant entry in a discriminated-union Props type. */
+export interface VariantItem {
+    /** The discriminant value (e.g. "button", "chip"). */
+    value: string;
+    /** Props that are specific to this variant. */
+    props: Property[];
+    /** Whether this variant is the default (open by default in the UI). */
+    isDefault?: boolean;
+}
+
+/** Discriminated-union variant metadata emitted by docgen. */
+export interface VariantDoc {
+    /** The discriminant prop name (e.g. "variant", "selectionType"). */
+    discriminant: string;
+    /** One entry per union branch. */
+    items: VariantItem[];
+}
+
+/** A type parameter with its documentation. */
+export interface TypeParamDoc {
+    /** Type parameter name (e.g. "O", "E", "S"). */
+    name: string;
+    /** Description from @typeParam JSDoc. */
+    description: string;
+}
+
 const renderTypeTableRow = ({ type, defaultValue }: Property) => (
     <Text as="span" typography="body1" className="prop-table__type">
         {castArray(type).reduce((acc, typeName, index, arr) => {
@@ -178,6 +204,52 @@ const SlotsTable: React.FC<{ slots: SlotDoc[] }> = ({ slots }) => (
     </div>
 );
 
+/**
+ * Collapsible section for a single discriminated-union variant.
+ */
+const VariantSection: React.FC<{ discriminant: string; item: VariantItem; componentName: string }> = ({
+    discriminant,
+    item,
+    componentName,
+}) => {
+    if (item.props.length === 0) {
+        return null;
+    }
+
+    return (
+        <details open={item.isDefault} name={componentName} className="prop-table__details">
+            <summary>
+                <Heading as="h4" style={{ display: 'inline-block' }}>
+                    <code>
+                        {discriminant} = &quot;{item.value}&quot;
+                    </code>
+                    {item.isDefault && ' (default)'}
+                </Heading>
+            </summary>
+            <Table properties={item.props} />
+        </details>
+    );
+};
+
+/**
+ * Type parameter legend block.
+ */
+const TypeParamsLegend: React.FC<{ typeParams: TypeParamDoc[] }> = ({ typeParams }) => (
+    <div className="prop-table__type-params">
+        <Text as="p">Generic type parameters:</Text>
+        <dl className="prop-table__type-params-list">
+            {typeParams.map(({ name, description }) => (
+                <Fragment key={name}>
+                    <dt>
+                        <code>{name}</code>
+                    </dt>
+                    <dd>{description || <em>No description</em>}</dd>
+                </Fragment>
+            ))}
+        </dl>
+    </div>
+);
+
 export interface ComponentDoc {
     displayName: string;
     props: Property[];
@@ -185,6 +257,10 @@ export interface ComponentDoc {
     slots?: SlotDoc[];
     /** Component-level deprecation message from @deprecated JSDoc tag. */
     deprecated?: string;
+    /** Discriminated-union variant groups (e.g. for MenuButton variants). */
+    variants?: VariantDoc;
+    /** Generic type parameter documentation (from @typeParam JSDoc). */
+    typeParams?: TypeParamDoc[];
 }
 
 export interface PropTableProps {
@@ -200,6 +276,8 @@ export const PropTable: React.FC<PropTableProps> = ({ docs }) => {
     const events = componentDoc?.events;
     const slots = componentDoc?.slots;
     const deprecated = componentDoc?.deprecated;
+    const variants = componentDoc?.variants;
+    const typeParams = componentDoc?.typeParams;
 
     if (!properties || !componentName) {
         return (
@@ -209,7 +287,29 @@ export const PropTable: React.FC<PropTableProps> = ({ docs }) => {
         );
     }
 
-    const [forwardedProps, others] = partition(properties, (prop) =>
+    // Synthesise a discriminant prop row for the main table (e.g. `selectionType`, `variant`).
+    // Its type lists the accepted literal values; required-ness is inherited from the original.
+    const existingDiscriminant = variants && properties.find((p) => p.name === variants.discriminant);
+    const discriminantProp: Property | null = variants
+        ? {
+              name: variants.discriminant,
+              description: existingDiscriminant?.description ?? '',
+              required: existingDiscriminant?.required ?? true,
+              deprecated: existingDiscriminant?.deprecated ?? false,
+              type: variants.items.map((item) => `"${item.value}"`),
+              defaultValue: variants.items.find((item) => item.isDefault)?.value ?? '',
+              declarations: existingDiscriminant?.declarations ?? [],
+          }
+        : null;
+
+    // Remove original discriminant from properties to avoid duplicate.
+    const filteredProperties = discriminantProp
+        ? properties.filter((p) => p.name !== variants!.discriminant)
+        : properties;
+
+    const allProperties = discriminantProp ? [...filteredProperties, discriminantProp] : properties;
+
+    const [forwardedProps, others] = partition(allProperties, (prop) =>
         prop.declarations?.some(({ fileName }) => fileName.match(/@types\/react/)),
     );
 
@@ -222,7 +322,27 @@ export const PropTable: React.FC<PropTableProps> = ({ docs }) => {
                     </Text>
                 </Message>
             )}
-            <Table properties={others} />
+
+            {typeParams && typeParams.length > 0 && <TypeParamsLegend typeParams={typeParams} />}
+
+            {others.length > 0 && <Table properties={others} />}
+
+            {variants && variants.items.some((item) => item.props.length > 0) && (
+                <div className="prop-table__variants">
+                    <Heading as="h4" typography="subtitle2" className="lumx-spacing-margin-bottom-regular">
+                        Variant-specific props
+                    </Heading>
+                    {variants.items.map((item) => (
+                        <VariantSection
+                            componentName={componentName}
+                            key={item.value}
+                            discriminant={variants.discriminant}
+                            item={item}
+                        />
+                    ))}
+                </div>
+            )}
+
             {forwardedProps.length ? (
                 <details>
                     <summary>

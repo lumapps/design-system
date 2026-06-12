@@ -5,6 +5,9 @@ const {
     getRootPath,
     findComponentInterface,
     extractPropertiesFromInterface,
+    extractDiscriminatedUnionProps,
+    extractConditionalSelectionVariants,
+    extractTypeParams,
     extractDefaultValues,
     getJsDocFromDeclaration,
     getJsDocDeprecatedFromDeclaration,
@@ -12,37 +15,13 @@ const {
 
 /**
  * Extract default values for a Vue component.
- * Vue components re-export DEFAULT_PROPS from @lumx/core, so we need to
- * follow the import chain to find the original definition.
+ * Delegates to the shared extractDefaultValues which now follows re-exports.
  *
  * @param {SourceFile} sourceFile - The Vue component source file
  * @returns {Object} - Map of prop name to default value string
  */
 function extractVueDefaultValues(sourceFile) {
-    // First try local definition (same as React)
-    const localDefaults = extractDefaultValues(sourceFile);
-    if (Object.keys(localDefaults).length > 0) {
-        return localDefaults;
-    }
-
-    // Follow re-exported DEFAULT_PROPS to its original source
-    for (const importDecl of sourceFile.getImportDeclarations()) {
-        const namedImports = importDecl.getNamedImports();
-        const defaultPropsImport = namedImports.find((ni) => {
-            // Handle both `import { DEFAULT_PROPS }` and `import { X as DEFAULT_PROPS }`
-            const name = ni.getAliasNode()?.getText() || ni.getName();
-            return name === 'DEFAULT_PROPS';
-        });
-
-        if (defaultPropsImport) {
-            const resolvedModule = importDecl.getModuleSpecifierSourceFile();
-            if (resolvedModule) {
-                return extractDefaultValues(resolvedModule);
-            }
-        }
-    }
-
-    return {};
+    return extractDefaultValues(sourceFile);
 }
 
 /**
@@ -250,16 +229,32 @@ function parseVueComponent(project, filePath) {
 
     const rootPath = getRootPath(project);
     const defaultValues = extractVueDefaultValues(sourceFile);
-    const props = extractPropertiesFromInterface(interfaceDecl, sourceFile, rootPath, defaultValues);
     const displayName = getVueComponentName(sourceFile);
     const events = extractEmits(sourceFile);
     const slots = extractSlots(sourceFile);
     const deprecated = getVueComponentDeprecated(sourceFile);
 
-    const result = { displayName, props, events, slots };
+    // Detect discriminated union Props (e.g. MenuButton variants) — true TS union
+    const unionResult = extractDiscriminatedUnionProps(interfaceDecl, sourceFile, rootPath, defaultValues);
+    // Detect generic selection-mode Props with conditional types
+    const conditionalResult =
+        !unionResult && extractConditionalSelectionVariants(interfaceDecl, sourceFile, rootPath, defaultValues);
+
+    const splitResult = unionResult || conditionalResult;
+    const result = splitResult
+        ? { displayName, props: splitResult.commonProps, variants: splitResult.variants, events, slots }
+        : { displayName, props: extractPropertiesFromInterface(interfaceDecl, sourceFile, rootPath, defaultValues), events, slots };
+
     if (deprecated !== undefined) {
         result.deprecated = deprecated;
     }
+
+    // Extract @typeParam documentation
+    const typeParams = extractTypeParams(interfaceDecl);
+    if (typeParams.length > 0) {
+        result.typeParams = typeParams;
+    }
+
     return result;
 }
 
