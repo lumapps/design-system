@@ -12,7 +12,12 @@ import {
 import { mdiMenuDown } from '@lumx/icons';
 import { type BaseSelectButtonWrapperProps } from '@lumx/core/js/utils/select/types';
 import { toggleSelection } from '@lumx/core/js/utils/select/toggleSelection';
-import { SelectButton as UI, type SelectButtonProps as UIProps } from '@lumx/core/js/components/SelectButton';
+import {
+    DEFAULT_PROPS,
+    CLASSNAME,
+    SelectButton as UI,
+    type SelectButtonProps as UIProps,
+} from '@lumx/core/js/components/SelectButton';
 import type { ComboboxButtonProps } from '@lumx/core/js/components/Combobox/ComboboxButton';
 import { InfiniteScroll } from '@lumx/vue/utils/InfiniteScroll';
 import { JSXElement } from '@lumx/core/js/types';
@@ -218,15 +223,13 @@ const SelectButton = defineComponent(
                 },
         );
 
-        const isMultiple = computed(() => props.selectionType === 'multiple');
-
         const handleSelect = (selectedOption: { value: string }) => {
             const next = toggleSelection(
                 props.options,
                 props.getOptionId,
                 props.value,
                 selectedOption?.value,
-                isMultiple.value,
+                props.selectionType === 'multiple',
             );
             emit('change', next);
         };
@@ -251,7 +254,7 @@ const SelectButton = defineComponent(
                     getSectionId: props.getSectionId as any,
                     renderSectionTitle: renderSectionTitle.value as any,
                     value: props.value,
-                    isMultiselectable: isMultiple.value,
+                    selectionType: props.selectionType,
                     label: props.label,
                     labelDisplayMode: props.labelDisplayMode,
                     buttonProps: {
@@ -307,3 +310,4 @@ const SelectButton = defineComponent(
 );
 
 export default SelectButton as unknown as SelectButtonConstructor & typeof SelectButton;
+export { DEFAULT_PROPS, CLASSNAME };

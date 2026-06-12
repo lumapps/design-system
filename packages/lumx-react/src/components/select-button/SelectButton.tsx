@@ -3,7 +3,11 @@ import React, { ElementType, type ForwardedRef, useCallback, useState } from 're
 import { mdiMenuDown } from '@lumx/icons';
 import { toggleSelection } from '@lumx/core/js/utils/select/toggleSelection';
 import type { GenericProps, NamedProps } from '@lumx/core/js/types';
-import { SelectButton as UI, type SelectButtonProps as UIProps } from '@lumx/core/js/components/SelectButton';
+import {
+    SelectButton as UI,
+    type SelectButtonProps as UIProps,
+    DEFAULT_PROPS,
+} from '@lumx/core/js/components/SelectButton';
 import { type ComboboxButtonLabelDisplayMode } from '@lumx/core/js/components/Combobox/ComboboxButton';
 import { type SelectButtonTranslations, type SelectListStatus } from '@lumx/core/js/utils/select/types';
 import { ComponentRef } from '@lumx/react/utils/type';
@@ -31,10 +35,11 @@ type OmittedKeys =
     | 'ref';
 
 /** Select-specific props common to both single and multi modes. */
-type SelectButtonSelectProps<O> = Omit<
-    ReactToJSX<UIProps<O>>,
-    'renderOption' | 'buttonProps' | 'value' | 'isMultiselectable'
-> & {
+interface SelectButtonSelectProps<O>
+    extends ReactToJSX<
+        UIProps<O>,
+        'renderOption' | 'buttonProps' | 'value' | 'handleSelect' | 'listProps' | 'infiniteScrollOptions'
+    > {
     /** Called to load more options (infinite scroll). */
     onLoadMore?: () => void;
     /** Called when the dropdown opens or closes. */
@@ -44,7 +49,7 @@ type SelectButtonSelectProps<O> = Omit<
      * Props `value`, `isSelected`, `description` and `key` are merged in automatically.
      */
     renderOption?: (option: O, index: number) => React.ReactNode;
-};
+}
 
 /**
  * Forwarded trigger props for a given element `E`, minus the keys that the
@@ -162,7 +167,7 @@ export const SelectButton = (React.forwardRef as ForwardRefSelectButton)((props,
         renderOption,
         getSectionId,
         renderSectionTitle,
-        selectionType,
+        selectionType = DEFAULT_PROPS.selectionType,
         value,
         onChange,
         onLoadMore,
@@ -204,7 +209,7 @@ export const SelectButton = (React.forwardRef as ForwardRefSelectButton)((props,
             getSectionId,
             renderSectionTitle,
             value,
-            isMultiselectable: isMultiple,
+            selectionType,
             label,
             labelDisplayMode,
             buttonProps: { ...buttonProps, as: buttonAs, ref },
