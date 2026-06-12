@@ -16,55 +16,26 @@
 }
 
 /* ==========================================================================
-   Variant sections (discriminated-union props)
+   Details animation
    ========================================================================== */
 
-.prop-table__variants {
-    margin-top: $lumx-spacing-unit * 4;
-}
+.prop-table__details {
+    interpolate-size: allow-keywords;
 
-.prop-table__variant {
-    margin-top: $lumx-spacing-unit * 2;
-    border: 1px solid lumx-color-variant("dark", "L4");
-    border-radius: var(--lumx-border-radius);
-    overflow: hidden;
-
-    &-summary {
-        display: flex;
-        align-items: center;
-        padding: $lumx-spacing-unit * 2 $lumx-spacing-unit * 3;
-        background-color: lumx-color-variant("dark", "L5");
+    & > summary {
         margin-top: $lumx-spacing-unit;
         cursor: pointer;
-        list-style: none;
-        user-select: none;
-
-        &::-webkit-details-marker {
-            display: none;
-        }
-
-        &::before {
-            content: "▶";
-            display: inline-block;
-            margin-right: $lumx-spacing-unit * 2;
-            font-size: 0.65em;
-            transition: transform 0.15s ease;
-        }
     }
 
-    &[open] > &-summary::before {
-        transform: rotate(90deg);
+    &::details-content {
+        overflow: clip;
+        height: 0;
+        transition: height 0.3s ease,
+                    content-visibility 0.3s allow-discrete;
     }
 
-    &-label {
-        code {
-            font-family: monospace;
-            font-size: 0.9em;
-        }
-    }
-
-    &-body {
-        padding-top: $lumx-spacing-unit * 2;
+    &[open]::details-content {
+        height: auto;
         padding: $lumx-spacing-unit *2;
     }
 }

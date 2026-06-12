@@ -315,8 +315,10 @@ export const PropTable: React.FC<PropTableProps> = ({ docs }) => {
 
     return (
         <>
+            <Heading as="h3">{componentName}</Heading>
+
             {deprecated !== undefined && (
-                <Message kind="warning" hasBackground className="lumx-spacing-margin-bottom-big">
+                <Message kind="warning" hasBackground>
                     <Text as="p" typography="body1">
                         <strong>Deprecated:</strong> {deprecated || 'This component is deprecated.'}
                     </Text>
@@ -329,9 +331,7 @@ export const PropTable: React.FC<PropTableProps> = ({ docs }) => {
 
             {variants && variants.items.some((item) => item.props.length > 0) && (
                 <div className="prop-table__variants">
-                    <Heading as="h4" typography="subtitle2" className="lumx-spacing-margin-bottom-regular">
-                        Variant-specific props
-                    </Heading>
+                    <Heading as="h4">Variant-specific props</Heading>
                     {variants.items.map((item) => (
                         <VariantSection
                             componentName={componentName}
@@ -344,9 +344,9 @@ export const PropTable: React.FC<PropTableProps> = ({ docs }) => {
             )}
 
             {forwardedProps.length ? (
-                <details>
+                <details className="prop-table__details">
                     <summary>
-                        <Heading as="h4" typography="subtitle2" style={{ display: 'inline-block' }}>
+                        <Heading as="h4" style={{ display: 'inline-block' }}>
                             Forwarded props
                         </Heading>
                     </summary>
@@ -356,18 +356,14 @@ export const PropTable: React.FC<PropTableProps> = ({ docs }) => {
 
             {events && events.length > 0 && (
                 <>
-                    <Heading as="h4" typography="subtitle2">
-                        Events
-                    </Heading>
+                    <Heading as="h4">Events</Heading>
                     <EventsTable events={events} />
                 </>
             )}
 
             {slots && slots.length > 0 && (
                 <>
-                    <Heading as="h4" typography="subtitle2">
-                        Slots
-                    </Heading>
+                    <Heading as="h4">Slots</Heading>
                     <SlotsTable slots={slots} />
                 </>
             )}
