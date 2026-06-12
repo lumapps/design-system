@@ -12,7 +12,7 @@ const { meta, ...stories } = setup({
 });
 
 export default {
-    title: 'LumX components/menu/MenuButton',
+    title: 'LumX components/menu-button/MenuButton',
     ...meta,
 };
 

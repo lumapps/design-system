@@ -1,6 +1,7 @@
 import React, { type ForwardedRef } from 'react';
 
 import {
+    DEFAULT_PROPS,
     MenuButton as UI,
     type MenuButtonProps as UIProps,
     type MenuButtonVariantsProps,
@@ -52,7 +53,14 @@ const TRIGGER_COMPONENTS = {
  * @return React element.
  */
 export const MenuButton = forwardRef<MenuButtonProps>((props, ref: ForwardedRef<HTMLElement>) => {
-    const { label, children, popoverProps, onOpen, variant = 'button', ...triggerProps } = props;
+    const {
+        label,
+        children,
+        popoverProps,
+        onOpen,
+        variant = DEFAULT_PROPS.variant as UIProps['variant'],
+        ...triggerProps
+    } = props;
 
     return UI(
         {
@@ -68,3 +76,4 @@ export const MenuButton = forwardRef<MenuButtonProps>((props, ref: ForwardedRef<
 });
 
 MenuButton.displayName = COMPONENT_NAME;
+MenuButton.defaultProps = DEFAULT_PROPS;
