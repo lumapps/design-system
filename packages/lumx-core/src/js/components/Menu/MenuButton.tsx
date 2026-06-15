@@ -3,9 +3,9 @@ import type { JSXElement, LumxClassName } from '../../types';
 
 export type MenuButtonVariant = 'button' | 'icon-button' | 'chip' | 'link';
 
-export const DEFAULT_PROPS: Partial<MenuButtonProps> = {
+export const DEFAULT_PROPS = {
     variant: 'button',
-};
+} satisfies Partial<MenuButtonProps>;
 
 /** ARIA keys set by MenuButton on the trigger — omitted from variant component props. */
 type MenuButtonAriaKeys = 'aria-haspopup' | 'aria-controls' | 'aria-expanded';

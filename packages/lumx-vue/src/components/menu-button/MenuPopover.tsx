@@ -35,7 +35,7 @@ const MenuPopover = defineComponent(
                 {
                     ...props,
                     children: slots.default?.() as JSXElement,
-                    isOpen: isOpen.value || false,
+                    isOpen: isOpen.value,
                     anchorRef,
                     handleClose: () => setIsOpen(false),
                 },

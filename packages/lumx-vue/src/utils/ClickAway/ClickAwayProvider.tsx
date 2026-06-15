@@ -11,7 +11,7 @@ import {
 import { setupClickAway, type ClickAwayCallback } from '@lumx/core/js/utils/ClickAway';
 
 interface ContextValue {
-    childrenRefs: Array<Ref<HTMLElement | undefined>>;
+    childrenRefs: Set<Ref<HTMLElement | undefined>>;
     addRefs(...newChildrenRefs: Array<Ref<HTMLElement | undefined>>): void;
 }
 
@@ -34,14 +34,14 @@ export const ClickAwayProvider = defineComponent(
 
         // Store raw refs so they are resolved lazily at click time (not at mount time).
         // This avoids missing elements that are not yet mounted when addRefs is first called.
-        const contextChildrenRefs: Array<Ref<HTMLElement | undefined>> = [];
+        const contextChildrenRefs = new Set<Ref<HTMLElement | undefined>>();
 
         const currentContext: ContextValue = {
             childrenRefs: contextChildrenRefs,
             addRefs(...newChildrenRefs) {
                 for (const newRef of newChildrenRefs) {
-                    if (!contextChildrenRefs.includes(newRef)) {
-                        contextChildrenRefs.push(newRef);
+                    if (!contextChildrenRefs.has(newRef)) {
+                        contextChildrenRefs.add(newRef);
                     }
                 }
                 if (parentContext) {
@@ -69,7 +69,7 @@ export const ClickAwayProvider = defineComponent(
             // Refs are resolved lazily at click time so late-mounted anchors are included.
             teardown = setupClickAway(
                 () =>
-                    contextChildrenRefs
+                    Array.from(contextChildrenRefs)
                         .map((r) => r.value)
                         .filter((el): el is HTMLElement => el instanceof HTMLElement),
                 (event) => {

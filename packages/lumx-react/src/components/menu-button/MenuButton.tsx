@@ -6,6 +6,7 @@ import {
     type MenuButtonProps as UIProps,
     type MenuButtonVariantsProps,
     COMPONENT_NAME,
+    type MenuButtonVariant,
 } from '@lumx/core/js/components/Menu/MenuButton';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
@@ -44,7 +45,7 @@ const TRIGGER_COMPONENTS = {
     'icon-button': IconButton,
     chip: Chip,
     link: Link,
-} as const;
+} satisfies Record<MenuButtonVariant, unknown>;
 
 /**
  * MenuButton component.
@@ -53,14 +54,7 @@ const TRIGGER_COMPONENTS = {
  * @return React element.
  */
 export const MenuButton = forwardRef<MenuButtonProps>((props, ref: ForwardedRef<HTMLElement>) => {
-    const {
-        label,
-        children,
-        popoverProps,
-        onOpen,
-        variant = DEFAULT_PROPS.variant as UIProps['variant'],
-        ...triggerProps
-    } = props;
+    const { label, children, popoverProps, onOpen, variant = DEFAULT_PROPS.variant, ...triggerProps } = props;
 
     return UI(
         {

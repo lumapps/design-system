@@ -16,12 +16,13 @@ import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 
 import Button, { type ButtonProps } from '../button/Button';
 import IconButton, { type IconButtonProps } from '../button/IconButton';
+import Chip, { type ChipProps } from '../chip/Chip';
+import Link, { type LinkProps } from '../link/Link';
+
 import MenuProvider from './MenuProvider';
 import MenuTrigger from './MenuTrigger';
 import MenuPopover, { MenuPopoverProps } from './MenuPopover';
 import MenuList from './MenuList';
-import Chip, { type ChipProps } from '../chip/Chip';
-import Link, { type LinkProps } from '../link/Link';
 
 /** Props that MenuButton explicitly declares */
 type MenuButtonBaseProps = VueToJSXProps<UIProps, 'children' | 'triggerProps' | 'onOpen'> & {
@@ -50,7 +51,7 @@ const TRIGGER_COMPONENTS = {
     'icon-button': IconButton,
     chip: Chip,
     link: Link,
-} as const;
+} satisfies Record<MenuButtonVariant, unknown>;
 
 /**
  * MenuButton component.

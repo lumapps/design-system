@@ -1,7 +1,9 @@
+import type { Ref } from 'vue';
+
 import { useMenuEvent } from './useMenuEvent';
 import { useMenuContext } from './context';
 
-export function useMenuOpen(): [import('vue').Ref<boolean | undefined>, (open: boolean) => void] {
+export function useMenuOpen(): [Ref<boolean>, (open: boolean) => void] {
     const { handle } = useMenuContext();
     const isOpen = useMenuEvent('open', false);
 
