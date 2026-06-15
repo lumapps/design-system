@@ -20,9 +20,13 @@ The field generates time suggestions in a dropdonw list with configurable minute
 
 ## Bounds
 
-Restrict the pickable range with `minTime` and `maxTime`. Options outside the range remain **visible** in the dropdown but are rendered as disabled. Typed input outside the range is snapped to the nearest bound on blur.
+Two independent bounding systems control which times the user can pick.
+
+**Time-of-day bounds** (`minTime` / `maxTime`) — restrict the pickable time range regardless of date. Options outside the range remain **visible** in the dropdown but are rendered as disabled. Typed input outside the range is snapped to the nearest bound on blur.
 
 <DemoBlock demo={{ react: ReactDemoBounds, vue: VueDemoBounds }} />
+
+**Date-aware bounds** (`minDateTime` / `maxDateTime`) — constrain based on the full date-time formed by combining each option's time with the current `value`'s date. The `value` prop must be set (the bound is skipped when no date context is defined). Useful for linked pickers — for example, constraining an end time to be after a start time on the same day. Options outside the bound remain **visible** but disabled, and when the current `value` falls outside the bound the component auto-corrects to the bound value.
 
 ## Locale
 

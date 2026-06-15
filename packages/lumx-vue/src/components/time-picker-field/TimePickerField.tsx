@@ -1,4 +1,4 @@
-import { computed, defineComponent, ref } from 'vue';
+import { computed, defineComponent, ref, watch } from 'vue';
 
 import {
     TimePickerField as UI,
@@ -70,8 +70,27 @@ const TimePickerField = defineComponent(
                 step: step.value,
                 minTime: props.minTime,
                 maxTime: props.maxTime,
+                minDateTime: props.minDateTime,
+                maxDateTime: props.maxDateTime,
+                value: props.value,
                 locale: locale.value,
             }),
+        );
+
+        // Auto-advance to bounds when the current value falls outside minDateTime / maxDateTime.
+        watch(
+            () => ({ value: props.value, minDateTime: props.minDateTime, maxDateTime: props.maxDateTime }),
+            ({ value, minDateTime, maxDateTime }) => {
+                if (!value) return;
+                if (minDateTime && value < minDateTime) {
+                    emit('change', minDateTime);
+                    return;
+                }
+                if (maxDateTime && value > maxDateTime) {
+                    emit('change', maxDateTime);
+                }
+            },
+            { immediate: true },
         );
 
         // Track the user's last non-empty typed input.
@@ -106,7 +125,13 @@ const TimePickerField = defineComponent(
             if (!parsed) return;
 
             // Snap to bounds if needed, then dedup against the current value.
-            const time = snapTimeToBounds(parsed, props.minTime, props.maxTime);
+            const time = snapTimeToBounds(parsed, {
+                minTime: props.minTime,
+                maxTime: props.maxTime,
+                minDateTime: props.minDateTime,
+                maxDateTime: props.maxDateTime,
+                value: props.value,
+            });
             if (props.value && isDateOnTime(props.value, time)) return;
 
             emit('change', getDateAtTime(time, props.value));
@@ -121,6 +146,8 @@ const TimePickerField = defineComponent(
                 step: _step,
                 minTime: _minTime,
                 maxTime: _maxTime,
+                minDateTime: _minDateTime,
+                maxDateTime: _maxDateTime,
                 translations,
                 class: _class,
                 ...forwardedProps
@@ -151,6 +178,8 @@ const TimePickerField = defineComponent(
             'step',
             'minTime',
             'maxTime',
+            'minDateTime',
+            'maxDateTime',
             'translations',
             'class',
             // Inherited SelectTextField props

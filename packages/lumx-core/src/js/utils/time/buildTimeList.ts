@@ -28,6 +28,20 @@ export interface BuildTimeListOptions {
     minTime?: Date;
     /** Upper bound (date part ignored). Entries after are kept but marked `outOfRange`. */
     maxTime?: Date;
+    /**
+     * Lower bound (date part respected). An entry is disabled when the date-time
+     * formed by combining the entry's time with `value`'s date is strictly before
+     * `minDateTime`. Requires `value` to be set (otherwise ignored).
+     */
+    minDateTime?: Date;
+    /**
+     * Upper bound (date part respected). An entry is disabled when the date-time
+     * formed by combining the entry's time with `value`'s date is strictly after
+     * `maxDateTime`. Requires `value` to be set (otherwise ignored).
+     */
+    maxDateTime?: Date;
+    /** Current value Date (date part used for `minDateTime`/`maxDateTime` comparison). */
+    value?: Date;
     /** BCP-47 locale used to populate `name` on each entry. */
     locale?: string;
 }
@@ -41,7 +55,7 @@ const MINUTES_IN_DAY = 24 * MINUTES_IN_HOUR;
  * render them as visible-but-unselectable. Returns `[]` for invalid `step`.
  */
 export function buildTimeList(options: BuildTimeListOptions = {}): TimeOfDay[] {
-    const { step = 30, minTime, maxTime, locale } = options;
+    const { step = 30, minTime, maxTime, minDateTime, maxDateTime, value, locale } = options;
     if (!Number.isInteger(step) || step <= 0) {
         return [];
     }
@@ -53,11 +67,21 @@ export function buildTimeList(options: BuildTimeListOptions = {}): TimeOfDay[] {
     for (let minutes = 0; minutes < MINUTES_IN_DAY; minutes += step) {
         const hour = Math.floor(minutes / MINUTES_IN_HOUR);
         const minute = minutes % MINUTES_IN_HOUR;
-        const outOfRange =
-            (minMinutes !== undefined && minutes < minMinutes) ||
-            (maxMinutes !== undefined && minutes > maxMinutes) ||
-            undefined;
-        const name = locale ? formatTime(getDateAtTime({ hour, minute }), locale) : undefined;
+        const optionTime = { hour, minute };
+
+        const beforeMinTime = minMinutes !== undefined && minutes < minMinutes;
+        const afterMaxTime = maxMinutes !== undefined && minutes > maxMinutes;
+        let beforeMinDateTime = false;
+        let afterMaxDateTime = false;
+
+        if (value && (minDateTime || maxDateTime)) {
+            const combined = getDateAtTime(optionTime, value);
+            if (minDateTime) beforeMinDateTime = combined < minDateTime;
+            if (maxDateTime) afterMaxDateTime = combined > maxDateTime;
+        }
+
+        const outOfRange = beforeMinTime || afterMaxTime || beforeMinDateTime || afterMaxDateTime || undefined;
+        const name = locale ? formatTime(getDateAtTime(optionTime), locale) : undefined;
 
         list.push({ hour, minute, name, outOfRange });
     }

@@ -1,4 +1,4 @@
-import React, { type SyntheticEvent, useCallback, useMemo, useState } from 'react';
+import React, { type SyntheticEvent, useCallback, useEffect, useMemo, useState } from 'react';
 
 import type { HasClassName, HasTheme } from '@lumx/core/js/types';
 import {
@@ -70,14 +70,32 @@ export const TimePickerField: React.FC<TimePickerFieldProps> = (props) => {
         step = DEFAULT_PROPS.step,
         minTime,
         maxTime,
+        minDateTime,
+        maxDateTime,
         className,
         theme,
         translations,
+        name: nameProp,
         ...forwardedProps
     } = props;
 
     // Build the option list — re-computed only when bounds/step/locale change.
-    const timeList = useMemo(() => buildTimeList({ step, minTime, maxTime, locale }), [step, minTime, maxTime, locale]);
+    const timeList = useMemo(
+        () => buildTimeList({ step, minTime, maxTime, minDateTime, maxDateTime, value, locale }),
+        [step, minTime, maxTime, minDateTime, maxDateTime, value, locale],
+    );
+
+    // Auto-advance to bounds when the current value falls outside minDateTime / maxDateTime.
+    useEffect(() => {
+        if (!value) return;
+        if (minDateTime && value < minDateTime) {
+            onChange(minDateTime, nameProp);
+            return;
+        }
+        if (maxDateTime && value > maxDateTime) {
+            onChange(maxDateTime, nameProp);
+        }
+    }, [value, minDateTime, maxDateTime, onChange, nameProp]);
 
     // Track the user's typed input separately from the SelectTextField's internal search state,
     // so blur can convert it to a Date.
@@ -92,9 +110,9 @@ export const TimePickerField: React.FC<TimePickerFieldProps> = (props) => {
     const handleChange: UIProps['handleChange'] = useCallback(
         (next) => {
             const date = next ? getDateAtTime(next, value) : undefined;
-            onChange(date, forwardedProps.name);
+            onChange(date, nameProp);
         },
-        [forwardedProps.name, onChange, value],
+        [nameProp, onChange, value],
     );
 
     const handleBlur: UIProps['handleBlur'] = useCallback(() => {
@@ -105,17 +123,18 @@ export const TimePickerField: React.FC<TimePickerFieldProps> = (props) => {
         if (!parsed) return;
 
         // Snap to bounds if needed, then dedup against the current value.
-        const time = snapTimeToBounds(parsed, minTime, maxTime);
+        const time = snapTimeToBounds(parsed, { minTime, maxTime, minDateTime, maxDateTime, value });
         if (value && isDateOnTime(value, time)) return;
 
-        onChange(getDateAtTime(time, value), forwardedProps.name);
-    }, [maxTime, minTime, forwardedProps.name, onChange, searchValue, value]);
+        onChange(getDateAtTime(time, value), nameProp);
+    }, [maxTime, minTime, minDateTime, maxDateTime, nameProp, onChange, searchValue, value]);
 
     const searchInputValue = value ? formatTime(value, locale) : undefined;
 
     return UI(
         {
             ...forwardedProps,
+            name: nameProp,
             value: selectedOption,
             options: timeList,
             translations,

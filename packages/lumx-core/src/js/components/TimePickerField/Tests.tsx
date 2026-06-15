@@ -62,6 +62,11 @@ export default function timePickerFieldTests({ components, renderWithState }: Ti
             expect(inputValue).toMatch(/^2:30/);
             expect(inputValue.toUpperCase()).toContain('PM');
         });
+
+        it('renders the input as disabled when isDisabled is true', () => {
+            renderWithState(defaultTemplate, { isDisabled: true });
+            expect(screen.getByRole('combobox')).toBeDisabled();
+        });
     });
 
     describe('option list', () => {
@@ -100,6 +105,45 @@ export default function timePickerFieldTests({ components, renderWithState }: Ti
             const optAfter = options.find((o) => /1:30/.test(o.textContent ?? ''));
             expect(optAt).not.toHaveAttribute('aria-disabled', 'true');
             expect(optAfter).toHaveAttribute('aria-disabled', 'true');
+        });
+
+        it('keeps options before `minDateTime` visible but disables them (same date as value)', async () => {
+            const value = new Date(2024, 5, 15, 12, 0);
+            const minDateTime = new Date(2024, 5, 15, 10, 0);
+            renderWithState(defaultTemplate, { value, minDateTime });
+            await userEvent.click(screen.getByRole('combobox'));
+            const options = screen.queryAllByRole('option');
+            expect(options).toHaveLength(48);
+            // 9:30 disabled, 10:00 enabled (same date as value so time-only comparison matches).
+            const optBefore = options.find((o) => /9:30/.test(o.textContent ?? ''));
+            const optAfter = options.find((o) => /10:00/.test(o.textContent ?? ''));
+            expect(optBefore).toHaveAttribute('aria-disabled', 'true');
+            expect(optAfter).not.toHaveAttribute('aria-disabled', 'true');
+        });
+
+        it('ignores `minDateTime` when value has a different (later) date', async () => {
+            const value = new Date(2024, 6, 15, 12, 0);
+            const minDateTime = new Date(2024, 5, 15, 10, 0);
+            renderWithState(defaultTemplate, { value, minDateTime });
+            await userEvent.click(screen.getByRole('combobox'));
+            const options = screen.queryAllByRole('option');
+            // Value date is after minDateTime date → all options enabled.
+            const disabledOptions = options.filter((o) => o.getAttribute('aria-disabled') === 'true');
+            expect(disabledOptions).toHaveLength(0);
+        });
+
+        it('disables options before `minDateTime` time after auto-advance snaps value to bound', async () => {
+            // Value date is before minDateTime → auto-advance snaps value to minDateTime.
+            // After auto-advance: value === minDateTime (same date), so only options before
+            // 10:00 (20 entries) are disabled.
+            const value = new Date(2024, 4, 15, 12, 0);
+            const minDateTime = new Date(2024, 5, 15, 10, 0);
+            renderWithState(defaultTemplate, { value, minDateTime });
+            await userEvent.click(screen.getByRole('combobox'));
+            const options = screen.queryAllByRole('option');
+            const disabledOptions = options.filter((o) => o.getAttribute('aria-disabled') === 'true');
+            // 20 disabled options = midnight to 9:30 on the same date as minDateTime.
+            expect(disabledOptions).toHaveLength(20);
         });
     });
 
@@ -161,6 +205,49 @@ export default function timePickerFieldTests({ components, renderWithState }: Ti
             expect(onChange).toHaveBeenLastCalledWith(expectTimeOfDay(12, 0), undefined, undefined);
         });
 
+        it('snaps to `maxTime` when the typed input is above it', async () => {
+            const onChange = vi.fn();
+            renderWithState(defaultTemplate, {
+                value: getDateAtTime({ hour: 11, minute: 0 }),
+                maxTime: getDateAtTime({ hour: 14, minute: 0 }),
+                onChange,
+            });
+            const input = screen.getByRole('combobox');
+            await userEvent.click(input);
+            await userEvent.clear(input);
+            await userEvent.type(input, '18');
+            await userEvent.tab();
+            expect(onChange).toHaveBeenLastCalledWith(expectTimeOfDay(14, 0), undefined, undefined);
+        });
+
+        it('snaps to `maxDateTime` when the typed input is above it (same date)', async () => {
+            const onChange = vi.fn();
+            const value = new Date(2024, 5, 15, 11, 0);
+            const maxDateTime = new Date(2024, 5, 15, 14, 0);
+            renderWithState(defaultTemplate, { value, maxDateTime, onChange });
+            const input = screen.getByRole('combobox');
+            await userEvent.click(input);
+            await userEvent.clear(input);
+            await userEvent.type(input, '18');
+            await userEvent.tab();
+            expect(onChange).toHaveBeenLastCalledWith(expectTimeOfDay(14, 0), undefined, undefined);
+        });
+
+        it('skips `minDateTime` snap when value is cleared (no date context)', async () => {
+            const onChange = vi.fn();
+            const value = new Date(2024, 6, 15, 11, 0);
+            const minDateTime = new Date(2024, 5, 15, 12, 0);
+            renderWithState(defaultTemplate, { value, minDateTime, onChange });
+            const input = screen.getByRole('combobox');
+            await userEvent.click(input);
+            await userEvent.clear(input);
+            await userEvent.type(input, '9');
+            await userEvent.tab();
+            // Value was cleared to undefined → no date context for dateTime comparison,
+            // so snapTimeToBounds skips minDateTime entirely. Typed "9" = 9:00 emitted as-is.
+            expect(onChange).toHaveBeenLastCalledWith(expectTimeOfDay(9, 0), undefined, undefined);
+        });
+
         it('does not call onChange for an unparseable typed value', async () => {
             const onChange = vi.fn();
             renderWithState(defaultTemplate, { value: getDateAtTime({ hour: 8, minute: 0 }), onChange });
@@ -183,6 +270,20 @@ export default function timePickerFieldTests({ components, renderWithState }: Ti
             const option = await screen.findByRole('option', { name: /^8:00\sPM$/i });
             await userEvent.click(option);
             expect(onChange).toHaveBeenLastCalledWith(expectTimeOfDay(20, 0), undefined, undefined);
+        });
+    });
+
+    describe('clear button', () => {
+        it('emits undefined when the clear button is clicked', async () => {
+            const onChange = vi.fn();
+            renderWithState(defaultTemplate, {
+                value: getDateAtTime({ hour: 14, minute: 0 }),
+                hasClearButton: true,
+                onChange,
+            });
+            const clearButton = screen.getByRole('button', { name: TRANSLATIONS.clearLabel });
+            await userEvent.click(clearButton);
+            expect(onChange).toHaveBeenLastCalledWith(undefined, undefined, undefined);
         });
     });
 }

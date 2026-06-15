@@ -5,5 +5,5 @@ export { formatTime } from './formatTime';
 export { parseTimeInput } from './parseTimeInput';
 export { getDateAtTime } from './getDateAtTime';
 export { timeOfDayMinutes } from './timeOfDayMinutes';
-export { snapTimeToBounds } from './snapTimeToBounds';
+export { snapTimeToBounds, type SnapTimeToBoundsOptions } from './snapTimeToBounds';
 export { isDateOnTime } from './isDateOnTime';

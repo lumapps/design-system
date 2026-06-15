@@ -51,18 +51,37 @@ export interface TimePickerFieldWrapperProps {
     step?: number;
 
     /**
-     * Lower bound. Options strictly before this time remain **visible** in the
-     * dropdown but are rendered as disabled (cannot be picked). Typed input
+     * Lower bound (date part ignored). Time options out of range are visible but disabled. Typed input
      * below this bound is snapped up to it on blur.
      */
     minTime?: Date;
 
     /**
-     * Upper bound. Options strictly after this time remain **visible** in the
-     * dropdown but are rendered as disabled (cannot be picked). Typed input
+     * Upper bound (date part ignored). Time options out of range are visible but disabled. Typed input
      * above this bound is snapped down to it on blur.
      */
     maxTime?: Date;
+
+    /**
+     * Lower bound (date part respected). Same behaviour as `minTime` but
+     * compares the full date-time formed by combining each option's time with
+     * the current value's date. Skipped when `value` is undefined (no date
+     * context).
+     *
+     * When set and the current value falls below this bound, the component
+     * auto-selects the bound value on mount and on bound/value changes.
+     */
+    minDateTime?: Date;
+
+    /**
+     * Upper bound (date part respected). Same behaviour as `maxTime` but
+     * compares the full date-time. Skipped when `value` is undefined (no date
+     * context).
+     *
+     * When set and the current value exceeds this bound, the component
+     * auto-selects the bound value.
+     */
+    maxDateTime?: Date;
 
     /**
      * Translations label for clear and show suggestions buttons.
@@ -148,11 +167,11 @@ export const TimePickerField = (
     props: TimePickerFieldProps,
     { SelectTextField, Option }: TimePickerFieldComponents,
 ) => {
-    const { options, translations, className, handleChange, handleSearch, handleBlur, ...fowardedProps } = props;
+    const { options, translations, className, handleChange, handleSearch, handleBlur, ...forwardedProps } = props;
 
     return (
         <SelectTextField
-            {...fowardedProps}
+            {...forwardedProps}
             className={block([className])}
             selectionType="single"
             options={options}
