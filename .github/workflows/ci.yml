@@ -88,12 +88,12 @@ jobs:
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    # Fails when the release/next PR is frozen (marked "Ready for review"),
+    # Fails when the release PR is frozen (marked "Ready for review"),
     # blocking merges to master during release preparation.
     release-freeze-check:
         if: >-
             github.event.pull_request.draft == false &&
-            github.head_ref != 'release/next'
+            !startsWith(github.head_ref, 'release/')
         runs-on: ubuntu-latest
         steps:
             - name: 'Checkout repository'

@@ -32,8 +32,9 @@ async function main({ inputs, context }) {
     }
 
     if (!isPrerelease && !inputs.releaseBranch) {
-        // Exit if not on master (skip when releaseBranch is provided by automation)
-        if (baseBranch !== 'master') {
+        // Exit if run from a named branch other than master (skip in PR-merge
+        // automation context where baseBranch is empty, or when releaseBranch is provided)
+        if (baseBranch && baseBranch !== 'master') {
             console.log(`New ${releaseType} release can only be created from the master branch.\n`);
             process.exit(1);
         }
