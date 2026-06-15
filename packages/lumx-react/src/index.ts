@@ -36,7 +36,7 @@ export * from './components/lightbox';
 export * from './components/link';
 export * from './components/link-preview';
 export * from './components/list';
-export * from './components/menu';
+export * from './components/menu-button';
 export * from './components/message';
 export * from './components/mosaic';
 export * from './components/navigation';

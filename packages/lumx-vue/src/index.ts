@@ -23,6 +23,7 @@ export * from './components/input-label';
 export * from './components/link';
 export * from './components/link-preview';
 export * from './components/list';
+export * from './components/menu-button';
 export * from './components/message';
 export * from './components/mosaic';
 export * from './components/popover';
