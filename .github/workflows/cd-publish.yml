@@ -2,7 +2,7 @@ name: 'CD / Publish'
 
 # This workflow orchestrates the continuous delivery process for the design system.
 # It supports:
-# - Official releases triggered by merging the release/next PR into 'master'
+# - Official releases triggered by merging a release/<version> PR into 'master'
 #   (auto-maintained as a draft PR, freeze by marking it "ready")
 # - Automatic prereleases (tag 'next') triggered when a PR merged into 'master' modifies
 #   any lib package (packages/lumx-*)
@@ -21,14 +21,14 @@ name: 'CD / Publish'
 # Release type (patch/minor/major) is auto-detected from CHANGELOG.md.
 #
 # Freeze behavior:
-# - When the release/next PR is frozen (marked "Ready"), merges to master are blocked
+# - When the release/<version> PR is frozen (marked "Ready"), merges to master are blocked
 #   via the "release-freeze-check" CI job (see ci.yml).
 # - Prereleases ('next' tag) still publish for PRs merged before the freeze.
 # - When the frozen release PR is merged, if CHANGELOG has unreleased changes
-#   (from PRs merged before the freeze), a new release/next draft PR is auto-created.
+#   (from PRs merged before the freeze), a new release/<version> draft PR is auto-created.
 
 on:
-    # Trigger on PR merged into master (release/next for releases, lib-changing PRs for prereleases)
+    # Trigger on PR merged into master (release/<version> for releases, lib-changing PRs for prereleases)
     pull_request:
         branches:
             - master
@@ -125,8 +125,8 @@ jobs:
                   [ -n "$releaseSha" ] && echo "releaseSha=$releaseSha" >> "$GITHUB_OUTPUT"
                   echo "affected=$affected" >> "$GITHUB_OUTPUT"
 
-    prepare_release_next:
-        name: 'Update release/next preview'
+    prepare_release:
+        name: 'Update release preview'
         needs: [check_trigger, build_publish_NPM]
         if: >-
             !failure() &&
@@ -139,7 +139,7 @@ jobs:
                   token: ${{ secrets.GITBOT_TOKEN }}
                   fetch-depth: 0
 
-            - name: 'Check if release/next PR is frozen'
+            - name: 'Check if release PR is frozen'
               id: check-pr
               uses: ./.github/actions/manage-release-pr
               with:
@@ -161,15 +161,14 @@ jobs:
               uses: ./.github/actions/increment-package-versions
               with:
                   releaseType: '${{ steps.detect.outputs.releaseType }}'
-                  releaseBranch: 'release/next'
 
-            - name: 'Commit and push release/next'
+            - name: 'Commit and push release branch'
               if: success() && steps.check-pr.outputs.frozen != 'true'
               run: |
                   git config user.name "lumbot"
                   git config user.email "lumbot@users.noreply.github.com"
                   git commit -am "chore(release): release v${{ steps.version.outputs.nextVersion }}"
-                  git push --force origin release/next
+                  git push --force origin "${{ steps.version.outputs.releaseBranch }}"
 
             - name: 'Create or update draft PR'
               if: success() && steps.check-pr.outputs.frozen != 'true'

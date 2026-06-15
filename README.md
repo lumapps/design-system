@@ -46,11 +46,11 @@ Everything is handled by the [**CD / Publish**](https://github.com/lumapps/desig
 When a PR modifying lib packages (`packages/lumx-*`) is merged into `master`, the workflow automatically:
 
 1. Publishes a `next` prerelease to NPM (e.g. `4.7.1-next.0`)
-2. Creates or updates a **draft** `release/next` PR with the next release version (auto-detected from `CHANGELOG.md`)
+2. Creates or updates a **draft** `release/<version>` PR (e.g. `release/4.7.1`) with the next release version (auto-detected from `CHANGELOG.md`)
 
 To publish an official release:
 
-1. Mark the draft `release/next` PR as **ready for review** (this freezes it — new merges to master won't update it)
+1. Mark the draft `release/<version>` PR as **ready for review** (this freezes it — new merges to master won't update it)
 2. Review and merge → publishes all packages to NPM, creates a Git tag, deploys the demo site, and generates GitHub release notes
 
 ### Prereleases

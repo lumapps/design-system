@@ -3,27 +3,30 @@
 const fs = require('fs');
 
 /**
- * Find the existing release/next PR.
- * @returns {{ frozen: boolean, prNumber: number }}
+ * Find the existing release PR (any open PR with head.ref starting with 'release/').
+ * @returns {{ frozen: boolean, prNumber: number, headRef: string }}
  */
 async function findReleasePR(github, context) {
     const { data: prs } = await github.rest.pulls.list({
         owner: context.repo.owner,
         repo: context.repo.repo,
-        head: `${context.repo.owner}:release/next`,
+        base: 'master',
         state: 'open',
     });
-    const pr = prs[0];
+    const pr = prs.find((p) => p.head.ref.startsWith('release/'));
     const frozen = pr ? !pr.draft : false;
     const prNumber = pr?.number || 0;
+    const headRef = pr?.head.ref || '';
     console.log(
-        pr ? `Found release/next PR #${prNumber} (draft=${pr.draft}, frozen=${frozen})` : 'No release/next PR found',
+        pr
+            ? `Found release PR #${prNumber} on branch '${headRef}' (draft=${pr.draft}, frozen=${frozen})`
+            : 'No release PR found',
     );
-    return { frozen, prNumber };
+    return { frozen, prNumber, headRef };
 }
 
 /**
- * Build the PR body for the release/next PR.
+ * Build the PR body for the release PR.
  */
 function buildPRBody({ nextVersion, prereleaseVersion, runUrl }) {
     const lines = [
@@ -65,11 +68,35 @@ function buildPRBody({ nextVersion, prereleaseVersion, runUrl }) {
 }
 
 /**
- * Create or update the release/next draft PR.
+ * Create or update the release draft PR.
+ * If an existing release PR is found on a different branch, close it and delete its branch first.
  */
-async function createOrUpdatePR(github, context, { prNumber, nextVersion, prereleaseVersion, runUrl }) {
+async function createOrUpdatePR(github, context, { prNumber, headRef, releaseBranch, nextVersion, prereleaseVersion, runUrl }) {
     const title = `chore(release): release v${nextVersion}`;
     const body = buildPRBody({ nextVersion, prereleaseVersion, runUrl });
+
+    // If existing PR is on a different branch (version changed), close it and delete its branch.
+    if (prNumber && headRef && headRef !== releaseBranch) {
+        console.log(`Release version changed: closing old PR #${prNumber} on '${headRef}', opening new one on '${releaseBranch}'`);
+        await github.rest.pulls.update({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            pull_number: prNumber,
+            state: 'closed',
+        });
+        try {
+            await github.rest.git.deleteRef({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                ref: `heads/${headRef}`,
+            });
+            console.log(`Deleted old branch '${headRef}'`);
+        } catch (e) {
+            console.log(`Warning: could not delete old branch '${headRef}': ${e.message}`);
+        }
+        // Reset so we create a new PR below
+        prNumber = 0;
+    }
 
     if (prNumber) {
         await github.rest.pulls.update({
@@ -84,13 +111,13 @@ async function createOrUpdatePR(github, context, { prNumber, nextVersion, prerel
         const { data: pr } = await github.rest.pulls.create({
             owner: context.repo.owner,
             repo: context.repo.repo,
-            head: 'release/next',
+            head: releaseBranch,
             base: 'master',
             title,
             body,
             draft: true,
         });
-        console.log(`Created draft PR #${pr.number}`);
+        console.log(`Created draft PR #${pr.number} on branch '${releaseBranch}'`);
     }
 }
 
@@ -100,7 +127,7 @@ async function createOrUpdatePR(github, context, { prNumber, nextVersion, prerel
  * @param {'check' | 'update' | 'fail-when-frozen'} options.mode
  */
 async function main({ github, context, core, mode, nextVersion, prereleaseVersion, runUrl }) {
-    const { frozen, prNumber } = await findReleasePR(github, context);
+    const { frozen, prNumber, headRef } = await findReleasePR(github, context);
 
     if (mode === 'check') {
         core.setOutput('frozen', String(frozen));
@@ -110,13 +137,14 @@ async function main({ github, context, core, mode, nextVersion, prereleaseVersio
 
     if (mode === 'fail-when-frozen') {
         if (frozen) {
-            core.setFailed('Merges blocked: release is being prepared (release/next PR is frozen)');
+            core.setFailed('Merges blocked: release is being prepared (release PR is frozen)');
         }
         return;
     }
 
     if (mode === 'update') {
-        await createOrUpdatePR(github, context, { prNumber, nextVersion, prereleaseVersion, runUrl });
+        const releaseBranch = `release/${nextVersion}`;
+        await createOrUpdatePR(github, context, { prNumber, headRef, releaseBranch, nextVersion, prereleaseVersion, runUrl });
         return;
     }
 

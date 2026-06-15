@@ -1,5 +1,5 @@
 name: 'Manage release PR'
-description: 'Check or update the release/next draft PR'
+description: 'Check or update the release draft PR'
 
 inputs:
     mode:
@@ -20,10 +20,10 @@ inputs:
 
 outputs:
     frozen:
-        description: 'Whether the release/next PR is frozen (not draft)'
+        description: 'Whether the release PR is frozen (not draft)'
         value: ${{ steps.run.outputs.frozen }}
     prNumber:
-        description: 'Existing release/next PR number (0 if none)'
+        description: 'Existing release PR number (0 if none)'
         value: ${{ steps.run.outputs.prNumber }}
 
 runs:
