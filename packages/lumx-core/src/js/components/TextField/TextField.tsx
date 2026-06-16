@@ -48,6 +48,8 @@ export interface TextFieldProps extends HasClassName, HasTheme, HasAriaDisabled,
     labelProps?: InputLabelProps;
     /** Max string length the input accepts (constrains the input and displays a character counter). */
     maxLength?: number;
+    /** Character counter message formatter. Receives remaining character count, returns accessible label (e.g. \"{n} characters remaining\"). */
+    charCounterMessage?: (charCount: number) => string | JSXElement;
     /** Whether the text field is a textarea or an input. */
     multiline?: boolean;
     /** Placeholder text. */
@@ -74,6 +76,7 @@ export type TextFieldPropsToOverride =
     | 'labelProps'
     | 'textFieldRef'
     | 'clearButtonProps'
+    | 'charCounterMessage'
     | 'helperId'
     | 'errorId'
     | 'labelId'
@@ -133,6 +136,7 @@ export const TextField = (props: TextFieldProps) => {
         multiline,
         placeholder,
         textFieldRef,
+        charCounterMessage,
         helperId,
         errorId,
         labelId,
@@ -147,6 +151,13 @@ export const TextField = (props: TextFieldProps) => {
 
     const valueLength = (value || '').length;
     const isNotEmpty = valueLength > 0;
+    const remaining = maxLength ? maxLength - valueLength : 0;
+    const charCounter = maxLength ? (
+        <span className={element('char-counter')} role="status">
+            {charCounterMessage ? charCounterMessage(remaining) : remaining}
+            {remaining === 0 && Icon({ icon: mdiAlertCircle, size: Size.xxs })}
+        </span>
+    ) : undefined;
 
     return (
         <div
@@ -172,23 +183,15 @@ export const TextField = (props: TextFieldProps) => {
         >
             {(label || maxLength) && (
                 <div className={element('header')}>
-                    {label &&
-                        InputLabel({
-                            ...labelProps,
-                            id: labelId,
-                            htmlFor: textFieldId as string,
-                            className: element('label'),
-                            isRequired,
-                            theme,
-                            children: label,
-                        })}
-
-                    {maxLength && (
-                        <div className={element('char-counter')}>
-                            <span>{maxLength - valueLength}</span>
-                            {maxLength - valueLength === 0 && Icon({ icon: mdiAlertCircle, size: Size.xxs })}
-                        </div>
-                    )}
+                    {InputLabel({
+                        ...labelProps,
+                        id: labelId,
+                        htmlFor: textFieldId as string,
+                        className: element('label'),
+                        isRequired,
+                        theme,
+                        children: [label, charCounter] as any,
+                    })}
                 </div>
             )}
 

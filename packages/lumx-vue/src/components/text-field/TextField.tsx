@@ -1,4 +1,4 @@
-import { computed, defineComponent, type ComponentPublicInstance, ref, useAttrs, watch } from 'vue';
+import { computed, defineComponent, type ComponentPublicInstance, ref, useAttrs, watch, type VNode } from 'vue';
 
 import {
     TextField as TextFieldUI,
@@ -20,6 +20,8 @@ import RawInputText from './RawInputText';
 import RawInputTextarea from './RawInputTextarea';
 
 export type TextFieldProps = VueToJSXProps<UIProps, TextFieldPropsToOverride | 'chips'> & {
+    /** Character counter message formatter. Receives remaining character count, returns accessible label (e.g. \"{n} characters remaining\"). */
+    charCounterMessage?: (charCount: number) => string | VNode;
     /** Native input id property (generated if not provided). */
     id?: string;
     /** Props to pass to the clear button. If not specified, the button won't be displayed. */
@@ -177,6 +179,7 @@ const TextField = defineComponent(
                     label={props.label}
                     labelProps={props.labelProps}
                     maxLength={props.maxLength}
+                    charCounterMessage={props.charCounterMessage as any}
                     multiline={props.multiline}
                     placeholder={props.placeholder}
                     value={props.value}
@@ -216,6 +219,7 @@ const TextField = defineComponent(
             'label',
             'labelProps',
             'maxLength',
+            'charCounterMessage',
             'isDisabled',
             'disabled',
             'multiline',

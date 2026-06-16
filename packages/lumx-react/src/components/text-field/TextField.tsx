@@ -1,4 +1,4 @@
-import { Ref, RefObject, SyntheticEvent, useRef, useState } from 'react';
+import { Ref, RefObject, ReactNode, SyntheticEvent, useRef, useState } from 'react';
 
 import { Theme } from '@lumx/core/js/constants';
 import { GenericProps } from '@lumx/react/utils/type';
@@ -26,6 +26,8 @@ import { RawInputTextarea } from './RawInputTextarea';
  * Defines the props of the component.
  */
 export interface TextFieldProps extends GenericProps, ReactToJSX<UIProps, TextFieldPropsToOverride> {
+    /** Character counter message formatter. Receives remaining character count, returns accessible label (e.g. \"{n} characters remaining\"). */
+    charCounterMessage?: (charCount: number) => string | ReactNode;
     /** Props to pass to the clear button (minus those already set by the TextField props). If not specified, the button won't be displayed. */
     clearButtonProps?: Pick<IconButtonProps, 'label'> &
         Omit<IconButtonProps, 'label' | 'onClick' | 'icon' | 'emphasis'>;
@@ -84,6 +86,7 @@ export const TextField = forwardRef<TextFieldProps, HTMLDivElement>((props, ref)
         label,
         labelProps,
         maxLength,
+        charCounterMessage,
         minimumRows,
         multiline,
         name,
@@ -189,6 +192,7 @@ export const TextField = forwardRef<TextFieldProps, HTMLDivElement>((props, ref)
         labelId,
         multiline,
         maxLength,
+        charCounterMessage,
         isRequired,
         errorId,
         placeholder,
