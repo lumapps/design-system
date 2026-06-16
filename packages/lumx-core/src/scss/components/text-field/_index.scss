@@ -43,19 +43,18 @@
         flex-shrink: 0;
         align-items: center;
         margin-left: auto;
+        float: right;
 
-        span {
-            font-size: var(--lumx-material-text-field-header-label-font-size);
-            font-weight: var(--lumx-material-text-field-header-label-font-weight);
-            line-height: var(--lumx-material-text-field-header-label-line-height);
+        font-size: var(--lumx-material-text-field-header-label-font-size);
+        font-weight: var(--lumx-material-text-field-header-label-font-weight);
+        line-height: var(--lumx-material-text-field-header-label-line-height);
 
-            #{$self}--theme-light & {
-                color: lumx-color-variant("dark", "L2");
-            }
+        #{$self}--theme-light & {
+            color: lumx-color-variant("dark", "L2");
+        }
 
-            #{$self}--theme-dark & {
-                color: lumx-color-variant("light", "L2");
-            }
+        #{$self}--theme-dark & {
+            color: lumx-color-variant("light", "L2");
         }
 
         i {

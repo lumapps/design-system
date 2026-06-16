@@ -97,6 +97,7 @@ export function setup({
             ...LabelAndHelper.args,
             value: 'Textfield value',
             maxLength: 195,
+            charCounterMessage: (n: number) => `${n} characters`,
         },
     };
 
