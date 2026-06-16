@@ -20,11 +20,8 @@ export interface SelectButtonProps<O> extends BaseSelectProps<O> {
      * The wrapper layer chooses the shape; the core just renders names.
      */
     value?: O | O[];
-    /**
-     * When `true`, sets `aria-multiselectable="true"` on the listbox so
-     * the dropdown stays open after each selection (combobox setup detects this attribute).
-     */
-    isMultiselectable?: boolean;
+    /** Single or multiple selection */
+    selectionType?: 'single' | 'multiple';
     /** Button label (used for ARIA and when no selection). */
     label: string;
     /** Controls how the label/value is displayed in the button. */
@@ -81,6 +78,13 @@ export const COMPONENT_NAME = 'SelectButton';
 export const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-select-button';
 
 /**
+ * Component default props.
+ */
+export const DEFAULT_PROPS = {
+    selectionType: 'single',
+} as const;
+
+/**
  * SelectButton core template.
  * Renders a Combobox with a button trigger and a dropdown list of options.
  *
@@ -100,7 +104,7 @@ export const SelectButton = <O,>(props: SelectButtonProps<O>, { Combobox, Infini
         getSectionId,
         renderSectionTitle,
         value,
-        isMultiselectable,
+        selectionType = DEFAULT_PROPS.selectionType,
         label,
         labelDisplayMode,
         buttonProps,
@@ -117,6 +121,7 @@ export const SelectButton = <O,>(props: SelectButtonProps<O>, { Combobox, Infini
     const isFullLoading = listStatus === 'loading';
     const isLoadingMore = listStatus === 'loadingMore';
     const isError = listStatus === 'error';
+    const isMultiselectable = selectionType === 'multiple';
 
     /*
      * Display value: castArray normalizes single/multi value to an array, then resolve

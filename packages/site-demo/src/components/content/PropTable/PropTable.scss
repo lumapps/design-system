@@ -14,3 +14,48 @@
         word-break: break-all;
     }
 }
+
+/* ==========================================================================
+   Details animation
+   ========================================================================== */
+
+.prop-table__details {
+    interpolate-size: allow-keywords;
+
+    & > summary {
+        margin-top: $lumx-spacing-unit;
+        cursor: pointer;
+    }
+
+    &::details-content {
+        overflow: clip;
+        height: 0;
+        transition: height 0.3s ease,
+                    content-visibility 0.3s allow-discrete;
+    }
+
+    &[open]::details-content {
+        height: auto;
+        padding: $lumx-spacing-unit *2;
+    }
+}
+
+/* ==========================================================================
+   Type-param legend
+   ========================================================================== */
+
+.prop-table__type-params {
+    margin-bottom: $lumx-spacing-unit * 4;
+    padding: $lumx-spacing-unit * 2 $lumx-spacing-unit * 3;
+    background-color: lumx-color-variant("blue", "L6");
+    border-left: 3px solid lumx-color-variant("blue", "N");
+    border-radius: var(--lumx-border-radius);
+
+    &-list {
+        margin-top: $lumx-spacing-unit;
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: $lumx-spacing-unit $lumx-spacing-unit * 3;
+        align-items: baseline;
+    }
+}

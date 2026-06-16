@@ -1,0 +1,49 @@
+---
+frameworks: ['react', 'vue']
+---
+
+import * as ReactDemoDefault from './react/default.tsx';
+import * as ReactDemoVariants from './react/variants.tsx';
+import * as ReactDemoMenuItems from './react/menu-items.tsx';
+import * as VueDemoDefault from './vue/default.vue';
+import * as VueDemoVariants from './vue/variants.vue';
+import * as VueDemoMenuItems from './vue/menu-items.vue';
+import ReactMenuButton from 'lumx-docs:@lumx/react/components/menu-button/MenuButton';
+
+import VueMenuButton from 'lumx-docs:@lumx/vue/components/menu-button/MenuButton';
+
+# Menu button
+
+**Menu buttons open a dropdown of actions anchored to a button trigger.**
+
+Use a `MenuButton` when the dropdown contains **actions** (edit, delete, filter). For selection-based dropdowns, use [SelectButton](/product/components/select-button) instead.
+
+## Default
+
+A menu button triggers a dropdown with a list of actions. The trigger label describes what the menu controls.
+
+<DemoBlock orientation="horizontal" demo={{ react: ReactDemoDefault, vue: VueDemoDefault }} />
+
+## Trigger variants
+
+The menu trigger is interchangeable. By default it's a [Button](/product/components/button), whose appearance can be tuned with the usual button props (`emphasis`, `size`, `color`…).
+The `variant` prop swaps the trigger for an icon button, a chip, or a link, so the menu fits naturally wherever it's placed.
+
+<DemoBlock orientation="horizontal" vAlign="space-around" demo={{ react: ReactDemoVariants, vue: VueDemoVariants }} />
+
+## Menu items
+
+Each menu item have a label, before and after slots (usually used for icons). Items can also be rendered as a different element — for example a link that navigates to another page.
+
+<DemoBlock orientation="horizontal" demo={{ react: ReactDemoMenuItems, vue: VueDemoMenuItems }} />
+
+## Accessibility concerns
+
+Menu button uses a WAI-ARIA disclosure pattern (a button that expands and collapses a dropdown). Keep these points in mind:
+
+- Always provide a meaningful **label** so screen readers understand the menu's purpose.
+- For menu actions that navigate to a different page, use a true HTML `<a>` link instead of a button to preserve native browser behaviors (right-click, open in new tab, etc.).
+
+## Properties
+
+<PropTable docs={{ react: ReactMenuButton, vue: VueMenuButton }} />

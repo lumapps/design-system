@@ -1,5 +1,6 @@
 ---
 frameworks: ['react']
+deprecated: true
 ---
 import * as DemoDefault from './react/default.tsx';
 import * as DemoProgrammaticallyControlled from './react/programmatically-controlled.tsx';
@@ -8,8 +9,13 @@ import ReactDropdown from 'lumx-docs:@lumx/react/components/dropdown/Dropdown';
 
 # Dropdown
 
+<DeprecationNotice>
+    Use [MenuButton](../menu-button) for action-based dropdowns, [SelectButton](../select-button) for selection-based dropdowns, or [Popover](../popover) for lower-level control. Dropdown is kept for backwards compatibility but will be removed in a future major version.
+</DeprecationNotice>
+
 **Dropdowns present multiple actions in a small area.**
 Dropdowns are commonly used for contextual menus and in form selects.
+
 
 <DemoBlock orientation="horizontal" demo={{ react: DemoDefault }} />
 
@@ -34,6 +40,6 @@ We do not yet provide a simple way to create a full accessible menu or listbox t
 
 On top of the popover, dropdowns provide an "infinite scroll" callback to load more data into the dropdown while the user scrolls. Consider adding [`aria-setsize`](https://w3c.github.io/aria/#aria-setsize) and [`aria-posinset`](https://w3c.github.io/aria/#aria-posinset) to your dropdown list items so that screen readers can know the size of the list and the position of items in the list.
 
-### Properties
+## Properties
 
 <PropTable docs={{ react: ReactDropdown }} />

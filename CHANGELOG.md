@@ -23,6 +23,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   `@lumx/vue`:
     -   `ClickAwayProvider`: resolve anchor refs lazily at click time to correctly exclude late-mounted elements
 
+### Changed
+
+-   `@lumx/react`:
+    -   `Dropdown`: deprecate component
+
 ## [4.16.0][] - 2026-06-08
 
 ### Changed

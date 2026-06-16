@@ -79,6 +79,11 @@ export interface MultipleSelectTextFieldProps<O = any> extends BaseSelectTextFie
 
 /**
  * SelectTextField props — supports both single and multiple selection.
+ * Discriminated on `selectionType`:
+ * - `'single'` → `value?: O`, `onChange?: (newValue?: O) => void`.
+ * - `'multiple'` → `value?: O[]`, `onChange?: (newValue?: O[]) => void`, `renderChip`, `getChipProps`.
+ *
+ * @typeParam O - Option object type, inferred from `options` / `getOptionId`.
  */
 export type SelectTextFieldProps<O = any> = SingleSelectTextFieldProps<O> | MultipleSelectTextFieldProps<O>;
 
