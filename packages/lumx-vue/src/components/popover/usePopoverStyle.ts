@@ -9,7 +9,7 @@ import {
     buildPopoverMiddleware,
     computeArrowStyles,
     getFloatingPlacement,
-} from '@lumx/core/js/components/Popover/popoverStyle';
+} from '@lumx/core/js/components/Popover/utils';
 import type { Offset } from '@lumx/core/js/components/Popover/types';
 
 export interface UsePopoverStyleOptions {

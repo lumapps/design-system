@@ -10,7 +10,7 @@ import {
     buildPopoverMiddleware,
     computeArrowStyles,
     getFloatingPlacement,
-} from '@lumx/core/js/components/Popover/popoverStyle';
+} from '@lumx/core/js/components/Popover/utils';
 import { PopoverProps } from '@lumx/react/components/popover/Popover';
 
 type Options = Pick<

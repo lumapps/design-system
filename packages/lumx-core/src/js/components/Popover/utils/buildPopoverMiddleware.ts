@@ -7,31 +7,11 @@ import {
     arrow as arrowMiddleware,
     autoPlacement,
     type Middleware,
-    type Placement as FloatingPlacement,
-    type MiddlewareData,
 } from '@floating-ui/dom';
 
-import { ARROW_SIZE, FitAnchorWidth, type Placement } from './constants';
-import type { Offset } from './types';
-
-/**
- * Parse a Popover placement into floating-ui placement or auto-placement config.
- */
-export function parseAutoPlacement(placement?: Placement) {
-    if (placement === 'auto') return { isAuto: true as const };
-    if (placement === 'auto-start') return { isAuto: true as const, autoAlignment: 'start' as const };
-    if (placement === 'auto-end') return { isAuto: true as const, autoAlignment: 'end' as const };
-    return { floatingPlacement: placement as FloatingPlacement, isAuto: false as const };
-}
-
-/**
- * Parse the fitToAnchorWidth option into the CSS property name to apply.
- */
-export function parseFitWidth(fitToAnchorWidth?: string | boolean): string | undefined {
-    if (!fitToAnchorWidth) return undefined;
-    if (typeof fitToAnchorWidth === 'string') return fitToAnchorWidth;
-    return FitAnchorWidth.MIN_WIDTH;
-}
+import { ARROW_SIZE } from '../constants';
+import type { Offset } from '../types';
+import { type parseAutoPlacement } from './parseAutoPlacement';
 
 export interface BuildPopoverMiddlewareOptions {
     /** Offset from the anchor element. */
@@ -40,7 +20,7 @@ export interface BuildPopoverMiddlewareOptions {
     hasArrow?: boolean;
     /** CSS property to fit to anchor width ('minWidth', 'maxWidth', 'width'). Already parsed via `parseFitWidth`. */
     fitWidth?: string;
-    /** Whether to constrain height to viewport. */
+    /** Constrain popover height to avoid overflowing the viewport. */
     fitWithinViewportHeight?: boolean;
     /** Boundary element for overflow detection. */
     boundary?: HTMLElement;
@@ -98,25 +78,4 @@ export function buildPopoverMiddleware(options: BuildPopoverMiddlewareOptions): 
     }
 
     return middlewares;
-}
-
-/**
- * Compute arrow CSS styles from floating-ui middleware data.
- */
-export function computeArrowStyles(arrowData?: MiddlewareData['arrow']): Record<string, string> | undefined {
-    if (!arrowData) return undefined;
-    return {
-        left: arrowData.x != null ? `${arrowData.x}px` : '',
-        top: arrowData.y != null ? `${arrowData.y}px` : '',
-    };
-}
-
-/**
- * Get the floating-ui placement from the parsed placement config.
- * Returns undefined for auto-placement (floating-ui handles it via autoPlacement middleware).
- */
-export function getFloatingPlacement(
-    parsedPlacement: ReturnType<typeof parseAutoPlacement>,
-): FloatingPlacement | undefined {
-    return parsedPlacement.isAuto ? undefined : parsedPlacement.floatingPlacement;
 }
