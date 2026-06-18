@@ -2,7 +2,6 @@ import { computed, ref, type Ref, type CSSProperties } from 'vue';
 
 import { useFloating, autoUpdate, type Placement as FloatingPlacement } from '@floating-ui/vue';
 
-import { type Placement } from '@lumx/core/js/components/Popover/constants';
 import {
     parseAutoPlacement,
     parseFitWidth,
@@ -10,7 +9,8 @@ import {
     computeArrowStyles,
     getFloatingPlacement,
 } from '@lumx/core/js/components/Popover/utils';
-import type { Offset } from '@lumx/core/js/components/Popover/types';
+import { type Placement } from '@lumx/core/js/components/Popover/constants';
+import type { Offset, PopoverSizes } from '@lumx/core/js/components/Popover/types';
 
 export interface UsePopoverStyleOptions {
     anchorRef: Ref<HTMLElement | undefined>;
@@ -18,6 +18,12 @@ export interface UsePopoverStyleOptions {
     hasArrow?: Ref<boolean | undefined>;
     fitToAnchorWidth?: Ref<string | boolean | undefined>;
     fitWithinViewportHeight?: Ref<boolean | undefined>;
+    width?: Ref<PopoverSizes['width']>;
+    minWidth?: Ref<PopoverSizes['minWidth']>;
+    maxWidth?: Ref<PopoverSizes['maxWidth']>;
+    height?: Ref<PopoverSizes['height']>;
+    minHeight?: Ref<PopoverSizes['minHeight']>;
+    maxHeight?: Ref<PopoverSizes['maxHeight']>;
     boundaryRef?: Ref<HTMLElement | undefined>;
     placement?: Ref<Placement | undefined>;
     style?: Ref<CSSProperties | undefined>;
@@ -48,6 +54,12 @@ export function usePopoverStyle(options: UsePopoverStyleOptions): UsePopoverStyl
             hasArrow: options.hasArrow?.value,
             fitWidth: fitWidth.value,
             fitWithinViewportHeight: options.fitWithinViewportHeight?.value,
+            width: options.width?.value,
+            minWidth: options.minWidth?.value,
+            maxWidth: options.maxWidth?.value,
+            height: options.height?.value,
+            minHeight: options.minHeight?.value,
+            maxHeight: options.maxHeight?.value,
             boundary: options.boundaryRef?.value,
             parsedPlacement: parsedPlacement.value,
             arrowElement: arrowRef.value,

@@ -1,3 +1,4 @@
+import { Size } from '../../constants/enums';
 import { ValueOf } from '../../types/ValueOf';
 
 /**
@@ -45,3 +46,8 @@ export const ARROW_SIZE = 14;
  * Popover default z-index
  */
 export const POPOVER_ZINDEX = 9999;
+
+/**
+ * Popover height/width sizes
+ */
+export const POPOVER_SIZES = [Size.m, Size.l, Size.xl, Size.xxl] as const;

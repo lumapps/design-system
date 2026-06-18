@@ -20,6 +20,7 @@ import {
     COMPONENT_NAME,
     DEFAULT_PROPS,
 } from '@lumx/core/js/components/Popover';
+import type { PopoverSizes } from '@lumx/core/js/components/Popover/types';
 import { useRestoreFocusOnClose } from '@lumx/react/hooks/useRestoreFocusOnClose';
 import { usePopoverStyle } from './usePopoverStyle';
 
@@ -33,7 +34,8 @@ export interface PopoverProps
         ReactToJSX<
             CorePopoverProps,
             'anchorRef' | 'as' | 'boundaryRef' | 'focusElement' | 'parentElement' | 'focusTrapZoneElement' | 'className'
-        > {
+        >,
+        PopoverSizes {
     /** Reference to the DOM element used to set the position of the popover. */
     anchorRef: RefObject<HTMLElement>;
     /** Customize the root element. (Must accept ref forwarding and props forwarding!). */
@@ -77,6 +79,12 @@ const _InnerPopover = forwardRef<PopoverProps, HTMLDivElement>((props, ref) => {
         fitToAnchorWidth,
         fitWithinViewportHeight,
         focusTrapZoneElement,
+        width,
+        minWidth,
+        maxWidth,
+        height,
+        minHeight,
+        maxHeight,
         offset,
         placement = DEFAULT_PROPS.placement,
         style,
@@ -92,6 +100,12 @@ const _InnerPopover = forwardRef<PopoverProps, HTMLDivElement>((props, ref) => {
         hasArrow,
         fitToAnchorWidth,
         fitWithinViewportHeight,
+        width,
+        minWidth,
+        maxWidth,
+        height,
+        minHeight,
+        maxHeight,
         boundaryRef,
         anchorRef,
         placement,

@@ -1,5 +1,6 @@
 // @vitest-environment jsdom
 import { describe, it, expect } from 'vitest';
+import { computePosition } from '@floating-ui/dom';
 
 import { buildPopoverMiddleware, type BuildPopoverMiddlewareOptions } from './buildPopoverMiddleware';
 
@@ -126,5 +127,126 @@ describe('buildPopoverMiddleware', () => {
         expect(names.indexOf('flip')).toBeLessThan(names.indexOf('shift'));
         expect(names.indexOf('shift')).toBeLessThan(names.indexOf('size'));
         expect(names.indexOf('size')).toBeLessThan(names.indexOf('arrow'));
+    });
+});
+
+describe('size middleware apply', () => {
+    const baseOptions: BuildPopoverMiddlewareOptions = {
+        parsedPlacement: { floatingPlacement: 'bottom', isAuto: false as const },
+    };
+
+    async function runPosition(options: Partial<BuildPopoverMiddlewareOptions> & { referenceWidth?: number }) {
+        const reference = document.createElement('div');
+        const floating = document.createElement('div');
+        reference.getBoundingClientRect = () =>
+            ({
+                x: 0,
+                y: 0,
+                width: options.referenceWidth ?? 200,
+                height: 20,
+                top: 0,
+                right: 0,
+                bottom: 0,
+                left: 0,
+            }) as DOMRect;
+
+        const middlewares = buildPopoverMiddleware({
+            ...baseOptions,
+            ...options,
+        });
+
+        await computePosition(reference, floating, {
+            placement: 'bottom',
+            middleware: middlewares,
+        });
+
+        return floating.style;
+    }
+
+    describe('width', () => {
+        it('should set width to anchor width when fitWidth is "width"', async () => {
+            const style = await runPosition({ fitWidth: 'width', referenceWidth: 150 });
+            expect(style.width).toBe('150px');
+        });
+
+        it('should set minWidth to anchor width when fitWidth is "minWidth" without explicit minWidth', async () => {
+            const style = await runPosition({ fitWidth: 'minWidth', referenceWidth: 150 });
+            expect(style.minWidth).toBe('150px');
+        });
+
+        it('should set maxWidth to anchor width when fitWidth is "maxWidth" without explicit maxWidth', async () => {
+            const style = await runPosition({ fitWidth: 'maxWidth', referenceWidth: 150 });
+            expect(style.maxWidth).toBe('150px');
+        });
+
+        it('should prefer explicit width over fitWidth', async () => {
+            const style = await runPosition({ width: '250px', fitWidth: 'width', referenceWidth: 150 });
+            expect(style.width).toBe('250px');
+        });
+
+        it('should resolve t-shirt size to CSS variable for width', async () => {
+            const style = await runPosition({ width: 'm' });
+            expect(style.width).toBe('var(--lumx-size-m)');
+        });
+
+        it('should combine anchor minWidth with explicit t-shirt minWidth', async () => {
+            const style = await runPosition({
+                fitWidth: 'minWidth',
+                minWidth: 'l',
+                referenceWidth: 150,
+            });
+            expect(style.minWidth).toBe('max(var(--lumx-size-l), 150px)');
+        });
+
+        it('should combine anchor maxWidth with explicit t-shirt maxWidth', async () => {
+            const style = await runPosition({
+                fitWidth: 'maxWidth',
+                maxWidth: 'm',
+                referenceWidth: 150,
+            });
+            expect(style.maxWidth).toBe('min(var(--lumx-size-m), 150px)');
+        });
+
+        it('should resolve explicit maxWidth CSS variable without fitWidth', async () => {
+            const style = await runPosition({ maxWidth: 'm' });
+            expect(style.maxWidth).toBe('var(--lumx-size-m)');
+        });
+    });
+
+    describe('height', () => {
+        it('should set height when provided', async () => {
+            const style = await runPosition({ height: '300px' });
+            expect(style.height).toBe('300px');
+        });
+
+        it('should set minHeight when provided', async () => {
+            const style = await runPosition({ minHeight: '100px' });
+            expect(style.minHeight).toBe('100px');
+        });
+
+        it('should resolve t-shirt size for height', async () => {
+            const style = await runPosition({ height: 'xl' });
+            expect(style.height).toBe('var(--lumx-size-xl)');
+        });
+
+        it('should set maxHeight from explicit value when fitWithinViewportHeight is false', async () => {
+            const style = await runPosition({ maxHeight: '200px' });
+            expect(style.maxHeight).toBe('200px');
+        });
+
+        it('should combine viewport constraint with maxHeight when fitWithinViewportHeight is true', async () => {
+            const style = await runPosition({ maxHeight: '200px', fitWithinViewportHeight: true });
+            expect(style.maxHeight).toBe('calc(0px)');
+        });
+
+        it('should only use viewport constraint when maxHeight is not set and fitWithinViewportHeight is true', async () => {
+            const style = await runPosition({ fitWithinViewportHeight: true });
+            expect(style.maxHeight).toBe('0px');
+        });
+
+        it('should resolve t-shirt maxHeight to CSS variable', async () => {
+            const style = await runPosition({ maxHeight: 'm' });
+            expect(style.maxHeight).toBe('var(--lumx-size-m)');
+        });
     });
 });

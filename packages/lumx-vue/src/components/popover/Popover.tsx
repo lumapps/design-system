@@ -6,6 +6,7 @@ import {
     DEFAULT_PROPS,
 } from '@lumx/core/js/components/Popover';
 import { type Placement, POPOVER_ZINDEX } from '@lumx/core/js/components/Popover/constants';
+import type { PopoverSizes } from '@lumx/core/js/components/Popover/types';
 import type { JSXElement } from '@lumx/core/js/types';
 
 import { ThemeProvider } from '../../utils/theme/ThemeProvider';
@@ -28,20 +29,21 @@ import { useRestoreFocusOnClose } from '../../composables/useRestoreFocusOnClose
 export type PopoverProps = VueToJSXProps<
     CorePopoverProps,
     'anchorRef' | 'boundaryRef' | 'focusElement' | 'parentElement' | 'focusTrapZoneElement' | 'isOpen'
-> & {
-    /** Reference to the DOM element used to set the position of the popover. Accepts a Vue Ref for reactive positioning. */
-    anchorRef?: Ref<HTMLElement | undefined> | HTMLElement;
-    /** Element which will act as boundary when opening the popover. Accepts a Vue Ref for reactive positioning. */
-    boundaryRef?: Ref<HTMLElement | undefined> | HTMLElement;
-    /** Element to focus when opening the popover. */
-    focusElement?: HTMLElement;
-    /** Whether the popover is open or not. */
-    isOpen?: boolean;
-    /** Reference to the parent element that triggered the popover. */
-    parentElement?: HTMLElement;
-    /** The element in which the focus trap should be set. Default to popover. */
-    focusTrapZoneElement?: HTMLElement;
-};
+> &
+    PopoverSizes & {
+        /** Reference to the DOM element used to set the position of the popover. Accepts a Vue Ref for reactive positioning. */
+        anchorRef?: Ref<HTMLElement | undefined> | HTMLElement;
+        /** Element which will act as boundary when opening the popover. Accepts a Vue Ref for reactive positioning. */
+        boundaryRef?: Ref<HTMLElement | undefined> | HTMLElement;
+        /** Element to focus when opening the popover. */
+        focusElement?: HTMLElement;
+        /** Whether the popover is open or not. */
+        isOpen?: boolean;
+        /** Reference to the parent element that triggered the popover. */
+        parentElement?: HTMLElement;
+        /** The element in which the focus trap should be set. Default to popover. */
+        focusTrapZoneElement?: HTMLElement;
+    };
 
 export const emitSchema = {
     close: () => true,
@@ -63,6 +65,12 @@ const Popover = defineComponent(
             hasArrow: toRef(props, 'hasArrow'),
             fitToAnchorWidth: toRef(props, 'fitToAnchorWidth'),
             fitWithinViewportHeight: toRef(props, 'fitWithinViewportHeight'),
+            width: toRef(props, 'width'),
+            minWidth: toRef(props, 'minWidth'),
+            maxWidth: toRef(props, 'maxWidth'),
+            height: toRef(props, 'height'),
+            minHeight: toRef(props, 'minHeight'),
+            maxHeight: toRef(props, 'maxHeight'),
             placement: computed(() => props.placement || (DEFAULT_PROPS.placement as Placement)),
             style: computed(() => undefined),
             zIndex: computed(() => props.zIndex ?? POPOVER_ZINDEX),
@@ -140,6 +148,12 @@ const Popover = defineComponent(
             'fitToAnchorWidth',
             'fitWithinViewportHeight',
             'focusElement',
+            'width',
+            'minWidth',
+            'maxWidth',
+            'height',
+            'minHeight',
+            'maxHeight',
             'focusAnchorOnClose',
             'hasArrow',
             'isOpen',

@@ -19,6 +19,12 @@ type Options = Pick<
     | 'hasArrow'
     | 'fitToAnchorWidth'
     | 'fitWithinViewportHeight'
+    | 'width'
+    | 'minWidth'
+    | 'maxWidth'
+    | 'height'
+    | 'minHeight'
+    | 'maxHeight'
     | 'boundaryRef'
     | 'anchorRef'
     | 'placement'
@@ -40,6 +46,12 @@ export function usePopoverStyle({
     hasArrow,
     fitToAnchorWidth,
     fitWithinViewportHeight,
+    width,
+    minWidth,
+    maxWidth,
+    height,
+    minHeight,
+    maxHeight,
     boundaryRef,
     anchorRef,
     placement,
@@ -60,11 +72,31 @@ export function usePopoverStyle({
                 hasArrow,
                 fitWidth,
                 fitWithinViewportHeight,
+                width,
+                minWidth,
+                maxWidth,
+                height,
+                minHeight,
+                maxHeight,
                 boundary,
                 parsedPlacement,
                 arrowElement,
             }),
-        [offset, hasArrow, fitWidth, fitWithinViewportHeight, boundary, parsedPlacement, arrowElement],
+        [
+            offset,
+            hasArrow,
+            fitWidth,
+            fitWithinViewportHeight,
+            width,
+            minWidth,
+            maxWidth,
+            height,
+            minHeight,
+            maxHeight,
+            boundary,
+            parsedPlacement,
+            arrowElement,
+        ],
     );
 
     const anchorElement = anchorRef.current;

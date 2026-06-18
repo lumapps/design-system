@@ -10,10 +10,13 @@ import {
 } from '@floating-ui/dom';
 
 import { ARROW_SIZE } from '../constants';
-import type { Offset } from '../types';
+import type { Offset, PopoverSizes } from '../types';
+import type { PXSize } from '../../../utils/browser/css/types';
+import { resolveCssSize } from '../../../utils/browser/css/resolveCssSize';
+import { cssMin, cssMax } from '../../../utils/browser/css/combineSize';
 import { type parseAutoPlacement } from './parseAutoPlacement';
 
-export interface BuildPopoverMiddlewareOptions {
+export interface BuildPopoverMiddlewareOptions extends PopoverSizes {
     /** Offset from the anchor element. */
     offset?: Offset;
     /** Whether the popover has an arrow. */
@@ -36,7 +39,29 @@ export interface BuildPopoverMiddlewareOptions {
  * Middleware order: offset → flip/autoPlacement → shift → size → arrow
  */
 export function buildPopoverMiddleware(options: BuildPopoverMiddlewareOptions): Middleware[] {
-    const { offset, hasArrow, fitWidth, fitWithinViewportHeight, boundary, parsedPlacement, arrowElement } = options;
+    const {
+        offset,
+        hasArrow,
+        fitWidth,
+        fitWithinViewportHeight,
+        width: rawWidth,
+        minWidth: rawMinWidth,
+        maxWidth: rawMaxWidth,
+        height: rawHeight,
+        minHeight: rawMinHeight,
+        maxHeight: rawMaxHeight,
+        boundary,
+        parsedPlacement,
+        arrowElement,
+    } = options;
+
+    // Resolve t-shirt sizes to CSS pixel strings for the apply callback.
+    const width = resolveCssSize(rawWidth);
+    const minWidth = resolveCssSize(rawMinWidth);
+    const maxWidth = resolveCssSize(rawMaxWidth);
+    const height = resolveCssSize(rawHeight);
+    const minHeight = resolveCssSize(rawMinHeight);
+    const maxHeight = resolveCssSize(rawMaxHeight);
 
     const middlewares: Middleware[] = [];
 
@@ -55,18 +80,33 @@ export function buildPopoverMiddleware(options: BuildPopoverMiddlewareOptions): 
         middlewares.push(shift(boundary ? { boundary } : {}));
     }
 
-    // Size middleware
-    if (fitWidth || fitWithinViewportHeight) {
+    // Size middleware — always required when any sizing constraint is set
+    const anySizeConstraint =
+        !!fitWidth || !!fitWithinViewportHeight || width || minWidth || maxWidth || height || minHeight || maxHeight;
+
+    if (anySizeConstraint) {
         middlewares.push(
             size({
                 ...(boundary ? { boundary } : {}),
                 apply({ availableHeight, rects, elements }) {
-                    if (fitWidth) {
-                        Object.assign(elements.floating.style, { [fitWidth]: `${rects.reference.width}px` });
-                    }
-                    if (fitWithinViewportHeight) {
-                        elements.floating.style.maxHeight = `${Math.max(0, availableHeight - ARROW_SIZE)}px`;
-                    }
+                    const anchorWidth: PXSize = `${rects.reference.width}px`;
+
+                    // Width: explicit width wins, else fitToAnchorWidth.
+                    elements.floating.style.width = width || (fitWidth === 'width' ? anchorWidth : '');
+                    // Min-width: anchor constrained by explicit min-width.
+                    elements.floating.style.minWidth = cssMax(minWidth, fitWidth === 'minWidth' ? anchorWidth : '');
+                    // Max-width: anchor constrained by explicit max-width.
+                    elements.floating.style.maxWidth = cssMin(maxWidth, fitWidth === 'maxWidth' ? anchorWidth : '');
+
+                    // Height: explicit values only.
+                    elements.floating.style.height = height || '';
+                    elements.floating.style.minHeight = minHeight || '';
+                    // Max-height: viewport combined with explicit max-height.
+                    const adaptedAvailableHeight: PXSize = `${Math.max(0, availableHeight - ARROW_SIZE)}px`;
+                    elements.floating.style.maxHeight = cssMin(
+                        maxHeight,
+                        fitWithinViewportHeight ? adaptedAvailableHeight : '',
+                    );
                 },
             }),
         );
