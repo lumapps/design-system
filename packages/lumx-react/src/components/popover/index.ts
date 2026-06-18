@@ -1,2 +1,3 @@
 export { Popover, type PopoverProps } from './Popover';
-export { Placement, type Offset, type Elevation } from '@lumx/core/js/components/Popover/constants';
+export { Placement } from '@lumx/core/js/components/Popover/constants';
+export type { Offset, Elevation, PopoverHeight, PopoverWidth } from '@lumx/core/js/components/Popover/types';

@@ -11,7 +11,8 @@ import {
     type MiddlewareData,
 } from '@floating-ui/dom';
 
-import { ARROW_SIZE, FitAnchorWidth, type Offset, type Placement } from './constants';
+import { ARROW_SIZE, FitAnchorWidth, type Placement } from './constants';
+import type { Offset } from './types';
 
 /**
  * Parse a Popover placement into floating-ui placement or auto-placement config.

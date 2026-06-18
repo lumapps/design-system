@@ -1,7 +1,8 @@
 import type { SetupStoriesOptions } from '@lumx/core/stories/types';
 import { getSelectArgType } from '@lumx/core/stories/controls/selectArgType';
 import { withUndefined } from '@lumx/core/stories/controls/withUndefined';
-import { Placement, type Elevation, FitAnchorWidth } from './constants';
+import { Placement, FitAnchorWidth } from './constants';
+import { type Elevation } from './types';
 import { DEFAULT_PROPS } from '.';
 
 /**

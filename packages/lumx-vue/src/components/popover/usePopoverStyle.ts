@@ -10,7 +10,7 @@ import {
     computeArrowStyles,
     getFloatingPlacement,
 } from '@lumx/core/js/components/Popover/popoverStyle';
-import type { Offset } from '@lumx/core/js/components/Popover/constants';
+import type { Offset } from '@lumx/core/js/components/Popover/types';
 
 export interface UsePopoverStyleOptions {
     anchorRef: Ref<HTMLElement | undefined>;

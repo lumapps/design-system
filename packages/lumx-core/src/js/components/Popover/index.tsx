@@ -1,6 +1,7 @@
 import type { JSXElement, HasTheme, HasClassName, HasCloseMode, CommonRef, LumxClassName } from '../../types';
 import { classNames } from '../../utils';
-import { Elevation, FitAnchorWidth, Offset, Placement, POPOVER_ZINDEX } from './constants';
+import { FitAnchorWidth, Placement, POPOVER_ZINDEX } from './constants';
+import type { Elevation, Offset } from './types';
 
 /**
  * Shared popover props used by both React and Vue wrappers.
