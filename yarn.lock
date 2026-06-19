@@ -2746,7 +2746,7 @@ __metadata:
     tinycolor2: "npm:^1.4.1"
     typescript: "npm:^5.4.3"
     version-changelog: "npm:^3.1.1"
-    vite: "npm:^7.3.2"
+    vite: "npm:^7.3.5"
     vite-tsconfig-paths: "npm:^5.1.4"
     vitest: "npm:^4.0.18"
   languageName: unknown
@@ -2835,7 +2835,7 @@ __metadata:
     rollup-plugin-ts-paths-resolve: "npm:^1.7.1"
     storybook: "npm:^10.2.19"
     typescript: "npm:^5.4.3"
-    vite: "npm:^7.3.2"
+    vite: "npm:^7.3.5"
     vite-tsconfig-paths: "npm:^5.1.4"
     vitest: "npm:^4.0.18"
   peerDependencies:
@@ -2893,7 +2893,7 @@ __metadata:
     jsdom: "npm:^27.2.0"
     storybook: "npm:^10.2.19"
     typescript: "npm:^5.4.3"
-    vite: "npm:^7.3.2"
+    vite: "npm:^7.3.5"
     vite-plugin-dts: "npm:^4.5.4"
     vite-plugin-static-copy: "npm:^3.1.4"
     vite-tsconfig-paths: "npm:^5.1.4"
@@ -23371,9 +23371,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^6.0.0 || ^7.0.0, vite@npm:^7.3.2":
-  version: 7.3.2
-  resolution: "vite@npm:7.3.2"
+"vite@npm:^6.0.0 || ^7.0.0, vite@npm:^7.3.5":
+  version: 7.3.5
+  resolution: "vite@npm:7.3.5"
   dependencies:
     esbuild: "npm:^0.27.0"
     fdir: "npm:^6.5.0"
@@ -23422,7 +23422,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: 10/c5f7a9a60011c41c836cedf31c8ee7624102aff9b6a7f3aab2ff47639721bba0916f81994c3a3ea6577a16c4f0dfee1e7dbd244e0da8edd5954e3c6d48daaaa2
+  checksum: 10/2e1337510d6b81948b035f8b096c9be22daf1101fc52ad3d06cad9e090057ba1c1396e5e12cbaac2485f9c6cdcc854f978fe862280bdfe1a9a4149c60734c125
   languageName: node
   linkType: hard
 
