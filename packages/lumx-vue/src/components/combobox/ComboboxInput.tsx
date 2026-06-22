@@ -54,11 +54,13 @@ const ComboboxInput = defineComponent(
             setHandle(
                 setupComboboxInput(input, {
                     onSelect(option) {
-                        // Update controlled value through Vue's emit flow.
-                        emit('change', option.value);
                         props.onSelect?.(option);
                         emit('select', option);
                     },
+                    onChange(value) {
+                        emit('change', value);
+                    },
+                    selectionMode: props.selectionMode,
                     filter: props.filter,
                     openOnFocus: props.openOnFocus,
                 }),
@@ -87,6 +89,7 @@ const ComboboxInput = defineComponent(
                 onSelect: _onSelect,
                 filter,
                 openOnFocus: _oof,
+                selectionMode: _selectionMode,
                 class: _class,
                 ...forwardedProps
             } = props;
@@ -164,6 +167,7 @@ const ComboboxInput = defineComponent(
             'onSelect',
             'filter',
             'openOnFocus',
+            'selectionMode',
         ),
         emits: {
             select: (option: { value: string }) => !!option,

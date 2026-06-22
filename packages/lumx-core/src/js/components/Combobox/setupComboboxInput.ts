@@ -8,6 +8,15 @@ export interface SetupComboboxInputOptions extends ComboboxCallbacks, ComboboxIn
      * (Use this in framework wrappers that maintain controlled input state, like React)
      */
     onInput?(value: string): void;
+    /**
+     * Called when the input value should change as a result of option selection,
+     * with `selectionMode` already applied.
+     *
+     * - `'fill'` (default): called with the selected option value.
+     * - `'clear'`: called with an empty string.
+     * - `'keep'`: NOT called (input value unchanged).
+     */
+    onChange?(value: string): void;
 }
 
 /**
@@ -26,7 +35,13 @@ export interface SetupComboboxInputOptions extends ComboboxCallbacks, ComboboxIn
  */
 export function setupComboboxInput(input: HTMLInputElement, options: SetupComboboxInputOptions): ComboboxHandle {
     let handle: ComboboxHandle;
-    const { filter = 'auto', onSelect: optionOnSelect, onInput: onInputCallback } = options;
+    const {
+        filter = 'auto',
+        selectionMode = 'fill',
+        onSelect: optionOnSelect,
+        onInput: onInputCallback,
+        onChange: onChangeCallback,
+    } = options;
     const openOnFocus = options.openOnFocus ?? filter === 'off';
     const autoFilter = filter === 'auto';
 
@@ -41,15 +56,21 @@ export function setupComboboxInput(input: HTMLInputElement, options: SetupCombob
     let userHasTyped = false;
 
     /**
-     * Wraps the consumer's onSelect to perform input-mode side effects after selection:
-     * resets the filter and typing state.
+     * Wraps the consumer's onSelect to perform input-mode side effects after selection,
+     * and drive `onChange` according to `selectionMode`.
+     * Filter and typing state are always reset on selection.
      */
     const onSelect = (option: { value: string }) => {
         optionOnSelect?.(option);
         userHasTyped = false;
-        if (autoFilter) {
-            handle.setFilter('');
+        if (autoFilter) handle.setFilter('');
+
+        if (selectionMode === 'fill') {
+            onChangeCallback?.(option.value);
+        } else if (selectionMode === 'clear') {
+            onChangeCallback?.('');
         }
+        // 'keep': onChange is not called — input value stays as-is.
     };
 
     handle = setupCombobox({ onSelect }, { wrapNavigation: true }, (combobox, signal) => {

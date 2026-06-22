@@ -137,7 +137,7 @@ export const SelectTextField = (props: SelectTextFieldProps, { Combobox, Infinit
 
     return (
         <Combobox.Provider onOpen={onOpen}>
-            <Combobox.Input label={label} {...inputProps} chips={chips} />
+            <Combobox.Input label={label} {...inputProps} selectionMode="keep" chips={chips} />
 
             <Combobox.Popover
                 fitToAnchorWidth="minWidth"

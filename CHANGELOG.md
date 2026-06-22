@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   `@lumx/react`, `@lumx/vue`:
     -   `TimePickerField`: add `boundsMode="enforce"` prop mode to proactively clamp the `value` to `minTime` and `maxTime` on mount and when bounds change
     -   `Popover`: add sizing API (`minWidth`, `width`, `maxWidth`, `minHeight`, `height`, `maxHeight`) complementary to the existing `fitToAnchorWidth` and `fitWithinViewportHeight`.
+    -   `Combobox.Input`: add `selectionMode` prop (`'fill'` | `'keep'` | `'clear'`, default `'fill'`). Use `'keep'` to leave the input unchanged after selection, or `'clear'` to reset it to an empty string — useful for multi-select patterns.
 
 ### Changed
 
