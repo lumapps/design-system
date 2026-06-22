@@ -11,7 +11,7 @@ Private packages powering the monorepo build, lint, test, and visual-diff infras
 | `storybook-testing`                         | Shared Storybook test utilities (`@lumx/storybook-testing`)    |
 | `visual-diffs`                              | Playwright-based visual regression tool (`@lumx/visual-diffs`) |
 | `vite-plugin-fix-esm-imports`               | Vite plugin: fixes ESM import paths for downstream compat      |
-| `rollup-plugin-optimize-imports-lumx-icons` | Rollup plugin: tree-shakes `@lumx/icons` imports in consumers  |
+| `vite-plugin-optimize-imports-lumx-icons`   | Vite plugin: tree-shakes `@lumx/icons` imports in consumers    |
 
 ## WHERE TO LOOK
 
@@ -22,7 +22,7 @@ Private packages powering the monorepo build, lint, test, and visual-diff infras
 | Fix visual-diff tooling      | `visual-diffs/`                              |
 | Fix Storybook test utilities | `storybook-testing/`                         |
 | Fix Vite ESM issues          | `vite-plugin-fix-esm-imports/`               |
-| Fix icon import optimization | `rollup-plugin-optimize-imports-lumx-icons/` |
+| Fix icon import optimization | `vite-plugin-optimize-imports-lumx-icons/`   |
 
 ## VISUAL DIFFS
 

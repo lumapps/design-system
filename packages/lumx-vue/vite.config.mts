@@ -2,7 +2,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { defineConfig } from 'vitest/config';
 import tsconfigPaths from 'vite-tsconfig-paths';
-import optimizeImportsLumxIcons from 'rollup-plugin-optimize-imports-lumx-icons';
+import optimizeImportsLumxIcons from 'vite-plugin-optimize-imports-lumx-icons';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import vue from '@vitejs/plugin-vue';
 import { nodeResolve } from '@rollup/plugin-node-resolve';

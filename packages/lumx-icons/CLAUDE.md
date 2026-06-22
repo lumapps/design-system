@@ -49,4 +49,4 @@ import { mdiCheck, mdiClose } from '@lumx/icons';
 -   MDI icons are named `mdi<PascalCaseName>` (e.g. `mdiAccountCircle`)
 -   Custom/brand icons follow same naming convention
 -   `postinstall` in root runs `yarn build:icons` automatically — consumers always get fresh build
--   Rollup plugin `rollup-plugin-optimize-imports-lumx-icons` (in dev-packages) tree-shakes icon imports in consumers
+-   Vite plugin `vite-plugin-optimize-imports-lumx-icons` (in dev-packages) tree-shakes icon imports in consumers

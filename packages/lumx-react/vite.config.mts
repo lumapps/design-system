@@ -1,6 +1,6 @@
 import { defineConfig } from 'vitest/config';
 import tsconfigPaths from 'vite-tsconfig-paths';
-import optimizeImportsLumxIcons from 'rollup-plugin-optimize-imports-lumx-icons';
+import optimizeImportsLumxIcons from 'vite-plugin-optimize-imports-lumx-icons';
 import dts from 'vite-plugin-dts';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 import fixEsmImports from 'vite-plugin-lumx-fix-esm-imports';

@@ -1,10 +1,10 @@
 {
-    "name": "rollup-plugin-optimize-imports-lumx-icons",
+    "name": "vite-plugin-optimize-imports-lumx-icons",
     "private": true,
     "version": "4.17.0",
     "license": "MIT",
     "type": "module",
-    "main": "index.js",
+    "main": "index.ts",
     "dependencies": {
         "magic-string": "^0.30.0"
     }
