@@ -9,7 +9,7 @@ import { defineConfig, type Plugin } from 'vite';
 import dts from 'vite-plugin-dts';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
-import fixEsmImports from 'rollup-plugin-lumx-fix-esm-imports';
+import fixEsmImports from 'vite-plugin-lumx-fix-esm-imports';
 
 import pkg from './package.json' with { type: 'json' };
 

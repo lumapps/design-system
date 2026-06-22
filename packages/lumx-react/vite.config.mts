@@ -3,7 +3,7 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 import optimizeImportsLumxIcons from 'rollup-plugin-optimize-imports-lumx-icons';
 import dts from 'vite-plugin-dts';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
-import fixEsmImports from 'rollup-plugin-lumx-fix-esm-imports';
+import fixEsmImports from 'vite-plugin-lumx-fix-esm-imports';
 import path from 'path';
 import { fileURLToPath } from 'url';
 

@@ -20542,12 +20542,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rollup-plugin-lumx-fix-esm-imports@workspace:dev-packages/rollup-plugin-fix-esm-imports":
-  version: 0.0.0-use.local
-  resolution: "rollup-plugin-lumx-fix-esm-imports@workspace:dev-packages/rollup-plugin-fix-esm-imports"
-  languageName: unknown
-  linkType: soft
-
 "rollup-plugin-optimize-imports-lumx-icons@workspace:dev-packages/rollup-plugin-optimize-imports-lumx-icons":
   version: 0.0.0-use.local
   resolution: "rollup-plugin-optimize-imports-lumx-icons@workspace:dev-packages/rollup-plugin-optimize-imports-lumx-icons"
@@ -23931,6 +23925,12 @@ __metadata:
   checksum: 10/1504a8da02f8015c3138ef57a690179ad9b9d4369a054ae48b52a1c8cbc7ad05474551eab309cd90cf758800e17b67ccd13317aa5f8e28efde957547c7a339fb
   languageName: node
   linkType: hard
+
+"vite-plugin-lumx-fix-esm-imports@workspace:dev-packages/vite-plugin-fix-esm-imports":
+  version: 0.0.0-use.local
+  resolution: "vite-plugin-lumx-fix-esm-imports@workspace:dev-packages/vite-plugin-fix-esm-imports"
+  languageName: unknown
+  linkType: soft
 
 "vite-plugin-static-copy@npm:^3.1.4":
   version: 3.1.4

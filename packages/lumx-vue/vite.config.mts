@@ -12,7 +12,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import pkg from './package.json' with { type: 'json' };
 import lumxCorePkg from '../lumx-core/package.json' with { type: 'json' };
-import fixEsmImports from 'rollup-plugin-lumx-fix-esm-imports';
+import fixEsmImports from 'vite-plugin-lumx-fix-esm-imports';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
