@@ -1403,7 +1403,8 @@ export default function selectTextFieldTests({ components, renderWithState }: Se
 
             await userEvent.click(input);
             await waitFor(() => {
-                expect(input.getAttribute('aria-expanded')).toBe('true');
+                // aria-expanded is false: error state has no selectable options
+                expect(input.getAttribute('aria-expanded')).toBe('false');
             });
 
             // Wait a tick to let InfiniteScroll potentially fire
@@ -1424,7 +1425,8 @@ export default function selectTextFieldTests({ components, renderWithState }: Se
 
             await userEvent.click(input);
             await waitFor(() => {
-                expect(input.getAttribute('aria-expanded')).toBe('true');
+                // aria-expanded is false: error state has no selectable options
+                expect(input.getAttribute('aria-expanded')).toBe('false');
             });
 
             await waitFor(() => {
@@ -1445,7 +1447,8 @@ export default function selectTextFieldTests({ components, renderWithState }: Se
 
             await userEvent.click(input);
             await waitFor(() => {
-                expect(input.getAttribute('aria-expanded')).toBe('true');
+                // aria-expanded is false: error state has no selectable options
+                expect(input.getAttribute('aria-expanded')).toBe('false');
             });
 
             expect(getSkeletons()).toHaveLength(0);

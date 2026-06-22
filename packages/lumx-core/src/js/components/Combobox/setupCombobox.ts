@@ -62,6 +62,12 @@ export function setupCombobox(
     /** Last notified input value, to re-fire `optionsChange` when the user keeps typing while empty. */
     let lastInputValue = '';
 
+    /** Last notified loading state, used to replay current state to late subscribers. */
+    let lastLoadingState = false;
+
+    /** Number of currently mounted skeleton placeholders. */
+    let skeletonCount = 0;
+
     /** Event subscribers managed by the handle. */
     const subscribers: { [K in keyof ComboboxEventMap]: Set<(value: ComboboxEventMap[K]) => void> } = {
         open: new Set(),
@@ -76,6 +82,20 @@ export function setupCombobox(
         subscribers[event].forEach((cb) => cb(value));
     }
 
+    /** Count visible (non-filtered) options. */
+    function getVisibleOptionCount(): number {
+        let count = 0;
+        for (const reg of optionRegistrations.values()) {
+            if (!reg.lastFiltered) count += 1;
+        }
+        return count;
+    }
+
+    /** True when the popup has visible content (options or skeletons). */
+    function hasVisibleContent(): boolean {
+        return getVisibleOptionCount() > 0 || skeletonCount > 0;
+    }
+
     /**
      * Notify all registered sections and fire `optionsChange` if the visible option count changed
      * or if the input value changed while the list is empty (so `emptyMessage` callbacks get
@@ -87,10 +107,7 @@ export function setupCombobox(
             notifySection(sectionElement, sectionRegistrations, optionRegistrations);
         }
 
-        let visibleCount = 0;
-        for (const reg of optionRegistrations.values()) {
-            if (!reg.lastFiltered) visibleCount += 1;
-        }
+        const visibleCount = getVisibleOptionCount();
         const inputValue = trigger?.value ?? '';
         const isEmpty = visibleCount === 0;
         if (visibleCount !== lastOptionsLength || (isEmpty && inputValue !== lastInputValue)) {
@@ -98,15 +115,18 @@ export function setupCombobox(
             lastInputValue = inputValue;
             notify('optionsChange', { optionsLength: visibleCount, inputValue });
         }
+
+        // Re-evaluate aria-expanded when the combobox is open — visible content may have
+        // changed due to filtering, option register/unregister, or skeleton transitions.
+        if (isOpenState) {
+            trigger?.setAttribute('aria-expanded', String(hasVisibleContent()));
+        }
     }
 
     // ── Skeleton loading tracking ──────────────────────────────
 
     /** Delay before announcing loading in the live region (ms). */
     const LOADING_ANNOUNCEMENT_DELAY = 500;
-
-    /** Number of currently mounted skeleton placeholders. */
-    let skeletonCount = 0;
 
     /** Timer for debounced loading announcement. */
     let loadingTimer: ReturnType<typeof setTimeout> | undefined;
@@ -133,6 +153,7 @@ export function setupCombobox(
      */
     function onSkeletonCountChange() {
         const isLoading = skeletonCount > 0;
+        lastLoadingState = isLoading;
         notify('loadingChange', isLoading);
 
         if (isLoading) {
@@ -347,8 +368,8 @@ export function setupCombobox(
                 startLoadingAnnouncementTimer();
             }
 
-            // Update aria-expanded on trigger
-            trigger?.setAttribute('aria-expanded', String(isOpen));
+            // Update aria-expanded on trigger (false when no visible options or skeletons)
+            trigger?.setAttribute('aria-expanded', String(isOpen && hasVisibleContent()));
             notify('open', isOpen);
         },
 
@@ -489,6 +510,17 @@ export function setupCombobox(
             callback: (value: ComboboxEventMap[K]) => void,
         ): () => void {
             subscribers[event].add(callback);
+            // Replay current loading state to late subscribers so that framework wrappers
+            // that subscribe after initial mount (e.g. async Vue watchers) don't miss the
+            // initial events fired during mount.
+            if (event === 'open' && isOpenState) {
+                (callback as (value: boolean) => void)(true);
+            }
+            if (event === 'loadingChange' && lastLoadingState) {
+                (callback as (value: boolean) => void)(true);
+            }
+
+            // Cleanup function
             return () => {
                 subscribers[event].delete(callback);
             };
@@ -501,6 +533,7 @@ export function setupCombobox(
             filterValue = '';
             lastOptionsLength = 0;
             lastInputValue = '';
+            lastLoadingState = false;
             optionRegistrations.clear();
             sectionRegistrations.clear();
             skeletonCount = 0;

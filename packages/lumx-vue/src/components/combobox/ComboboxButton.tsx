@@ -14,6 +14,7 @@ import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { Button } from '../button';
 import { Tooltip } from '../tooltip';
 import { useComboboxContext } from './context/ComboboxContext';
+import { useComboboxEvent } from './context/useComboboxEvent';
 import { useComboboxOpen } from './context/useComboboxOpen';
 
 export type ComboboxButtonProps = VueToJSXProps<UIProps, 'label' | 'renderButton'> & {
@@ -41,6 +42,8 @@ const ComboboxButton = defineComponent(
         const className = useClassName(() => props.class);
         const { listboxId, anchorRef, setHandle, handle } = useComboboxContext();
         const { isOpen } = useComboboxOpen();
+        const optionsState = useComboboxEvent('optionsChange', { optionsLength: 0 });
+        const isLoading = useComboboxEvent('loadingChange', false);
 
         const buttonRef = ref<HTMLElement | null>(null);
 
@@ -86,7 +89,7 @@ const ComboboxButton = defineComponent(
                     labelDisplayMode,
                     renderButton,
                     listboxId,
-                    isOpen: isOpen.value,
+                    isOpen: isOpen.value && (!!optionsState.value?.optionsLength || isLoading.value),
                     ref: (el: any) => {
                         // Handle both component instances and raw elements
                         buttonRef.value = el?.$el ?? el;

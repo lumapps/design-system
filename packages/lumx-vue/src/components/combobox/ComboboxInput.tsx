@@ -70,11 +70,13 @@ const ComboboxInput = defineComponent(
             setHandle(null);
         });
 
-        // Track whether the option list is empty to disable the toggle button.
-        const optionsState = useComboboxEvent('optionsChange', undefined);
+        // Track options and loading state to compute aria-expanded correctly.
+        const optionsState = useComboboxEvent('optionsChange', { optionsLength: 0 });
+        const isLoading = useComboboxEvent('loadingChange', false);
 
         const handleToggle = () => {
-            if (isOpen.value && optionsState.value?.optionsLength === 0) return;
+            // Don't toggle when error/empty state (no options and not loading)
+            if (isOpen.value && !optionsState.value?.optionsLength && !isLoading.value) return;
             setIsOpen(!isOpen.value);
             inputEl.value?.focus();
         };
@@ -110,7 +112,7 @@ const ComboboxInput = defineComponent(
                     'aria-disabled': fwdAriaDisabled ?? (attrs as any).ariaDisabled,
                     ...eventHandlers,
                     listboxId,
-                    isOpen: isOpen.value,
+                    isOpen: isOpen.value && (!!optionsState.value?.optionsLength || isLoading.value),
                     filter,
                     textFieldRef: (el: HTMLElement | null) => {
                         anchorRef.value = el;
