@@ -7,29 +7,19 @@ import postcss from 'postcss';
 
 import { defineConfig, type Plugin } from 'vite';
 import dts from 'vite-plugin-dts';
-import tsconfigPaths from 'vite-tsconfig-paths';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 import fixEsmImports from 'vite-plugin-lumx-fix-esm-imports';
 
 import pkg from './package.json' with { type: 'json' };
 
-// `configs/index.js` is CommonJS and dynamically requires its plugins; load it
-// through `createRequire` at runtime so Vite's config bundler doesn't try to
-// inline it (which breaks the dynamic `require` calls).
-const require = createRequire(import.meta.url);
-
-const importUrl = new URL(import.meta.url);
-const __dirname = path.dirname(importUrl.pathname);
-
-const ROOT_PATH = path.resolve(__dirname, '..', '..');
-const DIST_PATH = path.resolve(__dirname, 'dist');
-const SRC_PATH = path.resolve(__dirname, 'src');
+// Require CJS postcss.config file
+const postcssConfig = createRequire(import.meta.url)('../../configs/postcss.config.js');
 
 // Bundle entry points from the package.json `exports` field.
 const input = Object.values(pkg.exports)
     .map((e) => (typeof e === 'object' ? e.default : undefined))
     .filter(Boolean)
-    .map((importPath) => path.join(SRC_PATH, (importPath as string).replace(/index\.js$/, 'index.ts')));
+    .map((importPath) => path.join('src', (importPath as string).replace(/index\..*$/, 'index')));
 
 // Externalize all dependencies (and peer dependencies).
 const external = [
@@ -51,6 +41,7 @@ function sassBuilder(): Plugin {
         name: 'sass-builder',
         async closeBundle() {
             const inputs = ['src/scss/lumx.scss', 'src/scss/components-and-utils.scss'];
+            const distPath = path.resolve(import.meta.dirname, 'dist');
 
             for (const scssInput of inputs) {
                 const { css } = await sass.compileAsync(scssInput, {
@@ -63,32 +54,35 @@ function sassBuilder(): Plugin {
                 });
 
                 const { name } = path.parse(scssInput);
-                const outputPath = path.resolve(DIST_PATH, `${name}.css`);
+                const outputPath = path.resolve(distPath, `${name}.css`);
 
                 await fs.mkdir(path.dirname(outputPath), { recursive: true });
 
-                const CONFIGS = require('../../configs/index.js');
-                const { css: postProcess } = await postcss(CONFIGS.postcss.plugins).process(css, {
+                const { css: postProcess } = await postcss(postcssConfig.plugins).process(css, {
                     from: undefined,
                 });
                 await fs.writeFile(outputPath, postProcess);
                 // eslint-disable-next-line no-console
-                console.log(`${path.relative(__dirname, scssInput)} → ${path.relative(__dirname, DIST_PATH)}`);
+                console.log(`${scssInput} → dist`);
             }
         },
     };
 }
 
 export default defineConfig({
+    resolve: {
+        /** Use tsconfig path aliases natively. */
+        tsconfigPaths: true,
+    },
     build: {
-        outDir: DIST_PATH,
+        outDir: 'dist',
         // Disable minification to keep readable, source-like output
         minify: false,
         lib: {
             entry: input,
             formats: ['es'],
         },
-        rollupOptions: {
+        rolldownOptions: {
             external,
             output: {
                 format: 'esm',
@@ -100,14 +94,13 @@ export default defineConfig({
         },
     },
     plugins: [
-        /** Resolve tsconfig path aliases (e.g. `@lumx/core/*` → `src/*`). */
-        tsconfigPaths(),
         /** Generate per-file `.d.ts` declarations. */
         dts({
-            include: input,
+            entryRoot: 'src',
+            include: input.map(file => path.dirname(file)),
             compilerOptions: {
-                declaration: true,
-                rootDir: SRC_PATH,
+                // No need to type check (CI does it)
+                noCheck: true,
             },
         }),
         /** Fix ESM imports to add .js extensions for lodash sub-module imports. */
@@ -115,9 +108,10 @@ export default defineConfig({
         /** Copy additional files to dist. */
         viteStaticCopy({
             targets: [
-                { src: path.join(ROOT_PATH, 'LICENSE.md'), dest: '.' },
-                { src: path.join(__dirname, 'package.json'), dest: '.' },
-                { src: path.join(__dirname, 'src/{scss,css}'), dest: '.' },
+                // dest:'dist' compensates for vite-plugin-static-copy prepending a '..' to dest when src is outside config.root.
+                { src: '../../LICENSE.md', dest: 'dist' },
+                { src: 'package.json', dest: '' },
+                { src: 'src/{scss,css}', dest: '' },
             ],
         }),
         /** Compile standalone SCSS entry points to CSS. */

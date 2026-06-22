@@ -1,20 +1,13 @@
-import { defineConfig } from 'vitest/config';
-import tsconfigPaths from 'vite-tsconfig-paths';
+import { defineConfig } from 'vite';
 import optimizeImportsLumxIcons from 'vite-plugin-optimize-imports-lumx-icons';
 import dts from 'vite-plugin-dts';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 import fixEsmImports from 'vite-plugin-lumx-fix-esm-imports';
-import path from 'path';
-import { fileURLToPath } from 'url';
 
 import pkg from './package.json' with { type: 'json' };
 import lumxCorePkg from '../lumx-core/package.json' with { type: 'json' };
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const ROOT_PATH = path.resolve(__dirname, '../..');
-const SRC_PATH = path.resolve(__dirname, 'src');
-const DIST_PATH = path.resolve(__dirname, 'dist');
+import path from 'path';
 
 /** Set of lumx core exports */
 const lumxCoreExports = new Set(Object.keys(lumxCorePkg.exports).map((subpath) => path.join('@lumx/core', subpath)));
@@ -34,19 +27,23 @@ const entry = {
  * Shared with Vitest and Storybook (with some override in the `viteFinal` of `.storybook/main.ts`)
  */
 export default defineConfig({
-    esbuild: {
-        jsx: 'automatic',
-        jsxImportSource: 'react',
+    resolve: {
+        /** Use tsconfig path aliases natively. */
+        tsconfigPaths: true,
+    },
+    oxc: {
+        jsx: { runtime: 'automatic', importSource: 'react' },
+        include: /\.[jt]sx?$/,
     },
     build: {
         lib: {
             entry,
             formats: ['es'],
         },
-        outDir: DIST_PATH,
+        outDir: 'dist',
         // Disable minification to keep readable, source-like output
         minify: false,
-        rollupOptions: {
+        rolldownOptions: {
             /**
              * Determine if an import should be treated as external (not bundled).
              * - @lumx/icons => external
@@ -61,26 +58,33 @@ export default defineConfig({
             output: {
                 format: 'esm',
                 hoistTransitiveImports: false,
-                dir: DIST_PATH,
+                dir: 'dist',
                 chunkFileNames: '_internal/[hash].js',
             },
         },
     },
     plugins: [
+        /** Fix ESM imports (e.g. lodash) */
         fixEsmImports(),
-        tsconfigPaths(),
         /** Transform @lumx/icons imports to direct ESM imports. */
         optimizeImportsLumxIcons(),
+        /** Generate per-file `.d.ts` declarations. */
         dts({
-            include: Object.values(entry),
-            aliasesExclude: [/@lumx\/core/],
-            entryRoot: SRC_PATH,
+            entryRoot: 'src',
+            include: Object.values(entry).map(file => path.dirname(file)),
+            exclude: ['**/*.test.{ts,tsx}'],
+            compilerOptions: {
+                // No need to type check (CI does it)
+                noCheck: true,
+            },
         }),
+        /** Copy additional files to dist. */
         viteStaticCopy({
             targets: [
-                { src: path.join(ROOT_PATH, 'LICENSE.md'), dest: '.' },
-                { src: path.join(__dirname, 'README.md'), dest: '.' },
-                { src: path.join(__dirname, 'package.json'), dest: '.' },
+                // dest:'dist' compensates for vite-plugin-static-copy prepending a '..' to dest when src is outside config.root.
+                { src: '../../LICENSE.md', dest: 'dist' },
+                { src: 'README.md', dest: '' },
+                { src: 'package.json', dest: '' },
             ],
         }),
     ],

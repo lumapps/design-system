@@ -24,7 +24,7 @@
         "@types/lodash": "^4.14.149",
         "@types/react": "^18.3.24",
         "@types/react-dom": "^18.3.7",
-        "@vitest/ui": "^4.0.18",
+        "@vitest/ui": "^4.1.9",
         "autoprefixer": "^9.7.4",
         "chromatic": "^13.1.4",
         "focus-visible": "^5.0.2",
@@ -36,11 +36,10 @@
         "react-dom": "^18.3.1",
         "storybook": "^10.2.19",
         "typescript": "^5.4.3",
-        "vite": "^7.3.5",
-        "vite-plugin-dts": "^4.5.4",
-        "vite-plugin-static-copy": "^3.1.4",
-        "vite-tsconfig-paths": "^5.1.4",
-        "vitest": "^4.0.18"
+        "vite": "^8.0.16",
+        "vite-plugin-dts": "^5.0.2",
+        "vite-plugin-static-copy": "^4.1.1",
+        "vitest": "^4.1.9"
     },
     "peerDependencies": {
         "lodash": ">= 4.17.23",

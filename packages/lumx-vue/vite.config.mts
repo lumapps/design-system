@@ -1,57 +1,62 @@
-/* eslint-disable no-restricted-syntax */
-/* eslint-disable import/no-extraneous-dependencies */
-import { defineConfig } from 'vitest/config';
-import tsconfigPaths from 'vite-tsconfig-paths';
+import { defineConfig } from 'vite';
 import optimizeImportsLumxIcons from 'vite-plugin-optimize-imports-lumx-icons';
-import vueJsx from '@vitejs/plugin-vue-jsx';
-import vue from '@vitejs/plugin-vue';
 import dts from 'vite-plugin-dts';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import pkg from './package.json' with { type: 'json' };
-import lumxCorePkg from '../lumx-core/package.json' with { type: 'json' };
 import fixEsmImports from 'vite-plugin-lumx-fix-esm-imports';
+import vueJsx from '@vitejs/plugin-vue-jsx';
+import vue from '@vitejs/plugin-vue';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const ROOT_PATH = path.resolve(__dirname, '../..');
-const DIST_PATH = path.resolve(__dirname, 'dist');
+import path from 'path';
+
+import lumxCorePkg from '../lumx-core/package.json' with { type: 'json' };
+
 /** Set of lumx core exports */
 const lumxCoreExports = new Set(Object.keys(lumxCorePkg.exports).map((subpath) => path.join('@lumx/core', subpath)));
+
+/** Lib entry points */
+const entry = {
+    index: 'src/index.ts',
+    'utils/index': 'src/utils/index.ts',
+};
 
 /**
  * Vite config
  */
 export default defineConfig({
+    resolve: {
+        /** Use tsconfig path aliases natively. */
+        tsconfigPaths: true,
+    },
     build: {
         lib: {
-            entry: {
-                index: 'src/index.ts',
-                'utils/index': 'src/utils/index.ts',
-            },
+            entry,
             formats: ['es'],
         },
         outDir: 'dist',
-        sourcemap: true,
-        rollupOptions: {
+        // Disable minification to keep readable, source-like output
+        minify: false,
+        rolldownOptions: {
+            /**
+             * Determine if an import should be treated as external (not bundled).
+             * - @lumx/icons => external
+             * - @lumx/core => only external if the given module is not in the @lumx/core package.json "exports"
+             */
             external(id) {
                 if (id === 'vue') return true;
                 if (id.startsWith('@lumx/icons')) return true;
-                // @lumx/core imports are only external if they are available in the package.json "exports"
                 if (lumxCoreExports.has(id)) return true;
                 return false;
             },
             output: {
                 format: 'esm',
                 hoistTransitiveImports: false,
-                dir: DIST_PATH,
+                dir: 'dist',
                 chunkFileNames: '_internal/[hash].js',
             },
-            plugins: [],
         },
     },
     plugins: [
+        /** Fix ESM imports (e.g. lodash) */
         fixEsmImports(),
         vue(),
         vueJsx({
@@ -61,18 +66,25 @@ export default defineConfig({
             // ensuring the right runtime is used is key.
             babelPlugins: [['@babel/plugin-transform-react-jsx', { runtime: 'automatic', importSource: 'vue' }]],
         }),
-        tsconfigPaths(),
         /** Transform @lumx/icons imports to direct ESM imports. */
         optimizeImportsLumxIcons(),
+        /** Bunld typescript declaration files */
         dts({
-            exclude: ['src/**/*.stories.ts', 'src/**/*.test.ts', 'src/testing'],
+            include: Object.values(entry),
             aliasesExclude: [/@lumx\/core/],
             entryRoot: 'src',
+            compilerOptions: {
+                // No need to type check (CI does it)
+                noCheck: true,
+            },
         }),
+        /** Copy additional files to dist. */
         viteStaticCopy({
             targets: [
-                { src: path.join(ROOT_PATH, 'LICENSE.md'), dest: '.' },
-                { src: 'package.json', dest: '.' },
+                // dest:'dist' compensates for vite-plugin-static-copy prepending a '..' to dest when src is outside config.root.
+                { src: '../../LICENSE.md', dest: 'dist' },
+                { src: 'README.md', dest: '' },
+                { src: 'package.json', dest: '' },
             ],
         }),
     ],

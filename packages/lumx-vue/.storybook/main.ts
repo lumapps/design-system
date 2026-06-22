@@ -6,6 +6,12 @@ import { generateVueDemoStories } from '../../site-demo/scripts/generate-demo-st
 const importUrl = new URL(import.meta.url);
 const postcss = path.join('../..', importUrl.pathname, 'configs');
 
+// Vite 8's default (modern) Sass compiler no longer resolves bare `@import`
+// statements (e.g. `@import "sass-mq"`) from `node_modules` automatically.
+// Provide a resolver-based importer so the legacy-style `@import`s in the LumX
+// SCSS keep working (mirrors the importer used in lumx-core/vite.config.mts).
+const sassImporters = [{ findFileUrl: (url: string) => new URL(import.meta.resolve(url)) }];
+
 const config: StorybookConfig = {
     addons: ['@storybook/addon-a11y'],
     stories: ['../src/**/*.stories.@(js|jsx|ts|tsx)'],
@@ -19,7 +25,12 @@ const config: StorybookConfig = {
     },
     async viteFinal(config) {
         return mergeConfig(config, {
-            css: { postcss },
+            css: {
+                postcss,
+                preprocessorOptions: {
+                    scss: { importers: sassImporters },
+                },
+            },
             plugins: [
                 {
                     name: 'generate-demo-stories',
