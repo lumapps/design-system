@@ -79,4 +79,4 @@ All shared interfaces live in `src/js/types/`. Key ones:
 
 -   No React/Vue imports allowed in this package — keep it framework-agnostic
 -   JSX in this package uses a custom transform (`JSXElement` type, not `React.ReactElement`)
--   SCSS compilation happens as part of the Rollup build; don't import SCSS from JS
+-   SCSS compilation happens as part of the Vite build (`vite.config.mts`); don't import SCSS from JS
