@@ -1,4 +1,4 @@
-import { computed, defineComponent, ref } from 'vue';
+import { computed, defineComponent, ref, watch } from 'vue';
 
 import {
     TimePickerField as UI,
@@ -63,6 +63,7 @@ const TimePickerField = defineComponent(
         const className = useClassName(() => props.class);
         const locale = computed(() => props.locale ?? getCurrentLocale());
         const step = computed(() => props.step ?? DEFAULT_PROPS.step);
+        const boundsMode = computed(() => props.boundsMode ?? DEFAULT_PROPS.boundsMode);
 
         // Build the option list — re-computed only when bounds/step/locale change.
         const timeList = computed(() =>
@@ -87,6 +88,25 @@ const TimePickerField = defineComponent(
                 name: formatTime(value, locale.value),
             };
         });
+
+        // Clamp the current value to bounds whenever enforce mode is set and value/bounds change.
+        watch(
+            () => [boundsMode.value, props.value, props.minTime, props.maxTime],
+            () => {
+                if (boundsMode.value !== 'enforce' || !props.value) return;
+
+                const timeOfDay = {
+                    hour: props.value.getHours(),
+                    minute: props.value.getMinutes(),
+                };
+                const clamped = snapTimeToBounds(timeOfDay, props.minTime, props.maxTime);
+
+                if (clamped.hour !== props.value.getHours() || clamped.minute !== props.value.getMinutes()) {
+                    emit('change', getDateAtTime(clamped, props.value));
+                }
+            },
+            { immediate: true },
+        );
 
         const handleChange: UIProps['handleChange'] = (next) => {
             const date = next ? getDateAtTime(next, props.value) : undefined;
@@ -151,6 +171,7 @@ const TimePickerField = defineComponent(
             'step',
             'minTime',
             'maxTime',
+            'boundsMode',
             'translations',
             'class',
             // Inherited SelectTextField props

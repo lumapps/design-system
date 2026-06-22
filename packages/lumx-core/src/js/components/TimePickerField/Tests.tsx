@@ -174,6 +174,63 @@ export default function timePickerFieldTests({ components, renderWithState }: Ti
         });
     });
 
+    describe('boundsMode', () => {
+        it('clamps value to minTime on mount when boundsMode is "enforce"', () => {
+            const onChange = vi.fn();
+            renderWithState(defaultTemplate, {
+                value: getDateAtTime({ hour: 8, minute: 0 }),
+                minTime: getDateAtTime({ hour: 10, minute: 0 }),
+                boundsMode: 'enforce' as const,
+                onChange,
+            });
+            expect(onChange).toHaveBeenCalledWith(expectTimeOfDay(10, 0), undefined, undefined);
+        });
+
+        it('clamps value to maxTime on mount when boundsMode is "enforce"', () => {
+            const onChange = vi.fn();
+            renderWithState(defaultTemplate, {
+                value: getDateAtTime({ hour: 22, minute: 0 }),
+                maxTime: getDateAtTime({ hour: 18, minute: 0 }),
+                boundsMode: 'enforce' as const,
+                onChange,
+            });
+            expect(onChange).toHaveBeenCalledWith(expectTimeOfDay(18, 0), undefined, undefined);
+        });
+
+        it('does not clamp when boundsMode is not set', () => {
+            const onChange = vi.fn();
+            renderWithState(defaultTemplate, {
+                value: getDateAtTime({ hour: 22, minute: 0 }),
+                maxTime: getDateAtTime({ hour: 18, minute: 0 }),
+                onChange,
+            });
+            expect(onChange).not.toHaveBeenCalled();
+        });
+
+        it('does not clamp when boundsMode is "on-blur"', () => {
+            const onChange = vi.fn();
+            renderWithState(defaultTemplate, {
+                value: getDateAtTime({ hour: 22, minute: 0 }),
+                maxTime: getDateAtTime({ hour: 18, minute: 0 }),
+                boundsMode: 'on-blur' as const,
+                onChange,
+            });
+            expect(onChange).not.toHaveBeenCalled();
+        });
+
+        it('does not clamp when value is already in bounds', () => {
+            const onChange = vi.fn();
+            renderWithState(defaultTemplate, {
+                value: getDateAtTime({ hour: 12, minute: 0 }),
+                minTime: getDateAtTime({ hour: 9, minute: 0 }),
+                maxTime: getDateAtTime({ hour: 18, minute: 0 }),
+                boundsMode: 'enforce' as const,
+                onChange,
+            });
+            expect(onChange).not.toHaveBeenCalled();
+        });
+    });
+
     describe('selection via click', () => {
         it('emits a Date matching the picked option time-of-day', async () => {
             const onChange = vi.fn();

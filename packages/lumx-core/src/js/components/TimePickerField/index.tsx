@@ -19,6 +19,7 @@ const { block } = classNames.bem(CLASSNAME);
  */
 export const DEFAULT_PROPS: Partial<TimePickerFieldWrapperProps> = {
     step: 30,
+    boundsMode: 'on-blur',
 };
 
 /**
@@ -65,7 +66,17 @@ export interface TimePickerFieldWrapperProps {
     maxTime?: Date;
 
     /**
-     * Translations label for clear and show suggestions buttons.
+     * Controls how the time value interacts with `[minTime, maxTime]` bounds.
+     * Typed input is always snapped to bounds on blur.
+     * - `'enforce'`: additionally, the controlled `value` prop is proactively
+     *   clamped to bounds on mount and whenever bounds change, calling
+     *   `onChange` when adjusted.
+     * - `'on-blur'` (default): only blur snapping applies.
+     */
+    boundsMode?: 'on-blur' | 'enforce';
+
+    /**
+     * Translation labels for clear and show suggestions buttons.
      */
     translations: TimePickerFieldTranslations;
 }

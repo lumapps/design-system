@@ -4,9 +4,11 @@ frameworks: ['react', 'vue']
 
 import * as ReactDemoDefault from './react/default.tsx';
 import * as ReactDemoBounds from './react/bounds.tsx';
+import * as ReactDemoBoundsEnforce from './react/bounds-enforce.tsx';
 import * as ReactDemoLocale from './react/locale.tsx';
 import * as VueDemoDefault from './vue/default.vue';
 import * as VueDemoBounds from './vue/bounds.vue';
+import * as VueDemoBoundsEnforce from './vue/bounds-enforce.vue';
 import * as VueDemoLocale from './vue/locale.vue';
 import ReactTimePickerField from 'lumx-docs:@lumx/react/components/time-picker-field/TimePickerField';
 import VueTimePickerField from 'lumx-docs:@lumx/vue/components/time-picker-field/TimePickerField';
@@ -23,6 +25,11 @@ The field generates time suggestions in a dropdonw list with configurable minute
 Restrict the pickable range with `minTime` and `maxTime`. Options outside the range remain **visible** in the dropdown but are rendered as disabled. Typed input outside the range is snapped to the nearest bound on blur.
 
 <DemoBlock demo={{ react: ReactDemoBounds, vue: VueDemoBounds }} />
+
+The `boundsMode` prop controls when the value is adjusted to the bounds:
+
+- `"on-blur"` (default) — typed input is snapped to the nearest bound on blur only.
+- `"enforce"` — in addition to blur snapping, the controlled value is proactively clamped to the bounds on mount and whenever bounds change. The value stays in sync with `minTime` and `maxTime` automatically, calling `onChange` when adjusted.
 
 ## Locale
 

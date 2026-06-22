@@ -1,4 +1,4 @@
-import React, { type SyntheticEvent, useCallback, useMemo, useState } from 'react';
+import React, { type SyntheticEvent, useCallback, useEffect, useMemo, useState } from 'react';
 
 import type { HasClassName, HasTheme } from '@lumx/core/js/types';
 import {
@@ -70,9 +70,11 @@ export const TimePickerField: React.FC<TimePickerFieldProps> = (props) => {
         step = DEFAULT_PROPS.step,
         minTime,
         maxTime,
+        boundsMode = DEFAULT_PROPS.boundsMode,
         className,
         theme,
         translations,
+        name,
         ...forwardedProps
     } = props;
 
@@ -89,12 +91,27 @@ export const TimePickerField: React.FC<TimePickerFieldProps> = (props) => {
         return { hour: value.getHours(), minute: value.getMinutes(), name: formatTime(value, locale) };
     }, [value, locale]);
 
+    // Clamp the current value to bounds whenever enforce mode is set and value/bounds change.
+    useEffect(() => {
+        if (boundsMode !== 'enforce' || !value) return;
+
+        const timeOfDay = {
+            hour: value.getHours(),
+            minute: value.getMinutes(),
+        };
+        const clamped = snapTimeToBounds(timeOfDay, minTime, maxTime);
+
+        if (clamped.hour !== value.getHours() || clamped.minute !== value.getMinutes()) {
+            onChange(getDateAtTime(clamped, value), name);
+        }
+    }, [boundsMode, value, minTime, maxTime, onChange, name]);
+
     const handleChange: UIProps['handleChange'] = useCallback(
         (next) => {
             const date = next ? getDateAtTime(next, value) : undefined;
-            onChange(date, forwardedProps.name);
+            onChange(date, name);
         },
-        [forwardedProps.name, onChange, value],
+        [name, onChange, value],
     );
 
     const handleBlur: UIProps['handleBlur'] = useCallback(() => {
@@ -108,8 +125,8 @@ export const TimePickerField: React.FC<TimePickerFieldProps> = (props) => {
         const time = snapTimeToBounds(parsed, minTime, maxTime);
         if (value && isDateOnTime(value, time)) return;
 
-        onChange(getDateAtTime(time, value), forwardedProps.name);
-    }, [maxTime, minTime, forwardedProps.name, onChange, searchValue, value]);
+        onChange(getDateAtTime(time, value), name);
+    }, [maxTime, minTime, name, onChange, searchValue, value]);
 
     const searchInputValue = value ? formatTime(value, locale) : undefined;
 
