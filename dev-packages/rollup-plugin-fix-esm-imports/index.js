@@ -7,6 +7,7 @@
 export default function fixEsmImports() {
     return {
         name: 'rollup-plugin-lumx-fix-esm-imports',
+        apply: 'build',
         generateBundle(_, bundle) {
             for (const fileName in bundle) {
                 const chunk = bundle[fileName];
