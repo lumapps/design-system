@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   `@lumx/react`, `@lumx/vue`:
+    -   `TimePickerField`: add `boundsMode="enforce"` prop mode to proactively clamp the `value` to `minTime` and `maxTime` on mount and when bounds change
+
 ## [4.17.0][] - 2026-06-11
 
 ### Added

@@ -69,6 +69,15 @@ export function setup({
         },
     };
 
+    /** Enforce (clamp out-of-bounds) maxTime. */
+    const WithBoundsMode = {
+        args: {
+            value: getDateAtTime({ hour: 20, minute: 0 }),
+            maxTime: getDateAtTime({ hour: 18, minute: 0 }),
+            boundsMode: 'enforce',
+        },
+    };
+
     /** Disabled states (matrix). */
     const Disabled = {
         args: WithValue.args,
@@ -84,5 +93,5 @@ export function setup({
         ],
     };
 
-    return { meta, Default, WithValue, Step15, WithMinTime, WithMaxTime, French, Disabled };
+    return { meta, Default, WithValue, Step15, WithMinTime, WithMaxTime, French, WithBoundsMode, Disabled };
 }

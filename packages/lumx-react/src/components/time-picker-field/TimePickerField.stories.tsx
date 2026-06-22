@@ -19,4 +19,5 @@ export const Step15 = { ...stories.Step15 };
 export const WithMinTime = { ...stories.WithMinTime };
 export const WithMaxTime = { ...stories.WithMaxTime };
 export const French = { ...stories.French };
+export const WithBoundsMode = { ...stories.WithBoundsMode };
 export const Disabled = { ...stories.Disabled };
