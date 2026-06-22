@@ -5,7 +5,6 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 import optimizeImportsLumxIcons from 'vite-plugin-optimize-imports-lumx-icons';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import vue from '@vitejs/plugin-vue';
-import { nodeResolve } from '@rollup/plugin-node-resolve';
 import dts from 'vite-plugin-dts';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 import path from 'path';
@@ -18,8 +17,6 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const ROOT_PATH = path.resolve(__dirname, '../..');
 const DIST_PATH = path.resolve(__dirname, 'dist');
-const extensions = ['.js', '.jsx', '.ts', '.tsx'];
-
 /** Set of lumx core exports */
 const lumxCoreExports = new Set(Object.keys(lumxCorePkg.exports).map((subpath) => path.join('@lumx/core', subpath)));
 
@@ -51,10 +48,7 @@ export default defineConfig({
                 dir: DIST_PATH,
                 chunkFileNames: '_internal/[hash].js',
             },
-            plugins: [
-                /** Resolve source files. */
-                nodeResolve({ browser: true, extensions }),
-            ],
+            plugins: [],
         },
     },
     plugins: [
