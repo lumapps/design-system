@@ -50,11 +50,31 @@ In addition to positions, popovers can be aligned to a chosen anchor's side:
 
 <DemoBlock orientation="vertical" demo={{ react: ReactDemoAlignments, vue: VueDemoAlignments }} />
 
-## Matching width
+## Sizing
 
-Popovers width can be forced to match anchors.
+Popovers can be sized using explicit `width`, `minWidth`, `maxWidth`, `height`, `minHeight`, and `maxHeight` props.
+Values can be pixel strings (e.g. `"250px"`), viewport-height strings for height props (e.g. `"50vh"`),
+or global t-shirt size tokens (`"xxs"`, `"xs"`, `"s"`, `"m"`, `"l"`, `"xl"`, `"xxl"`).
+
+### Fit to anchor width
+
+Width can also be tied to the anchor element using the `fitToAnchorWidth` prop:
+
+-   `true` or `"minWidth"` — popover is **at least** as wide as the anchor
+-   `"maxWidth"` — popover is **at most** as wide as the anchor
+-   `"width"` — popover is **exactly** as wide as the anchor
 
 <DemoBlock demo={{ react: ReactDemoMatchingWidth, vue: VueDemoMatchingWidth }} />
+
+When combined with explicit sizing props:
+-   `minWidth` + `fitToAnchorWidth="minWidth"` → `max(explicit, anchor)`
+-   `maxWidth` + `fitToAnchorWidth="maxWidth"` → `min(explicit, anchor)`
+-   `width` + `fitToAnchorWidth="width"` → explicit `width` wins
+
+### Fit within viewport height
+
+The `fitWithinViewportHeight` prop constrains the popover's height to the available viewport space.
+When combined with an explicit `maxHeight`, the result is `min(maxHeight, available)`.
 
 ### Accessibility concerns
 

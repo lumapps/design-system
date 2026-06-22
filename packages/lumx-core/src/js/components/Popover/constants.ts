@@ -1,3 +1,4 @@
+import { Size } from '../../constants/enums';
 import { ValueOf } from '../../types/ValueOf';
 
 /**
@@ -27,21 +28,6 @@ export const Placement = {
 export type Placement = ValueOf<typeof Placement>;
 
 /**
- * Offset of the popover.
- */
-export interface Offset {
-    /** Offset size along the reference. */
-    along?: number;
-    /** Offset size away from the reference. */
-    away?: number;
-}
-
-/**
- * Popover elevation index.
- */
-export type Elevation = 1 | 2 | 3 | 4 | 5;
-
-/**
  * Popover fit anchor width options.
  */
 export const FitAnchorWidth = {
@@ -60,3 +46,8 @@ export const ARROW_SIZE = 14;
  * Popover default z-index
  */
 export const POPOVER_ZINDEX = 9999;
+
+/**
+ * Popover height/width sizes
+ */
+export const POPOVER_SIZES = [Size.m, Size.l, Size.xl, Size.xxl] as const;

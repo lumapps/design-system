@@ -1,7 +1,8 @@
 import type { SetupStoriesOptions } from '@lumx/core/stories/types';
 import { getSelectArgType } from '@lumx/core/stories/controls/selectArgType';
 import { withUndefined } from '@lumx/core/stories/controls/withUndefined';
-import { Placement, type Elevation, FitAnchorWidth } from './constants';
+import { Placement, FitAnchorWidth } from './constants';
+import { type Elevation } from './types';
 import { DEFAULT_PROPS } from '.';
 
 /**
@@ -111,5 +112,47 @@ export function setup({
         ],
     };
 
-    return { meta, Simple, DarkTheme, WithoutPortal, Placements, FitToAnchorWidth };
+    /** Width, minWidth and maxWidth variations */
+    const Width = {
+        args: {
+            anchorClassName: 'lumx-spacing-margin-huge',
+            popoverClassName: 'lumx-spacing-padding',
+            placement: Placement.BOTTOM,
+        },
+        decorators: [
+            withCombinations({
+                combinations: {
+                    cols: {
+                        'width: l': { width: 'l' },
+                        'minWidth: xl': { minWidth: 'xl' },
+                        'maxWidth: m': { maxWidth: 'm' },
+                    },
+                },
+                tableStyle: { width: '100%' },
+            }),
+        ],
+    };
+
+    /** Height, minHeight and maxHeight variations */
+    const Height = {
+        args: {
+            anchorClassName: 'lumx-spacing-margin-huge',
+            popoverClassName: 'lumx-spacing-padding',
+            placement: Placement.BOTTOM,
+        },
+        decorators: [
+            withCombinations({
+                combinations: {
+                    cols: {
+                        'height: l': { height: 'l' },
+                        'minHeight: xl': { minHeight: 'xl' },
+                        'maxHeight: m': { maxHeight: 'm' },
+                    },
+                },
+                tableStyle: { width: '100%' },
+            }),
+        ],
+    };
+
+    return { meta, Simple, DarkTheme, WithoutPortal, Placements, FitToAnchorWidth, Width, Height };
 }

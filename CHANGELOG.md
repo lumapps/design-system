@@ -11,6 +11,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `@lumx/react`, `@lumx/vue`:
     -   `TimePickerField`: add `boundsMode="enforce"` prop mode to proactively clamp the `value` to `minTime` and `maxTime` on mount and when bounds change
+    -   `Popover`: add sizing API (`minWidth`, `width`, `maxWidth`, `minHeight`, `height`, `maxHeight`) complementary to the existing `fitToAnchorWidth` and `fitWithinViewportHeight`.
+
+### Changed
+
+-   `@lumx/react`, `@lumx/vue`:
+    -   `SelectButton`, `SelectTextfield`: change default maxHeight to `80vh` instead of `50vh`
 
 ## [4.17.0][] - 2026-06-11
 

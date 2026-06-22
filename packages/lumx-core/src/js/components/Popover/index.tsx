@@ -1,6 +1,7 @@
 import type { JSXElement, HasTheme, HasClassName, HasCloseMode, CommonRef, LumxClassName } from '../../types';
 import { classNames } from '../../utils';
-import { Elevation, FitAnchorWidth, Offset, Placement, POPOVER_ZINDEX } from './constants';
+import { Placement, FitAnchorWidth, POPOVER_ZINDEX } from './constants';
+import type { PopoverSizes, Elevation, Offset } from './types';
 
 /**
  * Shared popover props used by both React and Vue wrappers.
@@ -30,7 +31,7 @@ export interface PopoverProps extends HasClassName, HasTheme, HasCloseMode {
      *   - `width`: popover equal to the anchor.
      */
     fitToAnchorWidth?: FitAnchorWidth | boolean;
-    /** Shrink popover if even after flipping there is not enough space. */
+    /** Constrain popover height to avoid overflowing the viewport. */
     fitWithinViewportHeight?: boolean;
     /** Element to focus when opening the popover. */
     focusElement?: CommonRef;
@@ -62,7 +63,7 @@ export interface PopoverProps extends HasClassName, HasTheme, HasCloseMode {
  * Internal UI rendering props for the core Popover component.
  * These are passed by the framework wrappers after processing the behavioral PopoverProps.
  */
-export interface PopoverUIProps extends HasClassName, HasTheme, HasCloseMode {
+export interface PopoverUIProps extends HasClassName, HasTheme, HasCloseMode, PopoverSizes {
     /** Customize the root element tag. */
     as?: string;
     /** Content. */
@@ -79,7 +80,6 @@ export interface PopoverUIProps extends HasClassName, HasTheme, HasCloseMode {
     popoverStyle?: any;
     /** Computed arrow styles (from floating UI). */
     arrowStyle?: any;
-
     /** Ref for the popover root element. */
     ref?: CommonRef;
     /** Ref setter for the arrow element. */

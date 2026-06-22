@@ -1,6 +1,8 @@
-import type { CommonRef, HasClassName, JSXElement, LumxClassName } from '../../types';
-import type { FitAnchorWidth, Placement } from '../Popover/constants';
+import type { HasClassName, JSXElement, LumxClassName } from '../../types';
+import type { PopoverProps } from '../Popover';
+import type { PopoverSizes } from '../Popover/types';
 import { classNames } from '../../utils';
+import { DEFAULT_COMBOBOX_POPOVER_MAX_HEIGHT } from './constants';
 
 /**
  * Component display name.
@@ -13,26 +15,18 @@ export const COMPONENT_NAME = 'ComboboxPopover';
 export const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-combobox-popover';
 const { block, element } = classNames.bem(CLASSNAME);
 
+type InheritedPopoverProps = Pick<
+    PopoverProps,
+    'closeOnClickAway' | 'closeOnEscape' | 'fitToAnchorWidth' | 'isOpen' | 'anchorRef' | 'placement' | 'handleClose'
+> &
+    PopoverSizes;
+
 /**
  * Defines the props for the core ComboboxPopover template.
  */
-export interface ComboboxPopoverProps extends HasClassName {
+export interface ComboboxPopoverProps extends HasClassName, InheritedPopoverProps {
     /** Content (should contain a ComboboxList). */
     children?: JSXElement;
-    /** Whether a click anywhere out of the popover would close it. */
-    closeOnClickAway?: boolean;
-    /** Whether an escape key press would close the popover. */
-    closeOnEscape?: boolean;
-    /** Manage popover width relative to anchor. Defaults to `true` (minWidth). */
-    fitToAnchorWidth?: FitAnchorWidth | boolean;
-    /** Whether the combobox is open. */
-    isOpen?: boolean;
-    /** Placement relative to anchor. Defaults to `'bottom-start'`. */
-    placement?: Placement;
-    /** Reference to the anchor element for popover positioning. */
-    anchorRef?: CommonRef;
-    /** Callback invoked when the popover requests to close (click away, escape). */
-    handleClose?(): void;
 }
 
 /**
@@ -64,7 +58,8 @@ export const ComboboxPopover = (props: ComboboxPopoverProps, { Popover, FlexBox 
         closeOnEscape = false,
         fitToAnchorWidth = true,
         isOpen,
-        placement = 'bottom-start' as Placement,
+        maxHeight = DEFAULT_COMBOBOX_POPOVER_MAX_HEIGHT,
+        placement = 'bottom-start',
         anchorRef,
         handleClose,
         ...forwardedProps
@@ -75,6 +70,7 @@ export const ComboboxPopover = (props: ComboboxPopoverProps, { Popover, FlexBox 
             {...forwardedProps}
             placement={placement}
             fitToAnchorWidth={fitToAnchorWidth}
+            maxHeight={maxHeight}
             className={block([className])}
             anchorRef={anchorRef}
             isOpen={isOpen}

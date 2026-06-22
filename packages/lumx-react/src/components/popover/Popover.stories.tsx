@@ -47,3 +47,5 @@ export const DarkTheme = { ...stories.DarkTheme };
 export const WithoutPortal = { ...stories.WithoutPortal };
 export const Placements = { ...stories.Placements };
 export const FitToAnchorWidth = { ...stories.FitToAnchorWidth };
+export const Width = { ...stories.Width };
+export const Height = { ...stories.Height };
