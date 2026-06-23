@@ -1,0 +1,19 @@
+diff --git a/dist/index.mjs b/dist/index.mjs
+index 2d347569cdcdd3ea988efdd5778032c56ad9edbc..1f5bbb88a388c6559e04218cca7e93e602fce47f 100644
+--- a/dist/index.mjs
++++ b/dist/index.mjs
+@@ -1283,7 +1283,13 @@ function createDtsResolvePlugin({ cwd, tsconfig, tsconfigRaw, resolver, sideEffe
+ 					external: true,
+ 					moduleSideEffects: sideEffects
+ 				};
+-				const rolldownResolution = await this.resolve(id, importer, options);
++				let rolldownResolution;
++				try {
++					rolldownResolution = await this.resolve(id, importer, options);
++				} catch (e) {
++					debug$1("Rolldown resolution threw for dts import %O from %O, falling back to dts resolver: %O", id, importer, e);
++					rolldownResolution = null;
++				}
+ 				debug$1("Rolldown resolution for dts import %O from %O: %O", id, importer, rolldownResolution);
+ 				if (rolldownResolution?.external) {
+ 					debug$1("Rolldown marked dts import as external:", id);

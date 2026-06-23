@@ -47,7 +47,7 @@ export default function optimizeImportsLumxIcons(): Plugin {
     }
 
     return {
-        name: 'vite-plugin-optimize-imports-lumx-icons',
+        name: '@lumx/vite-plugin-optimize-icons-imports',
         apply: 'build',
 
         async buildStart() {

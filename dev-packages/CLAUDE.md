@@ -10,8 +10,9 @@ Private packages powering the monorepo build, lint, test, and visual-diff infras
 | `eslint-plugin-lumapps`                     | Custom ESLint rules specific to LumX conventions               |
 | `storybook-testing`                         | Shared Storybook test utilities (`@lumx/storybook-testing`)    |
 | `visual-diffs`                              | Playwright-based visual regression tool (`@lumx/visual-diffs`) |
-| `vite-plugin-fix-esm-imports`               | Vite plugin: fixes ESM import paths for downstream compat      |
-| `vite-plugin-optimize-imports-lumx-icons`   | Vite plugin: tree-shakes `@lumx/icons` imports in consumers    |
+| `@lumx/vite-plugin-fix-esm-imports`         | Vite plugin: fixes ESM import paths for downstream compat      |
+| `@lumx/vite-plugin-optimize-icons-imports` | Vite plugin: tree-shakes `@lumx/icons` imports in consumers    |
+| `@lumx/base-vite-lib-config`                | Shared base Vite config for building LumX library packages     |
 
 ## WHERE TO LOOK
 
@@ -22,7 +23,8 @@ Private packages powering the monorepo build, lint, test, and visual-diff infras
 | Fix visual-diff tooling      | `visual-diffs/`                              |
 | Fix Storybook test utilities | `storybook-testing/`                         |
 | Fix Vite ESM issues          | `vite-plugin-fix-esm-imports/`               |
-| Fix icon import optimization | `vite-plugin-optimize-imports-lumx-icons/`   |
+| Fix icon import optimization | `vite-plugin-optimize-icons-imports/`   |
+| Shared Vite config           | `base-vite-lib-config/`                      |
 
 ## VISUAL DIFFS
 

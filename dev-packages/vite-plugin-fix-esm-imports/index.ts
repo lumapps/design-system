@@ -8,7 +8,7 @@ import type { Plugin } from 'vite';
  */
 export default function fixEsmImports(): Plugin {
     return {
-        name: 'vite-plugin-lumx-fix-esm-imports',
+        name: '@lumx/vite-plugin-fix-esm-imports',
         apply: 'build',
         renderChunk(code) {
             const newCode = code.replace(/from\s+['"](lodash\/[^/'"]+)(?<!\.js)['"]/g, "from '$1.js'");

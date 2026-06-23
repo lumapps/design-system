@@ -1,5 +1,5 @@
 {
-    "name": "vite-plugin-lumx-fix-esm-imports",
+    "name": "@lumx/vite-plugin-fix-esm-imports",
     "private": true,
     "version": "4.17.0",
     "license": "MIT",

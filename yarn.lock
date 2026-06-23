@@ -314,6 +314,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/generator@npm:^8.0.0":
+  version: 8.0.0
+  resolution: "@babel/generator@npm:8.0.0"
+  dependencies:
+    "@babel/parser": "npm:^8.0.0"
+    "@babel/types": "npm:^8.0.0"
+    "@jridgewell/gen-mapping": "npm:^0.3.12"
+    "@jridgewell/trace-mapping": "npm:^0.3.28"
+    "@types/jsesc": "npm:^2.5.0"
+    jsesc: "npm:^3.0.2"
+  checksum: 10/8d9b801886b4bbe46b101768abae0ffa1c9435601a8788358331c115b1a38a7c5acdd0e8b85b4d0c00806b0b74a0cc0e75ef50647f7322ffa3646a238e1b5420
+  languageName: node
+  linkType: hard
+
 "@babel/helper-annotate-as-pure@npm:^7.27.3, @babel/helper-annotate-as-pure@npm:^7.29.7":
   version: 7.29.7
   resolution: "@babel/helper-annotate-as-pure@npm:7.29.7"
@@ -544,6 +558,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/helper-string-parser@npm:^8.0.0":
+  version: 8.0.0
+  resolution: "@babel/helper-string-parser@npm:8.0.0"
+  checksum: 10/3c38887284b8bd76d2c5865b4a4a37f75a0dd2740d34169e3f140f1c35c5efff5682e50cbd38c47b0f143a38c145b93864a7a156a203a234317824083ec742cc
+  languageName: node
+  linkType: hard
+
 "@babel/helper-validator-identifier@npm:^7.25.9, @babel/helper-validator-identifier@npm:^7.29.7":
   version: 7.29.7
   resolution: "@babel/helper-validator-identifier@npm:7.29.7"
@@ -555,6 +576,13 @@ __metadata:
   version: 7.28.5
   resolution: "@babel/helper-validator-identifier@npm:7.28.5"
   checksum: 10/8e5d9b0133702cfacc7f368bf792f0f8ac0483794877c6dca5fcb73810ee138e27527701826fb58a40a004f3a5ec0a2f3c3dd5e326d262530b119918f3132ba7
+  languageName: node
+  linkType: hard
+
+"@babel/helper-validator-identifier@npm:^8.0.0":
+  version: 8.0.2
+  resolution: "@babel/helper-validator-identifier@npm:8.0.2"
+  checksum: 10/175f09f4c370668d163123ad154a753df0642a9d6dff799af637bf882c788cfacfbd0b1656ff8f81bd99ad1028e6c1516c5aa5a810c28f41fe28d9c90f57dba4
   languageName: node
   linkType: hard
 
@@ -649,6 +677,17 @@ __metadata:
   bin:
     parser: ./bin/babel-parser.js
   checksum: 10/da40c5928c95997b01aabe84fc3440881b8f20b866714fefa142961d37e82ffc03fbb9afed706f15f8a688278f95286ca0cea0d87ad6c77600f8c6c45d9824ee
+  languageName: node
+  linkType: hard
+
+"@babel/parser@npm:^8.0.0":
+  version: 8.0.0
+  resolution: "@babel/parser@npm:8.0.0"
+  dependencies:
+    "@babel/types": "npm:^8.0.0"
+  bin:
+    parser: ./bin/babel-parser.js
+  checksum: 10/c4b12bfba9129b6630ff83b7c5f8d4a139f3f11f0f973599eaca0b98a4574d1ca458b6e037b9f148d4964073db25e34f6a951d795f2f68dd730ee15ed7068ec1
   languageName: node
   linkType: hard
 
@@ -1901,6 +1940,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/types@npm:^8.0.0":
+  version: 8.0.0
+  resolution: "@babel/types@npm:8.0.0"
+  dependencies:
+    "@babel/helper-string-parser": "npm:^8.0.0"
+    "@babel/helper-validator-identifier": "npm:^8.0.0"
+  checksum: 10/9bc81523b9619df23c470ceafbfef6c792f6aeb2b1a5397c462d1e771829abd52edc6ee32c718c45e7e9a065baaa1cb3157a8144866b315a930a15615f15c7f0
+  languageName: node
+  linkType: hard
+
 "@blazediff/core@npm:1.9.1":
   version: 1.9.1
   resolution: "@blazediff/core@npm:1.9.1"
@@ -3104,6 +3153,18 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@lumx/base-vite-lib-config@workspace:*, @lumx/base-vite-lib-config@workspace:dev-packages/base-vite-lib-config":
+  version: 0.0.0-use.local
+  resolution: "@lumx/base-vite-lib-config@workspace:dev-packages/base-vite-lib-config"
+  dependencies:
+    "@lumx/vite-plugin-fix-esm-imports": "workspace:*"
+    "@lumx/vite-plugin-optimize-icons-imports": "workspace:*"
+    rolldown-plugin-dts: "patch:rolldown-plugin-dts@npm%3A0.26.0#~/.yarn/patches/rolldown-plugin-dts-npm-0.26.0-2ffe7440c6.patch"
+    vite: "npm:^8.0.16"
+    vite-plugin-static-copy: "npm:^4.1.1"
+  languageName: unknown
+  linkType: soft
+
 "@lumx/changelog-utils@workspace:dev-packages/changelog-utils":
   version: 0.0.0-use.local
   resolution: "@lumx/changelog-utils@workspace:dev-packages/changelog-utils"
@@ -3133,7 +3194,6 @@ __metadata:
     typescript: "npm:^5.4.3"
     version-changelog: "npm:^3.1.1"
     vite: "npm:^8.0.16"
-    vite-plugin-dts: "npm:^5.0.2"
     vite-plugin-static-copy: "npm:^4.1.1"
     vitest: "npm:^4.1.9"
   languageName: unknown
@@ -3211,7 +3271,6 @@ __metadata:
     typescript: "npm:^5.4.3"
     vite: "npm:^8.0.16"
     vite-plugin-dts: "npm:^5.0.2"
-    vite-plugin-static-copy: "npm:^4.1.1"
     vitest: "npm:^4.1.9"
   peerDependencies:
     lodash: ">= 4.17.23"
@@ -3243,12 +3302,27 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@lumx/vite-plugin-fix-esm-imports@workspace:*, @lumx/vite-plugin-fix-esm-imports@workspace:dev-packages/vite-plugin-fix-esm-imports":
+  version: 0.0.0-use.local
+  resolution: "@lumx/vite-plugin-fix-esm-imports@workspace:dev-packages/vite-plugin-fix-esm-imports"
+  languageName: unknown
+  linkType: soft
+
+"@lumx/vite-plugin-optimize-icons-imports@workspace:*, @lumx/vite-plugin-optimize-icons-imports@workspace:dev-packages/vite-plugin-optimize-icons-imports":
+  version: 0.0.0-use.local
+  resolution: "@lumx/vite-plugin-optimize-icons-imports@workspace:dev-packages/vite-plugin-optimize-icons-imports"
+  dependencies:
+    magic-string: "npm:^0.30.0"
+  languageName: unknown
+  linkType: soft
+
 "@lumx/vue@workspace:packages/lumx-vue":
   version: 0.0.0-use.local
   resolution: "@lumx/vue@workspace:packages/lumx-vue"
   dependencies:
     "@babel/plugin-transform-react-jsx": "npm:7.28.6"
     "@floating-ui/vue": "npm:^1.1.10"
+    "@lumx/base-vite-lib-config": "workspace:*"
     "@lumx/core": "npm:^4.17.0"
     "@lumx/icons": "npm:^4.17.0"
     "@lumx/storybook-testing": "workspace:*"
@@ -3268,8 +3342,6 @@ __metadata:
     storybook: "npm:^10.2.19"
     typescript: "npm:^5.4.3"
     vite: "npm:^8.0.16"
-    vite-plugin-dts: "npm:^5.0.2"
-    vite-plugin-static-copy: "npm:^4.1.1"
     vitest: "npm:^4.1.9"
     vue: "npm:^3.5.27"
     vue-tsc: "npm:^3.2.4"
@@ -5132,6 +5204,13 @@ __metadata:
   dependencies:
     "@types/node": "npm:*"
   checksum: 10/893e46e12be576baa471cf2fc13a4f0e413eaf30a5850de8fdbea3040e138ad4171234c59b986cf7137ff20a1582b254bf0c44cfd715d5ed772e1ab94dd75cd1
+  languageName: node
+  linkType: hard
+
+"@types/jsesc@npm:^2.5.0":
+  version: 2.5.1
+  resolution: "@types/jsesc@npm:2.5.1"
+  checksum: 10/25407775ed621790d2eec0cc51e194bd0d67a82e39204fd9748899c249ef965e17d9e6560f6c658773714f6d45a259465f3639790bb55750ebb168ee23801596
   languageName: node
   linkType: hard
 
@@ -7085,6 +7164,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ast-kit@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "ast-kit@npm:3.0.0"
+  dependencies:
+    "@babel/parser": "npm:^8.0.0"
+    estree-walker: "npm:^3.0.3"
+    pathe: "npm:^2.0.3"
+  checksum: 10/57c47901b27532df7d2cf8216fa050b2cae631fece71cedc495422bdf236bd39c81290e5387493aaed2ca11d5e74269722cd08d9b083fb094205d458b5a08060
+  languageName: node
+  linkType: hard
+
 "ast-types-flow@npm:^0.0.8":
   version: 0.0.8
   resolution: "ast-types-flow@npm:0.0.8"
@@ -7654,6 +7744,13 @@ __metadata:
   dependencies:
     file-uri-to-path: "npm:1.0.0"
   checksum: 10/593d5ae975ffba15fbbb4788fe5abd1e125afbab849ab967ab43691d27d6483751805d98cb92f7ac24a2439a8a8678cd0131c535d5d63de84e383b0ce2786133
+  languageName: node
+  linkType: hard
+
+"birpc@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "birpc@npm:4.0.0"
+  checksum: 10/f4418e2a0451f41eb6f20b3c9a4d6c007b335bbc0fe1d6eddf44bc2fd2d44f26594a3b0a24fc43107b0288a2a56959507b37478faed20e3da0d2587ed0fa1557
   languageName: node
   linkType: hard
 
@@ -9985,6 +10082,18 @@ __metadata:
   version: 16.4.7
   resolution: "dotenv@npm:16.4.7"
   checksum: 10/f13bfe97db88f0df4ec505eeffb8925ec51f2d56a3d0b6d916964d8b4af494e6fb1633ba5d09089b552e77ab2a25de58d70259b2c5ed45ec148221835fc99a0c
+  languageName: node
+  linkType: hard
+
+"dts-resolver@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "dts-resolver@npm:3.0.0"
+  peerDependencies:
+    oxc-resolver: ">=11.0.0"
+  peerDependenciesMeta:
+    oxc-resolver:
+      optional: true
+  checksum: 10/3778a2b6e4d35dc88776be1dde0e3cc26114fac4a42c344bb8b66829bf5de286b0c3f56a1da510162a7217579482066d7996eb3d38f12f91206edd1a8baced5f
   languageName: node
   linkType: hard
 
@@ -12795,6 +12904,15 @@ __metadata:
     es-errors: "npm:^1.3.0"
     get-intrinsic: "npm:^1.2.6"
   checksum: 10/a353e3a9595a74720b40fb5bae3ba4a4f826e186e83814d93375182384265676f59e49998b9cdfac4a2225ce95a3d32a68f502a2c5619303987f1c183ab80494
+  languageName: node
+  linkType: hard
+
+"get-tsconfig@npm:5.0.0-beta.5":
+  version: 5.0.0-beta.5
+  resolution: "get-tsconfig@npm:5.0.0-beta.5"
+  dependencies:
+    resolve-pkg-maps: "npm:^1.0.0"
+  checksum: 10/4946c4820cb2dc8c98073b341331b411db126c89b793d9bfe79c0d88843866e6fa7ebe9db43b51e9664d24e4cf10674e4137ad00881b10d4106c896d25c0e4fb
   languageName: node
   linkType: hard
 
@@ -17822,6 +17940,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"obug@npm:^2.1.3":
+  version: 2.1.3
+  resolution: "obug@npm:2.1.3"
+  checksum: 10/574e5c3d3def75440c54c29ce8a6d82a5698116962d2f9f28fb13f6fd5dbcc01b7df1b8e02a95f816c8dba482dcf315d9c5c97d9e718516cfea8bd6c896dcf67
+  languageName: node
+  linkType: hard
+
 "on-finished@npm:2.4.1, on-finished@npm:^2.4.1, on-finished@npm:~2.4.1":
   version: 2.4.1
   resolution: "on-finished@npm:2.4.1"
@@ -20217,6 +20342,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"resolve-pkg-maps@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "resolve-pkg-maps@npm:1.0.0"
+  checksum: 10/0763150adf303040c304009231314d1e84c6e5ebfa2d82b7d94e96a6e82bacd1dcc0b58ae257315f3c8adb89a91d8d0f12928241cba2df1680fbe6f60bf99b0e
+  languageName: node
+  linkType: hard
+
 "resolve-url-loader@npm:^3.1.5":
   version: 3.1.5
   resolution: "resolve-url-loader@npm:3.1.5"
@@ -20432,6 +20564,68 @@ __metadata:
   bin:
     rimraf: dist/esm/bin.mjs
   checksum: 10/add8e566fe903f59d7b55c6c2382320c48302778640d1951baf247b3b451af496c2dee7195c204a8c646fd6327feadd1f5b61ce68c1362d4898075a726d83cc6
+  languageName: node
+  linkType: hard
+
+"rolldown-plugin-dts@npm:0.26.0":
+  version: 0.26.0
+  resolution: "rolldown-plugin-dts@npm:0.26.0"
+  dependencies:
+    "@babel/generator": "npm:^8.0.0"
+    "@babel/helper-validator-identifier": "npm:^8.0.0"
+    "@babel/parser": "npm:^8.0.0"
+    ast-kit: "npm:^3.0.0"
+    birpc: "npm:^4.0.0"
+    dts-resolver: "npm:^3.0.0"
+    get-tsconfig: "npm:5.0.0-beta.5"
+    obug: "npm:^2.1.3"
+  peerDependencies:
+    "@ts-macro/tsc": ^0.3.6
+    "@typescript/native-preview": ">=7.0.0-dev.20260325.1"
+    rolldown: ^1.0.0
+    typescript: ^5.0.0 || ^6.0.0
+    vue-tsc: ~3.2.0 || ~3.3.0
+  peerDependenciesMeta:
+    "@ts-macro/tsc":
+      optional: true
+    "@typescript/native-preview":
+      optional: true
+    typescript:
+      optional: true
+    vue-tsc:
+      optional: true
+  checksum: 10/624af0bcb759afe57bf4e8718b1c90267f3e4fa14fdd91ddde249e8517fdbbae90046d80f2d989017d62719ad105a7905f4336c03c5964faa6ab58b069e98799
+  languageName: node
+  linkType: hard
+
+"rolldown-plugin-dts@patch:rolldown-plugin-dts@npm%3A0.26.0#~/.yarn/patches/rolldown-plugin-dts-npm-0.26.0-2ffe7440c6.patch":
+  version: 0.26.0
+  resolution: "rolldown-plugin-dts@patch:rolldown-plugin-dts@npm%3A0.26.0#~/.yarn/patches/rolldown-plugin-dts-npm-0.26.0-2ffe7440c6.patch::version=0.26.0&hash=b52bca"
+  dependencies:
+    "@babel/generator": "npm:^8.0.0"
+    "@babel/helper-validator-identifier": "npm:^8.0.0"
+    "@babel/parser": "npm:^8.0.0"
+    ast-kit: "npm:^3.0.0"
+    birpc: "npm:^4.0.0"
+    dts-resolver: "npm:^3.0.0"
+    get-tsconfig: "npm:5.0.0-beta.5"
+    obug: "npm:^2.1.3"
+  peerDependencies:
+    "@ts-macro/tsc": ^0.3.6
+    "@typescript/native-preview": ">=7.0.0-dev.20260325.1"
+    rolldown: ^1.0.0
+    typescript: ^5.0.0 || ^6.0.0
+    vue-tsc: ~3.2.0 || ~3.3.0
+  peerDependenciesMeta:
+    "@ts-macro/tsc":
+      optional: true
+    "@typescript/native-preview":
+      optional: true
+    typescript:
+      optional: true
+    vue-tsc:
+      optional: true
+  checksum: 10/7980705beccb2aeac7835804b0c8f7886eb140d8b4449528c02c11bbce5e0b83af4a7ded0536a50d42e380a12bd51d812aafdc13ae56b21cb0b89b4046755688
   languageName: node
   linkType: hard
 
@@ -23766,20 +23960,6 @@ __metadata:
   checksum: 10/2acaf42defbd132ee53df629b1b9541a482c9bed38b4e0763d9b7a96541722db4ce37edc54bdbd38f124ef706f9a345f389d4782b001ff210f43539673dc8e81
   languageName: node
   linkType: hard
-
-"vite-plugin-lumx-fix-esm-imports@workspace:dev-packages/vite-plugin-fix-esm-imports":
-  version: 0.0.0-use.local
-  resolution: "vite-plugin-lumx-fix-esm-imports@workspace:dev-packages/vite-plugin-fix-esm-imports"
-  languageName: unknown
-  linkType: soft
-
-"vite-plugin-optimize-imports-lumx-icons@workspace:dev-packages/vite-plugin-optimize-imports-lumx-icons":
-  version: 0.0.0-use.local
-  resolution: "vite-plugin-optimize-imports-lumx-icons@workspace:dev-packages/vite-plugin-optimize-imports-lumx-icons"
-  dependencies:
-    magic-string: "npm:^0.30.0"
-  languageName: unknown
-  linkType: soft
 
 "vite-plugin-static-copy@npm:^4.1.1":
   version: 4.1.1

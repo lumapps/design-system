@@ -1,0 +1,14 @@
+{
+    "name": "@lumx/base-vite-lib-config",
+    "private": true,
+    "version": "4.17.0",
+    "type": "module",
+    "main": "index.ts",
+    "devDependencies": {
+        "@lumx/vite-plugin-fix-esm-imports": "workspace:*",
+        "@lumx/vite-plugin-optimize-icons-imports": "workspace:*",
+        "rolldown-plugin-dts": "patch:rolldown-plugin-dts@npm%3A0.26.0#~/.yarn/patches/rolldown-plugin-dts-npm-0.26.0-2ffe7440c6.patch",
+        "vite": "^8.0.16",
+        "vite-plugin-static-copy": "^4.1.1"
+    }
+}

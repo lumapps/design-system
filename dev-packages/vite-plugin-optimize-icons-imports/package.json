@@ -1,5 +1,5 @@
 {
-    "name": "vite-plugin-optimize-imports-lumx-icons",
+    "name": "@lumx/vite-plugin-optimize-icons-imports",
     "private": true,
     "version": "4.17.0",
     "license": "MIT",
