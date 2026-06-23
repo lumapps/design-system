@@ -7,8 +7,13 @@ on:
     # Triggered when a label is removed (e.g. "in progress" or "need: dev*" removed)
     pull_request:
         types: [unlabeled, ready_for_review]
-    # Triggered from another workflow
+    # Triggered from another workflow (CI)
     workflow_call:
+        inputs:
+            ci_passed:
+                description: 'Set to true when called from CI after all checks pass'
+                type: boolean
+                default: false
 
 jobs:
     # Add 'need: review-frontend' (triggered from CI workflow or when removing "in progress" label on a PR)
@@ -48,13 +53,16 @@ jobs:
                       exit 0
                   fi
 
-                  # Check if all CI checks have passed
-                  CI_STATUS=$(gh pr view "$PR_NUMBER" --json statusCheckRollup \
-                      --jq '[.statusCheckRollup[] | select(.workflowName == "CI" and (.name | startswith("after-all") | not))] | if length == 0 then "PENDING" elif all(.conclusion == "SUCCESS") then "SUCCESS" else "FAILING" end')
-                  echo "CI status: $CI_STATUS"
-                  if [[ "$CI_STATUS" != "SUCCESS" ]]; then
-                      echo "CI has not passed yet, skipping."
-                      exit 0
+                  # When called from CI (ci_passed=true), CI has already passed — skip the check
+                  # When triggered by pull_request event, check CI status
+                  if [[ "${{ inputs.ci_passed }}" != "true" ]]; then
+                      CI_STATUS=$(gh pr view "$PR_NUMBER" --json statusCheckRollup \
+                          --jq '[.statusCheckRollup[] | select(.workflowName == "CI" and .conclusion != "SKIPPED")] | if length == 0 then "PENDING" elif all(.conclusion == "SUCCESS") then "SUCCESS" else "FAILING" end')
+                      echo "CI status: $CI_STATUS"
+                      if [[ "$CI_STATUS" != "SUCCESS" ]]; then
+                          echo "CI has not passed yet, skipping."
+                          exit 0
+                      fi
                   fi
 
                   # All conditions met

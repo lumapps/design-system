@@ -122,3 +122,6 @@ jobs:
     after-all:
         needs: [required-checks]
         uses: ./.github/workflows/pr-automation.yml
+        with:
+            ci_passed: true
+
