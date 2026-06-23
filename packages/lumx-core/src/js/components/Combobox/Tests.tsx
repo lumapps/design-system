@@ -2776,7 +2776,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
             await userEvent.click(input);
 
             await waitFor(() => {
-                expect(input).toHaveAttribute('aria-expanded', 'true');
+                expect(input).toHaveAttribute('aria-expanded', 'false');
             });
 
             // Content is deferred after open to allow the aria-live region
@@ -2795,7 +2795,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
             await userEvent.click(input);
 
             await waitFor(() => {
-                expect(input).toHaveAttribute('aria-expanded', 'true');
+                expect(input).toHaveAttribute('aria-expanded', 'false');
             });
 
             await waitFor(() => {

@@ -13,6 +13,7 @@ import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { ComponentRef, HasPolymorphicAs, HasRequiredLinkHref } from '@lumx/react/utils/type';
 import { Tooltip } from '../tooltip';
 import { Button } from '../button';
+import { useComboboxEvent } from './context/useComboboxEvent';
 import { useComboboxContext } from './context/ComboboxContext';
 import { useComboboxOpen } from './context/useComboboxOpen';
 
@@ -45,6 +46,8 @@ export const ComboboxButton = Object.assign(
         <E extends ElementType = typeof Button>(props: ComboboxButtonProps<E>, ref: ComponentRef<E>) => {
             const { listboxId, anchorRef, setHandle } = useComboboxContext();
             const [isOpen] = useComboboxOpen();
+            const state = useComboboxEvent('optionsChange', { optionsLength: 0 });
+            const isLoading = useComboboxEvent('loadingChange', false);
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const { as, label, value, labelDisplayMode = 'show-selection', onSelect, ...buttonProps } = props as any;
 
@@ -81,7 +84,7 @@ export const ComboboxButton = Object.assign(
                     value,
                     labelDisplayMode,
                     listboxId,
-                    isOpen,
+                    isOpen: isOpen && (!!state?.optionsLength || isLoading),
                     ref: mergedRef,
                 },
                 { Button: ButtonComp, Tooltip },

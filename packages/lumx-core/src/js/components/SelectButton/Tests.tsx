@@ -433,7 +433,8 @@ export default function selectButtonTests({ components, renderWithState }: Selec
 
             await userEvent.click(button);
             await waitFor(() => {
-                expect(button.getAttribute('aria-expanded')).toBe('true');
+                // aria-expanded is false: error state has no selectable options
+                expect(button.getAttribute('aria-expanded')).toBe('false');
             });
 
             await waitFor(() => {

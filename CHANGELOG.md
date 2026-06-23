@@ -18,6 +18,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   `@lumx/react`, `@lumx/vue`:
     -   `SelectButton`, `SelectTextfield`: change default maxHeight to `80vh` instead of `50vh`
 
+### Fixed
+
+-   `@lumx/react`, `@lumx/vue`:
+    -   `Combobox`: avoid setting `aria-expanded="true"` when the list has no visible options (empty or error state)
+
 ## [4.17.0][] - 2026-06-11
 
 ### Added
