@@ -41,9 +41,17 @@ export interface ComboboxInputProps extends TextFieldProps, ReactToJSX<UIProps, 
 export const ComboboxInput = forwardRef<ComboboxInputProps, HTMLDivElement>((props, ref) => {
     const { listboxId, anchorRef, setHandle } = useComboboxContext();
     const [isOpen, setIsOpen] = useComboboxOpen();
+    const {
+        inputRef: externalInputRef,
+        toggleButtonProps,
+        onSelect,
+        filter,
+        openOnFocus,
+        selectionMode,
+        ...otherProps
+    } = props;
     const state = useComboboxEvent('optionsChange', { optionsLength: 0 });
     const isLoading = useComboboxEvent('loadingChange', false);
-    const { inputRef: externalInputRef, toggleButtonProps, onSelect, filter, openOnFocus, ...otherProps } = props;
     const internalInputRef = useRef<HTMLInputElement>(null);
     const mergedInputRef = useMergeRefs(externalInputRef, internalInputRef);
 
@@ -59,14 +67,15 @@ export const ComboboxInput = forwardRef<ComboboxInputProps, HTMLDivElement>((pro
         if (!input) return undefined;
         const handle = setupComboboxInput(input, {
             onSelect(option) {
-                // Update controlled value through React's normal onChange flow.
-                onChangeRef.current?.(option.value);
                 onSelectRef.current?.(option);
             },
-            onInput(value) {
-                // Keep controlled value in sync.
+            onChange(value) {
                 onChangeRef.current?.(value);
             },
+            onInput(value) {
+                onChangeRef.current?.(value);
+            },
+            selectionMode,
             filter,
             openOnFocus,
         });
@@ -75,7 +84,7 @@ export const ComboboxInput = forwardRef<ComboboxInputProps, HTMLDivElement>((pro
             handle.destroy();
             setHandle(null);
         };
-    }, [filter, openOnFocus, setHandle]);
+    }, [filter, openOnFocus, selectionMode, setHandle]);
 
     const handleToggle = useCallback(() => {
         setIsOpen(!isOpen);

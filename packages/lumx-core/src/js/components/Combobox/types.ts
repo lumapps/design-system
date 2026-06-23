@@ -70,6 +70,19 @@ export interface ComboboxInputOptions {
      * @default false (true when filter is 'off')
      */
     openOnFocus?: boolean;
+    /**
+     * Controls what happens to the input value when an option is selected.
+     *
+     * - `'fill'` (default) — The input is updated with the selected option value via `onChange`.
+     * - `'keep'` — The input value is left unchanged; `onChange` is not called.
+     *   Useful when the component manages the displayed value independently (e.g. showing
+     *   an option display name rather than the raw option ID). The filter still resets.
+     * - `'clear'` — The input is cleared (empty string) via `onChange` after selection.
+     *   Useful for multi-select patterns where typing starts fresh after each pick.
+     *
+     * @default 'fill'
+     */
+    selectionMode?: 'fill' | 'keep' | 'clear';
 }
 
 /** Handle returned by `setupCombobox`. Used by framework wrappers and mode controllers. */

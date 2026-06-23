@@ -11,6 +11,7 @@ import { CLASSNAME as COMBOBOX_SECTION_CLASSNAME } from './ComboboxSection';
 import { CLASSNAME as COMBOBOX_STATE_CLASSNAME } from './ComboboxState';
 import { VISUALLY_HIDDEN } from '../../constants';
 import { setupCombobox } from './setupCombobox';
+import type { ComboboxInputOptions } from './types';
 
 // ─── Fixtures ────────────────────────────────────────────────────
 
@@ -93,16 +94,19 @@ export function createTemplates(Combobox: ComboboxNamespace, IconButton: any) {
         value,
         onChange,
         onSelect,
+        selectionMode,
     }: {
         value: string;
         onChange: (v: string) => void;
         onSelect?: (option: { value: string }) => void;
+        selectionMode?: ComboboxInputOptions['selectionMode'];
     }) => (
         <Combobox.Provider>
             <Combobox.Input
                 value={value}
                 onChange={onChange}
                 onSelect={onSelect}
+                selectionMode={selectionMode}
                 placeholder="Pick a fruit…"
                 toggleButtonProps={{ label: 'Fruits' }}
             />
@@ -1271,6 +1275,56 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
             expect(getActiveOption()).toBeNull();
             expect(input).toHaveAttribute('aria-activedescendant', '');
             expect(onSelect).toHaveBeenCalled();
+        });
+
+        it('should clear input value when selectionMode is clear', async () => {
+            const onSelect = vi.fn();
+            renderWithState(t.inputTemplate, { value: 'Grape', onSelect, selectionMode: 'clear' });
+            const input = screen.getByRole<HTMLInputElement>('combobox');
+            await userEvent.click(input);
+
+            await waitFor(() => {
+                expect(input).toHaveAttribute('aria-expanded', 'true');
+            });
+
+            const appleOption = screen.queryAllByRole('option').find((o) => o.textContent === 'Apple')!;
+            await userEvent.click(appleOption);
+
+            // onChange called with empty string — input gets cleared
+            await waitFor(() => {
+                expect(input.value).toBe('');
+            });
+            // onSelect still fired
+            expect(onSelect).toHaveBeenCalled();
+
+            // Combobox closes regardless of selectionMode
+            await waitFor(() => {
+                expect(input).toHaveAttribute('aria-expanded', 'false');
+            });
+        });
+
+        it('should not update input value when selectionMode is keep', async () => {
+            const onSelect = vi.fn();
+            renderWithState(t.inputTemplate, { value: '', onSelect, selectionMode: 'keep' });
+            const input = screen.getByRole<HTMLInputElement>('combobox');
+            await userEvent.click(input);
+
+            await waitFor(() => {
+                expect(input).toHaveAttribute('aria-expanded', 'true');
+            });
+
+            const grapeOption = screen.queryAllByRole('option').find((o) => o.textContent === 'Grape')!;
+            await userEvent.click(grapeOption);
+
+            // onChange must NOT have been called — input stays empty
+            expect(input.value).toBe('');
+            // onSelect still fired
+            expect(onSelect).toHaveBeenCalled();
+
+            // Combobox closes regardless of selectionMode
+            await waitFor(() => {
+                expect(input).toHaveAttribute('aria-expanded', 'false');
+            });
         });
 
         it('should keep focus on input after clicking option', async () => {
