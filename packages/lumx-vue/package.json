@@ -30,11 +30,11 @@
         }
     },
     "sideEffects": false,
-    "version": "4.17.0",
+    "version": "4.18.0",
     "dependencies": {
         "@floating-ui/vue": "^1.1.10",
-        "@lumx/core": "^4.17.0",
-        "@lumx/icons": "^4.17.0",
+        "@lumx/core": "^4.18.0",
+        "@lumx/icons": "^4.18.0",
         "@vueuse/core": "^14.1.0"
     },
     "peerDependencies": {
