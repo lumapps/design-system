@@ -26,10 +26,20 @@ async function main() {
         }
     }
 
+    // Affected projects that have a test target (to avoid running tests on non-testable packages).
+    const affectedWithTests = affectedNames.filter((name) => {
+        const node = graph.nodes[name];
+        return node?.data?.targets?.test != null;
+    });
+
     console.log('affected', affectedNames);
     core.setOutput('affected', JSON.stringify(affectedNames));
+
     console.log('modified', modified);
     core.setOutput('modified', JSON.stringify(modified));
+
+    console.log('affected-test', affectedWithTests);
+    core.setOutput('affected-test', JSON.stringify(affectedWithTests));
 }
 
 main().catch((err) => {

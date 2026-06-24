@@ -28,12 +28,13 @@ jobs:
               run: yarn lint:code
 
     tests:
-        if: github.event.pull_request.draft == false
+        needs: [check-affected]
+        if: github.event.pull_request.draft == false && needs.check-affected.outputs.affected-test != '[]'
         timeout-minutes: 30
         runs-on: ubuntu-latest
         strategy:
             matrix:
-                package: ['@lumx/core', '@lumx/react', '@lumx/vue']
+                package: ${{ fromJSON(needs.check-affected.outputs.affected-test) }}
                 packageOverrides: ['']
                 include:
                     - package: '@lumx/react'
