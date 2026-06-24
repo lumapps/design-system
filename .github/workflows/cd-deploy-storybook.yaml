@@ -14,34 +14,12 @@ concurrency:
 
 jobs:
     check-affected:
-        name: 'Check affected storybooks'
-        if: github.event.pull_request.draft == false
-        runs-on: ubuntu-latest
-        outputs:
-            react: ${{ steps.check.outputs.react }}
-            vue: ${{ steps.check.outputs.vue }}
-        steps:
-            - name: 'Checkout repository'
-              uses: actions/checkout@v6
-              with:
-                  fetch-depth: 0
-
-            - name: 'Setup'
-              uses: ./.github/actions/setup
-
-            - name: 'Check affected packages'
-              id: check
-              run: |
-                  AFFECTED=$(npx nx show projects --affected --base=origin/master --head=HEAD)
-                  echo "Affected projects:"
-                  echo "$AFFECTED"
-                  echo "react=$( echo "$AFFECTED" | grep -q '@lumx/react' && echo true || echo false )" >> "$GITHUB_OUTPUT"
-                  echo "vue=$( echo "$AFFECTED" | grep -q '@lumx/vue' && echo true || echo false )" >> "$GITHUB_OUTPUT"
+        uses: ./.github/workflows/workflow-check-affected.yml
 
     deploy-react:
         name: 'Deploy storybook (lumx-react)'
         needs: [check-affected]
-        if: needs.check-affected.outputs.react == 'true'
+        if: ${{ contains(fromJSON(needs.check-affected.outputs.affected), '@lumx/react') }}
         uses: ./.github/workflows/workflow-deploy-storybook.yml
         with:
             package: lumx-react
@@ -52,7 +30,7 @@ jobs:
     deploy-vue:
         name: 'Deploy storybook (lumx-vue)'
         needs: [check-affected]
-        if: needs.check-affected.outputs.vue == 'true'
+        if: ${{ contains(fromJSON(needs.check-affected.outputs.affected), '@lumx/vue') }}
         uses: ./.github/workflows/workflow-deploy-storybook.yml
         with:
             package: lumx-vue

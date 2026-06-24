@@ -1,0 +1,31 @@
+name: 'Check affected packages'
+
+on:
+    workflow_call:
+        outputs:
+            affected:
+                description: 'JSON array of affected project names'
+                value: ${{ jobs.check-affected.outputs.affected }}
+            modified:
+                description: 'JSON array of directly modified project names (without dependents)'
+                value: ${{ jobs.check-affected.outputs.modified }}
+
+jobs:
+    check-affected:
+        runs-on: ubuntu-latest
+        timeout-minutes: 10
+        outputs:
+            affected: ${{ steps.check-affected.outputs.affected }}
+            modified: ${{ steps.check-affected.outputs.modified }}
+        steps:
+            - name: 'Checkout repository'
+              uses: actions/checkout@v6
+              with:
+                  fetch-depth: 0
+
+            - name: 'Setup'
+              uses: ./.github/actions/setup
+
+            - name: 'Check affected and modified packages'
+              id: check-affected
+              uses: ./.github/actions/check-affected

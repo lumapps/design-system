@@ -1,0 +1,12 @@
+name: 'Check affected'
+description: 'Compute affected and directly modified packages'
+
+outputs:
+    affected:
+        description: 'JSON array of affected project names'
+    modified:
+        description: 'JSON array of directly modified project names (without dependents)'
+
+runs:
+    using: node24
+    main: index.mjs

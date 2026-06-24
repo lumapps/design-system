@@ -9,6 +9,10 @@ concurrency:
     cancel-in-progress: true
 
 jobs:
+    check-affected:
+        if: github.event.pull_request.draft == false
+        uses: ./.github/workflows/workflow-check-affected.yml
+
     lint:
         if: github.event.pull_request.draft == false
         timeout-minutes: 30
@@ -88,6 +92,22 @@ jobs:
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+    # Check if build completes
+    check-build-site:
+        needs: [check-affected]
+        if: ${{ contains(fromJSON(needs.check-affected.outputs.modified), 'lumx-site-demo') }}
+        timeout-minutes: 30
+        runs-on: ubuntu-latest
+        steps:
+            - name: 'Checkout repository'
+              uses: actions/checkout@v6
+
+            - name: 'Setup'
+              uses: ./.github/actions/setup
+
+            - name: 'Build site'
+              run: yarn build:site
+
     # Fails when the release PR is frozen (marked "Ready for review"),
     # blocking merges to master during release preparation.
     release-freeze-check:
@@ -109,7 +129,7 @@ jobs:
     # Aggregates all CI jobs so only "required-checks" needs to be required.
     required-checks:
         runs-on: ubuntu-latest
-        needs: [lint, test-storybook, tests, type-check, Commit-message-validation, release-freeze-check]
+        needs: [lint, test-storybook, tests, type-check, Commit-message-validation, release-freeze-check, check-affected, check-build-site]
         if: '!cancelled() && github.event.pull_request.draft == false'
         steps:
             - name: Success
@@ -124,4 +144,3 @@ jobs:
         uses: ./.github/workflows/pr-automation.yml
         with:
             ci_passed: true
-
