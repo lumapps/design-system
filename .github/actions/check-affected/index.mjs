@@ -15,12 +15,12 @@ async function main() {
     const { files: changedFiles } = parseFiles(nxArgs);
     const touchedFiles = changedFiles.length > 0 ? calculateFileChanges(changedFiles, nxArgs) : [];
 
-    const affectedGraph =
-        changedFiles.length > 0 ? await filterAffected(graph, touchedFiles) : graph;
+    const affectedGraph = changedFiles.length > 0 ? await filterAffected(graph, touchedFiles) : graph;
     const affectedNames = Object.keys(affectedGraph.nodes);
 
     // projects with at least one modified file
     const modified = [];
+    const affectedByTarget = { test: [] };
     for (const [name, node] of Object.entries(graph.nodes)) {
         const root = node.data.root;
         const prefix = root + '/';
@@ -28,12 +28,17 @@ async function main() {
         if (changedFiles.some((f) => f === root || f.startsWith(prefix))) {
             modified.push(name);
         }
+        if (node?.data?.targets?.['test']) affectedByTarget.test.push(name);
     }
 
     console.log('affected', affectedNames);
     core.setOutput('affected', JSON.stringify(affectedNames));
+
     console.log('modified', modified);
     core.setOutput('modified', JSON.stringify(modified));
+
+    console.log('affected-test', affectedByTarget.test);
+    core.setOutput('affected-test', JSON.stringify(affectedByTarget.test));
 }
 
 main().catch((err) => {
