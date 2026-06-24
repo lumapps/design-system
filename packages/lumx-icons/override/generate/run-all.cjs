@@ -6,7 +6,7 @@ const generateSCSSAliases = require('./generate-scss-aliases.cjs');
 const generateSCSSOverride = require('./generate-scss-override.cjs');
 const generateJSONIconLibrary = require('./generate-icon-library.cjs');
 const generateOverrideFont = require('./generate-override-font.cjs');
-const { cleanUpTmpDir } = require('./utils.cjs');
+const { cleanUpTmpDir } = require('./utils/clean-up-tmp-dir.cjs');
 
 (async () => {
     // Optimize our SVG files

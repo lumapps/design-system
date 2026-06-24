@@ -2,7 +2,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 const { INPUT_ICON_OVERRIDE_DIR } = require('./constants.cjs');
-const { optimizeSVGFile } = require('./utils.cjs');
+const { optimizeSVGFile } = require('./utils/optimize-svg-file.cjs');
 
 module.exports = async function optimizeSVGs() {
     console.debug('Optimizing SVG files...');

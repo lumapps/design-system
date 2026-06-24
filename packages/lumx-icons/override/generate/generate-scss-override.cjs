@@ -3,7 +3,7 @@ const fs = require('fs/promises');
 
 const overrideConfig = require('../override-icons/config.cjs');
 const { GENERATED_DIR, OUT_OVERRIDE_NAME } = require('./constants.cjs');
-const { unicodeToCssCode } = require('./utils.cjs');
+const { unicodeToCssCode } = require('./utils/unicode-to-css-code.cjs');
 
 /**
  * Generate SCSS exporting the override icons.
