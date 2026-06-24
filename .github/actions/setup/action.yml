@@ -6,6 +6,10 @@ inputs:
         description: 'Install Playwright Chromium browser'
         required: false
         default: 'false'
+    focus:
+        description: 'Package name to focus install (skips cache and runs yarn workspaces focus <pkg>)'
+        required: false
+        default: ''
 
 runs:
     using: composite
@@ -15,20 +19,26 @@ runs:
             with:
                 registry-url: 'https://registry.npmjs.org'
                 node-version-file: '.nvmrc'
+                cache: yarn
 
         -   name: "Cache dependencies"
+            if: inputs.focus == ''
             id: cache
             uses: actions/cache@v5
             with:
-                path: |
-                  **/node_modules
-                  .yarn/cache
+                path: '**/node_modules'
                 key: ${{ runner.os }}-node-v${{ inputs.node_version }}-dependency-hash-${{ hashFiles('yarn.lock') }}
                 restore-keys: |
                     ${{ runner.os }}-node-v${{ inputs.node_version }}-dependency-hash-
 
         -   name: "Install dependencies"
+            if: inputs.focus == ''
             run: yarn install
+            shell: bash
+
+        -   name: "Install only one workspace"
+            if: inputs.focus != ''
+            run: yarn workspaces focus ${{ inputs.focus }}
             shell: bash
 
         - name: 'Cache Playwright browsers'
