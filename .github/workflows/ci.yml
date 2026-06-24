@@ -106,7 +106,7 @@ jobs:
               uses: ./.github/actions/setup
 
             - name: 'Build site'
-              run: yarn build:site
+              run: yarn workspace lumx-site-demo build
 
     # Fails when the release PR is frozen (marked "Ready for review"),
     # blocking merges to master during release preparation.
