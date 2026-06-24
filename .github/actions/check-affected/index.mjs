@@ -1,31 +1,30 @@
 import { execSync } from 'node:child_process';
 import { createProjectGraphAsync } from 'nx/src/project-graph/project-graph.js';
 import { filterAffected } from 'nx/src/project-graph/affected/affected-project-graph.js';
-import { WholeFileChange } from 'nx/src/project-graph/file-utils.js';
+import { calculateFileChanges } from 'nx/src/project-graph/file-utils.js';
+import { parseFiles } from 'nx/src/utils/command-line-utils.js';
 import * as core from '@actions/core';
 
 async function main() {
-    const changedFiles = execSync('git diff --name-only origin/master...HEAD --diff-filter=AM')
-        .toString()
-        .trim()
-        .split('\n')
-        .filter(Boolean);
-
+    // Full Nx project dependency graph
     const graph = await createProjectGraphAsync();
 
-    const touchedFiles = changedFiles.map((file) => ({
-        file,
-        getChanges: () => [new WholeFileChange()],
-    }));
+    // Diff range: common ancestor of master..HEAD
+    const base = execSync('git merge-base origin/master HEAD').toString().trim();
+    const nxArgs = { base, head: 'HEAD' };
+    const { files: changedFiles } = parseFiles(nxArgs);
+    const touchedFiles = changedFiles.length > 0 ? calculateFileChanges(changedFiles, nxArgs) : [];
 
     const affectedGraph =
         changedFiles.length > 0 ? await filterAffected(graph, touchedFiles) : graph;
     const affectedNames = Object.keys(affectedGraph.nodes);
 
+    // projects with at least one modified file
     const modified = [];
     for (const [name, node] of Object.entries(graph.nodes)) {
         const root = node.data.root;
         const prefix = root + '/';
+        // collect projects listed in `changedFiles`
         if (changedFiles.some((f) => f === root || f.startsWith(prefix))) {
             modified.push(name);
         }
