@@ -72,8 +72,11 @@ jobs:
               run: yarn type-check
 
     test-storybook:
-        if: github.event.pull_request.draft == false
+        needs: [check-affected]
+        if: github.event.pull_request.draft == false && needs.check-affected.outputs.affected-test-storybook != '[]'
         uses: ./.github/workflows/workflow-test-storybook.yml
+        with:
+            packages: ${{ needs.check-affected.outputs.affected-test-storybook }}
         permissions:
             pull-requests: write
         secrets:
