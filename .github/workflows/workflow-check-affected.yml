@@ -12,6 +12,9 @@ on:
             affected-test:
                 description: 'JSON array of affected project names with tests'
                 value: ${{ jobs.check-affected.outputs.affected-test }}
+            affected-test-storybook:
+                description: 'JSON array of affected project names with test:storybook target'
+                value: ${{ jobs.check-affected.outputs.affected-test-storybook }}
 
 jobs:
     check-affected:
@@ -21,6 +24,7 @@ jobs:
             affected: ${{ steps.check-affected.outputs.affected }}
             modified: ${{ steps.check-affected.outputs.modified }}
             affected-test: ${{ steps.check-affected.outputs.affected-test }}
+            affected-test-storybook: ${{ steps.check-affected.outputs.affected-test-storybook }}
         steps:
             - name: 'Checkout repository'
               uses: actions/checkout@v6

@@ -16,19 +16,34 @@ async function main() {
     const touchedFiles = changedFiles.length > 0 ? calculateFileChanges(changedFiles, nxArgs) : [];
 
     const affectedGraph = changedFiles.length > 0 ? await filterAffected(graph, touchedFiles) : graph;
-    const affectedNames = Object.keys(affectedGraph.nodes);
 
-    // projects with at least one modified file
+    // Affected projects
+    const affectedNames = Object.keys(affectedGraph.nodes);
+    // Projects with at least one modified file
     const modified = [];
-    const affectedByTarget = { test: [] };
+    // Affected projects filtered by targets
+    const affectedByTarget = {
+        test: [],
+        'test:storybook': [],
+    };
+
+    // Collect modified projects and projects with targets in affectedByTarget
     for (const [name, node] of Object.entries(graph.nodes)) {
         const root = node.data.root;
         const prefix = root + '/';
-        // collect projects listed in `changedFiles`
+        // Collect projects listed in `changedFiles`
         if (changedFiles.some((f) => f === root || f.startsWith(prefix))) {
             modified.push(name);
         }
-        if (node?.data?.targets?.['test']) affectedByTarget.test.push(name);
+
+        // Collect affected projects per target, skipping projects that don't define it
+        if (affectedNames.includes(name)) {
+            for (const target of Object.keys(affectedByTarget)) {
+                if (node?.data?.targets?.[target]) {
+                    affectedByTarget[target].push(name);
+                }
+            }
+        }
     }
 
     console.log('affected', affectedNames);
@@ -39,6 +54,9 @@ async function main() {
 
     console.log('affected-test', affectedByTarget.test);
     core.setOutput('affected-test', JSON.stringify(affectedByTarget.test));
+
+    console.log('affected-test-storybook', affectedByTarget['test:storybook']);
+    core.setOutput('affected-test-storybook', JSON.stringify(affectedByTarget['test:storybook']));
 }
 
 main().catch((err) => {
