@@ -4,6 +4,11 @@
     "tui": {
         "enabled": true
     },
+    "pluginsConfig": {
+        "@nx/js": {
+            "projectsAffectedByDependencyUpdates": "auto"
+        }
+    },
     "namedInputs": {
         "sharedGlobals": ["{workspaceRoot}/tsconfig.json", "{workspaceRoot}/package.json", "{workspaceRoot}/.nvmrc"],
         "sourceFiles": [
