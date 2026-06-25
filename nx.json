@@ -4,6 +4,11 @@
     "tui": {
         "enabled": true
     },
+    "pluginsConfig": {
+        "@nx/js": {
+            "projectsAffectedByDependencyUpdates": "auto"
+        }
+    },
     "namedInputs": {
         "sharedGlobals": ["{workspaceRoot}/tsconfig.json", "{workspaceRoot}/package.json", "{workspaceRoot}/.nvmrc"],
         "sourceFiles": [
@@ -64,21 +69,7 @@
             ],
             "outputs": ["{workspaceRoot}/visual-diffs"],
             "cache": true
-        },
-        "start:storybook": {
-            "cache": false
-        },
-        "start": {
-            "cache": false
-        },
-        "clean": {
-            "cache": false
-        },
-        "generate:icons": {
-            "cache": false
-        },
-        "generate:design-tokens": {
-            "cache": false
         }
-    }
+    },
+    "analytics": false
 }
