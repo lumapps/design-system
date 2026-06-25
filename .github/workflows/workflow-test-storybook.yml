@@ -8,6 +8,10 @@ on:
                 description: 'Update all snapshots without checking for differences'
                 type: boolean
                 default: false
+            packages:
+                description: 'JSON array of storybook packages to test'
+                type: string
+                default: '["@lumx/react","@lumx/vue"]'
         secrets:
             GITBOT_TOKEN:
                 description: 'Token with write access to the wiki repo'
@@ -54,6 +58,7 @@ jobs:
                     | sort > ${{ matrix.visDir }}/cached-baselines.txt
 
             - name: 'Run ${{ matrix.project }} tests'
+              if: ${{ contains(fromJSON(inputs.packages), format('@lumx/{0}', matrix.label)) }}
               id: test-storybook
               run: yarn workspace "@lumx/${{ matrix.label }}" test:storybook ${{ inputs.update && '--update' || '' }}
               env:

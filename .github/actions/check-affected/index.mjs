@@ -40,6 +40,15 @@ async function main() {
 
     console.log('affected-test', affectedWithTests);
     core.setOutput('affected-test', JSON.stringify(affectedWithTests));
+
+    // Affected projects that have a test:storybook target.
+    const affectedWithStorybook = affectedNames.filter((name) => {
+        const node = graph.nodes[name];
+        return node?.data?.targets?.['test:storybook'] != null;
+    });
+
+    console.log('affected-test-storybook', affectedWithStorybook);
+    core.setOutput('affected-test-storybook', JSON.stringify(affectedWithStorybook));
 }
 
 main().catch((err) => {
