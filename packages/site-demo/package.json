@@ -19,8 +19,8 @@
         "lint": "cd ../.. && eslint packages/site-demo/src/",
         "build": "gatsby build",
         "start": "gatsby develop",
-        "type-check:vue": "vue-tsc --noEmit -p tsconfig.vue.json",
-        "type-check:react": "tsc -p tsconfig.json",
+        "type-check:vue": "yarn dlx vue-tsc --noEmit -p tsconfig.vue.json",
+        "type-check:react": "yarn dlx tsc -p tsconfig.json",
         "type-check": "yarn type-check:vue && yarn type-check:react",
         "generate:demo-stories": "node scripts/generate-demo-stories.mjs"
     },
