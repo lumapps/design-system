@@ -69,21 +69,7 @@
             ],
             "outputs": ["{workspaceRoot}/visual-diffs"],
             "cache": true
-        },
-        "start:storybook": {
-            "cache": false
-        },
-        "start": {
-            "cache": false
-        },
-        "clean": {
-            "cache": false
-        },
-        "generate:icons": {
-            "cache": false
-        },
-        "generate:design-tokens": {
-            "cache": false
         }
-    }
+    },
+    "analytics": false
 }
