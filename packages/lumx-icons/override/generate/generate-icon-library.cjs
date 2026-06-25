@@ -7,7 +7,8 @@ const aliasesConfig = require('../alias-icons.cjs');
 const overrideConfig = require('../override-icons/config.cjs');
 
 const { INPUT_ICON_OVERRIDE_DIR, GENERATED_DIR, JSON_ICON_LIBRARY_FILE } = require('./constants.cjs');
-const { svgToPath, optimizeSVGPath } = require('./utils.cjs');
+const { svgToPath } = require('./utils/svg-to-path.cjs');
+const { optimizeSVGPath } = require('./utils/optimize-svg-path.cjs');
 
 async function loadMDIIconEntries() {
     const entries = [];

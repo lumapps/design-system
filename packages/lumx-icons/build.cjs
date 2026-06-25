@@ -3,7 +3,7 @@
 const path = require('node:path');
 const fs = require('node:fs/promises');
 
-const { formatMdiName } = require('./override/generate/utils.cjs');
+const { formatMdiName } = require('./override/generate/utils/format-mdi-name.cjs');
 const { GENERATED_DIR, JSON_ICON_LIBRARY_FILE, DIST_PATH, PKG_PATH } = require('./override/generate/constants.cjs');
 
 /**
