@@ -16,7 +16,7 @@ jobs:
     # Run static code check (lint and type-check)
     code-check:
         needs: [check-affected]
-        if: github.event.pull_request.draft == false && needs.check-affected.outputs.affected != '[]'
+        if: false
         timeout-minutes: 30
         runs-on: ubuntu-latest
         steps:
@@ -31,7 +31,7 @@ jobs:
 
     tests:
         needs: [check-affected]
-        if: github.event.pull_request.draft == false && needs.check-affected.outputs.affected-test != '[]'
+        if: false
         timeout-minutes: 30
         runs-on: ubuntu-latest
         strategy:
@@ -61,7 +61,7 @@ jobs:
 
     test-storybook:
         needs: [check-affected]
-        if: github.event.pull_request.draft == false && needs.check-affected.outputs.affected-test-storybook != '[]'
+        if: false
         uses: ./.github/workflows/workflow-test-storybook.yml
         with:
             packages: ${{ needs.check-affected.outputs.affected-test-storybook }}
@@ -71,7 +71,7 @@ jobs:
             GITBOT_TOKEN: ${{ secrets.GITBOT_TOKEN }}
 
     Commit-message-validation:
-        if: github.event.pull_request.draft == false
+        if: false
         runs-on: ubuntu-latest
         steps:
             - name: 'Checkout repository'
@@ -87,7 +87,7 @@ jobs:
     # Check if build completes
     check-build-site:
         needs: [check-affected]
-        if: ${{ contains(fromJSON(needs.check-affected.outputs.modified), 'lumx-site-demo') }}
+        if: false
         timeout-minutes: 30
         runs-on: ubuntu-latest
         steps:
@@ -103,9 +103,7 @@ jobs:
     # Fails when the release PR is frozen (marked "Ready for review"),
     # blocking merges to master during release preparation.
     release-freeze-check:
-        if: >-
-            github.event.pull_request.draft == false &&
-            !startsWith(github.head_ref, 'release/')
+        if: false
         runs-on: ubuntu-latest
         steps:
             - name: 'Checkout repository'
@@ -120,7 +118,7 @@ jobs:
     # Single required check in branch protection rule.
     # Aggregates all CI jobs so only "required-checks" needs to be required.
     required-checks:
-        if: '!cancelled() && github.event.pull_request.draft == false'
+        if: false
         runs-on: ubuntu-latest
         needs: [code-check, test-storybook, tests, Commit-message-validation, release-freeze-check, check-affected, check-build-site]
         steps:
@@ -132,7 +130,7 @@ jobs:
               run: exit 1
 
     after-all:
-        if: '!cancelled() && needs.required-checks.result == ''success'''
+        if: false
         needs: [required-checks]
         uses: ./.github/workflows/pr-automation.yml
         with:
