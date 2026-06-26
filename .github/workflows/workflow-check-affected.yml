@@ -31,8 +31,6 @@ jobs:
               with:
                   fetch-depth: 0
                   filter: 'blob:none'
-                  show-progress: false
-                  persist-credentials: false
 
             - name: 'Setup'
               uses: ./.github/actions/setup
