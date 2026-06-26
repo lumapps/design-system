@@ -84,6 +84,19 @@ async function scanPackage(artifactRoot) {
         findFiles(artifactRoot, (f) => f.includes('__baselines__') && isPng(f)),
     ]);
 
+    // If no results and no diffs but baselines exist, the framework was not tested
+    // (baseline-only run to support cross-framework diffing).
+    if (resultPngs.length === 0 && diffPngs.length === 0 && baselinePngs.length > 0) {
+        return {
+            notRun: true,
+            hasBaselines: true,
+            diffs: [],
+            newScreenshots: [],
+            unchangedScreenshots: [],
+            deletedScreenshots: [],
+        };
+    }
+
     const cachedBaselines = await readBaselineManifest(artifactRoot);
 
     const baselineEntries = toEntries(baselinePngs, '__baselines__');
@@ -239,6 +252,7 @@ function renderImageEntry(entry, columns) {
  * @returns {string} e.g. "3 difference(s), 1 new" or "No changes"
  */
 function summarizeChanges(pkg) {
+    if (pkg.notRun) return 'Not tested (baseline only)';
     const parts = [
         pkg.diffs.length > 0 && `${pkg.diffs.length} difference(s)`,
         pkg.newScreenshots.length > 0 && `${pkg.newScreenshots.length} new`,
@@ -274,6 +288,9 @@ function buildReportPreamble(packages) {
  * @returns {string[]}
  */
 function buildPackageHeading(pkg, { headingLevel = 2 } = {}) {
+    if (pkg.notRun) {
+        return [md.heading(headingLevel, `@lumx/${pkg.label} — Not tested (baseline only)`), ''];
+    }
     if (!pkg.hasBaselines) {
         return [
             md.heading(headingLevel, `@lumx/${pkg.label} — No baseline snapshots found`),

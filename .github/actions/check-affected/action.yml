@@ -6,6 +6,8 @@ outputs:
         description: 'JSON array of affected project names'
     modified:
         description: 'JSON array of directly modified project names (without dependents)'
+    affected-test-storybook:
+        description: 'JSON array of affected project names with test:storybook target'
 
 runs:
     using: node24

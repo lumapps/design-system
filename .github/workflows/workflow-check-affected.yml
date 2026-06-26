@@ -9,6 +9,12 @@ on:
             modified:
                 description: 'JSON array of directly modified project names (without dependents)'
                 value: ${{ jobs.check-affected.outputs.modified }}
+            affected-test:
+                description: 'JSON array of affected project names with tests'
+                value: ${{ jobs.check-affected.outputs.affected-test }}
+            affected-test-storybook:
+                description: 'JSON array of affected project names with test:storybook target'
+                value: ${{ jobs.check-affected.outputs.affected-test-storybook }}
 
 jobs:
     check-affected:
@@ -17,14 +23,21 @@ jobs:
         outputs:
             affected: ${{ steps.check-affected.outputs.affected }}
             modified: ${{ steps.check-affected.outputs.modified }}
+            affected-test: ${{ steps.check-affected.outputs.affected-test }}
+            affected-test-storybook: ${{ steps.check-affected.outputs.affected-test-storybook }}
         steps:
             - name: 'Checkout repository'
               uses: actions/checkout@v6
               with:
                   fetch-depth: 0
+                  filter: 'blob:none'
+                  show-progress: false
+                  persist-credentials: false
 
             - name: 'Setup'
               uses: ./.github/actions/setup
+              with:
+                  focus: '@lumx/actions'
 
             - name: 'Check affected and modified packages'
               id: check-affected
