@@ -151,6 +151,7 @@ const ComboboxInput = defineComponent(
             'label',
             'labelProps',
             'maxLength',
+            'charCounterMessage',
             'isDisabled',
             'disabled',
             'aria-disabled',

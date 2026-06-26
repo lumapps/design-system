@@ -137,6 +137,8 @@ external HTML `label` with `for`).
 
 Showing a text field with only a placeholder is not sufficient, visual and accessible labels must also be in place.
 
+When using `maxLength`, provide `charCounterMessage` with a localized message (e.g. `(n) => \`${n} caractères restants\``) for proper accessibility.
+
 Text fields can be disabled in two ways:
 
 -   `disabled`/`isDisabled` which completely disables the text field. It's not focusable and pointer events (hover, click, etc.) are
