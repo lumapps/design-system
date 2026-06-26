@@ -31,9 +31,8 @@ jobs:
               with:
                   fetch-depth: 0
                   filter: 'blob:none'
-                  # TODO: revert — measuring perf impact of show-progress + persist-credentials
-                  # show-progress: false
-                  # persist-credentials: false
+                  show-progress: false
+                  persist-credentials: false
 
             - name: 'Setup'
               uses: ./.github/actions/setup
