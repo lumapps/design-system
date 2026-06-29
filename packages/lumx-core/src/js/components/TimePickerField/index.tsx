@@ -2,6 +2,7 @@ import { classNames } from '../../utils';
 import type { GenericProps, HasClassName, HasTheme, LumxClassName } from '../../types';
 import type { TimeOfDay } from '../../utils/time';
 import type { SelectTextFieldTranslations } from '../../utils/select/types';
+import type { ComboboxOptionProps } from '../Combobox/ComboboxOption';
 
 /**
  * Component display name.
@@ -79,6 +80,15 @@ export interface TimePickerFieldWrapperProps {
      * Translation labels for clear and show suggestions buttons.
      */
     translations: TimePickerFieldTranslations;
+
+    /**
+     * Callback to customize individual option props.
+     * Called for each time option with the hour and minute.
+     * Return partial `ComboboxOptionProps` to override default option rendering
+     * (e.g. `before`, `after`, `children`, `tooltipProps`, `actionProps`).
+     * `isDisabled` is merged with the out-of-range state using `||`.
+     */
+    getOptionProps?: ({ hour, minute }: { hour: number; minute: number }) => Partial<ComboboxOptionProps>;
 }
 
 /**
@@ -129,6 +139,12 @@ export interface TimePickerFieldProps extends HasTheme, HasClassName, GenericPro
 
     /** Called when the input loses focus — wrappers commit the typed value. */
     handleBlur(): void;
+
+    /**
+     * Callback to customize individual option props.
+     * See `TimePickerFieldWrapperProps.getOptionProps`.
+     */
+    getOptionProps?: ({ hour, minute }: { hour: number; minute: number }) => Partial<ComboboxOptionProps>;
 }
 
 /**
@@ -159,7 +175,16 @@ export const TimePickerField = (
     props: TimePickerFieldProps,
     { SelectTextField, Option }: TimePickerFieldComponents,
 ) => {
-    const { options, translations, className, handleChange, handleSearch, handleBlur, ...fowardedProps } = props;
+    const {
+        options,
+        translations,
+        className,
+        handleChange,
+        handleSearch,
+        handleBlur,
+        getOptionProps,
+        ...fowardedProps
+    } = props;
 
     return (
         <SelectTextField
@@ -168,7 +193,10 @@ export const TimePickerField = (
             selectionType="single"
             options={options}
             getOptionId="name"
-            renderOption={(entry: TimeOfDay) => <Option isDisabled={entry.outOfRange} />}
+            renderOption={({ hour, minute, outOfRange }: TimeOfDay) => {
+                const { isDisabled, ...extraProps } = getOptionProps?.({ hour, minute }) || {};
+                return <Option isDisabled={outOfRange || isDisabled} {...extraProps} />;
+            }}
             onChange={handleChange}
             onSearch={handleSearch}
             onBlur={handleBlur}

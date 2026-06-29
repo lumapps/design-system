@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   `@lumx/react`, `@lumx/vue`:
+    -   `TimePickerField`: add `getOptionProps` prop to customize individual option props
+
 ## [4.18.0][] - 2026-06-23
 
 ### Added
