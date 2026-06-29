@@ -1,0 +1,12 @@
+{
+    "name": "@lumx/generate-demo-stories",
+    "private": true,
+    "version": "4.18.0",
+    "type": "module",
+    "scripts": {
+        "generate": "node generate-demo-stories.mjs"
+    },
+    "dependencies": {
+        "glob": "^7.1.6"
+    }
+}

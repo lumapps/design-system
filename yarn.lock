@@ -2847,6 +2847,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@lumx/generate-demo-stories@workspace:dev-packages/generate-demo-stories":
+  version: 0.0.0-use.local
+  resolution: "@lumx/generate-demo-stories@workspace:dev-packages/generate-demo-stories"
+  dependencies:
+    glob: "npm:^7.1.6"
+  languageName: unknown
+  linkType: soft
+
 "@lumx/icons@npm:^4.18.0, @lumx/icons@workspace:packages/lumx-icons":
   version: 0.0.0-use.local
   resolution: "@lumx/icons@workspace:packages/lumx-icons"

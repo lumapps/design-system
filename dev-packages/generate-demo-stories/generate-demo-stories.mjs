@@ -3,7 +3,7 @@
 // Globs content/product/*/*/{react,vue}/*.{tsx,vue} to find all demos
 // and generates corresponding .stories.tsx files in lumx-react and lumx-vue.
 //
-// Usage: node scripts/generate-demo-stories.js [--react] [--vue]
+// Usage: node dev-packages/generate-demo-stories/generate-demo-stories.mjs [--react] [--vue]
 //   --react  Generate only React stories
 //   --vue    Generate only Vue stories
 //   (default: generate both)
@@ -14,10 +14,10 @@ import { fileURLToPath } from 'node:url';
 import glob from 'glob';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const SITE_DEMO_DIR = path.resolve(__dirname, '..');
-const CONTENT_DIR = path.join(SITE_DEMO_DIR, 'content/product');
-const REACT_OUTPUT_DIR = path.resolve(SITE_DEMO_DIR, '../lumx-react/src/stories/demos-generated');
-const VUE_OUTPUT_DIR = path.resolve(SITE_DEMO_DIR, '../lumx-vue/src/stories/demos-generated');
+const REPO_ROOT = path.resolve(__dirname, '../..');
+const CONTENT_DIR = path.join(REPO_ROOT, 'packages/site-demo/content/product');
+const REACT_OUTPUT_DIR = path.resolve(REPO_ROOT, 'packages/lumx-react/src/stories/demos-generated');
+const VUE_OUTPUT_DIR = path.resolve(REPO_ROOT, 'packages/lumx-vue/src/stories/demos-generated');
 
 /** Map content/product/ category dirs to story title prefixes.
  *  Only categories listed here are scanned for demos. */

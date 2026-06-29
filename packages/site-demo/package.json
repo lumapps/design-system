@@ -22,7 +22,7 @@
         "type-check:vue": "vue-tsc --noEmit -p tsconfig.vue.json",
         "type-check:react": "tsc -p tsconfig.json",
         "type-check": "yarn type-check:vue && yarn type-check:react",
-        "generate:demo-stories": "node scripts/generate-demo-stories.mjs"
+        "generate:demo-stories": "yarn workspace @lumx/generate-demo-stories generate"
     },
     "dependencies": {
         "@codesandbox/sandpack-react": "^2.20.0",
