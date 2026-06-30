@@ -12,6 +12,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   `@lumx/react`, `@lumx/vue`:
     -   `TimePickerField`: add `getOptionProps` prop to customize individual option props
 
+### Fixed
+
+-   `@lumx/core`, `@lumx/react`, `@lumx/vue`:
+    -   `TextField`: improve char counter a11y (with `role="status"` inside `<label>` and `charCounterMessage` prop)
+
 ## [4.18.0][] - 2026-06-23
 
 ### Added

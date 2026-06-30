@@ -181,7 +181,15 @@ export default (renderOptions: SetupOptions<any>) => {
                 const { element } = setup({ maxLength: 100, value: 'test' }, renderOptions);
                 const counter = element.querySelector(`.${CLASSNAME}__char-counter`);
                 expect(counter).toBeInTheDocument();
+                expect(counter).toHaveAttribute('role', 'status');
                 expect(counter).toHaveTextContent('96');
+            });
+
+            it('should render character counter with custom message', () => {
+                const charCounterMessage = (n: number) => `Plus que ${n} caractères`;
+                const { element } = setup({ maxLength: 100, value: 'test', charCounterMessage }, renderOptions);
+                const counter = element.querySelector(`.${CLASSNAME}__char-counter`);
+                expect(counter).toHaveTextContent('Plus que 96 caractères');
             });
 
             it('should not forward "className" to the native input element', () => {

@@ -3,5 +3,15 @@ import { TextField, type Theme } from '@lumx/react';
 
 export default ({ theme }: { theme?: Theme }) => {
     const [value, setValue] = useState('');
-    return <TextField label="Text field label" value={value} onChange={setValue} maxLength={50} theme={theme} />;
+    return (
+        <TextField
+            label="Text field label"
+            value={value}
+            onChange={setValue}
+            maxLength={50}
+            theme={theme}
+            charCounterMessage={(n) => `${n} characters remaining`}
+        />
+    );
+
 };
