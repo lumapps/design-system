@@ -75,6 +75,7 @@ export const TimePickerField: React.FC<TimePickerFieldProps> = (props) => {
         theme,
         translations,
         name,
+        getOptionProps,
         ...forwardedProps
     } = props;
 
@@ -142,6 +143,7 @@ export const TimePickerField: React.FC<TimePickerFieldProps> = (props) => {
             handleSearch,
             handleBlur,
             searchInputValue,
+            getOptionProps,
         },
         { SelectTextField, Option: SelectTextField.Option },
     );

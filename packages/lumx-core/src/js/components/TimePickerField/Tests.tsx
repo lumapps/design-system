@@ -90,6 +90,46 @@ export default function timePickerFieldTests({ components, renderWithState }: Ti
             expect(optAfter).not.toHaveAttribute('aria-disabled', 'true');
         });
 
+        describe('getOptionProps', () => {
+            it('is called for each option with the entry and index', async () => {
+                const getOptionProps = vi.fn(() => ({}));
+                renderWithState(defaultTemplate, { getOptionProps });
+                await userEvent.click(screen.getByRole('combobox'));
+                expect(getOptionProps).toHaveBeenCalledWith({ hour: 0, minute: 0 });
+                expect(getOptionProps).toHaveBeenCalledWith({ hour: 23, minute: 30 });
+            });
+
+            it('forwards returned props to the option element', async () => {
+                renderWithState(defaultTemplate, {
+                    getOptionProps: () => ({ className: 'custom-option' }),
+                });
+                await userEvent.click(screen.getByRole('combobox'));
+                const options = screen.queryAllByRole('option');
+                // The role="option" element is inside a <li> that receives the className.
+                expect(options[0]?.closest('.custom-option')).toBeInTheDocument();
+            });
+
+            it('merges isDisabled with outOfRange via ||', async () => {
+                renderWithState(defaultTemplate, {
+                    minTime: getDateAtTime({ hour: 10, minute: 0 }),
+                    getOptionProps: (entry: any) => ({
+                        // out-of-range entries (before 10:00) already disabled by outOfRange;
+                        // also disable 10:00 and 10:30 manually.
+                        isDisabled: entry.hour === 10,
+                    }),
+                });
+                await userEvent.click(screen.getByRole('combobox'));
+                // 9:30 — disabled by outOfRange
+                expect(screen.getByRole('option', { name: '9:30 AM' })).toHaveAttribute('aria-disabled', 'true');
+                // 10:00 — disabled by getOptionProps (outOfRange is falsy, but || merges)
+                expect(screen.getByRole('option', { name: '10:00 AM' })).toHaveAttribute('aria-disabled', 'true');
+                // 10:30 — disabled by getOptionProps
+                expect(screen.getByRole('option', { name: '10:30 AM' })).toHaveAttribute('aria-disabled', 'true');
+                // 11:00 — NOT disabled
+                expect(screen.getByRole('option', { name: '11:00 AM' })).not.toHaveAttribute('aria-disabled', 'true');
+            });
+        });
+
         it('keeps options after `maxTime` visible but disables them', async () => {
             renderWithState(defaultTemplate, { maxTime: getDateAtTime({ hour: 1, minute: 0 }) });
             await userEvent.click(screen.getByRole('combobox'));

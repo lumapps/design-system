@@ -143,6 +143,7 @@ const TimePickerField = defineComponent(
                 maxTime: _maxTime,
                 translations,
                 class: _class,
+                getOptionProps,
                 ...forwardedProps
             } = props;
 
@@ -157,6 +158,7 @@ const TimePickerField = defineComponent(
                     handleSearch,
                     handleBlur,
                     searchInputValue,
+                    getOptionProps,
                 },
                 { SelectTextField, Option: SelectTextFieldOption },
             );
@@ -173,6 +175,7 @@ const TimePickerField = defineComponent(
             'maxTime',
             'boundsMode',
             'translations',
+            'getOptionProps',
             'class',
             // Inherited SelectTextField props
             'label',
