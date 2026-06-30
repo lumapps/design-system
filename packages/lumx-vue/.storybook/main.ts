@@ -1,7 +1,7 @@
 import type { StorybookConfig } from '@storybook/vue3-vite';
 import { mergeConfig, type Plugin } from 'vite';
 import path from 'node:path';
-import { generateVueDemoStories } from '../../site-demo/scripts/generate-demo-stories.mjs';
+import { generateVueDemoStories } from '@lumx/generate-demo-stories/generate-demo-stories.mjs';
 
 const importUrl = new URL(import.meta.url);
 const postcss = path.join('../..', importUrl.pathname, 'configs');
