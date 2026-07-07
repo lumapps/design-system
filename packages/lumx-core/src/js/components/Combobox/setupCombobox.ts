@@ -9,6 +9,7 @@ import type {
     OptionRegistration,
     SectionRegistration,
 } from './types';
+import { debounceMicrotask } from '../../utils/function/debounceMicrotask';
 
 /** Options for configuring the shared combobox behavior. */
 interface ComboboxOptions {
@@ -101,8 +102,9 @@ export function setupCombobox(
      * or if the input value changed while the list is empty (so `emptyMessage` callbacks get
      * the updated query string).
      * Called whenever the set of visible options may have changed (option register/unregister, filter change).
+     * (debounced in a microtask)
      */
-    function notifyVisibilityChange() {
+    const notifyVisibilityChange = debounceMicrotask(() => {
         for (const [sectionElement] of sectionRegistrations) {
             notifySection(sectionElement, sectionRegistrations, optionRegistrations);
         }
@@ -121,7 +123,7 @@ export function setupCombobox(
         if (isOpenState) {
             trigger?.setAttribute('aria-expanded', String(hasVisibleContent()));
         }
-    }
+    });
 
     // ── Skeleton loading tracking ──────────────────────────────
 
@@ -537,6 +539,7 @@ export function setupCombobox(
             optionRegistrations.clear();
             sectionRegistrations.clear();
             skeletonCount = 0;
+            notifyVisibilityChange.cancel();
             clearTimeout(loadingTimer);
             announcementSent = false;
             // Clear all subscribers
