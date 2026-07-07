@@ -26,6 +26,16 @@ const FRUITS = [
 ];
 
 /**
+ * Build a list of `count` fruit options by repeating the base `FRUITS` list with unique ids.
+ * Shared between React and Vue `WithManyOptions` test stories.
+ */
+export function createManyOptions(count: number) {
+    return Array.from({ length: Math.ceil(count / FRUITS.length) })
+        .flatMap((_, page) => FRUITS.map((f, i) => ({ ...f, id: `${f.id}-${page * FRUITS.length + i}` })))
+        .slice(0, count);
+}
+
+/**
  * Setup test stories
  */
 export function setup({
@@ -194,6 +204,37 @@ export function setup({
         },
     };
 
+    /**
+     * Test story for WithManyOptions.
+     * Opens the dropdown and verifies that a large static option list renders fully.
+     *
+     * The number of options is controlled via the `optionsCount` arg (Storybook control),
+     * so it can be tweaked without editing the story. The render function is
+     * framework-specific (React hooks / Vue SFC), so each framework consumer overrides
+     * `render` and keeps this `args`/`argTypes`/`play`.
+     */
+    const WithManyOptions = {
+        args: { optionsCount: 200 },
+        argTypes: {
+            optionsCount: { control: { type: 'number', min: 1 } },
+        },
+        async play({ canvas, args }: any) {
+            const input = canvas.getByRole('combobox') as HTMLInputElement;
+
+            await userEvent.click(input);
+            await waitFor(() => {
+                expect(input).toHaveAttribute('aria-expanded', 'true');
+            });
+
+            const listbox = await screen.findByRole('listbox', { name: 'Select a fruit' });
+
+            await waitFor(() => {
+                const options = within(listbox).getAllByRole('option');
+                expect(options.length).toBe(args.optionsCount);
+            });
+        },
+    };
+
     return {
         meta,
         ClickOutsideCloses,
@@ -201,5 +242,6 @@ export function setup({
         BlurResetsToEmpty,
         MultiBlurResetsSearch,
         WithInfiniteScroll,
+        WithManyOptions,
     };
 }

@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { useState, useCallback } from 'react';
-import { setup } from '@lumx/core/js/components/SelectTextField/TestStories';
+import { useState, useCallback, useMemo } from 'react';
+import { setup, createManyOptions } from '@lumx/core/js/components/SelectTextField/TestStories';
 import { FRUITS, type Fruit } from '@lumx/core/js/components/SelectTextField/Stories';
 import { TRANSLATIONS } from '@lumx/core/js/components/SelectTextField/Tests';
 import { SelectTextField } from '.';
@@ -51,6 +51,30 @@ export const WithInfiniteScroll = {
                 value={value}
                 onChange={setValue}
                 onLoadMore={onLoadMore}
+                translations={TRANSLATIONS}
+            />
+        );
+    },
+};
+
+/** Test that a large option list (count set via the `optionsCount` arg) renders and can be scrolled through */
+export const WithManyOptions = {
+    ...testStories.WithManyOptions,
+    render: (args: { optionsCount: number }) => {
+        const items = useMemo(() => createManyOptions(args.optionsCount), [args.optionsCount]);
+        const [value, setValue] = useState<(typeof items)[number] | undefined>();
+
+        return (
+            <SelectTextField
+                selectionType="single"
+                label="Select a fruit"
+                placeholder="Search fruits..."
+                options={items}
+                filter="auto"
+                getOptionId="id"
+                getOptionName="name"
+                value={value}
+                onChange={setValue}
                 translations={TRANSLATIONS}
             />
         );

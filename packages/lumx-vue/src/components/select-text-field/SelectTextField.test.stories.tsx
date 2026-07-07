@@ -3,6 +3,7 @@ import { SelectTextField } from '.';
 import { Combobox } from '../combobox';
 
 import StoryWithInfiniteScroll from './Stories/WithInfiniteScroll.vue';
+import StoryWithManyOptions from './Stories/WithManyOptions.vue';
 
 const { meta, ...testStories } = setup({
     components: { SelectTextField, Combobox },
@@ -23,5 +24,17 @@ export const WithInfiniteScroll = {
     render: () => ({
         components: { StoryWithInfiniteScroll },
         template: '<StoryWithInfiniteScroll />',
+    }),
+};
+
+/** Test that a large (200) option list renders and can be scrolled through */
+export const WithManyOptions = {
+    ...testStories.WithManyOptions,
+    render: (args: { optionsCount: number }) => ({
+        components: { StoryWithManyOptions },
+        setup() {
+            return { args };
+        },
+        template: '<StoryWithManyOptions v-bind="args" />',
     }),
 };
