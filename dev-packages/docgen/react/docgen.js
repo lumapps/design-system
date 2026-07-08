@@ -1,19 +1,11 @@
 const path = require('path');
-const {
-    createProject,
-    getSourceFile,
-    getRootPath,
-    findComponentInterface,
-    extractPropertiesFromInterface,
-    extractDiscriminatedUnionProps,
-    extractConditionalSelectionVariants,
-    extractTypeParams,
-    extractDefaultValues,
-    getJsDocDeprecatedFromDeclaration,
-} = require('./docgen.js');
+const { getSourceFile, getRootPath, findComponentInterface } = require('../project.js');
+const { extractPropertiesFromInterface, extractDefaultValues } = require('../internal/props.js');
+const { extractDiscriminatedUnionProps, extractConditionalSelectionVariants, extractTypeParams } = require('../internal/variants.js');
+const { getJsDocDeprecatedFromDeclaration } = require('../internal/jsdoc.js');
 
 /**
- * Get the @deprecated JSDoc tag from a component's variable or function declaration.
+ * Get the `@deprecated` JSDoc tag from a component's variable or function declaration.
  * @param {SourceFile} sourceFile - The source file
  * @param {string} componentName - The component name to look for
  * @returns {string|undefined} - The deprecation reason, or undefined if not deprecated
@@ -79,7 +71,7 @@ function getComponentName(sourceFile) {
  * @param {Project} project - The ts-morph project
  * @param {string} filePath - Path to the component file
  */
-function parseReactComponent(project, filePath) {
+exports.parseReactComponent = function parseReactComponent(project, filePath) {
     const sourceFile = getSourceFile(project, filePath);
     if (!sourceFile) {
         return null;
@@ -117,40 +109,4 @@ function parseReactComponent(project, filePath) {
     }
 
     return result;
-}
-
-exports.createProject = createProject;
-exports.parseReactComponent = parseReactComponent;
-
-/**
- * CLI entrypoint - run docgen for a single React component
- * Usage: node react-docgen.js <component-path>
- * Example: node react-docgen.js packages/lumx-react/src/components/button/Button.tsx
- */
-if (require.main === module) {
-    const args = process.argv.slice(2);
-
-    if (args.length === 0) {
-        console.error('Usage: node react-docgen.js <component-path>');
-        console.error('Example: node react-docgen.js packages/lumx-react/src/components/button/Button.tsx');
-        process.exit(1);
-    }
-
-    const componentPath = args[0];
-    const lumxReactPath = path.resolve(__dirname, '../../../../packages/lumx-react');
-
-    try {
-        const project = createProject(lumxReactPath);
-        const result = parseReactComponent(project, path.resolve(componentPath));
-
-        if (!result) {
-            console.error('Error: Could not extract props from component');
-            process.exit(1);
-        }
-
-        console.log(JSON.stringify(result, null, 2));
-    } catch (err) {
-        console.error('Error:', err.message);
-        process.exit(1);
-    }
 }

@@ -1,28 +1,8 @@
 const path = require('path');
-const {
-    createProject,
-    getSourceFile,
-    getRootPath,
-    findComponentInterface,
-    extractPropertiesFromInterface,
-    extractDiscriminatedUnionProps,
-    extractConditionalSelectionVariants,
-    extractTypeParams,
-    extractDefaultValues,
-    getJsDocFromDeclaration,
-    getJsDocDeprecatedFromDeclaration,
-} = require('./docgen.js');
-
-/**
- * Extract default values for a Vue component.
- * Delegates to the shared extractDefaultValues which now follows re-exports.
- *
- * @param {SourceFile} sourceFile - The Vue component source file
- * @returns {Object} - Map of prop name to default value string
- */
-function extractVueDefaultValues(sourceFile) {
-    return extractDefaultValues(sourceFile);
-}
+const { getSourceFile, getRootPath, findComponentInterface } = require('../project.js');
+const { extractPropertiesFromInterface, extractDefaultValues } = require('../internal/props.js');
+const { extractDiscriminatedUnionProps, extractConditionalSelectionVariants, extractTypeParams } = require('../internal/variants.js');
+const { getJsDocFromDeclaration, getJsDocDeprecatedFromDeclaration } = require('../internal/jsdoc.js');
 
 /**
  * Get the Vue component name from defineComponent options.
@@ -216,7 +196,7 @@ function getVueComponentDeprecated(sourceFile) {
  * @param {string} filePath - Path to the Vue component file
  * @returns {Object|null} - Component documentation or null if parsing fails
  */
-function parseVueComponent(project, filePath) {
+exports.parseVueComponent = function parseVueComponent(project, filePath) {
     const sourceFile = getSourceFile(project, filePath);
     if (!sourceFile) {
         return null;
@@ -228,7 +208,7 @@ function parseVueComponent(project, filePath) {
     }
 
     const rootPath = getRootPath(project);
-    const defaultValues = extractVueDefaultValues(sourceFile);
+    const defaultValues = extractDefaultValues(sourceFile);
     const displayName = getVueComponentName(sourceFile);
     const events = extractEmits(sourceFile);
     const slots = extractSlots(sourceFile);
@@ -256,40 +236,4 @@ function parseVueComponent(project, filePath) {
     }
 
     return result;
-}
-
-exports.createProject = createProject;
-exports.parseVueComponent = parseVueComponent;
-
-/**
- * CLI entrypoint - run docgen for a single Vue component
- * Usage: node vue-docgen.js <component-path>
- * Example: node vue-docgen.js packages/lumx-vue/src/components/button/Button.tsx
- */
-if (require.main === module) {
-    const args = process.argv.slice(2);
-
-    if (args.length === 0) {
-        console.error('Usage: node vue-docgen.js <component-path>');
-        console.error('Example: node vue-docgen.js packages/lumx-vue/src/components/button/Button.tsx');
-        process.exit(1);
-    }
-
-    const componentPath = args[0];
-    const lumxVuePath = path.resolve(__dirname, '../../../../packages/lumx-vue');
-
-    try {
-        const project = createProject(lumxVuePath);
-        const result = parseVueComponent(project, path.resolve(componentPath));
-
-        if (!result) {
-            console.error('Error: Could not extract docs from Vue component');
-            process.exit(1);
-        }
-
-        console.log(JSON.stringify(result, null, 2));
-    } catch (err) {
-        console.error('Error:', err.message);
-        process.exit(1);
-    }
 }

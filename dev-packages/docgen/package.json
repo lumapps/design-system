@@ -1,0 +1,14 @@
+{
+    "name": "@lumx/docgen",
+    "version": "4.19.0",
+    "description": "React/Vue component docgen used to generate LumX prop tables",
+    "private": true,
+    "exports": {
+        "./project.js": "./project.js",
+        "./react/docgen.js": "./react/docgen.js",
+        "./vue/docgen.js": "./vue/docgen.js"
+    },
+    "dependencies": {
+        "ts-morph": "^27.0.2"
+    }
+}

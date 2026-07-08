@@ -99,7 +99,7 @@ import ReactButton from 'lumx-docs:@lumx/react/components/button/Button';
 
 ## Vue PropTable Docgen
 
-The prop table documentation is auto-extracted from Vue component source files by `plugins/lumx-prop-table/vue-docgen.js`. It extracts:
+The prop table documentation is auto-extracted from Vue component source files by `dev-packages/docgen/vue/docgen.js`. It extracts:
 
 -   **Props:** From the exported `*Props` type alias (e.g., `ButtonProps = VueToJSXProps<UIProps>`)
 -   **Events:** From exported `emitSchema` objects or inline `emits: [...]` arrays in defineComponent options
@@ -108,7 +108,7 @@ The prop table documentation is auto-extracted from Vue component source files b
 You can test the extraction for any Vue component via CLI:
 
 ```bash
-node packages/site-demo/plugins/lumx-prop-table/vue-docgen.js packages/lumx-vue/src/components/<component>/<Component>.tsx
+node dev-packages/docgen/vue/cli.js packages/lumx-vue/src/components/<component>/<Component>.tsx
 ```
 
 ## File Structure

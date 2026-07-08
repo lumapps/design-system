@@ -1,7 +1,7 @@
 const path = require('path');
-const { createProject } = require('./docgen.js');
-const { parseReactComponent } = require('./react-docgen.js');
-const { parseVueComponent } = require('./vue-docgen.js');
+const { createProject } = require('@lumx/docgen/project.js');
+const { parseReactComponent } = require('@lumx/docgen/react/docgen.js');
+const { parseVueComponent } = require('@lumx/docgen/vue/docgen.js');
 
 const ROOT_PATH = path.resolve(__dirname, '../../../..');
 
@@ -39,9 +39,9 @@ function lumxDocsWebpackLoader() {
 
         // Add dependency so webpack watches the component file and the docgen scripts themselves
         this.addDependency(filePath);
-        this.addDependency(require.resolve('./docgen.js'));
-        this.addDependency(require.resolve('./react-docgen.js'));
-        this.addDependency(require.resolve('./vue-docgen.js'));
+        this.addDependency(require.resolve('@lumx/docgen/project.js'));
+        this.addDependency(require.resolve('@lumx/docgen/react/docgen.js'));
+        this.addDependency(require.resolve('@lumx/docgen/vue/docgen.js'));
 
         // Parse with the appropriate framework docgen
         const result = projectConf.parse(projectConf.project, filePath);
