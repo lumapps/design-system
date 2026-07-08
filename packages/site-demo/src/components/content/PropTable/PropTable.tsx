@@ -13,16 +13,16 @@ import { classNames } from '@lumx/core/js/utils';
 export interface Property {
     /** Name. */
     name: string;
-    /** Required flag. */
-    required: boolean;
-    /** Deprecated flag. */
-    deprecated: boolean;
+    /** Required flag (omitted when false). */
+    required?: boolean;
+    /** Deprecated flag (omitted when false). */
+    deprecated?: boolean;
     /** Description. */
     description: string;
     /** Accepted type or types (union type). */
     type: string | string[];
-    /** Default value. */
-    defaultValue: string;
+    /** Default value (omitted when there is none). */
+    defaultValue?: string;
     /** Where the property comes from */
     declarations?: Array<{ name: string; fileName: string }>;
     /** Alias prop names (e.g. "disabled" is an alias of "isDisabled"). */

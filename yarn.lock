@@ -2854,6 +2854,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@lumx/docgen@workspace:*, @lumx/docgen@workspace:dev-packages/docgen":
+  version: 0.0.0-use.local
+  resolution: "@lumx/docgen@workspace:dev-packages/docgen"
+  dependencies:
+    ts-morph: "npm:^27.0.2"
+  languageName: unknown
+  linkType: soft
+
 "@lumx/generate-demo-stories@workspace:dev-packages/generate-demo-stories":
   version: 0.0.0-use.local
   resolution: "@lumx/generate-demo-stories@workspace:dev-packages/generate-demo-stories"
@@ -15488,6 +15496,7 @@ __metadata:
     "@codesandbox/sandpack-react": "npm:^2.20.0"
     "@gatsbyjs/reach-router": "npm:^2.0.1"
     "@lumx/core": "npm:^4.19.0"
+    "@lumx/docgen": "workspace:*"
     "@lumx/icons": "npm:^4.19.0"
     "@lumx/react": "npm:^4.19.0"
     "@mdx-js/react": "npm:^2.0.0"
@@ -15518,7 +15527,6 @@ __metadata:
     react: "npm:^18.3.1"
     react-dom: "npm:^18.3.1"
     sass: "npm:1.70.0"
-    ts-morph: "npm:^27.0.2"
     tsconfig-paths-webpack-plugin: "npm:^4.0.1"
     typescript: "npm:^5.4.3"
     vue: "npm:^3.5.27"
