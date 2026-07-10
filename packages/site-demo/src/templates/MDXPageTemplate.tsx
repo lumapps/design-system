@@ -12,10 +12,11 @@ interface Props {
 
 /** Template for the MDX page content */
 const MDXPageTemplate: React.FC<Props> = (props) => {
-    const { children } = props;
+    const { children, pageContext } = props;
 
     return (
         <>
+            <h1>{pageContext.title}</h1>
             {/* MDX content render */}
             {children}
         </>
