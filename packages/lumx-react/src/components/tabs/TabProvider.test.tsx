@@ -1,5 +1,5 @@
 import { Tab, TabList, TabPanel, TabProvider, TabProviderProps } from '@lumx/react';
-import { render, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { checkTabActive, query } from '@lumx/react/components/tabs/test-utils';
 import { vi } from 'vitest';
@@ -206,6 +206,43 @@ describe('TabProvider', () => {
             setup({ isLazy: false });
             // Check the first tab is active and all panel are loaded
             checkTabActive('Tab 1', { isLazy: false });
+        });
+    });
+
+    describe('polymorphic `as` in tab mode', () => {
+        // Decision (ii): `as` selects the element, but mode follows the provider — so an `as="a"`
+        // Tab inside a TabProvider is a real tab (`role="tab"`), not a nav-link.
+        const setupAsAnchor = (props: Partial<TabProviderProps> = {}) =>
+            render(
+                <TabProvider {...props}>
+                    <TabList aria-label="Tabs">
+                        <Tab as="a" href="#a" label="Home" />
+                        <Tab as="a" href="#b" label="Profile" />
+                    </TabList>
+                </TabProvider>,
+            );
+
+        it('renders `as="a"` tabs with role="tab" (element honored, mode from provider)', () => {
+            setupAsAnchor();
+
+            expect(screen.getByRole('tablist', { name: 'Tabs' })).toBeInTheDocument();
+            expect(screen.queryByRole('navigation')).not.toBeInTheDocument();
+
+            const tabs = screen.getAllByRole('tab');
+            expect(tabs).toHaveLength(2);
+            expect(tabs[0].tagName).toBe('A');
+            expect(tabs[0]).toHaveAttribute('href', '#a');
+            // The explicit `tab` role wins over the anchors' implicit `link` role.
+            expect(screen.queryByRole('link')).not.toBeInTheDocument();
+        });
+
+        it('fires onChange when an `as="a"` tab is activated (wired like a classic tab)', async () => {
+            const onChange = vi.fn();
+            // Controlled at index 0 so the provider does not emit onChange on mount.
+            setupAsAnchor({ onChange, activeTabIndex: 0 });
+
+            await userEvent.click(screen.getByRole('tab', { name: 'Profile' }));
+            await waitFor(() => expect(onChange).toHaveBeenCalledWith(1));
         });
     });
 

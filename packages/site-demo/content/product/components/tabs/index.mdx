@@ -4,9 +4,11 @@ frameworks: ['react', 'vue']
 import * as ReactDemoDefault from './react/default.tsx';
 import * as ReactDemoJustifyLeft from './react/justify-left.tsx';
 import * as ReactDemoIcon from './react/icon.tsx';
+import * as ReactDemoNavigation from './react/navigation.tsx';
 import * as VueDemoDefault from './vue/default.vue';
 import * as VueDemoJustifyLeft from './vue/justify-left.vue';
 import * as VueDemoIcon from './vue/icon.vue';
+import * as VueDemoNavigation from './vue/navigation.vue';
 import ReactTabProvider from 'lumx-docs:@lumx/react/components/tabs/TabProvider';
 import ReactTabList from 'lumx-docs:@lumx/react/components/tabs/TabList';
 import ReactTab from 'lumx-docs:@lumx/react/components/tabs/Tab';
@@ -30,9 +32,24 @@ import VueTabPanel from 'lumx-docs:@lumx/vue/components/tabs/TabPanel';
 
 <DemoBlock withThemeSwitcher demo={{ react: ReactDemoIcon, vue: VueDemoIcon }} />
 
+## Navigation
+
+Tabs can also be rendered as classic navigation links if not used in a `TabProvider`.
+
+<DemoBlock withThemeSwitcher demo={{ react: ReactDemoNavigation, vue: VueDemoNavigation }} />
+
+Make sure to provide a proper link and update either the `isActive` or `aria-current` prop (in this demo `HashNavLink` updates its `aria-current` internally).
+
 ### Accessibility concerns
 
-`Tab`, `TabList` and `TabPanel` use the [WAI-ARIA tab pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tabpanel/) with no need for configuration.
+Tabs support two distinct interaction modes, each with its own accessibility contract. Which mode applies is decided by whether `TabList` and `Tab` are used inside a `TabProvider`:
+
+-   **Tabbed panel mode**: wrapping `TabList` and `Tab` in a `TabProvider` activates the [WAI-ARIA tab pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tabpanel/) with no further configuration — `TabList` renders `role="tablist"`, each `Tab` renders `role="tab"` with `aria-selected`, and a `TabPanel` shows/hides the associated content.
+-   **Nav-link mode** : using `TabList` and `Tab` **without** a `TabProvider` activates plain navigation-link semantics instead. `TabList` renders a `<nav>` landmark, and each `Tab` should render as a link (via `as` / the `action` slot) with `aria-current`.
+
+The rendered element and the interaction mode are independent: `as` (React) and the `action` slot (Vue) only choose which element a `Tab` renders as — the mode always follows `TabProvider` presence. A `Tab` rendered as a link inside a `TabProvider` is therefore still a real tab (`role="tab"`), not a navigation link.
+
+Use tabbed panels to switch between sections of content on the same page; use navigation tabs to link to different pages or routes.
 
 ## Properties
 

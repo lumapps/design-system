@@ -23,10 +23,10 @@ export default (renderOptions: SetupOptions<any>) => {
 
     describe('TabList core tests', () => {
         describe('Props', () => {
-            it('should render default', () => {
+            it('should render default (navigation landmark, no TabProvider)', () => {
                 const name = 'Tab list';
                 const { links } = setup({ 'aria-label': name }, renderOptions);
-                expect(links).toBe(screen.queryByRole('tablist', { name }));
+                expect(links).toBe(screen.queryByRole('navigation', { name }));
             });
 
             it('should render layout', () => {

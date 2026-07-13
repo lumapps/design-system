@@ -1,4 +1,4 @@
-import { computed, defineComponent, useAttrs } from 'vue';
+import { type SlotsType, computed, defineComponent, useAttrs } from 'vue';
 
 import {
     Tab as TabUI,
@@ -8,22 +8,24 @@ import {
     COMPONENT_NAME,
     DEFAULT_PROPS,
 } from '@lumx/core/js/components/Tabs/Tab';
+import { classNames } from '@lumx/core/js/utils';
 
 import { useDisableStateProps } from '../../composables/useDisableStateProps';
 import { useClassName } from '../../composables/useClassName';
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { type HyphenatedAriaProps, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { Icon } from '../icon';
 import { Text } from '../text';
 import { useTabProviderContext } from './state';
 
-export type TabProps = VueToJSXProps<UIProps, TabPropsToOverride>;
+export type TabProps = Omit<VueToJSXProps<UIProps, TabPropsToOverride>, HyphenatedAriaProps>;
 
 export { CLASSNAME, COMPONENT_NAME, DEFAULT_PROPS };
 
 /**
  * Tab component.
  *
- * Implements WAI-ARIA `tab` role.
+ * Implements the WAI-ARIA `tab` role inside a `TabProvider`; renders a plain nav-link
+ * (`aria-current`, no tab role) outside one.
  *
  * @param  props Component props.
  * @return Vue element.
@@ -36,7 +38,7 @@ export const emitSchema = {
 };
 
 const Tab = defineComponent(
-    (props: TabProps, { emit }) => {
+    (props: TabProps, { emit, slots }) => {
         const attrs = useAttrs();
         const className = useClassName(() => props.class);
         const { isAnyDisabled } = useDisableStateProps(computed(() => ({ ...props, ...attrs })));
@@ -47,29 +49,45 @@ const Tab = defineComponent(
         const handleKeyPress = (event: KeyboardEvent) => emit('keypress', event);
 
         return () => {
-            return (
-                <TabUI
-                    {...attrs}
-                    id={props.id}
-                    className={className.value}
-                    icon={props.icon}
-                    iconProps={props.iconProps}
-                    label={props.label}
-                    isActive={isActive.value}
-                    isAnyDisabled={isAnyDisabled.value}
-                    isDisabled={props.isDisabled}
-                    shouldActivateOnFocus={tabState.value?.shouldActivateOnFocus}
-                    changeToTab={tabState.value?.changeToTab}
-                    tabId={tabState.value?.tabId}
-                    tabPanelId={tabState.value?.tabPanelId}
-                    handleFocus={handleFocus}
-                    handleKeyPress={handleKeyPress}
-                    keyPressProp="onKeypress"
-                    tabIndexProp="tabindex"
-                    Icon={Icon}
-                    Text={Text}
-                />
-            );
+            const { tabId, ...state } = tabState.value || {};
+            // Element props
+            let elementProps: Record<string, any> = {
+                className: className.value,
+            };
+
+            // Custom render
+            const rendered = slots.action?.();
+            const action = Array.isArray(rendered) ? rendered[0] : rendered;
+            if (action) {
+                const { class: actionClass, ...rest } = action.props || {};
+                Object.assign(elementProps, rest);
+                elementProps = rest;
+                elementProps.as = action.type;
+                // merge `class`
+                elementProps.className = classNames.join(elementProps.className, actionClass);
+            }
+
+            // Invoke core as a function (not JSX) so Vue doesn't also forward `onClick` to the root.
+            return TabUI({
+                ...attrs,
+                ...state,
+                ...elementProps,
+                // role=tab driven by presence of the TabProvider
+                role: tabState.value ? 'tab' : undefined,
+                id: tabId || props.id,
+                icon: props.icon,
+                iconProps: props.iconProps,
+                label: props.label,
+                isActive: isActive.value,
+                isAnyDisabled: isAnyDisabled.value,
+                isDisabled: props.isDisabled,
+                handleFocus,
+                handleKeyPress,
+                keyPressProp: 'onKeypress',
+                tabIndexProp: 'tabindex',
+                Icon,
+                Text,
+            });
         };
     },
     {
@@ -77,6 +95,9 @@ const Tab = defineComponent(
         inheritAttrs: false,
         props: keysOf<TabProps>()('icon', 'iconProps', 'id', 'isActive', 'isDisabled', 'label', 'class'),
         emits: emitSchema,
+        slots: Object as SlotsType<{
+            action: void;
+        }>,
     },
 );
 

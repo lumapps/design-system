@@ -1,14 +1,21 @@
 import { Size } from '../../constants';
-import { CommonRef, HasClassName, JSXElement } from '../../types';
+import { CommonRef, ElementType, HasClassName, HasRequiredLinkHref, JSXElement } from '../../types';
 import { classNames } from '../../utils';
 import { IconProps } from '../Icon';
+import { RawClickable } from '../RawClickable';
 
 import { TABS_CLASSNAME } from './constants';
 
 /**
- * Defines the props of the component.
+ * Element a `Tab` can render as: `'button'` (default, classic tab), `'a'` (nav-link, `href`
+ * required via {@link HasRequiredLinkHref}), or any `ElementType` (nav-link, e.g. a router `Link`).
  */
-export interface TabProps extends HasClassName {
+export type TabElement = 'a' | 'button' | ElementType;
+
+/**
+ * Defines the props of the component (independent of the `as` element).
+ */
+export interface CommonTabProps extends HasClassName {
     /** Children are not supported. */
     children?: never;
     /** Icon (SVG path). */
@@ -19,6 +26,11 @@ export interface TabProps extends HasClassName {
     id?: string;
     /** Whether the tab is active or not. */
     isActive?: boolean;
+    /**
+     * WAI-ARIA `tab` role, resolved by the framework wrapper from `TabProvider` presence:
+     * `'tab'` inside a provider (classic tab mode), `undefined` outside (nav-link mode).
+     */
+    role?: 'tab';
     /** Whether the component is disabled or not. */
     isDisabled?: boolean;
     /** Label content. */
@@ -39,26 +51,42 @@ export interface TabProps extends HasClassName {
     tabIndexProp?: string;
     /** Name of the prop used to attach the keypress event (framework-dependent). */
     keyPressProp?: string;
-    /** ID applied to the tab button element (for aria-labelledby on the panel). */
-    tabId?: string;
     /** ID of the associated tab panel (for aria-controls). */
     tabPanelId?: string;
     /** Icon component injected by the framework wrapper. */
     Icon: any;
     /** Text component injected by the framework wrapper. */
     Text: any;
-    /** Forward ref to the underlying button element. */
+    /** Forward ref to the underlying element. */
     ref?: CommonRef;
 }
 
+/**
+ * Polymorphic `as` surface for `Tab`. Not `HasPolymorphicAs<E>`: core JSX is type-checked under
+ * both the React and Vue namespaces, so spreading React DOM prop types would break the Vue
+ * cross-check. `href` is required at compile time when `as === 'a'` (via {@link HasRequiredLinkHref}).
+ */
+export type TabAsProps<E extends TabElement = 'button'> = { as?: E } & (E extends 'a'
+    ? HasRequiredLinkHref<'a'>
+    : unknown);
+
+/**
+ * Props of the `Tab` component. Polymorphic on `as` (element selection only): `as` picks the
+ * rendered element, while **mode is driven by `TabProvider` presence** (via the wrapper-resolved
+ * `role`), not by `as`. The `href` conditional's false branch is `unknown` (not a record) to avoid
+ * widening `keyof TabProps`.
+ */
+export type TabProps<E extends TabElement = 'button'> = CommonTabProps & TabAsProps<E>;
+
 export type TabPropsToOverride =
+    | 'as'
+    | 'role'
     | 'isAnyDisabled'
     | 'shouldActivateOnFocus'
     | 'changeToTab'
     | 'tabIndex'
     | 'tabIndexProp'
     | 'keyPressProp'
-    | 'tabId'
     | 'tabPanelId'
     | 'Icon'
     | 'Text';
@@ -80,16 +108,19 @@ export const CLASSNAME = `${TABS_CLASSNAME}__link`;
 const { block } = classNames.bem(CLASSNAME);
 
 /**
- * Tab component.
- *
- * Implements WAI-ARIA `tab` role {@see https://www.w3.org/TR/wai-aria-practices-1.1/examples/tabs/tabs-1/tabs.html#rps_label}
+ * Tab component. Two modes keyed on `TabProvider` presence (via the wrapper-resolved `role`):
+ * tab mode (`role === 'tab'`, inside a provider) implements the WAI-ARIA `tab` role
+ * {@see https://www.w3.org/TR/wai-aria-practices-1.1/examples/tabs/tabs-1/tabs.html#rps_label};
+ * nav-link mode (no provider) renders plain link semantics (`aria-current`, no tab role/aria).
+ * `as` only selects the rendered element and applies in both modes.
  *
  * @param  props Component props.
  * @param  ref   Component ref.
  * @return React element.
  */
-export const Tab = (props: TabProps) => {
+export const Tab = <E extends TabElement = 'button'>(props: TabProps<E>) => {
     const {
+        as = 'button',
         className,
         icon,
         iconProps = {},
@@ -97,6 +128,7 @@ export const Tab = (props: TabProps) => {
         isDisabled,
         id,
         isActive,
+        role,
         label,
         handleFocus,
         handleKeyPress,
@@ -106,63 +138,71 @@ export const Tab = (props: TabProps) => {
         changeToTab,
         tabPanelId,
         shouldActivateOnFocus,
-        tabId,
         Icon,
         Text,
         ref,
         ...forwardedProps
     } = props;
+    let rawClickableProps: Record<string, unknown>;
 
-    const changeToCurrentTab = () => {
-        if (isAnyDisabled) {
-            return;
-        }
-        changeToTab?.();
-    };
-
-    const onFocus = (event: any) => {
-        handleFocus?.(event);
-        if (shouldActivateOnFocus) {
+    if (role === 'tab') {
+        // Mode: WAI-ARIA `tab` role (inside a TabProvider)
+        const changeToCurrentTab = () => {
+            if (isAnyDisabled) {
+                return;
+            }
+            changeToTab?.();
+        };
+        const onFocus = (event: any) => {
+            handleFocus?.(event);
+            if (shouldActivateOnFocus) {
+                changeToCurrentTab();
+            }
+        };
+        const onKeyPress = (event: any) => {
+            handleKeyPress?.(event);
+            if (event.key !== 'Enter' || isAnyDisabled) {
+                return;
+            }
             changeToCurrentTab();
-        }
-    };
+        };
+        rawClickableProps = {
+            ...forwardedProps,
+            'aria-disabled': isAnyDisabled ? 'true' : 'false',
+            handleClick: changeToCurrentTab,
+            onFocus,
+            role: 'tab',
+            'aria-selected': isActive,
+            'aria-controls': tabPanelId,
+            [keyPressProp]: onKeyPress,
+            [tabIndexProp]: isActive ? 0 : tabIndex,
+        };
+    } else {
+        // Mode: nav link
+        const { onClick, ...rest } = forwardedProps as any;
+        rawClickableProps = {
+            ...rest,
+            isDisabled,
+            handleClick: onClick,
+            'aria-current': isActive ? 'page' : undefined,
+        };
+    }
 
-    const onKeyPress = (event: any) => {
-        handleKeyPress?.(event);
-        if (event.key !== 'Enter' || isAnyDisabled) {
-            return;
-        }
-        changeToCurrentTab();
-    };
-
-    return (
-        <button
-            ref={ref}
-            {...forwardedProps}
-            type="button"
-            id={tabId}
-            className={classNames.join(
-                className,
-                block({
-                    'is-active': isActive,
-                    'is-disabled': isAnyDisabled,
-                }),
-            )}
-            onClick={changeToCurrentTab}
-            {...{ [keyPressProp]: onKeyPress }}
-            onFocus={onFocus}
-            role="tab"
-            {...{ [tabIndexProp]: isActive ? 0 : tabIndex }}
-            aria-disabled={isAnyDisabled}
-            aria-selected={isActive}
-            aria-controls={tabPanelId}
-        >
-            {icon && <Icon icon={icon} size={Size.xs} {...iconProps} />}
-            {label && (
-                <Text as="span" truncate>
-                    {label}
-                </Text>
-            )}
-        </button>
-    );
+    return RawClickable({
+        ...rawClickableProps,
+        as,
+        id,
+        className: classNames.join(className, block({ 'is-active': isActive, 'is-disabled': isAnyDisabled })),
+        ref: ref as CommonRef,
+        children: (
+            <>
+                {icon && <Icon icon={icon} size={Size.xs} {...iconProps} />}
+                {label && (
+                    <Text as="span" truncate>
+                        {label}
+                    </Text>
+                )}
+            </>
+        ),
+    } as any);
 };

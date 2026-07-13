@@ -204,6 +204,49 @@ describe('TabProvider', () => {
         });
     });
 
+    describe('polymorphic element in tab mode', () => {
+        // Decision (ii): the `action` slot selects the element, but mode follows the provider — so an
+        // action-slot Tab inside a TabProvider is a real tab (`role="tab"`), not a nav-link.
+        const setupAsAnchor = async ({ onChange }: { onChange?: (index: number) => void } = {}) => {
+            const result = render({
+                setup() {
+                    return () => (
+                        <TabProvider onChange={onChange} activeTabIndex={0}>
+                            <TabList aria-label="Tabs">
+                                <Tab label="Home">{{ action: () => <a href="/home" /> }}</Tab>
+                                <Tab label="Profile">{{ action: () => <a href="/profile" /> }}</Tab>
+                            </TabList>
+                        </TabProvider>
+                    );
+                },
+            });
+            await flushPromises();
+            return result;
+        };
+
+        it('renders action-slot tabs with role="tab" (element honored, mode from provider)', async () => {
+            await setupAsAnchor();
+
+            expect(screen.getByRole('tablist', { name: 'Tabs' })).toBeInTheDocument();
+            expect(screen.queryByRole('navigation')).not.toBeInTheDocument();
+
+            const tabs = screen.getAllByRole('tab');
+            expect(tabs).toHaveLength(2);
+            expect(tabs[0].tagName).toBe('A');
+            expect(tabs[0]).toHaveAttribute('href', '/home');
+            // The explicit `tab` role wins over the anchors' implicit `link` role.
+            expect(screen.queryByRole('link')).not.toBeInTheDocument();
+        });
+
+        it('dispatches a tab change when an action-slot tab is activated (wired like a classic tab)', async () => {
+            const onChange = vi.fn();
+            await setupAsAnchor({ onChange });
+
+            await userEvent.click(screen.getByRole('tab', { name: 'Profile' }));
+            await waitFor(() => expect(onChange).toHaveBeenCalledWith(1));
+        });
+    });
+
     describe('activate on focus', () => {
         it('should activate tab on focus', async () => {
             await setup({ shouldActivateOnFocus: true });

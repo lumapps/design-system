@@ -1,8 +1,9 @@
-import { defineComponent, ref, useAttrs, useSlots } from 'vue';
+import { defineComponent, inject, ref, useAttrs, useSlots } from 'vue';
 
 import {
     TabList as TabListUI,
     type TabListProps as UIProps,
+    type TabListPropsToOverride,
     TabListLayout,
     COMPONENT_NAME,
     DEFAULT_PROPS,
@@ -14,10 +15,11 @@ import { useTheme } from '../../composables/useTheme';
 import { useClassName } from '../../composables/useClassName';
 import { useRovingTabIndexContainer } from '../../composables/useRovingTabIndexContainer';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { TAB_PROVIDER_INJECT_KEY } from './state';
 
 // aria-label is excluded from declared Vue props — Vue treats aria-* as attrs,
 // so it flows through the {..attrs} spread to the core component.
-type InternalProps = VueToJSXProps<UIProps, 'aria-label'>;
+type InternalProps = VueToJSXProps<UIProps, 'aria-label' | TabListPropsToOverride>;
 
 /** Public props type (includes aria-label for TypeScript consumers). */
 export type TabListProps = InternalProps & { 'aria-label': string };
@@ -27,7 +29,8 @@ export { TabListLayout, CLASSNAME, COMPONENT_NAME, DEFAULT_PROPS };
 /**
  * TabList component.
  *
- * Implements WAI-ARIA `tablist` role.
+ * Implements WAI-ARIA `tablist` role, or a `role="navigation"` landmark when used outside a
+ * `TabProvider` (nav-link mode).
  *
  * @param  props Component props.
  * @return Vue element.
@@ -39,24 +42,32 @@ const TabList = defineComponent(
         const defaultTheme = useTheme();
         const className = useClassName(() => props.class);
         const containerRef = ref<HTMLElement | null>(null);
+        const role = inject(TAB_PROVIDER_INJECT_KEY, undefined) === undefined ? 'navigation' : 'tablist';
 
+        // Classic mode: roving tabindex over `role="tab"` items — naturally inert in nav-link mode
+        // since nav links carry no `role="tab"` and keep their native per-link Tab stops.
         useRovingTabIndexContainer({
-            containerRef,
+            containerRef: role === 'navigation' ? ref<HTMLElement | null>(null) : containerRef,
             itemSelector: '[role="tab"]',
         });
 
-        return () => (
-            <TabListUI
-                {...attrs}
-                ref={containerRef}
-                aria-label={attrs['aria-label'] as string}
-                className={className.value}
-                theme={props.theme || defaultTheme.value}
-                layout={props.layout}
-                position={props.position}
-                children={slots.default?.() as JSXElement}
-            />
-        );
+        return () => {
+            const children = slots.default?.();
+
+            return (
+                <TabListUI
+                    {...attrs}
+                    ref={containerRef}
+                    aria-label={attrs['aria-label'] as string}
+                    className={className.value}
+                    theme={props.theme || defaultTheme.value}
+                    layout={props.layout}
+                    position={props.position}
+                    role={role}
+                    children={children as JSXElement}
+                />
+            );
+        };
     },
     {
         name: 'LumxTabList',
