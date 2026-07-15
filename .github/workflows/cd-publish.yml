@@ -211,9 +211,6 @@ jobs:
             - name: 'Setup'
               uses: ./.github/actions/setup
 
-            - name: 'Update npm' # Need npm >= v11.5 for trusted publishing
-              run: npm install -g npm@latest
-
             - name: '[prerelease] Detect release type from CHANGELOG'
               id: detect-type
               if: >-
