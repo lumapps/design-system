@@ -23,6 +23,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   `@lumx/react`, `@lumx/vue`:
     -   `Combobox`: avoid recursive updates errors when mounting a large option list
 
+### Changed
+
+-   `@lumx/react`, `@lumx/vue`:
+    -   `InfiniteScroll`: allow `undefined` callback to disable it
+
 ## [4.19.0][] - 2026-06-30
 
 ### Added

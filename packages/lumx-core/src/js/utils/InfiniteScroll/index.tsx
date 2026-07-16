@@ -5,9 +5,13 @@ export { setupInfiniteScrollObserver } from './setupInfiniteScrollObserver';
 export const INFINITE_SCROLL_CLASSNAME = 'lumx-infinite-scroll-anchor';
 
 export interface InfiniteScrollProps {
-    /** Callback when infinite scroll component is in view */
+    /**
+     * Callback when infinite scroll component is in view.
+     * Omit (e.g. while loading) to temporarily disable without changing the callback's
+     * identity when re-enabled — keeps the underlying observer stable.
+     */
     // eslint-disable-next-line react/no-unused-prop-types
-    callback: (evt?: Event) => void;
+    callback?(evt?: Event): void;
     /** Customize intersection observer option */
     // eslint-disable-next-line react/no-unused-prop-types
     options?: IntersectionObserverInit;
