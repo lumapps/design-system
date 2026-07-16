@@ -17,17 +17,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   `@lumx/react`, `@lumx/vue`:
     -   `TabList`: render a `role="navigation"` landmark instead of `role="tablist"` when used outside a `TabProvider`.
     -   `Tab`: render with WAI-ARIA `role="tab"` semantics only inside a `TabProvider`.
+    -   `InfiniteScroll`: allow `undefined` callback to disable it
 
 ### Fixed
 
 -   `@lumx/react`, `@lumx/vue`:
     -   `Combobox`: avoid recursive updates errors when mounting a large option list
-    -   `SelectButton`: fix `onLoadMore` firing eagerly
-
-### Changed
-
--   `@lumx/react`, `@lumx/vue`:
-    -   `InfiniteScroll`: allow `undefined` callback to disable it
+    -   `SelectButton` and `SelectTextField`: fix `onLoadMore` firing eagerly
 
 ## [4.19.0][] - 2026-06-30
 
