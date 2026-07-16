@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `@lumx/react`, `@lumx/vue`:
     -   `Combobox`: avoid recursive updates errors when mounting a large option list
+    -   `SelectButton`: fix `onLoadMore` firing eagerly
 
 ### Changed
 

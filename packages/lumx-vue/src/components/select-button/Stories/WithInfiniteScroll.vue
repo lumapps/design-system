@@ -8,6 +8,7 @@
         @change="handleChange"
         @load-more="onLoadMore"
     />
+    <div data-testid="load-more-count">{{ loadMoreCount }}</div>
 </template>
 
 <script setup lang="ts">
@@ -41,12 +42,14 @@ const initialItems: Fruit[] = Array.from({ length: 3 }).flatMap((_, page) =>
 
 const value = ref<Fruit>();
 const items = ref<Fruit[]>(initialItems);
+const loadMoreCount = ref(0);
 
 function handleChange(newValue: Fruit | undefined) {
     value.value = newValue;
 }
 
 function onLoadMore() {
+    loadMoreCount.value += 1;
     if (items.value.length >= 200) {
         return;
     }

@@ -37,15 +37,17 @@ export const TypeaheadFromClosed = { ...testStories.TypeaheadFromClosed };
 export const WithInfiniteScroll = {
     ...testStories.WithInfiniteScroll,
     render: () => {
-        // Start with 3 pages of items so the popover overflows and the
+        // Start with 10 pages of items so the popover overflows and the
         // IntersectionObserver sentinel doesn't fire until the user scrolls.
-        const initialItems = Array.from({ length: 3 }).flatMap((_, page) =>
+        const initialItems = Array.from({ length: 10 }).flatMap((_, page) =>
             FRUITS.map((f, i) => ({ ...f, id: `${f.id}-${page * FRUITS.length + i}` })),
         );
         const [items, setItems] = useState(initialItems);
         const [value, setValue] = useState<Fruit | undefined>();
+        const [loadMoreCount, setLoadMoreCount] = useState(0);
 
         const onLoadMore = useCallback(() => {
+            setLoadMoreCount((c) => c + 1);
             setItems((prev) => {
                 if (prev.length >= 200) return prev;
                 const offset = prev.length;
@@ -54,15 +56,18 @@ export const WithInfiniteScroll = {
         }, []);
 
         return (
-            <SelectButton
-                label="Select a fruit"
-                options={items}
-                getOptionId="id"
-                getOptionName="name"
-                value={value}
-                onChange={setValue}
-                onLoadMore={onLoadMore}
-            />
+            <>
+                <SelectButton
+                    label="Select a fruit"
+                    options={items}
+                    getOptionId="id"
+                    getOptionName="name"
+                    value={value}
+                    onChange={setValue}
+                    onLoadMore={onLoadMore}
+                />
+                <div data-testid="load-more-count">{loadMoreCount}</div>
+            </>
         );
     },
 };
