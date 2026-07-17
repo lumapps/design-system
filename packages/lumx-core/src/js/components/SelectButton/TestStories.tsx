@@ -80,8 +80,13 @@ export function setup({
 
     /**
      * Test story for WithInfiniteScroll.
-     * Opens the dropdown and verifies that the infinite scroll sentinel triggers
-     * loading additional options.
+     * Opens the dropdown and verifies that:
+     * - `onLoadMore` does NOT fire just from mounting/opening (the initial list overflows
+     *   the popover, so the sentinel isn't in view yet) — regression test for a bug where an
+     *   unstable `callback`/`options` reference caused the IntersectionObserver to be torn down
+     *   and recreated on every render, spuriously re-firing on the sentinel's current state.
+     * - Scrolling to the bottom loads more options, and triggers `onLoadMore` exactly once
+     *   (not a runaway loop from the same instability).
      *
      * The render function is framework-specific (React hooks / Vue SFC),
      * so each framework consumer overrides `render` and keeps this `play`.
@@ -109,6 +114,14 @@ export function setup({
                 initialCount = options.length;
             });
 
+            // onLoadMore should not fire just from mounting/opening: the sentinel isn't in
+            // view since the initial list overflows the popover.
+            const counter = within(canvasElement).getByTestId('load-more-count');
+            await new Promise((resolve) => {
+                setTimeout(resolve, 300);
+            });
+            expect(counter.textContent).toBe('0');
+
             // Scroll the popover to the bottom to trigger the IntersectionObserver sentinel
             const scrollContainer = listbox.closest('.lumx-combobox-popover__scroll')!;
             expect(scrollContainer).toBeTruthy();
@@ -118,6 +131,11 @@ export function setup({
             await waitFor(() => {
                 const options = within(listbox).getAllByRole('option');
                 expect(options.length).toBeGreaterThan(initialCount);
+            });
+
+            // A single scroll-to-bottom should trigger onLoadMore exactly once, not a runaway loop.
+            await waitFor(() => {
+                expect(counter.textContent).toBe('1');
             });
         },
     };

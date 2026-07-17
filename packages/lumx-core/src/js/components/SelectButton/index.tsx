@@ -122,6 +122,8 @@ export const SelectButton = <O,>(props: SelectButtonProps<O>, { Combobox, Infini
     const isLoadingMore = listStatus === 'loadingMore';
     const isError = listStatus === 'error';
     const isMultiselectable = selectionType === 'multiple';
+    // Prevent firing during loading or error states to avoid duplicate fetches.
+    const isInfiniteScrollEnabled = !listStatus || listStatus === 'idle';
 
     /*
      * Display value: castArray normalizes single/multi value to an array, then resolve
@@ -173,11 +175,7 @@ export const SelectButton = <O,>(props: SelectButtonProps<O>, { Combobox, Infini
 
                     {onLoadMore && InfiniteScroll && (
                         <InfiniteScroll
-                            callback={() => {
-                                // Guard: prevent firing during loading or error states to avoid duplicate fetches.
-                                if (listStatus && listStatus !== 'idle') return;
-                                onLoadMore();
-                            }}
+                            callback={isInfiniteScrollEnabled ? onLoadMore : undefined}
                             options={infiniteScrollOptions}
                         />
                     )}

@@ -19,6 +19,7 @@ import {
     type SelectButtonProps as UIProps,
 } from '@lumx/core/js/components/SelectButton';
 import type { ComboboxButtonProps } from '@lumx/core/js/components/Combobox/ComboboxButton';
+import { CLASSNAME as COMBOBOX_POPOVER_CLASSNAME } from '@lumx/core/js/components/Combobox/ComboboxPopover';
 import { InfiniteScroll } from '@lumx/vue/utils/InfiniteScroll';
 import { JSXElement } from '@lumx/core/js/types';
 
@@ -185,6 +186,12 @@ const SelectButton = defineComponent(
         // ComboboxList is a Vue component, so the ref resolves to its instance — Vue 3 auto-sets
         // `$el` to the root DOM node (the `<ul>`).
         const listRef = ref<ComponentPublicInstance | null>(null);
+        // The list itself doesn't scroll — its ancestor `__scroll` wrapper does. The
+        // IntersectionObserver root must be the actual scrolling/clipping element, or the
+        // sentinel is trivially always "intersecting" its non-clipping `<ul>` parent.
+        const scrollContainer = computed<HTMLElement | null>(
+            () => listRef.value?.$el?.closest(`.${COMBOBOX_POPOVER_CLASSNAME}__scroll`) ?? null,
+        );
 
         // Merge `class` prop with `className` attr (React-style attr from core JSX).
         const className = useClassName(() => props.class);
@@ -270,7 +277,7 @@ const SelectButton = defineComponent(
                     onOpen: (isOpen: boolean) => emit('open', isOpen),
                     translations: props.translations,
                     onLoadMore: hasLoadMoreListener ? onLoadMore : undefined,
-                    infiniteScrollOptions: { root: listRef.value?.$el ?? null, rootMargin: '100px' },
+                    infiniteScrollOptions: { root: scrollContainer.value, rootMargin: '100px' },
                 },
                 { Combobox, InfiniteScroll },
             );

@@ -17,7 +17,7 @@ export const InfiniteScroll = defineComponent(
 
         watchEffect((onCleanup) => {
             const element = elementRef.value;
-            if (!element) return;
+            if (!element || !props.callback) return;
 
             const cleanup = setupInfiniteScrollObserver(element, props.callback, props.options);
             onCleanup(cleanup);

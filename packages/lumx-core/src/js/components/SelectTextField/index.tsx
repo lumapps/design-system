@@ -134,6 +134,8 @@ export const SelectTextField = (props: SelectTextFieldProps, { Combobox, Infinit
     const isFullLoading = listStatus === 'loading';
     const isLoadingMore = listStatus === 'loadingMore';
     const isError = listStatus === 'error';
+    // Prevent firing during loading or error states to avoid duplicate fetches.
+    const isInfiniteScrollEnabled = !listStatus || listStatus === 'idle';
 
     return (
         <Combobox.Provider onOpen={onOpen}>
@@ -170,11 +172,7 @@ export const SelectTextField = (props: SelectTextFieldProps, { Combobox, Infinit
 
                     {onLoadMore && InfiniteScroll && (
                         <InfiniteScroll
-                            callback={() => {
-                                // Guard: prevent firing during loading or error states to avoid duplicate fetches.
-                                if (listStatus && listStatus !== 'idle') return;
-                                onLoadMore();
-                            }}
+                            callback={isInfiniteScrollEnabled ? onLoadMore : undefined}
                             options={infiniteScrollOptions}
                         />
                     )}
