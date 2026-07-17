@@ -23,9 +23,15 @@ export interface TabListProps extends HasClassName, HasTheme {
     layout?: TabListLayout;
     /** Position of the tabs in the list (requires 'clustered' layout). */
     position?: Alignment;
+    /** `role` applied to the inner `__links` container */
+    role?: 'navigation' | 'tablist';
     /** ref to the wrapper element */
     ref?: CommonRef;
 }
+
+export type TabListPropsToOverride =
+    // `role` must be resolved by each framework wrapper
+    'role';
 
 /**
  * Component display name.
@@ -56,10 +62,12 @@ export const TabList = (props: TabListProps) => {
         className,
         layout = DEFAULT_PROPS.layout,
         position = DEFAULT_PROPS.position,
+        role = 'tablist',
         theme,
         ref,
         ...forwardedProps
     } = props;
+    const LinkWrapper = role === 'navigation' ? 'nav' : 'div';
 
     return (
         <div
@@ -74,9 +82,9 @@ export const TabList = (props: TabListProps) => {
                 }),
             )}
         >
-            <div className={element('links')} role="tablist" aria-label={ariaLabel}>
+            <LinkWrapper className={element('links')} role={role} aria-label={ariaLabel}>
                 {children}
-            </div>
+            </LinkWrapper>
         </div>
     );
 };

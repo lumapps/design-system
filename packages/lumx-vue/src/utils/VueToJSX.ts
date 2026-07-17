@@ -27,7 +27,7 @@ export type VueToJSXProps<Props, OmitProps extends keyof Props = never> = Omit<
  * which breaks hyphenated key destructuring in core component templates.
  * By excluding them from props, they flow through `attrs` with their original hyphenated keys.
  */
-export type HyphenatedAriaProps = 'aria-expanded' | 'aria-haspopup' | 'aria-label' | 'aria-pressed';
+export type HyphenatedAriaProps = 'aria-current' | 'aria-expanded' | 'aria-haspopup' | 'aria-label' | 'aria-pressed';
 
 export const keysOf = <T>() => {
     return <K extends readonly (keyof T)[]>(

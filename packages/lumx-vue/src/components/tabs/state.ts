@@ -46,7 +46,6 @@ export const useTabProviderContext = (type: TabType, originalId?: string): Compu
 
     return computed((): TabState | undefined => {
         const index = state.value.ids[type].indexOf(id);
-        if (index === -1) return undefined;
         return {
             isLazy: state.value.isLazy,
             shouldActivateOnFocus: state.value.shouldActivateOnFocus,
@@ -56,11 +55,4 @@ export const useTabProviderContext = (type: TabType, originalId?: string): Compu
             changeToTab: () => dispatch({ type: 'setActiveTabIndex', payload: index }),
         };
     });
-};
-
-/**
- * Returns the raw tab provider state ref, or undefined if no provider is present.
- */
-export const useTabProviderContextState = (): Ref<State> | undefined => {
-    return inject(TAB_PROVIDER_INJECT_KEY, undefined)?.state;
 };

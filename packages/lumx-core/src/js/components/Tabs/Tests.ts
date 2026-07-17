@@ -21,13 +21,22 @@ export default (renderOptions: SetupOptions<any>) => {
 
     describe('Tab core tests', () => {
         describe('Props', () => {
-            it('should render default', () => {
+            // Without a TabProvider, Tab renders in nav-link mode: the default element is still a
+            // button, but it carries no WAI-ARIA `tab` semantics (mirrors TabList's navigation role).
+            it('should render default (nav-link mode, no TabProvider)', () => {
                 const label = 'Label';
                 const { tab } = setup({ label }, renderOptions);
-                expect(tab).toBe(screen.queryByRole('tab', { name: label }));
                 expect(tab.tagName).toBe('BUTTON');
-                expect(tab).toHaveAttribute('type', 'button');
+                expect(screen.queryByRole('tab')).not.toBeInTheDocument();
+                expect(tab).not.toHaveAttribute('role', 'tab');
+                expect(tab).not.toHaveAttribute('aria-selected');
                 expect(queryByClassName(tab, ICON_CLASSNAME)).not.toBeInTheDocument();
+            });
+
+            it('should mark the active tab with aria-current in nav-link mode', () => {
+                const { tab } = setup({ isActive: true }, renderOptions);
+                expect(tab).toHaveAttribute('aria-current', 'page');
+                expect(tab).toHaveClass(`${CLASSNAME}--is-active`);
             });
 
             it('should render icon', () => {

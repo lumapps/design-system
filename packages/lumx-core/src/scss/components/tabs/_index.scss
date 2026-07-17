@@ -16,7 +16,9 @@
     }
 
     &__link {
-        &:not(&--is-active):not(&--is-disabled) {
+        text-decoration: none;
+
+        &:not(&--is-active):not([aria-current="page"]):not(&--is-disabled) {
             @include lumx-tabs-link(lumx-base-const("emphasis", "LOW"));
 
             #{$self}--theme-light & {
@@ -28,7 +30,8 @@
             }
         }
 
-        &--is-active {
+        &--is-active,
+        &[aria-current="page"] {
             @include lumx-tabs-link(lumx-base-const("emphasis", "SELECTED"));
 
             #{$self}--theme-light & {

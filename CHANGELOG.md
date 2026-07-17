@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   `@lumx/react`, `@lumx/vue`:
+    -   `Tab`: support rendering as a custom element — `as` prop in React, `action` slot in Vue — e.g. to render navigation links.
+
+### Changed
+
+-   `@lumx/react`, `@lumx/vue`:
+    -   `TabList`: render a `role="navigation"` landmark instead of `role="tablist"` when used outside a `TabProvider`.
+    -   `Tab`: render with WAI-ARIA `role="tab"` semantics only inside a `TabProvider`.
+
 ### Fixed
 
 -   `@lumx/react`, `@lumx/vue`:
