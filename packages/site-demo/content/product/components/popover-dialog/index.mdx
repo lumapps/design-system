@@ -18,8 +18,11 @@ As this component uses the `dialog` accessible pattern, a few specific behaviors
 -   When the popover is opened, focus will be set on either the element set using the `focusElement` prop or the first focusable element.
     Once the focus is set within the popover, it will be trapped and stay within the popover until it is closed.
 
--   A label must be defined using either `aria-label` or `aria-labelledby` props.
-    Setting `aria-labelledby` is recommended as it target a visible label rather than adding an invisible `aria-label` on the dialog.
+-   An accessible name should be provided. Render a [`DialogHeading`](/product/components/dialog#properties) anywhere inside
+    the popover dialog to name it automatically (its `role="dialog"` element gets `aria-labelledby` pointing at the rendered
+    heading) — see the demo above. Alternatively, set the `label`, `aria-label`, or `aria-labelledby` props directly — an
+    explicit `label`/`aria-label`/`aria-labelledby` always takes precedence over an auto-linked `DialogHeading`. `label` is
+    optional: when omitted (and no `DialogHeading` is rendered), the popover dialog has no accessible name.
 
 -   The activating element should take focus on popover close (`focusAnchorOnClose` property, activated by default)
 

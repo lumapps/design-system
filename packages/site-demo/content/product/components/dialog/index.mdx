@@ -12,8 +12,10 @@ import * as VueDemoDefault from './vue/default.vue';
 import * as VueDemoSizes from './vue/sizes.vue';
 import * as VueDemoProcessingState from './vue/processing-state.vue';
 import ReactDialog from 'lumx-docs:@lumx/react/components/dialog/Dialog';
+import ReactDialogHeading from 'lumx-docs:@lumx/react/components/dialog/DialogHeading';
 import ReactAlertDialog from 'lumx-docs:@lumx/react/components/alert-dialog/AlertDialog';
 import VueDialog from 'lumx-docs:@lumx/vue/components/dialog/Dialog';
+import VueDialogHeading from 'lumx-docs:@lumx/vue/components/dialog/DialogHeading';
 
 **Inform users about a task and can contain critical information, require decisions, or involve multiple tasks.**
 
@@ -50,9 +52,27 @@ Use processing state when dialogs contain a form which submission takes an exten
 
 <DemoBlock orientation="horizontal" vAlign="center" demo={{ react: ReactDemoProcessingState, vue: VueDemoProcessingState }} />
 
+### Accessibility concerns
+
+A dialog needs an accessible name so assistive technologies can announce what it's about when it opens.
+
+-   Render a `DialogHeading` anywhere inside the dialog (typically in the `header`, e.g. as the `Toolbar`'s `label`) to name it.
+    The dialog's `role="dialog"` element automatically gets `aria-labelledby` pointing at the rendered heading — no manual wiring
+    required. `DialogHeading` is a thin wrapper over [Heading](/product/components/heading), so it also renders a real,
+    correctly-leveled heading element (e.g. `<h2>`) rather than plain styled text.
+-   If the consumer passes an explicit `aria-label` or `aria-labelledby` — via `dialogProps` on `Dialog` or `AlertDialog`, or
+    directly as a prop on `Lightbox`/`PopoverDialog` — it always wins over the auto-linked `DialogHeading` — explicit wiring
+    is never overridden.
+-   Rendering more than one `DialogHeading` inside the same dialog is supported but discouraged: the last one registered (i.e.
+    the last one mounted) wins.
+-   For dialogs without a visible title (e.g. a purely iconographic or minimal confirmation dialog), pass an `aria-label`
+    explicitly — through `dialogProps={{ 'aria-label': '...' }}` on `Dialog`/`AlertDialog`, or directly as a prop on
+    `Lightbox`/`PopoverDialog` — instead of rendering a `DialogHeading`.
+
 ## Properties
 
 <PropTable docs={{ react: ReactDialog, vue: VueDialog }} />
 
+<PropTable docs={{ react: ReactDialogHeading, vue: VueDialogHeading }} />
 
 <PropTable docs={{ react: ReactAlertDialog }} />
