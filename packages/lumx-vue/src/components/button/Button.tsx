@@ -12,7 +12,7 @@ import {
 import { useTheme } from '../../composables/useTheme';
 import { useClassName } from '../../composables/useClassName';
 import { useDisableStateProps } from '../../composables/useDisableStateProps';
-import { type HyphenatedAriaProps, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, type HyphenatedAriaProps, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { ResetTheme } from '../../utils/theme';
 import { Icon } from '../icon';
 import Text from '../text/Text';
@@ -105,7 +105,7 @@ const Button = defineComponent(
         };
     },
     {
-        name: 'LumxButton',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         // Redefine properties so that they come in as `props` on the `defineComponent` function
         props: keysOf<ButtonProps>()(

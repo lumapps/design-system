@@ -1,11 +1,11 @@
 import { defineComponent, useAttrs } from 'vue';
 
-import { Flag as FlagUI, type FlagProps as UIProps } from '@lumx/core/js/components/Flag';
+import { Flag as FlagUI, type FlagProps as UIProps, COMPONENT_NAME } from '@lumx/core/js/components/Flag';
 import type { JSXElement } from '@lumx/core/js/types';
 
 import { useTheme } from '../../composables/useTheme';
 import { useClassName } from '../../composables/useClassName';
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { Text } from '../text';
 
 export type FlagProps = VueToJSXProps<UIProps, 'Text'>;
@@ -34,7 +34,7 @@ const Flag = defineComponent(
         );
     },
     {
-        name: 'Flag',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         // Redefine properties so that they come in as `props` on the `defineComponent` function
         props: keysOf<FlagProps>()('color', 'icon', 'truncate', 'theme', 'class'),

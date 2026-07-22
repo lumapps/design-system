@@ -11,7 +11,7 @@ import {
 import { type JSXElement } from '@lumx/core/js/types';
 
 import { useClassName } from '../../composables/useClassName';
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { useTabProviderContext } from './state';
 
 export type TabPanelProps = VueToJSXProps<UIProps, TabPanelPropsToOverride>;
@@ -48,7 +48,7 @@ const TabPanel = defineComponent(
         );
     },
     {
-        name: 'LumxTabPanel',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<TabPanelProps>()('isActive', 'id', 'class'),
     },

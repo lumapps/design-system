@@ -6,6 +6,7 @@ import {
     type TimePickerFieldWrapperProps,
     type TimePickerFieldOwnedSelectProps,
     DEFAULT_PROPS,
+    COMPONENT_NAME,
 } from '@lumx/core/js/components/TimePickerField';
 import {
     buildTimeList,
@@ -17,7 +18,7 @@ import {
 } from '@lumx/core/js/utils/time';
 import { getCurrentLocale } from '@lumx/core/js/utils/locale/getCurrentLocale';
 
-import { keysOf, type ClassValue } from '../../utils/VueToJSX';
+import { getName, keysOf, type ClassValue } from '../../utils/VueToJSX';
 import { useClassName } from '../../composables/useClassName';
 import { SelectTextField, SelectTextFieldOption } from '../select-text-field';
 
@@ -165,7 +166,7 @@ const TimePickerField = defineComponent(
         };
     },
     {
-        name: 'LumxTimePickerField',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<TimePickerFieldProps>()(
             'value',

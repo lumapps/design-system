@@ -12,7 +12,7 @@ import {
 } from '@lumx/core/js/components/Menu/MenuButton';
 
 import { useClassName } from '../../composables/useClassName';
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 
 import Button, { type ButtonProps } from '../button/Button';
 import IconButton, { type IconButtonProps } from '../button/IconButton';
@@ -81,7 +81,7 @@ const MenuButton = defineComponent(
         };
     },
     {
-        name: 'LumxMenuButton',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<MenuButtonBaseProps>()('label', 'popoverProps', 'class', 'variant'),
         emits: ['open'],

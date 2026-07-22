@@ -4,7 +4,7 @@ import type { HeadingElement } from '@lumx/core/js/types';
 import type { HeadingLevelContext } from '@lumx/core/js/components/Heading/constants';
 import { computeHeadingLevel } from '@lumx/core/js/components/Heading/utils';
 
-import { keysOf } from '../../utils/VueToJSX';
+import { getName, keysOf } from '../../utils/VueToJSX';
 import { HeadingLevelContextKey } from './context';
 import { useHeadingLevel } from './useHeadingLevel';
 
@@ -40,7 +40,7 @@ const HeadingLevelProvider = defineComponent(
         return () => slots.default?.();
     },
     {
-        name: 'HeadingLevelProvider',
+        name: getName('HeadingLevelProvider'),
         props: keysOf<HeadingLevelProviderProps>()('level'),
     },
 );

@@ -13,6 +13,7 @@ import {
 import {
     SelectionChipGroup as UI,
     type SelectionChipGroupProps as UIProps,
+    COMPONENT_NAME,
 } from '@lumx/core/js/components/Chip/SelectionChipGroup';
 import { CLASSNAME as CHIP_CLASSNAME } from '@lumx/core/js/components/Chip';
 import { setupSelectionChipGroupEvents } from '@lumx/core/js/components/Chip/setupSelectionChipGroupEvents';
@@ -20,7 +21,7 @@ import { setupSelectionChipGroupEvents } from '@lumx/core/js/components/Chip/set
 import { useClassName } from '../../composables/useClassName';
 import { useTheme } from '../../composables/useTheme';
 import { useRovingTabIndexContainer } from '../../composables/useRovingTabIndexContainer';
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { isComponentType } from '../../utils/isComponentType';
 import { Icon } from '../icon';
 import { Tooltip } from '../tooltip';
@@ -148,7 +149,7 @@ const SelectionChipGroup = defineComponent(
         };
     },
     {
-        name: 'LumxSelectionChipGroup',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<SelectionChipGroupProps>()(
             'getChipProps',

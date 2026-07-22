@@ -10,7 +10,7 @@ import {
 } from '@lumx/core/js/components/Menu/MenuTrigger';
 
 import { useClassName } from '../../composables/useClassName';
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { Button } from '../button';
 
 import { useMenuContext } from './context';
@@ -71,7 +71,7 @@ const MenuTrigger = defineComponent(
         };
     },
     {
-        name: 'LumxMenuTrigger',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<MenuTriggerProps>()('class', 'id'),
     },

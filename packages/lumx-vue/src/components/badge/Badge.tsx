@@ -1,10 +1,10 @@
 import { defineComponent, useAttrs } from 'vue';
 
-import { Badge as BadgeUI, type BadgeProps as UIProps } from '@lumx/core/js/components/Badge';
+import { Badge as BadgeUI, type BadgeProps as UIProps, COMPONENT_NAME } from '@lumx/core/js/components/Badge';
 import { type JSXElement } from '@lumx/core/js/types';
 
 import { useClassName } from '../../composables/useClassName';
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 
 export type BadgeProps = VueToJSXProps<UIProps>;
 
@@ -24,7 +24,7 @@ const Badge = defineComponent(
         );
     },
     {
-        name: 'LumxBadge',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         // Redefine properties so that they come in as `props` on the `defineComponent` function
         props: keysOf<BadgeProps>()('color', 'class'),

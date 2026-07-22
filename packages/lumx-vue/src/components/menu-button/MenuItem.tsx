@@ -11,7 +11,7 @@ import {
 } from '@lumx/core/js/components/Menu/MenuItem';
 
 import { useClassName } from '../../composables/useClassName';
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { Icon } from '../icon';
 import Text from '../text/Text';
 
@@ -119,7 +119,7 @@ const MenuItem = defineComponent(
         };
     },
     {
-        name: 'LumxMenuItem',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<MenuItemProps>()('icon', 'afterIcon', 'color', 'isDisabled', 'class'),
         emits: ['click'],

@@ -29,6 +29,14 @@ export type VueToJSXProps<Props, OmitProps extends keyof Props = never> = Omit<
  */
 export type HyphenatedAriaProps = 'aria-current' | 'aria-expanded' | 'aria-haspopup' | 'aria-label' | 'aria-pressed';
 
+/**
+ * Build a Vue component `name` from its component name, prefixed with `Lumx`.
+ *
+ * The prefix avoids collisions with native HTML/SVG tags (e.g. `button`, `dialog`, `link`, `table`,
+ * `text`) and namespaces LumX components in Vue devtools / `<KeepAlive>`.
+ */
+export const getName = (componentName: string) => `Lumx${componentName}` as const;
+
 export const keysOf = <T>() => {
     return <K extends readonly (keyof T)[]>(
         ...keys: [keyof T] extends [K[number]]

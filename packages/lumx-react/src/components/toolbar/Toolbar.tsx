@@ -5,7 +5,7 @@ import {
     Toolbar as UI,
     ToolbarProps as UIProps,
     CLASSNAME,
-    TOOLBAR_NAME,
+    COMPONENT_NAME,
     DEFAULT_PROPS,
 } from '@lumx/core/js/components/Toolbar';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
@@ -36,6 +36,6 @@ export const Toolbar = forwardRef<ToolbarProps, HTMLDivElement>((props, ref) => 
         ...props,
     });
 });
-Toolbar.displayName = TOOLBAR_NAME;
+Toolbar.displayName = COMPONENT_NAME;
 Toolbar.className = CLASSNAME;
 Toolbar.defaultProps = DEFAULT_PROPS;

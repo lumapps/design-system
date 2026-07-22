@@ -10,7 +10,7 @@ import {
 } from '@lumx/core/js/components/Combobox/ComboboxPopover';
 import type { JSXElement } from '@lumx/core/js/types';
 
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { Popover } from '../popover';
 import type { PopoverProps } from '../popover/Popover';
 import { useComboboxContext } from './context/ComboboxContext';
@@ -57,7 +57,7 @@ const ComboboxPopover = defineComponent(
         };
     },
     {
-        name: 'LumxComboboxPopover',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<ComboboxPopoverProps>()(
             'as',

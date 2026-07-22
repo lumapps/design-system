@@ -14,7 +14,7 @@ import { useTheme } from '../../composables/useTheme';
 import { useClassName } from '../../composables/useClassName';
 import { useDisableStateProps } from '../../composables/useDisableStateProps';
 import { useHasEventListener } from '../../composables/useHasEventListener';
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 
 export type ChipProps = VueToJSXProps<UIProps, ChipPropsToOverride>;
 
@@ -105,7 +105,7 @@ const Chip = defineComponent(
         );
     },
     {
-        name: 'LumxChip',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<ChipProps>()(
             'color',

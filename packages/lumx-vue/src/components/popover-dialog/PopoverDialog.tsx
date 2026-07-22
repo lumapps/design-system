@@ -10,7 +10,7 @@ import type { PopoverProps as CorePopoverProps } from '@lumx/core/js/components/
 import { classNames } from '@lumx/core/js/utils';
 import { useClassName } from '@lumx/vue/composables/useClassName';
 
-import { keysOf } from '../../utils/VueToJSX';
+import { getName, keysOf } from '../../utils/VueToJSX';
 import Popover, { type PopoverProps } from '../popover/Popover';
 import HeadingLevelProvider from '../heading/HeadingLevelProvider';
 
@@ -54,7 +54,7 @@ const PopoverDialog = defineComponent(
         };
     },
     {
-        name: `Lumx${COMPONENT_NAME}`,
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<PopoverDialogProps>()(
             'anchorRef',

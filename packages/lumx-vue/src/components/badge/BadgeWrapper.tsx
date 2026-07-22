@@ -7,7 +7,7 @@ import {
     DEFAULT_PROPS,
 } from '@lumx/core/js/components/Badge/BadgeWrapper';
 import { useClassName } from '../../composables/useClassName';
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import type { JSXElement } from '@lumx/core/js/types';
 
 export type BadgeWrapperProps = VueToJSXProps<UIProps>;
@@ -32,7 +32,7 @@ const BadgeWrapper = defineComponent(
         };
     },
     {
-        name: 'LumxBadgeWrapper',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<BadgeWrapperProps>()('badge', 'class'),
     },

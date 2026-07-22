@@ -1,6 +1,6 @@
 import { computed, defineComponent, ref, type Ref } from 'vue';
 
-import { Lightbox as UI, type BaseLightboxProps } from '@lumx/core/js/components/Lightbox';
+import { Lightbox as UI, type BaseLightboxProps, COMPONENT_NAME } from '@lumx/core/js/components/Lightbox';
 import { DIALOG_TRANSITION_DURATION } from '@lumx/core/js/constants';
 import type { JSXElement } from '@lumx/core/js/types';
 
@@ -16,7 +16,7 @@ import { useFocusTrap } from '../../composables/useFocusTrap';
 import { useRestoreFocusOnClose } from '../../composables/useRestoreFocusOnClose';
 import { useTransitionVisibility } from '../../composables/useTransitionVisibility';
 import { useDisableBodyScroll } from '../../composables/useDisableBodyScroll';
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 
 export type LightboxProps = VueToJSXProps<BaseLightboxProps, 'theme' | 'aria-label' | 'aria-labelledby'> & {
     /** Reference to the element that triggered lightbox opening (gets focus back on close). */
@@ -113,7 +113,7 @@ const Lightbox = defineComponent(
         };
     },
     {
-        name: 'LumxLightbox',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<LightboxProps>()(
             'class',

@@ -9,7 +9,7 @@ import {
 } from '@lumx/core/js/components/Menu/MenuList';
 
 import { useClassName } from '../../composables/useClassName';
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 
 import { useMenuContext } from './context';
 import { useMenuOpen } from './useMenuOpen';
@@ -52,7 +52,7 @@ const MenuList = defineComponent(
             });
     },
     {
-        name: 'LumxMenuList',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<MenuListProps>()('class'),
     },

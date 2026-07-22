@@ -1,9 +1,9 @@
 import { computed, defineComponent, useAttrs } from 'vue';
 
-import { getHeadingProps, type HeadingProps } from '@lumx/core/js/components/Heading';
+import { COMPONENT_NAME, getHeadingProps, type HeadingProps } from '@lumx/core/js/components/Heading';
 import { useClassName } from '@lumx/vue/composables/useClassName';
 
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { Text } from '../text';
 import { useHeadingLevel } from './useHeadingLevel';
 
@@ -40,7 +40,7 @@ const Heading = defineComponent(
         return () => <Text {...uiProps.value}>{slots.default?.()}</Text>;
     },
     {
-        name: 'Heading',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         // Redefine properties so that they come in as `props` on the `defineComponent` function
         props: keysOf<HeadingVueProps>()(

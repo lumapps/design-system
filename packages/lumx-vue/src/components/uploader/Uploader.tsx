@@ -14,7 +14,7 @@ import { useTheme } from '../../composables/useTheme';
 import { useClassName } from '../../composables/useClassName';
 import { useDisableStateProps } from '../../composables/useDisableStateProps';
 import { useId } from '../../composables/useId';
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 
 type VueFileInputProps = {
     /** Accepted file types. */
@@ -117,7 +117,7 @@ const Uploader = defineComponent(
         };
     },
     {
-        name: 'LumxUploader',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<UploaderProps>()(
             'class',

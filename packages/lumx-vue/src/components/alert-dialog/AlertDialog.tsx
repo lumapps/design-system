@@ -5,7 +5,7 @@ import type { GenericProps, JSXElement } from '@lumx/core/js/types';
 
 import { useId } from '../../composables/useId';
 import { useClassName } from '../../composables/useClassName';
-import { keysOf, type ClassValue } from '../../utils/VueToJSX';
+import { getName, keysOf, type ClassValue } from '../../utils/VueToJSX';
 
 import Dialog from '../dialog/Dialog';
 import Button from '../button/Button';
@@ -117,7 +117,7 @@ const AlertDialog = defineComponent(
         };
     },
     {
-        name: COMPONENT_NAME,
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<AlertDialogProps>()(
             'class',

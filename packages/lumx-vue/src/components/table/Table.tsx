@@ -1,8 +1,9 @@
 import { defineComponent, useAttrs } from 'vue';
 import { Table as UI, type TableProps as UIProps } from '@lumx/core/js/components/Table';
+import { COMPONENT_NAME } from '@lumx/core/js/components/Table/constants';
 import { useTheme } from '../../composables/useTheme';
 import { useClassName } from '../../composables/useClassName';
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { JSXElement } from '@lumx/core/js/types';
 
 export type TableProps = VueToJSXProps<UIProps>;
@@ -26,7 +27,7 @@ const Table = defineComponent(
         };
     },
     {
-        name: 'LumxTable',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<TableProps>()('class', 'hasBefore', 'hasDividers', 'theme'),
     },

@@ -1,11 +1,11 @@
 import { computed, defineComponent, useAttrs, useTemplateRef, type VNodeArrayChildren } from 'vue';
 
-import { getTextProps, type TextProps as UIProps } from '@lumx/core/js/components/Text';
+import { getTextProps, type TextProps as UIProps, COMPONENT_NAME } from '@lumx/core/js/components/Text';
 import { useClassName } from '@lumx/vue/composables/useClassName';
 
 import { useOverflowTooltipLabel } from '../../composables/useOverflowTooltipLabel';
 import { useSlot } from '../../composables/useSlot';
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { wrapChildrenIconWithSpaces } from '../../utils/wrapChildrenIconWithSpaces';
 
 export type TextProps = VueToJSXProps<UIProps>;
@@ -57,7 +57,7 @@ const Text = defineComponent(
         };
     },
     {
-        name: 'LumxText',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         // Redefine properties so that they come in as `props` on the `defineComponent` function
         props: keysOf<TextProps>()(

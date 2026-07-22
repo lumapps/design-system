@@ -3,6 +3,7 @@ import { defineComponent, useAttrs } from 'vue';
 import {
     Avatar as AvatarUI,
     type AvatarProps as UIProps,
+    COMPONENT_NAME,
     DEFAULT_PROPS,
     element,
     type AvatarSize,
@@ -12,7 +13,7 @@ import type { GenericProps, JSXElement } from '@lumx/core/js/types';
 
 import { useTheme } from '../../composables/useTheme';
 import { useClassName } from '../../composables/useClassName';
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { Thumbnail, type ThumbnailProps } from '../thumbnail';
 
 export type { AvatarSize };
@@ -81,7 +82,7 @@ const Avatar = defineComponent(
         };
     },
     {
-        name: 'LumxAvatar',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<AvatarProps>()('image', 'alt', 'size', 'theme', 'linkProps', 'linkAs', 'thumbnailProps', 'class'),
         emits: emitSchema,

@@ -8,7 +8,7 @@ import {
     COMPONENT_NAME as MENU_POPOVER_COMPONENT_NAME,
 } from '@lumx/core/js/components/Menu/MenuPopover';
 
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { FlexBox } from '../flex-box';
 import { Popover } from '../popover';
 
@@ -43,7 +43,7 @@ const MenuPopover = defineComponent(
             );
     },
     {
-        name: 'LumxMenuPopover',
+        name: getName(MENU_POPOVER_COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<MenuPopoverProps>()('placement', 'class'),
     },

@@ -4,13 +4,14 @@ import {
     ListItem as ListItemUI,
     type ListItemProps as UIProps,
     type ListItemSize,
+    COMPONENT_NAME,
 } from '@lumx/core/js/components/List/ListItem';
 import type { JSXElement } from '@lumx/core/js/types';
 
 import { useDisableStateProps } from '../../composables/useDisableStateProps';
 import { useClassName } from '../../composables/useClassName';
 import { useHasEventListener } from '../../composables/useHasEventListener';
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import ListItemAction from './ListItemAction';
 
 export type { ListItemSize };
@@ -64,7 +65,7 @@ const ListItem = defineComponent(
         };
     },
     {
-        name: 'LumxListItem',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<ListItemProps>()(
             'isHighlighted',

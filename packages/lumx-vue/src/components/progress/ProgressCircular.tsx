@@ -10,7 +10,7 @@ import {
 } from '@lumx/core/js/components/ProgressCircular';
 import { useTheme } from '../../composables/useTheme';
 import { useClassName } from '../../composables/useClassName';
-import { keysOf, type VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, type VueToJSXProps } from '../../utils/VueToJSX';
 
 export type ProgressCircularProps = VueToJSXProps<UIProps, 'ref' | 'svgProps' | 'circleProps'>;
 
@@ -42,7 +42,7 @@ const ProgressCircular = defineComponent(
         };
     },
     {
-        name: 'LumxProgressCircular',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<ProgressCircularProps>()('class', 'size', 'display', 'theme'),
     },

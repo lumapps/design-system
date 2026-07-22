@@ -1,10 +1,10 @@
 import { defineComponent, useAttrs } from 'vue';
 
-import { Icon as IconUI, type IconProps as UIProps } from '@lumx/core/js/components/Icon';
+import { Icon as IconUI, type IconProps as UIProps, COMPONENT_NAME } from '@lumx/core/js/components/Icon';
 
 import { useTheme } from '../../composables/useTheme';
 import { useClassName } from '../../composables/useClassName';
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 
 export type IconProps = VueToJSXProps<UIProps>;
 
@@ -25,7 +25,7 @@ const Icon = defineComponent(
         );
     },
     {
-        name: 'Icon',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         // Redefine properties so that they come in as `props` on the `defineComponent` function
         props: keysOf<IconProps>()(

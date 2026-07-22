@@ -11,7 +11,7 @@ import {
 } from '@lumx/core/js/components/Combobox/ComboboxSection';
 import type { JSXElement } from '@lumx/core/js/types';
 
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { useWatchDisposable } from '../../composables/useWatchDisposable';
 import { ListSection } from '../list';
 import { useComboboxContext } from './context/ComboboxContext';
@@ -71,7 +71,7 @@ const ComboboxSection = defineComponent(
         };
     },
     {
-        name: 'LumxComboboxSection',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<ComboboxSectionProps>()('label', 'icon', 'class'),
     },

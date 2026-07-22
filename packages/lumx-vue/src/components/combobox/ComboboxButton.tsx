@@ -10,7 +10,7 @@ import {
 import { setupComboboxButton } from '@lumx/core/js/components/Combobox/setupComboboxButton';
 
 import { useClassName } from '../../composables/useClassName';
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { Button } from '../button';
 import { Tooltip } from '../tooltip';
 import { useComboboxContext } from './context/ComboboxContext';
@@ -102,7 +102,7 @@ const ComboboxButton = defineComponent(
         };
     },
     {
-        name: 'LumxComboboxButton',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<ComboboxButtonProps>()(
             'class',

@@ -3,6 +3,7 @@ import { computed, defineComponent, type Ref, unref, toRef } from 'vue';
 import {
     Popover as PopoverUI,
     type PopoverProps as CorePopoverProps,
+    COMPONENT_NAME,
     DEFAULT_PROPS,
 } from '@lumx/core/js/components/Popover';
 import { type Placement, POPOVER_ZINDEX } from '@lumx/core/js/components/Popover/constants';
@@ -14,7 +15,7 @@ import { useCallbackOnEscape } from '../../composables/useCallbackOnEscape';
 import { useClassName } from '../../composables/useClassName';
 import { Portal } from '../../utils/Portal/Portal';
 import { ClickAwayProvider } from '../../utils/ClickAway/ClickAwayProvider';
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 
 import { usePopoverStyle } from './usePopoverStyle';
 import { useFocusTrap } from '../../composables/useFocusTrap';
@@ -135,7 +136,7 @@ const Popover = defineComponent(
             );
     },
     {
-        name: 'LumxPopover',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<PopoverProps>()(
             'anchorRef',

@@ -3,6 +3,7 @@ import { computed, defineComponent, ref, toRaw, useAttrs } from 'vue';
 import {
     IconButton as IconButtonUI,
     type IconButtonProps as UIProps,
+    COMPONENT_NAME,
 } from '@lumx/core/js/components/Button/IconButton';
 
 import { Tooltip, type TooltipProps } from '../tooltip/Tooltip';
@@ -10,7 +11,7 @@ import { useTheme } from '../../composables/useTheme';
 import { useClassName } from '../../composables/useClassName';
 import { useAttrFallback } from '../../composables/useAttrFallback';
 import { useDisableStateProps } from '../../composables/useDisableStateProps';
-import { type HyphenatedAriaProps, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, type HyphenatedAriaProps, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 
 export type IconButtonProps = Omit<VueToJSXProps<UIProps>, HyphenatedAriaProps> & {
     /**
@@ -84,7 +85,7 @@ const IconButton = defineComponent(
         };
     },
     {
-        name: 'IconButton',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         // Redefine properties so that they come in as `props` on the `defineComponent` function
         props: keysOf<IconButtonProps>()(

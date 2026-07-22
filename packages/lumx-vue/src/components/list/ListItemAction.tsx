@@ -1,13 +1,13 @@
 import { computed, defineComponent, useAttrs } from 'vue';
 
-import { ListItemAction as ListItemActionUI } from '@lumx/core/js/components/List/ListItemAction';
+import { ListItemAction as ListItemActionUI, COMPONENT_NAME } from '@lumx/core/js/components/List/ListItemAction';
 import type { BaseClickableProps, ClickableElement } from '@lumx/core/js/components/RawClickable';
 import type { HasClassName, JSXElement } from '@lumx/core/js/types';
 
 import { classNames } from '@lumx/core/js/utils';
 import { useDisableStateProps } from '../../composables/useDisableStateProps';
 import { useClassName } from '../../composables/useClassName';
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 
 export type ListItemActionProps = VueToJSXProps<BaseClickableProps & HasClassName> & {
     /** Customize the rendered element. */
@@ -57,7 +57,7 @@ const ListItemAction = defineComponent(
         };
     },
     {
-        name: 'LumxListItemAction',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<ListItemActionProps>()('as', 'href', 'class', 'isDisabled', 'disabled', 'aria-disabled'),
         emits: emitSchema,

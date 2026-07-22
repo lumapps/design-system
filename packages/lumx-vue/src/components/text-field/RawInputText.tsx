@@ -7,7 +7,7 @@ import {
 
 import { useTheme } from '../../composables/useTheme';
 import { useClassName } from '../../composables/useClassName';
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 
 export type RawInputTextProps = VueToJSXProps<UIProps>;
 
@@ -70,7 +70,7 @@ const RawInputText = defineComponent(
         };
     },
     {
-        name: 'LumxRawInputText',
+        name: getName('RawInputText'),
         inheritAttrs: false,
         props: keysOf<RawInputTextProps>()('class', 'theme', 'value', 'type', 'name'),
         emits: emitSchema,

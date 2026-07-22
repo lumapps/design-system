@@ -11,7 +11,7 @@ import {
 
 import { useTheme } from '../../composables/useTheme';
 import { useClassName } from '../../composables/useClassName';
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 
 export type SkeletonRectangleProps = VueToJSXProps<UIProps>;
 
@@ -41,7 +41,7 @@ const SkeletonRectangle = defineComponent(
         };
     },
     {
-        name: 'SkeletonRectangle',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<SkeletonRectangleProps>()('class', 'aspectRatio', 'height', 'variant', 'width', 'color', 'theme'),
     },

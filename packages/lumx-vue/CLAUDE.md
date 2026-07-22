@@ -39,6 +39,10 @@ Each component directory follows this structure:
 
 Multi-component families (Button, Chip, List, Tabs…) add siblings in the same dir: `ButtonGroup.tsx`, `IconButton.tsx`, etc.
 
+### Component `name`
+
+Every `defineComponent` sets `name: getName(COMPONENT_NAME)` (from `utils/VueToJSX`), producing a `Lumx`-prefixed name (e.g. `LumxButton`). The prefix prevents collisions with native HTML/SVG tags (`button`, `dialog`, `link`, `table`, `text`…) and namespaces components in devtools
+
 ## COMPOSABLES
 
 `src/composables/` — the Vue equivalent of lumx-react hooks (theme, disabled state, focus, keyboard, slots, etc.), each with a co-located `.test.ts`.

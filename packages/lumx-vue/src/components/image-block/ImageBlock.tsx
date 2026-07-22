@@ -12,7 +12,7 @@ import {
 
 import { useTheme } from '../../composables/useTheme';
 import { useClassName } from '../../composables/useClassName';
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { Thumbnail, ThumbnailProps } from '../thumbnail';
 import ImageCaption from './ImageCaption';
 
@@ -55,7 +55,7 @@ const ImageBlock = defineComponent(
         };
     },
     {
-        name: 'LumxImageBlock',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<ImageBlockProps>()(
             'actions',

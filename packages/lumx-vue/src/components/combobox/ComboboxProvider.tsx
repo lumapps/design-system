@@ -1,8 +1,10 @@
 import { defineComponent, onWatcherCleanup, ref, shallowRef, useAttrs, watch } from 'vue';
 
+import { COMBOBOX_PROVIDER_COMPONENT_NAME } from '@lumx/core/js/components/Combobox/constants';
 import type { ComboboxHandle } from '@lumx/core/js/components/Combobox/types';
 
 import { useId } from '../../composables/useId';
+import { getName } from '../../utils/VueToJSX';
 import { provideComboboxContext } from './context/ComboboxContext';
 
 /**
@@ -44,7 +46,7 @@ const ComboboxProvider = defineComponent(
         return () => slots.default?.();
     },
     {
-        name: 'LumxComboboxProvider',
+        name: getName(COMBOBOX_PROVIDER_COMPONENT_NAME),
         inheritAttrs: false,
         props: {},
         emits: {

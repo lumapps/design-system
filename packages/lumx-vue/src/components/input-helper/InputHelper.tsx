@@ -1,11 +1,15 @@
 import { defineComponent, useAttrs } from 'vue';
 
-import { InputHelper as InputHelperUI, type InputHelperProps as UIProps } from '@lumx/core/js/components/InputHelper';
+import {
+    InputHelper as InputHelperUI,
+    type InputHelperProps as UIProps,
+    COMPONENT_NAME,
+} from '@lumx/core/js/components/InputHelper';
 import type { JSXElement } from '@lumx/core/js/types';
 
 import { useTheme } from '../../composables/useTheme';
 import { useClassName } from '../../composables/useClassName';
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 
 export type InputHelperProps = VueToJSXProps<UIProps>;
 
@@ -32,7 +36,7 @@ const InputHelper = defineComponent(
         );
     },
     {
-        name: 'InputHelper',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         // Redefine properties so that they come in as `props` on the `defineComponent` function
         props: keysOf<InputHelperProps>()('kind', 'theme', 'class', 'id'),

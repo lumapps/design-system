@@ -9,7 +9,7 @@ import {
 } from '@lumx/core/js/components/Combobox/ComboboxOptionSkeleton';
 import type { JSXElement } from '@lumx/core/js/types';
 
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { useClassName } from '../../composables/useClassName';
 import { useWatchDisposable } from '../../composables/useWatchDisposable';
 import { useComboboxContext } from './context/ComboboxContext';
@@ -46,7 +46,7 @@ const ComboboxOptionSkeleton = defineComponent(
         };
     },
     {
-        name: 'LumxComboboxOptionSkeleton',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<ComboboxOptionSkeletonProps>()('hasDescription', 'count', 'class'),
     },

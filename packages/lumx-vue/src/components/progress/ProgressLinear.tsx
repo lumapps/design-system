@@ -8,7 +8,7 @@ import {
 } from '@lumx/core/js/components/ProgressLinear';
 import { useTheme } from '../../composables/useTheme';
 import { useClassName } from '../../composables/useClassName';
-import { keysOf, type VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, type VueToJSXProps } from '../../utils/VueToJSX';
 
 export type ProgressLinearProps = VueToJSXProps<UIProps, 'ref'>;
 
@@ -32,7 +32,7 @@ const ProgressLinear = defineComponent(
         };
     },
     {
-        name: 'LumxProgressLinear',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<ProgressLinearProps>()('class', 'theme'),
     },

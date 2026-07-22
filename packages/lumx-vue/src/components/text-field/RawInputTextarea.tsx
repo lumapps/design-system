@@ -8,7 +8,7 @@ import {
 
 import { useTheme } from '../../composables/useTheme';
 import { useClassName } from '../../composables/useClassName';
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { useFitRowsToContent } from './useFitRowsToContent';
 
 export type RawInputTextareaProps = VueToJSXProps<UIProps>;
@@ -80,7 +80,7 @@ const RawInputTextarea = defineComponent(
         };
     },
     {
-        name: 'LumxRawInputTextarea',
+        name: getName('RawInputTextarea'),
         inheritAttrs: false,
         props: keysOf<RawInputTextareaProps>()('class', 'theme', 'value', 'rows', 'name'),
         emits: emitSchema,

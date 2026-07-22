@@ -1,7 +1,11 @@
 import { defineComponent, useAttrs } from 'vue';
-import { TableHeader as UI, type TableHeaderProps as UIProps } from '@lumx/core/js/components/Table/TableHeader';
+import {
+    TableHeader as UI,
+    type TableHeaderProps as UIProps,
+    COMPONENT_NAME,
+} from '@lumx/core/js/components/Table/TableHeader';
 import { useClassName } from '../../composables/useClassName';
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { JSXElement } from '@lumx/core/js/types';
 
 export type TableHeaderProps = VueToJSXProps<UIProps>;
@@ -16,7 +20,7 @@ const TableHeader = defineComponent(
         };
     },
     {
-        name: 'LumxTableHeader',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<TableHeaderProps>()('class'),
     },
