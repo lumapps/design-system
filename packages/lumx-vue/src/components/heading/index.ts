@@ -1,6 +1,4 @@
-import { HeadingProps } from '@lumx/core/js/components/Heading';
-
-import Heading from './Heading';
+import Heading, { type HeadingProps } from './Heading';
 import HeadingLevelProvider from './HeadingLevelProvider';
 import { useHeadingLevel } from './useHeadingLevel';
 

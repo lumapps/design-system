@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `@lumx/react`, `@lumx/vue`:
     -   `Tab`: support rendering as a custom element — `as` prop in React, `action` slot in Vue — e.g. to render navigation links.
+    -   `Dialog`: add `DialogHeading` component — names the enclosing `Dialog`, `Lightbox`, or `PopoverDialog` by linking it via `aria-labelledby` when rendered anywhere inside.
 
 ### Changed
 
