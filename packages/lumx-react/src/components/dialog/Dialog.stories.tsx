@@ -10,7 +10,6 @@ import {
     DatePickerField,
     Emphasis,
     FlexBox,
-    Heading,
     IconButton,
     List,
     ListItem,
@@ -25,6 +24,7 @@ import { loremIpsum } from '@lumx/core/stories/utils/lorem';
 import { setup } from '@lumx/core/js/components/Dialog/Stories';
 
 import { Dialog } from './Dialog';
+import { DialogHeading } from './DialogHeading';
 
 const { meta, ...stories } = setup({
     component: Dialog,
@@ -68,7 +68,7 @@ export const WithHeaderFooterChildren = () => {
             <Dialog isOpen={isOpen} onClose={close} parentElement={buttonRef}>
                 <header>
                     <Toolbar
-                        label={<Heading typography="title">Dialog heading</Heading>}
+                        label={<DialogHeading>Dialog heading</DialogHeading>}
                         after={<IconButton label="Close" emphasis="low" icon={mdiClose} />}
                     />
                 </header>

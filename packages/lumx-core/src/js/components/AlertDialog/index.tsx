@@ -2,7 +2,7 @@ import { mdiAlert, mdiAlertCircle, mdiCheckCircle, mdiInformation } from '@lumx/
 import { ColorPalette, Emphasis, Kind, Size } from '../../constants';
 import type { LumxClassName, JSXElement, HasClassName, CommonRef } from '../../types';
 import { classNames } from '../../utils';
-import { DialogProps } from '../Dialog';
+import { DialogShellProps } from '../Dialog';
 
 export interface BaseAlertDialogProps {
     /** Message variant. */
@@ -15,7 +15,7 @@ export interface BaseAlertDialogProps {
     children?: JSXElement;
 }
 
-export interface AlertDialogProps extends HasClassName, BaseAlertDialogProps, Pick<DialogProps, 'size'> {
+export interface AlertDialogProps extends HasClassName, BaseAlertDialogProps, Pick<DialogShellProps, 'size'> {
     /** Props forwarded to the confirm button */
     confirmProps: any;
     /**

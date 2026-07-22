@@ -80,3 +80,4 @@ All shared interfaces live in `src/js/types/`. Key ones:
 -   No React/Vue imports allowed in this package — keep it framework-agnostic
 -   JSX in this package uses a custom transform (`JSXElement` type, not `React.ReactElement`)
 -   SCSS compilation happens as part of the Rollup build; don't import SCSS from JS
+-   `src/js/utils/index.ts` is the public NPM surface for utils — only re-export a util there if it's meant to be consumed outside this repo. Utils shared across `@lumx/core`/`@lumx/react`/`@lumx/vue` but not meant for external consumers should stay as deep imports (e.g. `@lumx/core/js/utils/<name>`) and be left out of that barrel
