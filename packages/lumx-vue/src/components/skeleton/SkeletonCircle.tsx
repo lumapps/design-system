@@ -10,7 +10,7 @@ import {
 
 import { useTheme } from '../../composables/useTheme';
 import { useClassName } from '../../composables/useClassName';
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 
 export type SkeletonCircleProps = VueToJSXProps<UIProps>;
 
@@ -40,7 +40,7 @@ const SkeletonCircle = defineComponent(
         };
     },
     {
-        name: 'LumxSkeletonCircle',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<SkeletonCircleProps>()('class', 'size', 'color', 'theme'),
     },

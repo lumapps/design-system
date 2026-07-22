@@ -19,7 +19,7 @@ import type { JSXElement } from '@lumx/core/js/types';
 
 import { useTheme } from '../../composables/useTheme';
 import { useClassName } from '../../composables/useClassName';
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { classNames } from '@lumx/core/js/utils';
 
 import { Avatar, type AvatarProps } from '../avatar';
@@ -179,7 +179,7 @@ const UserBlock = defineComponent(
         };
     },
     {
-        name: 'LumxUserBlock',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<UserBlockProps>()(
             'avatarProps',

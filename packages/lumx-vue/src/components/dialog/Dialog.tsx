@@ -1,7 +1,13 @@
 import { Comment, computed, defineComponent, ref, type Ref } from 'vue';
 import { useIntersectionObserver } from '@vueuse/core';
 
-import { Dialog as UI, type BaseDialogProps, type DialogSizes, DEFAULT_PROPS } from '@lumx/core/js/components/Dialog';
+import {
+    Dialog as UI,
+    type BaseDialogProps,
+    type DialogSizes,
+    COMPONENT_NAME,
+    DEFAULT_PROPS,
+} from '@lumx/core/js/components/Dialog';
 import { DIALOG_TRANSITION_DURATION } from '@lumx/core/js/constants';
 import type { GenericProps, HasCloseMode, JSXElement } from '@lumx/core/js/types';
 
@@ -17,7 +23,7 @@ import { useFocusTrap } from '../../composables/useFocusTrap';
 import { useRestoreFocusOnClose } from '../../composables/useRestoreFocusOnClose';
 import { useTransitionVisibility } from '../../composables/useTransitionVisibility';
 import { useDisableBodyScroll } from '../../composables/useDisableBodyScroll';
-import { keysOf, type ClassValue } from '../../utils/VueToJSX';
+import { getName, keysOf, type ClassValue } from '../../utils/VueToJSX';
 
 export type DialogProps = Pick<BaseDialogProps, 'forceFooterDivider' | 'forceHeaderDivider' | 'isLoading'> &
     HasCloseMode & {
@@ -185,7 +191,7 @@ const Dialog = defineComponent(
         };
     },
     {
-        name: 'LumxDialog',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<DialogProps>()(
             'class',

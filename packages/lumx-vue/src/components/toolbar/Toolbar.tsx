@@ -3,16 +3,16 @@ import {
     Toolbar as ToolbarUI,
     type ToolbarProps as UIProps,
     CLASSNAME,
-    TOOLBAR_NAME,
+    COMPONENT_NAME,
     DEFAULT_PROPS,
 } from '@lumx/core/js/components/Toolbar';
 import { useClassName } from '../../composables/useClassName';
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import type { JSXElement } from '@lumx/core/js/types';
 
 export type ToolbarProps = VueToJSXProps<UIProps, 'label' | 'after' | 'before'>;
 
-export { CLASSNAME, TOOLBAR_NAME, DEFAULT_PROPS };
+export { CLASSNAME, COMPONENT_NAME as TOOLBAR_NAME, DEFAULT_PROPS };
 
 const Toolbar = defineComponent(
     (props: ToolbarProps, { slots }) => {
@@ -35,7 +35,7 @@ const Toolbar = defineComponent(
         };
     },
     {
-        name: 'LumxToolbar',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<ToolbarProps>()('class'),
     },

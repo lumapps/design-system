@@ -1,7 +1,11 @@
 import { defineComponent, useAttrs } from 'vue';
-import { TableBody as UI, type TableBodyProps as UIProps } from '@lumx/core/js/components/Table/TableBody';
+import {
+    TableBody as UI,
+    type TableBodyProps as UIProps,
+    COMPONENT_NAME,
+} from '@lumx/core/js/components/Table/TableBody';
 import { useClassName } from '../../composables/useClassName';
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { JSXElement } from '@lumx/core/js/types';
 
 export type TableBodyProps = VueToJSXProps<UIProps>;
@@ -16,7 +20,7 @@ const TableBody = defineComponent(
         };
     },
     {
-        name: 'LumxTableBody',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<TableBodyProps>()('class'),
     },

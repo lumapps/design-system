@@ -1,11 +1,15 @@
 import { defineComponent, useAttrs } from 'vue';
 
-import { InputLabel as InputLabelUI, type InputLabelProps as UIProps } from '@lumx/core/js/components/InputLabel';
+import {
+    InputLabel as InputLabelUI,
+    type InputLabelProps as UIProps,
+    COMPONENT_NAME,
+} from '@lumx/core/js/components/InputLabel';
 import type { JSXElement } from '@lumx/core/js/types';
 
 import { useTheme } from '../../composables/useTheme';
 import { useClassName } from '../../composables/useClassName';
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 
 export type InputLabelProps = VueToJSXProps<UIProps>;
 
@@ -32,7 +36,7 @@ const InputLabel = defineComponent(
         );
     },
     {
-        name: 'InputLabel',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         // Redefine properties so that they come in as `props` on the `defineComponent` function
         props: keysOf<InputLabelProps>()('htmlFor', 'id', 'isRequired', 'typography', 'theme', 'class', 'as'),

@@ -14,7 +14,7 @@ import { type JSXElement } from '@lumx/core/js/types';
 import { useTheme } from '../../composables/useTheme';
 import { useClassName } from '../../composables/useClassName';
 import { useRovingTabIndexContainer } from '../../composables/useRovingTabIndexContainer';
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { TAB_PROVIDER_INJECT_KEY } from './state';
 
 // aria-label is excluded from declared Vue props — Vue treats aria-* as attrs,
@@ -70,7 +70,7 @@ const TabList = defineComponent(
         };
     },
     {
-        name: 'LumxTabList',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<InternalProps>()('layout', 'position', 'theme', 'class'),
     },

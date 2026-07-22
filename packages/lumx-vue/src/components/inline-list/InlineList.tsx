@@ -1,10 +1,14 @@
 import { defineComponent, useAttrs } from 'vue';
 
-import { InlineList as InlineListUI, type InlineListProps as UIProps } from '@lumx/core/js/components/InlineList';
+import {
+    InlineList as InlineListUI,
+    type InlineListProps as UIProps,
+    COMPONENT_NAME,
+} from '@lumx/core/js/components/InlineList';
 import { type JSXElement } from '@lumx/core/js/types';
 
 import { useClassName } from '../../composables/useClassName';
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 
 export type InlineListProps = VueToJSXProps<UIProps, 'items'>;
 
@@ -24,7 +28,7 @@ const InlineList = defineComponent(
         );
     },
     {
-        name: 'LumxInlineList',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<InlineListProps>()('color', 'colorVariant', 'typography', 'wrap', 'class'),
     },

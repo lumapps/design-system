@@ -4,9 +4,10 @@ import {
     type TableCellProps as UIProps,
     ThOrder,
     TableCellVariant,
+    COMPONENT_NAME,
 } from '@lumx/core/js/components/Table/TableCell';
 import { useClassName } from '../../composables/useClassName';
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { JSXElement } from '@lumx/core/js/types';
 import { useHasEventListener } from '@lumx/vue/composables/useHasEventListener';
 
@@ -46,7 +47,7 @@ const TableCell = defineComponent(
         };
     },
     {
-        name: 'LumxTableCell',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<TableCellProps>()('class', 'icon', 'isSortable', 'sortOrder', 'variant'),
         emits: emitSchema,

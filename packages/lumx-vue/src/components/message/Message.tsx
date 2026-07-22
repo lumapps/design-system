@@ -1,9 +1,9 @@
 import { defineComponent, useAttrs } from 'vue';
-import { Message as MessageUI, type MessageProps as UIProps } from '@lumx/core/js/components/Message';
+import { Message as MessageUI, type MessageProps as UIProps, COMPONENT_NAME } from '@lumx/core/js/components/Message';
 import type { JSXElement } from '@lumx/core/js/types';
 
 import { useClassName } from '../../composables/useClassName';
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 
 export type MessageProps = VueToJSXProps<Omit<UIProps, 'closeButtonProps'>> & {
     /** label to be used for the close button */
@@ -45,7 +45,7 @@ const Message = defineComponent(
         );
     },
     {
-        name: 'Message',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         // Redefine properties so that they come in as `props` on the `defineComponent` function
         props: keysOf<MessageProps>()('hasBackground', 'icon', 'kind', 'class', 'closeButtonLabel'),

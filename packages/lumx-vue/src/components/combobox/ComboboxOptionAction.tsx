@@ -11,7 +11,7 @@ import type { JSXElement } from '@lumx/core/js/types';
 import { useId } from '../../composables/useId';
 import { useClassName } from '../../composables/useClassName';
 import { useDisableStateProps } from '../../composables/useDisableStateProps';
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 
 export type ComboboxOptionActionProps = Pick<VueToJSXProps<UIProps>, 'isDisabled' | 'class'> & {
     /** On click callback. */
@@ -48,7 +48,7 @@ const ComboboxOptionAction = defineComponent(
         };
     },
     {
-        name: 'LumxComboboxOptionAction',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<ComboboxOptionActionProps>()('isDisabled', 'onClick', 'class'),
     },

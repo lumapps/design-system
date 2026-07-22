@@ -11,7 +11,7 @@ import {
 } from '@lumx/core/js/components/Combobox/ComboboxOptionMoreInfo';
 import type { JSXElement } from '@lumx/core/js/types';
 
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { IconButton } from '../button';
 import { Popover } from '../popover';
 import { useComboboxOptionContext } from './context/ComboboxOptionContext';
@@ -113,7 +113,7 @@ const ComboboxOptionMoreInfo = defineComponent(
         };
     },
     {
-        name: 'LumxComboboxOptionMoreInfo',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<ComboboxOptionMoreInfoProps>()('class', 'onToggle'),
         emits: {

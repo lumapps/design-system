@@ -3,10 +3,11 @@ import { defineComponent, useAttrs } from 'vue';
 import {
     ListDivider as ListDividerUI,
     type ListDividerProps as UIProps,
+    COMPONENT_NAME,
 } from '@lumx/core/js/components/List/ListDivider';
 
 import { useClassName } from '../../composables/useClassName';
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 
 export type ListDividerProps = VueToJSXProps<UIProps>;
 
@@ -24,7 +25,7 @@ const ListDivider = defineComponent(
         return () => <ListDividerUI {...attrs} className={className.value} />;
     },
     {
-        name: 'LumxListDivider',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<ListDividerProps>()('class'),
     },

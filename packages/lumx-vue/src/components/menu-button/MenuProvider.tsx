@@ -1,8 +1,10 @@
 import { defineComponent, onMounted, onUnmounted, ref, useSlots } from 'vue';
 
+import { MENU_PROVIDER_COMPONENT_NAME } from '@lumx/core/js/components/Menu/constants';
 import { setupMenu } from '@lumx/core/js/components/Menu/setupMenu';
 
 import { useId } from '../../composables/useId';
+import { getName } from '../../utils/VueToJSX';
 
 import { provideMenuContext } from './context';
 
@@ -39,7 +41,7 @@ const MenuProvider = defineComponent(
         return () => slots.default?.();
     },
     {
-        name: 'LumxMenuProvider',
+        name: getName(MENU_PROVIDER_COMPONENT_NAME),
         inheritAttrs: false,
         props: {
             onOpen: { type: Function as any, default: undefined },

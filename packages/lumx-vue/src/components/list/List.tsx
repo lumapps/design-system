@@ -1,10 +1,10 @@
 import { defineComponent, useAttrs } from 'vue';
 
-import { List as ListUI, type ListProps as UIProps } from '@lumx/core/js/components/List';
+import { List as ListUI, type ListProps as UIProps, COMPONENT_NAME } from '@lumx/core/js/components/List';
 import type { JSXElement } from '@lumx/core/js/types';
 
 import { useClassName } from '../../composables/useClassName';
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 
 export type ListProps = VueToJSXProps<UIProps>;
 
@@ -24,7 +24,7 @@ const List = defineComponent(
         );
     },
     {
-        name: 'LumxList',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<ListProps>()('itemPadding', 'class'),
     },

@@ -8,7 +8,7 @@ import {
 } from '@lumx/core/js/components/Combobox/ComboboxState';
 import { subscribeComboboxState } from '@lumx/core/js/components/Combobox/subscribeComboboxState';
 
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { useWatchDisposable } from '../../composables/useWatchDisposable';
 import { GenericBlock } from '../generic-block';
 import { Text } from '../text';
@@ -66,7 +66,7 @@ const ComboboxState = defineComponent(
         };
     },
     {
-        name: 'LumxComboboxState',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<ComboboxStateProps>()(
             'emptyMessage',

@@ -15,6 +15,7 @@ import { toggleSelection } from '@lumx/core/js/utils/select/toggleSelection';
 import {
     DEFAULT_PROPS,
     CLASSNAME,
+    COMPONENT_NAME,
     SelectButton as UI,
     type SelectButtonProps as UIProps,
 } from '@lumx/core/js/components/SelectButton';
@@ -23,7 +24,7 @@ import { CLASSNAME as COMBOBOX_POPOVER_CLASSNAME } from '@lumx/core/js/component
 import { InfiniteScroll } from '@lumx/vue/utils/InfiniteScroll';
 import { JSXElement } from '@lumx/core/js/types';
 
-import { keysOf, type EmitsOf } from '../../utils/VueToJSX';
+import { getName, keysOf, type EmitsOf } from '../../utils/VueToJSX';
 import { Combobox } from '../combobox';
 import { Button } from '../button';
 import { useWrappedRenderOptionSlot } from '../combobox/useWrappedRenderOptionSlot';
@@ -284,7 +285,7 @@ const SelectButton = defineComponent(
         };
     },
     {
-        name: 'LumxSelectButton',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         slots: Object as SlotsType<{
             /**

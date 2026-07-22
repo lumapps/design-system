@@ -14,7 +14,7 @@ import { useClassName } from '../../composables/useClassName';
 import { useId } from '../../composables/useId';
 import { useDisableStateProps } from '../../composables/useDisableStateProps';
 import { useSlot } from '../../composables/useSlot';
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { IconButton } from '../button';
 import RawInputText from './RawInputText';
 import RawInputTextarea from './RawInputTextarea';
@@ -202,7 +202,7 @@ const TextField = defineComponent(
         };
     },
     {
-        name: 'LumxTextField',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<TextFieldProps>()(
             'class',

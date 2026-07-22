@@ -12,11 +12,11 @@ import {
 import { type BaseSelectTextFieldWrapperProps } from '@lumx/core/js/utils/select/types';
 import { getOptionDisplayName } from '@lumx/core/js/utils/select/getOptionDisplayName';
 import { toggleSelection } from '@lumx/core/js/utils/select/toggleSelection';
-import { SelectTextField as UI } from '@lumx/core/js/components/SelectTextField';
+import { SelectTextField as UI, COMPONENT_NAME } from '@lumx/core/js/components/SelectTextField';
 import { CLASSNAME as COMBOBOX_POPOVER_CLASSNAME } from '@lumx/core/js/components/Combobox/ComboboxPopover';
 import type { JSXElement } from '@lumx/core/js/types';
 
-import { keysOf, type ClassValue, type EmitsOf } from '../../utils/VueToJSX';
+import { getName, keysOf, type ClassValue, type EmitsOf } from '../../utils/VueToJSX';
 import { Combobox } from '../combobox';
 import { useWrappedRenderOptionSlot } from '../combobox/useWrappedRenderOptionSlot';
 import { useWrappedRenderSectionTitleSlot } from '../combobox/useWrappedRenderSectionTitleSlot';
@@ -347,7 +347,7 @@ const SelectTextField = defineComponent(
         };
     },
     {
-        name: 'LumxSelectTextField',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<SelectTextFieldProps<unknown>>()(
             'options',

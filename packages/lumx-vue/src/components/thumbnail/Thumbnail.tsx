@@ -16,7 +16,7 @@ import { useTheme } from '../../composables/useTheme';
 import { useClassName } from '../../composables/useClassName';
 import { useDisableStateProps } from '../../composables/useDisableStateProps';
 import { useHasEventListener } from '../../composables/useHasEventListener';
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { useImageLoad } from './useImageLoad';
 import { useFocusPointStyle } from './useFocusPointStyle';
 
@@ -136,7 +136,7 @@ const Thumbnail = defineComponent(
         };
     },
     {
-        name: 'LumxThumbnail',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<ThumbnailProps>()(
             'align',

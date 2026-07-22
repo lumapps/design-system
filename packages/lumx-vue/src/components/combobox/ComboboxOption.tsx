@@ -12,7 +12,7 @@ import type { JSXElement } from '@lumx/core/js/types';
 import { useId } from '../../composables/useId';
 import { useClassName } from '../../composables/useClassName';
 import { useWatchDisposable } from '../../composables/useWatchDisposable';
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { Tooltip } from '../tooltip';
 import type { TooltipProps } from '../tooltip/Tooltip';
 import { useComboboxContext } from './context/ComboboxContext';
@@ -118,7 +118,7 @@ const ComboboxOption = defineComponent(
         };
     },
     {
-        name: 'LumxComboboxOption',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<ComboboxOptionProps>()(
             'value',

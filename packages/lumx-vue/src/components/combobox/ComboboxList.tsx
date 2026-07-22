@@ -9,7 +9,7 @@ import {
 import type { JSXElement } from '@lumx/core/js/types';
 
 import { useClassName } from '../../composables/useClassName';
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { useWatchDisposable } from '../../composables/useWatchDisposable';
 import { useComboboxContext } from './context/ComboboxContext';
 import { useComboboxEvent } from './context/useComboboxEvent';
@@ -72,7 +72,7 @@ const ComboboxList = defineComponent(
         };
     },
     {
-        name: 'LumxComboboxList',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         // Note: 'aria-label' is intentionally NOT declared as a prop because Vue normalizes
         // hyphenated prop names to camelCase (ariaLabel) internally, making it inaccessible

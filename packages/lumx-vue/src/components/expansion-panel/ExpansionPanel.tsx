@@ -15,7 +15,7 @@ import type { JSXElement } from '@lumx/core/js/types';
 import IconButton from '../button/IconButton';
 import { useTheme } from '../../composables/useTheme';
 import { useClassName } from '../../composables/useClassName';
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 
 export type ExpansionPanelProps = VueToJSXProps<UIProps, ExpansionPanelPropsToOverride> & {
     /** Props to pass to the toggle button (minus those already set by the ExpansionPanel). */
@@ -121,7 +121,7 @@ const ExpansionPanel = defineComponent(
         };
     },
     {
-        name: 'LumxExpansionPanel',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<ExpansionPanelProps>()(
             'class',

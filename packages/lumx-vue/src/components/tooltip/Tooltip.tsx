@@ -7,6 +7,7 @@ import {
     type TooltipPlacement,
     DEFAULT_PROPS,
     ARROW_SIZE,
+    COMPONENT_NAME,
 } from '@lumx/core/js/components/Tooltip';
 
 import { useId } from '../../composables/useId';
@@ -15,7 +16,7 @@ import { useCallbackOnEscape } from '../../composables/useCallbackOnEscape';
 import { useTooltipOpen } from './useTooltipOpen';
 import { useInjectTooltipRef } from './useInjectTooltipRef';
 import { provideTooltipContext } from './context';
-import { keysOf, type ClassValue } from '../../utils/VueToJSX';
+import { getName, keysOf, type ClassValue } from '../../utils/VueToJSX';
 import { Portal } from '../../utils/Portal';
 
 export type { TooltipPlacement };
@@ -116,7 +117,7 @@ export const Tooltip = defineComponent(
         };
     },
     {
-        name: 'LumxTooltip',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<TooltipProps>()(
             'label',

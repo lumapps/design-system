@@ -10,7 +10,7 @@ import {
 import { setupComboboxInput } from '@lumx/core/js/components/Combobox/setupComboboxInput';
 
 import { useClassName } from '../../composables/useClassName';
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import type { TextFieldProps } from '../text-field/TextField';
 import { TextField } from '../text-field';
 import { IconButton } from '../button';
@@ -134,7 +134,7 @@ const ComboboxInput = defineComponent(
         };
     },
     {
-        name: 'LumxComboboxInput',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<ComboboxInputProps>()(
             'class',

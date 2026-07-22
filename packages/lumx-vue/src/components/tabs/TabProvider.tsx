@@ -1,7 +1,9 @@
 import { defineComponent, provide, ref, watch } from 'vue';
 
+import { TAB_PROVIDER_COMPONENT_NAME } from '@lumx/core/js/components/Tabs/constants';
 import { INIT_STATE, reducer, type Action, type State } from '@lumx/core/js/components/Tabs/state';
 
+import { getName } from '../../utils/VueToJSX';
 import { TAB_PROVIDER_INJECT_KEY } from './state';
 
 export interface TabProviderProps {
@@ -71,7 +73,7 @@ const TabProvider = defineComponent(
         return () => slots.default?.();
     },
     {
-        name: 'LumxTabProvider',
+        name: getName(TAB_PROVIDER_COMPONENT_NAME),
         props: {
             activeTabIndex: { required: false },
             isLazy: { required: false },

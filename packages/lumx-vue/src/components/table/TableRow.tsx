@@ -1,8 +1,8 @@
 import { computed, defineComponent, useAttrs } from 'vue';
-import { TableRow as UI, type TableRowProps as UIProps } from '@lumx/core/js/components/Table/TableRow';
+import { TableRow as UI, type TableRowProps as UIProps, COMPONENT_NAME } from '@lumx/core/js/components/Table/TableRow';
 import { useDisableStateProps } from '../../composables/useDisableStateProps';
 import { useClassName } from '../../composables/useClassName';
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { JSXElement } from '@lumx/core/js/types';
 
 export type TableRowProps = VueToJSXProps<UIProps, 'tabIndex' | 'aria-disabled'> & {
@@ -30,7 +30,7 @@ const TableRow = defineComponent(
         };
     },
     {
-        name: 'LumxTableRow',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<TableRowProps>()('class', 'isClickable', 'isDisabled', 'isSelected'),
     },

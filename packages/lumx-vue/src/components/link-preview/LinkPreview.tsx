@@ -11,7 +11,7 @@ import { Link } from '../link';
 import { Thumbnail } from '../thumbnail';
 import { useTheme } from '../../composables/useTheme';
 import { useClassName } from '../../composables/useClassName';
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 
 export type LinkPreviewProps = VueToJSXProps<UIProps, 'TitleHeading' | 'Link' | 'Thumbnail'> & {
     /** Customize the title heading tag. */
@@ -50,7 +50,7 @@ const LinkPreview = defineComponent(
         };
     },
     {
-        name: 'LumxLinkPreview',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<LinkPreviewProps>()(
             'class',

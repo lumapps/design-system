@@ -18,12 +18,12 @@ export interface ToolbarProps extends HasClassName {
 /**
  * Component display name.
  */
-export const TOOLBAR_NAME = 'Toolbar';
+export const COMPONENT_NAME = 'Toolbar';
 
 /**
  * Component default class name and class prefix.
  */
-export const CLASSNAME: LumxClassName<typeof TOOLBAR_NAME> = 'lumx-toolbar';
+export const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-toolbar';
 const { block, element } = classNames.bem(CLASSNAME);
 
 /**

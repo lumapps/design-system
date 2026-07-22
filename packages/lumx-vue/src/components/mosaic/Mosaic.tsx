@@ -4,12 +4,13 @@ import {
     Mosaic as MosaicUI,
     type MosaicProps as UIProps,
     MosaicPropsToOverride,
+    COMPONENT_NAME,
 } from '@lumx/core/js/components/Mosaic';
 
 import { useTheme } from '../../composables/useTheme';
 import { useClassName } from '../../composables/useClassName';
 import { useHasEventListener } from '../../composables/useHasEventListener';
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import Thumbnail, { type ThumbnailProps } from '../thumbnail/Thumbnail';
 
 export type MosaicThumbnailItem = Omit<ThumbnailProps, 'class'> & { onClick?: (event: Event) => void };
@@ -52,7 +53,7 @@ const Mosaic = defineComponent(
         );
     },
     {
-        name: 'LumxMosaic',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<MosaicProps>()('thumbnails', 'theme', 'class'),
         emits: emitSchema,

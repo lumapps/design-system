@@ -4,7 +4,7 @@ import { RadioGroup as RadioGroupUI, CLASSNAME, COMPONENT_NAME } from '@lumx/cor
 import type { JSXElement } from '@lumx/core/js/types';
 
 import { useClassName } from '../../composables/useClassName';
-import { keysOf, type ClassValue } from '../../utils/VueToJSX';
+import { getName, keysOf, type ClassValue } from '../../utils/VueToJSX';
 
 export interface RadioGroupProps {
     /** CSS class name */
@@ -34,7 +34,7 @@ const RadioGroup = defineComponent(
         );
     },
     {
-        name: 'RadioGroup',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<RadioGroupProps>()('class'),
     },

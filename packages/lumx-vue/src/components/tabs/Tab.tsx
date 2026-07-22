@@ -12,7 +12,7 @@ import { classNames } from '@lumx/core/js/utils';
 
 import { useDisableStateProps } from '../../composables/useDisableStateProps';
 import { useClassName } from '../../composables/useClassName';
-import { type HyphenatedAriaProps, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, type HyphenatedAriaProps, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { Icon } from '../icon';
 import { Text } from '../text';
 import { useTabProviderContext } from './state';
@@ -91,7 +91,7 @@ const Tab = defineComponent(
         };
     },
     {
-        name: 'LumxTab',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<TabProps>()('icon', 'iconProps', 'id', 'isActive', 'isDisabled', 'label', 'class'),
         emits: emitSchema,

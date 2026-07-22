@@ -4,12 +4,13 @@ import {
     GenericBlock as GenericBlockUI,
     type GenericBlockProps as UIProps,
     GenericBlockPropsToOverride,
+    COMPONENT_NAME,
 } from '@lumx/core/js/components/GenericBlock';
 import type { JSXElement } from '@lumx/core/js/types';
 
 import { FlexBox as FlexBoxVue, FlexBoxProps } from '../flex-box';
 import { useClassName } from '../../composables/useClassName';
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 
 /** FlexBox section props extended with standard HTML style. */
 type SectionProps = FlexBoxProps & { style?: CSSProperties };
@@ -97,7 +98,7 @@ const GenericBlock = defineComponent(
         };
     },
     {
-        name: 'LumxGenericBlock',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<GenericBlockProps>()(
             'as',

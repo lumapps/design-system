@@ -9,7 +9,7 @@ import {
 } from '@lumx/core/js/components/GridColumn';
 import { type JSXElement } from '@lumx/core/js/types';
 import { useClassName } from '../../composables/useClassName';
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 
 export type GridColumnProps = VueToJSXProps<UIProps>;
 
@@ -31,7 +31,7 @@ const GridColumn = defineComponent(
         );
     },
     {
-        name: 'LumxGridColumn',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<GridColumnProps>()('as', 'class', 'gap', 'itemMinWidth', 'maxColumns', 'style'),
     },

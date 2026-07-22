@@ -4,7 +4,7 @@ import { ImageCaption as UI } from '@lumx/core/js/components/ImageBlock/ImageCap
 import { type HorizontalAlignment, type Theme } from '@lumx/core/js/constants';
 
 import { useTheme } from '../../composables/useTheme';
-import { keysOf, type ClassValue } from '../../utils/VueToJSX';
+import { getName, keysOf, type ClassValue } from '../../utils/VueToJSX';
 import { FlexBox } from '../flex-box';
 import { Text } from '../text';
 
@@ -43,7 +43,7 @@ const ImageCaption = defineComponent(
         };
     },
     {
-        name: 'LumxImageCaption',
+        name: getName('ImageCaption'),
         inheritAttrs: false,
         props: keysOf<ImageCaptionProps>()(
             'align',

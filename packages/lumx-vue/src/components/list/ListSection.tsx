@@ -3,12 +3,13 @@ import { defineComponent, useAttrs } from 'vue';
 import {
     ListSection as ListSectionUI,
     type ListSectionProps as UIProps,
+    COMPONENT_NAME,
 } from '@lumx/core/js/components/List/ListSection';
 import type { JSXElement } from '@lumx/core/js/types';
 
 import { useId } from '../../composables/useId';
 import { useClassName } from '../../composables/useClassName';
-import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { Text } from '../text';
 
 export type ListSectionProps = VueToJSXProps<UIProps, 'id' | 'Text'>;
@@ -37,7 +38,7 @@ const ListSection = defineComponent(
         );
     },
     {
-        name: 'LumxListSection',
+        name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<ListSectionProps>()('label', 'icon', 'itemsWrapperProps', 'class'),
     },
