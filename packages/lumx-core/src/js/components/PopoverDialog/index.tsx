@@ -1,12 +1,15 @@
-import type { HasAriaLabelOrLabelledBy, LumxClassName } from '../../types';
+import type { AriaAttributes, LumxClassName } from '../../types';
 import type { PopoverProps } from '../Popover';
 
 /**
  * PopoverDialog props.
- * The PopoverDialog has the same props as the Popover but requires an accessible label.
+ * The PopoverDialog has the same props as the Popover, plus optional accessible-name props.
+ * An accessible name can be provided via `label`, `aria-label`, `aria-labelledby`, or by
+ * rendering a `DialogHeading` inside the dialog (which names it via the internal label
+ * registry) - at least one of these should be used.
  */
 export type PopoverDialogProps = PopoverProps &
-    HasAriaLabelOrLabelledBy & {
+    Pick<AriaAttributes, 'aria-label' | 'aria-labelledby'> & {
         /** Accessible label for the dialog (alternative to aria-label prop). */
         label?: string;
     };
