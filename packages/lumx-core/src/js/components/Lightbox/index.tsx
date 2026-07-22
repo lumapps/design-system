@@ -1,6 +1,7 @@
 import { mdiClose } from '@lumx/icons';
 import type { AriaAttributes, CommonRef, HasClassName, LumxClassName, HasTheme, JSXElement } from '../../types';
 import { classNames } from '../../utils';
+import { resolveAccessibleNameProps } from '../../utils/aria/resolveAccessibleNameProps';
 
 export interface BaseLightboxProps
     extends HasClassName,
@@ -34,6 +35,12 @@ export interface LightboxProps extends BaseLightboxProps {
     parentElement?: CommonRef;
     /** Reference to the element that should get the focus when the lightbox opens. By default, the close button or the lightbox itself will take focus. */
     focusElement?: CommonRef;
+    /**
+     * Id of the heading naming this lightbox (via the internal ids registry), applied as
+     * `aria-labelledby` on the lightbox container. Overridden by an explicit `aria-label`/
+     * `aria-labelledby`.
+     */
+    labelId?: string;
     /** On close callback. */
     handleClose?(): void;
     /** Children */
@@ -89,6 +96,7 @@ export const Lightbox = (props: LightboxProps) => {
         handleClose,
         parentElement,
         focusElement,
+        labelId,
         preventAutoClose,
         theme,
         zIndex,
@@ -111,8 +119,7 @@ export const Lightbox = (props: LightboxProps) => {
             <div
                 ref={ref}
                 {...forwardedProps}
-                aria-label={ariaLabel}
-                aria-labelledby={ariaLabelledBy}
+                {...resolveAccessibleNameProps(ariaLabel, ariaLabelledBy || labelId)}
                 aria-modal="true"
                 role="dialog"
                 tabIndex={-1}
