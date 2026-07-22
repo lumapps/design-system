@@ -12,7 +12,7 @@
         "@xmldom/xmldom": "^0.8.13",
         "fonteditor-core": "^2.3.2",
         "lodash": "4.18.1",
-        "svgo": "^3.3.3",
+        "svgo": "^3.3.4",
         "svgtofont": "^4.2.3",
         "typescript": "^5.4.3"
     },
