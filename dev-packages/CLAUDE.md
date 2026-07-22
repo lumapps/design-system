@@ -12,6 +12,7 @@ Private packages powering the monorepo build, lint, test, and visual-diff infras
 | `visual-diffs`                              | Playwright-based visual regression tool (`@lumx/visual-diffs`) |
 | `rollup-plugin-fix-esm-imports`             | Rollup plugin: fixes ESM import paths for downstream compat    |
 | `rollup-plugin-optimize-imports-lumx-icons` | Rollup plugin: tree-shakes `@lumx/icons` imports in consumers  |
+| `docgen`                                    | React/Vue docgen (`@lumx/docgen`) powering the site-demo prop-table Gatsby plugin |
 
 ## WHERE TO LOOK
 
@@ -23,6 +24,7 @@ Private packages powering the monorepo build, lint, test, and visual-diff infras
 | Fix Storybook test utilities | `storybook-testing/`                         |
 | Fix Rollup ESM issues        | `rollup-plugin-fix-esm-imports/`             |
 | Fix icon import optimization | `rollup-plugin-optimize-imports-lumx-icons/` |
+| Fix React/Vue prop-table docgen | `docgen/`                                |
 
 ## VISUAL DIFFS
 

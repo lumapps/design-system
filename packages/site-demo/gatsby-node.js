@@ -3,15 +3,10 @@ const { TsconfigPathsPlugin } = require('tsconfig-paths-webpack-plugin');
 
 const fs = require('fs');
 const path = require('path');
-const lodash = require('lodash');
 const { createFilePath } = require('gatsby-source-filesystem');
 const generateJSONIconLibrary = require('@lumx/icons/override/generate/generate-icon-library.cjs');
 const cleanExcerpt = require('./plugins/utils/cleanExcerpt');
-const mdxUtils = require('./plugins/utils/mdxUtils');
 const CONFIGS = require('../../configs');
-
-/** Get page title from slug */
-const slugToTitle = (slug) => lodash.startCase(lodash.last(slug.split('/').filter(Boolean)));
 
 /** Create pages with metadata from parsed MDX content and MDX page template. */
 exports.createPages = async ({ graphql, actions }) => {
@@ -34,7 +29,9 @@ exports.createPages = async ({ graphql, actions }) => {
                             frameworks
                             deprecated
                         }
-                        tableOfContents
+                        frontmatter {
+                            title
+                        }
                         internal {
                             contentFilePath
                         }
@@ -55,7 +52,10 @@ exports.createPages = async ({ graphql, actions }) => {
         if (!slug) {
             continue;
         }
-        const title = mdxUtils.getFirstH1Text(page.node.tableOfContents) || slugToTitle(slug);
+        const title = page.node.frontmatter?.title;
+        if (!title) {
+            throw new Error(`Missing frontmatter "title" for content page at slug "${slug}" (file: ${page.node.internal.contentFilePath})`);
+        }
         const excerpt = cleanExcerpt(page.node.excerpt, title);
         const frameworks = page.node.fields?.frameworks;
         const deprecated = page.node.fields?.deprecated;
