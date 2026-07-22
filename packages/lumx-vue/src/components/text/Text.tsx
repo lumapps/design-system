@@ -34,7 +34,8 @@ const Text = defineComponent(
         const componentProps = computed(() => {
             // Filter out 'children' to avoid Vue warning about read-only DOM property
             const { children: _, ...filteredAttrs } = attrs as any;
-            return { ...filteredAttrs, ...textProps.value };
+            // `id` is a declared prop (not an attr), so forward it to the element explicitly.
+            return { ...filteredAttrs, id: props.id, ...textProps.value };
         });
 
         return () => {
@@ -61,6 +62,7 @@ const Text = defineComponent(
         inheritAttrs: false,
         // Redefine properties so that they come in as `props` on the `defineComponent` function
         props: keysOf<TextProps>()(
+            'id',
             'as',
             'color',
             'colorVariant',
