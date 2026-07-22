@@ -1,6 +1,6 @@
 import { useCallback, useRef, useState } from 'react';
 import { mdiPlay } from '@lumx/icons';
-import { Button, Dialog, Text, Toolbar, type Theme } from '@lumx/react';
+import { Button, Dialog, DialogHeading, Toolbar, type Theme } from '@lumx/react';
 import { classNames } from '@lumx/core/js/utils';
 
 export default ({ theme }: { theme?: Theme }) => {
@@ -16,13 +16,7 @@ export default ({ theme }: { theme?: Theme }) => {
 
             <Dialog isOpen={isOpen} isLoading parentElement={buttonRef} onClose={close}>
                 <header>
-                    <Toolbar
-                        label={
-                            <Text as="span" typography="title">
-                                Default dialog
-                            </Text>
-                        }
-                    />
+                    <Toolbar label={<DialogHeading>Default dialog</DialogHeading>} />
                 </header>
 
                 <p className={classNames.padding('horizontal', 'huge')}>
