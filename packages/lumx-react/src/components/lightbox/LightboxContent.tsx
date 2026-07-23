@@ -90,7 +90,7 @@ export const LightboxContent = forwardRef<LightboxProps, HTMLDivElement>((props,
     }, [isOpen, parentElement]);
 
     // Close lightbox on escape key pressed.
-    useCallbackOnEscape(onClose);
+    useCallbackOnEscape(onClose, isOpen && !preventAutoClose);
 
     const clickAwayRefs = useRef([wrapperRef]);
 
