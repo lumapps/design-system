@@ -46,6 +46,9 @@
         "type": "git",
         "url": "git+https://github.com/lumapps/design-system.git"
     },
+    "resolutions": {
+        "vite": "^7.3.5"
+    },
     "scripts": {
         "build:libs": "nx run-many --target=build --projects=@lumx/icons,@lumx/core,@lumx/react,@lumx/vue",
         "build:site": "yarn workspace lumx-site-demo clean && nx run lumx-site-demo:build",
