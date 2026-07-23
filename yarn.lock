@@ -3187,6 +3187,7 @@ __metadata:
     "@types/lodash": "npm:^4.14.149"
     "@types/react": "npm:^18.3.24"
     "@types/react-dom": "npm:^18.3.7"
+    "@types/use-sync-external-store": "npm:^1.5.0"
     "@vitest/ui": "npm:^4.0.18"
     autoprefixer: "npm:^9.7.4"
     body-scroll-lock: "npm:^3.1.5"
@@ -3207,6 +3208,7 @@ __metadata:
     rollup-plugin-ts-paths-resolve: "npm:^1.7.1"
     storybook: "npm:^10.2.19"
     typescript: "npm:^5.4.3"
+    use-sync-external-store: "npm:^1.6.0"
     vite: "npm:^7.3.5"
     vite-tsconfig-paths: "npm:^5.1.4"
     vitest: "npm:^4.0.18"
@@ -5569,6 +5571,13 @@ __metadata:
   version: 2.0.11
   resolution: "@types/unist@npm:2.0.11"
   checksum: 10/6d436e832bc35c6dde9f056ac515ebf2b3384a1d7f63679d12358766f9b313368077402e9c1126a14d827f10370a5485e628bf61aa91117cf4fc882423191a4e
+  languageName: node
+  linkType: hard
+
+"@types/use-sync-external-store@npm:^1.5.0":
+  version: 1.5.0
+  resolution: "@types/use-sync-external-store@npm:1.5.0"
+  checksum: 10/39e5be8dc2cca080b490f2f79fed4381ae7eebee3f981208e359856733eafb2479d229db07a552f6c99fe0b5c09b3e46a3e6a870e00a88b50f3e690e73d2649b
   languageName: node
   linkType: hard
 
@@ -23707,7 +23716,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"use-sync-external-store@npm:^1.5.0":
+"use-sync-external-store@npm:^1.5.0, use-sync-external-store@npm:^1.6.0":
   version: 1.6.0
   resolution: "use-sync-external-store@npm:1.6.0"
   peerDependencies:

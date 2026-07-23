@@ -97,6 +97,12 @@ export interface ComboboxHandle {
     /** Subscribe to a combobox event. Returns an unsubscribe function. */
     subscribe<K extends keyof ComboboxEventMap>(event: K, callback: (value: ComboboxEventMap[K]) => void): () => void;
 
+    /**
+     * Read the last dispatched value of an event synchronously, for pull-based subscribers such as
+     * React's `useSyncExternalStore`. Returns `undefined` until the event has fired at least once.
+     */
+    getSnapshot<K extends keyof ComboboxEventMap>(event: K): ComboboxEventMap[K] | undefined;
+
     /** The current trigger element (may be null before registration). */
     readonly trigger: HTMLInputElement | HTMLButtonElement | null;
     /** The current listbox/grid element (may be null before registration). */

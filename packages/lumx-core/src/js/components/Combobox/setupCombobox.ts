@@ -9,7 +9,6 @@ import type {
     OptionRegistration,
     SectionRegistration,
 } from './types';
-import { debounceMicrotask } from '../../utils/function/debounceMicrotask';
 
 /** Options for configuring the shared combobox behavior. */
 interface ComboboxOptions {
@@ -78,8 +77,18 @@ export function setupCombobox(
         loadingAnnouncement: new Set(),
     };
 
+    /**
+     * Last value dispatched for each event. Kept in sync so pull-based subscribers — React's
+     * `useSyncExternalStore` via {@link ComboboxHandle.getSnapshot} — can read the current value
+     * during their own render/commit. This lets React catch changes that happened between a
+     * consumer's render and its subscription (e.g. options registered by child effects before the
+     * consumer subscribed, since `optionsChange` is not replayed on subscribe).
+     */
+    const latestValues: { [K in keyof ComboboxEventMap]?: ComboboxEventMap[K] } = {};
+
     /** Notify all subscribers for a given event. */
     function notify<K extends keyof ComboboxEventMap>(event: K, value: ComboboxEventMap[K]) {
+        latestValues[event] = value;
         subscribers[event].forEach((cb) => cb(value));
     }
 
@@ -102,9 +111,8 @@ export function setupCombobox(
      * or if the input value changed while the list is empty (so `emptyMessage` callbacks get
      * the updated query string).
      * Called whenever the set of visible options may have changed (option register/unregister, filter change).
-     * (debounced in a microtask)
      */
-    const notifyVisibilityChange = debounceMicrotask(() => {
+    function notifyVisibilityChange() {
         for (const [sectionElement] of sectionRegistrations) {
             notifySection(sectionElement, sectionRegistrations, optionRegistrations);
         }
@@ -123,7 +131,7 @@ export function setupCombobox(
         if (isOpenState) {
             trigger?.setAttribute('aria-expanded', String(hasVisibleContent()));
         }
-    });
+    }
 
     // ── Skeleton loading tracking ──────────────────────────────
 
@@ -528,6 +536,10 @@ export function setupCombobox(
             };
         },
 
+        getSnapshot<K extends keyof ComboboxEventMap>(event: K): ComboboxEventMap[K] | undefined {
+            return latestValues[event];
+        },
+
         destroy() {
             detach();
             trigger = null;
@@ -536,10 +548,13 @@ export function setupCombobox(
             lastOptionsLength = 0;
             lastInputValue = '';
             lastLoadingState = false;
+            // Drop cached snapshots so `getSnapshot` doesn't return stale values after destroy.
+            for (const key of Object.keys(latestValues) as Array<keyof typeof latestValues>) {
+                delete latestValues[key];
+            }
             optionRegistrations.clear();
             sectionRegistrations.clear();
             skeletonCount = 0;
-            notifyVisibilityChange.cancel();
             clearTimeout(loadingTimer);
             announcementSent = false;
             // Clear all subscribers
