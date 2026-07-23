@@ -70,6 +70,33 @@ function extractJsDocFromLeadingComments(node) {
 }
 
 /**
+ * Find the `emitSchema` variable declaration, following a named import into its
+ * declaring file if it isn't declared locally (e.g. Lightbox/PopoverDialog share
+ * `emitSchema` from a sibling `constants.ts`).
+ *
+ * @param {SourceFile} sourceFile - The Vue component source file
+ * @returns {VariableDeclaration|null}
+ */
+function findEmitSchemaDeclaration(sourceFile) {
+    for (const varDecl of sourceFile.getVariableDeclarations()) {
+        if (varDecl.getName() === 'emitSchema') return varDecl;
+    }
+
+    for (const importDecl of sourceFile.getImportDeclarations()) {
+        const hasNamedImport = importDecl.getNamedImports().some((ni) => ni.getName() === 'emitSchema');
+        if (!hasNamedImport) continue;
+
+        const importedSourceFile = importDecl.getModuleSpecifierSourceFile();
+        if (!importedSourceFile) continue;
+
+        const varDecl = importedSourceFile.getVariableDeclarations().find((decl) => decl.getName() === 'emitSchema');
+        if (varDecl) return varDecl;
+    }
+
+    return null;
+}
+
+/**
  * Extract events from a Vue component.
  * Supports two patterns:
  *   1. `emitSchema` const objects with validator functions
@@ -81,14 +108,11 @@ function extractJsDocFromLeadingComments(node) {
 function extractEmits(sourceFile) {
     const events = [];
 
-    // Strategy 1: Look for exported emitSchema const
-    for (const varDecl of sourceFile.getVariableDeclarations()) {
-        if (varDecl.getName() !== 'emitSchema') continue;
-
-        const initializer = varDecl.getInitializer();
-        if (!initializer || initializer.getKindName() !== 'ObjectLiteralExpression') continue;
-
-        for (const prop of initializer.getProperties()) {
+    // Strategy 1: Look for emitSchema const, declared locally or imported from elsewhere
+    const emitSchemaDecl = findEmitSchemaDeclaration(sourceFile);
+    const emitSchemaInitializer = emitSchemaDecl?.getInitializer();
+    if (emitSchemaInitializer?.getKindName() === 'ObjectLiteralExpression') {
+        for (const prop of emitSchemaInitializer.getProperties()) {
             if (prop.getKindName() !== 'PropertyAssignment') continue;
 
             // Strip surrounding quotes for string-literal property names (e.g. `'load-more'`).
