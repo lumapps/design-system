@@ -107,6 +107,7 @@ const LightboxContent = defineComponent(
                 labelId: labelId.value,
                 handleClose,
                 preventAutoClose: props.preventAutoClose,
+                preventCloseOnClick: props.preventCloseOnClick,
                 ref: wrapperRef,
                 zIndex: props.zIndex,
                 children: slots.default?.() as JSXElement,

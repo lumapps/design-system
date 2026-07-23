@@ -11,6 +11,8 @@ export interface BaseLightboxProps
     isOpen?: boolean;
     /** Whether to keep the dialog open on clickaway or escape press. */
     preventAutoClose?: boolean;
+    /** Whether to keep the dialog open on clickaway (overridden by `preventAutoClose`). */
+    preventCloseOnClick?: boolean;
     /** Z-axis position. */
     zIndex?: number;
 }
@@ -98,6 +100,7 @@ export const Lightbox = (props: LightboxProps) => {
         focusElement,
         labelId,
         preventAutoClose,
+        preventCloseOnClick,
         theme,
         zIndex,
         isVisible,
@@ -149,7 +152,10 @@ export const Lightbox = (props: LightboxProps) => {
                 )}
                 <HeadingLevelProvider level={2}>
                     <ThemeProvider value={undefined}>
-                        <ClickAwayProvider callback={!preventAutoClose && handleClose} childrenRefs={clickAwayRefs}>
+                        <ClickAwayProvider
+                            callback={!preventAutoClose && !preventCloseOnClick && handleClose}
+                            childrenRefs={clickAwayRefs}
+                        >
                             <div ref={childrenRef} className={element('wrapper')} role="presentation">
                                 {children}
                             </div>
