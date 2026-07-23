@@ -27,6 +27,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   `@lumx/react`, `@lumx/vue`:
     -   `Combobox`: avoid recursive updates errors when mounting a large option list
     -   `SelectButton` and `SelectTextField`: fix `onLoadMore` firing eagerly
+-   `@lumx/react`:
+    -   `Lightbox`: respect `preventAutoClose` when pressing Escape (Escape no longer closes the lightbox when `preventAutoClose` is set), aligning with Vue.
+-   `@lumx/vue`:
+    -   `Dialog`: forward an inline `<header>`/`<footer>`'s own props (e.g. `class`) to the rendered element, matching React (named-slot usage was already unaffected).
 
 ## [4.19.0][] - 2026-06-30
 
