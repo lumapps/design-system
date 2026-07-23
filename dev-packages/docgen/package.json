@@ -1,6 +1,6 @@
 {
     "name": "@lumx/docgen",
-    "version": "4.19.0",
+    "version": "4.20.0",
     "description": "React/Vue component docgen used to generate LumX prop tables",
     "private": true,
     "exports": {

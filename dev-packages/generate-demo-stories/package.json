@@ -1,7 +1,7 @@
 {
     "name": "@lumx/generate-demo-stories",
     "private": true,
-    "version": "4.19.0",
+    "version": "4.20.0",
     "type": "module",
     "scripts": {
         "generate": "node generate-demo-stories.mjs"
