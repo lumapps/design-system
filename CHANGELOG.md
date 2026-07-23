@@ -19,6 +19,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   `TabList`: render a `role="navigation"` landmark instead of `role="tablist"` when used outside a `TabProvider`.
     -   `Tab`: render with WAI-ARIA `role="tab"` semantics only inside a `TabProvider`.
     -   `InfiniteScroll`: allow `undefined` callback to disable it
+    -   `PopoverDialog`: `label` prop is now optional. rendering a `DialogHeading` inside is an alternative way to satisfy its accessible-name requirement.
+    -   `Lightbox`: emit only one of `aria-label`/`aria-labelledby` (label takes precedence) instead of both; a `DialogHeading` rendered inside now provides the accessible name via `aria-labelledby`.
 -   `@lumx/vue`:
     -   Standardize vue internal component `name` with `Lumx` prefix (was partially already in use). Newly-prefixed components: `AlertDialog`, `ButtonGroup`, `Checkbox`, `Flag`, `FlexBox`, `Heading`, `HeadingLevelProvider`, `Icon`, `IconButton`, `InputHelper`, `InputLabel`, `Message`, `RadioButton`, `RadioGroup`, `SkeletonRectangle`.
 
