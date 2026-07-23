@@ -194,6 +194,28 @@ describe('<Dialog />', () => {
                 expect(queryByClassName(document.body, CLASSNAME)).toHaveClass(`${CLASSNAME}--is-hidden`);
             });
         });
+
+        describe('inline header/footer children', () => {
+            it('should forward the inline header/footer own class to the rendered elements', () => {
+                render(Dialog, {
+                    props: { isOpen: true, disableBodyScroll: false },
+                    slots: {
+                        default: () => [
+                            <header class="my-header">Header content</header>,
+                            <footer class="my-footer">Footer content</footer>,
+                        ],
+                    },
+                });
+
+                const header = queryByClassName(document.body, `${CLASSNAME}__header`);
+                expect(header).toHaveClass('my-header');
+                expect(header).toHaveTextContent('Header content');
+
+                const footer = queryByClassName(document.body, `${CLASSNAME}__footer`);
+                expect(footer).toHaveClass('my-footer');
+                expect(footer).toHaveTextContent('Footer content');
+            });
+        });
     });
 
     commonTestsSuiteVTL(setupDialog, {

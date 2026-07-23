@@ -60,6 +60,17 @@ export const emitSchema = {
     visibilityChange: (isVisible: boolean) => typeof isVisible === 'boolean',
 };
 
+/**
+ * Extract the props of an inline `<header>`/`<footer>` vnode so they can be forwarded to
+ * `DialogContent` (mirrors the React wrapper, which forwards the inline element's own props/class).
+ * Vue vnodes expose the class under `class`, but `DialogContent` reads `className`, so translate it.
+ */
+const vnodeChildProps = (vnode: any): GenericProps | undefined => {
+    if (!vnode?.props) return undefined;
+    const { class: klass, ...rest } = vnode.props;
+    return { ...rest, ...(klass != null ? { className: klass } : {}) };
+};
+
 const Dialog = defineComponent(
     (props: DialogProps, { emit, slots, attrs }) => {
         const className = useClassName(() => props.class);
@@ -179,6 +190,7 @@ const Dialog = defineComponent(
                         footerChildContent={
                             (slots.footer?.() ?? (footerVnode as any)?.children) as JSXElement | undefined
                         }
+                        footerChildProps={slots.footer ? undefined : vnodeChildProps(footerVnode)}
                         forceFooterDivider={props.forceFooterDivider}
                         forceHeaderDivider={props.forceHeaderDivider}
                         handleClose={handleClose}
@@ -187,6 +199,7 @@ const Dialog = defineComponent(
                         headerChildContent={
                             (slots.header?.() ?? (headerVnode as any)?.children) as JSXElement | undefined
                         }
+                        headerChildProps={slots.header ? undefined : vnodeChildProps(headerVnode)}
                         isLoading={props.isLoading}
                         rootRef={rootRef as Ref<HTMLElement | undefined>}
                         setSentinelBottom={setSentinelBottom}
