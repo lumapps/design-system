@@ -7,7 +7,7 @@
     <Dialog :is-open="isOpen" :parent-element="parentElement ?? undefined" :size="size" @close="close">
         <template #header>
             <Toolbar>
-                <Text as="span" typography="title">Dialog</Text>
+                <DialogHeading>Dialog</DialogHeading>
             </Toolbar>
         </template>
 
@@ -34,7 +34,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { mdiPlay } from '@lumx/icons';
-import { Button, Dialog, Text, Toolbar, type DialogSizes, type Theme } from '@lumx/vue';
+import { Button, Dialog, DialogHeading, Toolbar, type DialogSizes, type Theme } from '@lumx/vue';
 
 defineProps<{ theme?: Theme }>();
 

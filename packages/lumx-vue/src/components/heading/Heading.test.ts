@@ -4,16 +4,16 @@ import { CLASSNAME } from '@lumx/core/js/components/Heading';
 import BaseHeadingTests from '@lumx/core/js/components/Heading/Tests';
 import { commonTestsSuiteVTL, SetupRenderOptions } from '@lumx/vue/testing';
 import { getByClassName } from '@lumx/core/testing/queries';
+import type { GenericProps } from '@lumx/core/js/types';
 import { Heading, HeadingLevelProvider, HeadingProps } from '.';
 
-const setup = (props: Partial<HeadingProps> = {}) => {
+const setup = (props: GenericProps = {}) => {
     const { container } = render(Heading, { props });
     return { props, container, element: getByClassName(container as HTMLElement, CLASSNAME) };
 };
 
 describe('<Heading>', () => {
-    const renderHeading = (props: HeadingProps, options: SetupRenderOptions<HeadingProps> = {}) => {
-        const { children, ...restProps } = props;
+    const renderHeading = ({ children, ...restProps }: any, options: SetupRenderOptions<HeadingProps> = {}) => {
         return render(Heading, {
             props: restProps,
             slots: children ? { default: children } : undefined,

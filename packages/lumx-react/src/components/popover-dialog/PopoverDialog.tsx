@@ -1,22 +1,10 @@
-import { ReactNode } from 'react';
-
-import { classNames } from '@lumx/core/js/utils';
-import {
-    CLASSNAME,
-    COMPONENT_NAME,
-    DEFAULT_PROPS,
-    type PopoverDialogProps as CorePopoverDialogProps,
-} from '@lumx/core/js/components/PopoverDialog';
-import type { PopoverProps as CorePopoverProps } from '@lumx/core/js/components/Popover';
+import { CLASSNAME, COMPONENT_NAME, DEFAULT_PROPS } from '@lumx/core/js/components/PopoverDialog';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
-import { HeadingLevelProvider } from '@lumx/react/components/heading';
-import { Popover, type PopoverProps } from '../popover/Popover';
+import { IdsRegistryProvider } from '@lumx/react/utils/IdsRegistryContext';
 
-/**
- * PopoverDialog props.
- * The PopoverDialog has the same props as the Popover but requires an accessible label.
- */
-export type PopoverDialogProps = PopoverProps & Omit<CorePopoverDialogProps, keyof CorePopoverProps>;
+import { PopoverDialogContent, type PopoverDialogProps } from './PopoverDialogContent';
+
+export type { PopoverDialogProps };
 
 /**
  * PopoverDialog component.
@@ -26,29 +14,11 @@ export type PopoverDialogProps = PopoverProps & Omit<CorePopoverDialogProps, key
  * - Closes on click away and escape
  * - Resets heading level context to 2
  */
-export const PopoverDialog = forwardRef<PopoverDialogProps, HTMLDivElement>((props, ref) => {
-    const { children, 'aria-label': ariaLabel, label = ariaLabel, className, ...forwardedProps } = props;
-
-    return (
-        <Popover
-            {...forwardedProps}
-            ref={ref}
-            className={classNames.join(className, CLASSNAME)}
-            role="dialog"
-            aria-modal="true"
-            /**
-             * If a label is set, set as aria-label.
-             * If it is undefined, the label can be set using the `aria-label` and `aria-labelledby` props
-             */
-            aria-label={label}
-            closeOnClickAway
-            closeOnEscape
-            withFocusTrap
-        >
-            <HeadingLevelProvider level={2}>{children as ReactNode}</HeadingLevelProvider>
-        </Popover>
-    );
-});
+export const PopoverDialog = forwardRef<PopoverDialogProps, HTMLDivElement>((props, ref) => (
+    <IdsRegistryProvider>
+        <PopoverDialogContent {...props} ref={ref} />
+    </IdsRegistryProvider>
+));
 
 PopoverDialog.displayName = COMPONENT_NAME;
 PopoverDialog.className = CLASSNAME;

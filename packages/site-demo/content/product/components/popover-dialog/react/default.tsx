@@ -1,6 +1,16 @@
 import { useRef, useState } from 'react';
 import { mdiMenu, mdiSettings } from '@lumx/icons';
-import { Button, FlexBox, Heading, IconButton, List, ListItem, PopoverDialog, Toolbar, type Theme } from '@lumx/react';
+import {
+    Button,
+    DialogHeading,
+    FlexBox,
+    IconButton,
+    List,
+    ListItem,
+    PopoverDialog,
+    Toolbar,
+    type Theme,
+} from '@lumx/react';
 
 export default ({ theme }: { theme?: Theme }) => {
     const anchorRef = useRef(null);
@@ -13,7 +23,6 @@ export default ({ theme }: { theme?: Theme }) => {
                 Open popover
             </Button>
             <PopoverDialog
-                aria-labelledby="dialogHeaderId"
                 anchorRef={anchorRef}
                 isOpen={isOpen}
                 onClose={handleClose}
@@ -22,11 +31,7 @@ export default ({ theme }: { theme?: Theme }) => {
             >
                 <FlexBox orientation="vertical">
                     <Toolbar
-                        label={
-                            <Heading id="dialogHeaderId" typography="subtitle2">
-                                Popover Dialog Example
-                            </Heading>
-                        }
+                        label={<DialogHeading>Popover Dialog Example</DialogHeading>}
                         after={<IconButton label="Settings" icon={mdiSettings} emphasis="low" />}
                     />
                     <List>

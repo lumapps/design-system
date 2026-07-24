@@ -20,8 +20,10 @@ This component uses the `dialog` accessible pattern, a few specific behaviors ar
 -   When opening, focus will be set either on the provided `focusElement` prop or on the close button (if defined) or on the dialog itself.
     Once the focus is set within, it will be trapped and stay within the lightbox until it is closed.
 
--   A label must be defined using either `aria-label` or `aria-labelledby` props.
-    Setting `aria-labelledby` is recommended as it target a visible label rather than adding an invisible `aria-label` on the dialog.
+-   An accessible name should be provided. Render a [`DialogHeading`](/product/components/dialog#properties) anywhere inside
+    the lightbox to name it automatically (its `role="dialog"` element gets `aria-labelledby` pointing at the rendered
+    heading). Alternatively, set the `aria-label` or `aria-labelledby` props directly — an explicit
+    `aria-label`/`aria-labelledby` always takes precedence over an auto-linked `DialogHeading`.
 
 -   When closing, the activating element should take focus. Make sure to fill the `parentElement` prop to make this work properly.
 

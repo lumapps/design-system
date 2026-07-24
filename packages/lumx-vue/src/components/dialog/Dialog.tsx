@@ -2,7 +2,7 @@ import { Comment, computed, defineComponent, ref, type Ref } from 'vue';
 import { useIntersectionObserver } from '@vueuse/core';
 
 import {
-    Dialog as UI,
+    DialogShell,
     type BaseDialogProps,
     type DialogSizes,
     COMPONENT_NAME,
@@ -16,10 +16,12 @@ import { ClickAwayProvider } from '../../utils/ClickAway/ClickAwayProvider';
 import { ThemeProvider } from '../../utils/theme/ThemeProvider';
 import HeadingLevelProvider from '../heading/HeadingLevelProvider';
 import ProgressCircular from '../progress/ProgressCircular';
+import DialogContent from './DialogContent';
 
 import { useCallbackOnEscape } from '../../composables/useCallbackOnEscape';
 import { useClassName } from '../../composables/useClassName';
 import { useFocusTrap } from '../../composables/useFocusTrap';
+import { IdsRegistryProvider } from '../../utils/IdsRegistryContext';
 import { useRestoreFocusOnClose } from '../../composables/useRestoreFocusOnClose';
 import { useTransitionVisibility } from '../../composables/useTransitionVisibility';
 import { useDisableBodyScroll } from '../../composables/useDisableBodyScroll';
@@ -56,6 +58,17 @@ export type DialogProps = Pick<BaseDialogProps, 'forceFooterDivider' | 'forceHea
 export const emitSchema = {
     close: () => true,
     visibilityChange: (isVisible: boolean) => typeof isVisible === 'boolean',
+};
+
+/**
+ * Extract the props of an inline `<header>`/`<footer>` vnode so they can be forwarded to
+ * `DialogContent` (mirrors the React wrapper, which forwards the inline element's own props/class).
+ * Vue vnodes expose the class under `class`, but `DialogContent` reads `className`, so translate it.
+ */
+const vnodeChildProps = (vnode: any): GenericProps | undefined => {
+    if (!vnode?.props) return undefined;
+    const { class: klass, ...rest } = vnode.props;
+    return { ...rest, ...(klass != null ? { className: klass } : {}) };
 };
 
 const Dialog = defineComponent(
@@ -153,40 +166,48 @@ const Dialog = defineComponent(
                 ? defaultChildren.filter((c: any) => c.type !== 'header' && c.type !== 'footer' && c.type !== Comment)
                 : defaultChildren;
 
-            return UI({
+            return DialogShell({
                 ...attrs,
-                ClickAwayProvider,
-                HeadingLevelProvider,
                 Portal,
+                HeadingLevelProvider,
                 ThemeProvider,
-                ProgressCircular,
+                IdsRegistryProvider,
                 className: className.value,
-                clickAwayRefs,
-                content: (bodyChildren.length ? bodyChildren : undefined) as JSXElement,
-                contentRef: contentRefCallback,
-                dialogProps: props.dialogProps,
-                footer: undefined,
-                footerChildContent: (slots.footer?.() ?? (footerVnode as any)?.children) as JSXElement | undefined,
-                footerChildProps: undefined,
-                forceFooterDivider: props.forceFooterDivider,
-                forceHeaderDivider: props.forceHeaderDivider,
-                handleClose,
-                hasBottomIntersection: hasBottomIntersection.value,
-                hasTopIntersection: hasTopIntersection.value,
-                header: undefined,
-                headerChildContent: (slots.header?.() ?? (headerVnode as any)?.children) as JSXElement | undefined,
-                headerChildProps: undefined,
                 isLoading: props.isLoading,
                 isOpen: props.isOpen,
                 isVisible: isVisible.value,
-                ref: rootRef,
-                rootRef: rootRef as Ref<HTMLElement | undefined>,
-                setSentinelBottom,
-                setSentinelTop,
-                shouldPreventCloseOnClickAway: shouldPreventCloseOnClickAway.value,
                 size: props.size ?? DEFAULT_PROPS.size,
-                wrapperRef: wrapperRef as Ref<HTMLElement | undefined>,
                 zIndex: props.zIndex,
+                ref: rootRef,
+                children: (
+                    <DialogContent
+                        ClickAwayProvider={ClickAwayProvider}
+                        ProgressCircular={ProgressCircular}
+                        clickAwayRefs={clickAwayRefs}
+                        content={(bodyChildren.length ? bodyChildren : undefined) as JSXElement}
+                        contentRef={contentRefCallback}
+                        dialogProps={props.dialogProps}
+                        footerChildContent={
+                            (slots.footer?.() ?? (footerVnode as any)?.children) as JSXElement | undefined
+                        }
+                        footerChildProps={slots.footer ? undefined : vnodeChildProps(footerVnode)}
+                        forceFooterDivider={props.forceFooterDivider}
+                        forceHeaderDivider={props.forceHeaderDivider}
+                        handleClose={handleClose}
+                        hasBottomIntersection={hasBottomIntersection.value}
+                        hasTopIntersection={hasTopIntersection.value}
+                        headerChildContent={
+                            (slots.header?.() ?? (headerVnode as any)?.children) as JSXElement | undefined
+                        }
+                        headerChildProps={slots.header ? undefined : vnodeChildProps(headerVnode)}
+                        isLoading={props.isLoading}
+                        rootRef={rootRef as Ref<HTMLElement | undefined>}
+                        setSentinelBottom={setSentinelBottom}
+                        setSentinelTop={setSentinelTop}
+                        shouldPreventCloseOnClickAway={shouldPreventCloseOnClickAway.value}
+                        wrapperRef={wrapperRef as Ref<HTMLElement | undefined>}
+                    />
+                ),
             });
         };
     },

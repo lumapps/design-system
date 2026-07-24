@@ -31,13 +31,19 @@ export default (renderOptions: SetupOptions<any>) => {
         });
 
         describe('Aria', () => {
-            it('should apply aria-label and aria-labelledby', () => {
+            it('should apply aria-labelledby', () => {
+                const { lightbox } = setup({ 'aria-labelledby': 'header-id' }, renderOptions);
+                expect(lightbox).toHaveAttribute('aria-labelledby', 'header-id');
+                expect(lightbox).not.toHaveAttribute('aria-label');
+            });
+
+            it('should prefer aria-label over aria-labelledby', () => {
                 const { lightbox } = setup(
                     { 'aria-label': 'My Lightbox', 'aria-labelledby': 'header-id' },
                     renderOptions,
                 );
                 expect(lightbox).toHaveAttribute('aria-label', 'My Lightbox');
-                expect(lightbox).toHaveAttribute('aria-labelledby', 'header-id');
+                expect(lightbox).not.toHaveAttribute('aria-labelledby');
             });
         });
     });

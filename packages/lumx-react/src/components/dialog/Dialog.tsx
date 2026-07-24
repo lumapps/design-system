@@ -19,12 +19,15 @@ import { ThemeProvider } from '@lumx/react/utils/theme/ThemeContext';
 
 import { Portal } from '@lumx/react/utils';
 import {
-    Dialog as UI,
+    DialogShell,
     CLASSNAME,
     COMPONENT_NAME,
     type DialogSizes,
     BaseDialogProps as UIProps,
 } from '@lumx/core/js/components/Dialog';
+
+import { IdsRegistryProvider } from '@lumx/react/utils/IdsRegistryContext';
+import { DialogContent } from './DialogContent';
 
 export type { DialogSizes } from '@lumx/core/js/components/Dialog';
 
@@ -79,12 +82,7 @@ const DEFAULT_PROPS: Partial<DialogProps> = {
  * @param  ref   Component ref.
  * @return React element.
  */
-export const Dialog = forwardRef<DialogProps, HTMLDivElement>((props, ref) => {
-    if (!DOCUMENT) {
-        // Can't render in SSR.
-        return null;
-    }
-
+const DialogBody = forwardRef<DialogProps, HTMLDivElement>((props, ref) => {
     const {
         children,
         className,
@@ -110,9 +108,7 @@ export const Dialog = forwardRef<DialogProps, HTMLDivElement>((props, ref) => {
         ...forwardedProps
     } = props;
 
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const previousOpen = React.useRef(isOpen);
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     React.useEffect(() => {
         if (isOpen !== previousOpen.current) {
             previousOpen.current = isOpen;
@@ -126,29 +122,21 @@ export const Dialog = forwardRef<DialogProps, HTMLDivElement>((props, ref) => {
 
     const shouldPreventCloseOnEscape = preventAutoClose || preventCloseOnEscape;
 
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     useCallbackOnEscape(onClose, isOpen && !shouldPreventCloseOnEscape);
 
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const wrapperRef = useRef<HTMLDivElement>(null);
     /**
      * Since the `contentRef` comes from the parent and is optional,
      * we need to create a stable contentRef that will always be available.
      */
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const localContentRef = useRef<HTMLDivElement>(null);
     // Handle focus trap.
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     useFocusTrap(isOpen && wrapperRef.current, focusElement?.current);
 
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     useDisableBodyScroll(disableBodyScroll && isOpen && localContentRef.current);
 
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [sentinelTop, setSentinelTop] = useState<Element | null>(null);
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [sentinelBottom, setSentinelBottom] = useState<Element | null>(null);
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const intersections = useIntersectionObserver([sentinelTop, sentinelBottom], {
         threshold: [0, 1],
     });
@@ -157,7 +145,6 @@ export const Dialog = forwardRef<DialogProps, HTMLDivElement>((props, ref) => {
     const hasBottomIntersection = sentinelBottom && !(intersections.get(sentinelBottom)?.isIntersecting ?? true);
 
     // Separate header, footer and dialog content from children.
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [[headerChild], [footerChild], content] = useMemo(
         () => partitionMulti(Children.toArray(children), [isHeader, isFooter]),
         [children],
@@ -167,56 +154,68 @@ export const Dialog = forwardRef<DialogProps, HTMLDivElement>((props, ref) => {
     const footerChildProps = (footerChild as ReactElement)?.props;
     const footerChildContent = footerChildProps?.children;
 
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const clickAwayRefs = useRef([wrapperRef]);
 
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const rootRef = useRef<HTMLDivElement>(null);
 
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const isVisible = useTransitionVisibility(rootRef, Boolean(isOpen), DIALOG_TRANSITION_DURATION, onVisibilityChange);
 
     const shouldPreventCloseOnClickAway = preventAutoClose || preventCloseOnClick;
 
     const isMounted = isOpen || isVisible || closeMode === 'hide';
 
-    return isMounted
-        ? UI({
-              ClickAwayProvider,
-              HeadingLevelProvider,
-              Portal,
-              ThemeProvider,
-              className,
-              clickAwayRefs,
-              content,
-              contentRef: mergeRefs(localContentRef, contentRef),
-              dialogProps,
-              footer,
-              footerChildContent,
-              footerChildProps,
-              forceFooterDivider,
-              forceHeaderDivider,
-              handleClose: onClose,
-              hasBottomIntersection,
-              hasTopIntersection,
-              header,
-              headerChildContent,
-              ProgressCircular,
-              headerChildProps,
-              isLoading,
-              isOpen,
-              isVisible,
-              ref: mergeRefs(rootRef, ref),
-              rootRef,
-              setSentinelBottom,
-              setSentinelTop,
-              shouldPreventCloseOnClickAway,
-              size,
-              wrapperRef,
-              zIndex,
-              ...forwardedProps,
-          })
-        : null;
+    if (!isMounted) return null;
+
+    return DialogShell({
+        Portal,
+        HeadingLevelProvider,
+        ThemeProvider,
+        IdsRegistryProvider,
+        className,
+        isLoading,
+        isOpen,
+        isVisible,
+        size,
+        zIndex,
+        ref: mergeRefs(rootRef, ref),
+        ...forwardedProps,
+        children: (
+            <DialogContent
+                ClickAwayProvider={ClickAwayProvider}
+                ProgressCircular={ProgressCircular}
+                clickAwayRefs={clickAwayRefs}
+                content={content}
+                contentRef={mergeRefs(localContentRef, contentRef)}
+                dialogProps={dialogProps}
+                footer={footer}
+                footerChildContent={footerChildContent}
+                footerChildProps={footerChildProps}
+                forceFooterDivider={forceFooterDivider}
+                forceHeaderDivider={forceHeaderDivider}
+                handleClose={onClose}
+                hasBottomIntersection={hasBottomIntersection}
+                hasTopIntersection={hasTopIntersection}
+                header={header}
+                headerChildContent={headerChildContent}
+                headerChildProps={headerChildProps}
+                isLoading={isLoading}
+                rootRef={rootRef}
+                setSentinelBottom={setSentinelBottom}
+                setSentinelTop={setSentinelTop}
+                shouldPreventCloseOnClickAway={shouldPreventCloseOnClickAway}
+                wrapperRef={wrapperRef}
+            />
+        ),
+    });
+});
+DialogBody.displayName = 'DialogBody';
+
+export const Dialog = forwardRef<DialogProps, HTMLDivElement>((props, ref) => {
+    if (!DOCUMENT) {
+        // Can't render in SSR.
+        return null;
+    }
+    return <DialogBody {...props} ref={ref} />;
 });
 Dialog.displayName = COMPONENT_NAME;
 Dialog.className = CLASSNAME;
