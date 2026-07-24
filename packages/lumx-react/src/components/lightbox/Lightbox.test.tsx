@@ -5,7 +5,9 @@ import { ThemeSentinel } from '@lumx/react/testing/utils/ThemeSentinel';
 import { vi } from 'vitest';
 
 import { Heading, HeadingLevelProvider } from '@lumx/react';
+import { DialogHeading } from '@lumx/react/components/dialog';
 import BaseLightboxTests from '@lumx/core/js/components/Lightbox/Tests';
+import { DialogLabelRegistryTests } from '@lumx/core/js/components/Dialog/labelRegistryTests';
 import { Lightbox, LightboxProps } from './Lightbox';
 
 const CLASSNAME = Lightbox.className as string;
@@ -28,6 +30,18 @@ describe(`<${Lightbox.displayName}>`, () => {
     // Run core tests
     BaseLightboxTests({
         render: (props: any) => render(<Lightbox {...props} />),
+        screen,
+    });
+
+    // Core shared tests: DialogHeading registry wiring.
+    DialogLabelRegistryTests({
+        render: ({ children, ...props }: any) =>
+            render(
+                <Lightbox isOpen parentElement={{ current: document.createElement('div') }} {...props}>
+                    {children}
+                </Lightbox>,
+            ),
+        makeDialogHeading: (name: string) => <DialogHeading>{name}</DialogHeading>,
         screen,
     });
 
@@ -66,6 +80,18 @@ describe(`<${Lightbox.displayName}>`, () => {
                 setup({ onClose });
                 fireEvent.mouseDown(document.body);
                 expect(onClose).toHaveBeenCalled();
+            });
+        });
+
+        // Registry link/absent cases are covered by the shared DialogLabelRegistryTests above; mechanics
+        // (last-wins, fallback, unmount) by the IdsRegistry tests. Here we only assert Lightbox's own
+        // top-level aria props take precedence over the registry.
+        describe('Label registry', () => {
+            it('should let an explicit aria-label prop override the registry', () => {
+                setup({ 'aria-label': 'Explicit label', children: <DialogHeading>My lightbox</DialogHeading> } as any);
+                const dialog = screen.getByRole('dialog');
+                expect(dialog).toHaveAttribute('aria-label', 'Explicit label');
+                expect(dialog).not.toHaveAttribute('aria-labelledby');
             });
         });
     });

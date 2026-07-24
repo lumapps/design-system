@@ -9,6 +9,10 @@ import { ColorWithVariants, ColorVariant, Typography, WhiteSpace } from '../../c
  */
 export interface TextProps extends HasClassName {
     /**
+     * HTML id.
+     */
+    id?: string;
+    /**
      * Color variant.
      */
     color?: ColorWithVariants;

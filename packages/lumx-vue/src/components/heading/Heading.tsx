@@ -1,13 +1,13 @@
 import { computed, defineComponent, useAttrs } from 'vue';
 
-import { COMPONENT_NAME, getHeadingProps, type HeadingProps } from '@lumx/core/js/components/Heading';
+import { COMPONENT_NAME, getHeadingProps, type HeadingProps as UIProps } from '@lumx/core/js/components/Heading';
 import { useClassName } from '@lumx/vue/composables/useClassName';
 
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { Text } from '../text';
 import { useHeadingLevel } from './useHeadingLevel';
 
-export type HeadingVueProps = VueToJSXProps<HeadingProps>;
+export type HeadingProps = VueToJSXProps<UIProps>;
 
 /**
  * Heading component.
@@ -16,7 +16,7 @@ export type HeadingVueProps = VueToJSXProps<HeadingProps>;
  * @return Vue element.
  */
 const Heading = defineComponent(
-    (props: HeadingVueProps, { slots }) => {
+    (props: HeadingProps, { slots }) => {
         const attrs = useAttrs();
         const context = useHeadingLevel();
         const mergedClassName = useClassName(() => props.class);
@@ -43,7 +43,8 @@ const Heading = defineComponent(
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         // Redefine properties so that they come in as `props` on the `defineComponent` function
-        props: keysOf<HeadingVueProps>()(
+        props: keysOf<HeadingProps>()(
+            'id',
             'as',
             'color',
             'colorVariant',

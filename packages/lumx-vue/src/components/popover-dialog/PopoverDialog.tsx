@@ -1,94 +1,32 @@
-import { computed, defineComponent, mergeProps, useAttrs } from 'vue';
+import { defineComponent } from 'vue';
 
-import {
-    CLASSNAME,
-    COMPONENT_NAME,
-    DEFAULT_PROPS,
-    type PopoverDialogProps as CorePopoverDialogProps,
-} from '@lumx/core/js/components/PopoverDialog';
-import type { PopoverProps as CorePopoverProps } from '@lumx/core/js/components/Popover';
-import { classNames } from '@lumx/core/js/utils';
-import { useClassName } from '@lumx/vue/composables/useClassName';
+import { CLASSNAME, COMPONENT_NAME, DEFAULT_PROPS } from '@lumx/core/js/components/PopoverDialog';
 
-import { getName, keysOf } from '../../utils/VueToJSX';
-import Popover, { type PopoverProps } from '../popover/Popover';
-import HeadingLevelProvider from '../heading/HeadingLevelProvider';
+import { getName } from '../../utils/VueToJSX';
+import { IdsRegistryProvider } from '../../utils/IdsRegistryContext';
+import PopoverDialogContent from './PopoverDialogContent';
+import { emitSchema, POPOVER_DIALOG_PROP_KEYS } from './constants';
+import type { PopoverDialogProps } from './types';
 
-/**
- * Vue PopoverDialog props.
- * Extends the Vue Popover props with dialog-specific accessible label props from core.
- */
-export type PopoverDialogProps = PopoverProps & Omit<CorePopoverDialogProps, keyof CorePopoverProps>;
-
-export const emitSchema = {
-    close: () => true,
-};
+export type { PopoverDialogProps };
+export { emitSchema };
 
 const PopoverDialog = defineComponent(
-    (props: PopoverDialogProps, { emit, slots }) => {
-        const attrs = useAttrs();
-        const className = useClassName(() => props.class);
-
-        // Vue normalizes hyphenated prop names to camelCase, so 'aria-label' prop becomes 'ariaLabel'.
-        // We also check attrs for aria-label when it's not declared as a prop.
-        const ariaLabel = computed(() => props.label ?? (props as any).ariaLabel ?? (attrs as any)['aria-label']);
-
+    (props: PopoverDialogProps, { emit, slots, attrs }) => {
         const handleClose = () => emit('close');
 
-        return () => {
-            const { label: _label, 'aria-label': _ariaLabel, class: _class, ...forwardedProps } = props;
-
-            return (
-                <Popover
-                    {...forwardedProps}
-                    {...mergeProps(attrs, { role: 'dialog', 'aria-modal': 'true', 'aria-label': ariaLabel.value })}
-                    class={classNames.join(CLASSNAME, className.value)}
-                    closeOnClickAway
-                    closeOnEscape
-                    withFocusTrap
-                    onClose={handleClose}
-                >
-                    <HeadingLevelProvider level={2}>{slots.default?.()}</HeadingLevelProvider>
-                </Popover>
-            );
-        };
+        return () => (
+            <IdsRegistryProvider>
+                <PopoverDialogContent {...props} {...attrs} onClose={handleClose}>
+                    {slots.default?.()}
+                </PopoverDialogContent>
+            </IdsRegistryProvider>
+        );
     },
     {
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
-        props: keysOf<PopoverDialogProps>()(
-            'anchorRef',
-            'aria-label',
-            'aria-labelledby',
-            'as',
-            'boundaryRef',
-            'closeMode',
-            'closeOnClickAway',
-            'closeOnEscape',
-            'elevation',
-            'fitToAnchorWidth',
-            'fitWithinViewportHeight',
-            'focusAnchorOnClose',
-            'focusElement',
-            'hasArrow',
-            'width',
-            'minWidth',
-            'maxWidth',
-            'height',
-            'minHeight',
-            'maxHeight',
-            'isOpen',
-            'label',
-            'offset',
-            'parentElement',
-            'placement',
-            'usePortal',
-            'focusTrapZoneElement',
-            'withFocusTrap',
-            'zIndex',
-            'theme',
-            'class',
-        ),
+        props: POPOVER_DIALOG_PROP_KEYS,
         emits: emitSchema,
     },
 );

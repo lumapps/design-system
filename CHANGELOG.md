@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `@lumx/react`, `@lumx/vue`:
     -   `Tab`: support rendering as a custom element — `as` prop in React, `action` slot in Vue — e.g. to render navigation links.
+    -   `Dialog`: add `DialogHeading` component — names the enclosing `Dialog`, `Lightbox`, or `PopoverDialog` by linking it via `aria-labelledby` when rendered anywhere inside.
 
 ### Changed
 
@@ -18,6 +19,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   `TabList`: render a `role="navigation"` landmark instead of `role="tablist"` when used outside a `TabProvider`.
     -   `Tab`: render with WAI-ARIA `role="tab"` semantics only inside a `TabProvider`.
     -   `InfiniteScroll`: allow `undefined` callback to disable it
+    -   `PopoverDialog`: `label` prop is now optional. rendering a `DialogHeading` inside is an alternative way to satisfy its accessible-name requirement.
+    -   `Lightbox`: emit only one of `aria-label`/`aria-labelledby` (label takes precedence) instead of both; a `DialogHeading` rendered inside now provides the accessible name via `aria-labelledby`.
 -   `@lumx/vue`:
     -   Standardize vue internal component `name` with `Lumx` prefix (was partially already in use). Newly-prefixed components: `AlertDialog`, `ButtonGroup`, `Checkbox`, `Flag`, `FlexBox`, `Heading`, `HeadingLevelProvider`, `Icon`, `IconButton`, `InputHelper`, `InputLabel`, `Message`, `RadioButton`, `RadioGroup`, `SkeletonRectangle`.
 
@@ -26,6 +29,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   `@lumx/react`, `@lumx/vue`:
     -   `Combobox`: avoid recursive updates errors when mounting a large option list
     -   `SelectButton` and `SelectTextField`: fix `onLoadMore` firing eagerly
+-   `@lumx/react`:
+    -   `Lightbox`: respect `preventAutoClose` when pressing Escape (Escape no longer closes the lightbox when `preventAutoClose` is set), aligning with Vue.
+-   `@lumx/vue`:
+    -   `Dialog`: forward an inline `<header>`/`<footer>`'s own props (e.g. `class`) to the rendered element, matching React (named-slot usage was already unaffected).
 
 ## [4.19.0][] - 2026-06-30
 

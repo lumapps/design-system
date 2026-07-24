@@ -1,12 +1,12 @@
 /* eslint-disable vue/one-component-per-file */
 import { defineComponent, ref } from 'vue';
 import { mdiClose } from '@lumx/icons';
-import { Button, Checkbox, FlexBox, Heading, IconButton, TextField, Toolbar } from '@lumx/vue';
+import { Button, Checkbox, FlexBox, IconButton, TextField, Toolbar } from '@lumx/vue';
 import { withChromaticForceScreenSize } from '@lumx/vue/stories/decorators/withChromaticForceScreenSize';
 import { loremIpsum } from '@lumx/core/stories/utils/lorem';
 import { setup } from '@lumx/core/js/components/Dialog/Stories';
 
-import { Dialog } from '.';
+import { Dialog, DialogHeading } from '.';
 
 /**
  * Story render component for Dialog.
@@ -105,7 +105,7 @@ export const WithHeaderFooterChildren = {
                                 header: () => (
                                     <Toolbar>
                                         {{
-                                            default: () => <Heading typography="title">Dialog heading</Heading>,
+                                            default: () => <DialogHeading>Dialog heading</DialogHeading>,
                                             after: () => <IconButton label="Close" emphasis="low" icon={mdiClose} />,
                                         }}
                                     </Toolbar>

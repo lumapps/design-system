@@ -8,6 +8,8 @@ import { Heading, HeadingLevelProvider } from '@lumx/react';
 import { vi } from 'vitest';
 import { DIALOG_TRANSITION_DURATION } from '@lumx/react/constants';
 import BaseDialogTests from '@lumx/core/js/components/Dialog/Tests';
+import { DialogLabelRegistryTests } from '@lumx/core/js/components/Dialog/labelRegistryTests';
+import { DialogHeading } from '@lumx/react/components/dialog';
 
 const CLASSNAME = Dialog.className as string;
 
@@ -32,6 +34,80 @@ describe(`<${Dialog.displayName}>`, () => {
     BaseDialogTests({
         render: (props: DialogProps) => render(<Dialog {...props} />),
         screen,
+    });
+
+    // Core shared tests: DialogHeading registry wiring.
+    DialogLabelRegistryTests({
+        render: ({ children, ...props }: any) =>
+            render(
+                <Dialog isOpen {...props}>
+                    {children}
+                </Dialog>,
+            ),
+        makeDialogHeading: (name: string) => <DialogHeading>{name}</DialogHeading>,
+        screen,
+    });
+
+    // Registry link/absent cases are covered by the shared DialogLabelRegistryTests above; mechanics
+    // (last-wins, fallback) by the IdsRegistry tests. Here we assert Dialog's own accessible-name resolution:
+    // the consumer id, unmount clearing, and explicit dialogProps overrides.
+    describe('Label registry', () => {
+        it('should remove aria-labelledby when the DialogHeading is unmounted', () => {
+            const { rerender } = render(
+                <Dialog isOpen dialogProps={{ 'data-testid': 'dialog' }}>
+                    <header>
+                        <DialogHeading>My dialog</DialogHeading>
+                    </header>
+                </Dialog>,
+            );
+            const dialog = screen.getByTestId('dialog');
+            expect(dialog).toHaveAttribute('aria-labelledby');
+
+            rerender(<Dialog isOpen dialogProps={{ 'data-testid': 'dialog' }} />);
+            expect(dialog).not.toHaveAttribute('aria-labelledby');
+        });
+
+        it('should use the consumer id for the link', () => {
+            render(
+                <Dialog isOpen dialogProps={{ 'data-testid': 'dialog' }}>
+                    <header>
+                        <DialogHeading id="my-heading-id">My dialog</DialogHeading>
+                    </header>
+                </Dialog>,
+            );
+            expect(screen.getByTestId('dialog')).toHaveAttribute('aria-labelledby', 'my-heading-id');
+        });
+
+        it('should let an explicit aria-labelledby (via dialogProps) override the registry', () => {
+            render(
+                <Dialog isOpen dialogProps={{ 'data-testid': 'dialog', 'aria-labelledby': 'explicit-id' }}>
+                    <header>
+                        <DialogHeading>My dialog</DialogHeading>
+                    </header>
+                </Dialog>,
+            );
+            expect(screen.getByTestId('dialog')).toHaveAttribute('aria-labelledby', 'explicit-id');
+        });
+
+        it('should only render one of aria-label/aria-labelledby when dialogProps sets both', () => {
+            render(
+                <Dialog
+                    isOpen
+                    dialogProps={{
+                        'data-testid': 'dialog',
+                        'aria-label': 'Explicit label',
+                        'aria-labelledby': 'explicit-id',
+                    }}
+                >
+                    <header>
+                        <DialogHeading>My dialog</DialogHeading>
+                    </header>
+                </Dialog>,
+            );
+            const dialog = screen.getByTestId('dialog');
+            expect(dialog).toHaveAttribute('aria-label', 'Explicit label');
+            expect(dialog).not.toHaveAttribute('aria-labelledby');
+        });
     });
 
     describe('Structure', () => {
