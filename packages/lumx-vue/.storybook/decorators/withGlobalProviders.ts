@@ -1,9 +1,10 @@
 import { h, provide, ref, watchEffect } from 'vue';
+import { PortalProvider } from '@lumx/vue/utils';
 
 // Global theme ref
 const theme = ref<undefined | string>();
 
-export const withGlobalTheme = (story: any, context: any) => {
+export const withGlobalProviders = (story: any, context: any) => {
     theme.value = context.args?.theme || context.globals?.theme || undefined;
     return {
         setup() {
@@ -14,12 +15,17 @@ export const withGlobalTheme = (story: any, context: any) => {
                 document.documentElement.classList.toggle('theme-dark', theme.value === 'dark');
             });
 
+            const containerRef = ref<HTMLElement | null>(null);
+
             // Call story() once during setup to get a stable component reference.
             // Calling it inside the render function would create new component definitions
             // on every render, causing Vue to unmount/remount and potentially triggering
             // infinite recursive updates.
             const storyComponent = story();
-            return () => h(storyComponent);
+            return () =>
+                h('lumx-story', { ref: containerRef }, [
+                    h(PortalProvider, { value: () => ({ container: containerRef.value }) }, () => h(storyComponent)),
+                ]);
         },
     };
 };

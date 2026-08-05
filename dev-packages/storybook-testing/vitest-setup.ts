@@ -56,7 +56,8 @@ export function setupStorybookVitest(
             // Wait for all images to load before taking the screenshot.
             await waitForImages();
 
-            const subject = options.subject ? document.querySelector(options.subject) ?? document.body : document.body;
+            const subject = document.body.querySelector('lumx-story');
+
             try {
                 await expect(subject).toMatchImageSnapshot(options);
             } catch (err) {

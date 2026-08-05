@@ -28,7 +28,8 @@ code {
     font-style: italic;
 }
 
-/** Add some space around the subject */
-body {
+lumx-story {
+    display: inline-block;
     padding: 1rem !important;
+    max-width: 850px;
 }
