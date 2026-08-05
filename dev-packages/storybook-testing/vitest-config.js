@@ -11,6 +11,9 @@ const tags = snapshotOnly ? { include: ['snapshot'] } : undefined;
 // Forward IMAGE_SNAPSHOT env flag to the browser context via Vite's define.
 const imageSnapshot = !!process.env.IMAGE_SNAPSHOT;
 
+// Screenshot scale factor (e.g. SCREENSHOT_SCALE=2 for @2x screenshots). Defaults to 1x.
+const deviceScaleFactor = Number(process.env.SCREENSHOT_SCALE) || 1;
+
 /**
  * Create a vitest config for storybook browser testing with visual snapshots.
  *
@@ -26,12 +29,13 @@ export function createStorybookVitestConfig(options) {
         defineConfig({
             define: {
                 'process.env.IMAGE_SNAPSHOT': JSON.stringify(imageSnapshot),
+                'process.env.SCREENSHOT_SCALE': JSON.stringify(deviceScaleFactor),
             },
             plugins: [
                 /** Load stories as tests */
                 storybookTest({ configDir, tags }),
                 /** Add storybook visual testing */
-                storybookVis(),
+                storybookVis({ snapshotKey: `@${deviceScaleFactor}x` }),
             ],
             test: {
                 name,
@@ -43,6 +47,7 @@ export function createStorybookVitestConfig(options) {
                         contextOptions: {
                             // Reduce animations (not great in screenshots)
                             reducedMotion: 'reduce',
+                            deviceScaleFactor,
                         },
                     }),
                     headless: true,
