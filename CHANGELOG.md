@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   `@lumx/core`, `@lumx/react`, `@lumx/vue`:
+    -   Click away: keep popovers open when a mouse press lands on a scrollbar. Pressing the scrollbar of a scrolling ancestor, or of the page itself, no longer counts as a click away. This affects every component that closes on click away, such as `Dropdown`, `Select`, `Combobox`, `PopoverDialog` and `Lightbox`.
+
 ## [4.20.0][] - 2026-07-24
 
 ### Added

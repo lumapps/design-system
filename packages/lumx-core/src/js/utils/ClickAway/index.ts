@@ -8,6 +8,7 @@
  */
 
 import type { Falsy } from '@lumx/core/js/types';
+import { isScrollbarPress } from '@lumx/core/js/utils/ClickAway/isScrollbarPress';
 
 /** Event types that trigger click away detection. */
 export const CLICK_AWAY_EVENT_TYPES = ['mousedown', 'touchstart'] as const;
@@ -16,14 +17,20 @@ export const CLICK_AWAY_EVENT_TYPES = ['mousedown', 'touchstart'] as const;
 export type ClickAwayCallback = EventListener | Falsy;
 
 /**
- * Check if the click event targets are outside all the given elements.
+ * Check if a press event is a click away from all the given elements.
  *
+ * @param event - The press event.
  * @param targets - The event target elements (from `event.target` and `event.composedPath()`).
  * @param elements - The elements considered "inside" the click away context.
- * @returns `true` if the click is outside all elements (i.e. a click away).
+ * @returns `true` if the press is a click away.
  */
-export function isClickAway(targets: HTMLElement[], elements: HTMLElement[]): boolean {
-    return !elements.some((element) => element instanceof Node && targets.some((target) => element.contains(target)));
+export function isClickAway(event: Event, targets: HTMLElement[], elements: HTMLElement[]): boolean {
+    // Containment first: it costs no layout work and rules out most presses.
+    if (elements.some((element) => element instanceof Node && targets.some((target) => element.contains(target)))) {
+        return false;
+    }
+    // Pressing a scrollbar lands outside the click away context but is not a click away.
+    return !targets.some((target) => isScrollbarPress(event, target));
 }
 
 /**
@@ -49,7 +56,7 @@ export function setupClickAway(
     const listener: EventListener = (evt) => {
         const targets = [evt.composedPath?.()[0], evt.target].filter((t): t is HTMLElement => t instanceof Node);
         const elements = getElements();
-        if (isClickAway(targets, elements)) {
+        if (isClickAway(evt, targets, elements)) {
             callback(evt);
         }
     };

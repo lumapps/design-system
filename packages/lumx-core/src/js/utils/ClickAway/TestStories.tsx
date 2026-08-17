@@ -49,11 +49,8 @@ export function setup({
     };
 
     /**
-     * This story showcases how click away behaves around a scrollable container: scrolling a panel
-     * is not a click away, whichever way you scroll it, while pressing content is.
-     *
-     * The scrollbar is forced to take layout space, so that the story still offers a gutter to press
-     * on a system that draws overlay scrollbars.
+     * This story showcases that scrolling a container is not a click away, however you scroll it.
+     * The scrollbar takes layout space on purpose: overlay scrollbars leave no gutter to press.
      */
     const ScrollableClickAway = {
         render: () => (
