@@ -49,6 +49,65 @@ export function setup({
     };
 
     /**
+     * This story showcases how click away behaves around a scrollable container: scrolling a panel
+     * is not a click away, whichever way you scroll it, while pressing content is.
+     *
+     * The scrollbar is forced to take layout space, so that the story still offers a gutter to press
+     * on a system that draws overlay scrollbars.
+     */
+    const ScrollableClickAway = {
+        render: () => (
+            <>
+                <style>{`
+                    [data-demo-scroller]::-webkit-scrollbar { width: 15px; height: 15px; }
+                    [data-demo-scroller]::-webkit-scrollbar-track { background: #eee; }
+                    [data-demo-scroller]::-webkit-scrollbar-thumb { background: #888; }
+                `}</style>
+                <p>
+                    Scrolling a panel is not a click away. Open a level, then scroll the panel below with the wheel, or
+                    by dragging its grey scrollbar. The level stays open either way.
+                </p>
+                <p>
+                    Pressing anything else closes the level: the panel content, and the thick borders of the two blocks
+                    on the right. Those two blocks overflow their box without ever rendering a scrollbar.
+                </p>
+                {/* Every length carries an explicit unit: Vue does not append `px` to a bare number. */}
+                <div style={{ display: 'flex', gap: '24px', alignItems: 'flex-start' }}>
+                    <section
+                        data-demo-scroller=""
+                        style={{
+                            height: '200px',
+                            width: '320px',
+                            overflowY: 'auto',
+                            border: '1px solid #ccc',
+                            padding: '8px',
+                        }}
+                    >
+                        <ButtonWithCard level={0} />
+                        {Array.from({ length: 30 }, (_, index) => (
+                            <p key={index}>panel line {index + 1}</p>
+                        ))}
+                    </section>
+                    <div style={{ width: '180px', border: '12px solid #999', padding: '8px' }}>
+                        Block with a 12px border and no overflow.
+                    </div>
+                    <div
+                        style={{
+                            width: '180px',
+                            border: '12px solid #999',
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis',
+                            whiteSpace: 'nowrap',
+                        }}
+                    >
+                        Truncated text that overflows its box without ever showing a scrollbar
+                    </div>
+                </div>
+            </>
+        ),
+    };
+
+    /**
      * Test: clicking outside closes the level
      */
     const TestClickAwayCloses = {
@@ -95,5 +154,5 @@ export function setup({
         },
     };
 
-    return { meta, NestedClickAway, InShadowDOM, TestClickAwayCloses, TestNestedClickAway };
+    return { meta, NestedClickAway, InShadowDOM, ScrollableClickAway, TestClickAwayCloses, TestNestedClickAway };
 }

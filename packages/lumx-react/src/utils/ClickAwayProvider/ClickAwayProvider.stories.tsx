@@ -47,5 +47,6 @@ export default {
 
 export const NestedClickAway = { ...stories.NestedClickAway };
 export const InShadowDOM = { ...stories.InShadowDOM };
+export const ScrollableClickAway = { ...stories.ScrollableClickAway };
 export const TestClickAwayCloses = { ...stories.TestClickAwayCloses };
 export const TestNestedClickAway = { ...stories.TestNestedClickAway };
