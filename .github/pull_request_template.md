@@ -13,7 +13,7 @@ Add/Remove/Update the following check list depending on your submission:
 
 -   [ ] (if has style) Add `need: review-integration` label
 -   [ ] (if has textual documentation) Add `need: review-doc` label
--   [ ] (if has code) Add `need: review-frontend` label
+-   [ ] (if has code) Add `need: review` label
 -   [ ] (if has react) Check through the [react dev check list]
 -   [ ] (if fix or feature) Add `need: test` label
 -   [ ] (if you need a storybook and/or visual diff) Add `need: deploy-storybook-react` or `need: deploy-storybook-vue` label

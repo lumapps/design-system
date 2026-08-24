@@ -16,9 +16,9 @@ on:
                 default: false
 
 jobs:
-    # Add 'need: review-frontend' (triggered from CI workflow or when removing "in progress" label on a PR)
+    # Add 'need: review' (triggered from CI workflow or when removing "in progress" label on a PR)
     add-review-label:
-        if: "${{ github.event.action != 'unlabeled' || github.event.label.name != 'need: review-frontend' }}"
+        if: "${{ github.event.action != 'unlabeled' || github.event.label.name != 'need: review' }}"
         continue-on-error: true
         runs-on: ubuntu-latest
         permissions:
@@ -37,9 +37,9 @@ jobs:
                   # Get PR data as JSON
                   PR_JSON=$(gh pr view "$PR_NUMBER" --json isDraft,labels,reviewDecision)
 
-                  # Skip draft PRs or PRs with "in progress" / "need: dev*" / "need: review-frontend" labels
+                  # Skip draft PRs or PRs with "in progress" / "need: dev*" / "need: review" labels
                   SKIP=$(echo "$PR_JSON" | jq -r '
-                      .isDraft or (.labels | any(.name | test("in progress") or startswith("need: dev") or . == "need: review-frontend"))
+                      .isDraft or (.labels | any(.name | test("in progress") or startswith("need: dev") or . == "need: review"))
                   ')
                   if [[ "$SKIP" == "true" ]]; then
                       echo "PR is draft, has in-progress/dev label, or already has review label, skipping."
@@ -66,10 +66,10 @@ jobs:
                   fi
 
                   # All conditions met
-                  echo "CI passes, no reviews yet. Adding 'need: review-frontend'."
-                  gh pr edit "$PR_NUMBER" --add-label "need: review-frontend"
+                  echo "CI passes, no reviews yet. Adding 'need: review'."
+                  gh pr edit "$PR_NUMBER" --add-label "need: review"
 
-    # Replace 'need: review-frontend' with 'need: test' when all required reviews are approved
+    # Replace 'need: review' with 'need: test' when all required reviews are approved
     update-test-label:
         continue-on-error: true
         runs-on: ubuntu-latest
@@ -96,9 +96,9 @@ jobs:
                       exit 0
                   fi
 
-                  # Remove 'need: review-frontend' (--remove-label is silent if label is absent)
-                  gh pr edit "$PR_NUMBER" --remove-label "need: review-frontend" || true
-                  echo "  Removed 'need: review-frontend'."
+                  # Remove 'need: review' (--remove-label is silent if label is absent)
+                  gh pr edit "$PR_NUMBER" --remove-label "need: review" || true
+                  echo "  Removed 'need: review'."
 
                   # Add 'need: test'
                   gh pr edit "$PR_NUMBER" --add-label "need: test"
