@@ -140,7 +140,7 @@ yarn test:react --skipNxCache -- Button.test.tsx --testNamePattern="hasBackgroun
 -   Vue package uses **TSX** (not `.vue` SFCs) — `shims-tsx.d.ts` + `shims-vue.d.ts` handle typings
 -   `site-demo` is private (not published); consuming docs live at design.lumapps.com
 -   All packages share the same version (4.6.0) — bumped together on release
--   PR workflow: branch → PR → CI (lint + test + visual) → "need: review-frontend" label → approve → "need: test" → merge
+-   PR workflow: branch → PR → CI (lint + test + visual) → "need: review" label → approve → "need: test" → merge
 
 ## PACKAGE DETAILS
 

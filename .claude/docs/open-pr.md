@@ -10,9 +10,9 @@
 Avoid restating every file that changed — trust the reviewer to read the diff.
 
 **Important:**
-- Always add the label `need: review-frontend`
+- Always add the label `need: review`
 
 ---
 
 ## Notes
-- The `need: review-frontend` label must always be set if the PR is ready to be reviewed (not a draft) — do not skip it even if the user doesn't mention it.
+- The `need: review` label must always be set if the PR is ready to be reviewed (not a draft) — do not skip it even if the user doesn't mention it.
