@@ -85,6 +85,29 @@ const computePercentFromValue = (value: number, min: number, max: number): numbe
     Number((value - min) / (max - min));
 
 /**
+ * Type guard checking whether an event is a touch event (native or React synthetic).
+ *
+ * @param event The interaction event.
+ * @return Whether the event is a touch event.
+ */
+const isTouchEvent = (
+    event: React.MouseEvent | React.TouchEvent | MouseEvent | TouchEvent,
+): event is React.TouchEvent | TouchEvent => 'touches' in event;
+
+/**
+ * Read the horizontal page position from either a mouse or touch event.
+ *
+ * @param event The interaction event.
+ * @return The page X position.
+ */
+const getPageX = (event: React.MouseEvent | React.TouchEvent | MouseEvent | TouchEvent): number => {
+    if (isTouchEvent(event)) {
+        return (event.touches[0] ?? event.changedTouches[0]).pageX;
+    }
+    return event.pageX;
+};
+
+/**
  * Slider component.
  *
  * @param  props Component props.
@@ -157,9 +180,12 @@ export const Slider = forwardRef<SliderProps, HTMLDivElement>((props, ref) => {
      * @param slider the slider element
      * @return The computed percent value
      */
-    const getPercentValue = (event: React.MouseEvent, slider: HTMLDivElement): number => {
+    const getPercentValue = (
+        event: React.MouseEvent | React.TouchEvent | MouseEvent | TouchEvent,
+        slider: HTMLDivElement,
+    ): number => {
         const { width, left } = slider.getBoundingClientRect();
-        let percent = (event.pageX - left - window.pageXOffset) / width;
+        let percent = (getPageX(event) - left - window.pageXOffset) / width;
         percent = clamp(percent, 0, 1);
         if (steps) {
             percent = findClosestStep(percent);
@@ -168,17 +194,20 @@ export const Slider = forwardRef<SliderProps, HTMLDivElement>((props, ref) => {
     };
 
     /**
-     * Register a handler for the mouse move event.
+     * Register a handler for the mouse/touch move event.
      */
-    const handleMove = useEventCallback((event: React.MouseEvent) => {
+    const handleMove = useEventCallback((event: MouseEvent | TouchEvent) => {
         const { current: slider } = sliderRef;
         if (!slider || !onChange) return;
+        if (isTouchEvent(event)) {
+            event.preventDefault();
+        }
         const newValue = getPercentValue(event, slider);
-        onChange(computeValueFromPercent(newValue, min, max, precision), name, event);
+        onChange(computeValueFromPercent(newValue, min, max, precision), name, event as unknown as SyntheticEvent);
     });
 
     /**
-     * Register a handler for the mouse up event.
+     * Register a handler for the mouse up/touch end/touch cancel event.
      * Clean a all listeners.
      */
     const handleEnd = useEventCallback(() => {
@@ -186,6 +215,7 @@ export const Slider = forwardRef<SliderProps, HTMLDivElement>((props, ref) => {
         document.body.removeEventListener('mouseup', handleEnd);
         document.body.removeEventListener('touchmove', handleMove as any);
         document.body.removeEventListener('touchend', handleEnd);
+        document.body.removeEventListener('touchcancel', handleEnd);
     });
 
     /**
@@ -232,6 +262,22 @@ export const Slider = forwardRef<SliderProps, HTMLDivElement>((props, ref) => {
         document.body.addEventListener('mouseup', handleEnd);
     });
 
+    /**
+     * Register a handler for the touchStart event.
+     */
+    const handleTouchStart = useEventCallback((event: React.TouchEvent) => {
+        const { current: slider } = sliderRef;
+        if (isAnyDisabled || !slider) return;
+        const newValue = getPercentValue(event, slider);
+        if (onChange) {
+            onChange(computeValueFromPercent(newValue, min, max, precision), name, event);
+        }
+
+        document.body.addEventListener('touchmove', handleMove as any, { passive: false });
+        document.body.addEventListener('touchend', handleEnd);
+        document.body.addEventListener('touchcancel', handleEnd);
+    });
+
     const percentString = `${computePercentFromValue(value, min, max) * 100}%`;
     return (
         <div
@@ -245,6 +291,7 @@ export const Slider = forwardRef<SliderProps, HTMLDivElement>((props, ref) => {
                 }),
             )}
             onMouseDown={handleMouseDown}
+            onTouchStart={handleTouchStart}
         >
             {label && (
                 <InputLabel id={sliderLabelId} htmlFor={sliderId} className={element('label')} theme={theme}>
