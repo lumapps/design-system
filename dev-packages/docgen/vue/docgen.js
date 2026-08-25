@@ -5,6 +5,46 @@ const { extractDiscriminatedUnionProps, extractConditionalSelectionVariants, ext
 const { getJsDocFromDeclaration, getJsDocDeprecatedFromDeclaration } = require('../internal/jsdoc.js');
 
 /**
+ * Resolve an expression used as the `name` option into a plain string.
+ *
+ * Handles the three shapes found in the codebase:
+ *   1. a string literal (`name: 'Button'`)
+ *   2. a `getName(COMPONENT_NAME)` call — the documented name is the wrapped
+ *      component name, without the `Lumx` prefix `getName` adds at runtime
+ *   3. an identifier pointing at a string constant, declared locally or imported
+ *      (e.g. `COMPONENT_NAME` re-exported from `@lumx/core`)
+ *
+ * @param {Node} node - The expression assigned to the `name` option
+ * @returns {string|null} - The resolved name, or null if it can't be resolved statically
+ */
+function resolveNameExpression(node) {
+    if (!node) return null;
+
+    const kind = node.getKindName();
+
+    if (kind === 'StringLiteral' || kind === 'NoSubstitutionTemplateLiteral') {
+        return node.getLiteralValue();
+    }
+
+    // `getName(COMPONENT_NAME)` — resolve the wrapped argument.
+    if (kind === 'CallExpression') {
+        const args = node.getArguments();
+        return args.length === 1 ? resolveNameExpression(args[0]) : null;
+    }
+
+    // Identifier — follow it to its declaration (across imports) and read the literal.
+    if (kind === 'Identifier') {
+        for (const definition of node.getDefinitionNodes()) {
+            if (definition.getKindName() !== 'VariableDeclaration') continue;
+            const resolved = resolveNameExpression(definition.getInitializer());
+            if (resolved) return resolved;
+        }
+    }
+
+    return null;
+}
+
+/**
  * Get the Vue component name from defineComponent options.
  * Looks for the `name` property in the second argument of defineComponent().
  *
@@ -29,9 +69,9 @@ function getVueComponentName(sourceFile) {
 
         for (const prop of optionsArg.getProperties()) {
             if (prop.getKindName() === 'PropertyAssignment' && prop.getName() === 'name') {
-                const value = prop.getInitializer()?.getText();
+                const value = resolveNameExpression(prop.getInitializer());
                 if (value) {
-                    return value.replace(/^['"]|['"]$/g, '');
+                    return value;
                 }
             }
         }

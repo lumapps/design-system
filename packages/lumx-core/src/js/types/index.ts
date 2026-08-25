@@ -14,6 +14,7 @@ export type { TextElement } from './TextElement';
 export type { ValueOf } from './ValueOf';
 export type { LumxClassName } from './LumxClassName';
 export type { Direction } from './Direction';
+export type { Elevation } from './Elevation';
 export type { Spacing } from './Spacing';
 export type { NestedComponents, ComponentLike } from './NestedComponents';
 export type { ObjectValues } from './ObjectValues';
