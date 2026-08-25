@@ -11,10 +11,7 @@ export interface Offset {
     away?: number;
 }
 
-/**
- * Popover elevation index.
- */
-export type Elevation = 1 | 2 | 3 | 4 | 5;
+export type { Elevation } from '../../types';
 
 /** Popover size value — pixel value, or "t-shirt" size token. */
 export type PopoverSize = PXSize | (typeof POPOVER_SIZES)[number];

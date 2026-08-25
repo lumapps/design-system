@@ -12,6 +12,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   `@lumx/react`:
     -   `Slider`: support dragging the handle on touch devices.
 
+### Added
+
+-   `@lumx/core`, `@lumx/react`, `@lumx/vue`:
+    -   Add `Card` component: a simple elevated container (`elevation` prop, 1–5, defaults to none).
+
 ## [4.20.0][] - 2026-07-24
 
 ### Added

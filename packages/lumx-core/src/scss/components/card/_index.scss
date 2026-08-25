@@ -1,0 +1,15 @@
+/* ==========================================================================
+   Card
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-card {
+    background-color: $lumx-color-light-N;
+    border-radius: var(--lumx-border-radius);
+    padding: $lumx-spacing-unit-huge;
+
+    @each $depth, $shadow in $lumx-elevation-shadows {
+        &--elevation-#{$depth} {
+            @include lumx-elevation($depth);
+        }
+    }
+}

@@ -1,0 +1,41 @@
+---
+title: Card
+frameworks: ['react', 'vue']
+---
+
+import * as ReactDemoDefault from './react/default.tsx';
+import * as ReactDemoElevation from './react/elevation.tsx';
+import * as VueDemoDefault from './vue/default.vue';
+import * as VueDemoElevation from './vue/elevation.vue';
+import ReactCard from 'lumx-docs:@lumx/react/components/card/Card';
+import VueCard from 'lumx-docs:@lumx/vue/components/card/Card';
+
+**Cards group related content into a single, contained surface.**
+
+<DemoBlock demo={{ react: ReactDemoDefault, vue: VueDemoDefault }} theme="dark" withThemeSwitcher />
+
+## Elevation
+
+Use the `elevation` property to raise a card above the surface, from `1` to `5`. Cards have no elevation
+by default. Higher elevations draw more attention, so reserve them for content that should stand out from
+the rest of the page.
+
+<DemoBlock demo={{ react: ReactDemoElevation, vue: VueDemoElevation }} withThemeSwitcher />
+
+### Accessibility concerns
+
+Cards are plain containers with no implicit semantic or ARIA role. A `<div>` conveys nothing to assistive
+technology, which is the right default for a purely visual grouping.
+
+When a card *is* meaningful on its own, give it the matching element through `as` rather than adding a role.
+Use `article` for content that stands alone, or `section` together with an accessible name (`aria-labelledby`
+pointing at a heading inside the card) for a thematic grouping — an unnamed `section` is ignored by most
+screen readers.
+
+Cards are not interactive. If the whole surface needs to be clickable, put a link or a button inside the
+card rather than making the card itself clickable, so that keyboard focus and screen reader semantics stay
+correct.
+
+## Properties
+
+<PropTable docs={{ react: ReactCard, vue: VueCard }} />
