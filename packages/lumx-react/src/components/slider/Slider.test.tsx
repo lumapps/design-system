@@ -76,6 +76,49 @@ describe(`<${Slider.displayName}>`, () => {
             fireEvent.mouseDown(slider!, { clientX: 100, pageX: 100 });
             expect(onChange).toHaveBeenCalledWith(100, undefined, expect.anything());
         });
+
+        it('should call onChange when touch-dragging the thumb', () => {
+            const onChange = vi.fn();
+            const { slider } = setup({ onChange, min: 0, max: 100 });
+            fireEvent.touchStart(slider!, { touches: [{ pageX: 50 }] });
+            expect(onChange).toHaveBeenCalledWith(50, undefined, expect.anything());
+            fireEvent.touchMove(document.body, { touches: [{ pageX: 75 }] });
+            expect(onChange).toHaveBeenCalledWith(75, undefined, expect.anything());
+        });
+
+        it('should stop calling onChange after touchend', () => {
+            const onChange = vi.fn();
+            const { slider } = setup({ onChange, min: 0, max: 100 });
+            fireEvent.touchStart(slider!, { touches: [{ pageX: 50 }] });
+            fireEvent.touchEnd(document.body);
+            onChange.mockClear();
+            fireEvent.touchMove(document.body, { touches: [{ pageX: 75 }] });
+            expect(onChange).not.toHaveBeenCalled();
+        });
+
+        it('should stop calling onChange after touchcancel', () => {
+            const onChange = vi.fn();
+            const { slider } = setup({ onChange, min: 0, max: 100 });
+            fireEvent.touchStart(slider!, { touches: [{ pageX: 50 }] });
+            fireEvent.touchCancel(document.body);
+            onChange.mockClear();
+            fireEvent.touchMove(document.body, { touches: [{ pageX: 75 }] });
+            expect(onChange).not.toHaveBeenCalled();
+        });
+
+        it('should call preventDefault on touchmove during an active drag', () => {
+            const onChange = vi.fn();
+            const { slider } = setup({ onChange, min: 0, max: 100 });
+            fireEvent.touchStart(slider!, { touches: [{ pageX: 50 }] });
+            const touchMoveEvent = new TouchEvent('touchmove', {
+                bubbles: true,
+                cancelable: true,
+                touches: [{ pageX: 75 } as Touch],
+            });
+            const preventDefault = vi.spyOn(touchMoveEvent, 'preventDefault');
+            document.body.dispatchEvent(touchMoveEvent);
+            expect(preventDefault).toHaveBeenCalled();
+        });
     });
 
     // Common tests suite.
