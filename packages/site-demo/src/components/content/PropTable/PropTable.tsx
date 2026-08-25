@@ -309,8 +309,12 @@ export const PropTable: React.FC<PropTableProps> = ({ docs }) => {
 
     const allProperties = discriminantProp ? [...filteredProperties, discriminantProp] : properties;
 
-    const [forwardedProps, others] = partition(allProperties, (prop) =>
-        prop.declarations?.some(({ fileName }) => fileName.match(/@types\/react/)),
+    const [forwardedProps, others] = partition(
+        allProperties,
+        (prop) =>
+            prop.declarations?.some(
+                ({ fileName }) => fileName.match(/@types\/react/) || fileName.match(/@vue\/runtime-dom/),
+            ) && !prop.declarations?.some(({ fileName }) => fileName.match(/lumx-(vue|react|core)/)),
     );
 
     return (
