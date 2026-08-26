@@ -41,10 +41,6 @@
             @include lumx-typography(subtitle2);
         }
 
-        & p a {
-            @include lumx-link("primary");
-        }
-
         /* stylelint-disable-next-line selector-type-no-unknown */
         code {
             padding: 0 $lumx-spacing-unit-tiny;
