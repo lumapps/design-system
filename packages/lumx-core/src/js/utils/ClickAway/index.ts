@@ -9,8 +9,17 @@
 
 import type { Falsy } from '@lumx/core/js/types';
 
-/** Event types that trigger click away detection. */
-export const CLICK_AWAY_EVENT_TYPES = ['mousedown', 'touchstart'] as const;
+/**
+ * Event types that trigger click away detection.
+ *
+ * `click` rather than `mousedown`: pressing a scrollbar dispatches a `mousedown` on the scrolling
+ * element, which is an ancestor of any popover it holds, but never dispatches a `click`. Scrolling
+ * therefore cannot be mistaken for a click away.
+ *
+ * `touchstart` is kept because iOS Safari does not dispatch `click` for taps on non-interactive
+ * elements, which would leave popovers open on tap away.
+ */
+export const CLICK_AWAY_EVENT_TYPES = ['click', 'touchstart'] as const;
 
 /** Callback triggered when a click away is detected. */
 export type ClickAwayCallback = EventListener | Falsy;
@@ -28,7 +37,7 @@ export function isClickAway(targets: HTMLElement[], elements: HTMLElement[]): bo
 
 /**
  * Imperative setup for click away detection.
- * Adds mousedown/touchstart listeners on `document` and calls the callback when a click
+ * Adds click/touchstart listeners on `document` and calls the callback when a click
  * occurs outside the elements returned by `getElements`.
  *
  * Note: when `getElements` returns an empty array, any click is considered a click away.
@@ -54,8 +63,9 @@ export function setupClickAway(
         }
     };
 
-    CLICK_AWAY_EVENT_TYPES.forEach((evtType) => document.addEventListener(evtType, listener));
+    // Capture phase: a `stopPropagation` on an app-level click handler must not prevent dismissal.
+    CLICK_AWAY_EVENT_TYPES.forEach((evtType) => document.addEventListener(evtType, listener, true));
     return () => {
-        CLICK_AWAY_EVENT_TYPES.forEach((evtType) => document.removeEventListener(evtType, listener));
+        CLICK_AWAY_EVENT_TYPES.forEach((evtType) => document.removeEventListener(evtType, listener, true));
     };
 }

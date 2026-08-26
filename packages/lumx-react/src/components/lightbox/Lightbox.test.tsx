@@ -78,7 +78,7 @@ describe(`<${Lightbox.displayName}>`, () => {
             it('should trigger onClose on click away', () => {
                 const onClose = vi.fn();
                 setup({ onClose });
-                fireEvent.mouseDown(document.body);
+                fireEvent.click(document.body);
                 expect(onClose).toHaveBeenCalled();
             });
         });

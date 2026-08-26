@@ -37,7 +37,6 @@ describe('<AlertDialog />', () => {
                 props: { isOpen: true, confirmProps: { label: 'OK', onClick: vi.fn() } },
             });
             const overlay = document.querySelector('.lumx-dialog__overlay');
-            fireEvent.mouseDown(overlay!);
             fireEvent.click(overlay!);
             expect(emitted('close')).toBeTruthy();
         });

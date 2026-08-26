@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+-   `@lumx/react`, `@lumx/vue`:
+    -   Popover, Dialog & Lightbox: detect a click away on `click` instead of `mousedown`. Should fix click away incorrectly activaing when clicking scrollbars.
+
 ## [4.21.0][] - 2026-08-25
 
 ### Fixed
@@ -142,7 +147,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `@lumx/vue`:
     -   Create the `SelectButton` component
-       `InputLabel`: Added prop `as` to specify the HTML element to use for rendering
+        `InputLabel`: Added prop `as` to specify the HTML element to use for rendering
 -   `@lumx/react`:
     -   Create the `TimePickerField` component
     -   `InputLabel`: Added prop `as` to specify the HTML element to use for rendering
@@ -225,13 +230,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   Moved `Lightbox` from `@lumx/react`
     -   `setupRovingTabIndex`: add MutationObserver-based tabindex normalization (mount, removal recovery, insertion, disabled-state, selection)
     -   `Combobox`: replace `autoFilter` boolean with `filter` prop (`'auto'` | `'manual'` | `'off'`) and add `openOnFocus` prop
--  `@lumx/react`:
-    -  `TextField`: improve clear button a11y linking it to the input label via `aria-describedby`
+-   `@lumx/react`:
+    -   `TextField`: improve clear button a11y linking it to the input label via `aria-describedby`
     -   `Combobox.Input`: replace `autoFilter` with `filter` and `openOnFocus` props
     -   `SelectionChipGroup`: simplify chip labeling; remove unused `inputLabel` and `scope` props
     -   `SelectionChipGroup`: implement ARIA listbox pattern
--  `@lumx/vue`:
-    -  `TextField`: improve clear button a11y linking it to the input label via `aria-describedby`
+-   `@lumx/vue`:
+    -   `TextField`: improve clear button a11y linking it to the input label via `aria-describedby`
     -   `Combobox.Input`: replace `autoFilter` with `filter` and `openOnFocus` props
     -   Create the `SelectionChipGroup` component
 

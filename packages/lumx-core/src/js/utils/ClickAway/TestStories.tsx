@@ -49,6 +49,43 @@ export function setup({
     };
 
     /**
+     * This story showcases that scrolling a container is not a click away, however you scroll it.
+     * The scrollbar takes layout space on purpose: overlay scrollbars leave no gutter to press.
+     */
+    const ScrollableClickAway = {
+        render: () => (
+            <>
+                <style>{`
+                    [data-demo-scroller]::-webkit-scrollbar { width: 15px; height: 15px; }
+                    [data-demo-scroller]::-webkit-scrollbar-track { background: #eee; }
+                    [data-demo-scroller]::-webkit-scrollbar-thumb { background: #888; }
+                `}</style>
+                <p>
+                    Scrolling a panel is not a click away. Open a level, then scroll the panel below with the wheel, or
+                    by dragging its grey scrollbar. The level stays open either way.
+                </p>
+                <p>Clicking the panel content closes the level.</p>
+                {/* Every length carries an explicit unit: Vue does not append `px` to a bare number. */}
+                <section
+                    data-demo-scroller=""
+                    style={{
+                        height: '200px',
+                        width: '320px',
+                        overflowY: 'auto',
+                        border: '1px solid #ccc',
+                        padding: '8px',
+                    }}
+                >
+                    <ButtonWithCard level={0} />
+                    {Array.from({ length: 30 }, (_, index) => (
+                        <p key={index}>panel line {index + 1}</p>
+                    ))}
+                </section>
+            </>
+        ),
+    };
+
+    /**
      * Test: clicking outside closes the level
      */
     const TestClickAwayCloses = {
@@ -95,5 +132,5 @@ export function setup({
         },
     };
 
-    return { meta, NestedClickAway, InShadowDOM, TestClickAwayCloses, TestNestedClickAway };
+    return { meta, NestedClickAway, InShadowDOM, ScrollableClickAway, TestClickAwayCloses, TestNestedClickAway };
 }

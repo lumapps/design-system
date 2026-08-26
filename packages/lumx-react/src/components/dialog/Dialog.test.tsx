@@ -175,7 +175,6 @@ describe(`<${Dialog.displayName}>`, () => {
             // Click the overlay (which is outside the wrapper)
             // The overlay class is .lumx-dialog__overlay
             const overlay = document.querySelector(`.${CLASSNAME}__overlay`);
-            fireEvent.mouseDown(overlay!);
             fireEvent.click(overlay!);
             expect(onClose).toHaveBeenCalled();
         });
@@ -184,7 +183,6 @@ describe(`<${Dialog.displayName}>`, () => {
             const onClose = vi.fn();
             setup({ isOpen: true, onClose, children: <button type="submit">Inside</button> });
             const insideBtn = screen.getByRole('button', { name: 'Inside' });
-            fireEvent.mouseDown(insideBtn);
             fireEvent.click(insideBtn);
             expect(onClose).not.toHaveBeenCalled();
         });

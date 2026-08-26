@@ -144,7 +144,6 @@ describe('<Dialog />', () => {
             it('should emit close when clicking outside (overlay)', () => {
                 const { emitted } = render(Dialog, { props: { isOpen: true, disableBodyScroll: false } });
                 const overlay = document.querySelector(`.${CLASSNAME}__overlay`);
-                fireEvent.mouseDown(overlay!);
                 fireEvent.click(overlay!);
                 expect(emitted('close')).toBeTruthy();
             });
@@ -154,7 +153,6 @@ describe('<Dialog />', () => {
                     props: { isOpen: true, disableBodyScroll: false },
                 });
                 const content = document.querySelector(`.${CLASSNAME}__content`);
-                fireEvent.mouseDown(content!);
                 fireEvent.click(content!);
                 expect(emitted('close')).toBeFalsy();
             });

@@ -64,7 +64,7 @@ describe('<Lightbox />', () => {
                 const { emitted } = render(Lightbox, {
                     props: { isOpen: true, parentElement: document.createElement('div') },
                 });
-                fireEvent.mouseDown(document.body);
+                fireEvent.click(document.body);
                 expect(emitted('close')).toBeTruthy();
             });
         });
