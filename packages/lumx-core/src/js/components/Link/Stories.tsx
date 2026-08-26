@@ -212,7 +212,7 @@ export function setup({
                             <small>Parent typography=title</small>
                         </td>
                         <td>
-                            <Text as="p" typography="title">
+                            <Text as="span" typography="title">
                                 <Link {...args}>
                                     Link <Icon icon={mdiEarth} /> with icon
                                 </Link>
@@ -224,7 +224,7 @@ export function setup({
                             <small>Parent color=red</small>
                         </td>
                         <td>
-                            <Text as="p" color="red">
+                            <Text as="span" color="red">
                                 <Link {...args}>
                                     Link <Icon icon={mdiEarth} /> with icon
                                 </Link>
@@ -247,6 +247,43 @@ export function setup({
         ],
     };
 
+    /**
+     * Links inside a paragraph are underlined by default so they stay distinguishable from the
+     * surrounding text without relying on color alone (WCAG 1.4.1).
+     */
+    const InParagraph = {
+        args: { href: 'https://example.com', children: 'documentation' },
+        argTypes: {
+            children: { control: false },
+            isDisabled: { control: false },
+            typography: { control: false },
+        },
+        render: ({ hasIcon, children, ...args }: any) => (
+            <p>
+                Read the{' '}
+                <Link {...args}>
+                    {children}{' '}
+                    {hasIcon ? <Icon icon={mdiEarth} /> : null}
+                </Link>{' '}
+                before you start.
+            </p>
+        ),
+        decorators: [
+            withCombinations({
+                combinations: {
+                    rows: {
+                        Default: {},
+                        'With icon': { hasIcon: true },
+                        Disabled: { isDisabled: true },
+                        'ARIA disabled': { 'aria-disabled': true },
+                        'As button': { href: undefined },
+                        'With typography': { typography: 'subtitle1' },
+                    },
+                }
+            }),
+        ],
+    };
+
     return {
         meta,
         Default,
@@ -260,5 +297,6 @@ export function setup({
         AllTypography,
         AllColors,
         ParentTypographyAndColor,
+        InParagraph,
     };
 }

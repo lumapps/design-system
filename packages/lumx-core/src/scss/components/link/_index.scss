@@ -5,6 +5,13 @@
 .#{$lumx-base-prefix}-link {
     @include lumx-link;
 
+    // Underline links sitting inside a paragraph of text so they stay distinguishable
+    // from the surrounding text without relying on color alone (WCAG 1.4.1).
+    // `:where` keeps the specificity at 0-1-0 so this stays easy to override.
+    :where(p) & {
+        text-decoration: underline;
+    }
+
     &:disabled,
     &[aria-disabled="true"] {
         @include lumx-state-disabled-input;
