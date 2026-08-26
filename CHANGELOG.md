@@ -14,8 +14,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
--   `@lumx/core`, `@lumx/react`, `@lumx/vue`:
-    -   Add `Card` component: a simple elevated container (`elevation` prop, 1–5, defaults to none).
+-   `@lumx/react`, `@lumx/vue`:
+    -   Create `Card` component. A simple container with optional elevation.
 
 ## [4.20.0][] - 2026-07-24
 
