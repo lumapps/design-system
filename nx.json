@@ -21,7 +21,13 @@
             "!{projectRoot}/reports/**/*",
             "!{projectRoot}/node_modules/**/*"
         ],
-        "storybookFiles": ["sourceFiles", "{projectRoot}/.storybook/**/*"]
+        "storybookFiles": ["sourceFiles", "{projectRoot}/.storybook/**/*"],
+        "storybookTestFiles": [
+            "storybookFiles",
+            { "env": "SNAPSHOT_ONLY" },
+            { "env": "IMAGE_SNAPSHOT" },
+            { "env": "SCREENSHOT_SCALE" }
+        ]
     },
     "targetDefaults": {
         "build": {
@@ -51,12 +57,12 @@
             "cache": true
         },
         "test:storybook": {
-            "inputs": ["storybookFiles"],
+            "inputs": ["storybookTestFiles"],
             "outputs": ["{projectRoot}/reports/coverage"],
             "cache": true
         },
         "test:storybook:visual": {
-            "inputs": ["storybookFiles"],
+            "inputs": ["storybookTestFiles"],
             "outputs": ["{projectRoot}/__vis__"],
             "cache": true
         },
