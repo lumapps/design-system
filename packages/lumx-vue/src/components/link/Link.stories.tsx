@@ -27,3 +27,4 @@ export const AllStates = { ...stories.AllStates };
 export const AllTypography = { ...stories.AllTypography };
 export const AllColors = { ...stories.AllColors };
 export const ParentTypographyAndColor = { ...stories.ParentTypographyAndColor };
+export const InParagraph = { ...stories.InParagraph };

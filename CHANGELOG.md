@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+-   `@lumx/react`, `@lumx/vue`:
+    -   `Link`: improve accessibility adding underline decoration when inside a paragraph to distinguish links from surrounding text.
+
 ### Fixed
 
 -   `@lumx/react`:
@@ -19,7 +24,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   `@lumx/react`, `@lumx/vue`:
     -   `MenuButton`/`MenuPopover`: the menu popover now defaults to `fitToAnchorWidth="minWidth"` (was `false`), so the menu is at least as wide as its trigger. The prop can now be overridden via `MenuButton`'s `popoverProps` or directly on `MenuPopover`.
     -   `UserBlock`: improve `fields` wrapper render with a more semantic `<p>` instead of `<div>`
-    -   `Text`, `Link`: stop adding a space before an icon starting the text and after an icon ending the text.
 
 ### Fixed
 
