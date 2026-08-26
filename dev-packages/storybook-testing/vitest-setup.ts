@@ -56,10 +56,18 @@ export function setupStorybookVitest(
             // Wait for all images to load before taking the screenshot.
             await waitForImages();
 
-            const subject = document.body.querySelector('lumx-story');
+            // Screenshot subject, overridable per story via `parameters.snapshot.subject`.
+            // `viewport` expands <lumx-story> to the full viewport and makes it the containing
+            // block of its fixed descendants (see vitest-overrides.css): required for stories
+            // rendering fixed overlays (dialog, tooltip, popover) that would otherwise fall
+            // outside the story element bounding box.
+            const { subject = 'lumx-story' } = options as { subject?: string };
+            const storyElement = document.body.querySelector('lumx-story');
+            if (subject === 'viewport') storyElement?.setAttribute('data-vis-viewport', '');
+            const subjectElement = subject === 'viewport' ? storyElement : document.querySelector(subject);
 
             try {
-                await expect(subject).toMatchImageSnapshot(options);
+                await expect(subjectElement).toMatchImageSnapshot(options);
             } catch (err) {
                 // Log visual diff as a warning instead of failing the test.
                 // Diff images are still generated (written before the error is thrown).
