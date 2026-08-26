@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+-   `@lumx/react`, `@lumx/vue`:
+    -   `Text`, `Heading`, `Link`: no space is added around an icon at the start or end of the content, or next to text that already ends or starts with a space.
+
 -   `@lumx/react`:
     -   `ImageLightbox`: `useImageLightbox`'s `getTriggerProps` now always includes `aria-haspopup="dialog"` to warn screen reader users that activating the trigger opens a modal dialog.
     -   `Slideshow`, `Slides`: the carousel container's `aria-roledescription="carousel"` can now be overridden by passing `aria-roledescription` as a prop. Add a `slideGroupRoleDescription` prop to `Slideshow`/`Slides` to override each slide group's `aria-roledescription="slide"`. Both keep their existing default wording when not provided.
@@ -20,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   `@lumx/react`, `@lumx/vue`:
     -   `MenuButton`/`MenuPopover`: the menu popover now defaults to `fitToAnchorWidth="minWidth"` (was `false`), so the menu is at least as wide as its trigger. The prop can now be overridden via `MenuButton`'s `popoverProps` or directly on `MenuPopover`.
     -   `UserBlock`: improve `fields` wrapper render with a more semantic `<p>` instead of `<div>`
+    -   `Text`, `Link`: stop adding a space before an icon starting the text and after an icon ending the text.
 
 ### Fixed
 

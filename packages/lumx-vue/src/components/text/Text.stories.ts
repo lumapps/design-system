@@ -30,3 +30,4 @@ export const AllTypography = { ...stories.AllTypography };
 export const AllColors = { ...stories.AllColors };
 export const TestUpdateTruncateTitleLabel = { ...stories.TestUpdateTruncateTitleLabel };
 export const WithIcon = { ...stories.WithIcon };
+export const WithIconAndExplicitSpaces = { ...stories.WithIconAndExplicitSpaces };
