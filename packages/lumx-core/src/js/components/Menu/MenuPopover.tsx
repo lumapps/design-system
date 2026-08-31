@@ -1,12 +1,12 @@
 import type { HasClassName, JSXElement, LumxClassName } from '../../types';
-import type { Placement } from '../Popover/constants';
+import { FitAnchorWidth, type Placement } from '../Popover/constants';
 import { classNames } from '../../utils';
 import { PopoverProps } from '../Popover';
 
 /** MenuPopover props. */
 export interface MenuPopoverProps
     extends HasClassName,
-        Pick<PopoverProps, 'placement' | 'anchorRef' | 'isOpen' | 'handleClose'> {
+        Pick<PopoverProps, 'placement' | 'anchorRef' | 'isOpen' | 'handleClose' | 'fitToAnchorWidth'> {
     /** Popover content (a `Menu`). */
     children?: JSXElement;
 }
@@ -31,6 +31,7 @@ export const MenuPopover = (props: MenuPopoverProps, { Popover, FlexBox }: MenuP
         className,
         isOpen,
         placement = 'bottom-start' as Placement,
+        fitToAnchorWidth = FitAnchorWidth.MIN_WIDTH,
         anchorRef,
         handleClose,
         ...forwardedProps
@@ -49,7 +50,7 @@ export const MenuPopover = (props: MenuPopoverProps, { Popover, FlexBox }: MenuP
             focusAnchorOnClose
             withFocusTrap={false}
             closeMode="hide"
-            fitToAnchorWidth={false}
+            fitToAnchorWidth={fitToAnchorWidth}
             className={block([className])}
         >
             <FlexBox orientation="vertical" className={element('scroll')}>
