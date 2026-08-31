@@ -15,6 +15,17 @@ const imageSnapshot = !!process.env.IMAGE_SNAPSHOT;
 const deviceScaleFactor = Number(process.env.SCREENSHOT_SCALE) || 1;
 
 /**
+ * Story viewport size, in CSS pixels.
+ *
+ * Applied both to the vitest tester iframe (`browser.viewport`) and to the Playwright page
+ * (`contextOptions.viewport`): vitest shrinks the iframe with a CSS `transform: scale()` to fit it
+ * inside the page, so a page smaller than the iframe silently downscales every screenshot (a
+ * 1200x900 iframe in Playwright's default 1280x720 page gives scale 0.8). Keeping both equal
+ * guarantees scale 1, so screenshot pixels = CSS pixels x deviceScaleFactor.
+ */
+const viewport = { width: 1200, height: 900 };
+
+/**
  * Create a vitest config for storybook browser testing with visual snapshots.
  *
  * @param {object} options
@@ -48,8 +59,10 @@ export function createStorybookVitestConfig(options) {
                             // Reduce animations (not great in screenshots)
                             reducedMotion: 'reduce',
                             deviceScaleFactor,
+                            viewport,
                         },
                     }),
+                    viewport,
                     headless: true,
                     instances: [{ browser: 'chromium' }],
                 },
