@@ -8,6 +8,9 @@ const execFileAsync = promisify(execFile);
 const { md } = require('./md');
 const { findFiles, extractRelativePath, normalizeScreenshotPath } = require('./utils');
 
+/** Max displayed width (in px) of report images. Smaller screenshots are not upscaled. */
+const MAX_IMAGE_WIDTH = 300;
+
 /**
  * Strip the `.png` extension and `-auto` suffix from screenshot file names.
  * e.g. "base-auto.png" -> "base"
@@ -234,14 +237,15 @@ function buildGroupedSection(heading, entries, renderEntry, { collapsed = false 
 /**
  * Render a single entry as an image table.
  * @param {Object} entry
- * @param {Array<{ label: string, url: string }>} columns - Table columns with label and image URL
+ * @param {Array<{ label: string, url: string, width?: number }>} columns - Table columns with label,
+ * image URL and display width
  * @returns {string[]}
  */
 function renderImageEntry(entry, columns) {
     const suffix = entry.diffPercent !== undefined ? ` (${entry.diffPercent.toFixed(2)}% diff)` : '';
     const table = md.table(
         columns.map((c) => c.label),
-        columns.map((c) => md.linkedImage(c.url, { width: 300 })),
+        columns.map((c) => md.linkedImage(c.url, { width: c.width })),
     );
     return [md.bold(`${entry.shortName}${suffix}`), '', table, ''];
 }
@@ -359,9 +363,22 @@ function buildFooter({ reportUrl, artifactUrl }) {
 }
 
 /**
- * Build a colocated image URL for a screenshot entry.
+ * Build the colocated path of an image variant, relative to the report root.
  * All images for a given screenshot live in the same directory:
- *   {prefix}/{label}/{normalizedRelPath without .png}/{variant}.png
+ *   {section}/{normalizedRelPath without .png}/{variant}.png
+ *
+ * @param {string} section - Section name (e.g. 'react', 'vue', 'cross-framework')
+ * @param {string} relPath - Relative screenshot path
+ * @param {string} variant - Image variant (e.g. 'baseline', 'current', 'diff', 'react', 'vue')
+ * @returns {string}
+ */
+function colocatedRelPath(section, relPath, variant) {
+    const dir = normalizeScreenshotPath(relPath).replace(/\.png$/, '');
+    return `${section}/${dir}/${variant}.png`;
+}
+
+/**
+ * Build a colocated image URL for a screenshot entry.
  *
  * @param {string} imageUrlPrefix
  * @param {string} section - Section name (e.g. 'react', 'vue', 'cross-framework')
@@ -370,8 +387,7 @@ function buildFooter({ reportUrl, artifactUrl }) {
  * @returns {string}
  */
 function colocatedImageUrl(imageUrlPrefix, section, entry, variant) {
-    const dir = normalizeScreenshotPath(entry.relPath).replace(/\.png$/, '');
-    return `${imageUrlPrefix}/${section}/${dir}/${variant}.png`;
+    return `${imageUrlPrefix}/${colocatedRelPath(section, entry.relPath, variant)}`;
 }
 
 /**
@@ -384,10 +400,26 @@ function colocatedImageUrl(imageUrlPrefix, section, entry, variant) {
  * @param {string} [options.prNumber] - Pull request number
  * @param {string} [options.artifactUrl] - Link to download artifacts
  * @param {Object} [options.crossFramework] - Cross-framework diff data
+ * @param {Map<string, number>} [options.imageWidths] - Intrinsic image widths, keyed by colocated rel path
  * @returns {string}
  */
 function buildFullReport(packages, options) {
-    const { imageUrlPrefix, prUrl, prNumber, artifactUrl, crossFramework } = options;
+    const { imageUrlPrefix, prUrl, prNumber, artifactUrl, crossFramework, imageWidths } = options;
+
+    /**
+     * Image URL and display width, capped at MAX_IMAGE_WIDTH without upscaling smaller screenshots.
+     * @param {string} section
+     * @param {{ relPath: string }} entry
+     * @param {string} variant
+     */
+    const image = (section, entry, variant) => {
+        const naturalWidth = imageWidths?.get(colocatedRelPath(section, entry.relPath, variant));
+        return {
+            url: colocatedImageUrl(imageUrlPrefix, section, entry, variant),
+            width: naturalWidth ? Math.min(MAX_IMAGE_WIDTH, naturalWidth) : MAX_IMAGE_WIDTH,
+        };
+    };
+
     const lines = [];
     lines.push(md.link(`PR#${prNumber}`, prUrl), '');
     lines.push(...buildReportPreamble(packages));
@@ -397,21 +429,21 @@ function buildFullReport(packages, options) {
 
         if (!pkg.hasBaselines) continue;
 
-        const url = (entry, variant) => colocatedImageUrl(imageUrlPrefix, pkg.label, entry, variant);
+        const img = (entry, variant) => image(pkg.label, entry, variant);
 
         lines.push(
             ...buildGroupedSection(md.heading(3, 'Differences'), pkg.diffs, (e) =>
                 renderImageEntry(e, [
-                    { label: 'Baseline', url: url(e, 'baseline') },
-                    { label: 'Current', url: url(e, 'current') },
-                    { label: 'Diff', url: url(e, 'diff') },
+                    { label: 'Baseline', ...img(e, 'baseline') },
+                    { label: 'Current', ...img(e, 'current') },
+                    { label: 'Diff', ...img(e, 'diff') },
                 ]),
             ),
             ...buildGroupedSection(md.heading(3, 'New Screenshots'), pkg.newScreenshots, (e) =>
-                renderImageEntry(e, [{ label: 'Current', url: url(e, 'current') }]),
+                renderImageEntry(e, [{ label: 'Current', ...img(e, 'current') }]),
             ),
             ...buildGroupedSection(md.heading(3, 'Deleted Screenshots'), pkg.deletedScreenshots, (e) =>
-                renderImageEntry(e, [{ label: 'Previous', url: url(e, 'baseline') }]),
+                renderImageEntry(e, [{ label: 'Previous', ...img(e, 'baseline') }]),
             ),
             ...buildUnchangedSection(pkg, imageUrlPrefix),
             md.rule,
@@ -424,11 +456,11 @@ function buildFullReport(packages, options) {
         if (crossFramework.diffs.length > 0) {
             lines.push(
                 ...buildGroupedSection(md.heading(3, 'Differences'), crossFramework.diffs, (entry) => {
-                    const url = (variant) => colocatedImageUrl(imageUrlPrefix, 'cross-framework', entry, variant);
+                    const img = (variant) => image('cross-framework', entry, variant);
                     return renderImageEntry(entry, [
-                        { label: 'React', url: url('react') },
-                        { label: 'Vue', url: url('vue') },
-                        { label: 'Diff', url: url('diff') },
+                        { label: 'React', ...img('react') },
+                        { label: 'Vue', ...img('vue') },
+                        { label: 'Diff', ...img('diff') },
                     ]);
                 }),
             );
@@ -469,6 +501,44 @@ function buildSummaryReport(packages, options) {
 }
 
 /**
+ * Read the intrinsic pixel width of a PNG from its IHDR header.
+ * @param {string} filePath
+ * @returns {Promise<number | undefined>} Width in pixels, or undefined if unreadable
+ */
+async function readPngWidth(filePath) {
+    let handle;
+    try {
+        handle = await fs.open(filePath);
+        // PNG layout: 8 bytes signature + 8 bytes IHDR chunk header, then the width as a big endian uint32.
+        const { buffer, bytesRead } = await handle.read(Buffer.alloc(24), 0, 24, 0);
+        return bytesRead === 24 ? buffer.readUInt32BE(16) : undefined;
+    } catch {
+        return undefined;
+    } finally {
+        await handle?.close();
+    }
+}
+
+/**
+ * Read the intrinsic width of every image of the consolidated report directory.
+ * Used to cap displayed image widths without upscaling small screenshots (GitHub strips inline
+ * styles, so `max-width` is not an option and the `width` attribute has to be computed).
+ *
+ * @param {string} outputDir - Root output directory
+ * @returns {Promise<Map<string, number>>} Map of image path relative to outputDir -> width in px
+ */
+async function readImageWidths(outputDir) {
+    const files = await findFiles(outputDir, (f) => f.endsWith('.png'));
+    const widths = await Promise.all(
+        files.map(async (file) => {
+            const relPath = path.relative(outputDir, file).split(path.sep).join('/');
+            return [relPath, await readPngWidth(file)];
+        }),
+    );
+    return new Map(widths.filter(([, width]) => width !== undefined));
+}
+
+/**
  * Copy a file to a destination, creating parent directories as needed.
  * @param {string} srcPath - Source file path
  * @param {string} destPath - Destination file path
@@ -489,8 +559,7 @@ async function copyFile(srcPath, destPath) {
  * @returns {string}
  */
 function colocatedPath(outputDir, section, relPath, variant) {
-    const dir = normalizeScreenshotPath(relPath).replace(/\.png$/, '');
-    return path.join(outputDir, section, dir, `${variant}.png`);
+    return path.join(outputDir, ...colocatedRelPath(section, relPath, variant).split('/'));
 }
 
 /**
@@ -630,13 +699,16 @@ async function main({ artifactsDir, outputDir, runId, owner, repo, prNumber }) {
     // 2. Consolidate all images into a single colocated output directory
     await consolidateImages(packages, crossFramework, artifactsDir, outputDir);
 
+    // Intrinsic image widths, to cap displayed widths without upscaling small screenshots
+    const imageWidths = await readImageWidths(outputDir);
+
     // 3. Build URLs
     const imageUrlPrefix = `https://raw.githubusercontent.com/wiki/${owner}/${repo}/pr-${prNumber}/visual-diffs`;
     const reportFileName = `Visual-Reports-PR-${prNumber}`;
     const reportUrl = `https://github.com/${owner}/${repo}/wiki/${reportFileName}`;
     const prUrl = `https://github.com/${owner}/${repo}/pull/${prNumber}`;
     const artifactUrl = `https://github.com/${owner}/${repo}/actions/runs/${runId}`;
-    const baseOptions = { imageUrlPrefix, prUrl, prNumber, artifactUrl, crossFramework };
+    const baseOptions = { imageUrlPrefix, prUrl, prNumber, artifactUrl, crossFramework, imageWidths };
 
     // 4. Build full report (for wiki) with images
     const fullReport = buildFullReport(packages, baseOptions);

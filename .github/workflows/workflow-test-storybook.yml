@@ -60,9 +60,8 @@ jobs:
             - name: 'Run ${{ matrix.project }} tests'
               if: ${{ contains(fromJSON(inputs.packages), format('@lumx/{0}', matrix.label)) }}
               id: test-storybook
-              run: yarn workspace "@lumx/${{ matrix.label }}" test:storybook ${{ inputs.update && '--update' || '' }}
+              run: yarn workspace "@lumx/${{ matrix.label }}" test:storybook:visual ${{ inputs.update && '--update' || '' }}
               env:
-                  IMAGE_SNAPSHOT: 'true'
                   SNAPSHOT_ONLY: ${{ inputs.update && 'true' || '' }}
 
             - name: 'Upload visual report artifacts'

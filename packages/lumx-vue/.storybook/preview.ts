@@ -1,5 +1,5 @@
 import type { Preview } from '@storybook/vue3-vite';
-import { withGlobalTheme } from './decorators/withGlobalTheme';
+import { withGlobalProviders } from './decorators/withGlobalProviders';
 import { Theme } from '@lumx/core/js/constants';
 import '@lumx/core/stories/root-styles.scss';
 import 'focus-visible';
@@ -24,7 +24,7 @@ const preview: Preview = {
     argTypes: {
         theme: { table: { disable: true } },
     },
-    decorators: [withGlobalTheme],
+    decorators: [withGlobalProviders],
     /** Add 'snapshot' tag to all stories (can be removed with `tags: ['!snapshot']`) */
     tags: ['snapshot'],
 };

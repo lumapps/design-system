@@ -28,7 +28,22 @@ code {
     font-style: italic;
 }
 
-/** Add some space around the subject */
-body {
+lumx-story {
+    display: inline-block;
     padding: 1rem !important;
+    max-width: 850px;
+}
+
+/**
+ * Viewport sized story element (`parameters.snapshot.subject: 'viewport'`).
+ * `contain: layout` makes it the containing block of fixed descendants (dialog, tooltip,
+ * popover overlays) so they end up inside the screenshot bounding box.
+ */
+lumx-story[data-vis-viewport] {
+    display: block;
+    width: 100vw;
+    max-width: none;
+    min-height: 100vh;
+    padding: 0 !important;
+    contain: layout;
 }

@@ -30,6 +30,8 @@ export function setup({
                 pauseAnimationAtEnd: true,
                 delay: DIALOG_TRANSITION_DURATION,
             },
+            // The dialog renders in a fixed overlay escaping the story element: screenshot the viewport.
+            snapshot: { subject: 'viewport' },
         },
         decorators: [withChromaticForceScreenSize()],
         args: DEFAULT_PROPS,
