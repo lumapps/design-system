@@ -23,7 +23,7 @@ import { Link, type LinkProps } from '../link';
 /** Props that MenuButton explicitly declares. */
 type MenuButtonBase = ReactToJSX<UIProps, 'triggerProps' | 'variant'> & {
     children?: React.ReactNode;
-    popoverProps?: MenuPopoverProps;
+    popoverProps?: Omit<MenuPopoverProps, 'children'>;
     onOpen?: (isOpen: boolean) => void;
     label: string;
 };

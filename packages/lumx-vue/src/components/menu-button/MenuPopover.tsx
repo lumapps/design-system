@@ -45,7 +45,7 @@ const MenuPopover = defineComponent(
     {
         name: getName(MENU_POPOVER_COMPONENT_NAME),
         inheritAttrs: false,
-        props: keysOf<MenuPopoverProps>()('placement', 'class'),
+        props: keysOf<MenuPopoverProps>()('placement', 'fitToAnchorWidth', 'class'),
     },
 );
 
