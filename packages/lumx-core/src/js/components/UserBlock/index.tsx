@@ -222,13 +222,13 @@ export const UserBlock = (props: UserBlockProps) => {
     const shouldDisplayFields = componentSize !== Size.s && componentSize !== Size.xs;
 
     const fieldsBlock = fields && shouldDisplayFields && (
-        <div className={element('fields')}>
+        <p className={element('fields')}>
             {fields.map((field: string, idx: number) => (
                 <Text as="span" key={idx} className={element('field')}>
                     {field}
                 </Text>
             ))}
-        </div>
+        </p>
     );
 
     const eventHandlers = {
