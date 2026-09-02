@@ -23,6 +23,8 @@ export interface UserBlockProps extends HasClassName, HasTheme {
     /**
      * Additional fields to display below the user's name.
      * Typically used for role, department, or other user metadata.
+     * Rendered inside a `<p>`, so only phrasing content (plain strings) is valid here —
+     * use `additionalFields` for block-level content.
      */
     fields?: string[];
 
@@ -222,13 +224,13 @@ export const UserBlock = (props: UserBlockProps) => {
     const shouldDisplayFields = componentSize !== Size.s && componentSize !== Size.xs;
 
     const fieldsBlock = fields && shouldDisplayFields && (
-        <div className={element('fields')}>
+        <Text as="p" className={element('fields')}>
             {fields.map((field: string, idx: number) => (
                 <Text as="span" key={idx} className={element('field')}>
                     {field}
                 </Text>
             ))}
-        </div>
+        </Text>
     );
 
     const eventHandlers = {
