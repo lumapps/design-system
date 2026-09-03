@@ -38,6 +38,11 @@ export default (renderOptions: SetupOptions<any>) => {
                 expect(screen.getByText('Field 1')).toBeInTheDocument();
                 expect(screen.getByText('Field 2')).toBeInTheDocument();
             });
+
+            it('should render fields as a <p> element', () => {
+                const { fields } = setup({ fields: ['Field 1', 'Field 2'] }, renderOptions);
+                expect(fields?.tagName).toBe('P');
+            });
         });
     });
 };
