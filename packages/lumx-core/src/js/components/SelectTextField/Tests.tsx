@@ -957,6 +957,23 @@ export default function selectTextFieldTests({ components, renderWithState }: Se
             });
         });
 
+        it('should remove a chip by clicking its close icon', async () => {
+            renderWithState(multiTemplate, { value: [FRUITS[0], FRUITS[2]] }); // Apple, Banana
+
+            await waitFor(() => {
+                expect(getChips().length).toBe(2);
+            });
+
+            // The close icon sits in the chip `after` element. A click there must also remove the chip.
+            const closeIcon = getChips()[0]!.querySelector<HTMLElement>('.lumx-chip__after')!;
+            expect(closeIcon).toBeTruthy();
+            await userEvent.click(closeIcon);
+
+            await waitFor(() => {
+                expect(getChips().length).toBe(1);
+            });
+        });
+
         it('should render pre-selected values as chips', async () => {
             renderWithState(multiTemplate, { value: [FRUITS[0], FRUITS[3], FRUITS[7]] }); // Apple, Blueberry, Orange
             const input = getInput();

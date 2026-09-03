@@ -56,8 +56,13 @@ const Chip = defineComponent(
             emit('click', event);
         };
 
+        /*
+         * The core template always attaches this handler on the `after` element. Only stop
+         * propagation when a listener is registered, else a click on the `after` element never
+         * reaches a parent that uses event delegation (example: SelectionChipGroup).
+         */
         const handleAfterClick = (event: MouseEvent) => {
-            if (isAnyDisabled.value) {
+            if (isAnyDisabled.value || !hasAfterClick) {
                 return;
             }
 
@@ -65,8 +70,9 @@ const Chip = defineComponent(
             event?.stopPropagation();
         };
 
+        /* Same rule as `handleAfterClick` above, for the `before` element. */
         const handleBeforeClick = (event: MouseEvent) => {
-            if (isAnyDisabled.value) {
+            if (isAnyDisabled.value || !hasBeforeClick) {
                 return;
             }
 
