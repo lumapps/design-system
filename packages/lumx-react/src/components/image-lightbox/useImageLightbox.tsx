@@ -34,7 +34,11 @@ export function useImageLightbox<P extends Partial<ImageLightboxProps>>(
      * Generates trigger props
      * @param index Provide an index to choose which image to display when the image lightbox opens.
      * */
-    getTriggerProps: (options?: TriggerOptions) => { onClick: (ev?: React.MouseEvent) => void; ref: React.Ref<any> };
+    getTriggerProps: (options?: TriggerOptions) => {
+        onClick: (ev?: React.MouseEvent) => void;
+        ref: React.Ref<any>;
+        'aria-haspopup': 'dialog';
+    };
     /** Props to forward to the ImageLightbox */
     imageLightboxProps: ManagedProps & P;
 } {
@@ -134,6 +138,7 @@ export function useImageLightbox<P extends Partial<ImageLightboxProps>>(
             onClick(e?: React.MouseEvent) {
                 open(e?.target as HTMLElement, options);
             },
+            'aria-haspopup': 'dialog' as const,
         }));
     }, []);
 
