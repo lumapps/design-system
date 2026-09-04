@@ -78,7 +78,7 @@ jobs:
               uses: actions/checkout@v6
 
             - name: 'Commit message validation'
-              uses: lumapps/commit-message-validator@master
+              uses: lumapps/commit-message-validator@1.5.7
               with:
                   no_jira: true
               env:
