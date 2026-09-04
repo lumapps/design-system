@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+-   `@lumx/react`, `@lumx/vue`:
+    -   `Link`: improve accessibility adding underline decoration when inside a paragraph to distinguish links from surrounding text.
+
 ### Fixed
 
 -   `@lumx/react`:

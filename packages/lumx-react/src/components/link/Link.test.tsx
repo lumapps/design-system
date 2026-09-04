@@ -40,11 +40,19 @@ describe(`<${Link.displayName}>`, () => {
             });
             const icons = queryAllByClassName(link, Icon.className as string);
             expect(icons).toHaveLength(3);
+            const [leftIcon, middleIcon, rightIcon] = icons;
 
-            for (const icon of icons) {
-                expect((icon.previousSibling as any).textContent).toEqual(' ');
-                expect((icon.nextSibling as any).textContent).toEqual(' ');
-            }
+            // Icon starting the text: no space before it
+            expect(leftIcon.previousSibling).toBe(null);
+            expect((leftIcon.nextSibling as any).textContent).toEqual(' ');
+
+            // Icon within the text: spaces on both sides
+            expect((middleIcon.previousSibling as any).textContent).toEqual(' ');
+            expect((middleIcon.nextSibling as any).textContent).toEqual(' ');
+
+            // Icon ending the text: no space after it
+            expect((rightIcon.previousSibling as any).textContent).toEqual(' ');
+            expect(rightIcon.nextSibling).toBe(null);
         });
 
         it('should not call onClick when disabled button is clicked', async () => {

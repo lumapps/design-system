@@ -5,9 +5,11 @@ frameworks: ['react', 'vue']
 import * as ReactDemoDefault from './react/default.tsx';
 import * as ReactDemoTypography from './react/typography.tsx';
 import * as ReactDemoColor from './react/color.tsx';
+import * as ReactDemoInText from './react/in-text.tsx';
 import * as VueDemoDefault from './vue/default.vue';
 import * as VueDemoTypography from './vue/typography.vue';
 import * as VueDemoColor from './vue/color.vue';
+import * as VueDemoInText from './vue/in-text.vue';
 import ReactLink from 'lumx-docs:@lumx/react/components/link/Link';
 import VueLink from 'lumx-docs:@lumx/vue/components/link/Link';
 
@@ -36,7 +38,11 @@ Links can change its `role` depending on the situation:
 -   Providing a `onClick` instead will transform the link into a `button` (while keeping the same link style)
 -   Providing a `linkAs` will use the given component instead (e.g. a react router link), **you'll have to make sure this component provides good accessibility**
 
-If the link is within some other text, please **avoid to use the same color** as the neighbouring text because users won't be able to see where the link start or ends.
+## Link in text
+
+Color alone is not a sufficient cue to distinguish a link from its surrounding text. To fix that, links in `<p>` will display as **underlined** (see [WCAG 1.4.1 Use of Color](https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html)).
+
+<DemoBlock demo={{ react: ReactDemoInText, vue: VueDemoInText }} />
 
 ## Properties
 
