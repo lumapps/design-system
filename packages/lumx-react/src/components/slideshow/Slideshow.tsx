@@ -17,7 +17,17 @@ import { SlideMode } from './constants';
  */
 export interface SlideshowProps
     extends GenericProps,
-        Pick<SlidesProps, 'autoPlay' | 'slidesId' | 'id' | 'theme' | 'fillHeight' | 'groupBy' | 'slideGroupLabel'> {
+        Pick<
+            SlidesProps,
+            | 'autoPlay'
+            | 'slidesId'
+            | 'id'
+            | 'theme'
+            | 'fillHeight'
+            | 'groupBy'
+            | 'slideGroupLabel'
+            | 'slideGroupRoleDescription'
+        > {
     /** Whether to use CSS transform translate or native scroll snap. */
     slideMode?: SlideMode;
     /** current slide active */
@@ -76,6 +86,7 @@ export const Slideshow = forwardRef<SlideshowProps, HTMLDivElement>((props, ref)
         id,
         slidesId,
         slideGroupLabel,
+        slideGroupRoleDescription,
         slideMode = DEFAULT_PROPS.slideMode,
         ...forwardedProps
     } = props;
@@ -137,6 +148,7 @@ export const Slideshow = forwardRef<SlideshowProps, HTMLDivElement>((props, ref)
             ref={mergeRefs(ref, setSlideshow)}
             hasControls={showControls}
             slideGroupLabel={slideGroupLabel}
+            slideGroupRoleDescription={slideGroupRoleDescription}
             afterSlides={
                 slideshowControlsProps && slidesCount > 1 ? (
                     <div className={`${Slides.className}__controls`}>

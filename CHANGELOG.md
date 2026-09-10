@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `@lumx/react`:
     -   `ImageLightbox`: `useImageLightbox`'s `getTriggerProps` now always includes `aria-haspopup="dialog"` to warn screen reader users that activating the trigger opens a modal dialog.
+    -   `Slideshow`, `Slides`: the carousel container's `aria-roledescription="carousel"` can now be overridden by passing `aria-roledescription` as a prop. Add a `slideGroupRoleDescription` prop to `Slideshow`/`Slides` to override each slide group's `aria-roledescription="slide"`. Both keep their existing default wording when not provided.
 
 ## [4.22.0][] - 2026-09-03
 

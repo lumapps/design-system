@@ -39,6 +39,11 @@ export interface SlidesProps extends GenericProps, HasTheme {
      * Receives the group position starting from 1 and the total number of groups.
      * */
     slideGroupLabel?: (groupPosition: number, groupTotal: number) => string;
+    /**
+     * Accessible role description to set on every slide group (`aria-roledescription`).
+     * Applies identically to every group.
+     * */
+    slideGroupRoleDescription?: string;
     /** Whether to use CSS transform translate or native scroll snap. */
     slideMode?: SlideMode;
     /** On slide change (only triggered on scroll when slideMode=scroll-snap) */
@@ -88,8 +93,10 @@ export const Slides = forwardRef<SlidesProps, HTMLDivElement>((props, ref) => {
         afterSlides,
         hasControls,
         slideGroupLabel,
+        slideGroupRoleDescription,
         slideMode = DEFAULT_PROPS.slideMode,
         onChange,
+        'aria-roledescription': ariaRoleDescription,
         ...forwardedProps
     } = props;
     const wrapperRef = React.useRef<HTMLDivElement>(null);
@@ -127,7 +134,7 @@ export const Slides = forwardRef<SlidesProps, HTMLDivElement>((props, ref) => {
                     [`group-by-${groupBy}`]: Boolean(groupBy),
                 }),
             )}
-            aria-roledescription="carousel"
+            aria-roledescription={ariaRoleDescription ?? 'carousel'}
         >
             <div
                 id={slidesId}
@@ -149,6 +156,7 @@ export const Slides = forwardRef<SlidesProps, HTMLDivElement>((props, ref) => {
                             id={slidesId && buildSlideShowGroupId(slidesId, index)}
                             role={hasControls ? 'tabpanel' : 'group'}
                             label={slideGroupLabel ? slideGroupLabel(index + 1, groups.length) : undefined}
+                            aria-roledescription={slideGroupRoleDescription}
                             isDisplayed={index >= startIndexVisible && index < endIndexVisible}
                         >
                             {group}
