@@ -2,7 +2,7 @@
 
 /**
  * Do not edit directly
- * Generated on Mon, 13 Jan 2025 09:24:38 GMT
+ * Generated on Thu, 10 Sep 2026 08:23:35 GMT
  */
 
 $lumx-button-height: 36px !default;
@@ -118,6 +118,7 @@ $lumx-chip-emphasis-selected-state-active-theme-light-border-color: var(--lumx-c
 $lumx-chip-emphasis-selected-state-active-theme-light-background-color: var(--lumx-color-primary-L4) !default;
 $lumx-chip-emphasis-selected-state-active-theme-dark-border-color: var(--lumx-color-light-N) !default;
 $lumx-chip-emphasis-selected-state-active-theme-dark-background-color: var(--lumx-color-light-L4) !default;
+$lumx-link-text-decoration: underline !default;
 $lumx-material-button-text-transform: none !default;
 $lumx-material-checkbox-wrapper-size: 20px !default;
 $lumx-material-checkbox-control-size: 16px !default;
@@ -802,6 +803,9 @@ $lumx-design-tokens: (
                 )
             )
         )
+    ),
+    "link": (
+        "text-decoration": $lumx-link-text-decoration
     ),
     "material": (
         "button": (

@@ -21,7 +21,7 @@
         &:hover,
         &[data-lumx-hover],
         &[data-focus-visible-added] {
-            text-decoration: underline;
+            text-decoration: var(--lumx-link-text-decoration);
         }
     }
 
@@ -34,6 +34,10 @@
 
 @mixin lumx-link-color($color, $variant) {
     color: lumx-color-variant($color, $variant);
+
+    &:visited {
+        color: var(--lumx-link-visited-color, #{lumx-color-variant($color, $variant)});
+    }
 }
 
 @mixin lumx-link($color: "primary", $variant: "N") {

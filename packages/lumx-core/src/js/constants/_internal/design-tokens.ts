@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Mon, 13 Jan 2025 09:24:38 GMT
+ * Generated on Thu, 10 Sep 2026 08:23:35 GMT
  */
 
 export const DESIGN_TOKENS = {
@@ -483,6 +483,7 @@ export const DESIGN_TOKENS = {
             },
         },
     },
+    link: { 'text-decoration': { value: 'underline' } },
     material: {
         button: { 'text-transform': { value: 'none' } },
         checkbox: { 'wrapper-size': { value: '20px' }, 'control-size': { value: '16px' } },

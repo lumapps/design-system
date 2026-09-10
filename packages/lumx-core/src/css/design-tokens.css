@@ -2,7 +2,7 @@
 
 /**
  * Do not edit directly
- * Generated on Mon, 13 Jan 2025 09:24:38 GMT
+ * Generated on Thu, 10 Sep 2026 08:23:35 GMT
  */
 
 :root {
@@ -119,6 +119,7 @@
     --lumx-chip-emphasis-selected-state-active-theme-light-background-color: var(--lumx-color-primary-L4);
     --lumx-chip-emphasis-selected-state-active-theme-dark-border-color: var(--lumx-color-light-N);
     --lumx-chip-emphasis-selected-state-active-theme-dark-background-color: var(--lumx-color-light-L4);
+    --lumx-link-text-decoration: underline;
     --lumx-material-button-text-transform: none;
     --lumx-material-checkbox-wrapper-size: 20px;
     --lumx-material-checkbox-control-size: 16px;
