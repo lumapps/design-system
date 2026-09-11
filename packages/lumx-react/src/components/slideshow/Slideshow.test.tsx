@@ -51,6 +51,37 @@ describe(`<${Slideshow.displayName}>`, () => {
         });
     });
 
+    describe('aria-roledescription', () => {
+        it('should default to aria-roledescription="carousel" on the container and "slide" on each group', () => {
+            const { slideShow } = setup();
+            expect(slideShow).toHaveAttribute('aria-roledescription', 'carousel');
+            const groups = screen.getAllByRole('tabpanel');
+            groups.forEach((group) => expect(group).toHaveAttribute('aria-roledescription', 'slide'));
+        });
+
+        it('should override the container aria-roledescription when passed as a prop', () => {
+            const { slideShow } = setup({ 'aria-roledescription': 'Carrousel' });
+            expect(slideShow).toHaveAttribute('aria-roledescription', 'Carrousel');
+        });
+
+        it('should keep the default container aria-roledescription when explicitly passed undefined', () => {
+            const { slideShow } = setup({ 'aria-roledescription': undefined });
+            expect(slideShow).toHaveAttribute('aria-roledescription', 'carousel');
+        });
+
+        it('should override every slide group aria-roledescription via slideGroupRoleDescription', () => {
+            setup({ slideGroupRoleDescription: 'Diapositive' });
+            const groups = screen.getAllByRole('tabpanel');
+            groups.forEach((group) => expect(group).toHaveAttribute('aria-roledescription', 'Diapositive'));
+        });
+
+        it('should keep the default slide aria-roledescription when slideGroupRoleDescription is not passed', () => {
+            setup();
+            const groups = screen.getAllByRole('tabpanel');
+            groups.forEach((group) => expect(group).toHaveAttribute('aria-roledescription', 'slide'));
+        });
+    });
+
     // Common tests suite.
     commonTestsSuiteRTL(setup, {
         baseClassName: CLASSNAME,

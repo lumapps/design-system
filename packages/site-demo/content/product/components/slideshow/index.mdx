@@ -2,6 +2,7 @@
 title: Slideshow
 frameworks: ['react']
 ---
+
 import * as DemoDefault from './react/default.tsx';
 import * as DemoGroupBy from './react/group-by.tsx';
 import * as DemoAutoplay from './react/autoplay.tsx';
@@ -22,6 +23,21 @@ Slideshows can display groups of pieces of content.
 Slideshows can play automatically.
 
 <DemoBlock orientation="horizontal" withThemeSwitcher vAlign="center" demo={{ react: DemoAutoplay }} />
+
+### Accessibility concerns
+
+Slideshows follow the [ARIA carousel pattern](https://www.w3.org/WAI/ARIA/apg/patterns/carousel/).
+
+The wrapper element gets `aria-roledescription="carousel"`. Every slide group gets
+`aria-roledescription="slide"`. A screen reader reads these descriptions in English only.
+Set your own values to translate them:
+
+-   `aria-roledescription` replaces the description on the carousel wrapper.
+-   `slideGroupRoleDescription` replaces the description on every slide group.
+
+Use the `slideGroupLabel` prop to give an accessible name to each slide group. The prop is a
+function. It receives the group position and the total number of groups. It must return the
+label as a string.
 
 ## Properties
 

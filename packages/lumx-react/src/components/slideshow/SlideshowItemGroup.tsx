@@ -37,7 +37,15 @@ export const buildSlideShowGroupId = (slidesId: string, index: number) => `${sli
  * @return React element.
  */
 export const SlideshowItemGroup = forwardRef<SlideshowItemGroupProps, HTMLDivElement>((props, ref) => {
-    const { className, children, role = 'group', label, isDisplayed, ...forwardedProps } = props;
+    const {
+        className,
+        children,
+        role = 'group',
+        label,
+        isDisplayed,
+        'aria-roledescription': ariaRoleDescription,
+        ...forwardedProps
+    } = props;
     const groupRef = React.useRef<HTMLDivElement>(null);
 
     useSlideFocusManagement({ isSlideDisplayed: isDisplayed, slideRef: groupRef });
@@ -47,7 +55,7 @@ export const SlideshowItemGroup = forwardRef<SlideshowItemGroupProps, HTMLDivEle
             ref={mergeRefs(groupRef, ref)}
             role={role}
             className={classNames.join(className, CLASSNAME)}
-            aria-roledescription="slide"
+            aria-roledescription={ariaRoleDescription ?? 'slide'}
             aria-label={label}
             {...forwardedProps}
         >
