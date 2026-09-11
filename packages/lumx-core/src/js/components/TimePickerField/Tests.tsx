@@ -201,6 +201,38 @@ export default function timePickerFieldTests({ components, renderWithState }: Ti
             expect(onChange).toHaveBeenLastCalledWith(expectTimeOfDay(12, 0), undefined, undefined);
         });
 
+        it('snaps a typed value above a non-step-aligned `maxTime` to the last on-grid option', async () => {
+            const onChange = vi.fn();
+            renderWithState(defaultTemplate, {
+                value: getDateAtTime({ hour: 8, minute: 0 }),
+                maxTime: getDateAtTime({ hour: 10, minute: 5 }),
+                step: 30,
+                onChange,
+            });
+            const input = screen.getByRole('combobox');
+            await userEvent.click(input);
+            await userEvent.clear(input);
+            await userEvent.type(input, '11:00');
+            await userEvent.tab();
+            expect(onChange).toHaveBeenLastCalledWith(expectTimeOfDay(10, 0), undefined, undefined);
+        });
+
+        it('leaves the typed value unchanged when no on-grid option exists in bounds', async () => {
+            const onChange = vi.fn();
+            renderWithState(defaultTemplate, {
+                value: getDateAtTime({ hour: 22, minute: 0 }),
+                minTime: getDateAtTime({ hour: 23, minute: 45 }),
+                step: 30,
+                onChange,
+            });
+            const input = screen.getByRole('combobox');
+            await userEvent.click(input);
+            await userEvent.clear(input);
+            await userEvent.type(input, '23:50');
+            await userEvent.tab();
+            expect(onChange).toHaveBeenLastCalledWith(expectTimeOfDay(23, 50), undefined, undefined);
+        });
+
         it('does not call onChange for an unparseable typed value', async () => {
             const onChange = vi.fn();
             renderWithState(defaultTemplate, { value: getDateAtTime({ hour: 8, minute: 0 }), onChange });
@@ -264,6 +296,55 @@ export default function timePickerFieldTests({ components, renderWithState }: Ti
                 value: getDateAtTime({ hour: 12, minute: 0 }),
                 minTime: getDateAtTime({ hour: 9, minute: 0 }),
                 maxTime: getDateAtTime({ hour: 18, minute: 0 }),
+                boundsMode: 'enforce' as const,
+                onChange,
+            });
+            expect(onChange).not.toHaveBeenCalled();
+        });
+
+        it('does not clamp when the value already sits exactly on grid-aligned bounds', () => {
+            const onChange = vi.fn();
+            renderWithState(defaultTemplate, {
+                value: getDateAtTime({ hour: 9, minute: 0 }),
+                minTime: getDateAtTime({ hour: 9, minute: 0 }),
+                maxTime: getDateAtTime({ hour: 18, minute: 0 }),
+                step: 30,
+                boundsMode: 'enforce' as const,
+                onChange,
+            });
+            expect(onChange).not.toHaveBeenCalled();
+        });
+
+        it('snaps up to the next on-grid option when `minTime` is not step-aligned', () => {
+            const onChange = vi.fn();
+            renderWithState(defaultTemplate, {
+                value: getDateAtTime({ hour: 8, minute: 0 }),
+                minTime: getDateAtTime({ hour: 10, minute: 5 }),
+                step: 30,
+                boundsMode: 'enforce' as const,
+                onChange,
+            });
+            expect(onChange).toHaveBeenCalledWith(expectTimeOfDay(10, 30), undefined, undefined);
+        });
+
+        it('snaps down to the last on-grid option when `maxTime` is not step-aligned', () => {
+            const onChange = vi.fn();
+            renderWithState(defaultTemplate, {
+                value: getDateAtTime({ hour: 12, minute: 0 }),
+                maxTime: getDateAtTime({ hour: 10, minute: 5 }),
+                step: 30,
+                boundsMode: 'enforce' as const,
+                onChange,
+            });
+            expect(onChange).toHaveBeenCalledWith(expectTimeOfDay(10, 0), undefined, undefined);
+        });
+
+        it('does not clamp when no on-grid option exists in bounds', () => {
+            const onChange = vi.fn();
+            renderWithState(defaultTemplate, {
+                value: getDateAtTime({ hour: 22, minute: 0 }),
+                minTime: getDateAtTime({ hour: 23, minute: 45 }),
+                step: 30,
                 boundsMode: 'enforce' as const,
                 onChange,
             });
