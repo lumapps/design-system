@@ -92,7 +92,7 @@ const TimePickerField = defineComponent(
 
         // Clamp the current value to bounds whenever enforce mode is set and value/bounds change.
         watch(
-            () => [boundsMode.value, props.value, props.minTime, props.maxTime],
+            () => [boundsMode.value, props.value, step.value, props.minTime, props.maxTime],
             () => {
                 if (boundsMode.value !== 'enforce' || !props.value) return;
 
@@ -100,7 +100,7 @@ const TimePickerField = defineComponent(
                     hour: props.value.getHours(),
                     minute: props.value.getMinutes(),
                 };
-                const clamped = snapTimeToBounds(timeOfDay, props.minTime, props.maxTime);
+                const clamped = snapTimeToBounds(timeOfDay, props.minTime, props.maxTime, step.value);
 
                 if (clamped.hour !== props.value.getHours() || clamped.minute !== props.value.getMinutes()) {
                     emit('change', getDateAtTime(clamped, props.value));
@@ -127,7 +127,7 @@ const TimePickerField = defineComponent(
             if (!parsed) return;
 
             // Snap to bounds if needed, then dedup against the current value.
-            const time = snapTimeToBounds(parsed, props.minTime, props.maxTime);
+            const time = snapTimeToBounds(parsed, props.minTime, props.maxTime, step.value);
             if (props.value && isDateOnTime(props.value, time)) return;
 
             emit('change', getDateAtTime(time, props.value));
