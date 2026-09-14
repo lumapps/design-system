@@ -262,8 +262,7 @@ export function setup({
             <p>
                 Read the{' '}
                 <Link {...args}>
-                    {children}{' '}
-                    {hasIcon ? <Icon icon={mdiEarth} /> : null}
+                    {children} {hasIcon ? <Icon icon={mdiEarth} /> : null}
                 </Link>{' '}
                 before you start.
             </p>
@@ -279,7 +278,7 @@ export function setup({
                         'As button': { href: undefined },
                         'With typography': { typography: 'subtitle1' },
                     },
-                }
+                },
             }),
         ],
     };
