@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `@lumx/react`, `@lumx/vue`:
     -   `Text`, `Heading`, `Link`: no space is added around an icon at the start or end of the content, or next to text that already ends or starts with a space.
+    -   `Text`, `Heading`, `Link`: an inline icon does not wrap to a new line on its own anymore.
 
 -   `@lumx/react`:
     -   `ImageLightbox`: `useImageLightbox`'s `getTriggerProps` now always includes `aria-haspopup="dialog"` to warn screen reader users that activating the trigger opens a modal dialog.

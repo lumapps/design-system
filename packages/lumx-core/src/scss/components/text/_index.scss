@@ -28,5 +28,6 @@
     // Fix icon alignment
     .#{$lumx-base-prefix}-icon, .#{$lumx-base-prefix}-icon > svg {
         display: inline;
+        white-space: nowrap;
     }
 }
