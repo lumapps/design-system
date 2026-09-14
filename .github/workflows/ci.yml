@@ -27,7 +27,11 @@ jobs:
               uses: ./.github/actions/setup
 
             - name: 'Run packages code check'
-              run: yarn nx run-many -t type-check,lint --projects='${{ needs.check-affected.outputs.affected }}'
+              # `--projects` takes a comma separated list. A raw JSON array makes nx
+              # silently drop the first and the last project (brackets stay attached).
+              env:
+                  AFFECTED: ${{ needs.check-affected.outputs.affected }}
+              run: yarn nx run-many -t type-check,lint --projects="$(echo "$AFFECTED" | jq -r 'join(",")')"
 
     tests:
         needs: [check-affected]
