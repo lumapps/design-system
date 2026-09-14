@@ -108,6 +108,21 @@ export function setup({
         ),
     };
 
+    /**
+     * Text containing icons where the author already wrote the spaces.
+     * No extra space must be added, so the gaps must match the `WithIcon` story.
+     */
+    const WithIconAndExplicitSpaces = {
+        render: ({ children, ...args }: any) => (
+            <Text {...args}>
+                {'Some text\u00a0'}
+                <Icon icon={mdiHeart} />
+                {'\u00a0with icons\u00a0'}
+                <Icon icon={mdiEarth} />
+            </Text>
+        ),
+    };
+
     /** All typographies */
     const AllTypography = {
         render: WithIcon.render,
@@ -158,6 +173,7 @@ export function setup({
         Truncate,
         TruncateMultiline,
         WithIcon,
+        WithIconAndExplicitSpaces,
         AllTypography,
         AllColors,
         TestUpdateTruncateTitleLabel,
