@@ -6,7 +6,10 @@
     &--is-required::before {
         margin-right: $lumx-spacing-unit-tiny;
         font-weight: 700;
-        content: "*";
+
+        // Empty alternative text: hides the marker from assistive technologies
+        // (the `required` attribute of the field already carries the state)
+        content: "*" / "";
     }
 
     &--theme-light {
