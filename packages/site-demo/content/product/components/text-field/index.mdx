@@ -67,7 +67,9 @@ There are seven options: `isRequired`, `helper`, `placeholder`, `icon`, `clearBu
 
 ### Is required
 
-Use `isRequired` to tell that the text field must be filled to submit the form.
+Use `isRequired` to tell that the text field must be filled to submit the form. The label shows a marker (`*`) and the
+input gets the `required` attribute. A form that contains required fields must explain the marker: place an
+[input required legend](/product/components/input-required-legend/) before the first field.
 
 <DemoBlock withThemeSwitcher demo={{ react: ReactDemoIsRequired, vue: VueDemoIsRequired }} />
 

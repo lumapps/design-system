@@ -33,6 +33,7 @@ export * from './components/image-lightbox';
 export * from './components/inline-list';
 export * from './components/input-helper';
 export * from './components/input-label';
+export * from './components/input-required-legend';
 export * from './components/lightbox';
 export * from './components/link';
 export * from './components/link-preview';

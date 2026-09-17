@@ -21,6 +21,7 @@ export * from './components/heading';
 export * from './components/icon';
 export * from './components/input-helper';
 export * from './components/input-label';
+export * from './components/input-required-legend';
 export * from './components/link';
 export * from './components/link-preview';
 export * from './components/list';
