@@ -147,6 +147,7 @@ const TextField = defineComponent(
                 name: props.name,
                 placeholder: props.placeholder,
                 theme,
+                required: props.isRequired || undefined,
                 'aria-invalid': props.hasError || undefined,
                 'aria-describedby': describedById,
                 ...disabledStateProps.value,

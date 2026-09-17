@@ -54,6 +54,17 @@ export default (renderOptions: SetupOptions<any>) => {
                 expect(inputNative.tagName).toBe('INPUT');
             });
 
+            it('should set required attribute on the input when isRequired', () => {
+                const { inputNative } = setup({ id: 'fixedId', label: 'Label', isRequired: true }, renderOptions);
+                expect(inputNative).toBeRequired();
+                expect(getByClassName(document.body, 'lumx-input-label')).toHaveClass('lumx-input-label--is-required');
+            });
+
+            it('should not set required attribute on the input by default', () => {
+                const { inputNative } = setup({ id: 'fixedId', label: 'Label' }, renderOptions);
+                expect(inputNative).not.toBeRequired();
+            });
+
             it('should render textarea', () => {
                 const { element, inputNative } = setup({ id: 'fixedId', multiline: true }, renderOptions);
                 expect(element).toBeInTheDocument();
