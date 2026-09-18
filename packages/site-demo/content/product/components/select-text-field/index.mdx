@@ -114,6 +114,14 @@ The `filter` prop controls how option filtering behaves:
 - Provide `loadingMessage` so screen readers announce when options are being loaded (announced via a live region after a short debounce).
 - Provide `nbOptionMessage` to announce the number of available options when the list updates.
 
+Use `isRequired` to tell that the field must be filled to submit the form. The label shows a marker (`*`) and the input
+gets `aria-required`. A form that contains required fields must explain the marker: place an
+[input required legend](/product/components/input-required-legend/) before the first field.
+
+Unlike `TextField`, the input does not get the native `required` attribute. The input text is not the value of the field:
+in multiple selection the value is held by the chips and the input stays empty, and with `filter="off"` the input is read
+only. Native form validation would therefore report a valid field as empty. Validate the selection yourself on submit.
+
 Select text fields can be disabled in two ways:
 
 - `isDisabled` which completely disables the select text field. It's not focusable and pointer events (hover, click, etc.) are

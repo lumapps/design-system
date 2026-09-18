@@ -65,6 +65,17 @@ export default (renderOptions: SetupOptions<any>) => {
                 expect(inputNative).not.toBeRequired();
             });
 
+            it('should let an explicit required attribute override isRequired', () => {
+                // Combobox.Input relies on this to keep the required label marker
+                // while replacing the native attribute with `aria-required`.
+                const { inputNative } = setup(
+                    { id: 'fixedId', label: 'Label', isRequired: true, required: false },
+                    renderOptions,
+                );
+                expect(inputNative).not.toBeRequired();
+                expect(getByClassName(document.body, 'lumx-input-label')).toHaveClass('lumx-input-label--is-required');
+            });
+
             it('should render textarea', () => {
                 const { element, inputNative } = setup({ id: 'fixedId', multiline: true }, renderOptions);
                 expect(element).toBeInTheDocument();

@@ -11,6 +11,8 @@ export interface ComboboxInputProps extends HasClassName, HasTheme, ComboboxCall
     listboxId?: string;
     /** Whether the combobox is open. */
     isOpen?: boolean;
+    /** Whether the field is required. Renders `aria-required` instead of the native `required`. */
+    isRequired?: boolean;
     /** ref to the root element. */
     ref?: CommonRef;
     /** Reference to the input element. */
@@ -93,6 +95,12 @@ export const ComboboxInput = (props: ComboboxInputProps, { TextField, IconButton
             {...forwardedProps}
             ref={ref}
             role="combobox"
+            // The input text is not the combobox value: in multiple selection the input stays
+            // empty, and `filter="off"` makes the input read only. Native constraint validation
+            // is wrong in both cases. Set `aria-required` and remove the native `required`
+            // attribute that TextField derives from `isRequired`.
+            required={false}
+            aria-required={props.isRequired || undefined}
             aria-autocomplete="list"
             aria-controls={listboxId}
             aria-expanded={isOpen}

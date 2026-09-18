@@ -29,7 +29,7 @@ field (`TextField`, `SelectTextField`, etc.).
 A form that contains required fields must explain the asterisk ([RGAA 4.1.2 criterion 11.10](https://accessibilite.numerique.gouv.fr/methode/criteres-et-tests/#11.10),
 [WCAG 3.3.2](https://www.w3.org/WAI/WCAG21/Understanding/labels-or-instructions.html)).
 
--   The required state reaches assistive technologies through the `required` attribute set by the field when `isRequired` is true.
+-   The required state reaches assistive technologies through the `required` attribute set by the field when `isRequired` is true. `SelectTextField` sets `aria-required` instead, because its input text is not the value of the field.
 -   The marker on field labels (`InputLabel` with `isRequired`) is hidden from assistive technologies because it does not carry any additional information.
 -   The legend is for sighted users. It stays readable by assistive technologies (do not add `aria-hidden`): its marker is announced one time, at the top of the form, where it carries meaning.
 

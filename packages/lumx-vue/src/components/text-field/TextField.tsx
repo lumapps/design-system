@@ -147,7 +147,8 @@ const TextField = defineComponent(
                 name: props.name,
                 placeholder: props.placeholder,
                 theme,
-                required: props.isRequired || undefined,
+                // An explicit `required` attribute wins over the one derived from `isRequired`.
+                required: inputAttrs.required ?? (props.isRequired || undefined),
                 'aria-invalid': props.hasError || undefined,
                 'aria-describedby': describedById,
                 ...disabledStateProps.value,

@@ -2,6 +2,8 @@
 import userEvent from '@testing-library/user-event';
 import { getByRole, getConfig, waitFor } from '@testing-library/dom';
 
+import { getByTagName } from '../../../testing/queries';
+
 // ─── Fixtures ────────────────────────────────────────────────────
 
 interface Fruit {
@@ -887,6 +889,61 @@ export default function selectTextFieldTests({ components, renderWithState }: Se
             renderWithState(defaultTemplate, { 'aria-disabled': true });
             const toggleButton = document.body.querySelector<HTMLButtonElement>('[aria-label="Show suggestions"]');
             expect(toggleButton?.disabled).toBe(true);
+        });
+    });
+
+    // ─── Required state (isRequired) ─────────────────────────────
+
+    describe('Required state (isRequired)', () => {
+        it('should set aria-required on the input', () => {
+            renderWithState(defaultTemplate, { isRequired: true });
+            const input = getByRole(document.body, 'combobox');
+
+            expect(input.getAttribute('aria-required')).toBe('true');
+        });
+
+        it('should NOT set the native required attribute on the input', () => {
+            // The input text is not the combobox value, so native constraint validation
+            // would report an empty input as invalid even when an option is selected.
+            renderWithState(defaultTemplate, { isRequired: true });
+            const input = getByRole(document.body, 'combobox') as HTMLInputElement;
+
+            expect(input.hasAttribute('required')).toBe(false);
+            expect(input.validity.valueMissing).toBe(false);
+        });
+
+        it('should mark the label as required', () => {
+            renderWithState(defaultTemplate, { isRequired: true });
+            const label = getByTagName(document.body, 'label');
+
+            expect(label.classList.contains('lumx-input-label--is-required')).toBe(true);
+        });
+
+        it('should set aria-required and no native required in multiple selection', () => {
+            renderWithState(multiTemplate, { isRequired: true, value: [FRUITS[0]] });
+            const input = getByRole(document.body, 'combobox') as HTMLInputElement;
+
+            expect(input.getAttribute('aria-required')).toBe('true');
+            expect(input.hasAttribute('required')).toBe(false);
+            expect(input.validity.valueMissing).toBe(false);
+        });
+
+        it('should set aria-required and no native required with filter="off"', () => {
+            // `filter="off"` makes the input read only, so the native `required`
+            // attribute never triggers constraint validation.
+            renderWithState(defaultTemplate, { isRequired: true, filter: 'off' });
+            const input = getByRole(document.body, 'combobox') as HTMLInputElement;
+
+            expect(input.readOnly).toBe(true);
+            expect(input.getAttribute('aria-required')).toBe('true');
+            expect(input.hasAttribute('required')).toBe(false);
+        });
+
+        it('should not set aria-required by default', () => {
+            renderWithState(defaultTemplate);
+            const input = getByRole(document.body, 'combobox');
+
+            expect(input.hasAttribute('aria-required')).toBe(false);
         });
     });
 
