@@ -235,7 +235,10 @@ export interface BaseSelectTextFieldWrapperProps<O>
     icon?: string;
     /** Disabled state. */
     isDisabled?: boolean;
-    /** Required field indicator. */
+    /**
+     * Required field indicator. Marks the label and sets `aria-required` on the input.
+     * The native `required` attribute is not used: the input text is not the field value.
+     */
     isRequired?: boolean;
     /** Error state flag. */
     hasError?: boolean;

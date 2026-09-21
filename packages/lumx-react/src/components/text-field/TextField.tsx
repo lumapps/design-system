@@ -149,7 +149,8 @@ export const TextField = forwardRef<TextFieldProps, HTMLDivElement>((props, ref)
         ref: inputRef as any,
         ...disabledStateProps,
         ...forwardedProps,
-        required: isRequired,
+        // An explicit `required` attribute wins over the one derived from `isRequired`.
+        required: forwardedProps.required ?? isRequired,
         maxLength,
         onBlur(evt: React.FocusEvent) {
             setFocus(false);

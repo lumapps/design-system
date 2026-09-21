@@ -1,0 +1,22 @@
+/* ==========================================================================
+   Input required legend
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-input-required-legend {
+    &__marker {
+        margin-right: $lumx-spacing-unit-tiny;
+        font-weight: 700;
+    }
+
+    &--theme-light {
+        @include lumx-input-helper(lumx-base-const("theme", "LIGHT"));
+
+        .#{$lumx-base-prefix}-input-required-legend__marker {
+            color: lumx-color-variant("red", "N");
+        }
+    }
+
+    &--theme-dark {
+        @include lumx-input-helper(lumx-base-const("theme", "DARK"));
+    }
+}

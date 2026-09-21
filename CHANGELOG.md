@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   `@lumx/react`, `@lumx/vue`:
+    -   `InputRequiredLegend`: new component to explain the required field marker (`*`) at the top of a form. The wording is provided via the `label` prop.
+
+### Fixed
+
+-   `@lumx/react`, `@lumx/vue`:
+    -   `InputLabel`: the required marker (`*`) is now hidden from assistive technologies (CSS alternative text). The required state is already announced via the `required` attribute of the field.
+-   `@lumx/vue`:
+    -   `TextField`: `isRequired` now sets the `required` attribute on the input (parity with React).
+
 ## [4.23.0][] - 2026-09-14
 
 ### Changed
