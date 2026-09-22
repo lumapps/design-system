@@ -14,6 +14,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   `@lumx/react`:
     -   `SideNavigationItem`: new `isCurrentPage` prop setting `aria-current="page"` on the link. A link with that attribute gets the selected style.
 
+### Changed
+
+-   `@lumx/react`:
+    -   `SideNavigation`, `SideNavigationItem`: children are no longer filtered to keep only `SideNavigationItem` elements. 
+
 ### Fixed
 
 -   `@lumx/react`, `@lumx/vue`:
