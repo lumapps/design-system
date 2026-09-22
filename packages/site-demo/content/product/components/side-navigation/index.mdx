@@ -26,6 +26,15 @@ Side navigation items have two states: _resting_, and _selected_.
 
 <DemoBlock demo={{ react: DemoStates }} />
 
+Two props produce the selected style. Use `isCurrentPage` for a link to the page you are on. Use `isSelected` for a selection that is not a page, or for an item that is not a link.
+
+`isCurrentPage` sets `aria-current="page"` on the link. A screen reader then announces the item as the current page. The style comes from that attribute, so these two other ways give the same result:
+
+-   Set `aria-current="page"` with the `linkProps` prop.
+-   Use a router link component in the `linkAs` prop that marks the active route by itself, such as a React Router `NavLink`.
+
+`isSelected` sets a modifier class only. It gives no information to a screen reader.
+
 ## Nested items
 
 Side navigation items can be nested. Parent items have two states: _closed_, and _open_.

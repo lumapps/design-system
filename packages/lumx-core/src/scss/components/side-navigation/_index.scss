@@ -61,12 +61,17 @@
    ========================================================================== */
 
 .#{$lumx-base-prefix}-side-navigation-item {
+    $self: &;
+
     &__link {
         @include lumx-list-item-clickable;
-    }
-}
 
-.#{$lumx-base-prefix}-side-navigation-item--is-selected > .#{$lumx-base-prefix}-side-navigation-item__link,
-.#{$lumx-base-prefix}-side-navigation-item--is-selected > .#{$lumx-base-prefix}-side-navigation-item__wrapper > .#{$lumx-base-prefix}-side-navigation-item__link {
-    @include lumx-list-item-selected('side-navigation-item');
+        // Selected state
+        // (`--is-selected` item modifier or `aria-current="page"` link attribute)
+        #{$self}--is-selected > &,
+        #{$self}--is-selected > #{$self}__wrapper > &,
+        &[aria-current="page"] {
+            @include lumx-list-item-selected("side-navigation-item");
+        }
+    }
 }

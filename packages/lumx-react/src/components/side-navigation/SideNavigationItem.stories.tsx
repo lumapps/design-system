@@ -58,6 +58,7 @@ const STATE_COMBINATIONS = withCombinations({
             Focused: { 'linkProps.data-focus-visible-added': true },
             Selected: { isSelected: true },
             'Selected & Focused': { isSelected: true, 'linkProps.data-focus-visible-added': true },
+            'Current page': { isCurrentPage: true, 'linkProps.href': '#' },
         },
     },
 });
@@ -66,7 +67,7 @@ const STATE_COMBINATIONS = withCombinations({
  * Demonstrate item & section variants
  */
 export const ItemsAndSections = {
-    argTypes: { ...disableArgTypes(['isSelected']) },
+    argTypes: { ...disableArgTypes(['isSelected', 'isCurrentPage']) },
     decorators: [
         withNestedProps(),
         STATE_COMBINATIONS,
@@ -93,7 +94,7 @@ export const ItemsAndSections = {
  * Demonstrate emphasis variants
  */
 export const EmphasisVariants = {
-    argTypes: { ...disableArgTypes(['emphasis', 'isSelected']) },
+    argTypes: { ...disableArgTypes(['emphasis', 'isSelected', 'isCurrentPage']) },
     decorators: [
         withNestedProps(),
         STATE_COMBINATIONS,
