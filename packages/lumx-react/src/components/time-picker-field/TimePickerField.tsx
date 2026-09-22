@@ -100,12 +100,12 @@ export const TimePickerField: React.FC<TimePickerFieldProps> = (props) => {
             hour: value.getHours(),
             minute: value.getMinutes(),
         };
-        const clamped = snapTimeToBounds(timeOfDay, minTime, maxTime);
+        const clamped = snapTimeToBounds(timeOfDay, minTime, maxTime, step);
 
         if (clamped.hour !== value.getHours() || clamped.minute !== value.getMinutes()) {
             onChange(getDateAtTime(clamped, value), name);
         }
-    }, [boundsMode, value, minTime, maxTime, onChange, name]);
+    }, [boundsMode, value, step, minTime, maxTime, onChange, name]);
 
     const handleChange: UIProps['handleChange'] = useCallback(
         (next) => {
@@ -123,11 +123,11 @@ export const TimePickerField: React.FC<TimePickerFieldProps> = (props) => {
         if (!parsed) return;
 
         // Snap to bounds if needed, then dedup against the current value.
-        const time = snapTimeToBounds(parsed, minTime, maxTime);
+        const time = snapTimeToBounds(parsed, minTime, maxTime, step);
         if (value && isDateOnTime(value, time)) return;
 
         onChange(getDateAtTime(time, value), name);
-    }, [maxTime, minTime, name, onChange, searchValue, value]);
+    }, [maxTime, minTime, name, onChange, searchValue, step, value]);
 
     const searchInputValue = value ? formatTime(value, locale) : undefined;
 

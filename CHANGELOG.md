@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `@lumx/react`, `@lumx/vue`:
     -   `InputLabel`: the required marker (`*`) is now hidden from assistive technologies (CSS alternative text). The required state is already announced via the `required` attribute of the field.
+    -   `TimePickerField`: an out-of-bounds value now snaps to the nearest selectable `step` option instead of the raw `minTime`/`maxTime`.
 -   `@lumx/vue`:
     -   `TextField`: `isRequired` now sets the `required` attribute on the input (parity with React).
 
