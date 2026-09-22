@@ -27,6 +27,13 @@ export interface SideNavigationItemProps extends GenericProps, HasCloseMode {
     isOpen?: boolean;
     /** Whether the component is selected or not. */
     isSelected?: boolean;
+    /**
+     * Whether the link points to the current page or not.
+     * Sets `aria-current="page"` on the link, which produces the selected style.
+     * This does not set the `--is-selected` modifier class: a link component set in `linkAs` can set the
+     * attribute by itself, and React never sees it, so the attribute is the only reliable signal.
+     */
+    isCurrentPage?: boolean;
     /** Custom react component for the link (can be used to inject react router Link). */
     linkAs?: 'a' | any;
     /** Props to pass to the link (minus those already set by the SideNavigationItem props). */
@@ -74,6 +81,7 @@ export const SideNavigationItem = forwardRef<SideNavigationItemProps, HTMLLIElem
         icon,
         isOpen,
         isSelected,
+        isCurrentPage,
         label,
         linkAs,
         linkProps,
@@ -88,6 +96,9 @@ export const SideNavigationItem = forwardRef<SideNavigationItemProps, HTMLLIElem
     const hasContent = !isEmpty(content);
     const shouldSplitActions = Boolean(onActionClick);
     const showChildren = hasContent && isOpen;
+
+    // Mark the link as the current page. A link component set in `linkAs` can also set it by itself.
+    const ariaCurrent = isCurrentPage ? 'page' : undefined;
 
     const contentId = useId();
     const ariaProps: any = {};
@@ -114,6 +125,7 @@ export const SideNavigationItem = forwardRef<SideNavigationItemProps, HTMLLIElem
                 <div className={element('wrapper')}>
                     {RawClickable({
                         as: linkAs || (linkProps?.href ? 'a' : 'button'),
+                        'aria-current': ariaCurrent,
                         ...(linkProps as any),
                         className: element('link'),
                         handleClick: onClick,
@@ -139,6 +151,7 @@ export const SideNavigationItem = forwardRef<SideNavigationItemProps, HTMLLIElem
             ) : (
                 RawClickable({
                     as: linkAs || (linkProps?.href ? 'a' : 'button'),
+                    'aria-current': ariaCurrent,
                     ...linkProps,
                     className: element('link'),
                     handleClick: onClick,

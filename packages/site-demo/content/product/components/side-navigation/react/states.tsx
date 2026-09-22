@@ -11,5 +11,13 @@ export default () => (
             isSelected
             toggleButtonProps={{ label: 'Toggle' }}
         />
+        <SideNavigationItem
+            label="Current page"
+            icon={mdiEmail}
+            emphasis="low"
+            isCurrentPage
+            linkProps={{ href: '#' }}
+            toggleButtonProps={{ label: 'Toggle' }}
+        />
     </SideNavigation>
 );

@@ -66,6 +66,53 @@ describe(`<${SideNavigationItem.displayName}>`, () => {
             const { sideNavigation } = setup({ isSelected: true });
             expect(sideNavigation).toHaveClass(`${CLASSNAME}--is-selected`);
         });
+
+        it('should not set aria-current on the link by default', () => {
+            const { link } = setup({ linkProps: { href: 'https://example.com' } });
+            expect(link).not.toHaveAttribute('aria-current');
+        });
+
+        it('should not set aria-current on the link when isSelected', () => {
+            const { link } = setup({ isSelected: true, linkProps: { href: 'https://example.com' } });
+            expect(link).not.toHaveAttribute('aria-current');
+        });
+
+        it('should set aria-current="page" on the link when isCurrentPage', () => {
+            const { link } = setup({ isCurrentPage: true, linkProps: { href: 'https://example.com' } });
+            expect(link).toHaveAttribute('aria-current', 'page');
+        });
+
+        it('should style the current page with aria-current, not with the --is-selected class', () => {
+            const { sideNavigation } = setup({ isCurrentPage: true, linkProps: { href: 'https://example.com' } });
+            expect(sideNavigation).not.toHaveClass(`${CLASSNAME}--is-selected`);
+        });
+
+        it('should set aria-current="page" on the split action link when isCurrentPage', () => {
+            const { link } = setup({
+                isCurrentPage: true,
+                linkProps: { href: 'https://example.com' },
+                onActionClick: vi.fn(),
+            });
+            expect(link).toHaveAttribute('aria-current', 'page');
+        });
+
+        it('should keep aria-current set in linkProps', () => {
+            const { link } = setup({
+                linkProps: { href: 'https://example.com', 'aria-current': 'page' },
+            });
+            expect(link).toHaveAttribute('aria-current', 'page');
+        });
+
+        it('should preserve aria-current set by a custom link component (e.g. router NavLink)', () => {
+            // Simulates a router `NavLink`: ignores the `aria-current` it receives and sets its own.
+            const NavLink = ({ 'aria-current': ignoredAriaCurrent, children, ...props }: any) => (
+                <a {...props} aria-current="page">
+                    {children}
+                </a>
+            );
+            const { link } = setup({ linkAs: NavLink, linkProps: { href: 'https://example.com' } });
+            expect(link).toHaveAttribute('aria-current', 'page');
+        });
     });
 
     describe('children', () => {
