@@ -1,0 +1,140 @@
+{
+    "comment": "Hand-curated map from legacy Beekeeper (bkpr-*) and kebab-case LumX (lx-*) tags to the LumX component that replaces them. The generator validates every `to` against the parsed component list and fails on an unknown name. `confidence: confirmed` means the replacement has been used in a real migration; `suggested` means it still needs a human to check the details.",
+    "migrations": [
+        {
+            "from": "bkpr-icon",
+            "to": "Icon",
+            "confidence": "confirmed",
+            "note": "Pass the icon path from @lumx/icons, e.g. `<Icon :icon=\"mdiPhone\" />`. Never inline a raw SVG path."
+        },
+        {
+            "from": "bkpr-clickable-icon",
+            "to": "IconButton",
+            "confidence": "confirmed",
+            "note": "Replaces a `<button>` wrapping an icon. `label` is required (it also becomes the tooltip). Always pass `emphasis` and `theme`, otherwise the button renders with no background."
+        },
+        {
+            "from": "bkpr-button",
+            "to": "Button",
+            "confidence": "confirmed",
+            "note": "Use `emphasis=\"high\"` for the single main action of a view, `medium` for secondary actions, `low` for tertiary ones."
+        },
+        {
+            "from": "bkpr-action-button",
+            "to": "Button",
+            "confidence": "suggested"
+        },
+        {
+            "from": "bkpr-modal",
+            "to": "Dialog",
+            "confidence": "confirmed"
+        },
+        {
+            "from": "bkpr-dialog",
+            "to": "AlertDialog",
+            "confidence": "suggested",
+            "note": "AlertDialog for a confirm/alert flow; Dialog for anything with custom content."
+        },
+        {
+            "from": "bkpr-tooltip",
+            "to": "Tooltip",
+            "confidence": "confirmed"
+        },
+        {
+            "from": "bkpr-dropdown",
+            "to": "Popover",
+            "confidence": "suggested",
+            "note": "Vue has no Dropdown component. Use MenuButton for a button that opens a menu, or Popover plus List for a custom anchored panel."
+        },
+        {
+            "from": "bkpr-dropdown-list",
+            "to": "List",
+            "confidence": "suggested"
+        },
+        {
+            "from": "bkpr-dropdown-item",
+            "to": "ListItem",
+            "confidence": "suggested"
+        },
+        {
+            "from": "bkpr-dropdown-divider",
+            "to": "ListDivider",
+            "confidence": "suggested"
+        },
+        {
+            "from": "bkpr-spinner",
+            "to": "ProgressCircular",
+            "confidence": "suggested",
+            "note": "ProgressCircular for a spinner, ProgressLinear for a bar."
+        },
+        {
+            "from": "bkpr-input",
+            "to": "TextField",
+            "confidence": "suggested"
+        },
+        {
+            "from": "bkpr-form-element",
+            "to": "InputLabel",
+            "confidence": "suggested",
+            "note": "Split into InputLabel, InputHelper and InputRequiredLegend around the field itself."
+        },
+        {
+            "from": "bkpr-chip",
+            "to": "Chip",
+            "confidence": "suggested"
+        },
+        {
+            "from": "bkpr-radio-button",
+            "to": "RadioButton",
+            "confidence": "suggested"
+        },
+        {
+            "from": "bkpr-web-tab-button",
+            "to": "TabList",
+            "confidence": "suggested",
+            "note": "Tabs are built from TabProvider + TabList + Tab + TabPanel."
+        },
+        {
+            "from": "bkpr-file-type-icon",
+            "to": "Icon",
+            "confidence": "suggested"
+        },
+        {
+            "from": "bkpr-file-input",
+            "to": "Uploader",
+            "confidence": "suggested"
+        },
+        {
+            "from": "bkpr-floating-action-button",
+            "to": "IconButton",
+            "confidence": "suggested",
+            "note": "LumX has no floating action button. Use IconButton with `emphasis=\"high\"` and position it yourself."
+        },
+        {
+            "from": "bkpr-illustration",
+            "to": null,
+            "confidence": "none",
+            "note": "No LumX equivalent. Keep the Beekeeper component or use a plain image."
+        }
+    ],
+    "patterns": [
+        {
+            "from": "<button> wrapping <lx-icon> or <bkpr-icon>",
+            "to": "IconButton",
+            "confidence": "confirmed",
+            "note": "Replaces the whole button. `<IconButton label=\"Add\" emphasis=\"medium\" :icon=\"mdiPlus\" :theme=\"theme\" />`"
+        },
+        {
+            "from": "raw SVG path in an icon prop",
+            "to": "Icon",
+            "confidence": "confirmed",
+            "note": "Import the named path from @lumx/icons instead: `import { mdiPhone } from '@lumx/icons'`. Use search_icons to find the name."
+        },
+        {
+            "from": "hardcoded colour or spacing value in SCSS",
+            "to": null,
+            "confidence": "confirmed",
+            "note": "Use a LumX CSS custom property, e.g. `var(--lumx-color-dark-N)` or `var(--lumx-spacing-unit-big)`. Use search_design_tokens to find it."
+        }
+    ]
+}

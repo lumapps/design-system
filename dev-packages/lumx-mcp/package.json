@@ -1,0 +1,24 @@
+{
+    "name": "@lumx/mcp",
+    "version": "4.23.0",
+    "description": "MCP server exposing LumX design system component props, docs and design tokens",
+    "private": true,
+    "type": "module",
+    "bin": {
+        "lumx-mcp": "./src/server.js"
+    },
+    "files": [
+        "src",
+        "data"
+    ],
+    "scripts": {
+        "generate": "node scripts/generate.js",
+        "start": "node src/server.js"
+    },
+    "dependencies": {
+        "@modelcontextprotocol/sdk": "^1.21.1"
+    },
+    "devDependencies": {
+        "@lumx/docgen": "workspace:*"
+    }
+}
