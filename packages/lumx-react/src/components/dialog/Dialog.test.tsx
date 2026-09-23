@@ -190,6 +190,52 @@ describe(`<${Dialog.displayName}>`, () => {
         });
     });
 
+    describe('Non-modal (`aria-modal` false)', () => {
+        const setupNonModal = (props: Partial<DialogProps> = {}) => {
+            render(
+                <>
+                    <button type="button">Outside</button>
+                    <Dialog isOpen dialogProps={{ 'aria-modal': false }} {...props}>
+                        <button type="button">Inside</button>
+                    </Dialog>
+                </>,
+            );
+        };
+
+        it('should move the focus into the dialog on open', () => {
+            setupNonModal();
+            expect(screen.getByRole('button', { name: 'Inside' })).toHaveFocus();
+        });
+
+        it('should not trap the focus', async () => {
+            setupNonModal();
+            await userEvent.tab();
+            expect(screen.getByRole('button', { name: 'Inside' })).not.toHaveFocus();
+        });
+
+        it('should trigger `onClose` when pressing `escape` key with the focus inside', async () => {
+            const onClose = vi.fn();
+            setupNonModal({ onClose });
+            await userEvent.keyboard('[Escape]');
+            expect(onClose).toHaveBeenCalled();
+        });
+
+        it('should not trigger `onClose` when pressing `escape` key with the focus outside', async () => {
+            const onClose = vi.fn();
+            setupNonModal({ onClose });
+            screen.getByRole('button', { name: 'Outside' }).focus();
+            await userEvent.keyboard('[Escape]');
+            expect(onClose).not.toHaveBeenCalled();
+        });
+
+        it('should not trigger `onClose` when clicking outside', async () => {
+            const onClose = vi.fn();
+            setupNonModal({ onClose });
+            await userEvent.click(screen.getByRole('button', { name: 'Outside' }));
+            expect(onClose).not.toHaveBeenCalled();
+        });
+    });
+
     describe('closeMode', () => {
         it('should unmount dialog when closed (default)', () => {
             vi.useFakeTimers();

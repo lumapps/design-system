@@ -30,6 +30,15 @@
         opacity: 0;
     }
 
+    // The root covers the viewport: let clicks go through to the page, only the dialog itself catches them.
+    &--is-non-modal {
+        pointer-events: none;
+    }
+
+    &--is-non-modal &__container {
+        pointer-events: auto;
+    }
+
     &__overlay {
         position: absolute;
         top: 0;

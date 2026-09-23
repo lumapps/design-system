@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `@lumx/react`, `@lumx/vue`:
     -   `InputRequiredLegend`: new component to explain the required field marker (`*`) at the top of a form. The wording is provided via the `label` prop.
+    -   `Dialog`: non-modal mode when `dialogProps['aria-modal']` is `false`: no focus trap, no overlay, no close on click outside, rendered in place (no portal), and escape only closes the dialog when the focus is inside.
 -   `@lumx/react`:
     -   `SideNavigationItem`: new `isCurrentPage` prop setting `aria-current="page"` on the link. A link with that attribute gets the selected style.
 

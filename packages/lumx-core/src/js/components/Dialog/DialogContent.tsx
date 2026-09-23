@@ -26,6 +26,8 @@ export interface DialogContentProps extends BaseDialogProps {
     handleClose?(): void;
     /** Whether to prevent closing on click away. */
     shouldPreventCloseOnClickAway?: boolean;
+    /** Whether the dialog is modal (`aria-modal="true"`, closes on click away). Defaults to `true`. */
+    isModal?: boolean;
     /** Refs used for click-away detection. */
     clickAwayRefs?: any;
     /** Ref for the root wrapper element. */
@@ -70,6 +72,7 @@ export const DialogContent = (props: DialogContentProps) => {
         dialogProps,
         handleClose,
         shouldPreventCloseOnClickAway,
+        isModal = true,
         clickAwayRefs,
         rootRef,
         wrapperRef,
@@ -104,12 +107,13 @@ export const DialogContent = (props: DialogContentProps) => {
         <div
             className={element('container')}
             role="dialog"
-            aria-modal="true"
+            aria-modal={isModal ? 'true' : 'false'}
             {...restDialogProps}
             {...resolveAccessibleNameProps(dialogAriaLabel, dialogAriaLabelledBy || labelId)}
         >
             <ClickAwayProvider
-                callback={!shouldPreventCloseOnClickAway && handleClose}
+                // A non-modal dialog leaves the page usable: clicking it must not close the dialog.
+                callback={isModal && !shouldPreventCloseOnClickAway && handleClose}
                 childrenRefs={clickAwayRefs}
                 parentRef={rootRef}
             >

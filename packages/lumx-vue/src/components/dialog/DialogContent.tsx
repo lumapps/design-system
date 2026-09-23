@@ -41,6 +41,7 @@ export default defineComponent(
             'headerChildContent',
             'headerChildProps',
             'isLoading',
+            'isModal',
             'isOpen',
             'rootRef',
             'setSentinelBottom',

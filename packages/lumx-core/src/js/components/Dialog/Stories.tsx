@@ -83,6 +83,11 @@ export function setup({
         args: { ...Default.args, preventCloseOnClick: true },
     };
 
+    /** Non-modal: no overlay, no focus trap, no close on click outside; escape closes only with the focus inside */
+    const NonModal = {
+        args: { ...WithHeaderFooter.args, dialogProps: { 'aria-modal': false } },
+    };
+
     return {
         meta,
         Default,
@@ -93,5 +98,6 @@ export function setup({
         PreventAutoClose,
         PreventCloseOnEscape,
         PreventCloseOnClick,
+        NonModal,
     };
 }

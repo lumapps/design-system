@@ -160,6 +160,65 @@ describe('<Dialog />', () => {
             });
         });
 
+        describe('Non-modal (`aria-modal` false)', () => {
+            const setupNonModal = () =>
+                render(
+                    defineComponent({
+                        emits: ['close'],
+                        setup(_, { emit }) {
+                            return () => (
+                                <>
+                                    <button type="button">Outside</button>
+                                    <Dialog
+                                        isOpen
+                                        disableBodyScroll={false}
+                                        dialogProps={{ 'aria-modal': false }}
+                                        onClose={() => emit('close')}
+                                    >
+                                        <button type="button">Inside</button>
+                                    </Dialog>
+                                </>
+                            );
+                        },
+                    }),
+                );
+
+            it('should move the focus into the dialog on open', async () => {
+                setupNonModal();
+                await nextTick();
+                expect(screen.getByRole('button', { name: 'Inside' })).toHaveFocus();
+            });
+
+            it('should not trap the focus', async () => {
+                setupNonModal();
+                await nextTick();
+                await userEvent.tab();
+                expect(screen.getByRole('button', { name: 'Inside' })).not.toHaveFocus();
+            });
+
+            it('should emit close on Escape with the focus inside', async () => {
+                const { emitted } = setupNonModal();
+                await nextTick();
+                await userEvent.keyboard('[Escape]');
+                expect(emitted('close')).toBeTruthy();
+            });
+
+            it('should not emit close on Escape with the focus outside', async () => {
+                const { emitted } = setupNonModal();
+                await nextTick();
+                screen.getByRole('button', { name: 'Outside' }).focus();
+                await userEvent.keyboard('[Escape]');
+                expect(emitted('close')).toBeFalsy();
+            });
+
+            it('should not emit close when clicking outside', async () => {
+                const { emitted } = setupNonModal();
+                await nextTick();
+                await userEvent.click(screen.getByRole('button', { name: 'Outside' }));
+                expect(emitted('close')).toBeFalsy();
+            });
+        });
+
         describe('closeMode', () => {
             it('should unmount dialog when closed (default)', async () => {
                 vi.useFakeTimers();

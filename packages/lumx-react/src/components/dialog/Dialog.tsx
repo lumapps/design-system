@@ -1,4 +1,4 @@
-import React, { Children, ReactElement, Ref, RefObject, useMemo, useRef, useState } from 'react';
+import React, { Children, ReactElement, Ref, RefObject, useEffect, useMemo, useRef, useState } from 'react';
 
 import { HeadingLevelProvider, ProgressCircular, Size } from '@lumx/react';
 
@@ -18,6 +18,8 @@ import { useTransitionVisibility } from '@lumx/react/hooks/useTransitionVisibili
 import { ThemeProvider } from '@lumx/react/utils/theme/ThemeContext';
 
 import { Portal } from '@lumx/react/utils';
+import { onEscapePressed } from '@lumx/core/js/utils';
+import { getFirstAndLastFocusable } from '@lumx/core/js/utils/focus/getFirstAndLastFocusable';
 import {
     DialogShell,
     CLASSNAME,
@@ -51,7 +53,12 @@ export interface DialogProps extends GenericProps, HasCloseMode, UIProps {
     size?: DialogSizes;
     /** Z-axis position. */
     zIndex?: number;
-    /** Z-axis position. */
+    /**
+     * Additional props for the dialog container element.
+     * Set `'aria-modal': false` to make the dialog non-modal: the page stays usable (no focus trap, no overlay,
+     * no close on click away, rendered in place instead of in a portal) and escape only closes the dialog when the
+     * focus is inside.
+     */
     dialogProps?: GenericProps;
     /** On close callback. */
     onClose?(): void;
@@ -120,9 +127,11 @@ const DialogBody = forwardRef<DialogProps, HTMLDivElement>((props, ref) => {
         }
     }, [isOpen, parentElement]);
 
+    const isModal = dialogProps?.['aria-modal'] !== false && dialogProps?.['aria-modal'] !== 'false';
+
     const shouldPreventCloseOnEscape = preventAutoClose || preventCloseOnEscape;
 
-    useCallbackOnEscape(onClose, isOpen && !shouldPreventCloseOnEscape);
+    useCallbackOnEscape(onClose, isModal && isOpen && !shouldPreventCloseOnEscape);
 
     const wrapperRef = useRef<HTMLDivElement>(null);
     /**
@@ -131,7 +140,24 @@ const DialogBody = forwardRef<DialogProps, HTMLDivElement>((props, ref) => {
      */
     const localContentRef = useRef<HTMLDivElement>(null);
     // Handle focus trap.
-    useFocusTrap(isOpen && wrapperRef.current, focusElement?.current);
+    useFocusTrap(isModal && isOpen && wrapperRef.current, focusElement?.current);
+
+    // Non-modal: without the focus trap, move the focus into the dialog on open ourselves.
+    useEffect(() => {
+        const wrapper = wrapperRef.current;
+        if (isModal || !isOpen || !wrapper) return;
+        (focusElement?.current || getFirstAndLastFocusable(wrapper).first)?.focus();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isModal, isOpen]);
+
+    // Non-modal: close on escape only when the focus is inside the dialog.
+    useEffect(() => {
+        const wrapper = wrapperRef.current;
+        if (isModal || !isOpen || shouldPreventCloseOnEscape || !onClose || !wrapper) return undefined;
+        const onKeyDown = onEscapePressed(onClose);
+        wrapper.addEventListener('keydown', onKeyDown);
+        return () => wrapper.removeEventListener('keydown', onKeyDown);
+    }, [isModal, isOpen, shouldPreventCloseOnEscape, onClose]);
 
     useDisableBodyScroll(disableBodyScroll && isOpen && localContentRef.current);
 
@@ -177,6 +203,7 @@ const DialogBody = forwardRef<DialogProps, HTMLDivElement>((props, ref) => {
         isVisible,
         size,
         zIndex,
+        isModal,
         ref: mergeRefs(rootRef, ref),
         ...forwardedProps,
         children: (
@@ -199,6 +226,7 @@ const DialogBody = forwardRef<DialogProps, HTMLDivElement>((props, ref) => {
                 headerChildContent={headerChildContent}
                 headerChildProps={headerChildProps}
                 isLoading={isLoading}
+                isModal={isModal}
                 rootRef={rootRef}
                 setSentinelBottom={setSentinelBottom}
                 setSentinelTop={setSentinelTop}

@@ -28,6 +28,22 @@ export default (renderOptions: SetupOptions<any>) => {
                 expect(container).toHaveAttribute('aria-modal', 'true');
             });
 
+            it('should render a non-modal dialog without overlay when `aria-modal` is false', () => {
+                const { dialog, container } = setup({ dialogProps: { 'aria-modal': false } }, renderOptions);
+
+                expect(container).toHaveAttribute('aria-modal', 'false');
+                expect(dialog).toHaveClass(`${CLASSNAME}--is-non-modal`);
+                expect(queryByClassName(dialog as HTMLElement, `${CLASSNAME}__overlay`)).not.toBeInTheDocument();
+                // Rendered in place instead of being portaled to the body.
+                expect(dialog?.parentElement).not.toBe(document.body);
+            });
+
+            it('should render a modal dialog in a portal by default', () => {
+                const { dialog } = setup({}, renderOptions);
+
+                expect(dialog?.parentElement).toBe(document.body);
+            });
+
             it('should render progress indicator when isLoading is true', () => {
                 setup({ isLoading: true }, renderOptions);
                 const progress = document.querySelector('.lumx-progress-circular');

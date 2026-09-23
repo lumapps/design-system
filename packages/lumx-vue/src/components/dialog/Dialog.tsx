@@ -1,4 +1,4 @@
-import { Comment, computed, defineComponent, ref, type Ref } from 'vue';
+import { Comment, computed, defineComponent, ref, watch, watchPostEffect, type Ref } from 'vue';
 import { useIntersectionObserver } from '@vueuse/core';
 
 import {
@@ -10,6 +10,8 @@ import {
 } from '@lumx/core/js/components/Dialog';
 import { DIALOG_TRANSITION_DURATION } from '@lumx/core/js/constants';
 import type { GenericProps, HasCloseMode, JSXElement } from '@lumx/core/js/types';
+import { onEscapePressed } from '@lumx/core/js/utils';
+import { getFirstAndLastFocusable } from '@lumx/core/js/utils/focus/getFirstAndLastFocusable';
 
 import { Portal } from '../../utils/Portal/Portal';
 import { ClickAwayProvider } from '../../utils/ClickAway/ClickAwayProvider';
@@ -37,7 +39,12 @@ export type DialogProps = Pick<BaseDialogProps, 'forceFooterDivider' | 'forceHea
         size?: DialogSizes;
         /** Z-axis position. */
         zIndex?: number;
-        /** Additional props for the dialog container element. */
+        /**
+         * Additional props for the dialog container element.
+         * Set `'aria-modal': false` to make the dialog non-modal: the page stays usable (no focus trap, no overlay,
+         * no close on click away, rendered in place instead of in a portal) and escape only closes the dialog when the
+         * focus is inside.
+         */
         dialogProps?: GenericProps;
         /** Reference to the parent element that triggered modal opening (gets focus back on close). */
         parentElement?: HTMLElement;
@@ -101,22 +108,46 @@ const Dialog = defineComponent(
             hasBottomIntersection.value = entry ? !entry.isIntersecting : null;
         });
 
+        const isModal = computed(
+            () => props.dialogProps?.['aria-modal'] !== false && props.dialogProps?.['aria-modal'] !== 'false',
+        );
+
         // Escape key
         const shouldPreventCloseOnEscape = computed(() => props.preventAutoClose || props.preventCloseOnEscape);
         const handleClose = () => emit('close');
         useCallbackOnEscape(
             handleClose,
-            computed(() => Boolean(props.isOpen && !shouldPreventCloseOnEscape.value)),
+            computed(() => Boolean(isModal.value && props.isOpen && !shouldPreventCloseOnEscape.value)),
         );
+
+        // Non-modal: close on escape only when the focus is inside the dialog.
+        watchPostEffect((onCleanup) => {
+            const wrapper = wrapperRef.value;
+            if (isModal.value || !props.isOpen || shouldPreventCloseOnEscape.value || !wrapper) return;
+            const onKeyDown = onEscapePressed(handleClose);
+            wrapper.addEventListener('keydown', onKeyDown);
+            onCleanup(() => wrapper.removeEventListener('keydown', onKeyDown));
+        });
 
         // Focus trap inside the dialog wrapper
         const focusZoneElement = computed(() => {
-            if (!props.isOpen) return false as const;
+            if (!isModal.value || !props.isOpen) return false as const;
             return wrapperRef.value || false;
         });
         useFocusTrap(
             focusZoneElement,
             computed(() => props.focusElement),
+        );
+
+        // Non-modal: without the focus trap, move the focus into the dialog on open ourselves.
+        watch(
+            () => Boolean(props.isOpen && wrapperRef.value),
+            (isReady) => {
+                const wrapper = wrapperRef.value;
+                if (isModal.value || !isReady || !wrapper) return;
+                (props.focusElement || getFirstAndLastFocusable(wrapper).first)?.focus();
+            },
+            { flush: 'post', immediate: true },
         );
 
         // Restore focus to parentElement when dialog closes
@@ -178,6 +209,7 @@ const Dialog = defineComponent(
                 isVisible: isVisible.value,
                 size: props.size ?? DEFAULT_PROPS.size,
                 zIndex: props.zIndex,
+                isModal: isModal.value,
                 ref: rootRef,
                 children: (
                     <DialogContent
@@ -201,6 +233,7 @@ const Dialog = defineComponent(
                         }
                         headerChildProps={slots.header ? undefined : vnodeChildProps(headerVnode)}
                         isLoading={props.isLoading}
+                        isModal={isModal.value}
                         rootRef={rootRef as Ref<HTMLElement | undefined>}
                         setSentinelBottom={setSentinelBottom}
                         setSentinelTop={setSentinelTop}

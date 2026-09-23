@@ -73,6 +73,7 @@ export const LongContent = { ...stories.LongContent };
 export const PreventAutoClose = { ...stories.PreventAutoClose };
 export const PreventCloseOnEscape = { ...stories.PreventCloseOnEscape };
 export const PreventCloseOnClick = { ...stories.PreventCloseOnClick };
+export const NonModal = { ...stories.NonModal };
 
 /**
  * More complex header/footer using Vue named slots
