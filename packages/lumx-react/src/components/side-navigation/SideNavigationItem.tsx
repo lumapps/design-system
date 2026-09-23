@@ -4,7 +4,7 @@ import isEmpty from 'lodash/isEmpty';
 
 import { mdiChevronDown, mdiChevronUp } from '@lumx/icons';
 import { Emphasis, Icon, Size, IconButton, IconButtonProps } from '@lumx/react';
-import { GenericProps, HasCloseMode, isComponent } from '@lumx/react/utils/type';
+import { GenericProps, HasCloseMode } from '@lumx/react/utils/type';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
 import { useId } from '@lumx/react/hooks/useId';
@@ -92,8 +92,7 @@ export const SideNavigationItem = forwardRef<SideNavigationItemProps, HTMLLIElem
         ...forwardedProps
     } = props;
 
-    const content = children && Children.toArray(children).filter(isComponent(SideNavigationItem));
-    const hasContent = !isEmpty(content);
+    const hasContent = !isEmpty(Children.toArray(children));
     const shouldSplitActions = Boolean(onActionClick);
     const showChildren = hasContent && isOpen;
 
@@ -175,7 +174,7 @@ export const SideNavigationItem = forwardRef<SideNavigationItemProps, HTMLLIElem
 
             {(closeMode === 'hide' || showChildren) && (
                 <ul className={element('children')} id={contentId}>
-                    {content}
+                    {children}
                 </ul>
             )}
         </li>
