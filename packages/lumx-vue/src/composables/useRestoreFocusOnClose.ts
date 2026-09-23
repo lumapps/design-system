@@ -1,5 +1,5 @@
 import { onBeforeUnmount, watch, type Ref } from 'vue';
-import { getFirstAndLastFocusable } from '@lumx/core/js/utils/focus/getFirstAndLastFocusable';
+import { getFirstAndLastFocusable, isFocusWithin } from '@lumx/core/js/utils/focus';
 
 /**
  * Restores focus to the anchor or parent element when the popover closes,
@@ -23,11 +23,7 @@ export function useRestoreFocusOnClose(
 ): void {
     const tryRestoreFocus = () => {
         if (!focusAnchorOnClose.value) return;
-        const popoverElement = popoverElementRef.value;
-        if (!popoverElement) return;
-
-        const isFocusWithin = popoverElement.contains(document.activeElement);
-        if (!isFocusWithin) return;
+        if (!isFocusWithin(popoverElementRef.value)) return;
 
         // On next render
         setTimeout(() => {
