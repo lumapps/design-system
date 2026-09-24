@@ -21,6 +21,7 @@ import { Portal } from '@lumx/react/utils';
 import { isFocusWithin, setupInitialFocus } from '@lumx/core/js/utils/focus';
 import {
     DialogShell,
+    isDialogModal,
     CLASSNAME,
     COMPONENT_NAME,
     type DialogSizes,
@@ -114,7 +115,7 @@ const DialogBody = forwardRef<DialogProps, HTMLDivElement>((props, ref) => {
         ...forwardedProps
     } = props;
 
-    const isModal = dialogProps?.['aria-modal'] !== false && dialogProps?.['aria-modal'] !== 'false';
+    const isModal = isDialogModal(dialogProps);
 
     const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -226,7 +227,6 @@ const DialogBody = forwardRef<DialogProps, HTMLDivElement>((props, ref) => {
                 headerChildContent={headerChildContent}
                 headerChildProps={headerChildProps}
                 isLoading={isLoading}
-                isModal={isModal}
                 rootRef={rootRef}
                 setSentinelBottom={setSentinelBottom}
                 setSentinelTop={setSentinelTop}

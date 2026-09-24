@@ -3,6 +3,7 @@ import { useIntersectionObserver } from '@vueuse/core';
 
 import {
     DialogShell,
+    isDialogModal,
     type BaseDialogProps,
     type DialogSizes,
     COMPONENT_NAME,
@@ -107,9 +108,7 @@ const Dialog = defineComponent(
             hasBottomIntersection.value = entry ? !entry.isIntersecting : null;
         });
 
-        const isModal = computed(
-            () => props.dialogProps?.['aria-modal'] !== false && props.dialogProps?.['aria-modal'] !== 'false',
-        );
+        const isModal = computed(() => isDialogModal(props.dialogProps));
 
         // Close on escape (a tooltip or popover opened inside registers after the dialog and so gets the escape first).
         // Non-modal: the page stays usable, so only close when the focus is inside the dialog.
@@ -231,7 +230,6 @@ const Dialog = defineComponent(
                         }
                         headerChildProps={slots.header ? undefined : vnodeChildProps(headerVnode)}
                         isLoading={props.isLoading}
-                        isModal={isModal.value}
                         rootRef={rootRef as Ref<HTMLElement | undefined>}
                         setSentinelBottom={setSentinelBottom}
                         setSentinelTop={setSentinelTop}
