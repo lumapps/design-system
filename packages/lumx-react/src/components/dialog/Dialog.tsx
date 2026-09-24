@@ -18,7 +18,7 @@ import { useTransitionVisibility } from '@lumx/react/hooks/useTransitionVisibili
 import { ThemeProvider } from '@lumx/react/utils/theme/ThemeContext';
 
 import { Portal } from '@lumx/react/utils';
-import { getFirstAndLastFocusable, isFocusWithin } from '@lumx/core/js/utils/focus';
+import { isFocusWithin, setupInitialFocus } from '@lumx/core/js/utils/focus';
 import {
     DialogShell,
     CLASSNAME,
@@ -150,8 +150,10 @@ const DialogBody = forwardRef<DialogProps, HTMLDivElement>((props, ref) => {
     // Non-modal: without the focus trap, move the focus into the dialog on open ourselves.
     useEffect(() => {
         const wrapper = wrapperRef.current;
-        if (isModal || !isOpen || !wrapper) return;
-        (focusElement?.current || getFirstAndLastFocusable(wrapper).first)?.focus();
+        if (isModal || !isOpen || !wrapper) return undefined;
+        const controller = new AbortController();
+        setupInitialFocus({ focusZoneElement: wrapper, focusElement: focusElement?.current }, controller.signal);
+        return () => controller.abort();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isModal, isOpen]);
 

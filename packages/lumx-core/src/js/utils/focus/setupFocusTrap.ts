@@ -1,5 +1,6 @@
 import { makeListenerTowerContext, type Listener } from '../function/listenerTower';
 import { getFirstAndLastFocusable } from './getFirstAndLastFocusable';
+import { focusZoneFallback, setupInitialFocus, type SetupInitialFocusOptions } from './setupInitialFocus';
 
 /**
  * Shared listener tower for focus traps.
@@ -9,24 +10,13 @@ import { getFirstAndLastFocusable } from './getFirstAndLastFocusable';
  */
 const FOCUS_TRAPS = makeListenerTowerContext();
 
-export interface SetupFocusTrapOptions {
-    /** The element in which to trap the focus. */
-    focusZoneElement: HTMLElement;
-    /**
-     * The element to focus when the trap is activated.
-     * Falls back to the first focusable element inside the zone, then to the zone element itself.
-     */
-    focusElement?: HTMLElement | null;
-}
+/** Focus trap options: the zone in which to trap the focus, and the element to focus on activation. */
+export type SetupFocusTrapOptions = SetupInitialFocusOptions;
 
 /**
  * Trap 'Tab' focus switch inside the `focusZoneElement`.
  *
- * Setup behavior:
- * 1. Focus `focusElement` if provided and contained in the zone.
- * 2. Otherwise focus the first focusable descendant.
- * 3. Otherwise focus the zone element itself (falling back to setting `tabindex="-1"` if needed) so that
- *    keyboard users (especially screen reader users) land inside the trapped region (e.g. an empty dialog).
+ * Setup behavior: move the focus into the zone (see `setupInitialFocus`).
  *
  * Tab key behavior:
  * - With at least one focusable descendant: focus cycles between the first and last focusable in the zone.
@@ -38,7 +28,7 @@ export interface SetupFocusTrapOptions {
  * @param signal  AbortSignal used to tear down the trap.
  */
 export function setupFocusTrap(options: SetupFocusTrapOptions, signal: AbortSignal): void {
-    const { focusZoneElement, focusElement } = options;
+    const { focusZoneElement } = options;
 
     if (!focusZoneElement || signal.aborted) {
         return;
@@ -46,23 +36,6 @@ export function setupFocusTrap(options: SetupFocusTrapOptions, signal: AbortSign
 
     // The root node is either the Document (regular DOM) or a ShadowRoot (shadow DOM portal).
     const rootNode = focusZoneElement.getRootNode() as Document | ShadowRoot;
-
-    // Track whether we added a `tabindex="-1"` so we can restore the original state on teardown.
-    let addedTabIndex = false;
-
-    /** Make the zone element programmatically focusable (so we can fall back to it). */
-    const ensureZoneIsFocusable = () => {
-        if (!focusZoneElement.hasAttribute('tabindex')) {
-            focusZoneElement.setAttribute('tabindex', '-1');
-            addedTabIndex = true;
-        }
-    };
-
-    /** Focus the zone element itself as a last-resort fallback. */
-    const focusZoneFallback = () => {
-        ensureZoneIsFocusable();
-        focusZoneElement.focus({ preventScroll: true });
-    };
 
     // Trap 'Tab' key down focus switch into the focus zone.
     const trapTabFocusInFocusZone = (evt: KeyboardEvent) => {
@@ -75,7 +48,7 @@ export function setupFocusTrap(options: SetupFocusTrapOptions, signal: AbortSign
         // Prevent focus switch if no focusable available — pin focus on the zone itself.
         if (!focusable.first) {
             evt.preventDefault();
-            focusZoneFallback();
+            focusZoneFallback(focusZoneElement, signal);
             return;
         }
 
@@ -112,31 +85,10 @@ export function setupFocusTrap(options: SetupFocusTrapOptions, signal: AbortSign
     };
 
     // SETUP: focus initial element.
-    if (focusElement && focusZoneElement.contains(focusElement)) {
-        // Focus the given element.
-        focusElement.focus({ preventScroll: true });
-    } else {
-        const firstFocusable = getFirstAndLastFocusable(focusZoneElement).first;
-        if (firstFocusable) {
-            // Focus the first focusable descendant.
-            firstFocusable.focus({ preventScroll: true });
-        } else {
-            // No focusable descendant — fall back to the zone itself (e.g. an empty dialog).
-            focusZoneFallback();
-        }
-    }
+    setupInitialFocus(options, signal);
 
     FOCUS_TRAPS.register(focusTrap);
 
     // TEARDOWN.
-    signal.addEventListener(
-        'abort',
-        () => {
-            FOCUS_TRAPS.unregister(focusTrap);
-            if (addedTabIndex) {
-                focusZoneElement.removeAttribute('tabindex');
-            }
-        },
-        { once: true },
-    );
+    signal.addEventListener('abort', () => FOCUS_TRAPS.unregister(focusTrap), { once: true });
 }

@@ -191,6 +191,44 @@ describe('<Dialog />', () => {
                 expect(screen.getByRole('button', { name: 'Inside' })).toHaveFocus();
             });
 
+            it('should move the focus to the `focusElement` on open', async () => {
+                const Wrapper = defineComponent({
+                    props: { isOpen: Boolean },
+                    setup(wrapperProps) {
+                        const second = ref<HTMLButtonElement>();
+                        return () => (
+                            <Dialog
+                                isOpen={wrapperProps.isOpen}
+                                // Keep the content mounted while closed, so the `focusElement` ref is set on open.
+                                closeMode="hide"
+                                disableBodyScroll={false}
+                                dialogProps={{ 'aria-modal': false }}
+                                focusElement={second.value}
+                            >
+                                <button type="button">First</button>
+                                <button type="button" ref={second}>
+                                    Second
+                                </button>
+                            </Dialog>
+                        );
+                    },
+                });
+                const { rerender } = render(Wrapper, { props: { isOpen: false } });
+                await nextTick();
+                await rerender({ isOpen: true });
+                await nextTick();
+                expect(screen.getByRole('button', { name: 'Second', hidden: true })).toHaveFocus();
+            });
+
+            it('should move the focus to the dialog itself when it has no focusable element', async () => {
+                const { emitted } = setupNonModal(() => <span>Text only</span>);
+                await nextTick();
+                expect(queryByClassName(document.body, `${CLASSNAME}__wrapper`)).toHaveFocus();
+                // So the escape still closes the dialog.
+                await userEvent.keyboard('[Escape]');
+                expect(emitted('close')).toBeTruthy();
+            });
+
             it('should not trap the focus', async () => {
                 setupNonModal();
                 await nextTick();

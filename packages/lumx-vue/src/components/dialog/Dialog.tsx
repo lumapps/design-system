@@ -10,7 +10,7 @@ import {
 } from '@lumx/core/js/components/Dialog';
 import { DIALOG_TRANSITION_DURATION } from '@lumx/core/js/constants';
 import type { GenericProps, HasCloseMode, JSXElement } from '@lumx/core/js/types';
-import { getFirstAndLastFocusable, isFocusWithin } from '@lumx/core/js/utils/focus';
+import { isFocusWithin, setupInitialFocus } from '@lumx/core/js/utils/focus';
 
 import { Portal } from '../../utils/Portal/Portal';
 import { ClickAwayProvider } from '../../utils/ClickAway/ClickAwayProvider';
@@ -136,12 +136,14 @@ const Dialog = defineComponent(
         // Non-modal: without the focus trap, move the focus into the dialog on open ourselves.
         watch(
             () => Boolean(props.isOpen && wrapperRef.value),
-            (isReady) => {
+            (isReady, _, onCleanup) => {
                 const wrapper = wrapperRef.value;
                 if (isModal.value || !isReady || !wrapper) return;
-                (props.focusElement || getFirstAndLastFocusable(wrapper).first)?.focus();
+                const controller = new AbortController();
+                setupInitialFocus({ focusZoneElement: wrapper, focusElement: props.focusElement }, controller.signal);
+                onCleanup(() => controller.abort());
             },
-            { flush: 'post', immediate: true },
+            { flush: 'post' },
         );
 
         // Restore focus to parentElement when dialog closes

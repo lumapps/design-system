@@ -1,3 +1,4 @@
+import { createRef } from 'react';
 import { Dialog, DialogProps } from '@lumx/react/components/dialog/Dialog';
 import { queryByClassName } from '@lumx/react/testing/utils/queries';
 import { render, screen, fireEvent, act } from '@testing-library/react';
@@ -206,6 +207,32 @@ describe(`<${Dialog.displayName}>`, () => {
         it('should move the focus into the dialog on open', () => {
             setupNonModal();
             expect(screen.getByRole('button', { name: 'Inside' })).toHaveFocus();
+        });
+
+        it('should move the focus to the `focusElement` on open', () => {
+            const focusElement = createRef<HTMLButtonElement>();
+            setupNonModal({
+                focusElement,
+                children: (
+                    <>
+                        <button type="button">First</button>
+                        <button type="button" ref={focusElement}>
+                            Second
+                        </button>
+                    </>
+                ),
+            });
+            expect(screen.getByRole('button', { name: 'Second' })).toHaveFocus();
+        });
+
+        it('should move the focus to the dialog itself when it has no focusable element', async () => {
+            const onClose = vi.fn();
+            setupNonModal({ onClose, children: 'Text only' });
+            const wrapper = queryByClassName(document.body, `${CLASSNAME}__wrapper`);
+            expect(wrapper).toHaveFocus();
+            // So the escape still closes the dialog.
+            await userEvent.keyboard('[Escape]');
+            expect(onClose).toHaveBeenCalled();
         });
 
         it('should not trap the focus', async () => {
