@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   `@lumx/react`, `@lumx/vue`:
+    -   `Dialog`: non-modal mode when `dialogProps['aria-modal']` is `false` (or `'false'`): the page stays usable (no focus trap, no overlay, no close on click outside, no body scroll lock), the dialog is rendered in place (no portal) and escape only closes the dialog when the focus is inside.
+
 ## [4.24.0][] - 2026-09-23
 
 ### Added

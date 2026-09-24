@@ -22,6 +22,11 @@ export interface DialogShellProps extends HasClassName {
     size?: DialogSizes;
     /** Z-axis position. */
     zIndex?: number;
+    /**
+     * Whether the dialog is modal. Defaults to `true`.
+     * A non-modal dialog has no overlay and renders in place (no portal), so it follows the page's focus and reading order.
+     */
+    isModal?: boolean;
     /** Content rendered inside the overlay + providers (typically a framework `DialogContent` reader). */
     children?: any;
     /** Portal component for rendering outside the DOM hierarchy. */
@@ -56,6 +61,7 @@ export const DialogShell = (props: DialogShellProps) => {
         isVisible,
         size = DEFAULT_PROPS.size,
         zIndex,
+        isModal = true,
         children,
         Portal,
         HeadingLevelProvider,
@@ -65,7 +71,7 @@ export const DialogShell = (props: DialogShellProps) => {
     } = props;
 
     return (
-        <Portal>
+        <Portal enabled={isModal}>
             <div
                 ref={ref}
                 {...forwardedProps}
@@ -74,13 +80,14 @@ export const DialogShell = (props: DialogShellProps) => {
                     block({
                         'is-hidden': !isOpen,
                         'is-loading': isLoading,
+                        'is-non-modal': !isModal,
                         'is-shown': isOpen || isVisible,
                         [`size-${size}`]: Boolean(size),
                     }),
                 )}
                 style={{ zIndex }}
             >
-                <div className={element('overlay')} />
+                {isModal && <div className={element('overlay')} />}
 
                 <HeadingLevelProvider level={2}>
                     <ThemeProvider value={undefined}>

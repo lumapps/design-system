@@ -59,6 +59,15 @@ export interface DialogContentProps extends BaseDialogProps {
 }
 
 /**
+ * Whether the dialog is modal: it is, unless `dialogProps['aria-modal']` is `false` (or `'false'`).
+ *
+ * @param  dialogProps Props of the dialog container element.
+ * @return whether the dialog is modal.
+ */
+export const isDialogModal = (dialogProps?: GenericProps) =>
+    dialogProps?.['aria-modal'] !== false && dialogProps?.['aria-modal'] !== 'false';
+
+/**
  * Dialog content: the `role="dialog"` element + header/body/footer.
  *
  * @param  props Component props.
@@ -99,6 +108,7 @@ export const DialogContent = (props: DialogContentProps) => {
         'aria-labelledby': dialogAriaLabelledBy,
         ...restDialogProps
     } = dialogProps ?? {};
+    const isModal = isDialogModal(restDialogProps);
 
     return (
         <div
@@ -109,7 +119,8 @@ export const DialogContent = (props: DialogContentProps) => {
             {...resolveAccessibleNameProps(dialogAriaLabel, dialogAriaLabelledBy || labelId)}
         >
             <ClickAwayProvider
-                callback={!shouldPreventCloseOnClickAway && handleClose}
+                // A non-modal dialog leaves the page usable: clicking it must not close the dialog.
+                callback={isModal && !shouldPreventCloseOnClickAway && handleClose}
                 childrenRefs={clickAwayRefs}
                 parentRef={rootRef}
             >
