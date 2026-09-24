@@ -220,6 +220,19 @@ describe('<Dialog />', () => {
                 expect(emitted('close')).toBeFalsy();
             });
 
+            it('should not disable the body scroll', async () => {
+                // Modal dialog: the body scroll is disabled.
+                const modal = render(Dialog, { props: { isOpen: false } });
+                await modal.rerender({ isOpen: true });
+                expect(document.body.style.overflow).toBe('hidden');
+                modal.unmount();
+                expect(document.body.style.overflow).not.toBe('hidden');
+
+                const nonModal = render(Dialog, { props: { isOpen: false, dialogProps: { 'aria-modal': false } } });
+                await nonModal.rerender({ isOpen: true, dialogProps: { 'aria-modal': false } });
+                expect(document.body.style.overflow).not.toBe('hidden');
+            });
+
             it('should close a tooltip inside on the first Escape and the dialog on the second', async () => {
                 const { emitted } = setupNonModal(() => (
                     <Tooltip label="Tooltip label">

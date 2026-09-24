@@ -63,7 +63,7 @@ export interface DialogProps extends GenericProps, HasCloseMode, UIProps {
     onClose?(): void;
     /** Callback called when the open animation starts and the close animation finishes. */
     onVisibilityChange?(isVisible: boolean): void;
-    /** whether to disable the scroll on the body or not */
+    /** Whether to disable the scroll on the body or not (ignored on a non-modal dialog: the page stays usable). */
     disableBodyScroll?: boolean;
     /** Children */
     children?: React.ReactNode;
@@ -155,7 +155,7 @@ const DialogBody = forwardRef<DialogProps, HTMLDivElement>((props, ref) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isModal, isOpen]);
 
-    useDisableBodyScroll(disableBodyScroll && isOpen && localContentRef.current);
+    useDisableBodyScroll(isModal && disableBodyScroll && isOpen && localContentRef.current);
 
     const [sentinelTop, setSentinelTop] = useState<Element | null>(null);
     const [sentinelBottom, setSentinelBottom] = useState<Element | null>(null);

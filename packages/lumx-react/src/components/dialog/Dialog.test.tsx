@@ -236,6 +236,16 @@ describe(`<${Dialog.displayName}>`, () => {
             expect(onClose).not.toHaveBeenCalled();
         });
 
+        it('should not disable the body scroll', () => {
+            // Modal dialog: the body scroll is disabled.
+            const { unmount } = render(<Dialog isOpen />);
+            expect(document.body.style.overflow).toBe('hidden');
+            unmount();
+
+            setupNonModal();
+            expect(document.body.style.overflow).not.toBe('hidden');
+        });
+
         it('should close a tooltip inside on the first `escape` and the dialog on the second', async () => {
             const onClose = vi.fn();
             setupNonModal({

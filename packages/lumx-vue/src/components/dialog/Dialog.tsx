@@ -57,7 +57,7 @@ export type DialogProps = Pick<BaseDialogProps, 'forceFooterDivider' | 'forceHea
         preventCloseOnEscape?: boolean;
         /** Whether to keep the dialog open on clickaway. */
         preventCloseOnClick?: boolean;
-        /** Whether to disable body scroll when the dialog is open. */
+        /** Whether to disable body scroll when the dialog is open (ignored on a non-modal dialog: the page stays usable). */
         disableBodyScroll?: boolean;
     };
 
@@ -153,8 +153,10 @@ const Dialog = defineComponent(
             computed(() => Boolean(props.isOpen)),
         );
 
-        // Disable body scroll when dialog is open
-        useDisableBodyScroll(computed(() => props.disableBodyScroll !== false && Boolean(props.isOpen)));
+        // Disable body scroll when dialog is open (not on a non-modal dialog: the page stays usable)
+        useDisableBodyScroll(
+            computed(() => isModal.value && props.disableBodyScroll !== false && Boolean(props.isOpen)),
+        );
 
         // Track animation state: keeps dialog mounted during close animation
         const isVisible = useTransitionVisibility(
