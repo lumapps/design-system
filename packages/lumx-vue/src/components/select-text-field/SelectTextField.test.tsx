@@ -86,8 +86,8 @@ describe('<SelectTextField>', () => {
             await user.click(option);
 
             const changes = emitted('change') as any[][];
-            expect(changes).toBeTruthy();
-            expect(changes.at(-1)![0]).toEqual(FRUITS[1]);
+            expect(changes).toHaveLength(1);
+            expect(changes[0][0]).toEqual(FRUITS[1]);
         });
 
         it('should emit "search" when typing in the input', async () => {

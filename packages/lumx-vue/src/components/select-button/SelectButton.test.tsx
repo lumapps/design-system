@@ -216,8 +216,8 @@ describe('<SelectButton>', () => {
             await user.click(option);
 
             const changes = emitted('change') as any[][];
-            expect(changes).toBeTruthy();
-            expect(changes.at(-1)![0]).toEqual(FRUITS[1]);
+            expect(changes).toHaveLength(1);
+            expect(changes[0][0]).toEqual(FRUITS[1]);
         });
 
         it('should emit "open" when dropdown opens', async () => {

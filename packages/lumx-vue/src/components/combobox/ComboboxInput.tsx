@@ -54,7 +54,6 @@ const ComboboxInput = defineComponent(
             setHandle(
                 setupComboboxInput(input, {
                     onSelect(option) {
-                        props.onSelect?.(option);
                         emit('select', option);
                     },
                     onChange(value) {
