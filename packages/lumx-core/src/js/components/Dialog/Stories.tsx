@@ -1,9 +1,10 @@
+import { expect, screen, waitFor } from 'storybook/test';
 import type { SetupStoriesOptions } from '@lumx/core/stories/types';
 import { getSelectArgType } from '@lumx/core/stories/controls/selectArgType';
 import { DIALOG_TRANSITION_DURATION } from '@lumx/core/js/constants';
 import { loremIpsum } from '@lumx/core/stories/utils/lorem';
 import { Size } from '../../constants';
-import { DEFAULT_PROPS } from '.';
+import { CLASSNAME, DEFAULT_PROPS } from '.';
 
 const CLOSE_MODES = ['hide', 'unmount'];
 const dialogSizes = [Size.tiny, Size.regular, Size.big, Size.huge];
@@ -86,6 +87,18 @@ export function setup({
     /** Non-modal: no overlay, no focus trap, no close on click outside; escape closes only with the focus inside */
     const NonModal = {
         args: { ...WithHeaderFooter.args, dialogProps: { 'aria-modal': false } },
+        async play() {
+            const dialog = await screen.findByRole('dialog');
+            const wrapper = dialog.querySelector(`.${CLASSNAME}__wrapper`) as HTMLElement;
+            // The page just under the visible dialog must get the clicks (not an invisible part of the dialog).
+            // Retried until the open animation ends.
+            await waitFor(() => {
+                const { left, width, bottom } = wrapper.getBoundingClientRect();
+                const elementUnder = document.elementFromPoint(left + width / 2, bottom + 10);
+                expect(elementUnder).not.toBeNull();
+                expect(dialog.closest(`.${CLASSNAME}`)?.contains(elementUnder)).toBe(false);
+            });
+        },
     };
 
     return {
