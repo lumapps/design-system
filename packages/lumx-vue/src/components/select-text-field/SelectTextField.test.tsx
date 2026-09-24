@@ -87,6 +87,7 @@ describe('<SelectTextField>', () => {
 
             const changes = emitted('change') as any[][];
             expect(changes).toBeTruthy();
+            expect(changes).toHaveLength(1);
             expect(changes.at(-1)![0]).toEqual(FRUITS[1]);
         });
 
