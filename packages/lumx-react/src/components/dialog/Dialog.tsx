@@ -18,8 +18,7 @@ import { useTransitionVisibility } from '@lumx/react/hooks/useTransitionVisibili
 import { ThemeProvider } from '@lumx/react/utils/theme/ThemeContext';
 
 import { Portal } from '@lumx/react/utils';
-import { onEscapePressed } from '@lumx/core/js/utils';
-import { getFirstAndLastFocusable } from '@lumx/core/js/utils/focus/getFirstAndLastFocusable';
+import { getFirstAndLastFocusable, isFocusWithin } from '@lumx/core/js/utils/focus';
 import {
     DialogShell,
     CLASSNAME,
@@ -131,14 +130,20 @@ const DialogBody = forwardRef<DialogProps, HTMLDivElement>((props, ref) => {
 
     const shouldPreventCloseOnEscape = preventAutoClose || preventCloseOnEscape;
 
-    useCallbackOnEscape(onClose, isModal && isOpen && !shouldPreventCloseOnEscape);
-
     const wrapperRef = useRef<HTMLDivElement>(null);
     /**
      * Since the `contentRef` comes from the parent and is optional,
      * we need to create a stable contentRef that will always be available.
      */
     const localContentRef = useRef<HTMLDivElement>(null);
+
+    // Close on escape (a tooltip or popover opened inside registers after the dialog and so gets the escape first).
+    // Non-modal: the page stays usable, so only close when the focus is inside the dialog.
+    const onEscape = React.useCallback(() => {
+        if (isModal || isFocusWithin(wrapperRef.current)) onClose?.();
+    }, [isModal, onClose]);
+    useCallbackOnEscape(onClose && onEscape, isOpen && !shouldPreventCloseOnEscape);
+
     // Handle focus trap.
     useFocusTrap(isModal && isOpen && wrapperRef.current, focusElement?.current);
 
@@ -149,15 +154,6 @@ const DialogBody = forwardRef<DialogProps, HTMLDivElement>((props, ref) => {
         (focusElement?.current || getFirstAndLastFocusable(wrapper).first)?.focus();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isModal, isOpen]);
-
-    // Non-modal: close on escape only when the focus is inside the dialog.
-    useEffect(() => {
-        const wrapper = wrapperRef.current;
-        if (isModal || !isOpen || shouldPreventCloseOnEscape || !onClose || !wrapper) return undefined;
-        const onKeyDown = onEscapePressed(onClose);
-        wrapper.addEventListener('keydown', onKeyDown);
-        return () => wrapper.removeEventListener('keydown', onKeyDown);
-    }, [isModal, isOpen, shouldPreventCloseOnEscape, onClose]);
 
     useDisableBodyScroll(disableBodyScroll && isOpen && localContentRef.current);
 

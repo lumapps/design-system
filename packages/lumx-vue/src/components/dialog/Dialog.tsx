@@ -1,4 +1,4 @@
-import { Comment, computed, defineComponent, ref, watch, watchPostEffect, type Ref } from 'vue';
+import { Comment, computed, defineComponent, ref, watch, type Ref } from 'vue';
 import { useIntersectionObserver } from '@vueuse/core';
 
 import {
@@ -10,8 +10,7 @@ import {
 } from '@lumx/core/js/components/Dialog';
 import { DIALOG_TRANSITION_DURATION } from '@lumx/core/js/constants';
 import type { GenericProps, HasCloseMode, JSXElement } from '@lumx/core/js/types';
-import { onEscapePressed } from '@lumx/core/js/utils';
-import { getFirstAndLastFocusable } from '@lumx/core/js/utils/focus/getFirstAndLastFocusable';
+import { getFirstAndLastFocusable, isFocusWithin } from '@lumx/core/js/utils/focus';
 
 import { Portal } from '../../utils/Portal/Portal';
 import { ClickAwayProvider } from '../../utils/ClickAway/ClickAwayProvider';
@@ -112,22 +111,17 @@ const Dialog = defineComponent(
             () => props.dialogProps?.['aria-modal'] !== false && props.dialogProps?.['aria-modal'] !== 'false',
         );
 
-        // Escape key
+        // Close on escape (a tooltip or popover opened inside registers after the dialog and so gets the escape first).
+        // Non-modal: the page stays usable, so only close when the focus is inside the dialog.
         const shouldPreventCloseOnEscape = computed(() => props.preventAutoClose || props.preventCloseOnEscape);
         const handleClose = () => emit('close');
+        const onEscape = () => {
+            if (isModal.value || isFocusWithin(wrapperRef.value)) handleClose();
+        };
         useCallbackOnEscape(
-            handleClose,
-            computed(() => Boolean(isModal.value && props.isOpen && !shouldPreventCloseOnEscape.value)),
+            onEscape,
+            computed(() => Boolean(props.isOpen && !shouldPreventCloseOnEscape.value)),
         );
-
-        // Non-modal: close on escape only when the focus is inside the dialog.
-        watchPostEffect((onCleanup) => {
-            const wrapper = wrapperRef.value;
-            if (isModal.value || !props.isOpen || shouldPreventCloseOnEscape.value || !wrapper) return;
-            const onKeyDown = onEscapePressed(handleClose);
-            wrapper.addEventListener('keydown', onKeyDown);
-            onCleanup(() => wrapper.removeEventListener('keydown', onKeyDown));
-        });
 
         // Focus trap inside the dialog wrapper
         const focusZoneElement = computed(() => {

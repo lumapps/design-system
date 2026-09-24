@@ -10,6 +10,8 @@ import { commonTestsSuiteVTL, type SetupRenderOptions } from '@lumx/vue/testing'
 import { queryByClassName } from '@lumx/core/testing/queries';
 
 import { Dialog, DialogHeading } from '.';
+import { Button } from '../button';
+import { Tooltip } from '../tooltip';
 
 // Clean up teleported dialog elements between tests
 afterEach(() => {
@@ -161,7 +163,7 @@ describe('<Dialog />', () => {
         });
 
         describe('Non-modal (`aria-modal` false)', () => {
-            const setupNonModal = () =>
+            const setupNonModal = (renderContent = () => <button type="button">Inside</button>) =>
                 render(
                     defineComponent({
                         emits: ['close'],
@@ -175,7 +177,7 @@ describe('<Dialog />', () => {
                                         dialogProps={{ 'aria-modal': false }}
                                         onClose={() => emit('close')}
                                     >
-                                        <button type="button">Inside</button>
+                                        {renderContent()}
                                     </Dialog>
                                 </>
                             );
@@ -216,6 +218,25 @@ describe('<Dialog />', () => {
                 await nextTick();
                 await userEvent.click(screen.getByRole('button', { name: 'Outside' }));
                 expect(emitted('close')).toBeFalsy();
+            });
+
+            it('should close a tooltip inside on the first Escape and the dialog on the second', async () => {
+                const { emitted } = setupNonModal(() => (
+                    <Tooltip label="Tooltip label">
+                        <Button>Anchor</Button>
+                    </Tooltip>
+                ));
+                await nextTick();
+                await userEvent.hover(screen.getByRole('button', { name: 'Anchor' }));
+                expect(await screen.findByRole('tooltip')).toBeInTheDocument();
+
+                await userEvent.keyboard('[Escape]');
+                await nextTick();
+                expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
+                expect(emitted('close')).toBeFalsy();
+
+                await userEvent.keyboard('[Escape]');
+                expect(emitted('close')).toHaveLength(1);
             });
         });
 

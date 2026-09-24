@@ -4,7 +4,8 @@ import { render, screen, fireEvent, act } from '@testing-library/react';
 import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 import userEvent from '@testing-library/user-event';
 import { ThemeSentinel } from '@lumx/react/testing/utils/ThemeSentinel';
-import { Heading, HeadingLevelProvider } from '@lumx/react';
+import { Button, Heading, HeadingLevelProvider, Tooltip } from '@lumx/react';
+import { classNames } from '@lumx/core/js/utils';
 import { vi } from 'vitest';
 import { DIALOG_TRANSITION_DURATION } from '@lumx/react/constants';
 import BaseDialogTests from '@lumx/core/js/components/Dialog/Tests';
@@ -196,7 +197,7 @@ describe(`<${Dialog.displayName}>`, () => {
                 <>
                     <button type="button">Outside</button>
                     <Dialog isOpen dialogProps={{ 'aria-modal': false }} {...props}>
-                        <button type="button">Inside</button>
+                        {props.children || <button type="button">Inside</button>}
                     </Dialog>
                 </>,
             );
@@ -233,6 +234,28 @@ describe(`<${Dialog.displayName}>`, () => {
             setupNonModal({ onClose });
             await userEvent.click(screen.getByRole('button', { name: 'Outside' }));
             expect(onClose).not.toHaveBeenCalled();
+        });
+
+        it('should close a tooltip inside on the first `escape` and the dialog on the second', async () => {
+            const onClose = vi.fn();
+            setupNonModal({
+                onClose,
+                children: (
+                    <Tooltip label="Tooltip label" closeMode="hide">
+                        <Button>Anchor</Button>
+                    </Tooltip>
+                ),
+            });
+            const tooltip = screen.getByRole('tooltip', { hidden: true });
+            await userEvent.hover(screen.getByRole('button', { name: 'Anchor' }));
+            expect(tooltip).not.toHaveClass(classNames.visuallyHidden());
+
+            await userEvent.keyboard('[Escape]');
+            expect(tooltip).toHaveClass(classNames.visuallyHidden());
+            expect(onClose).not.toHaveBeenCalled();
+
+            await userEvent.keyboard('[Escape]');
+            expect(onClose).toHaveBeenCalledTimes(1);
         });
     });
 
