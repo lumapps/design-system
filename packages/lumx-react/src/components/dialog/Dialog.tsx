@@ -114,23 +114,25 @@ const DialogBody = forwardRef<DialogProps, HTMLDivElement>((props, ref) => {
         ...forwardedProps
     } = props;
 
+    const isModal = dialogProps?.['aria-modal'] !== false && dialogProps?.['aria-modal'] !== 'false';
+
+    const wrapperRef = useRef<HTMLDivElement>(null);
+
     const previousOpen = React.useRef(isOpen);
     React.useEffect(() => {
         if (isOpen !== previousOpen.current) {
             previousOpen.current = isOpen;
 
             // Focus the parent element on close.
-            if (!isOpen && parentElement && parentElement.current) {
+            // Non-modal: only when the focus is inside the dialog (do not steal the focus from the page).
+            if (!isOpen && parentElement?.current && (isModal || isFocusWithin(wrapperRef.current))) {
                 parentElement.current.focus();
             }
         }
-    }, [isOpen, parentElement]);
-
-    const isModal = dialogProps?.['aria-modal'] !== false && dialogProps?.['aria-modal'] !== 'false';
+    }, [isOpen, isModal, parentElement]);
 
     const shouldPreventCloseOnEscape = preventAutoClose || preventCloseOnEscape;
 
-    const wrapperRef = useRef<HTMLDivElement>(null);
     /**
      * Since the `contentRef` comes from the parent and is optional,
      * we need to create a stable contentRef that will always be available.

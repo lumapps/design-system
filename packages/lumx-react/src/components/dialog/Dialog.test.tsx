@@ -235,6 +235,45 @@ describe(`<${Dialog.displayName}>`, () => {
             expect(onClose).toHaveBeenCalled();
         });
 
+        it('should move the focus back to the `parentElement` on close with the focus inside', () => {
+            const parentElement = createRef<HTMLButtonElement>();
+            const renderDialog = (isOpen: boolean) => (
+                <>
+                    <button type="button" ref={parentElement}>
+                        Parent
+                    </button>
+                    <Dialog isOpen={isOpen} parentElement={parentElement} dialogProps={{ 'aria-modal': false }}>
+                        <button type="button">Inside</button>
+                    </Dialog>
+                </>
+            );
+            const { rerender } = render(renderDialog(true));
+            expect(screen.getByRole('button', { name: 'Inside' })).toHaveFocus();
+
+            rerender(renderDialog(false));
+            expect(screen.getByRole('button', { name: 'Parent' })).toHaveFocus();
+        });
+
+        it('should keep the focus on the page on close with the focus outside', () => {
+            const parentElement = createRef<HTMLButtonElement>();
+            const renderDialog = (isOpen: boolean) => (
+                <>
+                    <button type="button" ref={parentElement}>
+                        Parent
+                    </button>
+                    <button type="button">Page</button>
+                    <Dialog isOpen={isOpen} parentElement={parentElement} dialogProps={{ 'aria-modal': false }}>
+                        <button type="button">Inside</button>
+                    </Dialog>
+                </>
+            );
+            const { rerender } = render(renderDialog(true));
+            screen.getByRole('button', { name: 'Page' }).focus();
+
+            rerender(renderDialog(false));
+            expect(screen.getByRole('button', { name: 'Page' })).toHaveFocus();
+        });
+
         it('should not trap the focus', async () => {
             setupNonModal();
             await userEvent.tab();

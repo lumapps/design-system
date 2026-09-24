@@ -1,4 +1,4 @@
-import { cleanup, fireEvent, render, screen } from '@testing-library/vue';
+import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/vue';
 import userEvent from '@testing-library/user-event';
 import { defineComponent, nextTick, ref } from 'vue';
 import { vi } from 'vitest';
@@ -227,6 +227,71 @@ describe('<Dialog />', () => {
                 // So the escape still closes the dialog.
                 await userEvent.keyboard('[Escape]');
                 expect(emitted('close')).toBeTruthy();
+            });
+
+            it('should move the focus back to the `parentElement` on close with the focus inside', async () => {
+                const isOpen = ref(true);
+                const Wrapper = defineComponent({
+                    setup() {
+                        const parentElement = ref<HTMLButtonElement>();
+                        return () => (
+                            <>
+                                <button type="button" ref={parentElement}>
+                                    Parent
+                                </button>
+                                <Dialog
+                                    isOpen={isOpen.value}
+                                    disableBodyScroll={false}
+                                    parentElement={parentElement.value}
+                                    dialogProps={{ 'aria-modal': false }}
+                                >
+                                    <button type="button">Inside</button>
+                                </Dialog>
+                            </>
+                        );
+                    },
+                });
+                render(Wrapper);
+                await nextTick();
+                expect(screen.getByRole('button', { name: 'Inside' })).toHaveFocus();
+
+                isOpen.value = false;
+                await waitFor(() => expect(screen.getByRole('button', { name: 'Parent' })).toHaveFocus());
+            });
+
+            it('should keep the focus on the page on close with the focus outside', async () => {
+                const isOpen = ref(true);
+                const Wrapper = defineComponent({
+                    setup() {
+                        const parentElement = ref<HTMLButtonElement>();
+                        return () => (
+                            <>
+                                <button type="button" ref={parentElement}>
+                                    Parent
+                                </button>
+                                <button type="button">Page</button>
+                                <Dialog
+                                    isOpen={isOpen.value}
+                                    disableBodyScroll={false}
+                                    parentElement={parentElement.value}
+                                    dialogProps={{ 'aria-modal': false }}
+                                >
+                                    <button type="button">Inside</button>
+                                </Dialog>
+                            </>
+                        );
+                    },
+                });
+                render(Wrapper);
+                await nextTick();
+                screen.getByRole('button', { name: 'Page' }).focus();
+
+                isOpen.value = false;
+                // The focus restore is deferred (`setTimeout`): wait for it before the check.
+                await new Promise((resolve) => {
+                    setTimeout(resolve, 10);
+                });
+                expect(screen.getByRole('button', { name: 'Page' })).toHaveFocus();
             });
 
             it('should not trap the focus', async () => {
