@@ -30,6 +30,12 @@
         opacity: 0;
     }
 
+    // The root and the container cover more than the visible dialog: let clicks go through to the page, only the
+    // visible dialog (the wrapper) catches them.
+    &--is-non-modal {
+        pointer-events: none;
+    }
+
     &__overlay {
         position: absolute;
         top: 0;
@@ -81,6 +87,10 @@
         display: flex;
         flex-direction: column;
         background-color: lumx-color-variant("light", "N");
+
+        #{$self}--is-non-modal & {
+            pointer-events: auto;
+        }
 
         @include mq($until: desktop) {
             min-height: 100%;

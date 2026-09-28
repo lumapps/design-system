@@ -1,8 +1,9 @@
-import { Comment, computed, defineComponent, ref, type Ref } from 'vue';
+import { Comment, computed, defineComponent, ref, watch, type Ref } from 'vue';
 import { useIntersectionObserver } from '@vueuse/core';
 
 import {
     DialogShell,
+    isDialogModal,
     type BaseDialogProps,
     type DialogSizes,
     COMPONENT_NAME,
@@ -10,6 +11,7 @@ import {
 } from '@lumx/core/js/components/Dialog';
 import { DIALOG_TRANSITION_DURATION } from '@lumx/core/js/constants';
 import type { GenericProps, HasCloseMode, JSXElement } from '@lumx/core/js/types';
+import { isFocusWithin, setupInitialFocus } from '@lumx/core/js/utils/focus';
 
 import { Portal } from '../../utils/Portal/Portal';
 import { ClickAwayProvider } from '../../utils/ClickAway/ClickAwayProvider';
@@ -37,7 +39,12 @@ export type DialogProps = Pick<BaseDialogProps, 'forceFooterDivider' | 'forceHea
         size?: DialogSizes;
         /** Z-axis position. */
         zIndex?: number;
-        /** Additional props for the dialog container element. */
+        /**
+         * Additional props for the dialog container element.
+         * Set `'aria-modal': false` to make the dialog non-modal: the page stays usable (no focus trap, no overlay,
+         * no close on click away, rendered in place instead of in a portal) and escape only closes the dialog when the
+         * focus is inside.
+         */
         dialogProps?: GenericProps;
         /** Reference to the parent element that triggered modal opening (gets focus back on close). */
         parentElement?: HTMLElement;
@@ -51,7 +58,7 @@ export type DialogProps = Pick<BaseDialogProps, 'forceFooterDivider' | 'forceHea
         preventCloseOnEscape?: boolean;
         /** Whether to keep the dialog open on clickaway. */
         preventCloseOnClick?: boolean;
-        /** Whether to disable body scroll when the dialog is open. */
+        /** Whether to disable body scroll when the dialog is open (ignored on a non-modal dialog: the page stays usable). */
         disableBodyScroll?: boolean;
     };
 
@@ -101,22 +108,41 @@ const Dialog = defineComponent(
             hasBottomIntersection.value = entry ? !entry.isIntersecting : null;
         });
 
-        // Escape key
+        const isModal = computed(() => isDialogModal(props.dialogProps));
+
+        // Close on escape (a tooltip or popover opened inside registers after the dialog and so gets the escape first).
+        // Non-modal: the page stays usable, so only close when the focus is inside the dialog.
         const shouldPreventCloseOnEscape = computed(() => props.preventAutoClose || props.preventCloseOnEscape);
         const handleClose = () => emit('close');
+        const onEscape = () => {
+            if (isModal.value || isFocusWithin(wrapperRef.value)) handleClose();
+        };
         useCallbackOnEscape(
-            handleClose,
+            onEscape,
             computed(() => Boolean(props.isOpen && !shouldPreventCloseOnEscape.value)),
         );
 
         // Focus trap inside the dialog wrapper
         const focusZoneElement = computed(() => {
-            if (!props.isOpen) return false as const;
+            if (!isModal.value || !props.isOpen) return false as const;
             return wrapperRef.value || false;
         });
         useFocusTrap(
             focusZoneElement,
             computed(() => props.focusElement),
+        );
+
+        // Non-modal: without the focus trap, move the focus into the dialog on open ourselves.
+        watch(
+            () => Boolean(props.isOpen && wrapperRef.value),
+            (isReady, _, onCleanup) => {
+                const wrapper = wrapperRef.value;
+                if (isModal.value || !isReady || !wrapper) return;
+                const controller = new AbortController();
+                setupInitialFocus({ focusZoneElement: wrapper, focusElement: props.focusElement }, controller.signal);
+                onCleanup(() => controller.abort());
+            },
+            { flush: 'post' },
         );
 
         // Restore focus to parentElement when dialog closes
@@ -128,8 +154,10 @@ const Dialog = defineComponent(
             computed(() => Boolean(props.isOpen)),
         );
 
-        // Disable body scroll when dialog is open
-        useDisableBodyScroll(computed(() => props.disableBodyScroll !== false && Boolean(props.isOpen)));
+        // Disable body scroll when dialog is open (not on a non-modal dialog: the page stays usable)
+        useDisableBodyScroll(
+            computed(() => isModal.value && props.disableBodyScroll !== false && Boolean(props.isOpen)),
+        );
 
         // Track animation state: keeps dialog mounted during close animation
         const isVisible = useTransitionVisibility(
@@ -178,6 +206,7 @@ const Dialog = defineComponent(
                 isVisible: isVisible.value,
                 size: props.size ?? DEFAULT_PROPS.size,
                 zIndex: props.zIndex,
+                isModal: isModal.value,
                 ref: rootRef,
                 children: (
                     <DialogContent

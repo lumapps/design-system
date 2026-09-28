@@ -1,4 +1,4 @@
-import { cleanup, fireEvent, render, screen } from '@testing-library/vue';
+import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/vue';
 import userEvent from '@testing-library/user-event';
 import { defineComponent, nextTick, ref } from 'vue';
 import { vi } from 'vitest';
@@ -10,6 +10,8 @@ import { commonTestsSuiteVTL, type SetupRenderOptions } from '@lumx/vue/testing'
 import { queryByClassName } from '@lumx/core/testing/queries';
 
 import { Dialog, DialogHeading } from '.';
+import { Button } from '../button';
+import { Tooltip } from '../tooltip';
 
 // Clean up teleported dialog elements between tests
 afterEach(() => {
@@ -157,6 +159,200 @@ describe('<Dialog />', () => {
                 fireEvent.mouseDown(content!);
                 fireEvent.click(content!);
                 expect(emitted('close')).toBeFalsy();
+            });
+        });
+
+        describe('Non-modal (`aria-modal` false)', () => {
+            const setupNonModal = (renderContent = () => <button type="button">Inside</button>) =>
+                render(
+                    defineComponent({
+                        emits: ['close'],
+                        setup(_, { emit }) {
+                            return () => (
+                                <>
+                                    <button type="button">Outside</button>
+                                    <Dialog
+                                        isOpen
+                                        disableBodyScroll={false}
+                                        dialogProps={{ 'aria-modal': false }}
+                                        onClose={() => emit('close')}
+                                    >
+                                        {renderContent()}
+                                    </Dialog>
+                                </>
+                            );
+                        },
+                    }),
+                );
+
+            it('should move the focus into the dialog on open', async () => {
+                setupNonModal();
+                await nextTick();
+                expect(screen.getByRole('button', { name: 'Inside' })).toHaveFocus();
+            });
+
+            it('should move the focus to the `focusElement` on open', async () => {
+                const Wrapper = defineComponent({
+                    props: { isOpen: Boolean },
+                    setup(wrapperProps) {
+                        const second = ref<HTMLButtonElement>();
+                        return () => (
+                            <Dialog
+                                isOpen={wrapperProps.isOpen}
+                                // Keep the content mounted while closed, so the `focusElement` ref is set on open.
+                                closeMode="hide"
+                                disableBodyScroll={false}
+                                dialogProps={{ 'aria-modal': false }}
+                                focusElement={second.value}
+                            >
+                                <button type="button">First</button>
+                                <button type="button" ref={second}>
+                                    Second
+                                </button>
+                            </Dialog>
+                        );
+                    },
+                });
+                const { rerender } = render(Wrapper, { props: { isOpen: false } });
+                await nextTick();
+                await rerender({ isOpen: true });
+                await nextTick();
+                expect(screen.getByRole('button', { name: 'Second', hidden: true })).toHaveFocus();
+            });
+
+            it('should move the focus to the dialog itself when it has no focusable element', async () => {
+                const { emitted } = setupNonModal(() => <span>Text only</span>);
+                await nextTick();
+                expect(queryByClassName(document.body, `${CLASSNAME}__wrapper`)).toHaveFocus();
+                // So the escape still closes the dialog.
+                await userEvent.keyboard('[Escape]');
+                expect(emitted('close')).toBeTruthy();
+            });
+
+            it('should move the focus back to the `parentElement` on close with the focus inside', async () => {
+                const isOpen = ref(true);
+                const Wrapper = defineComponent({
+                    setup() {
+                        const parentElement = ref<HTMLButtonElement>();
+                        return () => (
+                            <>
+                                <button type="button" ref={parentElement}>
+                                    Parent
+                                </button>
+                                <Dialog
+                                    isOpen={isOpen.value}
+                                    disableBodyScroll={false}
+                                    parentElement={parentElement.value}
+                                    dialogProps={{ 'aria-modal': false }}
+                                >
+                                    <button type="button">Inside</button>
+                                </Dialog>
+                            </>
+                        );
+                    },
+                });
+                render(Wrapper);
+                await nextTick();
+                expect(screen.getByRole('button', { name: 'Inside' })).toHaveFocus();
+
+                isOpen.value = false;
+                await waitFor(() => expect(screen.getByRole('button', { name: 'Parent' })).toHaveFocus());
+            });
+
+            it('should keep the focus on the page on close with the focus outside', async () => {
+                const isOpen = ref(true);
+                const Wrapper = defineComponent({
+                    setup() {
+                        const parentElement = ref<HTMLButtonElement>();
+                        return () => (
+                            <>
+                                <button type="button" ref={parentElement}>
+                                    Parent
+                                </button>
+                                <button type="button">Page</button>
+                                <Dialog
+                                    isOpen={isOpen.value}
+                                    disableBodyScroll={false}
+                                    parentElement={parentElement.value}
+                                    dialogProps={{ 'aria-modal': false }}
+                                >
+                                    <button type="button">Inside</button>
+                                </Dialog>
+                            </>
+                        );
+                    },
+                });
+                render(Wrapper);
+                await nextTick();
+                screen.getByRole('button', { name: 'Page' }).focus();
+
+                isOpen.value = false;
+                // The focus restore is deferred (`setTimeout`): wait for it before the check.
+                await new Promise((resolve) => {
+                    setTimeout(resolve, 10);
+                });
+                expect(screen.getByRole('button', { name: 'Page' })).toHaveFocus();
+            });
+
+            it('should not trap the focus', async () => {
+                setupNonModal();
+                await nextTick();
+                await userEvent.tab();
+                expect(screen.getByRole('button', { name: 'Inside' })).not.toHaveFocus();
+            });
+
+            it('should emit close on Escape with the focus inside', async () => {
+                const { emitted } = setupNonModal();
+                await nextTick();
+                await userEvent.keyboard('[Escape]');
+                expect(emitted('close')).toBeTruthy();
+            });
+
+            it('should not emit close on Escape with the focus outside', async () => {
+                const { emitted } = setupNonModal();
+                await nextTick();
+                screen.getByRole('button', { name: 'Outside' }).focus();
+                await userEvent.keyboard('[Escape]');
+                expect(emitted('close')).toBeFalsy();
+            });
+
+            it('should not emit close when clicking outside', async () => {
+                const { emitted } = setupNonModal();
+                await nextTick();
+                await userEvent.click(screen.getByRole('button', { name: 'Outside' }));
+                expect(emitted('close')).toBeFalsy();
+            });
+
+            it('should not disable the body scroll', async () => {
+                // Modal dialog: the body scroll is disabled.
+                const modal = render(Dialog, { props: { isOpen: false } });
+                await modal.rerender({ isOpen: true });
+                expect(document.body.style.overflow).toBe('hidden');
+                modal.unmount();
+                expect(document.body.style.overflow).not.toBe('hidden');
+
+                const nonModal = render(Dialog, { props: { isOpen: false, dialogProps: { 'aria-modal': false } } });
+                await nonModal.rerender({ isOpen: true, dialogProps: { 'aria-modal': false } });
+                expect(document.body.style.overflow).not.toBe('hidden');
+            });
+
+            it('should close a tooltip inside on the first Escape and the dialog on the second', async () => {
+                const { emitted } = setupNonModal(() => (
+                    <Tooltip label="Tooltip label">
+                        <Button>Anchor</Button>
+                    </Tooltip>
+                ));
+                await nextTick();
+                await userEvent.hover(screen.getByRole('button', { name: 'Anchor' }));
+                expect(await screen.findByRole('tooltip')).toBeInTheDocument();
+
+                await userEvent.keyboard('[Escape]');
+                await nextTick();
+                expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
+                expect(emitted('close')).toBeFalsy();
+
+                await userEvent.keyboard('[Escape]');
+                expect(emitted('close')).toHaveLength(1);
             });
         });
 
