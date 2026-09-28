@@ -270,13 +270,16 @@ export function setupCombobox(
                     break;
 
                 case 'Escape':
-                    // 2-tier: close if open, otherwise clear value.
+                    // 2-tier: close if open, otherwise clear the input value.
+                    // When there is nothing to close or clear, let Escape propagate
+                    // (ex: so a surrounding dialog can close).
                     if (handle.isOpen) {
                         handle.setIsOpen(false);
-                    } else {
+                        flag = true;
+                    } else if (triggerEl.tagName === 'INPUT' && triggerEl.value) {
                         handle.select(null);
+                        flag = true;
                     }
-                    flag = true;
                     break;
 
                 case 'PageUp':

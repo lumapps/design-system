@@ -100,8 +100,11 @@ export function setupComboboxButton(button: HTMLButtonElement, callbacks: Combob
                     // Close if open; never clear selection (button-mode has no text input).
                     if (combobox.isOpen) {
                         combobox.setIsOpen(false);
+                        return true;
                     }
-                    return true;
+                    // Closed: let Escape propagate (ex: so a surrounding dialog can close).
+                    // The base handler does not clear the selection on a button trigger.
+                    return false;
 
                 default:
                     // Printable characters → typeahead.

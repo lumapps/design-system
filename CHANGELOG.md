@@ -16,6 +16,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `@lumx/vue`:
     -   `SelectTextField`, `SelectButton`: fix `change` event firing twice on option selection.
+-   `@lumx/react`, `@lumx/vue`:
+    -   `Combobox`: `Escape` is no longer stopped when the combobox has nothing to close or clear, so it can reach a surrounding component (ex: close a dialog).
 
 ## [4.24.0][] - 2026-09-23
 

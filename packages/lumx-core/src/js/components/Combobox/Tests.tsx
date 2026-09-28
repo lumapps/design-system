@@ -920,6 +920,32 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
             await userEvent.keyboard('{Escape}');
             expect(input.value).toBe('');
         });
+
+        it('should let Escape propagate when closed and empty', async () => {
+            renderWithState(t.inputTemplate);
+            const input = screen.getByRole<HTMLInputElement>('combobox');
+            const onParentKeydown = vi.fn();
+            document.body.addEventListener('keydown', onParentKeydown);
+
+            await userEvent.click(input);
+            await waitFor(() => {
+                expect(input).toHaveAttribute('aria-expanded', 'true');
+            });
+
+            // Escape closes the listbox: consumed.
+            await userEvent.keyboard('{Escape}');
+            await waitFor(() => {
+                expect(input).toHaveAttribute('aria-expanded', 'false');
+            });
+            expect(onParentKeydown).not.toHaveBeenCalled();
+
+            // Escape with nothing to close or clear: propagated.
+            await userEvent.keyboard('{Escape}');
+            expect(onParentKeydown).toHaveBeenCalledTimes(1);
+            expect(onParentKeydown.mock.calls[0][0].defaultPrevented).toBe(false);
+
+            document.body.removeEventListener('keydown', onParentKeydown);
+        });
     });
 
     // ───────────────────────────────────────────────────────────────
@@ -1498,6 +1524,33 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
             });
 
             expect(button.textContent).toBe('Select a fruit');
+        });
+
+        it('should let Escape propagate when closed', async () => {
+            renderWithState(t.buttonTemplate, { value: '' }, BUTTON_STATE);
+            const button = screen.getByTestId('combobox-button');
+            const onParentKeydown = vi.fn();
+            document.body.addEventListener('keydown', onParentKeydown);
+            button.focus();
+
+            await userEvent.keyboard('{End}');
+            await waitFor(() => {
+                expect(button).toHaveAttribute('aria-expanded', 'true');
+            });
+
+            // Escape closes the listbox: consumed.
+            await userEvent.keyboard('{Escape}');
+            await waitFor(() => {
+                expect(button).toHaveAttribute('aria-expanded', 'false');
+            });
+            expect(onParentKeydown).not.toHaveBeenCalled();
+
+            // Escape with nothing to close: propagated.
+            await userEvent.keyboard('{Escape}');
+            expect(onParentKeydown).toHaveBeenCalledTimes(1);
+            expect(onParentKeydown.mock.calls[0][0].defaultPrevented).toBe(false);
+
+            document.body.removeEventListener('keydown', onParentKeydown);
         });
 
         it('should toggle on click', async () => {
