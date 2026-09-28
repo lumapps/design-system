@@ -55,7 +55,6 @@ const ComboboxButton = defineComponent(
                 setHandle(
                     setupComboboxButton(button as HTMLButtonElement, {
                         onSelect(option) {
-                            props.onSelect?.(option);
                             emit('select', option);
                         },
                     }),
