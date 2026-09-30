@@ -3,7 +3,7 @@
    ========================================================================== */
 
 .lumx-action-area {
-    position: relative;
+    @include lumx-action-area;
 }
 
 /* Action element
