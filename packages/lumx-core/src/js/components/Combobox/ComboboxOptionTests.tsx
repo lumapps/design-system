@@ -1,5 +1,5 @@
 import userEvent from '@testing-library/user-event';
-import { screen } from '@testing-library/dom';
+import { screen, waitFor } from '@testing-library/dom';
 import { CLASSNAME as COMBOBOX_OPTION_CLASSNAME } from './ComboboxOption';
 import { getByClassName, queryByClassName } from '../../../testing/queries';
 import { ComboboxNamespace } from './Tests';
@@ -176,6 +176,56 @@ export default function comboboxOptionTests({ Combobox, render }: ComboboxOption
             it('should render a tooltip when tooltipProps is provided (forceOpen)', async () => {
                 await setup({ tooltipProps: { label: 'Extra info', forceOpen: true } });
                 expect(screen.getByRole('tooltip')).toBeInTheDocument();
+            });
+        });
+
+        // ── Tooltip on active descendant ─────────────────────────────────
+
+        describe('Tooltip on active descendant', () => {
+            const setupWithTooltips = async () => {
+                render(() => (
+                    <Combobox.Provider>
+                        <Combobox.Input
+                            placeholder="Pick a fruit…"
+                            onChange={() => {}}
+                            toggleButtonProps={{ label: 'Fruits' }}
+                        />
+                        <Combobox.List aria-label="Fruits">
+                            {['Apple', 'Banana'].map((fruit) => (
+                                <Combobox.Option key={fruit} value={fruit} tooltipProps={{ label: `${fruit} info` }}>
+                                    {fruit}
+                                </Combobox.Option>
+                            ))}
+                        </Combobox.List>
+                    </Combobox.Provider>
+                ));
+                await userEvent.click(screen.getByRole('combobox'));
+                await screen.findAllByRole('option');
+            };
+
+            it('should not show any tooltip when no option is active', async () => {
+                await setupWithTooltips();
+                expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
+            });
+
+            it('should show the tooltip of the option highlighted with the keyboard', async () => {
+                await setupWithTooltips();
+                await userEvent.keyboard('{ArrowDown}');
+
+                expect(await screen.findByRole('tooltip', { name: 'Apple info' })).toBeInTheDocument();
+                expect(screen.queryByRole('tooltip', { name: 'Banana info' })).not.toBeInTheDocument();
+            });
+
+            it('should move the tooltip to the next highlighted option', async () => {
+                await setupWithTooltips();
+                await userEvent.keyboard('{ArrowDown}');
+                await screen.findByRole('tooltip', { name: 'Apple info' });
+                await userEvent.keyboard('{ArrowDown}');
+
+                expect(await screen.findByRole('tooltip', { name: 'Banana info' })).toBeInTheDocument();
+                await waitFor(() =>
+                    expect(screen.queryByRole('tooltip', { name: 'Apple info' })).not.toBeInTheDocument(),
+                );
             });
         });
 

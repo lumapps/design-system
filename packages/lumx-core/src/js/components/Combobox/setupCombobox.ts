@@ -8,7 +8,10 @@ import type {
     OnTriggerAttach,
     OptionRegistration,
     SectionRegistration,
+    OptionActiveEvent,
+    SubscriptionCallback,
 } from './types';
+import { isOptionActiveEvent, OPTION_ACTIVE_EVENT_PREFIX, optionActiveEvent } from './constants';
 
 /** Options for configuring the shared combobox behavior. */
 interface ComboboxOptions {
@@ -77,6 +80,9 @@ export function setupCombobox(
         loadingAnnouncement: new Set(),
     };
 
+    /** Per-option subscribers, keyed by optionActive:<id>. Sets are created on demand. */
+    const optionActiveSubscribers = new Map<OptionActiveEvent, Set<(isActive: boolean) => void>>();
+
     /**
      * Last value dispatched for each event. Kept in sync so pull-based subscribers — React's
      * `useSyncExternalStore` via {@link ComboboxHandle.getSnapshot} — can read the current value
@@ -88,8 +94,16 @@ export function setupCombobox(
 
     /** Notify all subscribers for a given event. */
     function notify<K extends keyof ComboboxEventMap>(event: K, value: ComboboxEventMap[K]) {
+        const previous = latestValues.activeDescendantChange ?? null;
+
         latestValues[event] = value;
         subscribers[event].forEach((cb) => cb(value));
+
+        // Fan out to the 2 affected options only: first the previous one, then the new one.
+        if (event === 'activeDescendantChange' && previous !== value) {
+            if (previous) optionActiveSubscribers.get(optionActiveEvent(previous))?.forEach((cb) => cb(false));
+            if (value) optionActiveSubscribers.get(optionActiveEvent(value as string))?.forEach((cb) => cb(true));
+        }
     }
 
     /** Count visible (non-filtered) options. */
@@ -518,11 +532,23 @@ export function setupCombobox(
             };
         },
 
-        subscribe<K extends keyof ComboboxEventMap>(
-            event: K,
-            callback: (value: ComboboxEventMap[K]) => void,
-        ): () => void {
-            subscribers[event].add(callback);
+        subscribe<K extends keyof ComboboxEventMap>(event: K, callback: SubscriptionCallback<K>): () => void {
+            if (isOptionActiveEvent(event)) {
+                const optionCallback = callback as SubscriptionCallback<OptionActiveEvent>;
+                const set = optionActiveSubscribers.get(event) ?? new Set();
+                optionActiveSubscribers.set(event, set);
+                set.add(optionCallback);
+                // Replay (same as open): Vue subscribes after mount and can miss the activation.
+                if (latestValues.activeDescendantChange === event.slice(OPTION_ACTIVE_EVENT_PREFIX.length))
+                    optionCallback(true);
+                return () => {
+                    set.delete(optionCallback);
+                    if (!set.size) optionActiveSubscribers.delete(event);
+                };
+            }
+
+            const subs = subscribers[event] as Set<SubscriptionCallback<K>>;
+            subs.add(callback);
             // Replay current loading state to late subscribers so that framework wrappers
             // that subscribe after initial mount (e.g. async Vue watchers) don't miss the
             // initial events fired during mount.
@@ -535,11 +561,16 @@ export function setupCombobox(
 
             // Cleanup function
             return () => {
-                subscribers[event].delete(callback);
+                subs.delete(callback);
             };
         },
 
         getSnapshot<K extends keyof ComboboxEventMap>(event: K): ComboboxEventMap[K] | undefined {
+            if (isOptionActiveEvent(event)) {
+                // Derived value. No per-id value is stored.
+                return (latestValues.activeDescendantChange ===
+                    event.slice(OPTION_ACTIVE_EVENT_PREFIX.length)) as ComboboxEventMap[K];
+            }
             return latestValues[event];
         },
 
@@ -560,6 +591,7 @@ export function setupCombobox(
             skeletonCount = 0;
             clearTimeout(loadingTimer);
             announcementSent = false;
+            optionActiveSubscribers.clear();
             // Clear all subscribers
             for (const set of Object.values(subscribers)) {
                 set.clear();

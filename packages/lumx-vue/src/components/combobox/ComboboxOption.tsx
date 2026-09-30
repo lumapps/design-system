@@ -18,6 +18,8 @@ import type { TooltipProps } from '../tooltip/Tooltip';
 import { useComboboxContext } from './context/ComboboxContext';
 import { useComboboxListContext } from './context/ComboboxListContext';
 import { provideComboboxOptionContext } from './context/ComboboxOptionContext';
+import { useComboboxEvent } from './context/useComboboxEvent';
+import { optionActiveEvent } from '@lumx/core/js/components/Combobox/constants';
 
 export type ComboboxOptionProps = VueToJSXProps<
     UIProps,
@@ -50,6 +52,9 @@ const ComboboxOption = defineComponent(
         const descriptionId = useId();
         const optionRef = ref<HTMLElement | null>(null);
         const isFiltered = ref(false);
+
+        // Force the tooltip open while the option is the active descendant (keyboard highlight).
+        const isActive = useComboboxEvent(optionActiveEvent(optionId), false);
 
         // Provide option context to children (e.g. OptionMoreInfo)
         provideComboboxOptionContext({ optionId });
@@ -93,6 +98,7 @@ const ComboboxOption = defineComponent(
             const before = getSlotOrAttr('before');
             const after = getSlotOrAttr('after');
             const children = slots.default?.() as JSXElement;
+            const { tooltipProps } = props;
 
             return UI(
                 {
@@ -110,7 +116,10 @@ const ComboboxOption = defineComponent(
                     actionProps: props.actionProps,
                     id: optionId,
                     descriptionId,
-                    tooltipProps: props.tooltipProps as any,
+                    tooltipProps: (tooltipProps && {
+                        ...tooltipProps,
+                        forceOpen: tooltipProps.forceOpen || isActive.value,
+                    }) as any,
                     className: className.value,
                 },
                 { Tooltip },

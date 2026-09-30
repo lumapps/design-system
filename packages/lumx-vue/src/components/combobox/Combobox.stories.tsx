@@ -33,3 +33,4 @@ export const ComboboxWithLoading = { ...stories.ComboboxWithLoading };
 export const ComboboxWithLoadMore = { ...stories.ComboboxWithLoadMore };
 export const ComboboxWithSectionLoading = { ...stories.ComboboxWithSectionLoading };
 export const ComboboxWithAvatarLoading = { ...stories.ComboboxWithAvatarLoading };
+export const ComboboxWithOptionTooltips = { ...stories.ComboboxWithOptionTooltips };
