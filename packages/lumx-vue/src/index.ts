@@ -47,5 +47,6 @@ export * from './components/toolbar';
 export * from './components/tooltip';
 export * from './components/user-block';
 export * from './components/select-button';
+export * from './components/select-list';
 export * from './components/select-text-field';
 export * from './components/time-picker-field';
