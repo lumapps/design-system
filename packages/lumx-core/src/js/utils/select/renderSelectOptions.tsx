@@ -1,14 +1,14 @@
 import { getWithSelector, groupBySelector } from '../selectors';
 import type { JSXElement } from '../../types';
-import type { BaseSelectComponents, RenderSelectOptionsProps } from './types';
+import type { RenderSelectOptionsComponents, RenderSelectOptionsProps } from './types';
 
 /**
- * Render options as ListboxOption elements.
+ * Render options as ListboxOption elements (shared by the combobox and the standalone listbox).
  * Framework-specific components are passed as a second argument.
  */
 export function renderSelectOptions<O>(
     props: RenderSelectOptionsProps<O>,
-    components: BaseSelectComponents,
+    components: RenderSelectOptionsComponents,
 ): JSXElement {
     const {
         options,
