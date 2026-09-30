@@ -18,6 +18,9 @@ export interface OptionRegistration {
     lastFiltered: boolean;
 }
 
+/** Event name for the active state of one option. */
+export type OptionActiveEvent = `optionActive:${string}`;
+
 /** Map of combobox event names to their payload types. */
 export interface ComboboxEventMap {
     /** Fired when the combobox open state changes. Payload: whether the combobox is open. */
@@ -39,7 +42,18 @@ export interface ComboboxEventMap {
      * Used to control the loading message text in the live region (ComboboxState).
      */
     loadingAnnouncement: boolean;
+    /**
+     * Fired only when this option becomes the active descendant (true)
+     * or stops being the active descendant (false).
+     * Build the key with optionActiveEvent(optionId).
+     */
+    [event: OptionActiveEvent]: boolean;
 }
+
+/** Callback provided in events subscriptions */
+export type SubscriptionCallback<T extends keyof ComboboxEventMap = keyof ComboboxEventMap> = (
+    value: ComboboxEventMap[T],
+) => void;
 
 /** Callbacks provided by the consumer (React/Vue) to react to combobox state changes. */
 export interface ComboboxCallbacks {
@@ -95,7 +109,7 @@ export interface ComboboxHandle {
     destroy(): void;
 
     /** Subscribe to a combobox event. Returns an unsubscribe function. */
-    subscribe<K extends keyof ComboboxEventMap>(event: K, callback: (value: ComboboxEventMap[K]) => void): () => void;
+    subscribe<K extends keyof ComboboxEventMap>(event: K, callback: SubscriptionCallback<K>): () => void;
 
     /**
      * Read the last dispatched value of an event synchronously, for pull-based subscribers such as

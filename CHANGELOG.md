@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   `@lumx/react`, `@lumx/vue`:
+    -   `Combobox`: show the option tooltip when the option is highlighted with the keyboard (active descendant).
+    -   `Combobox`: keep the popover open and the option tooltip visible on touch long-press.
+
 ## [4.25.0][] - 2026-09-28
 
 ### Added

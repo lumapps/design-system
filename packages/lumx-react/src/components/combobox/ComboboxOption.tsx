@@ -13,10 +13,12 @@ import {
 } from '@lumx/core/js/components/Combobox/ComboboxOption';
 import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 import { useId } from '@lumx/react/hooks/useId';
+import { optionActiveEvent } from '@lumx/core/js/components/Combobox/constants';
 import { Tooltip, TooltipProps } from '../tooltip';
 import { useComboboxContext } from './context/ComboboxContext';
 import { useComboboxListContext } from './context/ComboboxListContext';
 import { ComboboxOptionContext } from './context/ComboboxOptionContext';
+import { useComboboxEvent } from './context/useComboboxEvent';
 
 /**
  * Props forwarded to the inner action element (button or link).
@@ -85,6 +87,9 @@ export const ComboboxOption = forwardRef<ComboboxOptionProps, HTMLLIElement>((pr
     const mergedRef = useMergeRefs(ref, internalRef);
     const [isFiltered, setIsFiltered] = useState(false);
 
+    // Force the tooltip open while the option is the active descendant (keyboard highlight).
+    const isActive = useComboboxEvent(optionActiveEvent(optionId), false);
+
     useEffect(() => {
         const element = internalRef.current;
         if (!element || !handle) return undefined;
@@ -122,7 +127,7 @@ export const ComboboxOption = forwardRef<ComboboxOptionProps, HTMLLIElement>((pr
             handleClick: onClick,
             id: optionId,
             descriptionId,
-            tooltipProps,
+            tooltipProps: tooltipProps && { ...tooltipProps, forceOpen: tooltipProps.forceOpen || isActive },
         },
         { Tooltip },
     );
