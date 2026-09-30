@@ -13,7 +13,8 @@ import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 import { IconButton, IconButtonProps } from '../button';
 import { TextField, TextFieldProps } from '../text-field';
-import { useComboboxEvent } from './context/useComboboxEvent';
+import { useListboxEvent } from '../listbox/context/useListboxEvent';
+import { useListboxContext } from '../listbox/context/ListboxContext';
 import { useComboboxContext } from './context/ComboboxContext';
 import { useComboboxOpen } from './context/useComboboxOpen';
 
@@ -50,8 +51,9 @@ export const ComboboxInput = forwardRef<ComboboxInputProps, HTMLDivElement>((pro
         selectionMode,
         ...otherProps
     } = props;
-    const state = useComboboxEvent('optionsChange', { optionsLength: 0 });
-    const isLoading = useComboboxEvent('loadingChange', false);
+    const { list } = useListboxContext();
+    const state = useListboxEvent(list, 'optionsChange', { optionsLength: 0 });
+    const isLoading = useListboxEvent(list, 'loadingChange', false);
     const internalInputRef = useRef<HTMLInputElement>(null);
     const mergedInputRef = useMergeRefs(externalInputRef, internalInputRef);
 

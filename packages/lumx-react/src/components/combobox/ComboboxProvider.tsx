@@ -4,6 +4,7 @@ import type { ComboboxHandle } from '@lumx/core/js/components/Combobox/types';
 import { useId } from '@lumx/react/hooks/useId';
 
 import { ComboboxContext } from './context/ComboboxContext';
+import { ListboxContext, ListboxContextValue } from '../listbox/context/ListboxContext';
 
 /**
  * Defines the props of the component.
@@ -30,18 +31,27 @@ export function ComboboxProvider(props: ComboboxProviderProps) {
     const anchorRef = useRef<HTMLElement>(null);
     const [handle, setHandle] = useState<ComboboxHandle | null>(null);
     const contextValue = useMemo(() => ({ handle, setHandle, listboxId, anchorRef }), [handle, listboxId]);
+    // The listbox of the combobox: shared with the list, the options and the state through the listbox context.
+    const listboxContextValue = useMemo<ListboxContextValue>(
+        () => ({ list: handle?.list ?? null, listboxId, type: 'listbox' }),
+        [handle, listboxId],
+    );
 
-    // Subscribe to the combobox open event and forward to the onOpen callback.
+    // Subscribe to the open event and forward to the onOpen callback.
     const onOpenRef = useRef(onOpen);
     onOpenRef.current = onOpen;
     useEffect(() => {
         if (!handle) return undefined;
-        return handle.subscribe('open', (isOpen) => {
+        return handle.list.subscribe('open', (isOpen) => {
             onOpenRef.current?.(isOpen);
         });
     }, [handle]);
 
-    return <ComboboxContext.Provider value={contextValue}>{children}</ComboboxContext.Provider>;
+    return (
+        <ComboboxContext.Provider value={contextValue}>
+            <ListboxContext.Provider value={listboxContextValue}>{children}</ListboxContext.Provider>
+        </ComboboxContext.Provider>
+    );
 }
 
 ComboboxProvider.displayName = 'Combobox.Provider';

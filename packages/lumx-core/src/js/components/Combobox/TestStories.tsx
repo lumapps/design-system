@@ -10,7 +10,7 @@
 import { expect, screen, userEvent, within, waitFor } from 'storybook/test';
 import type { SetupStoriesOptions } from '@lumx/core/stories/types';
 import { queryAllByClassName } from '../../../testing/queries';
-import { CLASSNAME as COMBOBOX_OPTION_MORE_INFO_CLASSNAME } from './ComboboxOptionMoreInfo';
+import { CLASSNAME as COMBOBOX_OPTION_MORE_INFO_CLASSNAME } from '../Listbox/ListboxOptionMoreInfo';
 import { createTemplates, getActiveOption, type ComboboxNamespace } from './Tests';
 
 // ─── Fixtures ────────────────────────────────────────────────────
