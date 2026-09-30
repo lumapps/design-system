@@ -51,6 +51,7 @@ export * from './components/progress-tracker';
 export * from './components/radio-button';
 export * from './components/select';
 export * from './components/select-button';
+export * from './components/select-list';
 export * from './components/select-text-field';
 export * from './components/side-navigation';
 export * from './components/skeleton';
