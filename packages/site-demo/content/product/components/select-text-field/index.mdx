@@ -113,6 +113,7 @@ The `filter` prop controls how option filtering behaves:
 - In multiple selection mode, also provide `chipGroupLabel` (accessible label for the chip group) and `chipRemoveLabel` (appended to each chip's aria-label to indicate it can be removed, e.g. "Apple - Remove").
 - Provide `loadingMessage` so screen readers announce when options are being loaded (announced via a live region after a short debounce).
 - Provide `nbOptionMessage` to announce the number of available options when the list updates.
+- Do not put custom interactive elements (buttons, links, inputs) inside the options. They are not reachable by keyboard and break the pattern. This is unsupported.
 
 Use `isRequired` to tell that the field must be filled to submit the form. The label shows a marker (`*`) and the input
 gets `aria-required`. A form that contains required fields must explain the marker: place an

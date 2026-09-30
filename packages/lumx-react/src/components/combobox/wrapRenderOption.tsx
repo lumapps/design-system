@@ -4,7 +4,7 @@ import type { JSXElement } from '@lumx/core/js/types';
 import type { RenderOptionContext } from '@lumx/core/js/utils/select/types';
 
 import { isComponentType } from '@lumx/react/utils/type';
-import { ComboboxOption } from './ComboboxOption';
+import { ListboxOption } from '../listbox/ListboxOption';
 
 /** Render function passed as `renderOption` to a core Select* template. */
 type WrappedRenderOption<O> = (option: O, context: RenderOptionContext) => JSXElement | null;
@@ -32,13 +32,13 @@ export function wrapRenderOption<O>(
     if (!renderOption) return undefined;
     return (option, { index, value: optionValue, isSelected, description, name, after }) => {
         const node = renderOption(option, index);
-        if (!isComponentType(ComboboxOption)(node)) {
+        if (!isComponentType(ListboxOption)(node)) {
             return null;
         }
 
         const { children = name, after: customAfter, ...customProps } = (node as React.ReactElement).props;
         return (
-            <ComboboxOption
+            <ListboxOption
                 key={optionValue}
                 {...customProps}
                 value={optionValue}
@@ -52,7 +52,7 @@ export function wrapRenderOption<O>(
                 }
             >
                 {children}
-            </ComboboxOption>
+            </ListboxOption>
         ) as JSXElement;
     };
 }

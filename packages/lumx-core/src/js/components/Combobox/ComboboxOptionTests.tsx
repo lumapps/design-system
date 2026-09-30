@@ -1,17 +1,17 @@
 import userEvent from '@testing-library/user-event';
 import { screen, waitFor } from '@testing-library/dom';
 import { mdiCheckboxBlankOutline, mdiCheckboxMarked, mdiCheckCircle, mdiRadioboxBlank } from '@lumx/icons';
-import { CLASSNAME as COMBOBOX_OPTION_CLASSNAME } from './ComboboxOption';
+import { CLASSNAME as COMBOBOX_OPTION_CLASSNAME } from '../Listbox/ListboxOption';
 import { getByClassName, queryByClassName } from '../../../testing/queries';
 import { ComboboxNamespace } from './Tests';
 
 type RenderResult = { unmount: () => void; container: HTMLElement };
 
 /**
- * Options to set up the ComboboxOption test suite.
+ * Options to set up the ListboxOption test suite.
  * Injected by the framework-specific test file (React or Vue).
  */
-export interface ComboboxOptionTestSetup {
+export interface ListboxOptionTestSetup {
     /** Combobox compound component namespace */
     Combobox: Pick<ComboboxNamespace, 'Provider' | 'Input' | 'List' | 'Option' | 'SelectionIcon'>;
     /**
@@ -39,7 +39,7 @@ interface SetupOptions {
  * Shared Combobox.Option test suite — covers DOM shape and ARIA correctness.
  * Runs the same assertions against both React and Vue wrappers.
  */
-export default function comboboxOptionTests({ Combobox, render }: ComboboxOptionTestSetup) {
+export default function listboxOptionTests({ Combobox, render }: ListboxOptionTestSetup) {
     /**
      * Render a single Combobox.Option inside the minimal required context.
      * Returns the root <li> element, the action element (role="option" / role="gridcell"),
