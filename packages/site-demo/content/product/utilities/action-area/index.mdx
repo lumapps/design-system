@@ -14,7 +14,7 @@ Inspired by the [Open UI Link Area Delegation proposal](https://open-ui.org/comp
 
 -   Apply `classNames.actionArea()` to the container element.
 -   Apply `classNames.actionArea.action()` to the primary interactive element (link or button) to stretch the click area to the container.
--   Nested interactive elements are automatically elevated above the overlay so they remain independently clickable.
+-   Nested interactive elements (`a`, `button`, `input`, `select`, `textarea`, `label` and elements with a `tabindex`) are automatically elevated above the overlay so they remain independently clickable. Clicks on any other nested content trigger the action.
 
 ```ts
 import { classNames } from '@lumx/core/js/utils';

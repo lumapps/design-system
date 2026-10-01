@@ -1,0 +1,18 @@
+$interactive: 'a, button, input, select, textarea, label, [tabindex]';
+
+/* ==========================================================================
+   Action area
+   ========================================================================== */
+
+// Action area container: positioning context for the action overlay.
+// Nested interactive elements are elevated above the overlay so they stay independently clickable,
+// while clicks on any other content fall through to the action.
+// (zero specificity so that components can still set their own `position` and `z-index`)
+@mixin lumx-action-area {
+    position: relative;
+
+    @at-root :where(#{&}) :where(#{$interactive}):not(:where(.lumx-action-area__action)) {
+        position: relative;
+        z-index: 1;
+    }
+}

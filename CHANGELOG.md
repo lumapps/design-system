@@ -12,6 +12,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   `@lumx/react`, `@lumx/vue`:
     -   `Combobox`: show the option tooltip when the option is highlighted with the keyboard (active descendant).
     -   `Combobox`: keep the popover open and the option tooltip visible on touch long-press.
+    -   `ListItem`: clicks on non-interactive content in the `before`/`after` slots now trigger the `ListItemAction` (fixes option selection in `SelectButton`, `SelectTextField` and `Combobox`).
+-   `@lumx/core`:
+    -   action area utility: elevate nested interactive elements (links, buttons, inputs, etc.) above the action overlay so they stay independently clickable.
 
 ## [4.25.0][] - 2026-09-28
 
