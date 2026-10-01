@@ -27,6 +27,17 @@ export interface RenderOptionContext {
     isSelected: boolean;
     /** Resolved description string (from `getOptionDescription`), if any. Should be forwarded as `description`. */
     description?: string | null;
+    /**
+     * Selection state icon to render before the option label (currently always undefined).
+     * Should be forwarded as `before` (prepended before any custom `before` content).
+     */
+    before?: JSXElement;
+    /**
+     * Selection state icon to render after the option label
+     * (single selection: check circle when selected, blank radio otherwise; multiple selection: checkbox).
+     * Should be forwarded as `after` (appended after any custom `after` content).
+     */
+    after?: JSXElement;
 }
 
 export interface BaseSelectProps<O> {
@@ -89,6 +100,12 @@ export interface BaseSelectComponents {
 export interface RenderSelectOptionsProps<O> extends BaseSelectProps<O> {
     /** Selected option (single) or options (multiple). */
     selected?: O | O[];
+    /**
+     * Selection type, drives the selection state icons:
+     * - `'single'` (default): a check circle icon (selected) or blank radio icon after the label of every option.
+     * - `'multiple'`: a checkbox icon (marked or blank) after the label of every option.
+     */
+    selectionType?: 'single' | 'multiple';
 }
 
 /**

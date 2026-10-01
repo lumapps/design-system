@@ -168,6 +168,7 @@ export const SelectButton = <O,>(props: SelectButtonProps<O>, { Combobox, Infini
                                 getSectionId,
                                 renderSectionTitle,
                                 selected: value,
+                                selectionType,
                             },
                             { Combobox },
                         )

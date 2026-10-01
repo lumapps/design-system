@@ -36,6 +36,7 @@ const Icon = defineComponent(
             'size',
             'alt',
             'verticalAlign',
+            'style',
             'theme',
             'class',
         ),

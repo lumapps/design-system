@@ -26,7 +26,7 @@ export function useWrappedRenderOptionSlot(slot: Slot | undefined): ComputedRef<
         if (!slot && !renderOptionAttr) return undefined;
 
         return (option: unknown, context: RenderOptionContext) => {
-            const { index, value: optionValue, isSelected, description, name } = context;
+            const { index, value: optionValue, isSelected, description, name, before, after } = context;
             // Use slot or fallback on attrs.renderOption (needed for lumx-core compat)
             const vnodes = slot?.({ option, index }) || renderOptionAttr?.(option, context);
             const customOption = castArray(vnodes)?.find(isComponentType(ComboboxOption));
@@ -48,6 +48,15 @@ export function useWrappedRenderOptionSlot(slot: Slot | undefined): ComputedRef<
             }
             if (afterProp !== undefined && !slotChildren.after) {
                 slotChildren.after = () => afterProp;
+            }
+            // Keep the core-computed selection icons: prepend `before`, append `after`.
+            if (before !== undefined) {
+                const customBefore = slotChildren.before;
+                slotChildren.before = () => [before, customBefore?.()];
+            }
+            if (after !== undefined) {
+                const customAfter = slotChildren.after;
+                slotChildren.after = () => [customAfter?.(), after];
             }
             // Fallback: use the resolved option name as the default slot if not provided.
             if (!slotChildren.default) {

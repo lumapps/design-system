@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   `@lumx/react`, `@lumx/vue`:
+    -   `SelectButton`, `SelectTextField`, `SelectList`: show the selection state on the options. Single selection: a check icon after the selected option. Multiple selection: a checkbox icon before every option (marked when selected). Selected icons use the primary color. Custom `before`/`after` content is kept (the checkbox icon is prepended, the check icon is appended).
+    -   `SelectList`: new component to pick one or more options from a list.
+
 ### Fixed
 
 -   `@lumx/react`, `@lumx/vue`:

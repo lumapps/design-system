@@ -163,6 +163,7 @@ export const SelectTextField = (props: SelectTextFieldProps, { Combobox, Infinit
                                 getSectionId,
                                 renderSectionTitle,
                                 selected,
+                                selectionType: isMultiselectable ? 'multiple' : 'single',
                             },
                             { Combobox },
                         )
