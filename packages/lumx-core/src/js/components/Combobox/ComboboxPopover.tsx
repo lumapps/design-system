@@ -2,6 +2,7 @@ import type { HasClassName, JSXElement, LumxClassName } from '../../types';
 import type { PopoverProps } from '../Popover';
 import type { PopoverSizes } from '../Popover/types';
 import { classNames } from '../../utils';
+import { ScrollBox } from '../ScrollBox';
 import { DEFAULT_COMBOBOX_POPOVER_MAX_HEIGHT } from './constants';
 
 /**
@@ -35,8 +36,6 @@ export interface ComboboxPopoverProps extends HasClassName, InheritedPopoverProp
 export interface ComboboxPopoverComponents {
     /** Popover component (framework-specific). */
     Popover: any;
-    /** FlexBox component (framework-specific). */
-    FlexBox: any;
 }
 
 /**
@@ -50,7 +49,7 @@ export interface ComboboxPopoverComponents {
  * @param components Injected framework-specific components.
  * @return JSX element.
  */
-export const ComboboxPopover = (props: ComboboxPopoverProps, { Popover, FlexBox }: ComboboxPopoverComponents) => {
+export const ComboboxPopover = (props: ComboboxPopoverProps, { Popover }: ComboboxPopoverComponents) => {
     const {
         children,
         className,
@@ -79,9 +78,7 @@ export const ComboboxPopover = (props: ComboboxPopoverProps, { Popover, FlexBox 
             closeOnEscape={closeOnEscape}
             closeMode="hide"
         >
-            <FlexBox orientation="vertical" className={element('scroll')}>
-                {children}
-            </FlexBox>
+            {ScrollBox({ className: element('scroll'), scrollSnap: true, children })}
         </Popover>
     );
 };

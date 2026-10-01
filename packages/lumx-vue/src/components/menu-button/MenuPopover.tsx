@@ -9,7 +9,6 @@ import {
 } from '@lumx/core/js/components/Menu/MenuPopover';
 
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
-import { FlexBox } from '../flex-box';
 import { Popover } from '../popover';
 
 import { useMenuContext } from './context';
@@ -39,7 +38,7 @@ const MenuPopover = defineComponent(
                     anchorRef,
                     handleClose: () => setIsOpen(false),
                 },
-                { Popover, FlexBox },
+                { Popover },
             );
     },
     {

@@ -13,7 +13,7 @@ import { type BaseSelectTextFieldWrapperProps } from '@lumx/core/js/utils/select
 import { getOptionDisplayName } from '@lumx/core/js/utils/select/getOptionDisplayName';
 import { toggleSelection } from '@lumx/core/js/utils/select/toggleSelection';
 import { SelectTextField as UI, COMPONENT_NAME } from '@lumx/core/js/components/SelectTextField';
-import { CLASSNAME as COMBOBOX_POPOVER_CLASSNAME } from '@lumx/core/js/components/Combobox/ComboboxPopover';
+import { CLASSNAME as SCROLL_BOX_CLASSNAME } from '@lumx/core/js/components/ScrollBox';
 import type { JSXElement } from '@lumx/core/js/types';
 
 import { getName, keysOf, type ClassValue, type EmitsOf } from '../../utils/VueToJSX';
@@ -157,11 +157,11 @@ const SelectTextField = defineComponent(
         // ListboxList is a Vue component, so the ref resolves to its instance — Vue 3 auto-sets
         // `$el` to the root DOM node (the `<ul>`).
         const listRef = ref<ComponentPublicInstance | null>(null);
-        // The list itself doesn't scroll — its ancestor `__scroll` wrapper does. The
+        // The list itself doesn't scroll — its ancestor `ScrollBox` does. The
         // IntersectionObserver root must be the actual scrolling/clipping element, or the
         // sentinel is trivially always "intersecting" its non-clipping `<ul>` parent.
         const scrollContainer = computed<HTMLElement | null>(
-            () => listRef.value?.$el?.closest(`.${COMBOBOX_POPOVER_CLASSNAME}__scroll`) ?? null,
+            () => listRef.value?.$el?.closest(`.${SCROLL_BOX_CLASSNAME}`) ?? null,
         );
 
         // Ref to the underlying <input> element (needed to link the SelectionChipGroup)

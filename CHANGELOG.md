@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+-   `@lumx/react`, `@lumx/vue`:
+    -   `Combobox.Popover`, `MenuButton`: the popover content scrolls in an internal `ScrollBox` (`lumx-scroll-box` class) in place of a `FlexBox`.
+
 ## [4.26.0][] - 2026-10-08
 
 ### Added

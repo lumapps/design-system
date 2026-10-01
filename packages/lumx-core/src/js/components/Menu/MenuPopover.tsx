@@ -2,6 +2,7 @@ import type { HasClassName, JSXElement, LumxClassName } from '../../types';
 import { FitAnchorWidth, type Placement } from '../Popover/constants';
 import { classNames } from '../../utils';
 import { PopoverProps } from '../Popover';
+import { ScrollBox } from '../ScrollBox';
 
 /** MenuPopover props. */
 export interface MenuPopoverProps
@@ -15,8 +16,6 @@ export interface MenuPopoverProps
 export interface MenuPopoverComponents {
     /** Popover component (framework-specific). */
     Popover: any;
-    /** FlexBox component (framework-specific). */
-    FlexBox: any;
 }
 
 export const COMPONENT_NAME = 'MenuPopover';
@@ -25,7 +24,7 @@ export const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-menu-popove
 const { block, element } = classNames.bem(CLASSNAME);
 
 /** MenuPopover core template. Renders a `Popover` with menu-friendly defaults. */
-export const MenuPopover = (props: MenuPopoverProps, { Popover, FlexBox }: MenuPopoverComponents) => {
+export const MenuPopover = (props: MenuPopoverProps, { Popover }: MenuPopoverComponents) => {
     const {
         children,
         className,
@@ -53,9 +52,7 @@ export const MenuPopover = (props: MenuPopoverProps, { Popover, FlexBox }: MenuP
             fitToAnchorWidth={fitToAnchorWidth}
             className={block([className])}
         >
-            <FlexBox orientation="vertical" className={element('scroll')}>
-                {children}
-            </FlexBox>
+            {ScrollBox({ className: element('scroll'), children })}
         </Popover>
     );
 };

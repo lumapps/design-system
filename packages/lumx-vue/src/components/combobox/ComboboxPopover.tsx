@@ -15,7 +15,6 @@ import { Popover } from '../popover';
 import type { PopoverProps } from '../popover/Popover';
 import { useComboboxContext } from './context/ComboboxContext';
 import { useComboboxOpen } from './context/useComboboxOpen';
-import { FlexBox } from '../flex-box';
 
 /**
  * Props type extends the core ComboboxPopover props (via VueToJSXProps) with additional
@@ -52,7 +51,7 @@ const ComboboxPopover = defineComponent(
                     anchorRef: popoverAnchorRef as any,
                     handleClose: () => setIsOpen(false),
                 },
-                { Popover, FlexBox },
+                { Popover },
             );
         };
     },

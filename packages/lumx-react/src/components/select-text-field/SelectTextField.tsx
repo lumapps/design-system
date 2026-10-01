@@ -5,7 +5,7 @@ import { type BaseSelectTextFieldWrapperProps } from '@lumx/core/js/utils/select
 import { getOptionDisplayName } from '@lumx/core/js/utils/select/getOptionDisplayName';
 import { toggleSelection } from '@lumx/core/js/utils/select/toggleSelection';
 import { SelectTextField as UI } from '@lumx/core/js/components/SelectTextField';
-import { CLASSNAME as COMBOBOX_POPOVER_CLASSNAME } from '@lumx/core/js/components/Combobox/ComboboxPopover';
+import { CLASSNAME as SCROLL_BOX_CLASSNAME } from '@lumx/core/js/components/ScrollBox';
 import { HasClassName } from '@lumx/react/utils/type';
 import { Combobox, type ComboboxPopoverProps } from '../combobox';
 import { wrapRenderOption } from '../combobox/wrapRenderOption';
@@ -161,12 +161,12 @@ export const SelectTextField = <O,>(props: SelectTextFieldProps<O>) => {
     // (`value`, `isSelected`, `description`, `key`) into the returned <Combobox.Option>.
     const wrappedRenderOption = wrapRenderOption(renderOption);
 
-    // The list itself doesn't scroll — its ancestor `__scroll` wrapper does. The
+    // The list itself doesn't scroll — its ancestor `ScrollBox` does. The
     // IntersectionObserver root must be the actual scrolling/clipping element, or the
     // sentinel is trivially always "intersecting" its non-clipping `<ul>` parent.
     const [scrollContainer, setScrollContainer] = useState<HTMLElement | null>(null);
     const setListElement = useCallback((listElement: HTMLElement | null) => {
-        setScrollContainer(listElement?.closest<HTMLElement>(`.${COMBOBOX_POPOVER_CLASSNAME}__scroll`) ?? null);
+        setScrollContainer(listElement?.closest<HTMLElement>(`.${SCROLL_BOX_CLASSNAME}`) ?? null);
     }, []);
     const localInputRef = useRef<HTMLInputElement>(null);
     const mergedInputRef = useMergeRefs(localInputRef, externalInputRef);
