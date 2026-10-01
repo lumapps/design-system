@@ -105,7 +105,7 @@ export const ComboboxOption = forwardRef<ComboboxOptionProps, HTMLLIElement>((pr
 
     // Wrap `after` content in an option context so sub-components (e.g. OptionMoreInfo)
     // can access the parent option's ID for keyboard highlight detection.
-    const optionContextValue = useMemo(() => ({ optionId }), [optionId]);
+    const optionContextValue = useMemo(() => ({ optionId, isSelected: Boolean(isSelected) }), [optionId, isSelected]);
     const wrappedAfter = after ? (
         <ComboboxOptionContext.Provider value={optionContextValue}>{after}</ComboboxOptionContext.Provider>
     ) : undefined;

@@ -4,6 +4,8 @@ import { createContext, useContext } from 'react';
 export interface ComboboxOptionContextValue {
     /** The ID of the parent option element (matches the aria-activedescendant value when highlighted). */
     optionId: string;
+    /** Whether the parent option is selected. */
+    isSelected: boolean;
 }
 
 export const ComboboxOptionContext = createContext<ComboboxOptionContextValue | undefined>(undefined);

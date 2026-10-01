@@ -4,6 +4,8 @@ import { type InjectionKey, inject, provide } from 'vue';
 export interface ComboboxOptionContextValue {
     /** The ID of the parent option element (matches the aria-activedescendant value when highlighted). */
     optionId: string;
+    /** Whether the parent option is selected. */
+    isSelected: boolean;
 }
 
 const COMBOBOX_OPTION_CONTEXT_KEY: InjectionKey<ComboboxOptionContextValue> = Symbol('combobox-option-context');

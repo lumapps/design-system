@@ -1,5 +1,6 @@
 import userEvent from '@testing-library/user-event';
 import { screen, waitFor } from '@testing-library/dom';
+import { mdiCheckboxBlankOutline, mdiCheckboxMarked, mdiCheckCircle, mdiRadioboxBlank } from '@lumx/icons';
 import { CLASSNAME as COMBOBOX_OPTION_CLASSNAME } from './ComboboxOption';
 import { getByClassName, queryByClassName } from '../../../testing/queries';
 import { ComboboxNamespace } from './Tests';
@@ -12,7 +13,7 @@ type RenderResult = { unmount: () => void; container: HTMLElement };
  */
 export interface ComboboxOptionTestSetup {
     /** Combobox compound component namespace */
-    Combobox: Pick<ComboboxNamespace, 'Provider' | 'Input' | 'List' | 'Option'>;
+    Combobox: Pick<ComboboxNamespace, 'Provider' | 'Input' | 'List' | 'Option' | 'SelectionIcon'>;
     /**
      * Render a JSX template and return a result with a container.
      * The template is a zero-argument function returning a JSX element.
@@ -22,6 +23,7 @@ export interface ComboboxOptionTestSetup {
 
 interface SetupOptions {
     listType?: 'list' | 'grid';
+    isMultiselectable?: boolean;
     value?: string;
     isSelected?: boolean;
     isDisabled?: boolean;
@@ -45,6 +47,7 @@ export default function comboboxOptionTests({ Combobox, render }: ComboboxOption
      */
     const setup = async ({
         listType,
+        isMultiselectable,
         value = 'apple',
         isSelected,
         isDisabled,
@@ -62,7 +65,11 @@ export default function comboboxOptionTests({ Combobox, render }: ComboboxOption
                     onChange={() => {}}
                     toggleButtonProps={{ label: 'Fruits' }}
                 />
-                <Combobox.List aria-label="Fruits" type={listType}>
+                <Combobox.List
+                    aria-label="Fruits"
+                    type={listType}
+                    aria-multiselectable={isMultiselectable || undefined}
+                >
                     <Combobox.Option
                         value={value}
                         isSelected={isSelected}
@@ -161,6 +168,33 @@ export default function comboboxOptionTests({ Combobox, render }: ComboboxOption
             it('should render after content', async () => {
                 await setup({ after: <span data-testid="after-content">badge</span> });
                 expect(screen.getByTestId('after-content')).toBeInTheDocument();
+            });
+        });
+
+        // ── Selection icon ───────────────────────────────────────────────
+
+        describe('SelectionIcon', () => {
+            const getIconPath = () =>
+                document.querySelector('.lumx-combobox-option__selection-icon path')?.getAttribute('d');
+
+            it('should render a check circle icon when selected in a single selection list', async () => {
+                await setup({ isSelected: true, after: <Combobox.SelectionIcon /> });
+                expect(getIconPath()).toBe(mdiCheckCircle);
+            });
+
+            it('should render a radio icon when not selected in a single selection list', async () => {
+                await setup({ isSelected: false, after: <Combobox.SelectionIcon /> });
+                expect(getIconPath()).toBe(mdiRadioboxBlank);
+            });
+
+            it('should render a marked checkbox icon when selected in a multiple selection list', async () => {
+                await setup({ isSelected: true, isMultiselectable: true, after: <Combobox.SelectionIcon /> });
+                expect(getIconPath()).toBe(mdiCheckboxMarked);
+            });
+
+            it('should render a blank checkbox icon when not selected in a multiple selection list', async () => {
+                await setup({ isSelected: false, isMultiselectable: true, after: <Combobox.SelectionIcon /> });
+                expect(getIconPath()).toBe(mdiCheckboxBlankOutline);
             });
         });
 

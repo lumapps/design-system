@@ -89,6 +89,7 @@
     display: flex;
     flex-shrink: 0;
     justify-content: center;
+    gap: $lumx-spacing-unit-tiny;
 }
 
 @mixin lumx-list-item-before($size) {

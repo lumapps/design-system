@@ -4,6 +4,8 @@ import { createContext, useContext } from 'react';
 export interface ComboboxListContextValue {
     /** The popup type. "grid" enables 2D keyboard navigation and action buttons on options. */
     type: 'listbox' | 'grid';
+    /** The selection type of the list (from `aria-multiselectable`). */
+    selectionType?: 'single' | 'multiple';
 }
 
 export const ComboboxListContext = createContext<ComboboxListContextValue>({ type: 'listbox' });
