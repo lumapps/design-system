@@ -41,9 +41,28 @@
         @include lumx-list-item-highlighted;
     }
 
-    &__link--is-selected,
-    & .lumx-action-area__action[aria-selected="true"]::before {
+    &__link--is-selected {
         @include lumx-list-item-selected;
+    }
+
+    // Selected action: from `aria-selected` on the action (ex: combobox option) or from `isSelected` on the list item.
+    // (the background is on the action overlay `::before`, so the state selectors must come before `::before`)
+    & .#{$lumx-base-prefix}-action-area__action[aria-selected="true"],
+    &__wrapper--is-selected .#{$lumx-base-prefix}-action-area__action {
+        &::before {
+            background-color: lumx-color-variant("primary", "L5");
+        }
+
+        &:hover::before,
+        &[data-lumx-hover]::before,
+        &[data-focus-visible-added]::before {
+            background-color: lumx-color-variant("primary", "L4");
+        }
+
+        &:active::before,
+        &[data-lumx-active]::before {
+            background-color: lumx-color-variant("primary", "L3");
+        }
     }
 
     &__link--is-disabled,
