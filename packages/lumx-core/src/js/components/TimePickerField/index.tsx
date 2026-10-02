@@ -2,7 +2,7 @@ import { classNames } from '../../utils';
 import type { GenericProps, HasClassName, HasTheme, LumxClassName } from '../../types';
 import type { TimeOfDay } from '../../utils/time';
 import type { SelectTextFieldTranslations } from '../../utils/select/types';
-import type { ComboboxOptionProps } from '../Combobox/ComboboxOption';
+import type { ListboxOptionProps } from '../Listbox/ListboxOption';
 
 /**
  * Component display name.
@@ -84,11 +84,11 @@ export interface TimePickerFieldWrapperProps {
     /**
      * Callback to customize individual option props.
      * Called for each time option with the hour and minute.
-     * Return partial `ComboboxOptionProps` to override default option rendering
+     * Return partial `ListboxOptionProps` to override default option rendering
      * (e.g. `before`, `after`, `children`, `tooltipProps`, `actionProps`).
      * `isDisabled` is merged with the out-of-range state using `||`.
      */
-    getOptionProps?: ({ hour, minute }: { hour: number; minute: number }) => Partial<ComboboxOptionProps>;
+    getOptionProps?: ({ hour, minute }: { hour: number; minute: number }) => Partial<ListboxOptionProps>;
 }
 
 /**
@@ -144,7 +144,7 @@ export interface TimePickerFieldProps extends HasTheme, HasClassName, GenericPro
      * Callback to customize individual option props.
      * See `TimePickerFieldWrapperProps.getOptionProps`.
      */
-    getOptionProps?: ({ hour, minute }: { hour: number; minute: number }) => Partial<ComboboxOptionProps>;
+    getOptionProps?: ({ hour, minute }: { hour: number; minute: number }) => Partial<ListboxOptionProps>;
 }
 
 /**

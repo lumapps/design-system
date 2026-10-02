@@ -76,6 +76,7 @@ Select button follows the WAI-ARIA combobox pattern, but a few content choices a
 - Always provide a meaningful **label**: it is announced by screen readers and used as the trigger's fallback text.
 - Provide localized **screen-reader messages** for loading state, error state, and the number of available options, so assistive technologies can announce list updates.
 - When using an icon-only trigger, expose the label as a tooltip so it remains discoverable for sighted users too.
+- Do not put custom interactive elements (buttons, links, inputs) inside the options. They are not reachable by keyboard and break the pattern. This is unsupported.
 
 ## Properties
 

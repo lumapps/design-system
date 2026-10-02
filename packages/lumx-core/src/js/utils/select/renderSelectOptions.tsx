@@ -3,7 +3,7 @@ import type { JSXElement } from '../../types';
 import type { BaseSelectComponents, RenderSelectOptionsProps } from './types';
 
 /**
- * Render options as ComboboxOption elements.
+ * Render options as ListboxOption elements.
  * Framework-specific components are passed as a second argument.
  */
 export function renderSelectOptions<O>(

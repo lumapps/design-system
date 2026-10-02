@@ -15,6 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+-   `@lumx/vue`:
+    -   `SelectButton`, `SelectTextField`: fix the `option` slot crashing when the custom option has no default content (from a `.vue` template); the option name is now rendered.
 -   `@lumx/react`, `@lumx/vue`:
     -   `Combobox`: show the option tooltip when the option is highlighted with the keyboard (active descendant).
     -   `Combobox`: keep the popover open and the option tooltip visible on touch long-press.

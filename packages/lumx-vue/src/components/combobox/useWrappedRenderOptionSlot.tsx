@@ -5,7 +5,7 @@ import type { JSXElement } from '@lumx/core/js/types';
 import type { RenderOptionContext } from '@lumx/core/js/utils/select/types';
 
 import { isComponentType } from '../../utils/isComponentType';
-import ComboboxOption from './ComboboxOption';
+import ListboxOption from '../listbox/ListboxOption';
 
 /** Render function passed as `renderOption` to a core Select* template. */
 type WrappedRenderOption = (option: unknown, context: RenderOptionContext) => JSXElement;
@@ -14,7 +14,7 @@ type WrappedRenderOption = (option: unknown, context: RenderOptionContext) => JS
 type RenderOptionCallback = (option: unknown, context: RenderOptionContext) => unknown;
 
 /**
- * Adapts a Vue scoped slot returning a `<ComboboxOption>` into the `renderOption`
+ * Adapts a Vue scoped slot returning a `<ListboxOption>` into the `renderOption`
  * callback shape expected by the core Select* templates.
  */
 export function useWrappedRenderOptionSlot(slot: Slot | undefined): ComputedRef<WrappedRenderOption | undefined> {
@@ -29,7 +29,7 @@ export function useWrappedRenderOptionSlot(slot: Slot | undefined): ComputedRef<
             const { index, value: optionValue, isSelected, description, name, after } = context;
             // Use slot or fallback on attrs.renderOption (needed for lumx-core compat)
             const vnodes = slot?.({ option, index }) || renderOptionAttr?.(option, context);
-            const customOption = castArray(vnodes)?.find(isComponentType(ComboboxOption));
+            const customOption = castArray(vnodes)?.find(isComponentType(ListboxOption));
 
             // Fallback: consumer didn't return a <Combobox.Option> — render their VNodes as-is.
             if (!customOption) return vnodes as unknown as JSXElement;
@@ -55,12 +55,13 @@ export function useWrappedRenderOptionSlot(slot: Slot | undefined): ComputedRef<
                 slotChildren.after = () => [customAfter?.(), after];
             }
             // Fallback: use the resolved option name as the default slot if not provided.
+            // (Must be a slot function: compiled slots (`_` flag) are not normalized by Vue.)
             if (!slotChildren.default) {
-                slotChildren.default = name;
+                slotChildren.default = () => name;
             }
 
             return (
-                <ComboboxOption
+                <ListboxOption
                     key={optionValue}
                     value={optionValue}
                     isSelected={isSelected}
@@ -68,7 +69,7 @@ export function useWrappedRenderOptionSlot(slot: Slot | undefined): ComputedRef<
                     {...restSlotProps}
                 >
                     {slotChildren}
-                </ComboboxOption>
+                </ListboxOption>
             ) as JSXElement;
         };
     });
