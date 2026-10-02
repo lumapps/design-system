@@ -15,7 +15,7 @@ import { useComboboxContext } from './context/ComboboxContext';
 import { useComboboxEvent } from './context/useComboboxEvent';
 import { provideComboboxListContext } from './context/ComboboxListContext';
 
-export type ComboboxListProps = VueToJSXProps<UIProps, 'aria-label' | 'aria-busy' | 'id'>;
+export type ComboboxListProps = VueToJSXProps<UIProps, 'aria-label' | 'aria-busy' | 'aria-multiselectable' | 'id'>;
 
 /**
  * Combobox.List component - wraps List with listbox ARIA attributes.
@@ -31,7 +31,16 @@ const ComboboxList = defineComponent(
         const { listboxId, handle } = useComboboxContext();
         const listRef = ref<HTMLElement | null>(null);
 
-        provideComboboxListContext({ type: props.type || 'listbox' });
+        provideComboboxListContext({
+            // Getters: keep the provided values reactive (read again on each consumer render).
+            get type() {
+                return props.type || 'listbox';
+            },
+            get selectionType() {
+                const multiselectable = attrs['aria-multiselectable'];
+                return multiselectable === true || multiselectable === 'true' ? 'multiple' : 'single';
+            },
+        });
 
         // Register the list as the listbox when both handle and list element are available
         useWatchDisposable([handle, listRef], ([handleValue, list]) => {
