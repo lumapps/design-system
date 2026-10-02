@@ -1,0 +1,71 @@
+---
+title: Select list
+frameworks: ['react', 'vue']
+---
+
+import * as ReactDemoDefault from './react/default.tsx';
+import * as ReactDemoOptionsAndSections from './react/options-and-sections.tsx';
+import * as ReactDemoMultipleSelection from './react/multiple-selection.tsx';
+import * as ReactDemoListStates from './react/list-states.tsx';
+import * as VueDemoDefault from './vue/default.vue';
+import * as VueDemoOptionsAndSections from './vue/options-and-sections.vue';
+import * as VueDemoMultipleSelection from './vue/multiple-selection.vue';
+import * as VueDemoListStates from './vue/list-states.vue';
+import ReactSelectList from 'lumx-docs:@lumx/react/components/select-list/SelectList';
+import VueSelectList from 'lumx-docs:@lumx/vue/components/select-list/SelectList';
+
+**Select lists let users pick one or more options from a list that stays visible on the page.**
+
+`SelectList` is based on [List](/product/components/list). It has the same options and behavior as the dropdown lists of [Select button](/product/components/select-button) and [Select text field](/product/components/select-text-field). Use those components instead when the options must open from a button or an input.
+
+Only use a `SelectList` for a **selection** (choose one or more options). For a list of actions (edit, delete, …), use [Menu button](/product/components/menu-button) instead. For navigation (links to other pages), use links in a plain [List](/product/components/list) or a [Side navigation](/product/components/side-navigation) instead.
+
+## Default
+
+By default, a select list lets the user pick a single option. Selecting the selected option again deselects it.
+
+<DemoBlock orientation="vertical" demo={{ react: ReactDemoDefault, vue: VueDemoDefault }} />
+
+## Multiple selection
+
+Switch to multi-select mode to let the user pick several options. Selecting an already-selected option toggles it off.
+
+<DemoBlock orientation="vertical" demo={{ react: ReactDemoMultipleSelection, vue: VueDemoMultipleSelection }} />
+
+## Options & Sections
+
+Each option can carry a primary label and an optional description shown on a second line. Long lists can also be grouped into sections with a heading.
+
+The options and the section titles can also be customized (icons, badges, custom typography, etc.): use `renderOption` and `renderSectionTitle` in React, or the `option` and `sectionTitle` slots in Vue. The example below adds a file type icon on each option and the file count on each section title.
+
+<DemoBlock orientation="vertical" demo={{ react: ReactDemoOptionsAndSections, vue: VueDemoOptionsAndSections }} />
+
+## Width
+
+By default, the list takes the full width of its container. Use `width` to set a size token (`m`, `l`, `xl`, `xxl`) or a percentage of the container width. Use `minWidth` (same values) to change the minimum width.
+
+## List states
+
+When options come from a server, the list can communicate the loading or error state to the user:
+
+-   **Loading**: Displays skeleton placeholders while options are being fetched.
+-   **Error**: Displays an error message so the user knows the list could not be loaded and can try again.
+
+<DemoBlock
+    orientation="horizontal"
+    vAlign="space-evenly"
+    demo={{ react: ReactDemoListStates, vue: VueDemoListStates }}
+/>
+
+## Accessibility concerns
+
+Select list follows the [WAI-ARIA listbox pattern](https://www.w3.org/WAI/ARIA/apg/patterns/listbox/):
+
+-   Always provide an accessible name with `aria-label`, or with `aria-labelledby` that points to a visible title.
+-   The list keeps DOM focus and references the active option with `aria-activedescendant`. The options are not tab stops.
+-   Provide localized **screen-reader messages** for loading state, error state, and the number of available options, so assistive technologies can announce list updates.
+-   Do not put custom interactive elements (buttons, links, inputs) inside the options. They are not reachable by keyboard and break the pattern. This is unsupported.
+
+## Properties
+
+<PropTable docs={{ react: ReactSelectList, vue: VueSelectList }} />
