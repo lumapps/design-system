@@ -134,6 +134,54 @@ export function setup({
                             </>
                         }
                     />
+                    <ListItem
+                        size={size}
+                        before={beforeContent}
+                        after={afterContent}
+                        style={{ outline: '1px dashed red' }}
+                        children={
+                            <>
+                                <ListItemAction as="a" aria-current="true" onClick={onClick}>
+                                    Action with aria-current=true
+                                </ListItemAction>
+                                <Text as="p" color="dark-L2">
+                                    Some text outside the main action
+                                </Text>
+                            </>
+                        }
+                    />
+                    <ListItem
+                        size={size}
+                        before={beforeContent}
+                        after={afterContent}
+                        style={{ outline: '1px dashed red' }}
+                        children={
+                            <>
+                                <ListItemAction as="a" aria-current="page" onClick={onClick}>
+                                    Action with aria-current=page
+                                </ListItemAction>
+                                <Text as="p" color="dark-L2">
+                                    Some text outside the main action
+                                </Text>
+                            </>
+                        }
+                    />
+                    <ListItem
+                        size={size}
+                        before={beforeContent}
+                        after={afterContent}
+                        style={{ outline: '1px dashed red' }}
+                        children={
+                            <>
+                                <ListItemAction aria-selected="true" onClick={onClick}>
+                                    Action with aria-selected=true
+                                </ListItemAction>
+                                <Text as="p" color="dark-L2">
+                                    Some text outside the main action
+                                </Text>
+                            </>
+                        }
+                    />
                 </List>
             );
         },
