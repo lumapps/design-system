@@ -1,12 +1,12 @@
 import { defineComponent, ref, useAttrs, watch, toRef } from 'vue';
 
 import {
-    ComboboxOption as UI,
-    type ComboboxOptionProps as UIProps,
-    type ComboboxOptionPropsToOverride,
+    ListboxOption as UI,
+    type ListboxOptionProps as UIProps,
+    type ListboxOptionPropsToOverride,
     COMPONENT_NAME,
     CLASSNAME,
-} from '@lumx/core/js/components/Combobox/ComboboxOption';
+} from '@lumx/core/js/components/Listbox/ListboxOption';
 import type { JSXElement } from '@lumx/core/js/types';
 
 import { useId } from '../../composables/useId';
@@ -15,15 +15,14 @@ import { useWatchDisposable } from '../../composables/useWatchDisposable';
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { Tooltip } from '../tooltip';
 import type { TooltipProps } from '../tooltip/Tooltip';
-import { useComboboxContext } from './context/ComboboxContext';
-import { useComboboxListContext } from './context/ComboboxListContext';
-import { provideComboboxOptionContext } from './context/ComboboxOptionContext';
-import { useComboboxEvent } from './context/useComboboxEvent';
-import { optionActiveEvent } from '@lumx/core/js/components/Combobox/constants';
+import { useListboxContext } from './context/ListboxContext';
+import { provideListboxOptionContext } from './context/ListboxOptionContext';
+import { useListboxEvent } from './context/useListboxEvent';
+import { optionActiveEvent } from '@lumx/core/js/components/Listbox/constants';
 
-export type ComboboxOptionProps = VueToJSXProps<
+export type ListboxOptionProps = VueToJSXProps<
     UIProps,
-    ComboboxOptionPropsToOverride | 'descriptionId' | 'hidden' | 'isGrid' | 'id'
+    ListboxOptionPropsToOverride | 'descriptionId' | 'hidden' | 'isGrid' | 'id'
 > & {
     /** Props forwarded to a Tooltip wrapping the option trigger element. */
     tooltipProps?: Partial<TooltipProps>;
@@ -41,12 +40,11 @@ export const emitSchema = {
  * @param props Component props.
  * @return Vue element.
  */
-const ComboboxOption = defineComponent(
-    (props: ComboboxOptionProps, { slots, emit }) => {
+const ListboxOption = defineComponent(
+    (props: ListboxOptionProps, { slots, emit }) => {
         const attrs = useAttrs();
         const className = useClassName(() => props.class);
-        const { type } = useComboboxListContext();
-        const { handle } = useComboboxContext();
+        const { type, list } = useListboxContext();
         const isGrid = type === 'grid';
         const optionId = useId();
         const descriptionId = useId();
@@ -54,10 +52,10 @@ const ComboboxOption = defineComponent(
         const isFiltered = ref(false);
 
         // Force the tooltip open while the option is the active descendant (keyboard highlight).
-        const isActive = useComboboxEvent(optionActiveEvent(optionId), false);
+        const isActive = useListboxEvent(list, optionActiveEvent(optionId), false);
 
         // Provide option context to children (e.g. OptionMoreInfo)
-        provideComboboxOptionContext({
+        provideListboxOptionContext({
             optionId,
             // Getter: keeps the provided `isSelected` reactive.
             get isSelected() {
@@ -66,9 +64,9 @@ const ComboboxOption = defineComponent(
         });
 
         // Register option with the combobox handle when both are available
-        useWatchDisposable([handle, optionRef], ([handleValue, element]) => {
-            if (!handleValue || !element) return;
-            return handleValue.registerOption(element, (filtered) => {
+        useWatchDisposable([list, optionRef], ([listValue, element]) => {
+            if (!listValue || !element) return;
+            return listValue.registerOption(element, (filtered) => {
                 isFiltered.value = filtered;
             });
         });
@@ -77,10 +75,10 @@ const ComboboxOption = defineComponent(
         watch(
             toRef(props, 'value'),
             () => {
-                const handleValue = handle.value;
+                const listValue = list.value;
                 const element = optionRef.value;
-                if (!handleValue || !element) return;
-                handleValue.refilterOption(element);
+                if (!listValue || !element) return;
+                listValue.refilterOption(element);
             },
             // ensuring data-value is committed before re-evaluating the filter.
             { flush: 'post' },
@@ -135,7 +133,7 @@ const ComboboxOption = defineComponent(
     {
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
-        props: keysOf<ComboboxOptionProps>()(
+        props: keysOf<ListboxOptionProps>()(
             'value',
             'description',
             'isDisabled',
@@ -149,4 +147,4 @@ const ComboboxOption = defineComponent(
 );
 
 export { COMPONENT_NAME, CLASSNAME };
-export default ComboboxOption;
+export default ListboxOption;

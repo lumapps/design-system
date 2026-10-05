@@ -3,23 +3,24 @@ import { computed, defineComponent, ref } from 'vue';
 import { useClassName } from '../../composables/useClassName';
 
 import {
-    ComboboxOptionMoreInfo as UI,
-    type ComboboxOptionMoreInfoProps as UIProps,
-    type ComboboxOptionMoreInfoPropsToOverride,
+    ListboxOptionMoreInfo as UI,
+    type ListboxOptionMoreInfoProps as UIProps,
+    type ListboxOptionMoreInfoPropsToOverride,
     COMPONENT_NAME,
     CLASSNAME,
-} from '@lumx/core/js/components/Combobox/ComboboxOptionMoreInfo';
+} from '@lumx/core/js/components/Listbox/ListboxOptionMoreInfo';
 import type { JSXElement } from '@lumx/core/js/types';
 
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { IconButton } from '../button';
 import { Popover } from '../popover';
-import { useComboboxOptionContext } from './context/ComboboxOptionContext';
-import { useComboboxEvent } from './context/useComboboxEvent';
+import { useListboxOptionContext } from './context/ListboxOptionContext';
+import { useListboxContext } from './context/ListboxContext';
+import { useListboxEvent } from './context/useListboxEvent';
 
-export type ComboboxOptionMoreInfoProps = VueToJSXProps<
+export type ListboxOptionMoreInfoProps = VueToJSXProps<
     UIProps,
-    ComboboxOptionMoreInfoPropsToOverride | 'onMouseEnter' | 'onMouseLeave' | 'buttonProps'
+    ListboxOptionMoreInfoPropsToOverride | 'onMouseEnter' | 'onMouseLeave' | 'buttonProps'
 > & {
     /** Callback when the popover opens or closes. */
     onToggle?: (isOpen: boolean) => void;
@@ -36,8 +37,8 @@ export type ComboboxOptionMoreInfoProps = VueToJSXProps<
  * @param props Component props.
  * @return Vue element.
  */
-const ComboboxOptionMoreInfo = defineComponent(
-    (props: ComboboxOptionMoreInfoProps, { slots }) => {
+const ListboxOptionMoreInfo = defineComponent(
+    (props: ListboxOptionMoreInfoProps, { slots }) => {
         const mergedClassName = useClassName(() => props.class);
 
         // Ref to the IconButton component instance.
@@ -49,10 +50,11 @@ const ComboboxOptionMoreInfo = defineComponent(
         const isHovered = ref(false);
 
         // Get the parent option ID from the option context
-        const { optionId } = useComboboxOptionContext();
+        const { optionId } = useListboxOptionContext();
 
         // Subscribe to active descendant changes for keyboard highlight detection
-        const activeDescendantId = useComboboxEvent('activeDescendantChange', null);
+        const { list } = useListboxContext();
+        const activeDescendantId = useListboxEvent(list, 'activeDescendantChange', null);
 
         const popoverId = `${optionId}-more-info`;
 
@@ -115,7 +117,7 @@ const ComboboxOptionMoreInfo = defineComponent(
     {
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
-        props: keysOf<ComboboxOptionMoreInfoProps>()('class', 'onToggle'),
+        props: keysOf<ListboxOptionMoreInfoProps>()('class', 'onToggle'),
         emits: {
             toggle: (isOpen: boolean) => typeof isOpen === 'boolean',
         },
@@ -123,4 +125,4 @@ const ComboboxOptionMoreInfo = defineComponent(
 );
 
 export { COMPONENT_NAME, CLASSNAME };
-export default ComboboxOptionMoreInfo;
+export default ListboxOptionMoreInfo;

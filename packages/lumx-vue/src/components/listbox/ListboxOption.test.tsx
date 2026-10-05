@@ -1,16 +1,16 @@
 import { render, screen } from '@testing-library/vue';
 import userEvent from '@testing-library/user-event';
 
-import { CLASSNAME } from '@lumx/core/js/components/Combobox/ComboboxOption';
-import comboboxOptionTests from '@lumx/core/js/components/Combobox/ComboboxOptionTests';
+import { CLASSNAME } from '@lumx/core/js/components/Listbox/ListboxOption';
+import listboxOptionTests from '@lumx/core/js/components/Combobox/ComboboxOptionTests';
 import { findByClassName } from '@lumx/core/testing/queries';
 import { commonTestsSuiteVTL, SetupRenderOptions } from '@lumx/vue/testing';
 
-import { Combobox } from '.';
-import ComboboxOption from './ComboboxOption';
-import ComboboxProvider from './ComboboxProvider';
-import ComboboxInput from './ComboboxInput';
-import ComboboxList from './ComboboxList';
+import { Combobox } from '../combobox';
+import ListboxOption from './ListboxOption';
+import ComboboxProvider from '../combobox/ComboboxProvider';
+import ComboboxInput from '../combobox/ComboboxInput';
+import ListboxList from './ListboxList';
 
 /**
  * Mount a `<Combobox.Option>` inside the minimum required context
@@ -30,11 +30,11 @@ async function renderOption(propsOverride: any = {}, options: SetupRenderOptions
                         onChange={() => {}}
                         toggleButtonProps={{ label: 'Fruits' }}
                     />
-                    <ComboboxList aria-label="Fruits">
-                        <ComboboxOption value={value} {...rest}>
+                    <ListboxList aria-label="Fruits">
+                        <ListboxOption value={value} {...rest}>
                             Apple
-                        </ComboboxOption>
-                    </ComboboxList>
+                        </ListboxOption>
+                    </ListboxList>
                 </ComboboxProvider>
             ),
         },
@@ -53,7 +53,7 @@ describe('<Combobox.Option>', () => {
         forwardClassName: 'element',
     });
 
-    comboboxOptionTests({
+    listboxOptionTests({
         Combobox,
         render: (template) => {
             const { unmount, container } = render({ setup: () => () => template() });

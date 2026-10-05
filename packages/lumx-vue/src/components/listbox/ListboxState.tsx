@@ -1,21 +1,21 @@
 import { defineComponent, ref } from 'vue';
 
 import {
-    ComboboxState as UI,
-    type ComboboxStateProps as UIProps,
+    ListboxState as UI,
+    type ListboxStateProps as UIProps,
     COMPONENT_NAME,
     CLASSNAME,
-} from '@lumx/core/js/components/Combobox/ComboboxState';
-import { subscribeComboboxState } from '@lumx/core/js/components/Combobox/subscribeComboboxState';
+} from '@lumx/core/js/components/Listbox/ListboxState';
+import { subscribeListboxState } from '@lumx/core/js/components/Listbox/subscribeListboxState';
 
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { useWatchDisposable } from '../../composables/useWatchDisposable';
 import { GenericBlock } from '../generic-block';
 import { Text } from '../text';
-import { useComboboxContext } from './context/ComboboxContext';
-import { useComboboxEvent } from './context/useComboboxEvent';
+import { useListboxEvent } from './context/useListboxEvent';
+import { useListboxContext } from './context/ListboxContext';
 
-export type ComboboxStateProps = VueToJSXProps<UIProps, 'state'>;
+export type ListboxStateProps = VueToJSXProps<UIProps, 'state'>;
 
 /**
  * Combobox.State component - displays empty and error states for the combobox list.
@@ -23,17 +23,17 @@ export type ComboboxStateProps = VueToJSXProps<UIProps, 'state'>;
  * @param props Component props.
  * @return Vue element.
  */
-const ComboboxState = defineComponent(
-    (props: ComboboxStateProps) => {
-        const { handle } = useComboboxContext();
-        const optionsState = useComboboxEvent('optionsChange', undefined);
+const ListboxState = defineComponent(
+    (props: ListboxStateProps) => {
+        const { list } = useListboxContext();
+        const optionsState = useListboxEvent(list, 'optionsChange', undefined);
         const isLoading = ref(false);
         const shouldAnnounce = ref(false);
         const isOpen = ref(false);
 
-        useWatchDisposable(handle, (h) => {
-            if (h) {
-                return subscribeComboboxState(h, {
+        useWatchDisposable(list, (listValue) => {
+            if (listValue) {
+                return subscribeListboxState(listValue, {
                     setIsLoading: (v) => {
                         isLoading.value = v;
                     },
@@ -68,7 +68,7 @@ const ComboboxState = defineComponent(
     {
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
-        props: keysOf<ComboboxStateProps>()(
+        props: keysOf<ListboxStateProps>()(
             'emptyMessage',
             'nbOptionMessage',
             'errorMessage',
@@ -80,4 +80,4 @@ const ComboboxState = defineComponent(
 );
 
 export { COMPONENT_NAME, CLASSNAME };
-export default ComboboxState;
+export default ListboxState;

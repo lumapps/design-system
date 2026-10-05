@@ -1,7 +1,7 @@
-import _ComboboxOption from '../combobox/ComboboxOption';
-import _ComboboxSection from '../combobox/ComboboxSection';
-import _ComboboxOptionMoreInfo from '../combobox/ComboboxOptionMoreInfo';
-import _ComboboxOptionSkeleton from '../combobox/ComboboxOptionSkeleton';
+import _ComboboxOption from '../listbox/ListboxOption';
+import _ComboboxSection from '../listbox/ListboxSection';
+import _ComboboxOptionMoreInfo from '../listbox/ListboxOptionMoreInfo';
+import _ComboboxOptionSkeleton from '../listbox/ListboxOptionSkeleton';
 import _ListDivider from '../list/ListDivider';
 
 export {

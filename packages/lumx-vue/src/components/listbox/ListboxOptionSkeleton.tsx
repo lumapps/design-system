@@ -1,20 +1,20 @@
 import { defineComponent } from 'vue';
 
 import {
-    ComboboxOptionSkeleton as UI,
-    type ComboboxOptionSkeletonProps as UIProps,
-    type ComboboxOptionSkeletonPropsToOverride,
+    ListboxOptionSkeleton as UI,
+    type ListboxOptionSkeletonProps as UIProps,
+    type ListboxOptionSkeletonPropsToOverride,
     COMPONENT_NAME,
     CLASSNAME,
-} from '@lumx/core/js/components/Combobox/ComboboxOptionSkeleton';
+} from '@lumx/core/js/components/Listbox/ListboxOptionSkeleton';
 import type { JSXElement } from '@lumx/core/js/types';
 
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { useClassName } from '../../composables/useClassName';
 import { useWatchDisposable } from '../../composables/useWatchDisposable';
-import { useComboboxContext } from './context/ComboboxContext';
+import { useListboxContext } from './context/ListboxContext';
 
-export type ComboboxOptionSkeletonProps = VueToJSXProps<UIProps, ComboboxOptionSkeletonPropsToOverride>;
+export type ListboxOptionSkeletonProps = VueToJSXProps<UIProps, ListboxOptionSkeletonPropsToOverride>;
 
 /**
  * Combobox.OptionSkeleton component — renders skeleton placeholder(s) inside a combobox list.
@@ -22,13 +22,13 @@ export type ComboboxOptionSkeletonProps = VueToJSXProps<UIProps, ComboboxOptionS
  * @param props Component props.
  * @return Vue element.
  */
-const ComboboxOptionSkeleton = defineComponent(
-    (props: ComboboxOptionSkeletonProps, { slots, attrs }) => {
+const ListboxOptionSkeleton = defineComponent(
+    (props: ListboxOptionSkeletonProps, { slots, attrs }) => {
         const className = useClassName(() => props.class);
-        const { handle } = useComboboxContext();
+        const { list } = useListboxContext();
 
         // Register once with the combobox handle on mount
-        useWatchDisposable(handle, (h) => h?.registerSkeleton());
+        useWatchDisposable(list, (h) => h?.registerSkeleton());
 
         return () => {
             const before = attrs.before as JSXElement;
@@ -48,9 +48,9 @@ const ComboboxOptionSkeleton = defineComponent(
     {
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
-        props: keysOf<ComboboxOptionSkeletonProps>()('hasDescription', 'count', 'class'),
+        props: keysOf<ListboxOptionSkeletonProps>()('hasDescription', 'count', 'class'),
     },
 );
 
 export { COMPONENT_NAME, CLASSNAME };
-export default ComboboxOptionSkeleton;
+export default ListboxOptionSkeleton;

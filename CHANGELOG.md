@@ -20,6 +20,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+-   `@lumx/vue`:
+    -   `SelectButton`, `SelectTextField`: fix the `option` slot crashing when the custom option has no default content (from a `.vue` template); the option name is now rendered.
 -   `@lumx/react`, `@lumx/vue`:
     -   `TextField`, `SelectTextField`: forward the `className` of `labelProps` (e.g. `visually-hidden`) to the label instead of dropping it.
     -   `Combobox`: show the option tooltip when the option is highlighted with the keyboard (active descendant).
