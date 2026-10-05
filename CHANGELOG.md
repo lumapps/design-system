@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `@lumx/react`:
     -   `Notification`: add the `actionProps` prop that describes the action (`label`, `onClick`, and `as` to render another component, for example a close `IconButton`). It deprecates `actionLabel` and `onActionClick`.
+-   `@lumx/react`, `@lumx/vue`:
+    -   `SelectButton`, `SelectTextField`: show the selection state on the options with icons.
 
 ### Changed
 
