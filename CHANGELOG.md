@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 -   `@lumx/react`, `@lumx/vue`:
+    -   `SelectTextField`: add `labelProps` to customize the field label (e.g. `className: 'visually-hidden'`).
     -   `Combobox.SelectionIcon`: selection state icon for the `after` slot of `Combobox.Option` (reads the option `isSelected` and the list `aria-multiselectable`).
 
 ### Changed

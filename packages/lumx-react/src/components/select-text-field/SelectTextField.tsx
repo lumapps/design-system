@@ -118,6 +118,7 @@ export const SelectTextField = <O,>(props: SelectTextFieldProps<O>) => {
         // Text field
         className,
         label,
+        labelProps,
         placeholder,
         icon,
         isDisabled,
@@ -300,6 +301,7 @@ export const SelectTextField = <O,>(props: SelectTextFieldProps<O>) => {
             errorTryReloadMessage: translations.errorTryReloadMessage,
             inputProps: {
                 ...consumerInputProps,
+                labelProps: labelProps ?? consumerInputProps?.labelProps,
                 placeholder,
                 icon,
                 value: displayValue,

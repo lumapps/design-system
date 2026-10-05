@@ -197,6 +197,12 @@ export default function selectTextFieldTests({ components, renderWithState }: Se
             expect(label).toHaveClass('visually-hidden');
         });
 
+        it('should forward a class name to the label via labelProps', () => {
+            renderWithState(defaultTemplate, { labelProps: { className: 'visually-hidden' } });
+            const label = document.body.querySelector<HTMLLabelElement>('label.lumx-input-label');
+            expect(label).toHaveClass('visually-hidden');
+        });
+
         it('should render placeholder when no value is selected', () => {
             renderWithState(defaultTemplate);
             const input = getInput();
