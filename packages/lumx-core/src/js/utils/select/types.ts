@@ -28,6 +28,12 @@ export interface RenderOptionContext {
     isSelected: boolean;
     /** Resolved description string (from `getOptionDescription`), if any. Should be forwarded as `description`. */
     description?: string | null;
+    /**
+     * Selection state icon to render after the option label
+     * (single selection: check circle when selected, blank radio otherwise; multiple selection: checkbox).
+     * Should be forwarded as `after` (appended after any custom `after` content).
+     */
+    after?: JSXElement;
 }
 
 export interface BaseSelectProps<O> {
