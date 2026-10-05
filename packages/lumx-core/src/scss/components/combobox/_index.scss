@@ -70,6 +70,11 @@
         }
     }
 
+    // Selection state icon (select options), centered in the `after` slot
+    &__selection-icon {
+        margin: auto;
+    }
+
     // Center option content
     .#{$lumx-base-prefix}-list-item__content {
         display: flex;

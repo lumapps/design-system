@@ -33,6 +33,7 @@ export interface ComboboxNamespace {
     OptionAction: any;
     OptionMoreInfo: any;
     OptionSkeleton: any;
+    SelectionIcon: any;
     Popover: any;
     Section: any;
     State: any;

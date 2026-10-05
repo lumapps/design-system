@@ -8,6 +8,7 @@ import { ComboboxOptionSkeleton } from './ComboboxOptionSkeleton';
 import { ComboboxPopover } from './ComboboxPopover';
 import { ComboboxProvider } from './ComboboxProvider';
 import { ComboboxSection } from './ComboboxSection';
+import { ComboboxSelectionIcon } from './ComboboxSelectionIcon';
 import { ComboboxState } from './ComboboxState';
 import { ListDivider } from '../list/ListDivider';
 import { useComboboxEvent } from './context/useComboboxEvent';
@@ -44,6 +45,8 @@ export const Combobox = {
     OptionMoreInfo: ComboboxOptionMoreInfo,
     /** Loading placeholder skeleton(s) that auto-register loading state with the combobox handle. */
     OptionSkeleton: ComboboxOptionSkeleton,
+    /** Selection state icon (check circle / radio, or checkbox in multiple lists) for the `after` slot of an option. Reads the option `isSelected` and the list `aria-multiselectable`. */
+    SelectionIcon: ComboboxSelectionIcon,
     /** Floating popover container that auto-binds to the combobox anchor and open/close state. */
     Popover: ComboboxPopover,
     /** Labelled group of options that auto-hides when all its child options are filtered out. */

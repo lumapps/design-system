@@ -78,6 +78,7 @@ export interface BaseSelectComponents {
         Option: any;
         State: any;
         OptionSkeleton: any;
+        SelectionIcon: any;
     };
     /** Framework-specific InfiniteScroll component (handles IntersectionObserver lifecycle). */
     InfiniteScroll?: any;

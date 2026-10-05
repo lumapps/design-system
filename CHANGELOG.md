@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   `@lumx/react`, `@lumx/vue`:
+    -   `Combobox.SelectionIcon`: selection state icon for the `after` slot of `Combobox.Option` (reads the option `isSelected` and the list `aria-multiselectable`).
+
+### Changed
+
+-   `@lumx/react`, `@lumx/vue`:
+    -   `ListItem`: add a 4px gap between the elements of the `before` and `after` slots.
+
 ### Fixed
 
 -   `@lumx/react`, `@lumx/vue`:
@@ -43,7 +53,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 -   `@lumx/react`:
-    -   `SideNavigation`, `SideNavigationItem`: children are no longer filtered to keep only `SideNavigationItem` elements. 
+    -   `SideNavigation`, `SideNavigationItem`: children are no longer filtered to keep only `SideNavigationItem` elements.
 
 ### Fixed
 
