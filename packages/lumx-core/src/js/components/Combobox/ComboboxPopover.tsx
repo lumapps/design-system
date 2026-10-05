@@ -25,7 +25,7 @@ type InheritedPopoverProps = Pick<
  * Defines the props for the core ComboboxPopover template.
  */
 export interface ComboboxPopoverProps extends HasClassName, InheritedPopoverProps {
-    /** Content (should contain a ComboboxList). */
+    /** Content (should contain a ListboxList). */
     children?: JSXElement;
 }
 

@@ -5,20 +5,20 @@ import { ListItemAction } from '../List/ListItemAction';
 import { getTextProps } from '../Text';
 
 /**
- * Injected framework-specific components for ComboboxOption rendering.
+ * Injected framework-specific components for ListboxOption rendering.
  */
-export interface ComboboxOptionComponents {
+export interface ListboxOptionComponents {
     /** Tooltip wrapper component (optional). Used when `tooltipProps` is provided. */
     Tooltip?: any;
 }
 
 /**
- * Defines the props for the core ComboboxOption template.
+ * Defines the props for the core ListboxOption template.
  */
-export interface ComboboxOptionProps extends HasClassName {
+export interface ListboxOptionProps extends HasClassName {
     /** A component to be rendered before the content (e.g. an icon or avatar). */
     before?: JSXElement;
-    /** A component to be rendered after the content (e.g. ComboboxOptionAction elements). */
+    /** A component to be rendered after the content (e.g. ListboxOptionAction elements). */
     after?: JSXElement;
     /** Content (option label). */
     children?: JSXElement;
@@ -57,9 +57,9 @@ export interface ComboboxOptionProps extends HasClassName {
 
 /**
  * Props that React/Vue wrappers need to re-declare with framework-specific types.
- * Used by `ReactToJSX<ComboboxOptionProps, ComboboxOptionPropsToOverride>`.
+ * Used by `ReactToJSX<ListboxOptionProps, ListboxOptionPropsToOverride>`.
  */
-export type ComboboxOptionPropsToOverride = 'before' | 'after' | 'children' | 'tooltipProps' | 'actionProps';
+export type ListboxOptionPropsToOverride = 'before' | 'after' | 'children' | 'tooltipProps' | 'actionProps';
 
 /**
  * Component display name.
@@ -73,7 +73,7 @@ export const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-combobox-op
 const { block, element } = classNames.bem(CLASSNAME);
 
 /**
- * ComboboxOption core template.
+ * ListboxOption core template.
  * Renders a ListItem with combobox-specific ARIA attributes and structure.
  *
  * In grid mode, the ListItem renders with `role="row"` and the option content
@@ -82,7 +82,7 @@ const { block, element } = classNames.bem(CLASSNAME);
  * @param props Component props.
  * @return JSX element.
  */
-export const ComboboxOption = (props: ComboboxOptionProps, { Tooltip }: ComboboxOptionComponents = {}) => {
+export const ListboxOption = (props: ListboxOptionProps, { Tooltip }: ListboxOptionComponents = {}) => {
     const {
         before,
         after,
@@ -113,6 +113,8 @@ export const ComboboxOption = (props: ComboboxOptionProps, { Tooltip }: Combobox
     const actionElement = ListItemAction({
         as: 'button',
         ...actionProps,
+        // Focus stays on the focus owner (combobox trigger or standalone listbox), never on the option.
+        tabIndex: -1,
         id,
         className: element('action'),
         handleClick,

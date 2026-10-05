@@ -3,12 +3,12 @@ import userEvent from '@testing-library/user-event';
 import { fireEvent, screen, waitFor, within } from '@testing-library/dom';
 import { mdiDelete, mdiPencil } from '@lumx/icons';
 import { queryByClassName, queryAllByClassName } from '../../../testing/queries';
-import { CLASSNAME as COMBOBOX_LIST_CLASSNAME } from './ComboboxList';
-import { CLASSNAME as COMBOBOX_OPTION_CLASSNAME } from './ComboboxOption';
-import { CLASSNAME as COMBOBOX_OPTION_SKELETON_CLASSNAME } from './ComboboxOptionSkeleton';
+import { CLASSNAME as COMBOBOX_LIST_CLASSNAME } from '../Listbox/ListboxList';
+import { CLASSNAME as COMBOBOX_OPTION_CLASSNAME } from '../Listbox/ListboxOption';
+import { CLASSNAME as COMBOBOX_OPTION_SKELETON_CLASSNAME } from '../Listbox/ListboxOptionSkeleton';
 import { CLASSNAME as COMBOBOX_POPOVER_CLASSNAME } from './ComboboxPopover';
-import { CLASSNAME as COMBOBOX_SECTION_CLASSNAME } from './ComboboxSection';
-import { CLASSNAME as COMBOBOX_STATE_CLASSNAME } from './ComboboxState';
+import { CLASSNAME as COMBOBOX_SECTION_CLASSNAME } from '../Listbox/ListboxSection';
+import { CLASSNAME as COMBOBOX_STATE_CLASSNAME } from '../Listbox/ListboxState';
 import { VISUALLY_HIDDEN } from '../../constants';
 import { setupCombobox } from './setupCombobox';
 import type { ComboboxInputOptions } from './types';
@@ -3035,13 +3035,13 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
                 const loadingChanges: boolean[] = [];
                 const announcements: boolean[] = [];
-                handle.subscribe('loadingChange', (v) => loadingChanges.push(v));
-                handle.subscribe('loadingAnnouncement', (v) => announcements.push(v));
+                handle.list.subscribe('loadingChange', (v) => loadingChanges.push(v));
+                handle.list.subscribe('loadingAnnouncement', (v) => announcements.push(v));
 
                 // Register 3 skeletons while closed
-                const cleanup1 = handle.registerSkeleton();
-                const cleanup2 = handle.registerSkeleton();
-                const cleanup3 = handle.registerSkeleton();
+                const cleanup1 = handle.list.registerSkeleton();
+                const cleanup2 = handle.list.registerSkeleton();
+                const cleanup3 = handle.list.registerSkeleton();
 
                 // loadingChange fires immediately
                 expect(loadingChanges).toEqual([true]);
@@ -3083,10 +3083,10 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
                 const handle = setupCombobox(callbacks);
 
                 const announcements: boolean[] = [];
-                handle.subscribe('loadingAnnouncement', (v) => announcements.push(v));
+                handle.list.subscribe('loadingAnnouncement', (v) => announcements.push(v));
 
                 // Register skeletons and open
-                const cleanup1 = handle.registerSkeleton();
+                const cleanup1 = handle.list.registerSkeleton();
                 handle.setIsOpen(true);
 
                 // Wait for announcement
@@ -3121,10 +3121,10 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
                 const handle = setupCombobox(callbacks);
 
                 const announcements: boolean[] = [];
-                handle.subscribe('loadingAnnouncement', (v) => announcements.push(v));
+                handle.list.subscribe('loadingAnnouncement', (v) => announcements.push(v));
 
                 // Register and unregister skeletons while closed
-                const cleanup = handle.registerSkeleton();
+                const cleanup = handle.list.registerSkeleton();
                 vi.advanceTimersByTime(500);
                 cleanup();
 

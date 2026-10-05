@@ -4,9 +4,9 @@ import type { CommonRef, HasClassName, JSXElement, LumxClassName } from '../../t
 import { classNames } from '../../utils';
 
 /**
- * Defines the props for the core ComboboxOptionMoreInfo template.
+ * Defines the props for the core ListboxOptionMoreInfo template.
  */
-export interface ComboboxOptionMoreInfoProps extends HasClassName {
+export interface ListboxOptionMoreInfoProps extends HasClassName {
     /** Popover content (additional details about the option). */
     children?: JSXElement;
     /** Whether the popover is open. */
@@ -26,12 +26,12 @@ export interface ComboboxOptionMoreInfoProps extends HasClassName {
 /**
  * Props that React/Vue wrappers need to re-declare with framework-specific types.
  */
-export type ComboboxOptionMoreInfoPropsToOverride = 'children' | 'popoverId' | 'isOpen';
+export type ListboxOptionMoreInfoPropsToOverride = 'children' | 'popoverId' | 'isOpen';
 
 /**
- * Injected framework-specific components for ComboboxOptionMoreInfo rendering.
+ * Injected framework-specific components for ListboxOptionMoreInfo rendering.
  */
-export interface ComboboxOptionMoreInfoComponents {
+export interface ListboxOptionMoreInfoComponents {
     /** IconButton component (framework-specific). */
     IconButton: any;
     /** Popover component (framework-specific). */
@@ -50,7 +50,7 @@ export const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-combobox-op
 const { block, element } = classNames.bem(CLASSNAME);
 
 /**
- * ComboboxOptionMoreInfo core template.
+ * ListboxOptionMoreInfo core template.
  * Renders an info icon button with a popover that shows additional details about a combobox option.
  * The popover opens on mouse hover or when the parent option is keyboard-highlighted.
  *
@@ -61,9 +61,9 @@ const { block, element } = classNames.bem(CLASSNAME);
  * @param components Injected framework-specific components.
  * @return JSX element.
  */
-export const ComboboxOptionMoreInfo = (
-    props: ComboboxOptionMoreInfoProps,
-    { IconButton, Popover }: ComboboxOptionMoreInfoComponents,
+export const ListboxOptionMoreInfo = (
+    props: ListboxOptionMoreInfoProps,
+    { IconButton, Popover }: ListboxOptionMoreInfoComponents,
 ) => {
     const { children, className, isOpen, popoverId, ref, onMouseEnter, onMouseLeave, buttonProps } = props;
 

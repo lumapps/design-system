@@ -7,12 +7,12 @@ import { List } from '../List';
  * - `'listbox'`: Standard listbox with `role="listbox"` and `role="option"` items.
  * - `'grid'`: Grid mode with `role="grid"` and `role="gridcell"` items, enabling 2D keyboard navigation.
  */
-export type ComboboxListType = 'listbox' | 'grid';
+export type ListboxListType = 'listbox' | 'grid';
 
 /**
- * Defines the props for the core ComboboxList template.
+ * Defines the props for the core ListboxList template.
  */
-export interface ComboboxListProps extends HasClassName {
+export interface ListboxListProps extends HasClassName {
     /** Accessible label for the listbox (required for accessibility). */
     'aria-label'?: string;
     /**
@@ -26,7 +26,7 @@ export interface ComboboxListProps extends HasClassName {
      * Also read by `Combobox.SelectionIcon` to pick the checkbox icons.
      */
     'aria-multiselectable'?: boolean | 'true' | 'false';
-    /** Content (should be ComboboxOption elements). */
+    /** Content (should be ListboxOption elements). */
     children?: JSXElement;
     /** The ID of the listbox element. */
     id?: string;
@@ -36,7 +36,7 @@ export interface ComboboxListProps extends HasClassName {
      * The popup type. Set to "grid" when options have action buttons.
      * @default 'listbox'
      */
-    type?: ComboboxListType;
+    type?: ListboxListType;
 }
 
 /**
@@ -50,13 +50,13 @@ export const COMPONENT_NAME = 'ComboboxList';
 export const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-combobox-list';
 
 /**
- * ComboboxList core template.
+ * ListboxList core template.
  * Renders a List with combobox-specific ARIA attributes and styling.
  *
  * @param props Component props.
  * @return JSX element.
  */
-export const ComboboxList = (props: ComboboxListProps) => {
+export const ListboxList = (props: ListboxListProps) => {
     const {
         'aria-label': ariaLabel,
         'aria-busy': ariaBusy,

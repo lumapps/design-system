@@ -4,14 +4,14 @@ import { ListItem } from '../List/ListItem';
 import { SkeletonTypography } from '../Skeleton/SkeletonTypography';
 
 /**
- * Defines the props for the core ComboboxOptionSkeleton template.
+ * Defines the props for the core ListboxOptionSkeleton template.
  */
-export interface ComboboxOptionSkeletonProps extends HasClassName {
+export interface ListboxOptionSkeletonProps extends HasClassName {
     /** Content rendered before the skeleton text (e.g. SkeletonCircle for avatar placeholders). */
     before?: JSXElement;
     /** Content rendered after the skeleton text. */
     after?: JSXElement;
-    /** Show a secondary skeleton line (mirrors ComboboxOption's `description` prop). */
+    /** Show a secondary skeleton line (mirrors ListboxOption's `description` prop). */
     hasDescription?: boolean;
     /** Override the default SkeletonTypography content entirely. */
     children?: JSXElement;
@@ -27,9 +27,9 @@ export interface ComboboxOptionSkeletonProps extends HasClassName {
 
 /**
  * Props that React/Vue wrappers need to re-declare with framework-specific types.
- * Used by `ReactToJSX<ComboboxOptionSkeletonProps, ComboboxOptionSkeletonPropsToOverride>`.
+ * Used by `ReactToJSX<ListboxOptionSkeletonProps, ListboxOptionSkeletonPropsToOverride>`.
  */
-export type ComboboxOptionSkeletonPropsToOverride = 'before' | 'after' | 'children';
+export type ListboxOptionSkeletonPropsToOverride = 'before' | 'after' | 'children';
 
 /**
  * Component display name.
@@ -42,7 +42,7 @@ export const COMPONENT_NAME = 'ComboboxOptionSkeleton';
 export const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-combobox-option-skeleton';
 
 /**
- * ComboboxOptionSkeleton core template.
+ * ListboxOptionSkeleton core template.
  * Renders a skeleton placeholder `<li>` inside a combobox list, styled to match
  * option dimensions. Uses `role="none"` so screen readers ignore it.
  *
@@ -52,7 +52,7 @@ export const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-combobox-op
  * @param props Component props.
  * @return JSX element.
  */
-export const ComboboxOptionSkeleton = (props: ComboboxOptionSkeletonProps) => {
+export const ListboxOptionSkeleton = (props: ListboxOptionSkeletonProps) => {
     const { hasDescription, children, className, ref, count = 1, ...forwardedProps } = props;
 
     const itemProps = {

@@ -1,7 +1,7 @@
 import type { OptionRegistration, SectionRegistration, SectionState } from './types';
 
 /**
- * Get the value for a combobox option element.
+ * Get the value for an option element.
  * Uses `data-value` when set; falls back to the element's trimmed `textContent`.
  *
  * This is the *selection* value , which may differ from the visible label
@@ -12,7 +12,7 @@ export function getOptionValue(option: HTMLElement): string {
 }
 
 /**
- * Get the visible label for a combobox option element (its trimmed `textContent`).
+ * Get the visible label for an option element (its trimmed `textContent`).
  *
  * Used for typeahead matching: the user types the characters they see, which is the
  * option's label — not its `data-value` (which can be an unrelated id).

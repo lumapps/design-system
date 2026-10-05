@@ -14,9 +14,9 @@ export const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-combobox-st
 const { block } = classNames.bem(CLASSNAME);
 
 /**
- * Defines the props for the core ComboboxState template.
+ * Defines the props for the core ListboxState template.
  */
-export interface ComboboxStateProps {
+export interface ListboxStateProps {
     /**
      * Message to display when the list has no visible options.
      * Can be a plain string or a function receiving the current input value (for dynamic messages).
@@ -78,7 +78,7 @@ export interface ComboboxStateProps {
 /**
  * Components injected by the framework wrapper (dependency injection).
  */
-export interface ComboboxStateComponents {
+export interface ListboxStateComponents {
     /**
      * GenericBlock component (framework-specific, e.g. React GenericBlock with FlexBox handling).
      */
@@ -90,7 +90,7 @@ export interface ComboboxStateComponents {
 }
 
 /**
- * ComboboxState core template.
+ * ListboxState core template.
  * Renders empty/error/option-count state messages inside the combobox popover.
  * The block itself acts as a screen reader live region (`role="status" aria-live="polite"`).
  *
@@ -103,7 +103,7 @@ export interface ComboboxStateComponents {
  * @param components Injected framework-specific components.
  * @return JSX element or null when no state is active.
  */
-export const ComboboxState = (props: ComboboxStateProps, { GenericBlock, Text }: ComboboxStateComponents) => {
+export const ListboxState = (props: ListboxStateProps, { GenericBlock, Text }: ListboxStateComponents) => {
     const { emptyMessage, nbOptionMessage, errorMessage, errorTryReloadMessage, loadingMessage, state } = props;
     const isOpen = state?.isOpen ?? true;
     const optionsLength = state?.optionsLength ?? 0;

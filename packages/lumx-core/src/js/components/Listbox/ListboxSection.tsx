@@ -2,14 +2,14 @@ import type { CommonRef, HasClassName, JSXElement, LumxClassName } from '../../t
 import { classNames } from '../../utils';
 
 /**
- * Defines the props for the core ComboboxSection template.
+ * Defines the props for the core ListboxSection template.
  */
-export interface ComboboxSectionProps extends HasClassName {
+export interface ListboxSectionProps extends HasClassName {
     /** Section label displayed as the group title. Accepts a plain string or custom JSX content. */
     label?: string | JSXElement;
     /** Section icon */
     icon?: string;
-    /** Section content (should be ComboboxOption elements). */
+    /** Section content (should be ListboxOption elements). */
     children: JSXElement;
     /** ref to the root element. */
     ref?: CommonRef;
@@ -22,21 +22,21 @@ export interface ComboboxSectionProps extends HasClassName {
     /**
      * When true, the section is visually rendered (label + content) but hidden from assistive
      * technology. Used for skeleton-only sections: the visual skeleton provides feedback to
-     * sighted users, while the live region (`ComboboxState`) handles the loading announcement.
+     * sighted users, while the live region (`ListboxState`) handles the loading announcement.
      */
     'aria-hidden'?: boolean;
 }
 
 /**
  * Props that React/Vue wrappers need to re-declare with framework-specific types.
- * Used by `ReactToJSX<ComboboxSectionProps, ComboboxSectionPropsToOverride>`.
+ * Used by `ReactToJSX<ListboxSectionProps, ListboxSectionPropsToOverride>`.
  */
-export type ComboboxSectionPropsToOverride = 'children';
+export type ListboxSectionPropsToOverride = 'children';
 
 /**
- * Injected framework-specific components for ComboboxSection rendering.
+ * Injected framework-specific components for ListboxSection rendering.
  */
-export interface ComboboxSectionComponents {
+export interface ListboxSectionComponents {
     /** ListSection component (framework-specific). */
     ListSection: any;
 }
@@ -52,7 +52,7 @@ export const COMPONENT_NAME = 'ComboboxSection';
 export const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-combobox-section';
 
 /**
- * ComboboxSection core template.
+ * ListboxSection core template.
  * Renders a ListSection with combobox-specific ARIA roles.
  *
  * Framework-specific components (ListSection) are passed as a second argument
@@ -62,7 +62,7 @@ export const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-combobox-se
  * @param components Injected framework-specific components.
  * @return JSX element.
  */
-export const ComboboxSection = (props: ComboboxSectionProps, { ListSection }: ComboboxSectionComponents) => {
+export const ListboxSection = (props: ListboxSectionProps, { ListSection }: ListboxSectionComponents) => {
     const { children, className, hidden, 'aria-hidden': ariaHidden, ...forwardedProps } = props;
     return (
         <ListSection

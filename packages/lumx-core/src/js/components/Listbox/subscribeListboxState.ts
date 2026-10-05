@@ -1,4 +1,4 @@
-import type { ComboboxHandle } from './types';
+import type { ListboxHandle } from '../Listbox/types';
 
 /**
  * Delay before inserting content into the aria-live region after the popover opens (ms).
@@ -11,41 +11,51 @@ import type { ComboboxHandle } from './types';
  */
 const OPEN_ANNOUNCEMENT_DELAY = 100;
 
-/** Setters invoked by `subscribeComboboxState` when handle events fire. */
-export interface ComboboxStateSetters {
+/** Setters invoked by `subscribeListboxState` when handle events fire. */
+export interface ListboxStateSetters {
     /** Called immediately with the current loading state, then on every `loadingChange` event. */
     setIsLoading: (value: boolean) => void;
     /** Called on every `loadingAnnouncement` event (debounced 500ms after skeletons mount). */
     setShouldAnnounce: (value: boolean) => void;
-    /** Called with `true` after a short delay when the combobox opens, and `false` immediately on close. */
+    /** Called with `true` after a short delay when the options become visible, and `false` immediately when hidden. */
     setIsOpen: (value: boolean) => void;
 }
 
 /**
- * Subscribe to the combobox handle events needed by `ComboboxState`.
+ * Subscribe to the listbox handle events needed by `ListboxState`.
  *
  * Manages three subscriptions:
- * - `loadingChange` → `setIsLoading` (+ synchronous initial read of `handle.isLoading`)
+ * - `loadingChange` → `setIsLoading` (+ synchronous initial read of `list.isLoading`)
  * - `loadingAnnouncement` → `setShouldAnnounce`
- * - `open` → `setIsOpen` (deferred by {@link OPEN_ANNOUNCEMENT_DELAY}ms on open, immediate on close)
+ * - `open` → `setIsOpen` (deferred by {@link OPEN_ANNOUNCEMENT_DELAY}ms when shown, immediate when hidden)
+ *   (a standalone listbox is always visible: `setIsOpen(true)` once, no subscription)
  *
- * @param handle  The combobox handle to subscribe to.
+ * @param list    The listbox handle to subscribe to (`ComboboxHandle.list` inside a combobox).
  * @param setters Framework-specific state setters.
  * @returns A cleanup function that unsubscribes all events and clears timers.
  */
-export function subscribeComboboxState(handle: ComboboxHandle, setters: ComboboxStateSetters): () => void {
+export function subscribeListboxState(list: ListboxHandle, setters: ListboxStateSetters): () => void {
     const { setIsLoading, setShouldAnnounce, setIsOpen } = setters;
 
     // Read current loading state synchronously
-    setIsLoading(handle.isLoading);
+    setIsLoading(list.isLoading);
 
-    const unsubLoadingChange = handle.subscribe('loadingChange', setIsLoading);
-    const unsubLoadingAnnouncement = handle.subscribe('loadingAnnouncement', setShouldAnnounce);
+    const unsubLoadingChange = list.subscribe('loadingChange', setIsLoading);
+    const unsubLoadingAnnouncement = list.subscribe('loadingAnnouncement', setShouldAnnounce);
+
+    // Standalone listbox: the options are always visible.
+    if (list.isStandalone) {
+        setIsOpen(true);
+        return () => {
+            unsubLoadingChange();
+            unsubLoadingAnnouncement();
+        };
+    }
 
     let openTimer: ReturnType<typeof setTimeout> | undefined;
-    const unsubOpen = handle.subscribe('open', (open) => {
+    const unsubVisible = list.subscribe('open', (visible) => {
         clearTimeout(openTimer);
-        if (open) {
+        if (visible) {
             // Delay content insertion so the popover is visible in the
             // accessibility tree before the live region content changes.
             openTimer = setTimeout(() => setIsOpen(true), OPEN_ANNOUNCEMENT_DELAY);
@@ -58,7 +68,7 @@ export function subscribeComboboxState(handle: ComboboxHandle, setters: Combobox
     return () => {
         unsubLoadingChange();
         unsubLoadingAnnouncement();
-        unsubOpen();
+        unsubVisible();
         clearTimeout(openTimer);
     };
 }

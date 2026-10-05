@@ -10,9 +10,9 @@ import { classNames } from '../../utils';
 import { ClickableElement, RawClickable } from '../RawClickable';
 
 /**
- * Defines the props for the core ComboboxOptionAction template.
+ * Defines the props for the core ListboxOptionAction template.
  */
-export type ComboboxOptionActionProps<E extends ClickableElement = 'button'> = HasPolymorphicAs<E> &
+export type ListboxOptionActionProps<E extends ClickableElement = 'button'> = HasPolymorphicAs<E> &
     HasClassName &
     HasRequiredLinkHref<E> & {
         /** Content of the action (icon, label, etc.). */
@@ -38,7 +38,7 @@ export const COMPONENT_NAME = 'ComboboxOptionAction';
 export const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-combobox-option-action';
 
 /**
- * ComboboxOptionAction core template.
+ * ListboxOptionAction core template.
  * Renders a secondary action button within a combobox option row (grid mode).
  * Each action renders as a `role="gridcell"` element, enabling 2D keyboard
  * navigation (ArrowLeft/Right to move between the option and its actions).
@@ -46,7 +46,7 @@ export const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-combobox-op
  * @param props Component props.
  * @return JSX element.
  */
-export const ComboboxOptionAction = <E extends ClickableElement = 'button'>(props: ComboboxOptionActionProps<E>) => {
+export const ListboxOptionAction = <E extends ClickableElement = 'button'>(props: ListboxOptionActionProps<E>) => {
     const { children, className, as: Element = 'button', handleClick, ...forwardedProps } = props;
 
     return RawClickable({

@@ -2,7 +2,7 @@ import { mdiCheckboxBlankOutline, mdiCheckboxMarked, mdiCheckCircle, mdiRadiobox
 
 import { Icon } from '../Icon';
 
-export interface ComboboxSelectionIconProps {
+export interface ListboxOptionSelectionIconProps {
     /** Selection type of the select (`undefined` renders nothing). */
     selectionType: 'single' | 'multiple' | undefined;
     /** Whether the option is selected. */
@@ -15,7 +15,7 @@ export interface ComboboxSelectionIconProps {
  * - `single`: a check circle icon when selected, a blank radio icon otherwise.
  * - `multiple`: a checkbox icon, marked or blank.
  */
-export const ComboboxSelectionIcon = ({ selectionType, isSelected }: ComboboxSelectionIconProps) => {
+export const ListboxOptionSelectionIcon = ({ selectionType, isSelected }: ListboxOptionSelectionIconProps) => {
     let icon: string;
     if (selectionType === 'multiple') {
         icon = isSelected ? mdiCheckboxMarked : mdiCheckboxBlankOutline;
