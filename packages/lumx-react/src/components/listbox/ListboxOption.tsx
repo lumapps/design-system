@@ -5,30 +5,29 @@ import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { HasPolymorphicAs, HasRequiredLinkHref } from '@lumx/react/utils/type';
 import { GenericProps } from '@lumx/core/js/types';
 import {
-    ComboboxOption as UI,
-    ComboboxOptionProps as UIProps,
-    ComboboxOptionPropsToOverride,
+    ListboxOption as UI,
+    ListboxOptionProps as UIProps,
+    ListboxOptionPropsToOverride,
     COMPONENT_NAME,
     CLASSNAME,
-} from '@lumx/core/js/components/Combobox/ComboboxOption';
+} from '@lumx/core/js/components/Listbox/ListboxOption';
 import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 import { useId } from '@lumx/react/hooks/useId';
-import { optionActiveEvent } from '@lumx/core/js/components/Combobox/constants';
+import { optionActiveEvent } from '@lumx/core/js/components/Listbox/constants';
 import { Tooltip, TooltipProps } from '../tooltip';
-import { useComboboxContext } from './context/ComboboxContext';
-import { useComboboxListContext } from './context/ComboboxListContext';
-import { ComboboxOptionContext } from './context/ComboboxOptionContext';
-import { useComboboxEvent } from './context/useComboboxEvent';
+import { useListboxContext } from './context/ListboxContext';
+import { ListboxOptionContext } from './context/ListboxOptionContext';
+import { useListboxEvent } from './context/useListboxEvent';
 
 /**
  * Props forwarded to the inner action element (button or link).
  */
-export type ComboboxOptionActionProps<E extends ElementType = 'button'> = HasPolymorphicAs<E> & HasRequiredLinkHref<E>;
+export type ListboxOptionActionProps<E extends ElementType = 'button'> = HasPolymorphicAs<E> & HasRequiredLinkHref<E>;
 
 /**
  * Props for Combobox.Option component.
  */
-export interface ComboboxOptionProps extends GenericProps, ReactToJSX<UIProps, ComboboxOptionPropsToOverride> {
+export interface ListboxOptionProps extends GenericProps, ReactToJSX<UIProps, ListboxOptionPropsToOverride> {
     /** Display label for the option. */
     children?: ReactNode;
     /** On option clicked (or activated with keyboard) */
@@ -44,7 +43,7 @@ export interface ComboboxOptionProps extends GenericProps, ReactToJSX<UIProps, C
     /** Props forwarded to a Tooltip wrapping the role="option" / role="gridcell" trigger element. */
     tooltipProps?: Partial<TooltipProps>;
     /** Props forwarded to the inner action element (e.g. `{ as: 'a', href: '/foo' }`). */
-    actionProps?: ComboboxOptionActionProps<any>;
+    actionProps?: ListboxOptionActionProps<any>;
 }
 
 /**
@@ -64,7 +63,7 @@ export interface ComboboxOptionProps extends GenericProps, ReactToJSX<UIProps, C
  * @param ref   Component ref.
  * @return React element.
  */
-export const ComboboxOption = forwardRef<ComboboxOptionProps, HTMLLIElement>((props, ref) => {
+export const ListboxOption = forwardRef<ListboxOptionProps, HTMLLIElement>((props, ref) => {
     const {
         value,
         description,
@@ -78,8 +77,7 @@ export const ComboboxOption = forwardRef<ComboboxOptionProps, HTMLLIElement>((pr
         onClick,
         ...forwardedProps
     } = props;
-    const { type } = useComboboxListContext();
-    const { handle } = useComboboxContext();
+    const { type, list } = useListboxContext();
     const isGrid = type === 'grid';
     const optionId = useId();
     const descriptionId = useId();
@@ -88,26 +86,26 @@ export const ComboboxOption = forwardRef<ComboboxOptionProps, HTMLLIElement>((pr
     const [isFiltered, setIsFiltered] = useState(false);
 
     // Force the tooltip open while the option is the active descendant (keyboard highlight).
-    const isActive = useComboboxEvent(optionActiveEvent(optionId), false);
+    const isActive = useListboxEvent(list, optionActiveEvent(optionId), false);
 
     useEffect(() => {
         const element = internalRef.current;
-        if (!element || !handle) return undefined;
-        return handle.registerOption(element, setIsFiltered);
-    }, [handle]);
+        if (!element || !list) return undefined;
+        return list.registerOption(element, setIsFiltered);
+    }, [list]);
 
     // Re-evaluate filter state when the option value changes.
     useEffect(() => {
         const element = internalRef.current;
-        if (!element || !handle) return;
-        handle.refilterOption(element);
-    }, [handle, value]);
+        if (!element || !list) return;
+        list.refilterOption(element);
+    }, [list, value]);
 
     // Wrap `after` content in an option context so sub-components (e.g. OptionMoreInfo)
     // can access the parent option's ID for keyboard highlight detection.
     const optionContextValue = useMemo(() => ({ optionId, isSelected: Boolean(isSelected) }), [optionId, isSelected]);
     const wrappedAfter = after ? (
-        <ComboboxOptionContext.Provider value={optionContextValue}>{after}</ComboboxOptionContext.Provider>
+        <ListboxOptionContext.Provider value={optionContextValue}>{after}</ListboxOptionContext.Provider>
     ) : undefined;
 
     return UI(
@@ -133,5 +131,5 @@ export const ComboboxOption = forwardRef<ComboboxOptionProps, HTMLLIElement>((pr
     );
 });
 
-ComboboxOption.displayName = COMPONENT_NAME;
-ComboboxOption.className = CLASSNAME;
+ListboxOption.displayName = COMPONENT_NAME;
+ListboxOption.className = CLASSNAME;

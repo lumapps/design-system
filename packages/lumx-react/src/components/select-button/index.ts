@@ -1,4 +1,4 @@
-import { ComboboxOption } from '../combobox/ComboboxOption';
+import { ListboxOption } from '../listbox/ListboxOption';
 import { SelectButton as _SelectButton } from './SelectButton';
 
 export type {
@@ -13,5 +13,5 @@ export type { SelectButtonProps, SingleSelectButtonProps, MultipleSelectButtonPr
  */
 export const SelectButton = Object.assign(_SelectButton, {
     /** Selectable option within the dropdown list. */
-    Option: ComboboxOption,
+    Option: ListboxOption,
 });

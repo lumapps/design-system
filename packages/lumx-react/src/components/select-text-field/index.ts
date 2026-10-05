@@ -1,7 +1,7 @@
-import { ComboboxOption } from '../combobox/ComboboxOption';
-import { ComboboxSection } from '../combobox/ComboboxSection';
-import { ComboboxOptionMoreInfo } from '../combobox/ComboboxOptionMoreInfo';
-import { ComboboxOptionSkeleton } from '../combobox/ComboboxOptionSkeleton';
+import { ListboxOption } from '../listbox/ListboxOption';
+import { ListboxSection } from '../listbox/ListboxSection';
+import { ListboxOptionMoreInfo } from '../listbox/ListboxOptionMoreInfo';
+import { ListboxOptionSkeleton } from '../listbox/ListboxOptionSkeleton';
 import { ListDivider } from '../list/ListDivider';
 import { SelectTextField as _SelectTextField } from './SelectTextField';
 
@@ -18,13 +18,13 @@ export type { SelectTextFieldTranslations } from '@lumx/core/js/utils/select/typ
  */
 export const SelectTextField = Object.assign(_SelectTextField, {
     /** Selectable option within the dropdown list. */
-    Option: ComboboxOption,
+    Option: ListboxOption,
     /** Labelled group of options. */
-    Section: ComboboxSection,
+    Section: ListboxSection,
     /** Info icon on an option that reveals a popover with additional details. */
-    OptionMoreInfo: ComboboxOptionMoreInfo,
+    OptionMoreInfo: ListboxOptionMoreInfo,
     /** Skeleton loading placeholder for options being fetched. */
-    OptionSkeleton: ComboboxOptionSkeleton,
+    OptionSkeleton: ListboxOptionSkeleton,
     /** Visual separator between option groups (alias for ListDivider). Purely decorative — invisible to screen readers. */
     Divider: ListDivider,
 });

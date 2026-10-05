@@ -1,30 +1,30 @@
 import { Children, ReactNode, useEffect, useRef, useState } from 'react';
 
 import {
-    ComboboxSection as UI,
-    ComboboxSectionProps as UIProps,
-    ComboboxSectionPropsToOverride,
+    ListboxSection as UI,
+    ListboxSectionProps as UIProps,
+    ListboxSectionPropsToOverride,
     COMPONENT_NAME,
     CLASSNAME,
-} from '@lumx/core/js/components/Combobox/ComboboxSection';
+} from '@lumx/core/js/components/Listbox/ListboxSection';
 import { GenericProps } from '@lumx/core/js/types';
 import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { ListSection } from '../list/ListSection';
-import { useComboboxContext } from './context/ComboboxContext';
+import { useListboxContext } from './context/ListboxContext';
 
 /**
  * Props for Combobox.Section component.
  */
-export interface ComboboxSectionProps extends GenericProps, ReactToJSX<UIProps, ComboboxSectionPropsToOverride> {
+export interface ListboxSectionProps extends GenericProps, ReactToJSX<UIProps, ListboxSectionPropsToOverride> {
     /** Section content (should be Combobox.Option elements). */
     children: ReactNode;
 }
 
 /**
  * Combobox.Section component - groups Combobox.Option items under a labelled section.
- * Delegates rendering to the core ComboboxSection template, injecting the React ListSection.
+ * Delegates rendering to the core ListboxSection template, injecting the React ListSection.
  *
  * Returns null when children is empty so the section header is not rendered as an orphan.
  *
@@ -37,8 +37,8 @@ export interface ComboboxSectionProps extends GenericProps, ReactToJSX<UIProps, 
  * @param ref   Component ref.
  * @return React element.
  */
-export const ComboboxSection = forwardRef<ComboboxSectionProps, HTMLLIElement>((props, ref) => {
-    const { handle } = useComboboxContext();
+export const ListboxSection = forwardRef<ListboxSectionProps, HTMLLIElement>((props, ref) => {
+    const { list } = useListboxContext();
     const internalRef = useRef<HTMLLIElement>(null);
     const mergedRef = useMergeRefs(ref, internalRef);
     const [sectionState, setSectionState] = useState({ hidden: false, 'aria-hidden': false });
@@ -46,9 +46,9 @@ export const ComboboxSection = forwardRef<ComboboxSectionProps, HTMLLIElement>((
     // Register with the combobox handle for section state notifications.
     useEffect(() => {
         const element = internalRef.current;
-        if (!element || !handle) return undefined;
-        return handle.registerSection(element, setSectionState);
-    }, [handle]);
+        if (!element || !list) return undefined;
+        return list.registerSection(element, setSectionState);
+    }, [list]);
 
     if (Children.count(props.children) === 0) return null;
 
@@ -63,5 +63,5 @@ export const ComboboxSection = forwardRef<ComboboxSectionProps, HTMLLIElement>((
     );
 });
 
-ComboboxSection.displayName = COMPONENT_NAME;
-ComboboxSection.className = CLASSNAME;
+ListboxSection.displayName = COMPONENT_NAME;
+ListboxSection.className = CLASSNAME;

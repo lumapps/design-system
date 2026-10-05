@@ -1,22 +1,23 @@
 import { ReactNode, useEffect, useRef, useState } from 'react';
 
 import {
-    ComboboxOptionMoreInfo as UI,
-    ComboboxOptionMoreInfoProps as UIProps,
-    ComboboxOptionMoreInfoPropsToOverride,
+    ListboxOptionMoreInfo as UI,
+    ListboxOptionMoreInfoProps as UIProps,
+    ListboxOptionMoreInfoPropsToOverride,
     COMPONENT_NAME,
     CLASSNAME,
-} from '@lumx/core/js/components/Combobox/ComboboxOptionMoreInfo';
+} from '@lumx/core/js/components/Listbox/ListboxOptionMoreInfo';
 import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 import { IconButton, IconButtonProps } from '@lumx/react/components/button';
 import { Popover } from '@lumx/react/components/popover';
-import { useComboboxOptionContext } from './context/ComboboxOptionContext';
-import { useComboboxEvent } from './context/useComboboxEvent';
+import { useListboxOptionContext } from './context/ListboxOptionContext';
+import { useListboxContext } from './context/ListboxContext';
+import { useListboxEvent } from './context/useListboxEvent';
 
 /**
  * Props for Combobox.OptionMoreInfo component.
  */
-export interface ComboboxOptionMoreInfoProps extends ReactToJSX<UIProps, ComboboxOptionMoreInfoPropsToOverride> {
+export interface ListboxOptionMoreInfoProps extends ReactToJSX<UIProps, ListboxOptionMoreInfoPropsToOverride> {
     /** Content of the popover (additional details about the option). */
     children?: ReactNode;
     /** Callback when the popover opens or closes. */
@@ -38,16 +39,17 @@ export interface ComboboxOptionMoreInfoProps extends ReactToJSX<UIProps, Combobo
  * @param props Component props.
  * @return React element.
  */
-export const ComboboxOptionMoreInfo = (props: ComboboxOptionMoreInfoProps) => {
+export const ListboxOptionMoreInfo = (props: ListboxOptionMoreInfoProps) => {
     const { children, onToggle, buttonProps, ...forwardedProps } = props;
     const ref = useRef<HTMLButtonElement>(null);
     const [isHovered, setIsHovered] = useState(false);
 
     // Get the parent option ID from the option context (provided by Combobox.Option).
-    const { optionId } = useComboboxOptionContext();
+    const { optionId } = useListboxOptionContext();
 
     // Subscribe to active descendant changes to detect keyboard highlight.
-    const activeDescendantId = useComboboxEvent('activeDescendantChange', null);
+    const { list } = useListboxContext();
+    const activeDescendantId = useListboxEvent(list, 'activeDescendantChange', null);
     const isKeyboardHighlighted = activeDescendantId === optionId;
 
     // Open on mouse hover or keyboard highlight.
@@ -57,7 +59,7 @@ export const ComboboxOptionMoreInfo = (props: ComboboxOptionMoreInfoProps) => {
         onToggle?.(isOpen);
     }, [isOpen, onToggle]);
 
-    // Predictable ID convention: the parent ComboboxOption sets aria-describedby="${optionId}-more-info"
+    // Predictable ID convention: the parent ListboxOption sets aria-describedby="${optionId}-more-info"
     // on the role="option" element. The Popover uses closeMode="hide" to keep content in the DOM
     // so that screen readers can resolve the aria-describedby reference even when the popover is closed.
     const popoverId = `${optionId}-more-info`;
@@ -77,5 +79,5 @@ export const ComboboxOptionMoreInfo = (props: ComboboxOptionMoreInfoProps) => {
     );
 };
 
-ComboboxOptionMoreInfo.displayName = COMPONENT_NAME;
-ComboboxOptionMoreInfo.className = CLASSNAME;
+ListboxOptionMoreInfo.displayName = COMPONENT_NAME;
+ListboxOptionMoreInfo.className = CLASSNAME;

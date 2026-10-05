@@ -1,22 +1,22 @@
 import { ReactNode, useEffect, useState } from 'react';
 
 import {
-    ComboboxState as UI,
-    ComboboxStateProps as UIProps,
+    ListboxState as UI,
+    ListboxStateProps as UIProps,
     COMPONENT_NAME,
     CLASSNAME,
-} from '@lumx/core/js/components/Combobox/ComboboxState';
-import { subscribeComboboxState } from '@lumx/core/js/components/Combobox/subscribeComboboxState';
+} from '@lumx/core/js/components/Listbox/ListboxState';
+import { subscribeListboxState } from '@lumx/core/js/components/Listbox/subscribeListboxState';
 import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 import { GenericBlock } from '../generic-block';
 import { Text } from '../text';
-import { useComboboxEvent } from './context/useComboboxEvent';
-import { useComboboxContext } from './context/ComboboxContext';
+import { useListboxEvent } from './context/useListboxEvent';
+import { useListboxContext } from './context/ListboxContext';
 
 /**
  * Props for Combobox.State component.
  */
-export interface ComboboxStateProps extends ReactToJSX<UIProps, 'state'> {
+export interface ListboxStateProps extends ReactToJSX<UIProps, 'state'> {
     /** Additional content rendered after the state message. */
     children?: ReactNode;
 }
@@ -50,18 +50,18 @@ export interface ComboboxStateProps extends ReactToJSX<UIProps, 'state'> {
  * @param props Component props.
  * @return React element.
  */
-export const ComboboxState = (props: ComboboxStateProps) => {
-    const { handle } = useComboboxContext();
-    const optionsState = useComboboxEvent('optionsChange', undefined);
+export const ListboxState = (props: ListboxStateProps) => {
+    const { list } = useListboxContext();
+    const optionsState = useListboxEvent(list, 'optionsChange', undefined);
 
     const [isLoading, setIsLoading] = useState(false);
     const [shouldAnnounce, setShouldAnnounce] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
 
     useEffect(() => {
-        if (!handle) return undefined;
-        return subscribeComboboxState(handle, { setIsLoading, setShouldAnnounce, setIsOpen });
-    }, [handle]);
+        if (!list) return undefined;
+        return subscribeListboxState(list, { setIsLoading, setShouldAnnounce, setIsOpen });
+    }, [list]);
 
     const state = { ...optionsState, isLoading, isOpen };
 
@@ -71,5 +71,5 @@ export const ComboboxState = (props: ComboboxStateProps) => {
     return UI({ ...props, loadingMessage, state }, { GenericBlock, Text });
 };
 
-ComboboxState.displayName = COMPONENT_NAME;
-ComboboxState.className = CLASSNAME;
+ListboxState.displayName = COMPONENT_NAME;
+ListboxState.className = CLASSNAME;

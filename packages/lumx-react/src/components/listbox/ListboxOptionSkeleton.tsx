@@ -2,21 +2,21 @@ import { ReactNode, useEffect } from 'react';
 
 import { GenericProps } from '@lumx/core/js/types';
 import {
-    ComboboxOptionSkeleton as UI,
-    ComboboxOptionSkeletonProps as UIProps,
-    ComboboxOptionSkeletonPropsToOverride,
+    ListboxOptionSkeleton as UI,
+    ListboxOptionSkeletonProps as UIProps,
+    ListboxOptionSkeletonPropsToOverride,
     COMPONENT_NAME,
     CLASSNAME,
-} from '@lumx/core/js/components/Combobox/ComboboxOptionSkeleton';
+} from '@lumx/core/js/components/Listbox/ListboxOptionSkeleton';
 import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
-import { useComboboxContext } from './context/ComboboxContext';
+import { useListboxContext } from './context/ListboxContext';
 
 /**
  * Props for Combobox.OptionSkeleton component.
  */
-export interface ComboboxOptionSkeletonProps
+export interface ListboxOptionSkeletonProps
     extends GenericProps,
-        ReactToJSX<UIProps, ComboboxOptionSkeletonPropsToOverride> {
+        ReactToJSX<UIProps, ListboxOptionSkeletonPropsToOverride> {
     /** Content rendered before the skeleton text (e.g. SkeletonCircle for avatar placeholders). */
     before?: ReactNode;
     /** Content rendered after the skeleton text. */
@@ -49,12 +49,12 @@ export interface ComboboxOptionSkeletonProps
  * @param props Component props.
  * @return React element(s).
  */
-export const ComboboxOptionSkeleton = (props: ComboboxOptionSkeletonProps) => {
-    const { handle } = useComboboxContext();
-    useEffect(() => handle?.registerSkeleton(), [handle]);
+export const ListboxOptionSkeleton = (props: ListboxOptionSkeletonProps) => {
+    const { list } = useListboxContext();
+    useEffect(() => list?.registerSkeleton(), [list]);
 
     return <UI {...props} />;
 };
 
-ComboboxOptionSkeleton.displayName = COMPONENT_NAME;
-ComboboxOptionSkeleton.className = CLASSNAME;
+ListboxOptionSkeleton.displayName = COMPONENT_NAME;
+ListboxOptionSkeleton.className = CLASSNAME;

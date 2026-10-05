@@ -1,13 +1,13 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { CLASSNAME } from '@lumx/core/js/components/Combobox/ComboboxOption';
-import comboboxOptionTests from '@lumx/core/js/components/Combobox/ComboboxOptionTests';
+import { CLASSNAME } from '@lumx/core/js/components/Listbox/ListboxOption';
+import listboxOptionTests from '@lumx/core/js/components/Combobox/ComboboxOptionTests';
 import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 import { getByClassName } from '@lumx/react/testing/utils/queries';
 
 import { Combobox } from '@lumx/react';
-import { ComboboxOptionProps } from './ComboboxOption';
+import { ListboxOptionProps } from './ListboxOption';
 
 /**
  * Mount a `<Combobox.Option>` inside the minimum required context
@@ -16,7 +16,7 @@ import { ComboboxOptionProps } from './ComboboxOption';
  * Option children are unmounted while the combobox is closed, so the helper
  * opens it (via the input trigger) before returning the option element.
  */
-async function renderOption(propsOverride: Partial<ComboboxOptionProps> = {}, options?: SetupRenderOptions) {
+async function renderOption(propsOverride: Partial<ListboxOptionProps> = {}, options?: SetupRenderOptions) {
     const props: any = {
         value: 'apple',
         children: 'Apple',
@@ -46,7 +46,7 @@ describe('<Combobox.Option>', () => {
         forwardRef: 'element',
     });
 
-    comboboxOptionTests({
+    listboxOptionTests({
         Combobox,
         render: (template) => render(template()),
     });

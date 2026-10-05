@@ -1,9 +1,9 @@
-import { ComboboxSelectionIcon as UI } from '@lumx/core/js/components/Combobox/ComboboxSelectionIcon';
-import { useComboboxListContext } from './context/ComboboxListContext';
-import { useComboboxOptionContext } from './context/ComboboxOptionContext';
+import { ListboxOptionSelectionIcon as UI } from '@lumx/core/js/components/Listbox/ListboxOptionSelectionIcon';
+import { useListboxContext } from './context/ListboxContext';
+import { useListboxOptionContext } from './context/ListboxOptionContext';
 
 /**
- * Combobox.SelectionIcon component.
+ * Combobox.SelectionIcon component (`Listbox.SelectionIcon`, re-exported by the combobox).
  *
  * Displays the selection state icon of an option (the same icon as in `SelectTextField` and `SelectButton`):
  * - `single` list: a check circle icon when selected, a blank radio icon otherwise.
@@ -14,9 +14,9 @@ import { useComboboxOptionContext } from './context/ComboboxOptionContext';
  *
  * @return React element.
  */
-export const ComboboxSelectionIcon = () => {
-    const { isSelected } = useComboboxOptionContext();
-    const { selectionType } = useComboboxListContext();
+export const ListboxOptionSelectionIcon = () => {
+    const { isSelected } = useListboxOptionContext();
+    const { selectionType } = useListboxContext();
     return <UI selectionType={selectionType} isSelected={isSelected} />;
 };
-ComboboxSelectionIcon.displayName = 'ComboboxSelectionIcon';
+ListboxOptionSelectionIcon.displayName = 'ComboboxSelectionIcon';
