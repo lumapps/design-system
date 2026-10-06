@@ -49,7 +49,7 @@
     // or from `isSelected` on the list item.
     // (the background is on the action overlay `::before`, so the state selectors must come before `::before`)
     & .#{$lumx-base-prefix}-action-area__action[aria-selected="true"],
-    & .#{$lumx-base-prefix}-action-area__action[aria-current]:not([aria-current="false"], [aria-current=""]),
+    & .#{$lumx-base-prefix}-action-area__action[aria-current]:not([aria-current="false"]):not([aria-current=""]),
     &__wrapper--is-selected .#{$lumx-base-prefix}-action-area__action {
         &::before {
             background-color: lumx-color-variant("primary", "L5");
