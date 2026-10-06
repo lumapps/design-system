@@ -303,6 +303,66 @@ export function setup({
         ),
     };
 
+    /** Combobox with `Combobox.SelectionIcon` in a single selection list (check circle / radio icons). */
+    const ComboboxWithSelectionIconSingle = {
+        args: { value: 'Banana' },
+        decorators: [withValueOnChange()],
+        render: ({ value, onChange }: { value: string; onChange: (v: string) => void }) => (
+            <Combobox.Provider>
+                <Combobox.Input
+                    value={value}
+                    onChange={onChange}
+                    placeholder="Pick a fruit…"
+                    toggleButtonProps={{ label: 'Fruits' }}
+                />
+                <Combobox.Popover>
+                    <Combobox.List aria-label="Fruits">
+                        {FRUITS.map((fruit) => (
+                            <Combobox.Option
+                                key={fruit}
+                                value={fruit}
+                                isSelected={fruit === value}
+                                after={<Combobox.SelectionIcon />}
+                            >
+                                {fruit}
+                            </Combobox.Option>
+                        ))}
+                    </Combobox.List>
+                </Combobox.Popover>
+            </Combobox.Provider>
+        ),
+    };
+
+    /** Combobox with `Combobox.SelectionIcon` in a multiple selection list (checkbox icons). */
+    const ComboboxWithSelectionIconMultiple = {
+        args: { value: '' },
+        decorators: [withValueOnChange()],
+        render: ({ value, onChange }: { value: string; onChange: (v: string) => void }) => (
+            <Combobox.Provider>
+                <Combobox.Input
+                    value={value}
+                    onChange={onChange}
+                    placeholder="Pick a fruit…"
+                    toggleButtonProps={{ label: 'Fruits' }}
+                />
+                <Combobox.Popover>
+                    <Combobox.List aria-label="Fruits" aria-multiselectable>
+                        {FRUITS.map((fruit) => (
+                            <Combobox.Option
+                                key={fruit}
+                                value={fruit}
+                                isSelected={['Apple', 'Banana'].includes(fruit)}
+                                after={<Combobox.SelectionIcon />}
+                            >
+                                {fruit}
+                            </Combobox.Option>
+                        ))}
+                    </Combobox.List>
+                </Combobox.Popover>
+            </Combobox.Provider>
+        ),
+    };
+
     /**
      * Combobox with empty state and option count message.
      * Uses `Combobox.State` with both `emptyMessage` and `nbOptionMessage`.
@@ -565,6 +625,8 @@ export function setup({
         ComboboxWithButton,
         ComboboxWithLinkOptions,
         ComboboxWithOptionMoreInfo,
+        ComboboxWithSelectionIconSingle,
+        ComboboxWithSelectionIconMultiple,
         GridComboboxWithInput,
         GridComboboxWithButton,
         ComboboxWithEmptyState,

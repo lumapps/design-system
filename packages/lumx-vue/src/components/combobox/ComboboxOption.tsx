@@ -57,7 +57,13 @@ const ComboboxOption = defineComponent(
         const isActive = useComboboxEvent(optionActiveEvent(optionId), false);
 
         // Provide option context to children (e.g. OptionMoreInfo)
-        provideComboboxOptionContext({ optionId });
+        provideComboboxOptionContext({
+            optionId,
+            // Getter: keeps the provided `isSelected` reactive.
+            get isSelected() {
+                return Boolean(props.isSelected);
+            },
+        });
 
         // Register option with the combobox handle when both are available
         useWatchDisposable([handle, optionRef], ([handleValue, element]) => {

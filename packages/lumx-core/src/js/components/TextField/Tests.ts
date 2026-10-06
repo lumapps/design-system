@@ -54,6 +54,13 @@ export default (renderOptions: SetupOptions<any>) => {
                 expect(inputNative.tagName).toBe('INPUT');
             });
 
+            it('should forward labelProps class name to the label', () => {
+                setup({ id: 'fixedId', label: 'Label', labelProps: { className: 'visually-hidden' } }, renderOptions);
+                const label = getByClassName(document.body, 'lumx-input-label');
+                expect(label).toHaveClass('visually-hidden');
+                expect(label).toHaveClass('lumx-text-field__label');
+            });
+
             it('should set required attribute on the input when isRequired', () => {
                 const { inputNative } = setup({ id: 'fixedId', label: 'Label', isRequired: true }, renderOptions);
                 expect(inputNative).toBeRequired();

@@ -7,9 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   `@lumx/react`, `@lumx/vue`:
+    -   `SelectTextField`: add `labelProps` to customize the field label (e.g. `className: 'visually-hidden'`).
+    -   `Combobox.SelectionIcon`: selection state icon for the `after` slot of `Combobox.Option` (reads the option `isSelected` and the list `aria-multiselectable`).
+
+### Changed
+
+-   `@lumx/react`, `@lumx/vue`:
+    -   `ListItem`: add a 4px gap between the elements of the `before` and `after` slots.
+
 ### Fixed
 
 -   `@lumx/react`, `@lumx/vue`:
+    -   `TextField`, `SelectTextField`: forward the `className` of `labelProps` (e.g. `visually-hidden`) to the label instead of dropping it.
     -   `Combobox`: show the option tooltip when the option is highlighted with the keyboard (active descendant).
     -   `Combobox`: keep the popover open and the option tooltip visible on touch long-press.
     -   `ListItem`: clicks on non-interactive content in the `before`/`after` slots now trigger the `ListItemAction` (fixes option selection in `SelectButton`, `SelectTextField` and `Combobox`).
@@ -43,7 +55,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 -   `@lumx/react`:
-    -   `SideNavigation`, `SideNavigationItem`: children are no longer filtered to keep only `SideNavigationItem` elements. 
+    -   `SideNavigation`, `SideNavigationItem`: children are no longer filtered to keep only `SideNavigationItem` elements.
 
 ### Fixed
 

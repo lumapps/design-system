@@ -187,7 +187,7 @@ export const TextField = (props: TextFieldProps) => {
                         ...labelProps,
                         id: labelId,
                         htmlFor: textFieldId as string,
-                        className: element('label'),
+                        className: classNames.join(labelProps?.className, element('label')),
                         isRequired,
                         theme,
                         children: [label, charCounter] as any,

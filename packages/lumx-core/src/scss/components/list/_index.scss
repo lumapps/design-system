@@ -45,9 +45,11 @@
         @include lumx-list-item-selected;
     }
 
-    // Selected action: from `aria-selected` on the action (ex: combobox option) or from `isSelected` on the list item.
+    // Selected action: from `aria-selected` (ex: combobox option) or `aria-current` (ex: nav link) on the action,
+    // or from `isSelected` on the list item.
     // (the background is on the action overlay `::before`, so the state selectors must come before `::before`)
     & .#{$lumx-base-prefix}-action-area__action[aria-selected="true"],
+    & .#{$lumx-base-prefix}-action-area__action[aria-current]:not([aria-current="false"], [aria-current=""]),
     &__wrapper--is-selected .#{$lumx-base-prefix}-action-area__action {
         &::before {
             background-color: lumx-color-variant("primary", "L5");

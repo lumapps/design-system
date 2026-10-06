@@ -304,6 +304,7 @@ const SelectTextField = defineComponent(
                     errorTryReloadMessage: props.translations.errorTryReloadMessage,
                     inputProps: {
                         ...props.inputProps,
+                        labelProps: props.labelProps ?? props.inputProps?.labelProps,
                         placeholder: props.placeholder,
                         icon: props.icon,
                         value: displayValue.value,
@@ -362,6 +363,7 @@ const SelectTextField = defineComponent(
             'hasClearButton',
             'listStatus',
             'label',
+            'labelProps',
             'placeholder',
             'icon',
             'isDisabled',

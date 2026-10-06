@@ -180,6 +180,7 @@ const TimePickerField = defineComponent(
             'class',
             // Inherited SelectTextField props
             'label',
+            'labelProps',
             'placeholder',
             'icon',
             'isDisabled',

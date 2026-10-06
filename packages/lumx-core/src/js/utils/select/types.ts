@@ -1,6 +1,7 @@
 import type { HasAriaDisabled } from '../../types/HasAriaDisabled';
 import type { HasTheme } from '../../types/HasTheme';
 import type { JSXElement, Selector } from '../../types';
+import type { InputLabelProps } from '../../components/InputLabel';
 
 /**
  * Status of the select dropdown list.
@@ -78,6 +79,7 @@ export interface BaseSelectComponents {
         Option: any;
         State: any;
         OptionSkeleton: any;
+        SelectionIcon: any;
     };
     /** Framework-specific InfiniteScroll component (handles IntersectionObserver lifecycle). */
     InfiniteScroll?: any;
@@ -256,6 +258,8 @@ export interface BaseSelectTextFieldWrapperProps<O>
     maxLength?: number;
     /** Accessible label for the input element (overrides the visual label for screen readers). */
     ariaLabel?: string;
+    /** Additional props forwarded to the field label (e.g. `className: 'visually-hidden'`, `typography`). */
+    labelProps?: Partial<Omit<InputLabelProps, 'children' | 'htmlFor' | 'id'>>;
     /** Additional props forwarded to the Combobox.Input (and ultimately to TextField). */
     inputProps?: Record<string, any>;
     /** Props forwarded to the Combobox.Popover. */

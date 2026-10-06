@@ -32,7 +32,8 @@ export const ComboboxList = forwardRef<ComboboxListProps, HTMLUListElement>((pro
     const { 'aria-label': ariaLabel, type = 'listbox', className, children, ...forwardedProps } = props;
     const internalRef = useRef<HTMLUListElement>(null);
     const mergedRef = useMergeRefs(ref, internalRef);
-    const listContextValue = useMemo(() => ({ type }), [type]);
+    const selectionType = String(forwardedProps['aria-multiselectable']) === 'true' ? 'multiple' : 'single';
+    const listContextValue = useMemo(() => ({ type, selectionType }) as const, [type, selectionType]);
     const [isOpen] = useComboboxOpen();
     const options = useComboboxEvent('optionsChange', undefined);
     const visibleCount = options?.optionsLength ?? 0;
