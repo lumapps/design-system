@@ -398,7 +398,7 @@ export default function selectButtonTests({ components, renderWithState }: Selec
             });
 
             // Skeleton placeholders use a known class in the Combobox component.
-            const skeletons = document.body.querySelectorAll('.lumx-combobox-option-skeleton');
+            const skeletons = document.body.querySelectorAll('.lumx-listbox-option-skeleton');
             expect(skeletons.length).toBeGreaterThan(0);
             // Real options should not be rendered.
             expect(screen.queryAllByRole('option')).toHaveLength(0);
@@ -419,7 +419,7 @@ export default function selectButtonTests({ components, renderWithState }: Selec
             // Real options remain.
             expect(screen.getAllByRole('option')).toHaveLength(3);
             // A skeleton is appended after the options.
-            const skeletons = document.body.querySelectorAll('.lumx-combobox-option-skeleton');
+            const skeletons = document.body.querySelectorAll('.lumx-listbox-option-skeleton');
             expect(skeletons.length).toBeGreaterThan(0);
         });
 
@@ -438,7 +438,7 @@ export default function selectButtonTests({ components, renderWithState }: Selec
             });
 
             await waitFor(() => {
-                const stateElement = document.body.querySelector('.lumx-combobox-state');
+                const stateElement = document.body.querySelector('.lumx-listbox-state');
                 expect(stateElement).toBeTruthy();
                 expect(stateElement?.textContent).toContain(TRANSLATIONS.errorMessage);
                 expect(stateElement?.textContent).toContain(TRANSLATIONS.errorTryReloadMessage);

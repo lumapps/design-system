@@ -29,6 +29,8 @@ type RenderResult = { unmount: () => void; container: HTMLElement };
 export interface ListboxTestSetup {
     components: {
         Listbox: ListboxNamespace;
+        /** Combobox namespace (to test the listbox inside a combobox context). */
+        Combobox: { Provider: any; Button: any; Popover: any; List: any; Option: any };
         IconButton: any;
     };
     /**
@@ -54,7 +56,10 @@ const WITH_SELECT_STATE = { onChangeProp: 'onSelect', valueExtract: (option: { v
 
 // ─── Test suite ──────────────────────────────────────────────────
 
-export default function listboxTests({ components: { Listbox, IconButton }, renderWithState }: ListboxTestSetup) {
+export default function listboxTests({
+    components: { Listbox, Combobox, IconButton },
+    renderWithState,
+}: ListboxTestSetup) {
     /** Render a single-select standalone listbox between two buttons. */
     const setupSingle = (initialArgs: Record<string, any> = {}) => {
         const onSelect = vi.fn();
@@ -428,6 +433,92 @@ export default function listboxTests({ components: { Listbox, IconButton }, rend
                 await userEvent.tab();
                 expect(await screen.findByRole('tooltip', { name: 'Apple info' })).toBeInTheDocument();
             });
+        });
+    });
+
+    describe('Listbox inside a combobox', () => {
+        it('should let the combobox trigger own focus', async () => {
+            const onSelect = vi.fn();
+            renderWithState(
+                ({ value, onSelect: handleSelect }) => (
+                    <Combobox.Provider>
+                        <Combobox.Button label="Fruit" value={value} onSelect={handleSelect} />
+                        <Combobox.Popover>
+                            <Listbox.List aria-label="Fruits">
+                                {FRUITS.map((fruit) => (
+                                    <Listbox.Option key={fruit} value={fruit} isSelected={fruit === value}>
+                                        {fruit}
+                                    </Listbox.Option>
+                                ))}
+                            </Listbox.List>
+                        </Combobox.Popover>
+                    </Combobox.Provider>
+                ),
+                { value: '', onSelect },
+                WITH_SELECT_STATE,
+            );
+            const trigger = screen.getByRole('combobox');
+            const listbox = screen.getByRole('listbox', { name: 'Fruits', hidden: true });
+            expect(listbox).not.toHaveAttribute('tabindex');
+
+            await userEvent.tab();
+            await userEvent.keyboard('{ArrowDown}');
+            expect(trigger).toHaveFocus();
+            expect(trigger).toHaveAttribute('aria-expanded', 'true');
+            await userEvent.keyboard('{ArrowDown}{Enter}');
+            expect(onSelect).toHaveBeenLastCalledWith({ value: 'Banana' });
+            await vi.waitFor(() => expect(trigger).toHaveAttribute('aria-expanded', 'false'));
+        });
+
+        it('should render an option under Combobox.Provider without a list', () => {
+            renderWithState(() => (
+                <Combobox.Provider>
+                    <Listbox.Option value="Apple">Apple</Listbox.Option>
+                </Combobox.Provider>
+            ));
+            expect(screen.getByText('Apple')).toBeInTheDocument();
+        });
+
+        it('should work side by side with a standalone listbox', async () => {
+            const onStandaloneSelect = vi.fn();
+            renderWithState(
+                ({ value, onSelect }) => (
+                    <>
+                        <Listbox.Provider onSelect={onStandaloneSelect}>
+                            <Listbox.List aria-label="Standalone">
+                                {FRUITS.map((fruit) => (
+                                    <Listbox.Option key={fruit} value={fruit}>
+                                        {fruit}
+                                    </Listbox.Option>
+                                ))}
+                            </Listbox.List>
+                        </Listbox.Provider>
+                        <Combobox.Provider>
+                            <Combobox.Button label="Fruit" value={value} onSelect={onSelect} />
+                            <Combobox.Popover>
+                                <Combobox.List aria-label="In combobox">
+                                    {FRUITS.map((fruit) => (
+                                        <Combobox.Option key={fruit} value={fruit} isSelected={fruit === value}>
+                                            {fruit}
+                                        </Combobox.Option>
+                                    ))}
+                                </Combobox.List>
+                            </Combobox.Popover>
+                        </Combobox.Provider>
+                    </>
+                ),
+                { value: '' },
+                WITH_SELECT_STATE,
+            );
+            const standalone = screen.getByRole('listbox', { name: 'Standalone' });
+            await userEvent.tab();
+            await userEvent.keyboard('{ArrowDown}{Enter}');
+            expect(onStandaloneSelect).toHaveBeenLastCalledWith({ value: 'Banana' });
+            expect(standalone).toHaveFocus();
+
+            await userEvent.tab();
+            expect(screen.getByRole('combobox')).toHaveFocus();
+            expect(getActiveOptionLabel(standalone)).toBeNull();
         });
     });
 }

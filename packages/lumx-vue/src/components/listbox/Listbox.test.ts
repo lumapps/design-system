@@ -3,7 +3,7 @@ import { defineComponent, ref } from 'vue';
 import identity from 'lodash/identity';
 
 import listboxTests from '@lumx/core/js/components/Listbox/Tests';
-import { IconButton } from '@lumx/vue';
+import { Combobox, IconButton } from '@lumx/vue';
 import { Listbox } from '.';
 
 /**
@@ -41,5 +41,5 @@ function renderWithState(
 }
 
 describe('<Listbox> (internal)', () => {
-    listboxTests({ components: { Listbox, IconButton }, renderWithState });
+    listboxTests({ components: { Listbox, Combobox, IconButton }, renderWithState });
 });

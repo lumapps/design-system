@@ -10,7 +10,7 @@
 import { expect, screen, userEvent, within, waitFor } from 'storybook/test';
 import type { SetupStoriesOptions } from '@lumx/core/stories/types';
 import { queryAllByClassName } from '../../../testing/queries';
-import { CLASSNAME as COMBOBOX_OPTION_MORE_INFO_CLASSNAME } from './ComboboxOptionMoreInfo';
+import { CLASSNAME as COMBOBOX_OPTION_MORE_INFO_CLASSNAME } from '../Listbox/ListboxOptionMoreInfo';
 import { createTemplates, getActiveOption, type ComboboxNamespace } from './Tests';
 
 // ─── Fixtures ────────────────────────────────────────────────────
@@ -21,7 +21,7 @@ const MORE_INFO_FRUITS = ['Apple', 'Banana', 'Cherry'];
 
 /** Helper: get a visible (open) OptionMoreInfo popover element. */
 function getVisibleMoreInfoPopover(): HTMLElement | null {
-    const popovers = queryAllByClassName(document.body, 'lumx-combobox-option-more-info__popover');
+    const popovers = queryAllByClassName(document.body, 'lumx-listbox-option-more-info__popover');
     return popovers.find((p) => !p.classList.contains('lumx-popover--is-hidden')) ?? null;
 }
 

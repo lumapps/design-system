@@ -184,7 +184,7 @@ export interface SelectButtonConstructor {
  */
 const SelectButton = defineComponent(
     (props: SelectButtonProps, { emit, slots, attrs }) => {
-        // ComboboxList is a Vue component, so the ref resolves to its instance — Vue 3 auto-sets
+        // ListboxList is a Vue component, so the ref resolves to its instance — Vue 3 auto-sets
         // `$el` to the root DOM node (the `<ul>`).
         const listRef = ref<ComponentPublicInstance | null>(null);
         // The list itself doesn't scroll — its ancestor `__scroll` wrapper does. The

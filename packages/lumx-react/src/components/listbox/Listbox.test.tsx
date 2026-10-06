@@ -4,7 +4,7 @@ import identity from 'lodash/identity';
 import over from 'lodash/over';
 
 import listboxTests from '@lumx/core/js/components/Listbox/Tests';
-import { IconButton } from '@lumx/react';
+import { Combobox, IconButton } from '@lumx/react';
 import { Listbox } from '.';
 
 /**
@@ -32,5 +32,5 @@ function renderWithState(
 }
 
 describe('<Listbox> (internal)', () => {
-    listboxTests({ components: { Listbox, IconButton }, renderWithState });
+    listboxTests({ components: { Listbox, Combobox, IconButton }, renderWithState });
 });

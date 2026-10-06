@@ -1,20 +1,9 @@
-import { type FocusNavigationController } from '../../utils/focusNavigation';
-import { getOptionValue, isOptionDisabled, isSelected, notifySection } from './utils';
-import { setupListbox } from './setupListbox';
-import type {
-    ComboboxCallbacks,
-    ComboboxEventMap,
-    ComboboxHandle,
-    OnTriggerAttach,
-    OptionRegistration,
-    SectionRegistration,
-    OptionActiveEvent,
-    SubscriptionCallback,
-} from './types';
-import { isOptionActiveEvent, OPTION_ACTIVE_EVENT_PREFIX, optionActiveEvent } from './constants';
+import { isSelected } from '../Listbox/utils';
+import { setupListbox } from '../Listbox/setupListbox';
+import type { ComboboxCallbacks, ComboboxHandle, OnTriggerAttach } from './types';
 
 /** Options for configuring the shared combobox behavior. */
-interface ComboboxOptions {
+interface ListboxOptions {
     /** When true, ArrowDown/ArrowUp wrap around in listbox mode (input pattern). Default: false. */
     wrapNavigation?: boolean;
 }
@@ -37,176 +26,72 @@ interface ComboboxOptions {
  */
 export function setupCombobox(
     callbacks: ComboboxCallbacks,
-    options?: ComboboxOptions,
+    options?: ListboxOptions,
     onTriggerAttach?: OnTriggerAttach,
 ): ComboboxHandle {
     const { wrapNavigation = false } = options ?? {};
 
     let trigger: HTMLInputElement | HTMLButtonElement | null = null;
-    let listbox: HTMLElement | null = null;
-    let focusNav: FocusNavigationController | null = null;
-    let isOpenState = false;
 
-    /** Current filter value (empty string = no filtering). */
-    let filterValue = '';
-
-    /** Registered options: maps DOM element → { callback, last notified state }. */
-    const optionRegistrations = new Map<HTMLElement, OptionRegistration>();
-
-    /** Registered sections: maps DOM element → { callback, last notified state }. */
-    const sectionRegistrations = new Map<HTMLElement, SectionRegistration>();
-
-    /** AbortController for all structural event listeners. */
+    /** AbortController for all trigger event listeners. */
     let abortController: AbortController | null = null;
 
-    /** Last notified visible option count, to avoid redundant `optionsChange` notifications. */
-    let lastOptionsLength = 0;
-
-    /** Last notified input value, to re-fire `optionsChange` when the user keeps typing while empty. */
-    let lastInputValue = '';
-
-    /** Last notified loading state, used to replay current state to late subscribers. */
-    let lastLoadingState = false;
-
-    /** Number of currently mounted skeleton placeholders. */
-    let skeletonCount = 0;
-
-    /** Event subscribers managed by the handle. */
-    const subscribers: { [K in keyof ComboboxEventMap]: Set<(value: ComboboxEventMap[K]) => void> } = {
-        open: new Set(),
-        activeDescendantChange: new Set(),
-        optionsChange: new Set(),
-        loadingChange: new Set(),
-        loadingAnnouncement: new Set(),
-    };
-
-    /** Per-option subscribers, keyed by optionActive:<id>. Sets are created on demand. */
-    const optionActiveSubscribers = new Map<OptionActiveEvent, Set<(isActive: boolean) => void>>();
-
-    /**
-     * Last value dispatched for each event. Kept in sync so pull-based subscribers — React's
-     * `useSyncExternalStore` via {@link ComboboxHandle.getSnapshot} — can read the current value
-     * during their own render/commit. This lets React catch changes that happened between a
-     * consumer's render and its subscription (e.g. options registered by child effects before the
-     * consumer subscribed, since `optionsChange` is not replayed on subscribe).
-     */
-    const latestValues: { [K in keyof ComboboxEventMap]?: ComboboxEventMap[K] } = {};
-
-    /** Notify all subscribers for a given event. */
-    function notify<K extends keyof ComboboxEventMap>(event: K, value: ComboboxEventMap[K]) {
-        const previous = latestValues.activeDescendantChange ?? null;
-
-        latestValues[event] = value;
-        subscribers[event].forEach((cb) => cb(value));
-
-        // Fan out to the 2 affected options only: first the previous one, then the new one.
-        if (event === 'activeDescendantChange' && previous !== value) {
-            if (previous) optionActiveSubscribers.get(optionActiveEvent(previous))?.forEach((cb) => cb(false));
-            if (value) optionActiveSubscribers.get(optionActiveEvent(value as string))?.forEach((cb) => cb(true));
-        }
-    }
-
-    /** Count visible (non-filtered) options. */
-    function getVisibleOptionCount(): number {
-        let count = 0;
-        for (const reg of optionRegistrations.values()) {
-            if (!reg.lastFiltered) count += 1;
-        }
-        return count;
-    }
-
-    /** True when the popup has visible content (options or skeletons). */
-    function hasVisibleContent(): boolean {
-        return getVisibleOptionCount() > 0 || skeletonCount > 0;
-    }
-
-    /**
-     * Notify all registered sections and fire `optionsChange` if the visible option count changed
-     * or if the input value changed while the list is empty (so `emptyMessage` callbacks get
-     * the updated query string).
-     * Called whenever the set of visible options may have changed (option register/unregister, filter change).
-     */
-    function notifyVisibilityChange() {
-        for (const [sectionElement] of sectionRegistrations) {
-            notifySection(sectionElement, sectionRegistrations, optionRegistrations);
-        }
-
-        const visibleCount = getVisibleOptionCount();
-        const inputValue = trigger?.value ?? '';
-        const isEmpty = visibleCount === 0;
-        if (visibleCount !== lastOptionsLength || (isEmpty && inputValue !== lastInputValue)) {
-            lastOptionsLength = visibleCount;
-            lastInputValue = inputValue;
-            notify('optionsChange', { optionsLength: visibleCount, inputValue });
-        }
-
-        // Re-evaluate aria-expanded when the combobox is open — visible content may have
-        // changed due to filtering, option register/unregister, or skeleton transitions.
-        if (isOpenState) {
-            trigger?.setAttribute('aria-expanded', String(hasVisibleContent()));
-        }
-    }
-
-    // ── Skeleton loading tracking ──────────────────────────────
-
-    /** Delay before announcing loading in the live region (ms). */
-    const LOADING_ANNOUNCEMENT_DELAY = 500;
-
-    /** Timer for debounced loading announcement. */
-    let loadingTimer: ReturnType<typeof setTimeout> | undefined;
-
-    /** Whether a loading announcement has been sent since the last open. */
-    let announcementSent = false;
-
-    /** Start or restart the debounced loading announcement timer if conditions are met. */
-    function startLoadingAnnouncementTimer() {
-        clearTimeout(loadingTimer);
-        if (skeletonCount > 0 && isOpenState) {
-            loadingTimer = setTimeout(() => {
-                if (skeletonCount > 0 && isOpenState) {
-                    announcementSent = true;
-                    notify('loadingAnnouncement', true);
-                }
-            }, LOADING_ANNOUNCEMENT_DELAY);
-        }
-    }
-
-    /**
-     * Called when the skeleton count transitions between 0 and >0 (or vice versa).
-     * Fires `loadingChange` immediately and manages the debounced `loadingAnnouncement`.
-     */
-    function onSkeletonCountChange() {
-        const isLoading = skeletonCount > 0;
-        lastLoadingState = isLoading;
-        notify('loadingChange', isLoading);
-
-        if (isLoading) {
-            startLoadingAnnouncementTimer();
-        } else {
-            clearTimeout(loadingTimer);
-            if (announcementSent) {
-                announcementSent = false;
-                notify('loadingAnnouncement', false);
-            }
-        }
-    }
-
-    // Forward-declared so internal helpers (keydown handler, listbox listeners, etc.)
-    // can reference `handle` before the object is fully constructed (via closure).
-    // The handle is assigned immediately below and is always available by the time these helpers run.
+    // Forward-declared so internal helpers can reference `handle` before it is constructed (via closure).
     let handle!: ComboboxHandle;
+
+    /** Set `aria-haspopup="grid"` on the trigger when the listbox is a grid. */
+    function syncHasPopup(listbox: HTMLElement | null) {
+        if (trigger && listbox?.getAttribute('role') === 'grid') trigger.setAttribute('aria-haspopup', 'grid');
+    }
+
+    /**
+     * The listbox handle owns the open state, the option/section/skeleton registry, the filter, the focus
+     * navigation, the selection and all the events. The combobox links it to the trigger (focus owner).
+     */
+    const list = setupListbox({
+        wrapNavigation,
+        onSelect(option, element) {
+            callbacks.onSelect?.(option);
+            // Close on selection (when not multiselectable)
+            if (element && !list.isMultiSelect) {
+                list.focusNav?.clear();
+                // Defer the close to the next frame (to make sure all other click handler resolve).
+                requestAnimationFrame(() => {
+                    handle.setIsOpen(false);
+                });
+            }
+        },
+        focusOwner: {
+            getFocusOwner: () => trigger,
+            getInputValue: () => trigger?.value ?? '',
+            onMount: (listbox) => syncHasPopup(listbox),
+        },
+    });
+
+    /**
+     * Keep `aria-expanded` in sync while open: it is false when there is nothing to show
+     * (no visible option and no skeleton), which changes with filtering, option register/unregister
+     * and skeleton transitions. Unsubscribed by `list.destroy()`.
+     */
+    function syncExpanded() {
+        if (list.isOpen) trigger?.setAttribute('aria-expanded', String(list.hasVisibleContent));
+    }
+    list.subscribe('optionsChange', syncExpanded);
+    list.subscribe('loadingChange', syncExpanded);
 
     /** Detach everything (abort all listeners, clear state). */
     function detach() {
+        // Clear the active option while the old trigger is still the focus owner.
+        list.focusNav?.clear();
         abortController?.abort();
         abortController = null;
-        focusNav = null;
     }
 
     /**
      * Attach the shared keydown listener to the trigger.
      *
-     * Handles: Enter, ArrowDown, ArrowUp, Escape (2-tier), PageUp, PageDown.
+     * Handles what is combobox-specific: open on ArrowDown/ArrowUp, the Enter close rule, Escape (2-tier)
+     * and the Alt modifiers. The navigation itself is delegated to `list.handleKeydown`.
      * Mode-specific keys (Space, Home, End, ArrowLeft/Right, printable chars, etc.)
      * are delegated to the `onKeydown` hook provided by the mode controller.
      */
@@ -225,20 +110,14 @@ export function setupCombobox(
 
             let flag = false;
             const { altKey } = event;
-            const nav = handle.focusNav;
+            const nav = list.focusNav;
 
             switch (event.key) {
                 case 'Enter':
-                    if (handle.isOpen && nav?.selectors.activeItem) {
-                        // Capture activeItem before click — the click handler may close
-                        // the popover and clear the focus navigation state.
-                        const { activeItem } = nav.selectors;
-                        // "Click" on active option
-                        if (!isOptionDisabled(activeItem)) {
-                            activeItem.click();
-                        }
+                    // Open with an active option: "click" it (handled by the listbox).
+                    if (handle.isOpen && list.handleKeydown(event)) {
                         flag = true;
-                    } else if (handle.isOpen && !handle.isMultiSelect) {
+                    } else if (handle.isOpen && !list.isMultiSelect) {
                         // Open with no active item (single select) => close the popup,
                         // but let Enter propagate so it can submit a surrounding form.
                         handle.setIsOpen(false);
@@ -247,38 +126,27 @@ export function setupCombobox(
                     // let Enter pass through so it can submit a surrounding form
                     break;
 
-                // Open if closed, else move focus within listbox (wrap if enabled).
+                // Open if closed, else move the active option (handled by the listbox).
                 case 'ArrowDown':
                     if (!handle.isOpen) {
                         handle.setIsOpen(true);
-                        // Focus first or selected item on open.
+                        // Focus first or selected item on open (deferred until the options commit).
                         if (!altKey) nav?.goTo((s) => s.getMatching(isSelected) ?? s.getFirst());
-                    } else if (nav?.selectors.hasNavigableItems && !altKey) {
-                        if (nav.selectors.activeItem) {
-                            // Go down
-                            nav.goDown();
-                        } else {
-                            // Focus first or selected item when no active item.
-                            nav.goTo((s) => s.getMatching(isSelected) ?? s.getFirst());
-                        }
+                    } else if (!altKey) {
+                        list.handleKeydown(event);
                     }
                     flag = true;
                     break;
 
-                // Open if closed, else move focus within listbox (wrap if enabled).
+                // Open if closed, else move the active option (handled by the listbox).
                 case 'ArrowUp':
                     if (!handle.isOpen && !altKey) {
                         handle.setIsOpen(true);
-                        // Focus last or selected item on open.
+                        // Focus last or selected item on open (deferred until the options commit).
                         nav?.goTo((s) => s.getMatching(isSelected) ?? s.getLast());
-                    } else if (handle.isOpen && nav?.selectors.hasNavigableItems) {
-                        if (nav.selectors.activeItem) {
-                            // Go up
-                            nav.goUp();
-                        } else if (!altKey) {
-                            // Focus last or selected item when no active item.
-                            nav.goTo((s) => s.getMatching(isSelected) ?? s.getLast());
-                        }
+                    } else if (handle.isOpen && (nav?.selectors.activeItem || !altKey)) {
+                        // Alt+ArrowUp only moves when there is an active option.
+                        list.handleKeydown(event);
                     }
                     flag = true;
                     break;
@@ -291,22 +159,14 @@ export function setupCombobox(
                         handle.setIsOpen(false);
                         flag = true;
                     } else if (triggerEl.tagName === 'INPUT' && triggerEl.value) {
-                        handle.select(null);
+                        list.select(null);
                         flag = true;
                     }
                     break;
 
                 case 'PageUp':
-                    if (handle.isOpen && nav?.selectors.activeItem) {
-                        nav.goToOffset(-10);
-                    }
-                    flag = true;
-                    break;
-
                 case 'PageDown':
-                    if (handle.isOpen && nav?.selectors.activeItem) {
-                        nav.goToOffset(10);
-                    }
+                    if (handle.isOpen) list.handleKeydown(event);
                     flag = true;
                     break;
 
@@ -329,6 +189,7 @@ export function setupCombobox(
 
         // Create a fresh abort controller if needed
         const isNewController = !abortController;
+        syncHasPopup(list.element);
         if (!abortController) {
             abortController = new AbortController();
         }
@@ -337,7 +198,7 @@ export function setupCombobox(
         if (!trigger.getAttribute('aria-activedescendant')) {
             trigger.setAttribute('aria-activedescendant', '');
         }
-        trigger.setAttribute('aria-expanded', String(isOpenState));
+        trigger.setAttribute('aria-expanded', String(list.isOpen));
 
         // On first attach, wire up the mode-specific controller, shared keydown, and focusout handlers.
         if (isNewController) {
@@ -353,137 +214,26 @@ export function setupCombobox(
                 { signal: abortController.signal },
             );
         }
-
-        if (listbox && !focusNav) {
-            focusNav = setupListbox(handle, abortController.signal, notify, { wrapNavigation });
-        }
     }
 
     handle = {
         get trigger() {
             return trigger;
         },
-        get listbox() {
-            return listbox;
-        },
-        get focusNav() {
-            return focusNav;
+        get list() {
+            return list;
         },
         get isOpen() {
-            return isOpenState;
-        },
-        get isMultiSelect() {
-            return listbox?.getAttribute('aria-multiselectable') === 'true';
-        },
-        get isLoading() {
-            return skeletonCount > 0;
+            return list.isOpen;
         },
 
         setIsOpen(isOpen: boolean) {
-            if (isOpenState === isOpen) return;
-            isOpenState = isOpen;
-            if (!isOpen) {
-                focusNav?.clear();
-                // Reset announcement state so it retriggers on next open
-                clearTimeout(loadingTimer);
-                if (announcementSent) {
-                    announcementSent = false;
-                    notify('loadingAnnouncement', false);
-                }
-            } else if (skeletonCount > 0) {
-                // Opening while already loading — start the announcement timer
-                startLoadingAnnouncementTimer();
-            }
-
+            if (list.isOpen === isOpen) return;
+            if (!isOpen) list.focusNav?.clear();
             // Update aria-expanded on trigger (false when no visible options or skeletons)
-            trigger?.setAttribute('aria-expanded', String(isOpen && hasVisibleContent()));
-            notify('open', isOpen);
-        },
-
-        select(option: HTMLElement | null) {
-            callbacks.onSelect?.({ value: option ? getOptionValue(option) : '' });
-
-            // Close on selection (when not multiselectable)
-            if (option && !handle.isMultiSelect) {
-                handle.focusNav?.clear();
-                // Defer the close to the next frame (to make sure all other click handler resolve).
-                requestAnimationFrame(() => {
-                    handle.setIsOpen(false);
-                });
-            }
-        },
-
-        flushPendingNavigation() {
-            // Do navigations actions we could not do because the combobox items were not mounted yet
-            focusNav?.flushPendingNavigation();
-        },
-
-        registerOption(element: HTMLElement, callback: (isFiltered: boolean) => void): () => void {
-            const filterLower = filterValue.toLowerCase();
-            const text = getOptionValue(element).toLowerCase();
-            const isFiltered = filterLower.length > 0 && !text.includes(filterLower);
-            optionRegistrations.set(element, { callback, lastFiltered: isFiltered });
-            // Notify immediately with current state so the option renders correctly.
-            callback(isFiltered);
-            notifyVisibilityChange();
-            return () => {
-                optionRegistrations.delete(element);
-                notifyVisibilityChange();
-            };
-        },
-
-        setFilter(newFilter: string) {
-            filterValue = newFilter;
-            const filterLower = newFilter.toLowerCase();
-            for (const [element, reg] of optionRegistrations) {
-                const text = getOptionValue(element).toLowerCase();
-                const isFiltered = filterLower.length > 0 && !text.includes(filterLower);
-                // Only notify when state actually changes to avoid unnecessary re-renders.
-                if (isFiltered !== reg.lastFiltered) {
-                    reg.lastFiltered = isFiltered;
-                    reg.callback(isFiltered);
-                }
-            }
-            notifyVisibilityChange();
-        },
-
-        refilterOption(element: HTMLElement) {
-            const reg = optionRegistrations.get(element);
-            if (!reg) return;
-            const filterLower = filterValue.toLowerCase();
-            const text = getOptionValue(element).toLowerCase();
-            const isFiltered = filterLower.length > 0 && !text.includes(filterLower);
-            if (isFiltered !== reg.lastFiltered) {
-                reg.lastFiltered = isFiltered;
-                reg.callback(isFiltered);
-                notifyVisibilityChange();
-            }
-        },
-
-        registerSection(
-            element: HTMLElement,
-            callback: (state: { hidden: boolean; 'aria-hidden': boolean }) => void,
-        ): () => void {
-            sectionRegistrations.set(element, { callback, last: { hidden: false, 'aria-hidden': false } });
-            // Compute and notify initial state immediately (force to ensure callback fires).
-            notifySection(element, sectionRegistrations, optionRegistrations, true);
-            return () => {
-                sectionRegistrations.delete(element);
-            };
-        },
-
-        registerSkeleton(): () => void {
-            const wasLoading = skeletonCount > 0;
-            skeletonCount += 1;
-            if (!wasLoading) {
-                onSkeletonCountChange();
-            }
-            return () => {
-                skeletonCount -= 1;
-                if (skeletonCount === 0) {
-                    onSkeletonCountChange();
-                }
-            };
+            trigger?.setAttribute('aria-expanded', String(isOpen && list.hasVisibleContent));
+            // Last: the listbox dispatches `open` to the subscribers, which must see the trigger in its final state.
+            list.setOpen(isOpen);
         },
 
         registerTrigger(newTrigger: HTMLInputElement | HTMLButtonElement): () => void {
@@ -502,100 +252,10 @@ export function setupCombobox(
             };
         },
 
-        registerListbox(newListbox: HTMLElement): () => void {
-            // If we already have the same listbox, nothing to do
-            if (listbox === newListbox) return () => {};
-
-            // Store the listbox. If trigger is already attached, we need to
-            // create focus nav and attach listbox listeners.
-            const hadListbox = !!listbox;
-            listbox = newListbox;
-
-            if (trigger && abortController) {
-                if (!hadListbox) {
-                    // First listbox — set up focus nav and listbox listeners
-                    focusNav = setupListbox(handle, abortController.signal, notify, { wrapNavigation });
-                } else {
-                    // Replacing listbox — full re-attach
-                    detach();
-                    tryAttach();
-                }
-            }
-
-            return () => {
-                if (listbox === newListbox) {
-                    listbox = null;
-                    focusNav = null;
-                    // Don't full detach — trigger and mode controller stay alive
-                    // The listbox may reappear (e.g., popover re-render)
-                }
-            };
-        },
-
-        subscribe<K extends keyof ComboboxEventMap>(event: K, callback: SubscriptionCallback<K>): () => void {
-            if (isOptionActiveEvent(event)) {
-                const optionCallback = callback as SubscriptionCallback<OptionActiveEvent>;
-                const set = optionActiveSubscribers.get(event) ?? new Set();
-                optionActiveSubscribers.set(event, set);
-                set.add(optionCallback);
-                // Replay (same as open): Vue subscribes after mount and can miss the activation.
-                if (latestValues.activeDescendantChange === event.slice(OPTION_ACTIVE_EVENT_PREFIX.length))
-                    optionCallback(true);
-                return () => {
-                    set.delete(optionCallback);
-                    if (!set.size) optionActiveSubscribers.delete(event);
-                };
-            }
-
-            const subs = subscribers[event] as Set<SubscriptionCallback<K>>;
-            subs.add(callback);
-            // Replay current loading state to late subscribers so that framework wrappers
-            // that subscribe after initial mount (e.g. async Vue watchers) don't miss the
-            // initial events fired during mount.
-            if (event === 'open' && isOpenState) {
-                (callback as (value: boolean) => void)(true);
-            }
-            if (event === 'loadingChange' && lastLoadingState) {
-                (callback as (value: boolean) => void)(true);
-            }
-
-            // Cleanup function
-            return () => {
-                subs.delete(callback);
-            };
-        },
-
-        getSnapshot<K extends keyof ComboboxEventMap>(event: K): ComboboxEventMap[K] | undefined {
-            if (isOptionActiveEvent(event)) {
-                // Derived value. No per-id value is stored.
-                return (latestValues.activeDescendantChange ===
-                    event.slice(OPTION_ACTIVE_EVENT_PREFIX.length)) as ComboboxEventMap[K];
-            }
-            return latestValues[event];
-        },
-
         destroy() {
             detach();
             trigger = null;
-            listbox = null;
-            filterValue = '';
-            lastOptionsLength = 0;
-            lastInputValue = '';
-            lastLoadingState = false;
-            // Drop cached snapshots so `getSnapshot` doesn't return stale values after destroy.
-            for (const key of Object.keys(latestValues) as Array<keyof typeof latestValues>) {
-                delete latestValues[key];
-            }
-            optionRegistrations.clear();
-            sectionRegistrations.clear();
-            skeletonCount = 0;
-            clearTimeout(loadingTimer);
-            announcementSent = false;
-            optionActiveSubscribers.clear();
-            // Clear all subscribers
-            for (const set of Object.values(subscribers)) {
-                set.clear();
-            }
+            list.destroy();
         },
     };
 

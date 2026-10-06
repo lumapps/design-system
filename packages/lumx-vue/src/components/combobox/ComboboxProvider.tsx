@@ -1,4 +1,4 @@
-import { defineComponent, onWatcherCleanup, ref, shallowRef, useAttrs, watch } from 'vue';
+import { computed, defineComponent, onWatcherCleanup, ref, shallowRef, useAttrs, watch } from 'vue';
 
 import { COMBOBOX_PROVIDER_COMPONENT_NAME } from '@lumx/core/js/components/Combobox/constants';
 import type { ComboboxHandle } from '@lumx/core/js/components/Combobox/types';
@@ -6,6 +6,7 @@ import type { ComboboxHandle } from '@lumx/core/js/components/Combobox/types';
 import { useId } from '../../composables/useId';
 import { getName } from '../../utils/VueToJSX';
 import { provideComboboxContext } from './context/ComboboxContext';
+import { provideListboxContext } from '../listbox/context/ListboxContext';
 
 /**
  * Defines the props of the component.
@@ -32,11 +33,13 @@ const ComboboxProvider = defineComponent(
         };
 
         provideComboboxContext({ handle, setHandle, listboxId, anchorRef });
+        // The listbox of the combobox: shared with the list, the options and the state through the listbox context.
+        provideListboxContext({ list: computed(() => handle.value?.list ?? null), listboxId, type: 'listbox' });
 
-        // Subscribe to the combobox open event and forward to the onOpen callback.
+        // Subscribe to the open event and forward to the onOpen callback.
         watch(handle, (handleValue) => {
             if (!handleValue) return;
-            const unsubscribe = handleValue.subscribe('open', (isOpen) => {
+            const unsubscribe = handleValue.list.subscribe('open', (isOpen) => {
                 (attrs.onOpen as any)?.(isOpen);
                 emit('open', isOpen);
             });

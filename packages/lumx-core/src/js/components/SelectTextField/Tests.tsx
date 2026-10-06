@@ -62,7 +62,7 @@ export interface SelectTextFieldTestSetup {
 // ─── DOM Helpers ─────────────────────────────────────────────────
 // Options and listbox are rendered in a portal (document.body).
 // All option/listbox queries target document.body.
-// NB: Queries for the dropdown listbox and options are scoped to `.lumx-combobox-list`
+// NB: Queries for the dropdown listbox and options are scoped to `.lumx-listbox-list`
 // to avoid matching the SelectionChipGroup's [role="listbox"] and [role="option"] elements.
 
 function getInput(): HTMLInputElement {
@@ -83,17 +83,17 @@ async function openByClick(): Promise<void> {
 }
 
 function getListbox(): HTMLElement | null {
-    return document.body.querySelector<HTMLElement>('.lumx-combobox-list[role="listbox"]');
+    return document.body.querySelector<HTMLElement>('.lumx-listbox-list[role="listbox"]');
 }
 
 function getVisibleOptions(): HTMLElement[] {
     return Array.from(
-        document.body.querySelectorAll<HTMLElement>('.lumx-combobox-list [role="option"]:not([data-filtered])'),
+        document.body.querySelectorAll<HTMLElement>('.lumx-listbox-list [role="option"]:not([data-filtered])'),
     );
 }
 
 function getAllOptions(): HTMLElement[] {
-    return Array.from(document.body.querySelectorAll<HTMLElement>('.lumx-combobox-list [role="option"]'));
+    return Array.from(document.body.querySelectorAll<HTMLElement>('.lumx-listbox-list [role="option"]'));
 }
 
 /** Get chip elements inside the selection chip group. Chips render as [role="option"] inside a listbox. */
@@ -174,7 +174,7 @@ const ERROR_TRANSLATIONS = {
 };
 
 function getSkeletons(): HTMLElement[] {
-    return Array.from(document.body.querySelectorAll<HTMLElement>('.lumx-combobox-option-skeleton'));
+    return Array.from(document.body.querySelectorAll<HTMLElement>('.lumx-listbox-option-skeleton'));
 }
 
 export default function selectTextFieldTests({ components, renderWithState }: SelectTextFieldTestSetup) {
@@ -1271,7 +1271,7 @@ export default function selectTextFieldTests({ components, renderWithState }: Se
             });
 
             await waitFor(() => {
-                const stateElement = document.body.querySelector('.lumx-combobox-state');
+                const stateElement = document.body.querySelector('.lumx-listbox-state');
                 expect(stateElement).toBeTruthy();
                 expect(stateElement?.textContent).toContain('No results found');
             });
@@ -1289,7 +1289,7 @@ export default function selectTextFieldTests({ components, renderWithState }: Se
             });
 
             await waitFor(() => {
-                const stateElement = document.body.querySelector('.lumx-combobox-state');
+                const stateElement = document.body.querySelector('.lumx-listbox-state');
                 expect(stateElement).toBeTruthy();
                 expect(stateElement?.textContent).toContain('10 result(s) available');
             });
@@ -1313,7 +1313,7 @@ export default function selectTextFieldTests({ components, renderWithState }: Se
             });
 
             await waitFor(() => {
-                const stateElement = document.body.querySelector('.lumx-combobox-state');
+                const stateElement = document.body.querySelector('.lumx-listbox-state');
                 expect(stateElement?.textContent).toContain('1 result(s) available');
             });
         });
@@ -1336,7 +1336,7 @@ export default function selectTextFieldTests({ components, renderWithState }: Se
             });
 
             await waitFor(() => {
-                const stateElement = document.body.querySelector('.lumx-combobox-state');
+                const stateElement = document.body.querySelector('.lumx-listbox-state');
                 expect(stateElement?.textContent).toContain('No results found');
                 expect(stateElement?.textContent).not.toContain('result(s) available');
             });
@@ -1516,7 +1516,7 @@ export default function selectTextFieldTests({ components, renderWithState }: Se
             });
 
             await waitFor(() => {
-                const stateElement = document.body.querySelector('.lumx-combobox-state');
+                const stateElement = document.body.querySelector('.lumx-listbox-state');
                 expect(stateElement).toBeTruthy();
                 expect(stateElement?.textContent).toContain('Failed to load');
                 expect(stateElement?.textContent).toContain('Please try again later');

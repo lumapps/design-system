@@ -1,4 +1,4 @@
-import _ComboboxOption from '../combobox/ComboboxOption';
+import _ComboboxOption from '../listbox/ListboxOption';
 
 export {
     default as SelectButton,
