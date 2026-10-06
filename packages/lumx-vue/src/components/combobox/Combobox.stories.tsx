@@ -1,4 +1,4 @@
-import { Avatar, IconButton, SkeletonCircle } from '@lumx/vue';
+import { Avatar, IconButton, SkeletonCircle, Text } from '@lumx/vue';
 import { withValueOnChange } from '@lumx/vue/stories/decorators/withValueOnChange';
 import { setup } from '@lumx/core/js/components/Combobox/Stories';
 
@@ -10,6 +10,7 @@ const { meta, ...stories } = setup({
         IconButton,
         Avatar,
         SkeletonCircle,
+        Text,
     },
     decorators: { withValueOnChange },
 });
@@ -36,3 +37,4 @@ export const ComboboxWithLoadMore = { ...stories.ComboboxWithLoadMore };
 export const ComboboxWithSectionLoading = { ...stories.ComboboxWithSectionLoading };
 export const ComboboxWithAvatarLoading = { ...stories.ComboboxWithAvatarLoading };
 export const ComboboxWithOptionTooltips = { ...stories.ComboboxWithOptionTooltips };
+export const ComboboxWithTruncatedOption = { ...stories.ComboboxWithTruncatedOption };
