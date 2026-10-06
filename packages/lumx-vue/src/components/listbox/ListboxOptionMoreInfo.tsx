@@ -1,0 +1,130 @@
+import { computed, defineComponent, ref, watch } from 'vue';
+
+import { useClassName } from '../../composables/useClassName';
+
+import {
+    ListboxOptionMoreInfo as UI,
+    type ListboxOptionMoreInfoProps as UIProps,
+    type ListboxOptionMoreInfoPropsToOverride,
+    COMPONENT_NAME,
+    CLASSNAME,
+} from '@lumx/core/js/components/Listbox/ListboxOptionMoreInfo';
+import type { JSXElement } from '@lumx/core/js/types';
+
+import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { IconButton } from '../button';
+import { Popover } from '../popover';
+import { useListboxOptionContext } from './context/ListboxOptionContext';
+import { useListboxContext } from './context/ListboxContext';
+import { useListboxEvent } from './context/useListboxEvent';
+
+export type ListboxOptionMoreInfoProps = VueToJSXProps<
+    UIProps,
+    ListboxOptionMoreInfoPropsToOverride | 'onMouseEnter' | 'onMouseLeave' | 'buttonProps'
+>;
+
+export const emitSchema = {
+    /** Fired when the popover opens or closes. */
+    toggle: (isOpen: boolean) => typeof isOpen === 'boolean',
+};
+
+/**
+ * Combobox.OptionMoreInfo component.
+ *
+ * Displays an info icon button on a combobox option that shows a popover with additional details.
+ * The popover opens on mouse hover over the icon or when the parent option is keyboard-highlighted.
+ *
+ * Must be placed in the `after` slot of a `Combobox.Option`.
+ *
+ * @param props Component props.
+ * @return Vue element.
+ */
+const ListboxOptionMoreInfo = defineComponent(
+    (props: ListboxOptionMoreInfoProps, { slots, emit }) => {
+        const mergedClassName = useClassName(() => props.class);
+
+        // Ref to the IconButton component instance.
+        const iconButtonRef = ref<any>(null);
+
+        // Resolved DOM element (<button>) used as the popover anchor.
+        const anchorEl = computed<HTMLElement | undefined>(() => iconButtonRef.value?.$el ?? undefined);
+
+        const isHovered = ref(false);
+
+        // Get the parent option ID from the option context
+        const { optionId } = useListboxOptionContext();
+
+        // Subscribe to active descendant changes for keyboard highlight detection
+        const { list } = useListboxContext();
+        const activeDescendantId = useListboxEvent(list, 'activeDescendantChange', null);
+
+        // Open on mouse hover or keyboard highlight.
+        const isOpen = computed(() => isHovered.value || activeDescendantId.value === optionId);
+        watch(isOpen, (open) => emit('toggle', open), { immediate: true });
+
+        const popoverId = `${optionId}-more-info`;
+
+        /**
+         * IconButton adapter (closure) that maps core `onMouseEnter`/`onMouseLeave`
+         * → Vue `onMouseenter`/`onMouseleave`
+         */
+        function IconButtonAdapter(coreProps: any) {
+            const { onMouseEnter, onMouseLeave, ...rest } = coreProps;
+            return (
+                <IconButton
+                    ref={iconButtonRef}
+                    {...{ onMouseenter: onMouseEnter, onMouseleave: onMouseLeave }}
+                    {...rest}
+                />
+            );
+        }
+        /**
+         * Adapter for Popover (closure): `anchorRef` with the resolved DOM element
+         */
+        const PopoverAdapter = (coreProps: any, { slots: popoverSlots }: any) => {
+            const { anchorRef: _coreAnchorRef, ...rest } = coreProps;
+            return (
+                <Popover anchorRef={anchorEl} {...rest}>
+                    {popoverSlots}
+                </Popover>
+            );
+        };
+
+        return () => {
+            const children = slots.default?.() as JSXElement;
+
+            return UI(
+                {
+                    // Pass `undefined` for the core template's `ref` prop. The core template
+                    // passes `ref` to `<IconButton ref={ref}>`, but if we pass `iconButtonRef`
+                    // here, Vue would bind the outer functional component's VNode ref to
+                    // the same target, resolving to a Text node (due to Tooltip fragments)
+                    // and overriding the adapter's inner `ref={iconButtonRef}` binding.
+                    // By passing `undefined`, the outer VNode has no ref and only the adapter's
+                    // inner ref binding takes effect.
+                    ref: undefined,
+                    className: mergedClassName.value,
+                    isOpen: isOpen.value,
+                    popoverId,
+                    children,
+                    onMouseEnter: () => {
+                        isHovered.value = true;
+                    },
+                    onMouseLeave: () => {
+                        isHovered.value = false;
+                    },
+                },
+                { IconButton: IconButtonAdapter, Popover: PopoverAdapter },
+            );
+        };
+    },
+    {
+        name: getName(COMPONENT_NAME),
+        inheritAttrs: false,
+        props: keysOf<ListboxOptionMoreInfoProps>()('class'),
+        emits: emitSchema,
+    },
+);
+
+export { COMPONENT_NAME, CLASSNAME };
+export default ListboxOptionMoreInfo;
