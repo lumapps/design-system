@@ -2,14 +2,14 @@
    Side navigation
    ========================================================================== */
 
-.#{$lumx-base-prefix}-side-navigation {
+.lumx-side-navigation {
     @include lumx-list;
 }
 
 /* Item
    ========================================================================== */
 
-.#{$lumx-base-prefix}-side-navigation-item {
+.lumx-side-navigation-item {
     $self: &;
 
     @include lumx-side-navigation-item;
@@ -60,7 +60,7 @@
 /* Item link states
    ========================================================================== */
 
-.#{$lumx-base-prefix}-side-navigation-item {
+.lumx-side-navigation-item {
     $self: &;
 
     &__link {

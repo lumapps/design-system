@@ -5,8 +5,8 @@
 // NB: list, option and section styles live in `components/list-box`, the state styles in `components/composite`.
 
 // ---- Input -----------------------
-.#{$lumx-base-prefix}-combobox-input {
-    .#{$lumx-base-prefix}-text-field__chips {
+.lumx-combobox-input {
+    .lumx-text-field__chips {
         width: min-content;
         min-width: 0;
     }
@@ -14,7 +14,7 @@
 
 // ---- Popover -----------------------
 
-.#{$lumx-base-prefix}-combobox-popover {
+.lumx-combobox-popover {
     color: var(--lumx-color-dark-N);
 
     &__scroll {
@@ -25,7 +25,7 @@
     // content) and no state
     $visible-list: ':is([role="listbox"], [role="grid"], [role="tree"]):not([hidden])';
 
-    &:not(:has(#{$visible-list}, .#{$lumx-base-prefix}-composite-status)) {
+    &:not(:has(#{$visible-list}, .lumx-composite-status)) {
         display: none;
     }
 }

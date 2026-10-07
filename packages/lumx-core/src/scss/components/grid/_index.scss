@@ -5,7 +5,7 @@
    Grid
    ========================================================================== */
 
-.#{$lumx-base-prefix}-grid {
+.lumx-grid {
     display: flex;
 
     &--orientation-horizontal {
@@ -20,65 +20,65 @@
 /* Grid wrap
    ========================================================================== */
 
-.#{$lumx-base-prefix}-grid--wrap-nowrap {
+.lumx-grid--wrap-nowrap {
     flex-wrap: nowrap;
 }
 
-.#{$lumx-base-prefix}-grid--wrap-wrap {
+.lumx-grid--wrap-wrap {
     flex-wrap: wrap;
 }
 
-.#{$lumx-base-prefix}-grid--wrap-wrap-reverse {
+.lumx-grid--wrap-wrap-reverse {
     flex-wrap: wrap-reverse;
 }
 
 /* Grid alignment
    ========================================================================== */
 
-.#{$lumx-base-prefix}-grid--orientation-horizontal.#{$lumx-base-prefix}-grid--h-align-top,
-.#{$lumx-base-prefix}-grid--orientation-vertical.#{$lumx-base-prefix}-grid--v-align-left {
+.lumx-grid--orientation-horizontal.lumx-grid--h-align-top,
+.lumx-grid--orientation-vertical.lumx-grid--v-align-left {
     align-items: flex-start;
 }
 
-.#{$lumx-base-prefix}-grid--orientation-horizontal.#{$lumx-base-prefix}-grid--h-align-center,
-.#{$lumx-base-prefix}-grid--orientation-vertical.#{$lumx-base-prefix}-grid--v-align-center {
+.lumx-grid--orientation-horizontal.lumx-grid--h-align-center,
+.lumx-grid--orientation-vertical.lumx-grid--v-align-center {
     align-items: center;
 }
 
-.#{$lumx-base-prefix}-grid--orientation-horizontal.#{$lumx-base-prefix}-grid--h-align-bottom,
-.#{$lumx-base-prefix}-grid--orientation-vertical.#{$lumx-base-prefix}-grid--v-align-right {
+.lumx-grid--orientation-horizontal.lumx-grid--h-align-bottom,
+.lumx-grid--orientation-vertical.lumx-grid--v-align-right {
     align-items: flex-end;
 }
 
-.#{$lumx-base-prefix}-grid--orientation-horizontal.#{$lumx-base-prefix}-grid--v-align-left,
-.#{$lumx-base-prefix}-grid--orientation-vertical.#{$lumx-base-prefix}-grid--h-align-top {
+.lumx-grid--orientation-horizontal.lumx-grid--v-align-left,
+.lumx-grid--orientation-vertical.lumx-grid--h-align-top {
     justify-content: flex-start;
 }
 
-.#{$lumx-base-prefix}-grid--orientation-horizontal.#{$lumx-base-prefix}-grid--v-align-center,
-.#{$lumx-base-prefix}-grid--orientation-vertical.#{$lumx-base-prefix}-grid--h-align-center {
+.lumx-grid--orientation-horizontal.lumx-grid--v-align-center,
+.lumx-grid--orientation-vertical.lumx-grid--h-align-center {
     justify-content: center;
 }
 
-.#{$lumx-base-prefix}-grid--orientation-horizontal.#{$lumx-base-prefix}-grid--v-align-right,
-.#{$lumx-base-prefix}-grid--orientation-vertical.#{$lumx-base-prefix}-grid--h-align-bottom {
+.lumx-grid--orientation-horizontal.lumx-grid--v-align-right,
+.lumx-grid--orientation-vertical.lumx-grid--h-align-bottom {
     justify-content: flex-end;
 }
 
-.#{$lumx-base-prefix}-grid--orientation-horizontal.#{$lumx-base-prefix}-grid--v-align-space-around,
-.#{$lumx-base-prefix}-grid--orientation-vertical.#{$lumx-base-prefix}-grid--h-align-space-around {
+.lumx-grid--orientation-horizontal.lumx-grid--v-align-space-around,
+.lumx-grid--orientation-vertical.lumx-grid--h-align-space-around {
     justify-content: space-around;
 }
 
-.#{$lumx-base-prefix}-grid--orientation-horizontal.#{$lumx-base-prefix}-grid--v-align-space-between,
-.#{$lumx-base-prefix}-grid--orientation-vertical.#{$lumx-base-prefix}-grid--h-align-space-between {
+.lumx-grid--orientation-horizontal.lumx-grid--v-align-space-between,
+.lumx-grid--orientation-vertical.lumx-grid--h-align-space-between {
     justify-content: space-between;
 }
 
 /* Grid item
    ========================================================================== */
 
-.#{$lumx-base-prefix}-grid-item {
+.lumx-grid-item {
     position: relative;
     flex: 1 1 auto;
 
@@ -99,7 +99,7 @@
    ========================================================================== */
 
 @for $i from 1 through 12 {
-    .#{$lumx-base-prefix}-grid-item--order-#{$i} {
+    .lumx-grid-item--order-#{$i} {
         order: $i;
     }
 }
@@ -107,26 +107,26 @@
 /* Grid spacings
    ========================================================================== */
 
-.#{$lumx-base-prefix}-grid--gutter-regular {
+.lumx-grid--gutter-regular {
     margin: 0 (math.div($lumx-spacing-unit, 2) * -1);
 
-    & > .#{$lumx-base-prefix}-grid-item {
+    & > .lumx-grid-item {
         padding: 0 math.div($lumx-spacing-unit, 2);
     }
 }
 
-.#{$lumx-base-prefix}-grid--gutter-big {
+.lumx-grid--gutter-big {
     margin: 0 ($lumx-spacing-unit * -1);
 
-    & > .#{$lumx-base-prefix}-grid-item {
+    & > .lumx-grid-item {
         padding: 0 $lumx-spacing-unit;
     }
 }
 
-.#{$lumx-base-prefix}-grid--gutter-huge {
+.lumx-grid--gutter-huge {
     margin: 0 ($lumx-spacing-unit * 1.5) * -1;
 
-    & > .#{$lumx-base-prefix}-grid-item {
+    & > .lumx-grid-item {
         padding: 0 $lumx-spacing-unit * 1.5;
     }
 }
@@ -135,12 +135,12 @@
    ========================================================================== */
 
 @for $i from 1 through 12 {
-    .#{$lumx-base-prefix}-grid--orientation-horizontal > .#{$lumx-base-prefix}-grid-item--width-#{$i} {
+    .lumx-grid--orientation-horizontal > .lumx-grid-item--width-#{$i} {
         flex: string.unquote("0 0 #{math.div(100, 12) * $i + "%"}");
         max-width: #{math.div(100, 12) * $i + "%"};
     }
 
-    .#{$lumx-base-prefix}-grid--orientation-vertical > .#{$lumx-base-prefix}-grid-item--width-#{$i} {
+    .lumx-grid--orientation-vertical > .lumx-grid-item--width-#{$i} {
         flex: string.unquote("0 0 #{math.div(100, 12) * $i + "%"}");
         max-height: #{math.div(100, 12) * $i + "%"};
     }

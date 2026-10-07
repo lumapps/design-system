@@ -2,7 +2,7 @@
    Progress tracker
    ========================================================================== */
 
-.#{$lumx-base-prefix}-progress-tracker {
+.lumx-progress-tracker {
     position: relative;
 
     &__steps {
@@ -37,7 +37,7 @@
 /* Step
    ========================================================================== */
 
-.#{$lumx-base-prefix}-progress-tracker-step {
+.lumx-progress-tracker-step {
     $self: &;
 
     display: flex;
@@ -98,24 +98,24 @@
    ========================================================================== */
 
 // Hover state
-.#{$lumx-base-prefix}-progress-tracker-step--is-clickable:hover {
+.lumx-progress-tracker-step--is-clickable:hover {
     @include lumx-state(lumx-base-const("state", "HOVER"), lumx-base-const("emphasis", "LOW"), "dark");
 }
 
 // Active state
-.#{$lumx-base-prefix}-progress-tracker-step--is-clickable:active {
+.lumx-progress-tracker-step--is-clickable:active {
     @include lumx-state(lumx-base-const("state", "ACTIVE"), lumx-base-const("emphasis", "LOW"), "dark");
 }
 
 // Focus state
-.#{$lumx-base-prefix}-progress-tracker-step[data-focus-visible-added] {
+.lumx-progress-tracker-step[data-focus-visible-added] {
     @include lumx-state(lumx-base-const("state", "FOCUS"), lumx-base-const("emphasis", "LOW"), "dark");
 }
 
 /* Step panel
    ========================================================================== */
 
-.#{$lumx-base-prefix}-step-panel {
+.lumx-step-panel {
     display: none;
     outline: none;
 

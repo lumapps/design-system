@@ -2,7 +2,7 @@
    Message
    ========================================================================== */
 
-.#{$lumx-base-prefix}-message {
+.lumx-message {
     display: flex;
     align-items: flex-start;
 
@@ -32,8 +32,8 @@
    ========================================================================== */
 
 @each $color in $lumx-notification-color-palette {
-    .#{$lumx-base-prefix}-message--color-#{$color} {
-        &.#{$lumx-base-prefix}-message--has-background {
+    .lumx-message--color-#{$color} {
+        &.lumx-message--has-background {
             background-color: lumx-color-variant($color, "L6");
         }
     }

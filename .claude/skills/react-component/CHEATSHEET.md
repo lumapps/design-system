@@ -180,7 +180,7 @@ export * from './MyComponentVariant';
 ## SCSS Template
 
 ```scss
-.#{$lumx-base-prefix}-my-component {
+.lumx-my-component {
     // Base styles
 
     // Modifiers (BEM --)

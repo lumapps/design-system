@@ -142,7 +142,7 @@
 }
 
 @mixin lumx-list-auto-section-divider() {
-    $divider: '.#{$lumx-base-prefix}-list-divider';
+    $divider: '.lumx-list-divider';
     $section: &;
 
     // Insert a divider before each section that:

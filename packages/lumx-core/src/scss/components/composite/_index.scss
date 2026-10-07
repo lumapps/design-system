@@ -6,13 +6,13 @@
 
 // ---- Status -----------------------
 
-.#{$lumx-base-prefix}-composite-status {
+.lumx-composite-status {
     text-align: center;
 }
 
 // ---- Item -----------------------
 
-.#{$lumx-base-prefix}-composite-item {
+.lumx-composite-item {
     // Selection state icon, centered in the `after` slot
     &__selection-icon {
         margin: auto;
