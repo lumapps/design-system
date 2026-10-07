@@ -16,7 +16,7 @@ const GROUPED_FRUITS = [
  * Framework-specific components and hooks are injected via options.
  */
 export function setup({
-    components: { Combobox, IconButton, Avatar, SkeletonCircle },
+    components: { Combobox, IconButton, Avatar, SkeletonCircle, Text },
     decorators: { withValueOnChange },
 }: SetupStoriesOptions<{
     components: {
@@ -24,6 +24,7 @@ export function setup({
         IconButton: any;
         Avatar: any;
         SkeletonCircle: any;
+        Text: any;
     };
     decorators: 'withValueOnChange';
 }>) {
@@ -573,6 +574,37 @@ export function setup({
         ),
     };
 
+    /** Combobox with a long option label truncated with an ellipsis (popover width limited to the anchor width). */
+    const ComboboxWithTruncatedOption = {
+        args: { value: '' },
+        decorators: [withValueOnChange()],
+        render: ({ value, onChange }: { value: string; onChange: (v: string) => void }) => (
+            <Combobox.Provider>
+                <Combobox.Input
+                    value={value}
+                    onChange={onChange}
+                    placeholder="Pick a fruit…"
+                    toggleButtonProps={{ label: 'Fruits' }}
+                />
+                <Combobox.Popover fitToAnchorWidth="width">
+                    <Combobox.List aria-label="Fruits">
+                        <Combobox.Option value="long">
+                            <Text as="span" truncate data-testid="truncated-label">
+                                A very long fruit name that does not fit in the popover and must be truncated with an
+                                ellipsis instead of widening the list
+                            </Text>
+                        </Combobox.Option>
+                        {FRUITS.map((fruit) => (
+                            <Combobox.Option key={fruit} value={fruit}>
+                                {fruit}
+                            </Combobox.Option>
+                        ))}
+                    </Combobox.List>
+                </Combobox.Popover>
+            </Combobox.Provider>
+        ),
+    };
+
     /**
      * Combobox with avatar options and matching skeleton placeholders.
      * Options use `Avatar` in the `before` slot; skeletons use `SkeletonCircle`
@@ -636,5 +668,6 @@ export function setup({
         ComboboxWithSectionLoading,
         ComboboxWithAvatarLoading,
         ComboboxWithOptionTooltips,
+        ComboboxWithTruncatedOption,
     };
 }

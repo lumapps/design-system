@@ -75,6 +75,12 @@
         margin: auto;
     }
 
+    // Allow flex items to shrink below their content width so `truncate` text shows an ellipsis
+    .#{$lumx-base-prefix}-list-item__wrapper,
+    .#{$lumx-base-prefix}-list-item__content {
+        min-width: 0;
+    }
+
     // Center option content
     .#{$lumx-base-prefix}-list-item__content {
         display: flex;
