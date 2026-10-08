@@ -2,6 +2,8 @@
    Combobox
    ========================================================================== */
 
+// NB: list, option, section and state styles live in `components/list-box`.
+
 // ---- Input -----------------------
 .#{$lumx-base-prefix}-combobox-input {
     .#{$lumx-base-prefix}-text-field__chips {
@@ -33,66 +35,12 @@
           scroll-snap-align: end;
         }
     }
-}
 
-// Hide popover and list when there is no option, no state, and no skeleton
-.#{$lumx-base-prefix}-combobox-popover,
-.#{$lumx-base-prefix}-combobox-list {
+    // Hide popover when there is no option, no state, and no skeleton
     &:empty,
-    &:not(:has(.#{$lumx-base-prefix}-combobox-option)):not(:has(.#{$lumx-base-prefix}-combobox-state)):not(
-        :has(.#{$lumx-base-prefix}-combobox-option-skeleton)
+    &:not(:has(.#{$lumx-base-prefix}-listbox-option)):not(:has(.#{$lumx-base-prefix}-listbox-state)):not(
+        :has(.#{$lumx-base-prefix}-listbox-option-skeleton)
     ) {
         display: none;
-    }
-}
-
-// ---- State -----------------------
-
-.#{$lumx-base-prefix}-combobox-state {
-    text-align: center;
-}
-
-// ---- Option -----------------------
-
-.#{$lumx-base-prefix}-combobox-option {
-    // Skeleton option placeholders — width variation via :nth-child cycling
-    &-skeleton {
-        .#{$lumx-base-prefix}-skeleton-typography {
-            width: min(65%, 200px);
-        }
-
-        &:nth-child(3n + 1) .#{$lumx-base-prefix}-skeleton-typography {
-            width: min(70%, 230px);
-        }
-
-        &:nth-child(3n + 2) .#{$lumx-base-prefix}-skeleton-typography {
-            width: min(55%, 170px);
-        }
-    }
-
-    // Selection state icon (select options), centered in the `after` slot
-    &__selection-icon {
-        margin: auto;
-    }
-
-    // Allow flex items to shrink below their content width so `truncate` text shows an ellipsis
-    .#{$lumx-base-prefix}-list-item__wrapper,
-    .#{$lumx-base-prefix}-list-item__content {
-        min-width: 0;
-    }
-
-    // Center option content
-    .#{$lumx-base-prefix}-list-item__content {
-        display: flex;
-        flex-direction: column;
-        justify-items: center;
-    }
-
-    // Option more info popover sizing
-    &-more-info {
-        &__popover {
-            max-width: $lumx-size-xxl;
-            padding: $lumx-spacing-unit-big;
-        }
     }
 }

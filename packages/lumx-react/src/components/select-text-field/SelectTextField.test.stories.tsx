@@ -19,7 +19,7 @@ export const MultiBlurResetsSearch = { ...testStories.MultiBlurResetsSearch };
 
 // React-specific test stories (use React hooks for stateful rendering)
 
-/** Test infinite scroll loads more options when scrolling to the bottom */
+/** Test infinite scroll loads more options (grouped in sections) when scrolling to the bottom */
 export const WithInfiniteScroll = {
     ...testStories.WithInfiniteScroll,
     render: () => {
@@ -48,6 +48,7 @@ export const WithInfiniteScroll = {
                 filter="auto"
                 getOptionId="id"
                 getOptionName="name"
+                getSectionId="category"
                 value={value}
                 onChange={setValue}
                 onLoadMore={onLoadMore}

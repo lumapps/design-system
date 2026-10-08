@@ -158,10 +158,11 @@
         }
     }
 
-    // Insert a divider after each section that is not the last child
-    // and not directly followed by an explicit divider or a hidden element
-    // (when followed by a hidden element, the next visible section's ::before handles the divider).
-    &:not(:last-child):not(:has(+ #{$divider})):not(:has(+ [hidden])) {
+    // Insert a divider after each section followed by visible content, i.e. a next sibling that is not:
+    // - an explicit divider
+    // - a hidden element (the next visible section's ::before handles the divider)
+    // - empty (like the infinite scroll sentinel)
+    &:has(+ :not(#{$divider}, [hidden], :empty)) {
         &::after {
             content: '';
             display: block;

@@ -1,0 +1,69 @@
+/* ==========================================================================
+   Listbox
+   ========================================================================== */
+
+// NB: elements also carry the legacy `lumx-combobox-*` class names for backward compatibility.
+// Styles target the `lumx-listbox-*` class names only.
+
+// ---- List -----------------------
+
+// Hide list when there is no option, no state, and no skeleton
+.#{$lumx-base-prefix}-listbox-list {
+    &:empty,
+    &:not(:has(.#{$lumx-base-prefix}-listbox-option)):not(:has(.#{$lumx-base-prefix}-listbox-state)):not(
+        :has(.#{$lumx-base-prefix}-listbox-option-skeleton)
+    ) {
+        display: none;
+    }
+}
+
+// ---- State -----------------------
+
+.#{$lumx-base-prefix}-listbox-state {
+    text-align: center;
+}
+
+// ---- Option -----------------------
+
+.#{$lumx-base-prefix}-listbox-option {
+    // Skeleton option placeholders — width variation via :nth-child cycling
+    &-skeleton {
+        .#{$lumx-base-prefix}-skeleton-typography {
+            width: min(65%, 200px);
+        }
+
+        &:nth-child(3n + 1) .#{$lumx-base-prefix}-skeleton-typography {
+            width: min(70%, 230px);
+        }
+
+        &:nth-child(3n + 2) .#{$lumx-base-prefix}-skeleton-typography {
+            width: min(55%, 170px);
+        }
+    }
+
+    // Selection state icon (select options), centered in the `after` slot
+    &__selection-icon {
+        margin: auto;
+    }
+
+    // Allow flex items to shrink below their content width so `truncate` text shows an ellipsis
+    .#{$lumx-base-prefix}-list-item__wrapper,
+    .#{$lumx-base-prefix}-list-item__content {
+        min-width: 0;
+    }
+
+    // Center option content
+    .#{$lumx-base-prefix}-list-item__content {
+        display: flex;
+        flex-direction: column;
+        justify-items: center;
+    }
+
+    // Option more info popover sizing
+    &-more-info {
+        &__popover {
+            max-width: $lumx-size-xxl;
+            padding: $lumx-spacing-unit-big;
+        }
+    }
+}

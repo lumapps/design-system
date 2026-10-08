@@ -18,7 +18,7 @@ export const MultiBlurResetsSearch = { ...testStories.MultiBlurResetsSearch };
 
 // Vue-specific test stories (use Vue SFCs for stateful rendering)
 
-/** Test infinite scroll loads more options when scrolling to the bottom */
+/** Test infinite scroll loads more options (grouped in sections) when scrolling to the bottom */
 export const WithInfiniteScroll = {
     ...testStories.WithInfiniteScroll,
     render: () => ({

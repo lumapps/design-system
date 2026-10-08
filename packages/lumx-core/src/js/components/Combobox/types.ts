@@ -1,59 +1,6 @@
-import type { FocusNavigationController } from '../../utils/focusNavigation';
+import type { ListboxHandle } from '../Listbox/types';
 
-/** Section visibility state tracked per registration. */
-export interface SectionState {
-    hidden: boolean;
-    'aria-hidden': boolean;
-}
-
-/** Registration entry for a section element. */
-export interface SectionRegistration {
-    callback: (state: SectionState) => void;
-    last: SectionState;
-}
-
-/** Registration entry for an option element. */
-export interface OptionRegistration {
-    callback: (isFiltered: boolean) => void;
-    lastFiltered: boolean;
-}
-
-/** Event name for the active state of one option. */
-export type OptionActiveEvent = `optionActive:${string}`;
-
-/** Map of combobox event names to their payload types. */
-export interface ComboboxEventMap {
-    /** Fired when the combobox open state changes. Payload: whether the combobox is open. */
-    open: boolean;
-    /** Fired when the active descendant changes (visual focus). Payload: the option id or null. */
-    activeDescendantChange: string | null;
-    /**
-     * Fired when the visible option count changes.
-     * Payload: the number of visible options plus the current input value.
-     */
-    optionsChange: { optionsLength: number; inputValue?: string } | undefined;
-    /**
-     * Fired immediately when the aggregate loading state changes (skeleton count transitions
-     * between 0 and >0). Used for empty suppression in ComboboxState and for aria-busy on the listbox.
-     */
-    loadingChange: boolean;
-    /**
-     * Fired after a 500ms debounce when loading persists, or immediately when loading ends.
-     * Used to control the loading message text in the live region (ComboboxState).
-     */
-    loadingAnnouncement: boolean;
-    /**
-     * Fired only when this option becomes the active descendant (true)
-     * or stops being the active descendant (false).
-     * Build the key with optionActiveEvent(optionId).
-     */
-    [event: OptionActiveEvent]: boolean;
-}
-
-/** Callback provided in events subscriptions */
-export type SubscriptionCallback<T extends keyof ComboboxEventMap = keyof ComboboxEventMap> = (
-    value: ComboboxEventMap[T],
-) => void;
+export type { SectionState, SectionRegistration, OptionRegistration, OptionActiveEvent } from '../Listbox/types';
 
 /** Callbacks provided by the consumer (React/Vue) to react to combobox state changes. */
 export interface ComboboxCallbacks {
@@ -99,97 +46,29 @@ export interface ComboboxInputOptions {
     selectionMode?: 'fill' | 'keep' | 'clear';
 }
 
-/** Handle returned by `setupCombobox`. Used by framework wrappers and mode controllers. */
+/**
+ * Handle returned by `setupCombobox`. Used by framework wrappers and mode controllers.
+ *
+ * The combobox owns the trigger. Everything else (the open state, the option registry, the filter,
+ * the focus navigation, the selection, the loading state and all the events) is on the
+ * {@link ListboxHandle} exposed as `list`: the listbox element is mounted with `list.mount(element)`.
+ * The combobox open state is the listbox `open` event.
+ */
 export interface ComboboxHandle {
     /** Register the trigger element. Returns a cleanup function. */
     registerTrigger(trigger: HTMLInputElement | HTMLButtonElement): () => void;
-    /** Register the listbox/grid element. Returns a cleanup function. */
-    registerListbox(listbox: HTMLElement): () => void;
     /** Tear down all listeners and state. */
     destroy(): void;
 
-    /** Subscribe to a combobox event. Returns an unsubscribe function. */
-    subscribe<K extends keyof ComboboxEventMap>(event: K, callback: SubscriptionCallback<K>): () => void;
-
-    /**
-     * Read the last dispatched value of an event synchronously, for pull-based subscribers such as
-     * React's `useSyncExternalStore`. Returns `undefined` until the event has fired at least once.
-     */
-    getSnapshot<K extends keyof ComboboxEventMap>(event: K): ComboboxEventMap[K] | undefined;
-
     /** The current trigger element (may be null before registration). */
     readonly trigger: HTMLInputElement | HTMLButtonElement | null;
-    /** The current listbox/grid element (may be null before registration). */
-    readonly listbox: HTMLElement | null;
-    /** The focus navigation controller. */
-    readonly focusNav: FocusNavigationController | null;
-    /** Whether the popup is open. */
+    /** The listbox handle (option registry, filter, focus navigation, selection, listbox events). */
+    readonly list: ListboxHandle;
+    /** Whether the popup is open (same as `list.isOpen`). */
     readonly isOpen: boolean;
-    /** Whether multi-select mode. */
-    readonly isMultiSelect: boolean;
-    /** Whether any skeleton placeholders are currently registered (loading). */
-    readonly isLoading: boolean;
 
-    /** Set the open state, update ARIA, fire callback. */
+    /** Set the open state and update ARIA. Subscribe to `list` `open` to observe it. */
     setIsOpen(isOpen: boolean): void;
-    /** Select an option (or null to clear), fire callback. */
-    select(option: HTMLElement | null): void;
-
-    /**
-     * Replay the pending navigation intent stored on the focus navigation controller via
-     * its `goTo` resolver. Called by the framework wrapper after the option children
-     * commit (keyboard opens from the closed state defer navigation until then). No-op
-     * when nothing is pending.
-     */
-    flushPendingNavigation(): void;
-
-    /**
-     * Register an option DOM element for filter notifications.
-     * The element's textContent is used as the searchable text.
-     * The callback is invoked immediately with the current filter state,
-     * and again whenever the filter changes.
-     * Returns a cleanup function that unregisters the option.
-     */
-    registerOption(element: HTMLElement, onFilterChange: (isFiltered: boolean) => void): () => void;
-    /**
-     * Set the current filter value and notify all registered options of their match state.
-     * Options whose text does not start with the filter value are notified with isFiltered=true.
-     * An empty filter value clears filtering (all options become visible).
-     */
-    setFilter(filterValue: string): void;
-    /**
-     * Re-evaluate the filter state of a single registered option.
-     * Call this after the option's `data-value` or textContent has been updated
-     * (e.g. after a framework re-render) to ensure its filtered/visible state
-     * is consistent with the current filter value.
-     */
-    refilterOption(element: HTMLElement): void;
-    /**
-     * Register a section DOM element for state notifications.
-     * The callback is invoked immediately with the current state, and again whenever
-     * the state changes after a filter update or option un/registration.
-     *
-     * - `hidden`: true when all registered options are filtered out (keeps children mounted
-     *   but invisible to the user and screen readers).
-     * - `aria-hidden`: true when the section has no registered options at all (skeleton-only).
-     *   The section stays visually rendered but is hidden from assistive technology —
-     *   the live region (`ComboboxState`) handles the loading announcement instead.
-     *
-     * At most one of `hidden` / `aria-hidden` is true at a time.
-     *
-     * Returns a cleanup function that unregisters the section.
-     */
-    registerSection(
-        element: HTMLElement,
-        onChange: (state: { hidden: boolean; 'aria-hidden': boolean }) => void,
-    ): () => void;
-    /**
-     * Register a skeleton placeholder. Increments the internal skeleton counter.
-     * When the counter transitions from 0 to >0, fires `loadingChange` immediately
-     * and schedules `loadingAnnouncement` after 500ms. Returns a cleanup function
-     * that decrements the counter (and fires the reverse transitions when reaching 0).
-     */
-    registerSkeleton(): () => void;
 }
 
 /**

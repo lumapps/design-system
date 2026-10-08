@@ -1,32 +1,32 @@
+import { ListDivider } from '../list';
+import ListboxList from '../listbox/ListboxList';
+import ListboxOption from '../listbox/ListboxOption';
+import ListboxOptionAction from '../listbox/ListboxOptionAction';
+import ListboxOptionMoreInfo from '../listbox/ListboxOptionMoreInfo';
+import ListboxOptionSkeleton from '../listbox/ListboxOptionSkeleton';
+import ListboxOptionSelectionIcon from '../listbox/ListboxOptionSelectionIcon';
+import ListboxSection from '../listbox/ListboxSection';
+import ListboxState from '../listbox/ListboxState';
 import ComboboxButton from './ComboboxButton';
 import ComboboxInput from './ComboboxInput';
-import ComboboxList from './ComboboxList';
-import ComboboxOption from './ComboboxOption';
-import ComboboxOptionAction from './ComboboxOptionAction';
-import ComboboxOptionMoreInfo from './ComboboxOptionMoreInfo';
-import ComboboxOptionSkeleton from './ComboboxOptionSkeleton';
 import ComboboxPopover from './ComboboxPopover';
 import ComboboxProvider from './ComboboxProvider';
-import ComboboxSection from './ComboboxSection';
-import ComboboxSelectionIcon from './ComboboxSelectionIcon';
-import ComboboxState from './ComboboxState';
-import { ListDivider } from '../list';
 
 export type { ComboboxProviderProps } from './ComboboxProvider';
-export type { ComboboxListProps } from './ComboboxList';
 export type { ComboboxPopoverProps } from './ComboboxPopover';
 export type { ComboboxButtonProps } from './ComboboxButton';
 export type { ComboboxInputProps } from './ComboboxInput';
-export type { ComboboxOptionProps } from './ComboboxOption';
-export type { ComboboxOptionActionProps } from './ComboboxOptionAction';
-export type { ComboboxOptionMoreInfoProps } from './ComboboxOptionMoreInfo';
-export type { ComboboxOptionSkeletonProps } from './ComboboxOptionSkeleton';
-export type { ComboboxSectionProps } from './ComboboxSection';
-export type { ComboboxStateProps } from './ComboboxState';
+// The list, option, section and state modules are the listbox ones (public names unchanged).
+export type { ListboxListProps as ComboboxListProps } from '../listbox/ListboxList';
+export type { ListboxOptionProps as ComboboxOptionProps } from '../listbox/ListboxOption';
+export type { ListboxOptionActionProps as ComboboxOptionActionProps } from '../listbox/ListboxOptionAction';
+export type { ListboxOptionMoreInfoProps as ComboboxOptionMoreInfoProps } from '../listbox/ListboxOptionMoreInfo';
+export type { ListboxOptionSkeletonProps as ComboboxOptionSkeletonProps } from '../listbox/ListboxOptionSkeleton';
+export type { ListboxSectionProps as ComboboxSectionProps } from '../listbox/ListboxSection';
+export type { ListboxStateProps as ComboboxStateProps } from '../listbox/ListboxState';
 
 export type { ComboboxButtonLabelDisplayMode } from '@lumx/core/js/components/Combobox/ComboboxButton';
-export type { ComboboxListType } from '@lumx/core/js/components/Combobox/ComboboxList';
-export type { ComboboxHandle, ComboboxCallbacks } from '@lumx/core/js/components/Combobox/types';
+export type { ListboxListType as ComboboxListType } from '@lumx/core/js/components/Listbox/ListboxList';
 
 /**
  * Combobox compound component namespace.
@@ -38,24 +38,24 @@ export const Combobox = {
     Button: ComboboxButton,
     /** Text input trigger for autocomplete combobox mode with optional toggle button and filtering. */
     Input: ComboboxInput,
-    /** Listbox container that registers with the combobox handle and tracks loading state. */
-    List: ComboboxList,
+    /** Listbox container linked to the combobox trigger (must be rendered inside `Combobox.Provider`). */
+    List: ListboxList,
     /** Selectable option item with filtering and keyboard navigation support. */
-    Option: ComboboxOption,
+    Option: ListboxOption,
     /** Secondary action button within a grid-mode option row, rendered as an independent gridcell. */
-    OptionAction: ComboboxOptionAction,
+    OptionAction: ListboxOptionAction,
     /** Info button on an option that shows a popover on hover or keyboard highlight. */
-    OptionMoreInfo: ComboboxOptionMoreInfo,
+    OptionMoreInfo: ListboxOptionMoreInfo,
     /** Loading placeholder skeleton(s) that auto-register loading state with the combobox handle. */
-    OptionSkeleton: ComboboxOptionSkeleton,
+    OptionSkeleton: ListboxOptionSkeleton,
     /** Selection state icon (check circle / radio, or checkbox in multiple lists) for the `after` slot of an option. Reads the option `isSelected` and the list `aria-multiselectable`. */
-    SelectionIcon: ComboboxSelectionIcon,
+    SelectionIcon: ListboxOptionSelectionIcon,
     /** Floating popover container that auto-binds to the combobox anchor and open/close state. */
     Popover: ComboboxPopover,
     /** Labelled group of options that auto-hides when all its child options are filtered out. */
-    Section: ComboboxSection,
+    Section: ListboxSection,
     /** Displays empty, error, and loading state messages for the combobox list. */
-    State: ComboboxState,
+    State: ListboxState,
     /** Visual separator between option groups (alias for ListDivider). Purely decorative — invisible to screen readers. */
     Divider: ListDivider,
 };

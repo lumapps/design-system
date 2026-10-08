@@ -1,0 +1,66 @@
+import type {
+    CommonRef,
+    HasClassName,
+    HasPolymorphicAs,
+    HasRequiredLinkHref,
+    JSXElement,
+    LumxClassName,
+} from '../../types';
+import { classNames } from '../../utils';
+import { ClickableElement, RawClickable } from '../RawClickable';
+
+/**
+ * Defines the props for the core ListboxOptionAction template.
+ */
+export type ListboxOptionActionProps<E extends ClickableElement = 'button'> = HasPolymorphicAs<E> &
+    HasClassName &
+    HasRequiredLinkHref<E> & {
+        /** Content of the action (icon, label, etc.). */
+        children?: JSXElement;
+        /** Unique ID for the action element. */
+        id?: string;
+        /** Whether the action is disabled. */
+        isDisabled?: boolean;
+        /** On click callback. */
+        handleClick?(evt: any): void;
+        /** ref to the root element. */
+        ref?: CommonRef;
+    };
+
+/**
+ * Component display name.
+ */
+export const COMPONENT_NAME = 'ListboxOptionAction';
+
+/**
+ * Component default class name and class prefix.
+ */
+export const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-listbox-option-action';
+/**
+ * Legacy class name, emitted next to `CLASSNAME` for backward compatibility.
+ *
+ * @deprecated Use `CLASSNAME` (`lumx-listbox-*`). The legacy `lumx-combobox-*` class will be removed in the next major version.
+ */
+export const LEGACY_CLASSNAME = 'lumx-combobox-option-action';
+
+/**
+ * ListboxOptionAction core template.
+ * Renders a secondary action button within a combobox option row (grid mode).
+ * Each action renders as a `role="gridcell"` element, enabling 2D keyboard
+ * navigation (ArrowLeft/Right to move between the option and its actions).
+ *
+ * @param props Component props.
+ * @return JSX element.
+ */
+export const ListboxOptionAction = <E extends ClickableElement = 'button'>(props: ListboxOptionActionProps<E>) => {
+    const { children, className, as: Element = 'button', handleClick, ...forwardedProps } = props;
+
+    return RawClickable({
+        as: Element as any,
+        ...forwardedProps,
+        role: 'gridcell',
+        className: classNames.join(className, CLASSNAME, LEGACY_CLASSNAME),
+        handleClick,
+        children,
+    } as any);
+};

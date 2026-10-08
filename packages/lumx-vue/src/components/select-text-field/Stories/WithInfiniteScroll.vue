@@ -7,6 +7,7 @@
         filter="auto"
         get-option-id="id"
         get-option-name="name"
+        get-section-id="category"
         :value="value"
         :translations="TRANSLATIONS"
         @change="handleChange"
@@ -22,19 +23,20 @@ import { SelectTextField } from '@lumx/vue';
 interface Fruit {
     id: string;
     name: string;
+    category: string;
 }
 
 const FRUITS: Fruit[] = [
-    { id: 'apple', name: 'Apple' },
-    { id: 'apricot', name: 'Apricot' },
-    { id: 'banana', name: 'Banana' },
-    { id: 'blueberry', name: 'Blueberry' },
-    { id: 'cherry', name: 'Cherry' },
-    { id: 'grape', name: 'Grape' },
-    { id: 'lemon', name: 'Lemon' },
-    { id: 'orange', name: 'Orange' },
-    { id: 'peach', name: 'Peach' },
-    { id: 'strawberry', name: 'Strawberry' },
+    { id: 'apple', name: 'Apple', category: 'Pome' },
+    { id: 'apricot', name: 'Apricot', category: 'Stone' },
+    { id: 'banana', name: 'Banana', category: 'Tropical' },
+    { id: 'blueberry', name: 'Blueberry', category: 'Berry' },
+    { id: 'cherry', name: 'Cherry', category: 'Stone' },
+    { id: 'grape', name: 'Grape', category: 'Berry' },
+    { id: 'lemon', name: 'Lemon', category: 'Citrus' },
+    { id: 'orange', name: 'Orange', category: 'Citrus' },
+    { id: 'peach', name: 'Peach', category: 'Stone' },
+    { id: 'strawberry', name: 'Strawberry', category: 'Berry' },
 ];
 
 const value = ref<Fruit>();

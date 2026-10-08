@@ -61,7 +61,7 @@ export function setup({
         ),
     };
 
-    /** Combobox with grouped options using ComboboxSection. */
+    /** Combobox with grouped options using ListboxSection. */
     const ComboboxWithSection = {
         args: { value: '' },
         decorators: [withValueOnChange()],

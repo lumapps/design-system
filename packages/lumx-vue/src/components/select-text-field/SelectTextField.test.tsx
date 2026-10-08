@@ -453,7 +453,7 @@ describe('<SelectTextField>', () => {
                 expect(document.body.querySelector('[data-test="before"]')).toBeInTheDocument();
             });
             // Ensure it's positioned before the first option in the listbox.
-            const listbox = document.body.querySelector('.lumx-combobox-list');
+            const listbox = document.body.querySelector('.lumx-listbox-list');
             const before = listbox?.querySelector('[data-test="before"]');
             const firstOption = listbox?.querySelector('[role="option"]');
             expect(before).toBeTruthy();
