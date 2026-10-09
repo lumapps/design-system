@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   `@lumx/react`, `@lumx/vue`:
+    -   `SelectButton`, `SelectTextField`: show the selection state on the options with icons.
+
 ## [4.26.0][] - 2026-10-08
 
 ### Added

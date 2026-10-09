@@ -59,16 +59,17 @@ export function renderSelectOptions<O>(
         const name = getWithSelector(getOptionName || getOptionId, item) || id;
         const description = getOptionDescription && getWithSelector(getOptionDescription, item);
         const isSelected = selectedIds?.has(id) ?? false;
+        const after = (<Combobox.SelectionIcon />) as JSXElement;
 
         // Delegate to the consumer's render function when provided.
         // The consumer receives core-computed context and is responsible for rendering
         // a <Combobox.Option> with those values forwarded.
         if (renderOption) {
-            return renderOption(item, { index, value: id, name, isSelected, description }) as any;
+            return renderOption(item, { index, value: id, name, isSelected, description, after }) as any;
         }
 
         return (
-            <Combobox.Option key={id} value={id} description={description} isSelected={isSelected}>
+            <Combobox.Option key={id} value={id} description={description} isSelected={isSelected} after={after}>
                 {name}
             </Combobox.Option>
         );

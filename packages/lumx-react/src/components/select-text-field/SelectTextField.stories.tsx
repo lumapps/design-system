@@ -59,7 +59,11 @@ export const CustomRender = () => {
             onChange={(v) => setValue(v ?? [])}
             translations={MULTI_TRANSLATIONS}
             renderOption={(fruit: Fruit) => (
-                <Combobox.Option value={fruit.id} before={<Icon icon={fruit.icon} size="xs" />} />
+                <Combobox.Option
+                    value={fruit.id}
+                    before={<Icon icon={fruit.icon} size="xs" />}
+                    after={<Combobox.OptionMoreInfo>a "{fruit.category}" fruit</Combobox.OptionMoreInfo>}
+                />
             )}
             renderSectionTitle={(sectionId, options) => (
                 <>
