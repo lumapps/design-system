@@ -24,6 +24,17 @@ describe('toggleSelection', () => {
             const result = toggleSelection(FRUITS, 'id', FRUITS[0], 'cherry', false);
             expect(result).toEqual(FRUITS[2]);
         });
+
+        it('keeps the option when it is selected again (default)', () => {
+            const result = toggleSelection(FRUITS, 'id', FRUITS[0], 'apple', false);
+            expect(result).toEqual(FRUITS[0]);
+        });
+
+        it('deselects the option when it is selected again with allowDeselect', () => {
+            expect(toggleSelection(FRUITS, 'id', FRUITS[0], 'apple', false, true)).toBeUndefined();
+            // Another option is still selected normally.
+            expect(toggleSelection(FRUITS, 'id', FRUITS[0], 'cherry', false, true)).toEqual(FRUITS[2]);
+        });
     });
 
     describe('multi mode', () => {

@@ -4,7 +4,7 @@ import type { JSXElement, Selector } from '../../types';
 import type { InputLabelProps } from '../../components/InputLabel';
 
 /**
- * Status of the select dropdown list.
+ * Status of the options list (dropdown of `SelectButton`/`SelectTextField`, or `SelectList`).
  *
  * - `'idle'` — Default state, no loading indicators.
  * - `'loading'` — Full loading: shows skeleton placeholders, hides real options.
@@ -83,6 +83,14 @@ export interface BaseSelectComponents {
     };
     /** Framework-specific InfiniteScroll component (handles IntersectionObserver lifecycle). */
     InfiniteScroll?: any;
+}
+
+/**
+ * Components needed to render select options (the option and section components are shared
+ * by the combobox and the standalone listbox).
+ */
+export interface RenderSelectOptionsComponents {
+    Combobox: Pick<BaseSelectComponents['Combobox'], 'Section' | 'Option' | 'SelectionIcon'>;
 }
 
 /**
@@ -176,6 +184,34 @@ export interface BaseSelectButtonWrapperProps<O>
     listStatus?: SelectListStatus;
     /** Optional translations for screen-reader announcements (loading/empty/error/option count). */
     translations?: SelectButtonTranslations;
+}
+
+/**
+ * Shared translation labels for SelectList wrappers (React and Vue).
+ * Same messages as the SelectButton (the list is always visible, so there is no input value).
+ */
+export type SelectListTranslations = SelectButtonTranslations;
+
+/**
+ * Wrapper-level props shared between React and Vue SelectList implementations.
+ */
+export interface BaseSelectListWrapperProps<O>
+    extends Pick<
+        BaseSelectProps<O>,
+        'options' | 'getOptionId' | 'getOptionName' | 'getOptionDescription' | 'getSectionId'
+    > {
+    /**
+     * Selection type. Discriminator that wrappers expand into a typed union:
+     * `'single'` (default) → `value?: O`, `'multiple'` → `value: O[]`.
+     */
+    selectionType?: 'single' | 'multiple';
+    /**
+     * Status of the list.
+     * @default 'idle'
+     */
+    listStatus?: SelectListStatus;
+    /** Optional translations for screen-reader announcements (loading/empty/error/option count). */
+    translations?: SelectListTranslations;
 }
 
 /**

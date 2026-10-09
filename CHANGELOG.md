@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   `@lumx/react`, `@lumx/vue`:
+    -   `SelectList`: new component to pick one or more options from a list that stays visible on the page (single/multiple selection, sections, loading/error states, infinite scroll).
+
 ## [4.26.0][] - 2026-10-08
 
 ### Added
