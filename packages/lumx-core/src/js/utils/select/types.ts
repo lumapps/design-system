@@ -229,7 +229,10 @@ export interface BaseSelectTextFieldWrapperProps<O>
      * @default false
      */
     openOnFocus?: boolean;
-    /** Field label (required). Also used as aria-label for the listbox. */
+    /**
+     * Field label (required). Also used as aria-label for the listbox.
+     * When empty, the listbox uses the input `aria-labelledby` (from `inputProps`).
+     */
     label: string;
     /** Input placeholder text. */
     placeholder?: string;

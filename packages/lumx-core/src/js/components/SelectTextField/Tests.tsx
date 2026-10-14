@@ -2,7 +2,7 @@
 import userEvent from '@testing-library/user-event';
 import { getByRole, getConfig, waitFor } from '@testing-library/dom';
 
-import { getByTagName } from '../../../testing/queries';
+import { getByTagName, queryByTagName } from '../../../testing/queries';
 
 // ─── Fixtures ────────────────────────────────────────────────────
 
@@ -316,6 +316,19 @@ export default function selectTextFieldTests({ components, renderWithState }: Se
             renderWithState(defaultTemplate);
             const listbox = getListbox();
             expect(listbox?.getAttribute('aria-label')).toBe('Select a fruit');
+        });
+
+        it('should label the listbox like the input when the label is empty', () => {
+            renderWithState(defaultTemplate, {
+                label: '',
+                inputProps: { 'aria-labelledby': 'external-label' },
+            });
+
+            expect(queryByTagName(document.body, 'label')).toBeNull();
+            expect(getInput()).toHaveAttribute('aria-labelledby', 'external-label');
+            const listbox = getListbox();
+            expect(listbox).toHaveAttribute('aria-labelledby', 'external-label');
+            expect(listbox).not.toHaveAttribute('aria-label');
         });
     });
 

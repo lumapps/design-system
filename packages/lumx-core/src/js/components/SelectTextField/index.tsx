@@ -9,7 +9,10 @@ export interface SelectTextFieldProps<O = any> extends BaseSelectProps<O> {
     /** Selected option (single) or options (multiple) — for marking options as selected. */
     selected?: O | O[];
 
-    /** Field label (required). Also used as aria-label for the listbox. */
+    /**
+     * Field label (required). Also used as aria-label for the listbox.
+     * When empty, the listbox uses the input `aria-labelledby` (from `inputProps`).
+     */
     label: string;
 
     /** Whether the listbox supports multiple selection. */
@@ -147,7 +150,13 @@ export const SelectTextField = (props: SelectTextFieldProps, { Combobox, Infinit
                 placement="bottom-start"
                 {...popoverProps}
             >
-                <Combobox.List {...listProps} aria-label={label} aria-multiselectable={isMultiselectable || undefined}>
+                <Combobox.List
+                    {...listProps}
+                    aria-label={label || undefined}
+                    // No label: name the listbox like the input (ex: labelled by an external element).
+                    aria-labelledby={label ? undefined : inputProps?.['aria-labelledby']}
+                    aria-multiselectable={isMultiselectable || undefined}
+                >
                     {beforeOptions}
 
                     {isFullLoading ? (
