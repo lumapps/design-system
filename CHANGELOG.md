@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   `@lumx/react`, `@lumx/vue`:
+    -   `SelectTextField`: add `aria-label` (deprecates `ariaLabel`) and `aria-labelledby` props; with an empty `label`, the listbox is labelled by `aria-labelledby`.
+
 ### Changed
 
 -   `@lumx/react`, `@lumx/vue`:

@@ -2,7 +2,7 @@
 import userEvent from '@testing-library/user-event';
 import { getByRole, getConfig, waitFor } from '@testing-library/dom';
 
-import { getByTagName } from '../../../testing/queries';
+import { getByTagName, queryByTagName } from '../../../testing/queries';
 
 // ─── Fixtures ────────────────────────────────────────────────────
 
@@ -316,6 +316,67 @@ export default function selectTextFieldTests({ components, renderWithState }: Se
             renderWithState(defaultTemplate);
             const listbox = getListbox();
             expect(listbox?.getAttribute('aria-label')).toBe('Select a fruit');
+        });
+
+        it('should label the listbox like the input when the label is empty', () => {
+            renderWithState(defaultTemplate, {
+                label: '',
+                inputProps: { 'aria-labelledby': 'external-label' },
+            });
+
+            expect(queryByTagName(document.body, 'label')).toBeNull();
+            expect(getInput()).toHaveAttribute('aria-labelledby', 'external-label');
+            const listbox = getListbox();
+            expect(listbox).toHaveAttribute('aria-labelledby', 'external-label');
+            expect(listbox).not.toHaveAttribute('aria-label');
+        });
+
+        it('should label the input and the listbox from the aria-labelledby prop when the label is empty', () => {
+            renderWithState(defaultTemplate, { label: '', 'aria-labelledby': 'external-label' });
+
+            expect(queryByTagName(document.body, 'label')).toBeNull();
+            expect(getInput()).toHaveAttribute('aria-labelledby', 'external-label');
+            const listbox = getListbox();
+            expect(listbox).toHaveAttribute('aria-labelledby', 'external-label');
+            expect(listbox).not.toHaveAttribute('aria-label');
+        });
+
+        it('should give precedence to the aria-labelledby prop over the input props', () => {
+            renderWithState(defaultTemplate, {
+                label: '',
+                'aria-labelledby': 'prop-label',
+                inputProps: { 'aria-labelledby': 'input-props-label' },
+            });
+
+            expect(getInput()).toHaveAttribute('aria-labelledby', 'prop-label');
+            expect(getListbox()).toHaveAttribute('aria-labelledby', 'prop-label');
+        });
+
+        it('should keep the listbox labelled by the label when aria-labelledby is set', () => {
+            renderWithState(defaultTemplate, { 'aria-labelledby': 'external-label' });
+
+            expect(getInput()).toHaveAttribute('aria-labelledby', 'external-label');
+            const listbox = getListbox();
+            expect(listbox).toHaveAttribute('aria-label', 'Select a fruit');
+            expect(listbox).not.toHaveAttribute('aria-labelledby');
+        });
+
+        it('should forward the aria-label prop to the input', () => {
+            renderWithState(defaultTemplate, { 'aria-label': 'Fruit' });
+
+            expect(getInput()).toHaveAttribute('aria-label', 'Fruit');
+        });
+
+        it('should forward the deprecated ariaLabel prop to the input', () => {
+            renderWithState(defaultTemplate, { ariaLabel: 'Fruit' });
+
+            expect(getInput()).toHaveAttribute('aria-label', 'Fruit');
+        });
+
+        it('should give precedence to the aria-label prop over the input props', () => {
+            renderWithState(defaultTemplate, { 'aria-label': 'Fruit', inputProps: { 'aria-label': 'Other' } });
+
+            expect(getInput()).toHaveAttribute('aria-label', 'Fruit');
         });
     });
 

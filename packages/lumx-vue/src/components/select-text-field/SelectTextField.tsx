@@ -16,7 +16,7 @@ import { SelectTextField as UI, COMPONENT_NAME } from '@lumx/core/js/components/
 import { CLASSNAME as SCROLL_BOX_CLASSNAME } from '@lumx/core/js/components/ScrollBox';
 import type { JSXElement } from '@lumx/core/js/types';
 
-import { getName, keysOf, type ClassValue, type EmitsOf } from '../../utils/VueToJSX';
+import { getName, keysOf, type ClassValue, type EmitsOf, type HyphenatedAriaProps } from '../../utils/VueToJSX';
 import { Combobox } from '../combobox';
 import { useWrappedRenderOptionSlot } from '../combobox/useWrappedRenderOptionSlot';
 import { useWrappedRenderSectionTitleSlot } from '../combobox/useWrappedRenderSectionTitleSlot';
@@ -26,8 +26,11 @@ import { useHasEventListener } from '../../composables/useHasEventListener';
 import { useClassName } from '../../composables/useClassName';
 import { useDisableStateProps } from '../../composables/useDisableStateProps';
 
-/** Props shared across single and multiple selection modes. */
-interface BaseSelectTextFieldProps<O = any> extends BaseSelectTextFieldWrapperProps<O> {
+/**
+ * Props shared across single and multiple selection modes.
+ * Hyphenated aria props (`aria-label`, `aria-labelledby`) are not declared, they flow through `attrs`.
+ */
+interface BaseSelectTextFieldProps<O = any> extends Omit<BaseSelectTextFieldWrapperProps<O>, HyphenatedAriaProps> {
     /** Content to render before the options list. */
     beforeOptions?: JSXElement;
     /** CSS class. */
@@ -294,6 +297,8 @@ const SelectTextField = defineComponent(
                     renderSectionTitle: wrappedRenderSectionTitle.value as any,
                     selected: props.value,
                     label: props.label,
+                    'aria-label': (attrs['aria-label'] as string | undefined) ?? props.ariaLabel,
+                    'aria-labelledby': attrs['aria-labelledby'] as string | undefined,
                     isMultiselectable: isMultiple.value,
                     listStatus,
                     onOpen: (isOpen: boolean) => emit('open', isOpen),
@@ -325,7 +330,6 @@ const SelectTextField = defineComponent(
                         name: props.name,
                         isValid: props.isValid,
                         maxLength: props.maxLength,
-                        'aria-label': props.ariaLabel,
                         clearButtonProps: showClear ? { label: props.translations.clearLabel } : undefined,
                         onClear: handleClear,
                         toggleButtonProps: props.translations.showSuggestionsLabel

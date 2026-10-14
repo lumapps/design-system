@@ -109,6 +109,9 @@ The `filter` prop controls how option filtering behaves:
 `SelectTextField` is built on the combobox pattern and uses the WAI-ARIA combobox role internally.
 
 - Always provide a `label` prop so the field is properly announced by screen readers.
+- When another element already labels the field (for example, the button that opens a dialog containing the field), set
+  `label=""` and pass the id of that element in the `aria-labelledby` prop. The input and the listbox are then both
+  labelled by that element.
 - The `translations` prop is required and must include an accessible label for the clear button (`clearLabel`). Optionally provide `showSuggestionsLabel` for the toggle button; when omitted, the toggle button is not rendered.
 - In multiple selection mode, also provide `chipGroupLabel` (accessible label for the chip group) and `chipRemoveLabel` (appended to each chip's aria-label to indicate it can be removed, e.g. "Apple - Remove").
 - Provide `loadingMessage` so screen readers announce when options are being loaded (announced via a live region after a short debounce).

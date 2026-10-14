@@ -9,11 +9,23 @@ export interface SelectTextFieldProps<O = any> extends BaseSelectProps<O> {
     /** Selected option (single) or options (multiple) — for marking options as selected. */
     selected?: O | O[];
 
-    /** Field label (required). Also used as aria-label for the listbox. */
+    /**
+     * Field label (required). Also used as aria-label for the listbox.
+     * When empty, the listbox uses the input `aria-labelledby`.
+     */
     label: string;
 
     /** Whether the listbox supports multiple selection. */
     isMultiselectable?: boolean;
+
+    /** Accessible label of the input (takes precedence over `inputProps['aria-label']`). */
+    'aria-label'?: string;
+
+    /**
+     * Id of the element(s) labelling the input (takes precedence over `inputProps['aria-labelledby']`).
+     * Also labels the listbox when `label` is empty.
+     */
+    'aria-labelledby'?: string;
 
     /** Props forwarded to Combobox.Input. */
     inputProps?: Record<string, any>;
@@ -115,6 +127,8 @@ export const SelectTextField = (props: SelectTextFieldProps, { Combobox, Infinit
         label,
         isMultiselectable,
         inputProps,
+        'aria-label': ariaLabel = inputProps?.['aria-label'],
+        'aria-labelledby': ariaLabelledBy = inputProps?.['aria-labelledby'],
         popoverProps,
         listProps,
         listStatus = 'idle',
@@ -139,7 +153,14 @@ export const SelectTextField = (props: SelectTextFieldProps, { Combobox, Infinit
 
     return (
         <Combobox.Provider onOpen={onOpen}>
-            <Combobox.Input label={label} {...inputProps} selectionMode="keep" chips={chips} />
+            <Combobox.Input
+                label={label}
+                {...inputProps}
+                aria-label={ariaLabel}
+                aria-labelledby={ariaLabelledBy}
+                selectionMode="keep"
+                chips={chips}
+            />
 
             <Combobox.Popover
                 fitToAnchorWidth="minWidth"
@@ -147,7 +168,13 @@ export const SelectTextField = (props: SelectTextFieldProps, { Combobox, Infinit
                 placement="bottom-start"
                 {...popoverProps}
             >
-                <Combobox.List {...listProps} aria-label={label} aria-multiselectable={isMultiselectable || undefined}>
+                <Combobox.List
+                    {...listProps}
+                    aria-label={label || undefined}
+                    // No label: name the listbox like the input (ex: labelled by an external element).
+                    aria-labelledby={label ? undefined : ariaLabelledBy}
+                    aria-multiselectable={isMultiselectable || undefined}
+                >
                     {beforeOptions}
 
                     {isFullLoading ? (

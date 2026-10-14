@@ -131,7 +131,9 @@ export const SelectTextField = <O,>(props: SelectTextFieldProps<O>) => {
         name,
         isValid,
         maxLength,
-        ariaLabel,
+        ariaLabel: deprecatedAriaLabel,
+        'aria-label': ariaLabel = deprecatedAriaLabel,
+        'aria-labelledby': ariaLabelledBy,
         inputRef: externalInputRef,
         // Event callbacks
         onBlur: externalOnBlur,
@@ -291,6 +293,8 @@ export const SelectTextField = <O,>(props: SelectTextFieldProps<O>) => {
             renderSectionTitle: renderSectionTitle as any,
             selected: value,
             label,
+            'aria-label': ariaLabel,
+            'aria-labelledby': ariaLabelledBy,
             isMultiselectable: isMultiple,
             listStatus,
             onOpen,
@@ -321,7 +325,6 @@ export const SelectTextField = <O,>(props: SelectTextFieldProps<O>) => {
                 name,
                 isValid,
                 maxLength,
-                'aria-label': ariaLabel,
                 clearButtonProps: showClear ? { label: translations.clearLabel } : undefined,
                 onClear: handleClear,
                 toggleButtonProps: translations.showSuggestionsLabel
