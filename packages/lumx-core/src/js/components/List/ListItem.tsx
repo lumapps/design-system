@@ -36,6 +36,14 @@ export interface ListItemProps extends HasClassName, HasAriaDisabled {
     handleClick?: (event: any) => void;
 }
 
+/**
+ * Core-only props of the ListItem template (not exposed by the React and Vue components).
+ */
+export interface ListItemCoreProps {
+    /** Root element tag. Default: `li` (e.g. `div` for an item row that is not a direct list child). */
+    as?: 'li' | 'div';
+}
+
 export type ListItemPropsToOverride = 'after' | 'before' | 'children' | 'handleClick';
 
 /**
@@ -62,8 +70,9 @@ export const DEFAULT_PROPS: Partial<ListItemProps> = {
  * @param  props Component props.
  * @return JSX element.
  */
-export const ListItem = (props: ListItemProps) => {
+export const ListItem = (props: ListItemProps & ListItemCoreProps) => {
     const {
+        as: Element = 'li',
         after,
         before,
         children,
@@ -83,7 +92,7 @@ export const ListItem = (props: ListItemProps) => {
     const clickable = !!linkAs || linkProps?.href || handleClick;
 
     return (
-        <li
+        <Element
             ref={ref}
             {...forwardedProps}
             className={classNames.join(className, block({ [`size-${size}`]: Boolean(size) }))}
@@ -108,7 +117,7 @@ export const ListItem = (props: ListItemProps) => {
                     </>
                 ) as JSXElement,
             })}
-        </li>
+        </Element>
     );
 };
 
