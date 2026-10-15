@@ -3,7 +3,7 @@ import type { PopoverProps } from '../Popover';
 import type { PopoverSizes } from '../Popover/types';
 import { classNames } from '../../utils';
 import { ScrollBox } from '../ScrollBox';
-import { DEFAULT_COMBOBOX_POPOVER_MAX_HEIGHT } from './constants';
+import { COMBOBOX_POPOVER_CLASSNAME, DEFAULT_COMBOBOX_POPOVER_MAX_HEIGHT } from './constants';
 
 /**
  * Component display name.
@@ -13,7 +13,7 @@ export const COMPONENT_NAME = 'ComboboxPopover';
 /**
  * Component default class name.
  */
-export const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-combobox-popover';
+export const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = COMBOBOX_POPOVER_CLASSNAME;
 const { block, element } = classNames.bem(CLASSNAME);
 
 type InheritedPopoverProps = Pick<

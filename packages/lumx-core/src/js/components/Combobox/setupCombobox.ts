@@ -1,5 +1,6 @@
 import { isSelected } from '../Listbox/utils';
 import { setupListbox } from '../Listbox/setupListbox';
+import { COMBOBOX_POPOVER_CLASSNAME } from './constants';
 import type { ComboboxCallbacks, ComboboxHandle, OnTriggerAttach } from './types';
 
 /** Options for configuring the shared combobox behavior. */
@@ -33,11 +34,26 @@ export function setupCombobox(
 
     let trigger: HTMLInputElement | HTMLButtonElement | null = null;
 
+    /** When true, the listbox stays open (inline listbox, no popup to open or close). */
+    let alwaysOpen = false;
+    /** Whether the mounted listbox is inline (not in a `Combobox.Popover`). */
+    let isInline = false;
+    /** Forced `alwaysOpen` value (`undefined`: from the listbox placement, see {@link isInline}). */
+    let alwaysOpenOverride: boolean | undefined;
+
     /** AbortController for all trigger event listeners. */
     let abortController: AbortController | null = null;
 
     // Forward-declared so internal helpers can reference `handle` before it is constructed (via closure).
     let handle!: ComboboxHandle;
+
+    /** Apply the `alwaysOpen` value (override, or else the listbox placement). */
+    function syncAlwaysOpen() {
+        const value = alwaysOpenOverride ?? isInline;
+        if (alwaysOpen === value) return;
+        alwaysOpen = value;
+        handle.setIsOpen(value);
+    }
 
     /** Set `aria-haspopup="grid"` on the trigger when the listbox is a grid. */
     function syncHasPopup(listbox: HTMLElement | null) {
@@ -64,7 +80,12 @@ export function setupCombobox(
         focusOwner: {
             getFocusOwner: () => trigger,
             getInputValue: () => trigger?.value ?? '',
-            onMount: (listbox) => syncHasPopup(listbox),
+            onMount: (listbox) => {
+                syncHasPopup(listbox);
+                // No `Combobox.Popover` around the listbox: inline listbox, always open.
+                isInline = !listbox.closest(`.${COMBOBOX_POPOVER_CLASSNAME}`);
+                syncAlwaysOpen();
+            },
         },
     });
 
@@ -153,9 +174,15 @@ export function setupCombobox(
 
                 case 'Escape':
                     // 2-tier: close if open, otherwise clear the input value.
+                    // Always open: only clear the active option (never the selected value, which stays visible).
                     // When there is nothing to close or clear, let Escape propagate
                     // (ex: so a surrounding dialog can close).
-                    if (handle.isOpen) {
+                    if (alwaysOpen) {
+                        if (nav?.selectors.activeItem) {
+                            nav.clear();
+                            flag = true;
+                        }
+                    } else if (handle.isOpen) {
                         handle.setIsOpen(false);
                         flag = true;
                     } else if (triggerEl.tagName === 'INPUT' && triggerEl.value) {
@@ -226,14 +253,27 @@ export function setupCombobox(
         get isOpen() {
             return list.isOpen;
         },
+        get alwaysOpen() {
+            return alwaysOpen;
+        },
 
         setIsOpen(isOpen: boolean) {
+            // Always open: a close request only clears the active option.
+            if (alwaysOpen && !isOpen) {
+                list.focusNav?.clear();
+                return;
+            }
             if (list.isOpen === isOpen) return;
             if (!isOpen) list.focusNav?.clear();
             // Update aria-expanded on trigger (false when no visible options or skeletons)
             trigger?.setAttribute('aria-expanded', String(isOpen && list.hasVisibleContent));
             // Last: the listbox dispatches `open` to the subscribers, which must see the trigger in its final state.
             list.setOpen(isOpen);
+        },
+
+        setAlwaysOpen(value: boolean | undefined) {
+            alwaysOpenOverride = value;
+            syncAlwaysOpen();
         },
 
         registerTrigger(newTrigger: HTMLInputElement | HTMLButtonElement): () => void {

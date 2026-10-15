@@ -11,7 +11,13 @@ import { provideListboxContext } from '../listbox/context/ListboxContext';
 /**
  * Defines the props of the component.
  */
-export interface ComboboxProviderProps {}
+export interface ComboboxProviderProps {
+    /**
+     * Keep the listbox always open (inline listbox).
+     * By default, the listbox is always open when the combobox contains no `Combobox.Popover`.
+     */
+    alwaysOpen?: boolean;
+}
 
 /**
  * Combobox.Provider component.
@@ -23,7 +29,7 @@ export interface ComboboxProviderProps {}
  * @return Vue element.
  */
 const ComboboxProvider = defineComponent(
-    (_props: ComboboxProviderProps, { slots, emit }) => {
+    (props: ComboboxProviderProps, { slots, emit }) => {
         const attrs = useAttrs();
         const listboxId = useId();
         const anchorRef = ref<HTMLElement | null>(null);
@@ -35,6 +41,11 @@ const ComboboxProvider = defineComponent(
         provideComboboxContext({ handle, setHandle, listboxId, anchorRef });
         // The listbox of the combobox: shared with the list, the options and the state through the listbox context.
         provideListboxContext({ list: computed(() => handle.value?.list ?? null), listboxId, type: 'listbox' });
+
+        // Force the always open state (`undefined`: the core detects the inline listbox).
+        watch([handle, () => props.alwaysOpen], ([handleValue, alwaysOpen]) => {
+            handleValue?.setAlwaysOpen(alwaysOpen);
+        });
 
         // Subscribe to the open event and forward to the onOpen callback.
         watch(handle, (handleValue) => {
@@ -51,7 +62,10 @@ const ComboboxProvider = defineComponent(
     {
         name: getName(COMBOBOX_PROVIDER_COMPONENT_NAME),
         inheritAttrs: false,
-        props: {},
+        props: {
+            // `undefined` by default (Vue casts a missing boolean prop to `false`).
+            alwaysOpen: { type: Boolean, default: undefined },
+        },
         emits: {
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
             open: (isOpen: boolean) => true,
