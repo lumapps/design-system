@@ -104,6 +104,15 @@ The `filter` prop controls how option filtering behaves:
 - **`"manual"`** — All options remain visible; filtering is the consumer's responsibility. Use this when options are fetched from a server in response to the `onSearch` callback.
 - **`"off"`** — The input is set to read-only (no typing). The dropdown opens on focus, acting as a pure picker. Useful for static dropdowns where search is not needed.
 
+## Inline list
+
+Set `popoverProps={false}` to render the list inline below the text field, with no popover. The list is always visible:
+there is no toggle button, and selecting an option or moving the focus out of the field does not close the list.
+
+The parent must be a flex column with a bounded height, so that the list fills the remaining space and scrolls. Use the
+inline list only as the main content of a dedicated container (for example, a picker dialog), not in a form: the
+options always stay in the screen reader reading order.
+
 ## Accessibility concerns
 
 `SelectTextField` is built on the combobox pattern and uses the WAI-ARIA combobox role internally.

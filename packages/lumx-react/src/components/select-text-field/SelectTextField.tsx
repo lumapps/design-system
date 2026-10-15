@@ -38,8 +38,13 @@ interface BaseSelectTextFieldProps<O = any> extends BaseSelectTextFieldWrapperPr
     onLoadMore?: () => void;
     /** Content to render before the options list. */
     beforeOptions?: React.ReactNode;
-    /** Props forwarded to the Combobox.List popover. */
-    popoverProps?: ComboboxPopoverProps;
+    /**
+     * Props forwarded to the Combobox.Popover.
+     * Set to `false` to render the list inline below the text field, with no popover (the list is always visible).
+     * The parent must give the list a bounded height (flex column) so that the list scrolls.
+     * Use it only as the main content of a dedicated container (ex: a picker dialog), not in a form.
+     */
+    popoverProps?: ComboboxPopoverProps | false;
     /** On blur callback. */
     onBlur?: (event: React.FocusEvent) => void;
     /** On focus callback. */

@@ -11,8 +11,8 @@ import type { JSXElement } from '@lumx/core/js/types';
 import { useClassName } from '../../composables/useClassName';
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 
-/** The inline `style` flows through the attrs. */
-export type ScrollBoxProps = VueToJSXProps<UIProps, 'style'>;
+/** The inline `style` and the `tabIndex` flow through the attrs. */
+export type ScrollBoxProps = VueToJSXProps<UIProps, 'style' | 'tabIndex'>;
 
 export { CLASSNAME, COMPONENT_NAME };
 
@@ -38,7 +38,7 @@ const ScrollBox = defineComponent(
     {
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
-        props: keysOf<ScrollBoxProps>()('scrollSnap', 'class'),
+        props: keysOf<ScrollBoxProps>()('fillSpace', 'scrollSnap', 'class'),
     },
 );
 

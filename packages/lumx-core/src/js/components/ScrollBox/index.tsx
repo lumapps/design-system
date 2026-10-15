@@ -1,12 +1,12 @@
 import { Orientation } from '../../constants';
 import type { CommonRef, HasClassName, JSXElement, LumxClassName } from '../../types';
 import { classNames } from '../../utils';
-import { getFlexBoxProps } from '../FlexBox';
+import { type FlexBoxProps, getFlexBoxProps } from '../FlexBox';
 
 /**
  * Defines the props for the core ScrollBox template.
  */
-export interface ScrollBoxProps extends HasClassName {
+export interface ScrollBoxProps extends HasClassName, Pick<FlexBoxProps, 'fillSpace'> {
     /** Content to scroll. */
     children?: JSXElement;
     /**
@@ -14,6 +14,8 @@ export interface ScrollBoxProps extends HasClassName {
      * (when motion is not reduced). Useful for keyboard navigation in a list of options.
      */
     scrollSnap?: boolean;
+    /** Tab index (ex: `-1` to keep the browser from making the scroll container a tab stop). */
+    tabIndex?: number;
     /** Additional inline style. */
     style?: Record<string, any>;
     /** Reference to the root element. */

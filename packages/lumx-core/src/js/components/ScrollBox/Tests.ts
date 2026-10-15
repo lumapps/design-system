@@ -32,5 +32,10 @@ export default (renderOptions: SetupOptions<ScrollBoxProps>) => {
             const { scrollBox } = setup({ scrollSnap: true }, renderOptions);
             expect(scrollBox).toHaveClass(`${CLASSNAME}--scroll-snap`);
         });
+
+        it('should apply fillSpace class', () => {
+            const { scrollBox } = setup({ fillSpace: true }, renderOptions);
+            expect(scrollBox).toHaveClass('lumx-flex-box--fill-space');
+        });
     });
 };

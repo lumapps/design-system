@@ -1,8 +1,8 @@
 /* eslint-disable no-await-in-loop */
 import userEvent from '@testing-library/user-event';
-import { getByRole, getConfig, waitFor } from '@testing-library/dom';
+import { getByRole, getConfig, queryByRole, waitFor } from '@testing-library/dom';
 
-import { getByTagName, queryByTagName } from '../../../testing/queries';
+import { getByClassName, getByTagName, queryByClassName, queryByTagName } from '../../../testing/queries';
 
 // ─── Fixtures ────────────────────────────────────────────────────
 
@@ -428,6 +428,67 @@ export default function selectTextFieldTests({ components, renderWithState }: Se
                 expect(input.getAttribute('aria-expanded')).toBe('false');
             });
             expect(onOpen).toHaveBeenCalledWith(false);
+        });
+    });
+
+    // ─── Inline (no popover) ─────────────────────────────────────
+
+    describe('Inline list (popoverProps={false})', () => {
+        it('should render the list inline in a scroll box, open without user interaction', async () => {
+            renderWithState(defaultTemplate, { popoverProps: false });
+            const input = getInput();
+
+            await waitFor(() => {
+                expect(input.getAttribute('aria-expanded')).toBe('true');
+            });
+            expect(queryByClassName(document.body, 'lumx-combobox-popover')).toBeNull();
+            const scrollBox = getByClassName(document.body, 'lumx-select-text-field__scroll');
+            expect(scrollBox).toHaveClass(
+                'lumx-scroll-box',
+                'lumx-scroll-box--scroll-snap',
+                'lumx-flex-box--fill-space',
+            );
+            expect(scrollBox).toHaveAttribute('tabindex', '-1');
+            expect(scrollBox).toContainElement(getListbox());
+            expect(getVisibleOptions()).toHaveLength(FRUITS.length);
+        });
+
+        it('should not render the toggle button', () => {
+            renderWithState(defaultTemplate, { popoverProps: false });
+            expect(queryByRole(document.body, 'button', { name: 'Show suggestions' })).toBeNull();
+        });
+
+        it('should keep the list open after selection, and not call onOpen', async () => {
+            const onOpen = vi.fn();
+            renderWithState(defaultTemplate, { popoverProps: false, onOpen });
+            const input = getInput();
+
+            await userEvent.click(input);
+            await userEvent.click(getVisibleOptions()[2]); // Banana
+
+            await waitFor(() => {
+                expect(input.value).toBe('Banana');
+            });
+            await new Promise((resolve) => {
+                requestAnimationFrame(resolve);
+            });
+            expect(input.getAttribute('aria-expanded')).toBe('true');
+            expect(getVisibleOptions()).toHaveLength(FRUITS.length);
+            expect(onOpen).not.toHaveBeenCalled();
+        });
+
+        it('should keep the list open in multiple selection', async () => {
+            renderWithState(multiTemplate, { popoverProps: false });
+            const input = getInput();
+
+            await userEvent.click(input);
+            await userEvent.click(getVisibleOptions()[0]); // Apple
+            await userEvent.click(getVisibleOptions()[1]); // Apricot
+
+            await waitFor(() => {
+                expect(getChips()).toHaveLength(2);
+            });
+            expect(input.getAttribute('aria-expanded')).toBe('true');
         });
     });
 

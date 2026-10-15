@@ -271,8 +271,13 @@ export interface BaseSelectTextFieldWrapperProps<O>
     labelProps?: Partial<Omit<InputLabelProps, 'children' | 'htmlFor' | 'id'>>;
     /** Additional props forwarded to the Combobox.Input (and ultimately to TextField). */
     inputProps?: Record<string, any>;
-    /** Props forwarded to the Combobox.Popover. */
-    popoverProps?: Record<string, any>;
+    /**
+     * Props forwarded to the Combobox.Popover.
+     * Set to `false` to render the list inline below the text field, with no popover (the list is always visible).
+     * The parent must give the list a bounded height (flex column) so that the list scrolls.
+     * Use it only as the main content of a dedicated container (ex: a picker dialog), not in a form.
+     */
+    popoverProps?: Record<string, any> | false;
     /** Labels for the clear button, toggle button, and chip group. */
     translations: SelectTextFieldTranslations;
 }

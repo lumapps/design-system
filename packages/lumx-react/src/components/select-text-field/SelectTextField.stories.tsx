@@ -3,6 +3,7 @@ import { useState, useCallback } from 'react';
 import type { Meta } from '@storybook/react-vite';
 
 import { withValueOnChange } from '@lumx/react/stories/decorators/withValueOnChange';
+import { withWrapper } from '@lumx/react/stories/decorators/withWrapper';
 import { setup, FRUITS, type Fruit } from '@lumx/core/js/components/SelectTextField/Stories';
 import { MULTI_TRANSLATIONS } from '@lumx/core/js/components/SelectTextField/Tests';
 
@@ -13,7 +14,7 @@ import { Combobox } from '../combobox';
 
 const { meta, ...stories } = setup({
     components: { SelectTextField },
-    decorators: { withValueOnChange },
+    decorators: { withValueOnChange, withWrapper },
 });
 
 const defaultMeta: Meta<typeof SelectTextField> = {
@@ -31,6 +32,7 @@ export const WithIcon = { ...stories.WithIcon };
 export const Disabled = { ...stories.Disabled };
 export const WithError = { ...stories.WithError };
 export const WithHelper = { ...stories.WithHelper };
+export const Inline = { ...stories.Inline };
 export const MultipleSelection = { ...stories.MultipleSelection };
 export const MultipleWithPreselected = { ...stories.MultipleWithPreselected };
 export const MultipleWithManyChips = { ...stories.MultipleWithManyChips };
