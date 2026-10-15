@@ -1,15 +1,21 @@
 @use "sass:map";
 
+// Icon size. The internal `--_lumx-icon-size` CSS variable overrides the size (on the icon element):
+// - no shape: the icon box and the glyph;
+// - with a shape: the shape box only (the glyph keeps its size, mapped from `$size`).
 @mixin lumx-icon-size($size, $has-shape: false) {
-    width: map.get($lumx-sizes, $size);
-    height: map.get($lumx-sizes, $size);
+    // stylelint-disable-next-line custom-property-pattern
+    $icon-size: var(--_lumx-icon-size, #{map.get($lumx-sizes, $size)});
+
+    width: $icon-size;
+    height: $icon-size;
 
     @if $has-shape == true {
         font-size: map.get($lumx-sizes, map.get($lumx-icon-has-shape-size-map, $size));
         line-height: map.get($lumx-sizes, map.get($lumx-icon-has-shape-size-map, $size));
     } @else if $has-shape == false {
-        font-size: map.get($lumx-sizes, $size);
-        line-height: map.get($lumx-sizes, $size);
+        font-size: $icon-size;
+        line-height: $icon-size;
     }
 }
 
