@@ -37,7 +37,8 @@ export interface ListProps extends GenericProps, ReactToJSX<UIProps> {
  * @return React element.
  */
 const InternalList = forwardRef<ListProps, HTMLUListElement>((props, ref) => {
-    const { children, isClickable, onListItemSelected, itemPadding, ...forwardedProps } = props;
+    // `as` is a core-only prop (not exposed by the React component).
+    const { as: _as, children, isClickable, onListItemSelected, itemPadding, ...forwardedProps } = props;
     const adjustedItemPadding = itemPadding ?? (isClickable ? Size.big : undefined);
 
     return UI({ ...forwardedProps, ref, children, itemPadding: adjustedItemPadding });

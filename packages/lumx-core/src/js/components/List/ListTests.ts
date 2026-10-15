@@ -22,6 +22,11 @@ export default (renderOptions: SetupOptions<any>) => {
                 expect(list.tagName).toBe('UL');
             });
 
+            it('should ignore the core-only `as` prop', () => {
+                const { list } = setup({ as: 'div' }, renderOptions);
+                expect(list.tagName).toBe('UL');
+            });
+
             it('should apply the base class', () => {
                 const { list } = setup({}, renderOptions);
                 expect(list).toHaveClass(CLASSNAME);
