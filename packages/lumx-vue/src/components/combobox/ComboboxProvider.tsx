@@ -17,6 +17,12 @@ export interface ComboboxProviderProps {
      * By default, the listbox is always open when the combobox contains no `Combobox.Popover`.
      */
     alwaysOpen?: boolean;
+    /**
+     * Activate an option (the selected option, or else the first option) when the trigger gets a keyboard focus,
+     * like the ArrowDown key. Applies only when the listbox is open on focus (always open listbox,
+     * or input with `openOnFocus`).
+     */
+    activateOnFocus?: boolean;
 }
 
 /**
@@ -47,6 +53,10 @@ const ComboboxProvider = defineComponent(
             handleValue?.setAlwaysOpen(alwaysOpen);
         });
 
+        watch([handle, () => props.activateOnFocus], ([handleValue, activateOnFocus]) => {
+            handleValue?.setActivateOnFocus(!!activateOnFocus);
+        });
+
         // Subscribe to the open event and forward to the onOpen callback.
         watch(handle, (handleValue) => {
             if (!handleValue) return;
@@ -65,6 +75,7 @@ const ComboboxProvider = defineComponent(
         props: {
             // `undefined` by default (Vue casts a missing boolean prop to `false`).
             alwaysOpen: { type: Boolean, default: undefined },
+            activateOnFocus: { type: Boolean, default: false },
         },
         emits: {
             // eslint-disable-next-line @typescript-eslint/no-unused-vars

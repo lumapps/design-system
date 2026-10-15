@@ -81,6 +81,13 @@ export interface ComboboxHandle {
      * `Combobox.Popover`.
      */
     setAlwaysOpen(alwaysOpen: boolean | undefined): void;
+    /**
+     * When true, a keyboard focus on the trigger activates an option (the selected option, or else the first
+     * option), like the ArrowDown key. A focus with a pointer, or a programmatic focus with no key press before it,
+     * does not activate an option. This applies only when the listbox is open on focus (always open listbox,
+     * or input with `openOnFocus`). Default: false.
+     */
+    setActivateOnFocus(activateOnFocus: boolean): void;
 }
 
 /**

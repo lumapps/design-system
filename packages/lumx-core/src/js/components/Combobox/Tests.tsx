@@ -190,12 +190,14 @@ export function createTemplates(Combobox: ComboboxNamespace, IconButton: any) {
         value,
         onChange,
         onSelect,
+        activateOnFocus,
     }: {
         value: string;
         onChange: (v: string) => void;
         onSelect?: (option: { value: string }) => void;
+        activateOnFocus?: boolean;
     }) => (
-        <Combobox.Provider>
+        <Combobox.Provider activateOnFocus={activateOnFocus}>
             <Combobox.Input
                 value={value}
                 onChange={onChange}
@@ -221,12 +223,14 @@ export function createTemplates(Combobox: ComboboxNamespace, IconButton: any) {
         value,
         onChange,
         onSelect,
+        activateOnFocus,
     }: {
         value: string;
         onChange: (v: string) => void;
         onSelect?: (option: { value: string }) => void;
+        activateOnFocus?: boolean;
     }) => (
-        <Combobox.Provider>
+        <Combobox.Provider activateOnFocus={activateOnFocus}>
             <Combobox.Input
                 value={value}
                 onChange={onChange}
@@ -663,13 +667,15 @@ export function createTemplates(Combobox: ComboboxNamespace, IconButton: any) {
         onChange,
         onSelect,
         alwaysOpen,
+        activateOnFocus,
     }: {
         value: string;
         onChange: (v: string) => void;
         onSelect?: (option: { value: string }) => void;
         alwaysOpen?: boolean;
+        activateOnFocus?: boolean;
     }) => (
-        <Combobox.Provider alwaysOpen={alwaysOpen}>
+        <Combobox.Provider alwaysOpen={alwaysOpen} activateOnFocus={activateOnFocus}>
             <Combobox.Input value={value} onChange={onChange} onSelect={onSelect} placeholder="Pick a fruit…" />
             <Combobox.List aria-label="Fruits">
                 {FRUITS.map((fruit) => (
@@ -681,8 +687,31 @@ export function createTemplates(Combobox: ComboboxNamespace, IconButton: any) {
         </Combobox.Provider>
     );
 
+    /** Inline combobox with a button trigger: no `Combobox.Popover`, so the listbox is always open. */
+    const inlineButtonTemplate = ({
+        value,
+        onSelect,
+        activateOnFocus,
+    }: {
+        value: string;
+        onSelect: (option: { value: string }) => void;
+        activateOnFocus?: boolean;
+    }) => (
+        <Combobox.Provider activateOnFocus={activateOnFocus}>
+            <Combobox.Button label="Select a fruit" value={value} onSelect={onSelect} />
+            <Combobox.List aria-label="Fruits">
+                {FRUITS.map((fruit) => (
+                    <Combobox.Option key={fruit} value={fruit} isSelected={fruit === value}>
+                        {fruit}
+                    </Combobox.Option>
+                ))}
+            </Combobox.List>
+        </Combobox.Provider>
+    );
+
     return {
         inlineTemplate,
+        inlineButtonTemplate,
         inputTemplate,
         manualFilterTemplate,
         filterOffTemplate,
@@ -2258,6 +2287,107 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
 
             // Default filter="auto" should not open on focus
             expect(input).toHaveAttribute('aria-expanded', 'false');
+        });
+    });
+
+    describe('activateOnFocus', () => {
+        it('should activate the first option on keyboard focus when the listbox opens on focus', async () => {
+            renderWithState(t.openOnFocusTemplate, { activateOnFocus: true });
+            const input = screen.getByRole<HTMLInputElement>('combobox');
+
+            await userEvent.tab();
+            expect(input).toHaveFocus();
+
+            await waitFor(() => {
+                expect(getActiveOption()).toHaveTextContent('Apple');
+            });
+            expect(input).toHaveAttribute('aria-activedescendant', getActiveOption()?.id);
+        });
+
+        it('should not activate an option on focus without activateOnFocus', async () => {
+            renderWithState(t.openOnFocusTemplate);
+            const input = screen.getByRole<HTMLInputElement>('combobox');
+
+            await userEvent.tab();
+            await waitFor(() => {
+                expect(input).toHaveAttribute('aria-expanded', 'true');
+            });
+            expect(getActiveOption()).toBeNull();
+        });
+
+        it('should not activate an option on focus when the listbox stays closed', async () => {
+            renderWithState(t.noOpenOnFocusTemplate, { activateOnFocus: true });
+            const input = screen.getByRole<HTMLInputElement>('combobox');
+
+            await userEvent.tab();
+            expect(input).toHaveFocus();
+            expect(input).toHaveAttribute('aria-expanded', 'false');
+            expect(input).toHaveAttribute('aria-activedescendant', '');
+        });
+
+        it('should activate the first option on keyboard focus (inline input)', async () => {
+            renderWithState(t.inlineTemplate, { activateOnFocus: true });
+            const input = screen.getByRole<HTMLInputElement>('combobox');
+
+            await userEvent.tab();
+            expect(input).toHaveFocus();
+
+            await waitFor(() => {
+                expect(getActiveOption()).toHaveTextContent('Apple');
+            });
+
+            // ArrowDown moves on from the active option.
+            await userEvent.keyboard('{ArrowDown}');
+            expect(getActiveOption()).toHaveTextContent('Apricot');
+        });
+
+        it('should not activate an option on focus with the pointer (inline input)', async () => {
+            renderWithState(t.inlineTemplate, { activateOnFocus: true });
+            const input = screen.getByRole<HTMLInputElement>('combobox');
+
+            await userEvent.click(input);
+            expect(input).toHaveFocus();
+            await waitFor(() => {
+                expect(input).toHaveAttribute('aria-expanded', 'true');
+            });
+            expect(getActiveOption()).toBeNull();
+            expect(input).toHaveAttribute('aria-activedescendant', '');
+        });
+
+        it('should not activate an option on programmatic focus after a pointer input (inline input)', async () => {
+            renderWithState(t.inlineTemplate, { activateOnFocus: true });
+            const input = screen.getByRole<HTMLInputElement>('combobox');
+
+            await userEvent.click(document.body);
+            input.focus();
+            expect(input).toHaveFocus();
+            expect(getActiveOption()).toBeNull();
+            expect(input).toHaveAttribute('aria-activedescendant', '');
+        });
+
+        it('should activate an option on programmatic focus after a key press (inline input)', async () => {
+            renderWithState(t.inlineTemplate, { activateOnFocus: true });
+            const input = screen.getByRole<HTMLInputElement>('combobox');
+
+            // Ex: a key press opens a dialog, which moves the focus to the input.
+            await userEvent.keyboard('{Enter}');
+            input.focus();
+            await waitFor(() => {
+                expect(getActiveOption()).toHaveTextContent('Apple');
+            });
+        });
+
+        it('should activate the selected option on keyboard focus (inline button)', async () => {
+            renderWithState(t.inlineButtonTemplate, { value: 'Cherry', activateOnFocus: true }, BUTTON_STATE);
+            const button = screen.getByRole('combobox');
+
+            await userEvent.tab();
+            expect(button).toHaveFocus();
+
+            await waitFor(() => {
+                expect(getActiveOption()).toHaveTextContent('Cherry');
+            });
+            expect(button).toHaveAttribute('aria-activedescendant', getActiveOption()?.id);
         });
     });
 

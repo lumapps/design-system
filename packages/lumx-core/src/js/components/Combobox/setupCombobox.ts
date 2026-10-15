@@ -1,5 +1,6 @@
 import { isSelected } from '../Listbox/utils';
 import { setupListbox } from '../Listbox/setupListbox';
+import { getInputModality } from '../../utils/browser/inputModality';
 import { COMBOBOX_POPOVER_CLASSNAME } from './constants';
 import type { ComboboxCallbacks, ComboboxHandle, OnTriggerAttach } from './types';
 
@@ -40,6 +41,8 @@ export function setupCombobox(
     let isInline = false;
     /** Forced `alwaysOpen` value (`undefined`: from the listbox placement, see {@link isInline}). */
     let alwaysOpenOverride: boolean | undefined;
+    /** Activate an option on keyboard focus (see {@link ComboboxHandle.setActivateOnFocus}). */
+    let activateOnFocus = false;
 
     /** AbortController for all trigger event listeners. */
     let abortController: AbortController | null = null;
@@ -47,12 +50,28 @@ export function setupCombobox(
     // Forward-declared so internal helpers can reference `handle` before it is constructed (via closure).
     let handle!: ComboboxHandle;
 
+    /**
+     * With `activateOnFocus`: when the trigger has a keyboard focus and the listbox is open, activate the selected
+     * option, or else the first option (same as ArrowDown). Does nothing when an option is already active, or when
+     * the last user input is not a keyboard input (focus with a pointer, or programmatic focus with no key press).
+     */
+    function activateOnTriggerFocus() {
+        const nav = handle.list.focusNav;
+        if (!activateOnFocus || !trigger || !nav || !handle.isOpen || nav.selectors.activeItem) return;
+        if (trigger.ownerDocument.activeElement !== trigger || getInputModality() !== 'keyboard') return;
+        if (trigger.getAttribute('aria-disabled') === 'true') return;
+        // Deferred until the options commit.
+        nav.goTo((s) => s.getMatching(isSelected) ?? s.getFirst());
+    }
+
     /** Apply the `alwaysOpen` value (override, or else the listbox placement). */
     function syncAlwaysOpen() {
         const value = alwaysOpenOverride ?? isInline;
         if (alwaysOpen === value) return;
         alwaysOpen = value;
         handle.setIsOpen(value);
+        // The trigger can get focus before the listbox mounts (ex: focus on dialog open).
+        activateOnTriggerFocus();
     }
 
     /** Set `aria-haspopup="grid"` on the trigger when the listbox is a grid. */
@@ -232,6 +251,10 @@ export function setupCombobox(
             const onKeydown = onTriggerAttach?.(handle, abortController.signal) || undefined;
             attachTriggerKeydown(trigger, abortController.signal, onKeydown);
 
+            // Activate an option on keyboard focus.
+            // Registered after the mode controller, so its focus handler (that can open the listbox) runs first.
+            trigger.addEventListener('focus', activateOnTriggerFocus, { signal: abortController.signal });
+
             // Close the popup when the trigger loses focus
             trigger.addEventListener(
                 'focusout',
@@ -240,6 +263,9 @@ export function setupCombobox(
                 },
                 { signal: abortController.signal },
             );
+
+            // The trigger can get focus before the listeners attach.
+            activateOnTriggerFocus();
         }
     }
 
@@ -274,6 +300,12 @@ export function setupCombobox(
         setAlwaysOpen(value: boolean | undefined) {
             alwaysOpenOverride = value;
             syncAlwaysOpen();
+        },
+
+        setActivateOnFocus(value: boolean) {
+            activateOnFocus = value;
+            // The trigger can get focus before this option is set.
+            activateOnTriggerFocus();
         },
 
         registerTrigger(newTrigger: HTMLInputElement | HTMLButtonElement): () => void {

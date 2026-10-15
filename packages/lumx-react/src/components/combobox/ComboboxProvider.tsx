@@ -19,6 +19,12 @@ export interface ComboboxProviderProps {
      * By default, the listbox is always open when the combobox contains no `Combobox.Popover`.
      */
     alwaysOpen?: boolean;
+    /**
+     * Activate an option (the selected option, or else the first option) when the trigger gets a keyboard focus,
+     * like the ArrowDown key. Applies only when the listbox is open on focus (always open listbox,
+     * or input with `openOnFocus`).
+     */
+    activateOnFocus?: boolean;
 }
 
 /**
@@ -31,7 +37,7 @@ export interface ComboboxProviderProps {
  * @return React element.
  */
 export function ComboboxProvider(props: ComboboxProviderProps) {
-    const { children, onOpen, alwaysOpen } = props;
+    const { children, onOpen, alwaysOpen, activateOnFocus = false } = props;
     const listboxId = useId();
     const anchorRef = useRef<HTMLElement>(null);
     const [handle, setHandle] = useState<ComboboxHandle | null>(null);
@@ -46,6 +52,10 @@ export function ComboboxProvider(props: ComboboxProviderProps) {
     useEffect(() => {
         handle?.setAlwaysOpen(alwaysOpen);
     }, [handle, alwaysOpen]);
+
+    useEffect(() => {
+        handle?.setActivateOnFocus(activateOnFocus);
+    }, [handle, activateOnFocus]);
 
     // Subscribe to the open event and forward to the onOpen callback.
     const onOpenRef = useRef(onOpen);
