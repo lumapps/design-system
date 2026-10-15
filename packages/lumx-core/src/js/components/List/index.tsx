@@ -18,6 +18,14 @@ export interface ListProps extends HasClassName {
 }
 
 /**
+ * Core-only props of the List template (not exposed by the React and Vue components).
+ */
+export interface ListCoreProps {
+    /** Root element tag. Default: `ul`. */
+    as?: 'ul' | 'ol' | 'div';
+}
+
+/**
  * Component display name.
  */
 export const COMPONENT_NAME = 'List';
@@ -39,11 +47,11 @@ export const DEFAULT_PROPS: Partial<ListProps> = {};
  * @param  props Component props.
  * @return JSX element.
  */
-export const List = (props: ListProps) => {
-    const { children, className, itemPadding, ref, ...forwardedProps } = props;
+export const List = (props: ListProps & ListCoreProps) => {
+    const { as: Element = 'ul', children, className, itemPadding, ref, ...forwardedProps } = props;
 
     return (
-        <ul
+        <Element
             {...forwardedProps}
             className={classNames.join(
                 className,
@@ -54,7 +62,7 @@ export const List = (props: ListProps) => {
             ref={ref}
         >
             {children}
-        </ul>
+        </Element>
     );
 };
 
