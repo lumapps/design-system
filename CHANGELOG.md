@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `@lumx/react`, `@lumx/vue`:
     -   `SelectTextField`: with an empty `label`, the listbox uses the `aria-labelledby` of the input (from `inputProps`), so that the field can be labelled by an external element.
+    -   `Combobox`: the listbox is always open when it is not in a `Combobox.Popover` (inline listbox); new `alwaysOpen` prop on `Combobox.Provider` to override it.
 
 ### Changed
 

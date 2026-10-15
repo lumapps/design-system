@@ -657,7 +657,32 @@ export function createTemplates(Combobox: ComboboxNamespace, IconButton: any) {
         </Combobox.Provider>
     );
 
+    /** Inline combobox: no `Combobox.Popover`, so the listbox is always open. */
+    const inlineTemplate = ({
+        value,
+        onChange,
+        onSelect,
+        alwaysOpen,
+    }: {
+        value: string;
+        onChange: (v: string) => void;
+        onSelect?: (option: { value: string }) => void;
+        alwaysOpen?: boolean;
+    }) => (
+        <Combobox.Provider alwaysOpen={alwaysOpen}>
+            <Combobox.Input value={value} onChange={onChange} onSelect={onSelect} placeholder="Pick a fruit…" />
+            <Combobox.List aria-label="Fruits">
+                {FRUITS.map((fruit) => (
+                    <Combobox.Option key={fruit} value={fruit}>
+                        {fruit}
+                    </Combobox.Option>
+                ))}
+            </Combobox.List>
+        </Combobox.Provider>
+    );
+
     return {
+        inlineTemplate,
         inputTemplate,
         manualFilterTemplate,
         filterOffTemplate,
@@ -1443,6 +1468,99 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
             await userEvent.click(screen.getByRole('combobox'));
             expect(getActiveOption()).toBeNull();
             expect(input).toHaveAttribute('aria-activedescendant', '');
+        });
+    });
+
+    describe('Inline listbox (no Combobox.Popover)', () => {
+        it('should render the options open without user interaction', async () => {
+            renderWithState(t.inlineTemplate);
+            const input = screen.getByRole<HTMLInputElement>('combobox');
+            await waitFor(() => {
+                expect(input).toHaveAttribute('aria-expanded', 'true');
+            });
+            expect(screen.getAllByRole('option')).toHaveLength(FRUITS.length);
+        });
+
+        it('should stay open after selection and focus out', async () => {
+            const onSelect = vi.fn();
+            renderWithState(t.inlineTemplate, { onSelect });
+            const input = screen.getByRole<HTMLInputElement>('combobox');
+            await userEvent.click(input);
+
+            await userEvent.click(await screen.findByRole('option', { name: 'Banana' }));
+            expect(onSelect).toHaveBeenCalledWith(expect.objectContaining({ value: 'Banana' }));
+
+            await userEvent.tab();
+            expect(input).not.toHaveFocus();
+            // Wait past the deferred close of the single selection (next frame).
+            await new Promise((resolve) => {
+                requestAnimationFrame(resolve);
+            });
+            expect(input).toHaveAttribute('aria-expanded', 'true');
+            expect(screen.getAllByRole('option')).toHaveLength(FRUITS.length);
+        });
+
+        it('should clear the active option, then let Escape propagate (input kept)', async () => {
+            renderWithState(t.inlineTemplate);
+            const input = screen.getByRole<HTMLInputElement>('combobox');
+
+            await userEvent.click(input);
+            await userEvent.type(input, 'App');
+            await userEvent.keyboard('{ArrowDown}');
+            await waitFor(() => {
+                expect(getActiveOption()).toHaveTextContent('Apple');
+            });
+
+            const onParentKeydown = vi.fn();
+            document.body.addEventListener('keydown', onParentKeydown);
+
+            // 1st Escape: clear the active option (the listbox stays open).
+            await userEvent.keyboard('{Escape}');
+            expect(getActiveOption()).toBeNull();
+            expect(input).toHaveAttribute('aria-expanded', 'true');
+            expect(input.value).toBe('App');
+
+            expect(onParentKeydown).not.toHaveBeenCalled();
+
+            // 2nd Escape: no active option, propagated (the input is not cleared).
+            await userEvent.keyboard('{Escape}');
+            expect(onParentKeydown).toHaveBeenCalledTimes(1);
+            expect(input.value).toBe('App');
+            expect(input).toHaveAttribute('aria-expanded', 'true');
+
+            document.body.removeEventListener('keydown', onParentKeydown);
+        });
+
+        it('should filter on typing and reset the filter on focus out', async () => {
+            renderWithState(t.inlineTemplate);
+            const input = screen.getByRole<HTMLInputElement>('combobox');
+            await userEvent.click(input);
+            await userEvent.type(input, 'App');
+            await waitFor(() => {
+                expect(screen.getAllByRole('option')).toHaveLength(1);
+            });
+
+            await userEvent.tab();
+            await waitFor(() => {
+                expect(screen.getAllByRole('option')).toHaveLength(FRUITS.length);
+            });
+        });
+
+        it('should open and close normally with alwaysOpen={false}', async () => {
+            renderWithState(t.inlineTemplate, { alwaysOpen: false });
+            const input = screen.getByRole<HTMLInputElement>('combobox');
+            expect(input).toHaveAttribute('aria-expanded', 'false');
+            expect(screen.queryAllByRole('option')).toHaveLength(0);
+
+            await userEvent.click(input);
+            await waitFor(() => {
+                expect(input).toHaveAttribute('aria-expanded', 'true');
+            });
+
+            await userEvent.keyboard('{Escape}');
+            await waitFor(() => {
+                expect(input).toHaveAttribute('aria-expanded', 'false');
+            });
         });
     });
 
