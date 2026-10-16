@@ -6,7 +6,9 @@ import type { CompositeHandle, CompositeType } from '@lumx/core/js/components/Co
  * its items, sections, skeletons and state.
  *
  * Provided by `ListboxProvider` (standalone listbox) and by `Combobox.Provider` (the list registered on
- * the combobox, with `comboboxListId`), then re-provided by the list with its `type`, without `comboboxListId`.
+ * the combobox, with `comboboxListId`), then re-provided by the list with its `type` (and by a tree item with
+ * the next `level`), without `comboboxListId`. A standalone `TreeList` has no provider above it: it provides the
+ * first context itself.
  */
 export interface CompositeContextValue {
     /** The composite handle (null inside a combobox until a list registers). */
@@ -33,14 +35,17 @@ export interface CompositeContextValue {
 
 export const CompositeContext = createContext<CompositeContextValue | undefined>(undefined);
 
-/** Access the composite context, if any (undefined outside a `ListboxProvider` or a `Combobox.Provider`). */
+/**
+ * Access the composite context, if any (undefined outside a `ListboxProvider`, a `Combobox.Provider` or a
+ * standalone `TreeList`).
+ */
 export function useOptionalCompositeContext(): CompositeContextValue | undefined {
     return useContext(CompositeContext);
 }
 
 /**
  * Access the composite context.
- * @throws Error outside a `ListboxProvider` or a `Combobox.Provider`.
+ * @throws Error outside a `ListboxProvider`, a `Combobox.Provider` or a standalone `TreeList`.
  */
 export function useCompositeContext(): CompositeContextValue {
     const context = useOptionalCompositeContext();
