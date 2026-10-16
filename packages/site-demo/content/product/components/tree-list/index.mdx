@@ -1,14 +1,20 @@
 ---
 title: Tree list
-frameworks: ['react']
+frameworks: ['react', 'vue']
 ---
 
 import * as ReactDemoDefault from './react/default.tsx';
 import * as ReactDemoMultipleSelection from './react/multiple-selection.tsx';
 import * as ReactDemoItemContent from './react/item-content.tsx';
 import * as ReactDemoComboboxInput from './react/combobox-input.tsx';
+import * as VueDemoDefault from './vue/default.vue';
+import * as VueDemoMultipleSelection from './vue/multiple-selection.vue';
+import * as VueDemoItemContent from './vue/item-content.vue';
+import * as VueDemoComboboxInput from './vue/combobox-input.vue';
 import ReactTreeList from 'lumx-docs:@lumx/react/components/tree-list/TreeList';
 import ReactTreeListItem from 'lumx-docs:@lumx/react/components/tree-list/TreeListItem';
+import VueTreeList from 'lumx-docs:@lumx/vue/components/tree-list/TreeList';
+import VueTreeListItem from 'lumx-docs:@lumx/vue/components/tree-list/TreeListItem';
 
 **Tree lists display a hierarchy of items that users can open, close and select.**
 
@@ -32,21 +38,21 @@ A parent item starts open when one of its sub-items is selected.
 A tree item without a `value` is not selectable (in this demo: "Citrus" and "Drinks").
 A click or <kbd>Enter</kbd> on a non-selectable parent item opens or closes it.
 
-<DemoBlock demo={{ react: ReactDemoDefault }} />
+<DemoBlock demo={{ react: ReactDemoDefault, vue: VueDemoDefault }} />
 
 ## Multiple selection
 
 Set `selectionType="multiple"` to let users select several tree items.
 The `value` of the tree list is then an array, and a selection toggles the tree item in it.
 
-<DemoBlock demo={{ react: ReactDemoMultipleSelection }} />
+<DemoBlock demo={{ react: ReactDemoMultipleSelection, vue: VueDemoMultipleSelection }} />
 
 ## Item content
 
 A tree item has a `label`, an optional `description`, and `before` and `after` sections
 (for example an icon or a thumbnail).
 
-<DemoBlock demo={{ react: ReactDemoItemContent }} />
+<DemoBlock demo={{ react: ReactDemoItemContent, vue: VueDemoItemContent }} />
 
 ## In a combobox
 
@@ -63,7 +69,7 @@ In this demo, the tree list has no popover: it is always visible below the input
 A selection clears the filter text.
 The open state of the parent items stays as the user sets it.
 
-<DemoBlock demo={{ react: ReactDemoComboboxInput }} />
+<DemoBlock demo={{ react: ReactDemoComboboxInput, vue: VueDemoComboboxInput }} />
 
 The tree list also works in the other combobox setups:
 
@@ -93,6 +99,6 @@ The tree list follows the [WAI-ARIA tree view pattern](https://www.w3.org/WAI/AR
 
 ## Properties
 
-<PropTable docs={{ react: ReactTreeList }} />
+<PropTable docs={{ react: ReactTreeList, vue: VueTreeList }} />
 
-<PropTable docs={{ react: ReactTreeListItem }} />
+<PropTable docs={{ react: ReactTreeListItem, vue: VueTreeListItem }} />
