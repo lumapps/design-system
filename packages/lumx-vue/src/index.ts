@@ -45,6 +45,7 @@ export * from './components/text';
 export * from './components/thumbnail';
 export * from './components/toolbar';
 export * from './components/tooltip';
+export * from './components/tree-list';
 export * from './components/user-block';
 export * from './components/select-button';
 export * from './components/select-text-field';
