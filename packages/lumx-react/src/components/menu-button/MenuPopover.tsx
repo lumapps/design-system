@@ -9,7 +9,6 @@ import {
 import { Popover } from '@lumx/react/components/popover';
 import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 
-import { FlexBox } from '../flex-box';
 import { useMenuContext } from './context/MenuContext';
 import { useMenuOpen } from './context/useMenuOpen';
 
@@ -40,7 +39,7 @@ export const MenuPopover = (props: MenuPopoverProps) => {
             anchorRef,
             handleClose: () => setIsOpen(false),
         },
-        { Popover, FlexBox },
+        { Popover },
     );
 };
 

@@ -66,9 +66,21 @@ export interface ComboboxHandle {
     readonly list: ListboxHandle;
     /** Whether the popup is open (same as `list.isOpen`). */
     readonly isOpen: boolean;
+    /** Whether the listbox is always open (see {@link ComboboxHandle.setAlwaysOpen}). */
+    readonly alwaysOpen: boolean;
 
-    /** Set the open state and update ARIA. Subscribe to `list` `open` to observe it. */
+    /**
+     * Set the open state and update ARIA. Subscribe to `list` `open` to observe it.
+     * When always open, a close request only clears the active option.
+     */
     setIsOpen(isOpen: boolean): void;
+    /**
+     * Force the listbox always open (inline listbox, not in a popup) or not. With `false`, the listbox uses the
+     * open/close behavior (the listbox closes). When always open, focus out, selection and Escape do not
+     * close the listbox. With `undefined` (default), the listbox is always open when it is mounted outside of a
+     * `Combobox.Popover`.
+     */
+    setAlwaysOpen(alwaysOpen: boolean | undefined): void;
 }
 
 /**

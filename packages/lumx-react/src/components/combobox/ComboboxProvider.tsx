@@ -14,6 +14,11 @@ export interface ComboboxProviderProps {
     children?: ReactNode;
     /** Callback fired when the combobox open state changes. */
     onOpen?: (isOpen: boolean) => void;
+    /**
+     * Keep the listbox always open (inline listbox).
+     * By default, the listbox is always open when the combobox contains no `Combobox.Popover`.
+     */
+    alwaysOpen?: boolean;
 }
 
 /**
@@ -26,7 +31,7 @@ export interface ComboboxProviderProps {
  * @return React element.
  */
 export function ComboboxProvider(props: ComboboxProviderProps) {
-    const { children, onOpen } = props;
+    const { children, onOpen, alwaysOpen } = props;
     const listboxId = useId();
     const anchorRef = useRef<HTMLElement>(null);
     const [handle, setHandle] = useState<ComboboxHandle | null>(null);
@@ -36,6 +41,11 @@ export function ComboboxProvider(props: ComboboxProviderProps) {
         () => ({ list: handle?.list ?? null, listboxId, type: 'listbox' }),
         [handle, listboxId],
     );
+
+    // Force the always open state (`undefined`: the core detects the inline listbox).
+    useEffect(() => {
+        handle?.setAlwaysOpen(alwaysOpen);
+    }, [handle, alwaysOpen]);
 
     // Subscribe to the open event and forward to the onOpen callback.
     const onOpenRef = useRef(onOpen);

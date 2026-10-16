@@ -5,7 +5,7 @@ import { type BaseSelectTextFieldWrapperProps } from '@lumx/core/js/utils/select
 import { getOptionDisplayName } from '@lumx/core/js/utils/select/getOptionDisplayName';
 import { toggleSelection } from '@lumx/core/js/utils/select/toggleSelection';
 import { SelectTextField as UI } from '@lumx/core/js/components/SelectTextField';
-import { CLASSNAME as COMBOBOX_POPOVER_CLASSNAME } from '@lumx/core/js/components/Combobox/ComboboxPopover';
+import { CLASSNAME as SCROLL_BOX_CLASSNAME } from '@lumx/core/js/components/ScrollBox';
 import { HasClassName } from '@lumx/react/utils/type';
 import { Combobox, type ComboboxPopoverProps } from '../combobox';
 import { wrapRenderOption } from '../combobox/wrapRenderOption';
@@ -38,8 +38,13 @@ interface BaseSelectTextFieldProps<O = any> extends BaseSelectTextFieldWrapperPr
     onLoadMore?: () => void;
     /** Content to render before the options list. */
     beforeOptions?: React.ReactNode;
-    /** Props forwarded to the Combobox.List popover. */
-    popoverProps?: ComboboxPopoverProps;
+    /**
+     * Props forwarded to the Combobox.Popover.
+     * Set to `false` to render the list inline below the text field, with no popover (the list is always visible).
+     * The parent must give the list a bounded height (flex column) so that the list scrolls.
+     * Use it only as the main content of a dedicated container (ex: a picker dialog), not in a form.
+     */
+    popoverProps?: ComboboxPopoverProps | false;
     /** On blur callback. */
     onBlur?: (event: React.FocusEvent) => void;
     /** On focus callback. */
@@ -131,7 +136,9 @@ export const SelectTextField = <O,>(props: SelectTextFieldProps<O>) => {
         name,
         isValid,
         maxLength,
-        ariaLabel,
+        ariaLabel: deprecatedAriaLabel,
+        'aria-label': ariaLabel = deprecatedAriaLabel,
+        'aria-labelledby': ariaLabelledBy,
         inputRef: externalInputRef,
         // Event callbacks
         onBlur: externalOnBlur,
@@ -161,12 +168,12 @@ export const SelectTextField = <O,>(props: SelectTextFieldProps<O>) => {
     // (`value`, `isSelected`, `description`, `key`) into the returned <Combobox.Option>.
     const wrappedRenderOption = wrapRenderOption(renderOption);
 
-    // The list itself doesn't scroll — its ancestor `__scroll` wrapper does. The
+    // The list itself doesn't scroll — its ancestor `ScrollBox` does. The
     // IntersectionObserver root must be the actual scrolling/clipping element, or the
     // sentinel is trivially always "intersecting" its non-clipping `<ul>` parent.
     const [scrollContainer, setScrollContainer] = useState<HTMLElement | null>(null);
     const setListElement = useCallback((listElement: HTMLElement | null) => {
-        setScrollContainer(listElement?.closest<HTMLElement>(`.${COMBOBOX_POPOVER_CLASSNAME}__scroll`) ?? null);
+        setScrollContainer(listElement?.closest<HTMLElement>(`.${SCROLL_BOX_CLASSNAME}`) ?? null);
     }, []);
     const localInputRef = useRef<HTMLInputElement>(null);
     const mergedInputRef = useMergeRefs(localInputRef, externalInputRef);
@@ -291,6 +298,8 @@ export const SelectTextField = <O,>(props: SelectTextFieldProps<O>) => {
             renderSectionTitle: renderSectionTitle as any,
             selected: value,
             label,
+            'aria-label': ariaLabel,
+            'aria-labelledby': ariaLabelledBy,
             isMultiselectable: isMultiple,
             listStatus,
             onOpen,
@@ -321,7 +330,6 @@ export const SelectTextField = <O,>(props: SelectTextFieldProps<O>) => {
                 name,
                 isValid,
                 maxLength,
-                'aria-label': ariaLabel,
                 clearButtonProps: showClear ? { label: translations.clearLabel } : undefined,
                 onClear: handleClear,
                 toggleButtonProps: translations.showSuggestionsLabel

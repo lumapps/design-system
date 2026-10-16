@@ -1,4 +1,6 @@
 import type { JSXElement, LumxClassName } from '../../types';
+import { classNames } from '../../utils';
+import { ScrollBox } from '../ScrollBox';
 import { renderSelectOptions } from '../../utils/select/renderSelectOptions';
 import { BaseSelectComponents, BaseSelectProps, SelectListStatus } from '../../utils/select/types';
 
@@ -9,17 +11,34 @@ export interface SelectTextFieldProps<O = any> extends BaseSelectProps<O> {
     /** Selected option (single) or options (multiple) — for marking options as selected. */
     selected?: O | O[];
 
-    /** Field label (required). Also used as aria-label for the listbox. */
+    /**
+     * Field label (required). Also used as aria-label for the listbox.
+     * When empty, the listbox uses the input `aria-labelledby`.
+     */
     label: string;
 
     /** Whether the listbox supports multiple selection. */
     isMultiselectable?: boolean;
 
+    /** Accessible label of the input (takes precedence over `inputProps['aria-label']`). */
+    'aria-label'?: string;
+
+    /**
+     * Id of the element(s) labelling the input (takes precedence over `inputProps['aria-labelledby']`).
+     * Also labels the listbox when `label` is empty.
+     */
+    'aria-labelledby'?: string;
+
     /** Props forwarded to Combobox.Input. */
     inputProps?: Record<string, any>;
 
-    /** Props forwarded to Combobox.Popover. */
-    popoverProps?: Record<string, any>;
+    /**
+     * Props forwarded to Combobox.Popover.
+     * Set to `false` to render the list inline below the text field, with no popover (the list is always visible).
+     * The parent must give the list a bounded height (flex column) so that the list scrolls.
+     * Use it only as the main content of a dedicated container (ex: a picker dialog), not in a form.
+     */
+    popoverProps?: Record<string, any> | false;
 
     /** Props forwarded to Combobox.List (e.g. ref). */
     listProps?: Record<string, any>;
@@ -90,6 +109,7 @@ export const COMPONENT_NAME = 'SelectTextField';
  * Component default class name.
  */
 export const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-select-text-field';
+const { element } = classNames.bem(CLASSNAME);
 
 /**
  * SelectTextField core template.
@@ -115,6 +135,8 @@ export const SelectTextField = (props: SelectTextFieldProps, { Combobox, Infinit
         label,
         isMultiselectable,
         inputProps,
+        'aria-label': ariaLabel = inputProps?.['aria-label'],
+        'aria-labelledby': ariaLabelledBy = inputProps?.['aria-labelledby'],
         popoverProps,
         listProps,
         listStatus = 'idle',
@@ -136,58 +158,93 @@ export const SelectTextField = (props: SelectTextFieldProps, { Combobox, Infinit
     const isError = listStatus === 'error';
     // Prevent firing during loading or error states to avoid duplicate fetches.
     const isInfiniteScrollEnabled = !listStatus || listStatus === 'idle';
+    // No popover: the list is inline (the combobox detects it and keeps the list always open).
+    const isInline = popoverProps === false;
+
+    const listContent = (
+        <>
+            <Combobox.List
+                {...listProps}
+                aria-label={label || undefined}
+                // No label: name the listbox like the input (ex: labelled by an external element).
+                aria-labelledby={label ? undefined : ariaLabelledBy}
+                aria-multiselectable={isMultiselectable || undefined}
+            >
+                {beforeOptions}
+
+                {isFullLoading ? (
+                    <Combobox.OptionSkeleton count={3} />
+                ) : (
+                    renderSelectOptions(
+                        {
+                            options,
+                            getOptionId,
+                            getOptionName,
+                            getOptionDescription,
+                            renderOption,
+                            getSectionId,
+                            renderSectionTitle,
+                            selected,
+                        },
+                        { Combobox },
+                    )
+                )}
+
+                {afterOptions}
+
+                {onLoadMore && InfiniteScroll && (
+                    <InfiniteScroll
+                        callback={isInfiniteScrollEnabled ? onLoadMore : undefined}
+                        options={infiniteScrollOptions}
+                    />
+                )}
+
+                {isLoadingMore && <Combobox.OptionSkeleton count={1} />}
+            </Combobox.List>
+
+            <Combobox.State
+                loadingMessage={loadingMessage}
+                emptyMessage={emptyMessage}
+                nbOptionMessage={nbOptionMessage}
+                errorMessage={isError ? errorMessage : undefined}
+                errorTryReloadMessage={isError ? errorTryReloadMessage : undefined}
+            />
+        </>
+    ) as JSXElement;
 
     return (
-        <Combobox.Provider onOpen={onOpen}>
-            <Combobox.Input label={label} {...inputProps} selectionMode="keep" chips={chips} />
+        <Combobox.Provider onOpen={isInline ? undefined : onOpen}>
+            <Combobox.Input
+                label={label}
+                {...inputProps}
+                aria-label={ariaLabel}
+                aria-labelledby={ariaLabelledBy}
+                // No popup to toggle when inline.
+                toggleButtonProps={isInline ? undefined : inputProps?.toggleButtonProps}
+                selectionMode="keep"
+                chips={chips}
+            />
 
-            <Combobox.Popover
-                fitToAnchorWidth="minWidth"
-                fitWithinViewportHeight
-                placement="bottom-start"
-                {...popoverProps}
-            >
-                <Combobox.List {...listProps} aria-label={label} aria-multiselectable={isMultiselectable || undefined}>
-                    {beforeOptions}
-
-                    {isFullLoading ? (
-                        <Combobox.OptionSkeleton count={3} />
-                    ) : (
-                        renderSelectOptions(
-                            {
-                                options,
-                                getOptionId,
-                                getOptionName,
-                                getOptionDescription,
-                                renderOption,
-                                getSectionId,
-                                renderSectionTitle,
-                                selected,
-                            },
-                            { Combobox },
-                        )
-                    )}
-
-                    {afterOptions}
-
-                    {onLoadMore && InfiniteScroll && (
-                        <InfiniteScroll
-                            callback={isInfiniteScrollEnabled ? onLoadMore : undefined}
-                            options={infiniteScrollOptions}
-                        />
-                    )}
-
-                    {isLoadingMore && <Combobox.OptionSkeleton count={1} />}
-                </Combobox.List>
-
-                <Combobox.State
-                    loadingMessage={loadingMessage}
-                    emptyMessage={emptyMessage}
-                    nbOptionMessage={nbOptionMessage}
-                    errorMessage={isError ? errorMessage : undefined}
-                    errorTryReloadMessage={isError ? errorTryReloadMessage : undefined}
-                />
-            </Combobox.Popover>
+            {isInline ? (
+                // Fill the remaining space of a flex column parent (the list scrolls in it).
+                // Not a tab stop: the input owns the focus (some browsers make a scroll container focusable).
+                ScrollBox({
+                    className: element('scroll'),
+                    scrollSnap: true,
+                    fillSpace: true,
+                    tabIndex: -1,
+                    children: listContent,
+                })
+            ) : (
+                <Combobox.Popover
+                    fitToAnchorWidth="minWidth"
+                    fitWithinViewportHeight
+                    placement="bottom-start"
+                    {...popoverProps}
+                >
+                    {listContent}
+                </Combobox.Popover>
+            )}
         </Combobox.Provider>
     );
 };

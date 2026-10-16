@@ -229,7 +229,10 @@ export interface BaseSelectTextFieldWrapperProps<O>
      * @default false
      */
     openOnFocus?: boolean;
-    /** Field label (required). Also used as aria-label for the listbox. */
+    /**
+     * Field label (required). Also used as aria-label for the listbox.
+     * When empty, the listbox uses the input `aria-labelledby`.
+     */
     label: string;
     /** Input placeholder text. */
     placeholder?: string;
@@ -257,13 +260,24 @@ export interface BaseSelectTextFieldWrapperProps<O>
     /** Maximum string length (shows character counter). */
     maxLength?: number;
     /** Accessible label for the input element (overrides the visual label for screen readers). */
+    'aria-label'?: string;
+    /**
+     * @deprecated Use `aria-label` instead.
+     */
     ariaLabel?: string;
+    /** Id of the element(s) labelling the input (and the listbox when `label` is empty). */
+    'aria-labelledby'?: string;
     /** Additional props forwarded to the field label (e.g. `className: 'visually-hidden'`, `typography`). */
     labelProps?: Partial<Omit<InputLabelProps, 'children' | 'htmlFor' | 'id'>>;
     /** Additional props forwarded to the Combobox.Input (and ultimately to TextField). */
     inputProps?: Record<string, any>;
-    /** Props forwarded to the Combobox.Popover. */
-    popoverProps?: Record<string, any>;
+    /**
+     * Props forwarded to the Combobox.Popover.
+     * Set to `false` to render the list inline below the text field, with no popover (the list is always visible).
+     * The parent must give the list a bounded height (flex column) so that the list scrolls.
+     * Use it only as the main content of a dedicated container (ex: a picker dialog), not in a form.
+     */
+    popoverProps?: Record<string, any> | false;
     /** Labels for the clear button, toggle button, and chip group. */
     translations: SelectTextFieldTranslations;
 }

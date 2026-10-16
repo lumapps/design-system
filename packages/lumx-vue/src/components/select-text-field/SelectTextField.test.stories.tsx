@@ -2,6 +2,7 @@ import { setup } from '@lumx/core/js/components/SelectTextField/TestStories';
 import { SelectTextField } from '.';
 import { Combobox } from '../combobox';
 
+import StoryInlineInPopoverDialog from './Stories/InlineInPopoverDialog.vue';
 import StoryWithInfiniteScroll from './Stories/WithInfiniteScroll.vue';
 import StoryWithManyOptions from './Stories/WithManyOptions.vue';
 
@@ -36,5 +37,14 @@ export const WithManyOptions = {
             return { args };
         },
         template: '<StoryWithManyOptions v-bind="args" />',
+    }),
+};
+
+/** Test the inline list (`popoverProps={false}`) in a popover dialog that closes on selection, with infinite scroll */
+export const InlineInPopoverDialog = {
+    ...testStories.InlineInPopoverDialog,
+    render: () => ({
+        components: { StoryInlineInPopoverDialog },
+        template: '<StoryInlineInPopoverDialog />',
     }),
 };

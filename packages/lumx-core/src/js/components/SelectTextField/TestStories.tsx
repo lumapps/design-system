@@ -235,8 +235,92 @@ export function setup({
         },
     };
 
+    /**
+     * Test story for the inline list (`popoverProps={false}`) composed in a popover dialog
+     * (button + popover dialog + inline select text field) that closes on selection, with infinite scroll.
+     *
+     * The render function is framework-specific (React hooks / Vue SFC),
+     * so each framework consumer overrides `render` and keeps this `play`.
+     * The render must open a `role="dialog"` popover named "Pick a fruit" from a button
+     * (`aria-haspopup="dialog"`, `aria-expanded`) that shows "Pick a fruit" and the selected value,
+     * with a bounded height, and start with enough options to overflow the list.
+     * The select text field has no label: its input is labelled by the "Pick a fruit" text of the button.
+     * Opening the dialog focuses the input. Selecting an option closes the dialog. The field has no clear button (`hasClearButton={false}`).
+     */
+    const InlineInPopoverDialog = {
+        async play({ canvas }: any) {
+            const trigger = canvas.getByRole('button', { name: 'Pick a fruit' });
+            expect(trigger).toHaveAttribute('aria-haspopup', 'dialog');
+            expect(trigger).toHaveAttribute('aria-expanded', 'false');
+
+            await userEvent.click(trigger);
+            const dialog = await screen.findByRole('dialog', { name: 'Pick a fruit' });
+            expect(trigger).toHaveAttribute('aria-expanded', 'true');
+            // No visible label: the input and the listbox are labelled by the button label.
+            const input = within(dialog).getByRole('combobox', { name: 'Pick a fruit' }) as HTMLInputElement;
+            // The focus moves into the dialog, on the input.
+            await waitFor(() => {
+                expect(input).toHaveFocus();
+            });
+
+            // The list is inline and open with no user interaction.
+            await waitFor(() => {
+                expect(input).toHaveAttribute('aria-expanded', 'true');
+            });
+            const listbox = within(dialog).getByRole('listbox', { name: 'Pick a fruit' });
+            let initialCount = 0;
+            await waitFor(() => {
+                initialCount = within(listbox).getAllByRole('option').length;
+                expect(initialCount).toBeGreaterThan(0);
+            });
+
+            // The scroll box is bounded by the dialog: it scrolls, and the sentinel does not load more by itself.
+            const scrollBox = listbox.closest<HTMLElement>('.lumx-scroll-box')!;
+            expect(scrollBox).toBeTruthy();
+            expect(scrollBox.scrollHeight).toBeGreaterThan(scrollBox.clientHeight);
+            await new Promise((resolve) => {
+                setTimeout(resolve, 300);
+            });
+            expect(within(listbox).getAllByRole('option')).toHaveLength(initialCount);
+
+            // Scroll to the bottom: load more.
+            scrollBox.scrollTop = scrollBox.scrollHeight;
+            await waitFor(() => {
+                expect(within(listbox).getAllByRole('option').length).toBeGreaterThan(initialCount);
+            });
+
+            // Select an option: the dialog closes, the focus goes back to the button, which shows the value.
+            await userEvent.click(within(listbox).getAllByRole('option')[1]);
+            await waitFor(() => {
+                expect(screen.queryByRole('dialog', { name: 'Pick a fruit' })).toBeNull();
+            });
+            expect(trigger).toHaveAccessibleName('Pick a fruit: Apricot');
+            expect(trigger).toHaveAttribute('aria-expanded', 'false');
+            await waitFor(() => {
+                expect(trigger).toHaveFocus();
+            });
+
+            // Open the dialog again: the selected value is kept.
+            await userEvent.click(trigger);
+            const reopenedDialog = await screen.findByRole('dialog', { name: 'Pick a fruit' });
+            const reopenedInput = within(reopenedDialog).getByRole('combobox', { name: 'Pick a fruit' });
+            expect(reopenedInput).toHaveValue('Apricot');
+            // No clear button, even with a selected value.
+            expect(within(reopenedDialog).queryByRole('button', { name: 'Clear' })).toBeNull();
+
+            // Escape in the input: propagates and closes the dialog (the selected value is not cleared).
+            await userEvent.click(reopenedInput);
+            await userEvent.keyboard('{Escape}');
+            await waitFor(() => {
+                expect(screen.queryByRole('dialog', { name: 'Pick a fruit' })).toBeNull();
+            });
+            expect(trigger).toHaveAccessibleName('Pick a fruit: Apricot');
+        },
+    };
+
     return {
         meta,
+        InlineInPopoverDialog,
         ClickOutsideCloses,
         BlurResetsToSelectedValue,
         BlurResetsToEmpty,

@@ -101,12 +101,12 @@ export type Fruit = (typeof FRUITS)[number];
  */
 export function setup({
     components: { SelectTextField },
-    decorators: { withValueOnChange },
+    decorators: { withValueOnChange, withWrapper },
 }: SetupStoriesOptions<{
     components: {
         SelectTextField: any;
     };
-    decorators: 'withValueOnChange';
+    decorators: 'withValueOnChange' | 'withWrapper';
 }>) {
     const meta = {
         component: SelectTextField,
@@ -298,6 +298,33 @@ export function setup({
                 onChange={onChange}
                 helper="Choose your favorite fruit"
                 translations={TRANSLATIONS}
+            />
+        ),
+    };
+
+    /**
+     * Inline list (`popoverProps={false}`): the list shows below the field with no popover, always open.
+     * The parent is a flex column with a bounded height, so that the list fills the remaining space and scrolls.
+     */
+    const Inline = {
+        args: { value: undefined },
+        decorators: [
+            withValueOnChange(),
+            withWrapper({ style: { display: 'flex', flexDirection: 'column', width: '300px', height: '300px' } }),
+        ],
+        render: ({ value, onChange }: any) => (
+            <SelectTextField
+                selectionType="single"
+                label="Select a fruit"
+                placeholder="Search fruits..."
+                options={FRUITS}
+                filter="auto"
+                getOptionId="id"
+                getOptionName="name"
+                value={value}
+                onChange={onChange}
+                translations={TRANSLATIONS}
+                popoverProps={false}
             />
         ),
     };
@@ -524,6 +551,7 @@ export function setup({
         Disabled,
         WithError,
         WithHelper,
+        Inline,
         MultipleSelection,
         MultipleWithPreselected,
         MultipleWithManyChips,

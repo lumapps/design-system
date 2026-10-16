@@ -1,4 +1,5 @@
 import { withValueOnChange } from '@lumx/vue/stories/decorators/withValueOnChange';
+import { withWrapper } from '@lumx/vue/stories/decorators/withWrapper';
 import { setup } from '@lumx/core/js/components/SelectTextField/Stories';
 
 import { SelectTextField } from '.';
@@ -10,7 +11,7 @@ import StoryMultipleWithSearch from './Stories/MultipleWithSearch.vue';
 
 const { meta, ...stories } = setup({
     components: { SelectTextField },
-    decorators: { withValueOnChange },
+    decorators: { withValueOnChange, withWrapper },
 });
 
 export default {
@@ -27,6 +28,7 @@ export const WithIcon = { ...stories.WithIcon };
 export const Disabled = { ...stories.Disabled };
 export const WithError = { ...stories.WithError };
 export const WithHelper = { ...stories.WithHelper };
+export const Inline = { ...stories.Inline };
 export const MultipleSelection = { ...stories.MultipleSelection };
 export const MultipleWithPreselected = { ...stories.MultipleWithPreselected };
 export const MultipleWithManyChips = { ...stories.MultipleWithManyChips };

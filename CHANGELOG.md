@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   `@lumx/react`, `@lumx/vue`:
+    -   `SelectTextField`: add `aria-label` (deprecates `ariaLabel`) and `aria-labelledby` props; with an empty `label`, the listbox is labelled by `aria-labelledby`.
+    -   `Combobox`: the listbox is always open when it is not in a `Combobox.Popover` (inline listbox); new `alwaysOpen` prop on `Combobox.Provider` to override it.
+    -   `SelectTextField`: `popoverProps={false}` renders the list inline below the text field (no popover), to compose the field in other patterns.
+
+### Changed
+
+-   `@lumx/react`, `@lumx/vue`:
+    -   `Combobox.Popover`, `MenuButton`: the popover content scrolls in an internal `ScrollBox` (`lumx-scroll-box` class) in place of a `FlexBox`.
+
 ## [4.26.0][] - 2026-10-08
 
 ### Added

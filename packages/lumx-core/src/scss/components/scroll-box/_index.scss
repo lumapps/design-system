@@ -1,0 +1,27 @@
+/* ==========================================================================
+   Scroll box
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-scroll-box {
+    overflow-y: auto;
+
+    &--scroll-snap {
+        scroll-snap-type: y proximity;
+
+        @media (prefers-reduced-motion: no-preference) {
+            scroll-behavior: smooth;
+        }
+
+        &::before {
+            display: block;
+            content: "";
+            scroll-snap-align: start;
+        }
+
+        &::after {
+            display: block;
+            content: "";
+            scroll-snap-align: end;
+        }
+    }
+}

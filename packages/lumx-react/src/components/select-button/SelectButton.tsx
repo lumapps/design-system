@@ -9,7 +9,7 @@ import {
     DEFAULT_PROPS,
 } from '@lumx/core/js/components/SelectButton';
 import { type ComboboxButtonLabelDisplayMode } from '@lumx/core/js/components/Combobox/ComboboxButton';
-import { CLASSNAME as COMBOBOX_POPOVER_CLASSNAME } from '@lumx/core/js/components/Combobox/ComboboxPopover';
+import { CLASSNAME as SCROLL_BOX_CLASSNAME } from '@lumx/core/js/components/ScrollBox';
 import { type SelectButtonTranslations, type SelectListStatus } from '@lumx/core/js/utils/select/types';
 import { ComponentRef } from '@lumx/react/utils/type';
 import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
@@ -181,12 +181,12 @@ export const SelectButton = (React.forwardRef as ForwardRefSelectButton)((props,
         as,
         ...buttonProps
     } = props;
-    // The list itself doesn't scroll — its ancestor `__scroll` wrapper does. The
+    // The list itself doesn't scroll — its ancestor `ScrollBox` does. The
     // IntersectionObserver root must be the actual scrolling/clipping element, or the
     // sentinel is trivially always "intersecting" its non-clipping `<ul>` parent.
     const [scrollContainer, setScrollContainer] = useState<HTMLElement | null>(null);
     const setListElement = useCallback((listElement: HTMLElement | null) => {
-        setScrollContainer(listElement?.closest<HTMLElement>(`.${COMBOBOX_POPOVER_CLASSNAME}__scroll`) ?? null);
+        setScrollContainer(listElement?.closest<HTMLElement>(`.${SCROLL_BOX_CLASSNAME}`) ?? null);
     }, []);
 
     const isMultiple = selectionType === 'multiple';

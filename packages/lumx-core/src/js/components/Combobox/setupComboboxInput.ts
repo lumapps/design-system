@@ -123,6 +123,18 @@ export function setupComboboxInput(input: HTMLInputElement, options: SetupCombob
             { signal },
         );
 
+        // Always open: the input loses focus with no close, so reset the typing state and the filter here
+        // (the framework wrapper resets the search text on blur).
+        input.addEventListener(
+            'focusout',
+            () => {
+                if (!combobox.alwaysOpen) return;
+                userHasTyped = false;
+                if (autoFilter) combobox.list.setFilter('');
+            },
+            { signal },
+        );
+
         // Re-apply filter when the combobox opens, but only if the current
         // input value came from user typing. After a programmatic change
         // (select, clear), all options should remain visible.
