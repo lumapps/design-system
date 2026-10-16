@@ -78,6 +78,11 @@ export interface ListboxStateProps {
          * when the popover opens (content insertion triggers `aria-live` announcement).
          */
         isOpen?: boolean;
+        /**
+         * Whether the option count message must not show (e.g. a tree without a filter).
+         * Driven by the framework wrapper via the handle's `optionsChange` event.
+         */
+        isCountHidden?: boolean;
     };
 }
 
@@ -103,7 +108,8 @@ export interface ListboxStateComponents {
  * Activation rules:
  * - Error state: active when `errorMessage` is provided (presence-based).
  * - Empty state: active when `optionsLength` is 0 and `emptyMessage` is provided, and there is no error.
- * - Option count: active when `nbOptionMessage` is provided, the list is not empty, not loading, and not in error.
+ * - Option count: active when `nbOptionMessage` is provided, the list is not empty, not loading, not in error, and
+ *   the count is not hidden (`isCountHidden`, e.g. a tree without a filter).
  *
  * @param props Component props.
  * @param components Injected framework-specific components.
@@ -123,9 +129,11 @@ export const ListboxState = (props: ListboxStateProps, { GenericBlock, Text }: L
     // The framework wrapper gates `loadingMessage` via the debounced `loadingAnnouncement` event,
     // passing `undefined` until the 500ms threshold is reached.
     const showLoading = !showError && !!loadingMessage;
-    // Show option count message when the list is open, not empty, not loading, and not in error.
+    // Show option count message when the list is open, not empty, not loading, not in error, and the count is not hidden.
     const resolvedNbOptionMessage =
-        !isEmpty && !showError && !state?.isLoading && nbOptionMessage ? nbOptionMessage(optionsLength) : undefined;
+        !isEmpty && !showError && !state?.isLoading && !state?.isCountHidden && nbOptionMessage
+            ? nbOptionMessage(optionsLength)
+            : undefined;
     const show = showEmpty || showError;
     const alignProps = { hAlign: 'center', vAlign: 'center' };
 

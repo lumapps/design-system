@@ -1,0 +1,112 @@
+/* ==========================================================================
+   Tree list
+   ========================================================================== */
+
+// The row reuses the list item structure (`lumx-list-item`, size tiny) and the option action styles
+// (hover, active, selected), at every depth.
+
+// Indent: each group sets `--lumx-tree-list-level` (the level of its sub-items, unset at the root).
+// The rows (and the skeletons or states in a group) add one big spacing unit of left padding per level.
+$tree-list-indent: calc(var(--lumx-tree-list-level, 0) * #{$lumx-spacing-unit-big});
+
+// ---- Tree -----------------------
+
+// Hide the tree when there is no visible tree item, no state, and no skeleton (e.g. an empty inline tree,
+// or a tree where the filter hides every tree item: a hidden tree item keeps its class)
+.#{$lumx-base-prefix}-tree-list {
+    &:empty,
+    &:not(:has(.#{$lumx-base-prefix}-tree-list-item:not([hidden]))):not(:has(.#{$lumx-base-prefix}-listbox-state)):not(
+        :has(.#{$lumx-base-prefix}-listbox-option-skeleton)
+    ) {
+        display: none;
+    }
+}
+
+// ---- Tree item -----------------------
+
+.#{$lumx-base-prefix}-tree-list-item {
+    &__row {
+        padding-left: $tree-list-indent;
+    }
+
+    // Allow flex items to shrink below their content width so `truncate` text shows an ellipsis
+    .#{$lumx-base-prefix}-list-item__wrapper,
+    .#{$lumx-base-prefix}-list-item__content {
+        min-width: 0;
+    }
+
+    // Center the tree item content (label and description)
+    .#{$lumx-base-prefix}-list-item__content {
+        display: flex;
+        flex-direction: column;
+        justify-items: center;
+    }
+
+    // The `before` slot holds the expand toggle (or the spacer) and the `before` content: no fixed width
+    &__row .#{$lumx-base-prefix}-list-item__before {
+        justify-content: flex-start;
+        width: auto;
+    }
+
+    // Expand toggle, or the spacer of the same width on a leaf item
+    &__toggle,
+    &__spacer {
+        flex-shrink: 0;
+    }
+
+    &__spacer {
+        width: $lumx-size-s;
+    }
+
+    // A bigger chevron than the default icon of a size `s` icon button.
+    // Negative vertical margins: the toggle (24px) fits in the line height (20px), so that a parent item row
+    // keeps the height of a list item of size `tiny` (36px).
+    &__toggle {
+        margin-block: calc((#{$lumx-size-xs} - #{$lumx-size-s}) / 2);
+
+        // stylelint-disable-next-line custom-property-pattern
+        --_lumx-icon-size: #{$lumx-size-xs};
+
+        &::before {
+            border-radius: 0 !important;
+        }
+    }
+
+    // Non-selectable parent item: the expand toggle is the main action of the row.
+    // The row button lets the pointer through to the toggle overlay (it stays the `role="treeitem"`).
+    &__action--passive {
+        all: unset;
+        pointer-events: none;
+    }
+
+    // The toggle overlay covers the whole row (the row is the positioning context, not the toggle).
+    &__toggle--main {
+        position: static;
+    }
+
+    // The button styles disable the pointer on `::before` (also the action area overlay): enable it,
+    // so that the overlay catches the clicks on the row.
+    &__row &__toggle--main.#{$lumx-base-prefix}-button::before {
+        pointer-events: auto;
+    }
+
+    // Keyboard: the active item is the row button, show its highlight on the toggle overlay.
+    &__row:has(.#{$lumx-base-prefix}-tree-list-item__action--passive[data-focus-visible-added])
+    .#{$lumx-base-prefix}-tree-list-item__toggle--main::before {
+        @include lumx-state(lumx-base-const("state", "HOVER"), lumx-base-const("emphasis", "LOW"), "dark");
+
+        outline-style: solid;
+        outline-offset: -2px;
+    }
+
+    // Sub-items (the indent is on their rows)
+    &__group {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+
+        > :not(.#{$lumx-base-prefix}-tree-list-item) {
+            padding-left: $tree-list-indent;
+        }
+    }
+}

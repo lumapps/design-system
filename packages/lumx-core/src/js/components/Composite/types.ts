@@ -2,9 +2,9 @@ import type { FocusNavigationCallbacks, FocusNavigationController } from '../../
 
 /**
  * Pattern of a mounted composite element (from its role): each composite specialization
- * (see {@link setupComposite}) adds its own patterns.
+ * (see {@link setupComposite}) adds its own patterns (listbox: `'listbox'` and `'grid'`, tree list: `'tree'`).
  */
-export type CompositeType = 'listbox' | 'grid';
+export type CompositeType = 'listbox' | 'grid' | 'tree';
 
 /** Mode of the filter (see {@link CompositeHandle.setFilter}). */
 export type CompositeFilterMode = 'auto' | 'manual';
@@ -99,8 +99,18 @@ export interface CompositeNavigation<T extends CompositeType = CompositeType> {
     readonly focusNav: FocusNavigationController;
     /** Selector of the elements that can become active (options, grid cells, …). */
     readonly cellSelector: string;
+    /**
+     * Selector of other elements (not cells) whose mousedown must not move DOM focus away from the
+     * focus owner (e.g. an expand toggle next to a tree item).
+     */
+    readonly keepFocusSelector?: string;
     /** Whether a clicked cell selects its item (e.g. false for grid action cells). */
     isOptionCell(cell: HTMLElement): boolean;
+    /**
+     * Find the cell of a pressed or clicked element (e.g. the tree item of an expand toggle that covers its row).
+     * Default: the closest element that matches {@link cellSelector}.
+     */
+    getCellFromTarget?(target: HTMLElement): HTMLElement | null;
     /** Scroll the active item into view. */
     scrollIntoView(item: HTMLElement): void;
     /**
