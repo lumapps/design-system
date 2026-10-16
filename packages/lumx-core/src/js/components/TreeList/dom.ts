@@ -18,8 +18,8 @@ const isSkeletonElement = (el: Element) => el.classList.contains(SKELETON_CLASSN
  *       </button>
  *       <p data-tree-label>                                 ← description (filter match text)
  *     </div>
- *     <ul role="group" id="<id>-group" hidden?>             ← group (parent item only): sub-item roots,
- *     </ul>                                                   skeletons and state
+ *     <ul role="group" id="<id>-group" hidden?>             ← group (parent item only): sub-item roots
+ *     </ul>                                                   and skeletons
  *   </li>
  * </ul>
  */
