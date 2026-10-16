@@ -23,7 +23,7 @@
 
     // Hide the popover when it holds no visible list (the composite sets `hidden` on a list without visible
     // content) and no state
-    $visible-list: ':is([role="listbox"], [role="grid"]):not([hidden])';
+    $visible-list: ':is([role="listbox"], [role="grid"], [role="tree"]):not([hidden])';
 
     &:not(:has(#{$visible-list}, .#{$lumx-base-prefix}-composite-status)) {
         display: none;
