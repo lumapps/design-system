@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useMemo, useRef } from 'react';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import {
@@ -11,7 +11,7 @@ import { setupListbox } from '@lumx/core/js/components/Listbox/setupListbox';
 import type { ListboxHandle } from '@lumx/core/js/components/Listbox/types';
 import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 import { CompositeContext, CompositeContextValue, useCompositeContext } from '../composite/CompositeContext';
-import { useCompositeEvent } from '../composite/useCompositeEvent';
+import { useCompositeList } from '../composite/useCompositeList';
 import { useOptionalComboboxContext } from '../combobox/context/ComboboxContext';
 import { useListboxHandle } from './context/useListboxHandle';
 
@@ -44,23 +44,19 @@ export const ListboxList = forwardRef<ListboxListProps, HTMLUListElement>((props
     // Inside a combobox, the provided handle is the registered list, which is linked (not standalone).
     const isStandalone = !!providedList?.isStandalone;
 
-    // Inside a combobox: create the listbox handle (linked to the trigger) and register it on the combobox.
-    const [comboboxList, setComboboxList] = useState<ListboxHandle | null>(null);
-    useEffect(() => {
-        if (!combobox || isStandalone) return undefined;
-        const newList = setupListbox(combobox.listOptions);
-        const unregister = combobox.registerList(newList);
-        setComboboxList(newList);
-        return () => {
-            unregister();
-            newList.destroy();
-            setComboboxList(null);
-        };
-    }, [combobox, isStandalone]);
-    const list = isStandalone || !comboboxContext ? providedList : comboboxList;
-
     const internalRef = useRef<HTMLUListElement>(null);
     const mergedRef = useMergeRefs(ref, internalRef);
+
+    // Inside a combobox: create the listbox handle (linked to the trigger) and register it on the combobox.
+    const {
+        handle: list,
+        isOpen,
+        isLoading,
+    } = useCompositeList<ListboxHandle>({
+        elementRef: internalRef,
+        combobox: comboboxContext && !isStandalone ? { handle: combobox, createList: setupListbox } : undefined,
+        standaloneHandle: providedList,
+    });
 
     const selectionType = String(forwardedProps['aria-multiselectable']) === 'true' ? 'multiple' : 'single';
 
@@ -68,24 +64,6 @@ export const ListboxList = forwardRef<ListboxListProps, HTMLUListElement>((props
         () => ({ handle: list, id: listboxId, type, selectionType, level: 0 }),
         [list, listboxId, type, selectionType],
     );
-
-    // Options are rendered only while visible (standalone: always; combobox: while open).
-    const isOpen = useCompositeEvent(list, 'open', false);
-    const options = useCompositeEvent(list, 'optionsChange', undefined);
-    const visibleCount = options?.optionsLength ?? 0;
-    const isLoading = useCompositeEvent(list, 'loadingChange', false);
-
-    // Mount the list element on the handle.
-    useEffect(() => {
-        const element = internalRef.current;
-        if (!element) return undefined;
-        return list?.mount(element);
-    }, [list]);
-
-    // Flush pending keyboard navigation after options commit on open.
-    useEffect(() => {
-        if (isOpen) list?.flushPendingNavigation();
-    }, [isOpen, visibleCount, list]);
 
     return (
         <CompositeContext.Provider value={contextValue}>

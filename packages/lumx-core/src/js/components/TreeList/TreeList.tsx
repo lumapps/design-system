@@ -24,6 +24,8 @@ export interface TreeListProps extends HasClassName {
     children?: JSXElement;
     /** The ID of the tree element. */
     id?: string;
+    /** Tab index (`0` on a standalone list, which owns focus). */
+    tabIndex?: number;
     /** ref to the root element */
     ref?: CommonRef;
 }

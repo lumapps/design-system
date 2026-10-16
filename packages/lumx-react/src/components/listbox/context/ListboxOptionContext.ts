@@ -1,11 +1,13 @@
 import { createContext, useContext } from 'react';
 
-/** Context value provided by Combobox.Option to its `after` slot children. */
+/** Context value provided by Combobox.Option (and TreeListItem) to its slot children. */
 export interface ListboxOptionContextValue {
     /** The ID of the parent option element (matches the aria-activedescendant value when highlighted). */
     optionId: string;
     /** Whether the parent option is selected. */
     isSelected: boolean;
+    /** Whether the parent option can be selected (false on a tree item without a value). Default: true. */
+    isSelectable?: boolean;
 }
 
 export const ListboxOptionContext = createContext<ListboxOptionContextValue | undefined>(undefined);

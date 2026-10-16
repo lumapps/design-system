@@ -33,10 +33,7 @@ export function ListboxProvider(props: ListboxProviderProps) {
     // Tear down the handle (pending timers, subscribers) on unmount.
     useEffect(() => () => list.destroy(), [list]);
 
-    const contextValue = useMemo<CompositeContextValue>(
-        () => ({ handle: list, id: listboxId, type: 'listbox' }),
-        [list, listboxId],
-    );
+    const contextValue = useMemo<CompositeContextValue>(() => ({ handle: list, id: listboxId }), [list, listboxId]);
     return <CompositeContext.Provider value={contextValue}>{children}</CompositeContext.Provider>;
 }
 ListboxProvider.displayName = 'ListboxProvider';
