@@ -234,11 +234,15 @@
     }
 }
 
+// Icon in a button. The internal `--_lumx-icon-size` CSS variable overrides the size (see `lumx-icon-size`).
 @mixin lumx-button-icon($variant, $size, $position: null) {
-    width: map.get($lumx-button-icon-sizes, $size);
-    height: map.get($lumx-button-icon-sizes, $size);
-    font-size: map.get($lumx-button-icon-sizes, $size);
-    line-height: map.get($lumx-button-icon-sizes, $size);
+    // stylelint-disable-next-line custom-property-pattern
+    $icon-size: var(--_lumx-icon-size, #{map.get($lumx-button-icon-sizes, $size)});
+
+    width: $icon-size;
+    height: $icon-size;
+    font-size: $icon-size;
+    line-height: $icon-size;
     pointer-events: none;
 
     @if $variant == "button" {
