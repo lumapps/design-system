@@ -1,74 +1,49 @@
-import { defineComponent, ref } from 'vue';
+import { defineComponent } from 'vue';
 
 import {
-    ListboxState as UI,
-    type ListboxStateProps as UIProps,
+    CompositeStatus as UI,
+    type CompositeStatusProps as UIProps,
     COMPONENT_NAME,
     CLASSNAME,
 } from '@lumx/core/js/components/Composite/CompositeStatus';
-import { subscribeListboxState } from '@lumx/core/js/components/Listbox/subscribeListboxState';
 
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
-import { useWatchDisposable } from '../../composables/useWatchDisposable';
 import { GenericBlock } from '../generic-block';
 import { Text } from '../text';
-import { useListboxEvent } from './useCompositeEvent';
-import { useListboxContext } from './CompositeContext';
+import { useCompositeContext } from './CompositeContext';
+import { useCompositeEvent } from './useCompositeEvent';
 
-export type ListboxStateProps = VueToJSXProps<UIProps, 'state'>;
+export type CompositeStatusProps = VueToJSXProps<UIProps, 'state'>;
 
 /**
- * Combobox.State component - displays empty and error states for the combobox list.
+ * CompositeStatus: the live region of a composite (list, grid or tree), exposed as `Combobox.State` and
+ * `Listbox.State`. Displays the empty, loading, error and item count messages.
  *
  * @param props Component props.
  * @return Vue element.
  */
-const ListboxState = defineComponent(
-    (props: ListboxStateProps) => {
-        const { list } = useListboxContext();
-        const optionsState = useListboxEvent(list, 'optionsChange', undefined);
-        const isLoading = ref(false);
-        const shouldAnnounce = ref(false);
-        const isOpen = ref(false);
+const CompositeStatus = defineComponent(
+    (props: CompositeStatusProps) => {
+        const { handle: list } = useCompositeContext();
+        const state = useCompositeEvent(list, 'stateChange', undefined);
 
-        useWatchDisposable(list, (listValue) => {
-            if (listValue) {
-                return subscribeListboxState(listValue, {
-                    setIsLoading: (v) => {
-                        isLoading.value = v;
-                    },
-                    setShouldAnnounce: (v) => {
-                        shouldAnnounce.value = v;
-                    },
-                    setIsOpen: (v) => {
-                        isOpen.value = v;
-                    },
-                });
-            }
-        });
-
-        return () => {
-            const state = { ...optionsState.value, isLoading: isLoading.value, isOpen: isOpen.value };
-            // Only pass loadingMessage to core after the 500ms debounce threshold
-            const loadingMessage = shouldAnnounce.value ? props.loadingMessage : undefined;
-
-            return UI(
+        return () =>
+            UI(
                 {
                     emptyMessage: props.emptyMessage,
                     nbOptionMessage: props.nbOptionMessage,
                     errorMessage: props.errorMessage,
                     errorTryReloadMessage: props.errorTryReloadMessage,
-                    loadingMessage,
-                    state,
+                    loadingMessage: props.loadingMessage,
+                    state: state.value,
                 },
-                { GenericBlock, Text: Text as any },
+                { GenericBlock, Text },
             );
-        };
     },
     {
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
-        props: keysOf<ListboxStateProps>()(
+        props: keysOf<CompositeStatusProps>()(
             'emptyMessage',
             'nbOptionMessage',
             'errorMessage',
@@ -80,4 +55,4 @@ const ListboxState = defineComponent(
 );
 
 export { COMPONENT_NAME, CLASSNAME };
-export default ListboxState;
+export default CompositeStatus;

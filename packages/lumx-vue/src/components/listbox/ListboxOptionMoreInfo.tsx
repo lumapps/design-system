@@ -14,9 +14,10 @@ import type { JSXElement } from '@lumx/core/js/types';
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { IconButton } from '../button';
 import { Popover } from '../popover';
-import { useListboxOptionContext } from '../composite/CompositeItemContext';
-import { useListboxContext } from '../composite/CompositeContext';
-import { useListboxEvent } from '../composite/useCompositeEvent';
+import { useCompositeItemContext } from '../composite/CompositeItemContext';
+import { useCompositeContext } from '../composite/CompositeContext';
+import { optionActiveEvent } from '@lumx/core/js/components/Composite/constants';
+import { useCompositeEvent } from '../composite/useCompositeEvent';
 
 export type ListboxOptionMoreInfoProps = VueToJSXProps<
     UIProps,
@@ -51,15 +52,16 @@ const ListboxOptionMoreInfo = defineComponent(
 
         const isHovered = ref(false);
 
-        // Get the parent option ID from the option context
-        const { optionId } = useListboxOptionContext();
+        // Get the parent option ID from the item context
+        const { itemId: optionId } = useCompositeItemContext();
 
         // Subscribe to active descendant changes for keyboard highlight detection
-        const { list } = useListboxContext();
-        const activeDescendantId = useListboxEvent(list, 'activeDescendantChange', null);
+        const { handle } = useCompositeContext();
+        // Only this option updates when the active item moves (the per-item active event).
+        const isActive = useCompositeEvent(handle, optionActiveEvent(optionId), false);
 
         // Open on mouse hover or keyboard highlight.
-        const isOpen = computed(() => isHovered.value || activeDescendantId.value === optionId);
+        const isOpen = computed(() => isHovered.value || isActive.value);
         watch(isOpen, (open) => emit('toggle', open), { immediate: true });
 
         const popoverId = `${optionId}-more-info`;

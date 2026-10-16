@@ -1,10 +1,11 @@
 import { ReactNode, useEffect, useMemo, useRef, useState } from 'react';
 
-import type { ComboboxHandle } from '@lumx/core/js/components/Combobox/types';
+import type { ComboboxEventMap, ComboboxHandle } from '@lumx/core/js/components/Combobox/types';
 import { useId } from '@lumx/react/hooks/useId';
 
 import { ComboboxContext } from './context/ComboboxContext';
-import { ListboxContext, ListboxContextValue } from '../composite/CompositeContext';
+import { CompositeContext, CompositeContextValue } from '../composite/CompositeContext';
+import { useCompositeEvent } from '../composite/useCompositeEvent';
 
 /**
  * Defines the props of the component.
@@ -26,6 +27,8 @@ export interface ComboboxProviderProps {
  *
  * Provides shared context to sub-components. The vanilla JS combobox handle is
  * created by the trigger sub-component (Combobox.Input or Combobox.Button) on mount.
+ * The list handle is created by the list component, which registers it on the combobox handle:
+ * the provider shares the registered list with the sub-components (composite context).
  *
  * @param props Component props.
  * @return React element.
@@ -35,11 +38,14 @@ export function ComboboxProvider(props: ComboboxProviderProps) {
     const listboxId = useId();
     const anchorRef = useRef<HTMLElement>(null);
     const [handle, setHandle] = useState<ComboboxHandle | null>(null);
+    // The list registered on the combobox (updated when the list component registers or unregisters it).
+    const list = useCompositeEvent<ComboboxEventMap, 'composite'>(handle, 'composite', null);
     const contextValue = useMemo(() => ({ handle, setHandle, listboxId, anchorRef }), [handle, listboxId]);
-    // The listbox of the combobox: shared with the list, the options and the state through the listbox context.
-    const listboxContextValue = useMemo<ListboxContextValue>(
-        () => ({ list: handle?.list ?? null, listboxId, type: 'listbox' }),
-        [handle, listboxId],
+    // The list of the combobox: shared with the list, the options and the state through the composite context.
+    // No `type`: the list element provides it (the registered list may be any composite).
+    const compositeContextValue = useMemo<CompositeContextValue>(
+        () => ({ handle: list, id: listboxId, comboboxListId: listboxId }),
+        [list, listboxId],
     );
 
     // Force the always open state (`undefined`: the core detects the inline listbox).
@@ -52,14 +58,14 @@ export function ComboboxProvider(props: ComboboxProviderProps) {
     onOpenRef.current = onOpen;
     useEffect(() => {
         if (!handle) return undefined;
-        return handle.list.subscribe('open', (isOpen) => {
+        return handle.subscribe('open', (isOpen) => {
             onOpenRef.current?.(isOpen);
         });
     }, [handle]);
 
     return (
         <ComboboxContext.Provider value={contextValue}>
-            <ListboxContext.Provider value={listboxContextValue}>{children}</ListboxContext.Provider>
+            <CompositeContext.Provider value={compositeContextValue}>{children}</CompositeContext.Provider>
         </ComboboxContext.Provider>
     );
 }

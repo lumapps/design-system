@@ -1,4 +1,4 @@
-import type { ComboboxCallbacks, ComboboxHandle, ComboboxInputOptions } from './types';
+import type { ComboboxCallbacks, ComboboxHandle, ComboboxInputOptions, OnTriggerAttach } from './types';
 import { setupCombobox } from './setupCombobox';
 
 /** Options for configuring the input-mode combobox controller. */
@@ -23,8 +23,8 @@ export interface SetupComboboxInputOptions extends ComboboxCallbacks, ComboboxIn
  * Set up a combobox with an input trigger (autocomplete/filter pattern).
  *
  * Creates a full combobox handle with the input-mode controller automatically
- * wired in and the trigger registered. The consumer only needs to call
- * `handle.list.mount(listbox)`.
+ * wired in and the trigger registered. The consumer only needs to attach the list
+ * with `handle.attachList(setupListbox)`.
  *
  * Handles: Home/End (text cursor), ArrowLeft/Right (clear active descendant),
  * filtering (on input and on open), and focus behavior.
@@ -63,7 +63,7 @@ export function setupComboboxInput(input: HTMLInputElement, options: SetupCombob
     const onSelect = (option: { value: string }) => {
         optionOnSelect?.(option);
         userHasTyped = false;
-        if (autoFilter) handle.list.setFilter('');
+        if (autoFilter) handle.list?.setFilter('');
 
         if (selectionMode === 'fill') {
             onChangeCallback?.(option.value);
@@ -73,7 +73,7 @@ export function setupComboboxInput(input: HTMLInputElement, options: SetupCombob
         // 'keep': onChange is not called — input value stays as-is.
     };
 
-    handle = setupCombobox({ onSelect }, { wrapNavigation: true }, (combobox, signal) => {
+    const onTriggerAttach: OnTriggerAttach = (combobox, signal) => {
         signal.addEventListener('abort', () => {
             userHasTyped = false;
         });
@@ -85,7 +85,7 @@ export function setupComboboxInput(input: HTMLInputElement, options: SetupCombob
                 if (!(event instanceof InputEvent)) return;
                 if (isDisabled()) return;
 
-                combobox.list.focusNav?.clear();
+                combobox.list?.clearActiveItem();
                 userHasTyped = true;
 
                 // Notify the framework wrapper of the new input value synchronously.
@@ -94,7 +94,7 @@ export function setupComboboxInput(input: HTMLInputElement, options: SetupCombob
                 combobox.setIsOpen(true);
 
                 if (autoFilter) {
-                    combobox.list.setFilter(input.value);
+                    combobox.list?.setFilter(input.value);
                 }
             },
             { signal },
@@ -105,7 +105,7 @@ export function setupComboboxInput(input: HTMLInputElement, options: SetupCombob
             'focus',
             () => {
                 if (isDisabled()) return;
-                combobox.list.focusNav?.clear();
+                combobox.list?.clearActiveItem();
                 if (openOnFocus) {
                     combobox.setIsOpen(true);
                 }
@@ -130,50 +130,57 @@ export function setupComboboxInput(input: HTMLInputElement, options: SetupCombob
             () => {
                 if (!combobox.alwaysOpen) return;
                 userHasTyped = false;
-                if (autoFilter) combobox.list.setFilter('');
+                if (autoFilter) combobox.list?.setFilter('');
             },
             { signal },
         );
 
-        // Re-apply filter when the combobox opens, but only if the current
+        // Re-apply filter when the combobox opens (or when a list registers), but only if the current
         // input value came from user typing. After a programmatic change
         // (select, clear), all options should remain visible.
-        const unsubscribeOpen = combobox.list.subscribe('open', (isOpen) => {
-            if (isOpen && autoFilter && userHasTyped) {
-                combobox.list.setFilter(input.value);
+        const reapplyFilter = () => {
+            if (combobox.isOpen && autoFilter && userHasTyped) {
+                combobox.list?.setFilter(input.value);
             }
+        };
+        const unsubscribeOpen = combobox.subscribe('open', reapplyFilter);
+        const unsubscribeList = combobox.subscribe('composite', reapplyFilter);
+        signal.addEventListener('abort', () => {
+            unsubscribeOpen();
+            unsubscribeList();
         });
-        signal.addEventListener('abort', unsubscribeOpen);
 
         return (event: KeyboardEvent): boolean => {
-            const nav = combobox.list.focusNav;
+            const { list } = combobox;
 
             switch (event.key) {
                 case 'Home':
                     input.setSelectionRange(0, 0);
-                    nav?.clear();
+                    list?.clearActiveItem();
                     return true;
 
                 case 'End': {
                     const len = input.value.length;
                     input.setSelectionRange(len, len);
-                    nav?.clear();
+                    list?.clearActiveItem();
                     return true;
                 }
 
                 case 'ArrowLeft':
                 case 'ArrowRight':
                     // Grid pattern: navigate cells when an active cell exists.
-                    if (combobox.list.navigateHorizontal(event.key)) return true;
+                    if (list?.handleKeydown(event)) return true;
                     // Otherwise: clear active item, allow caret movement.
-                    nav?.clear();
+                    list?.clearActiveItem();
                     return false;
 
                 default:
                     return false;
             }
         };
-    });
+    };
+
+    handle = setupCombobox({ onSelect, wrapNavigation: true, onTriggerAttach });
 
     handle.registerTrigger(input);
     return handle;

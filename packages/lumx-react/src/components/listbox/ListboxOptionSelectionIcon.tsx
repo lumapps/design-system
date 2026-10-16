@@ -1,6 +1,9 @@
-import { ListboxOptionSelectionIcon as UI } from '@lumx/core/js/components/Composite/CompositeSelectionIcon';
-import { useListboxContext } from '../composite/CompositeContext';
-import { useListboxOptionContext } from '../composite/CompositeItemContext';
+import {
+    CompositeSelectionIcon as UI,
+    LEGACY_OPTION_CLASSNAME,
+} from '@lumx/core/js/components/Composite/CompositeSelectionIcon';
+import { useCompositeContext } from '../composite/CompositeContext';
+import { useCompositeItemContext } from '../composite/CompositeItemContext';
 
 /**
  * Combobox.SelectionIcon component (`Listbox.SelectionIcon`, re-exported by the combobox).
@@ -15,8 +18,8 @@ import { useListboxOptionContext } from '../composite/CompositeItemContext';
  * @return React element.
  */
 export const ListboxOptionSelectionIcon = () => {
-    const { isSelected } = useListboxOptionContext();
-    const { selectionType } = useListboxContext();
-    return <UI selectionType={selectionType} isSelected={isSelected} />;
+    const { isSelected } = useCompositeItemContext();
+    const { selectionType } = useCompositeContext();
+    return <UI selectionType={selectionType} isSelected={isSelected} className={LEGACY_OPTION_CLASSNAME} />;
 };
 ListboxOptionSelectionIcon.displayName = 'ComboboxSelectionIcon';

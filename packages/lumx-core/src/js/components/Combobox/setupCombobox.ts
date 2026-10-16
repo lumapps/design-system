@@ -1,53 +1,90 @@
-import { isSelected } from '../Listbox/utils';
-import { setupListbox } from '../Composite/setupComposite';
+import type { CompositeEventMap, CompositeHandle, CompositeOptions } from '../Composite/types';
 import { COMBOBOX_POPOVER_CLASSNAME } from './constants';
-import type { ComboboxCallbacks, ComboboxHandle, OnTriggerAttach } from './types';
+import type { ComboboxCallbacks, ComboboxEventMap, ComboboxHandle, OnTriggerAttach } from './types';
 
-/** Options for configuring the shared combobox behavior. */
-interface ListboxOptions {
+/** Options of {@link setupCombobox}: the callbacks, and the shared combobox behavior options. */
+interface SetupComboboxOptions extends ComboboxCallbacks {
     /** When true, ArrowDown/ArrowUp wrap around in listbox mode (input pattern). Default: false. */
     wrapNavigation?: boolean;
+    /**
+     * Called when the trigger is registered and the signal is ready. Used by the mode-specific wrappers
+     * (setupComboboxInput/Button) to attach the controller of their mode.
+     */
+    onTriggerAttach?: OnTriggerAttach;
 }
 
 /**
- * Set up combobox behavior (WAI-ARIA combobox pattern) on a trigger + listbox pair.
+ * Set up combobox behavior (WAI-ARIA combobox pattern) on a trigger + list pair.
  *
- * The trigger and listbox are registered separately via the returned handle,
+ * The trigger and the list are registered separately via the returned handle,
  * allowing framework components to register them on mount. The behavior is
- * fully attached once both are registered.
+ * fully attached once both are registered. The list is late-bound: the list component attaches its
+ * composite handle with `handle.attachList`.
  *
  * @see https://www.w3.org/WAI/ARIA/apg/patterns/combobox/
  *
- * @param callbacks Callbacks invoked on combobox events (e.g. option selection).
- * @param options Options for configuring the shared combobox behavior.
- * @param onTriggerAttach Optional callback invoked when the trigger is registered and the signal is ready.
- *                        Used by mode-specific wrappers (setupComboboxInput/Button) to automatically
- *                        attach the appropriate controller.
+ * @param options The callbacks (e.g. option selection) and the shared combobox behavior options.
  * @returns A ComboboxHandle for interacting with the combobox.
  */
-export function setupCombobox(
-    callbacks: ComboboxCallbacks,
-    options?: ListboxOptions,
-    onTriggerAttach?: OnTriggerAttach,
-): ComboboxHandle {
-    const { wrapNavigation = false } = options ?? {};
+export function setupCombobox(options: SetupComboboxOptions = {}): ComboboxHandle {
+    const { wrapNavigation = false, onTriggerAttach, ...callbacks } = options;
 
     let trigger: HTMLInputElement | HTMLButtonElement | null = null;
+    /** The attached list (see `attachList`). */
+    let list: CompositeHandle | null = null;
+    /** Cleanup of the subscriptions on the registered list. */
+    let unsubscribeList: (() => void) | null = null;
 
-    /** When true, the listbox stays open (inline listbox, no popup to open or close). */
+    /** The popup open state (source of truth, forwarded to the registered list). */
+    let isOpen = false;
+    /** When true, the list stays open (inline list, no popup to open or close). */
     let alwaysOpen = false;
-    /** Whether the mounted listbox is inline (not in a `Combobox.Popover`). */
+    /** Whether the mounted list is inline (not in a `Combobox.Popover`). */
     let isInline = false;
-    /** Forced `alwaysOpen` value (`undefined`: from the listbox placement, see {@link isInline}). */
+    /** Forced `alwaysOpen` value (`undefined`: from the list placement, see {@link isInline}). */
     let alwaysOpenOverride: boolean | undefined;
 
     /** AbortController for all trigger event listeners. */
     let abortController: AbortController | null = null;
 
+    /** Events owned by the combobox. The other events are forwarded from the attached list. */
+    type OwnEvent = 'open' | 'composite';
+    const isOwnEvent = (event: keyof ComboboxEventMap): event is OwnEvent => event === 'open' || event === 'composite';
+    const subscribers: { [K in OwnEvent]: Set<(value: ComboboxEventMap[K]) => void> } = {
+        open: new Set(),
+        composite: new Set(),
+    };
+
+    function notify<K extends OwnEvent>(event: K, value: ComboboxEventMap[K]) {
+        for (const cb of subscribers[event] as Set<(v: ComboboxEventMap[K]) => void>) cb(value);
+    }
+
+    /** Listeners of a forwarded list event, and the subscription on the current list that feeds them. */
+    interface ForwardedEvent {
+        listeners: Set<(value: unknown) => void>;
+        unsubscribe: (() => void) | null;
+    }
+    const forwardedEvents = new Map<keyof CompositeEventMap, ForwardedEvent>();
+
+    /** Subscribe the forwarded event on the current list (null without a list). Returns the unsubscribe. */
+    function forwardEvent(event: keyof CompositeEventMap, listeners: ForwardedEvent['listeners']) {
+        return list ? list.subscribe(event, (value) => listeners.forEach((cb) => cb(value))) : null;
+    }
+
+    /** List change: forward the events from the new list, and dispatch its snapshots (undefined without a list). */
+    function syncForwardedEvents() {
+        for (const [event, forwarded] of forwardedEvents) {
+            forwarded.unsubscribe?.();
+            forwarded.unsubscribe = forwardEvent(event, forwarded.listeners);
+            const value = list?.getSnapshot(event);
+            forwarded.listeners.forEach((cb) => cb(value));
+        }
+    }
+
     // Forward-declared so internal helpers can reference `handle` before it is constructed (via closure).
     let handle!: ComboboxHandle;
 
-    /** Apply the `alwaysOpen` value (override, or else the listbox placement). */
+    /** Apply the `alwaysOpen` value (override, or else the list placement). */
     function syncAlwaysOpen() {
         const value = alwaysOpenOverride ?? isInline;
         if (alwaysOpen === value) return;
@@ -55,22 +92,34 @@ export function setupCombobox(
         handle.setIsOpen(value);
     }
 
-    /** Set `aria-haspopup="grid"` on the trigger when the listbox is a grid. */
-    function syncHasPopup(listbox: HTMLElement | null) {
-        if (trigger && listbox?.getAttribute('role') === 'grid') trigger.setAttribute('aria-haspopup', 'grid');
+    /**
+     * Mirror the pattern of the mounted list on the trigger `aria-haspopup` (`grid`, `tree`, …), including back to
+     * `listbox` when another list replaces a grid. `listbox` is the ARIA default: it is not added to a trigger
+     * that has no `aria-haspopup`.
+     */
+    function syncHasPopup() {
+        const type = list?.type;
+        if (!trigger || !type) return;
+        if (type !== 'listbox' || trigger.hasAttribute('aria-haspopup')) trigger.setAttribute('aria-haspopup', type);
     }
 
     /**
-     * The listbox handle owns the open state, the option/section/skeleton registry, the filter, the focus
-     * navigation, the selection and all the events. The combobox links it to the trigger (focus owner).
+     * Sync `aria-expanded` on the trigger: true when the popup is open and the list has something to show
+     * (visible items or root skeletons), which changes with the open state, filtering, item register/unregister
+     * and skeleton transitions.
      */
-    const list = setupListbox({
+    function syncExpanded() {
+        trigger?.setAttribute('aria-expanded', String(isOpen && !!list?.hasVisibleContent));
+    }
+
+    /** Options of the list handle: the combobox links it to the trigger (focus owner). */
+    const listOptions: CompositeOptions = {
         wrapNavigation,
         onSelect(option, element) {
             callbacks.onSelect?.(option);
             // Close on selection (when not multiselectable)
-            if (element && !list.isMultiSelect) {
-                list.focusNav?.clear();
+            if (element && !list?.isMultiSelect) {
+                list?.clearActiveItem();
                 // Defer the close to the next frame (to make sure all other click handler resolve).
                 requestAnimationFrame(() => {
                     handle.setIsOpen(false);
@@ -80,30 +129,26 @@ export function setupCombobox(
         focusOwner: {
             getFocusOwner: () => trigger,
             getInputValue: () => trigger?.value ?? '',
-            onMount: (listbox) => {
-                syncHasPopup(listbox);
-                // No `Combobox.Popover` around the listbox: inline listbox, always open.
-                isInline = !listbox.closest(`.${COMBOBOX_POPOVER_CLASSNAME}`);
+            onMount: (element) => {
+                syncHasPopup();
+                // No `Combobox.Popover` around the list: inline list, always open.
+                isInline = !element.closest(`.${COMBOBOX_POPOVER_CLASSNAME}`);
                 syncAlwaysOpen();
             },
         },
-    });
+    };
 
-    /**
-     * Keep `aria-expanded` in sync while open: it is false when there is nothing to show
-     * (no visible option and no skeleton), which changes with filtering, option register/unregister
-     * and skeleton transitions. Unsubscribed by `list.destroy()`.
-     */
-    function syncExpanded() {
-        if (list.isOpen) trigger?.setAttribute('aria-expanded', String(list.hasVisibleContent));
+    /** Unregister the current list (unsubscribe, no destroy: its `detach` destroys it). */
+    function releaseList() {
+        unsubscribeList?.();
+        unsubscribeList = null;
+        list = null;
     }
-    list.subscribe('optionsChange', syncExpanded);
-    list.subscribe('loadingChange', syncExpanded);
 
     /** Detach everything (abort all listeners, clear state). */
     function detach() {
         // Clear the active option while the old trigger is still the focus owner.
-        list.focusNav?.clear();
+        list?.clearActiveItem();
         abortController?.abort();
         abortController = null;
     }
@@ -131,14 +176,13 @@ export function setupCombobox(
 
             let flag = false;
             const { altKey } = event;
-            const nav = list.focusNav;
 
             switch (event.key) {
                 case 'Enter':
-                    // Open with an active option: "click" it (handled by the listbox).
-                    if (handle.isOpen && list.handleKeydown(event)) {
+                    // Open with an active option: "click" it (handled by the list).
+                    if (handle.isOpen && list?.handleKeydown(event)) {
                         flag = true;
-                    } else if (handle.isOpen && !list.isMultiSelect) {
+                    } else if (handle.isOpen && !list?.isMultiSelect) {
                         // Open with no active item (single select) => close the popup,
                         // but let Enter propagate so it can submit a surrounding form.
                         handle.setIsOpen(false);
@@ -147,27 +191,27 @@ export function setupCombobox(
                     // let Enter pass through so it can submit a surrounding form
                     break;
 
-                // Open if closed, else move the active option (handled by the listbox).
+                // Open if closed, else move the active option (handled by the list).
                 case 'ArrowDown':
                     if (!handle.isOpen) {
                         handle.setIsOpen(true);
                         // Focus first or selected item on open (deferred until the options commit).
-                        if (!altKey) nav?.goTo((s) => s.getMatching(isSelected) ?? s.getFirst());
+                        if (!altKey) list?.activateDefaultItem('first');
                     } else if (!altKey) {
-                        list.handleKeydown(event);
+                        list?.handleKeydown(event);
                     }
                     flag = true;
                     break;
 
-                // Open if closed, else move the active option (handled by the listbox).
+                // Open if closed, else move the active option (handled by the list).
                 case 'ArrowUp':
                     if (!handle.isOpen && !altKey) {
                         handle.setIsOpen(true);
                         // Focus last or selected item on open (deferred until the options commit).
-                        nav?.goTo((s) => s.getMatching(isSelected) ?? s.getLast());
-                    } else if (handle.isOpen && (nav?.selectors.activeItem || !altKey)) {
+                        list?.activateDefaultItem('last');
+                    } else if (handle.isOpen && (list?.activeItem || !altKey)) {
                         // Alt+ArrowUp only moves when there is an active option.
-                        list.handleKeydown(event);
+                        list?.handleKeydown(event);
                     }
                     flag = true;
                     break;
@@ -178,22 +222,23 @@ export function setupCombobox(
                     // When there is nothing to close or clear, let Escape propagate
                     // (ex: so a surrounding dialog can close).
                     if (alwaysOpen) {
-                        if (nav?.selectors.activeItem) {
-                            nav.clear();
+                        if (list?.activeItem) {
+                            list.clearActiveItem();
                             flag = true;
                         }
                     } else if (handle.isOpen) {
                         handle.setIsOpen(false);
                         flag = true;
                     } else if (triggerEl.tagName === 'INPUT' && triggerEl.value) {
-                        list.select(null);
+                        // Clear the selection (the same as `list.select(null)`, also without a list).
+                        listOptions.onSelect?.({ value: '' }, null);
                         flag = true;
                     }
                     break;
 
                 case 'PageUp':
                 case 'PageDown':
-                    if (handle.isOpen) list.handleKeydown(event);
+                    if (handle.isOpen) list?.handleKeydown(event);
                     flag = true;
                     break;
 
@@ -210,13 +255,13 @@ export function setupCombobox(
         triggerEl.addEventListener('keydown', (e) => handleKeydown(e as KeyboardEvent), { signal });
     }
 
-    /** Try to fully attach when both trigger and listbox are available. */
+    /** Try to fully attach when the trigger is available. */
     function tryAttach() {
         if (!trigger) return;
 
         // Create a fresh abort controller if needed
         const isNewController = !abortController;
-        syncHasPopup(list.element);
+        syncHasPopup();
         if (!abortController) {
             abortController = new AbortController();
         }
@@ -225,7 +270,7 @@ export function setupCombobox(
         if (!trigger.getAttribute('aria-activedescendant')) {
             trigger.setAttribute('aria-activedescendant', '');
         }
-        trigger.setAttribute('aria-expanded', String(list.isOpen));
+        syncExpanded();
 
         // On first attach, wire up the mode-specific controller, shared keydown, and focusout handlers.
         if (isNewController) {
@@ -251,24 +296,27 @@ export function setupCombobox(
             return list;
         },
         get isOpen() {
-            return list.isOpen;
+            return isOpen;
         },
         get alwaysOpen() {
             return alwaysOpen;
         },
 
-        setIsOpen(isOpen: boolean) {
+        setIsOpen(open: boolean) {
             // Always open: a close request only clears the active option.
-            if (alwaysOpen && !isOpen) {
-                list.focusNav?.clear();
+            if (alwaysOpen && !open) {
+                list?.clearActiveItem();
                 return;
             }
-            if (list.isOpen === isOpen) return;
-            if (!isOpen) list.focusNav?.clear();
+            if (isOpen === open) return;
+            isOpen = open;
+            if (!open) list?.clearActiveItem();
             // Update aria-expanded on trigger (false when no visible options or skeletons)
-            trigger?.setAttribute('aria-expanded', String(isOpen && list.hasVisibleContent));
-            // Last: the listbox dispatches `open` to the subscribers, which must see the trigger in its final state.
-            list.setOpen(isOpen);
+            syncExpanded();
+            // Last: the list and the combobox dispatch `open` to the subscribers, which must see the trigger
+            // in its final state.
+            list?.setOpen(open);
+            notify('open', open);
         },
 
         setAlwaysOpen(value: boolean | undefined) {
@@ -292,10 +340,79 @@ export function setupCombobox(
             };
         },
 
+        attachList(createList) {
+            const newList = createList(listOptions);
+            releaseList();
+            list = newList;
+            // The visible items and the loading state (`hasVisibleContent`) are fields of the live region state.
+            unsubscribeList = newList.subscribe('stateChange', syncExpanded);
+            // Forward the open state (the list may attach after the popup opened). (`aria-haspopup`: on mount.)
+            newList.setOpen(isOpen);
+            syncExpanded();
+            syncForwardedEvents();
+            notify('composite', newList);
+            return {
+                list: newList,
+                detach() {
+                    // Unregister before the destroy: the combobox never reads a destroyed list.
+                    if (list === newList) {
+                        releaseList();
+                        // No list left: nothing to show (the list options may unregister after this, unobserved).
+                        syncExpanded();
+                        syncForwardedEvents();
+                        notify('composite', null);
+                    }
+                    newList.destroy();
+                },
+            };
+        },
+
+        subscribe(event, callback) {
+            if (isOwnEvent(event)) {
+                const eventSubscribers = subscribers[event] as Set<typeof callback>;
+                eventSubscribers.add(callback);
+                // Replay the open state to late subscribers (e.g. async Vue watchers), like the list does.
+                if (event === 'open' && isOpen) (callback as (value: boolean) => void)(true);
+                return () => {
+                    eventSubscribers.delete(callback);
+                };
+            }
+            // Forwarded list event: one subscription per event on the current list feeds all the callbacks.
+            let forwarded = forwardedEvents.get(event);
+            if (!forwarded) {
+                const listeners: ForwardedEvent['listeners'] = new Set();
+                forwarded = { listeners, unsubscribe: forwardEvent(event, listeners) };
+                forwardedEvents.set(event, forwarded);
+            }
+            const forwardedCallback = callback as (value: unknown) => void;
+            forwarded.listeners.add(forwardedCallback);
+            // Replay the current list snapshot to the late subscriber (like the list replays its open state).
+            const value = list?.getSnapshot(event);
+            if (value !== undefined) forwardedCallback(value);
+            return () => {
+                forwarded.listeners.delete(forwardedCallback);
+                if (forwarded.listeners.size) return;
+                forwarded.unsubscribe?.();
+                forwardedEvents.delete(event);
+            };
+        },
+
+        getSnapshot<K extends keyof ComboboxEventMap>(event: K): ComboboxEventMap[K] | undefined {
+            if (isOwnEvent(event)) {
+                const own: { [E in OwnEvent]: ComboboxEventMap[E] } = { open: isOpen, composite: list };
+                return own[event] as ComboboxEventMap[K];
+            }
+            return list?.getSnapshot(event as keyof CompositeEventMap) as ComboboxEventMap[K] | undefined;
+        },
+
         destroy() {
             detach();
             trigger = null;
-            list.destroy();
+            releaseList();
+            isOpen = false;
+            for (const set of Object.values(subscribers)) set.clear();
+            for (const forwarded of forwardedEvents.values()) forwarded.unsubscribe?.();
+            forwardedEvents.clear();
         },
     };
 

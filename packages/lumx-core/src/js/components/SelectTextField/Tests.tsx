@@ -1393,9 +1393,7 @@ export default function selectTextFieldTests({ components, renderWithState }: Se
             });
 
             await waitFor(() => {
-                const stateElement = document.body.querySelector('.lumx-listbox-state');
-                expect(stateElement).toBeTruthy();
-                expect(stateElement?.textContent).toContain('No results found');
+                expect(getByRole(document.body, 'status')).toHaveTextContent('No results found');
             });
         });
 
@@ -1411,9 +1409,7 @@ export default function selectTextFieldTests({ components, renderWithState }: Se
             });
 
             await waitFor(() => {
-                const stateElement = document.body.querySelector('.lumx-listbox-state');
-                expect(stateElement).toBeTruthy();
-                expect(stateElement?.textContent).toContain('10 result(s) available');
+                expect(getByRole(document.body, 'status')).toHaveTextContent('10 result(s) available');
             });
         });
 
@@ -1435,8 +1431,7 @@ export default function selectTextFieldTests({ components, renderWithState }: Se
             });
 
             await waitFor(() => {
-                const stateElement = document.body.querySelector('.lumx-listbox-state');
-                expect(stateElement?.textContent).toContain('1 result(s) available');
+                expect(getByRole(document.body, 'status')).toHaveTextContent('1 result(s) available');
             });
         });
 
@@ -1458,9 +1453,8 @@ export default function selectTextFieldTests({ components, renderWithState }: Se
             });
 
             await waitFor(() => {
-                const stateElement = document.body.querySelector('.lumx-listbox-state');
-                expect(stateElement?.textContent).toContain('No results found');
-                expect(stateElement?.textContent).not.toContain('result(s) available');
+                expect(getByRole(document.body, 'status')).toHaveTextContent('No results found');
+                expect(getByRole(document.body, 'status')).not.toHaveTextContent('result(s) available');
             });
         });
     });
@@ -1638,10 +1632,8 @@ export default function selectTextFieldTests({ components, renderWithState }: Se
             });
 
             await waitFor(() => {
-                const stateElement = document.body.querySelector('.lumx-listbox-state');
-                expect(stateElement).toBeTruthy();
-                expect(stateElement?.textContent).toContain('Failed to load');
-                expect(stateElement?.textContent).toContain('Please try again later');
+                expect(getByRole(document.body, 'status')).toHaveTextContent('Failed to load');
+                expect(getByRole(document.body, 'status')).toHaveTextContent('Please try again later');
             });
         });
 
