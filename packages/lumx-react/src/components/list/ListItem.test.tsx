@@ -6,6 +6,7 @@ import { vi } from 'vitest';
 import React from 'react';
 import { DisabledStateProvider } from '@lumx/react/utils/disabled';
 import BaseListItemTests from '@lumx/core/js/components/List/ListItemTests';
+import { ListItem as ListItemUI } from '@lumx/core/js/components/List/ListItem';
 import { ListItem, ListItemProps } from '.';
 
 const CLASSNAME = ListItem.className as string;
@@ -22,6 +23,16 @@ const setup = (props: Partial<ListItemProps> = {}, { wrapper }: SetupRenderOptio
 };
 
 describe(`<${ListItem.displayName}>`, () => {
+    // Core only (not a prop of the React component).
+    describe('core template `as` prop', () => {
+        it('should render the root element with the given tag', () => {
+            render(ListItemUI({ as: 'div', children: 'Label' }));
+            const listItem = getByClassName(document.body, CLASSNAME);
+            expect(listItem.tagName).toBe('DIV');
+            expect(queryByClassName(listItem, `${CLASSNAME}__wrapper`)).toHaveTextContent('Label');
+        });
+    });
+
     // Run core tests (mapping handleClick -> onItemSelected for React;
     // onItemSelected is used instead of onClick to avoid useDisableStateProps stripping onClick when disabled)
     BaseListItemTests({
