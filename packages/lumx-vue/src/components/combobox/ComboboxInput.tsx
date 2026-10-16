@@ -16,8 +16,7 @@ import { TextField } from '../text-field';
 import { IconButton } from '../button';
 import type { IconButtonProps } from '../button/IconButton';
 import { useComboboxContext } from './context/ComboboxContext';
-import { useListboxEvent } from '../composite/useCompositeEvent';
-import { useListboxContext } from '../composite/CompositeContext';
+import { useComboboxEvent } from './context/useComboboxEvent';
 import { useComboboxOpen } from './context/useComboboxOpen';
 
 /**
@@ -73,9 +72,8 @@ const ComboboxInput = defineComponent(
         });
 
         // Track options and loading state to compute aria-expanded correctly.
-        const { list } = useListboxContext();
-        const optionsState = useListboxEvent(list, 'optionsChange', { optionsLength: 0 });
-        const isLoading = useListboxEvent(list, 'loadingChange', false);
+        const optionsState = useComboboxEvent('optionsChange', { optionsLength: 0 });
+        const isLoading = useComboboxEvent('loadingChange', false);
 
         const handleToggle = () => {
             // Don't toggle when error/empty state (no options and not loading)

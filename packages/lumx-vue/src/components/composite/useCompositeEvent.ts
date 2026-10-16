@@ -1,40 +1,51 @@
-import { type Ref, ref } from 'vue';
-import type { ListboxEventMap, ListboxHandle } from '@lumx/core/js/components/Composite/types';
+import { type Ref, shallowRef } from 'vue';
+import type { CompositeEventMap, CompositeEventSource } from '@lumx/core/js/components/Composite/types';
 import { useWatchDisposable } from '../../composables/useWatchDisposable';
 
-/** Minimal event source shape of the listbox handle. */
-export interface EventSource {
-    subscribe(event: string, callback: (value: unknown) => void): () => void;
-}
+/**
+ * Composite events coalesced into a single deferred update (microtask): mounting a large item list fires one
+ * `optionsChange` per item registration. Applying each notification synchronously makes a
+ * consumer that both reads the value and (re)mounts the items mutate its own render dependency, which trips the Vue
+ * recursive update guard. The other events are applied synchronously.
+ *
+ * (React does not need this: it batches synchronous store updates itself, and coalescing there
+ * would defer the update into a microtask that fires outside `act` in consumers' unit tests.)
+ */
+const COALESCED_EVENTS: ReadonlySet<PropertyKey> = new Set<keyof CompositeEventMap>(['optionsChange']);
 
 /**
- * Subscribe to an event of a listbox handle. Re-subscribes when the handle changes.
- * `optionsChange` bursts are coalesced into a single deferred update.
+ * Subscribe to an event of a handle (a composite handle). Re-subscribes when the handle changes, then starts from
+ * the new handle snapshot (or `initialValue` while there is no handle or until the event has fired at least once),
+ * so it never keeps the value of the previous handle. An `undefined` notification resets the value to
+ * `initialValue` the same way.
  */
-export function useHandleEvent<V>(handle: Readonly<Ref<EventSource | null>>, event: string, initialValue: V): Ref<V> {
-    const value = ref(initialValue) as Ref<V>;
+export function useCompositeEvent<M extends CompositeEventMap, K extends keyof M>(
+    handle: Readonly<Ref<CompositeEventSource<M> | null>>,
+    event: K,
+    initialValue: M[K],
+): Ref<M[K]> {
+    // Shallow: the values are replaced, never mutated (and a handle value must not become a reactive proxy).
+    const value = shallowRef(initialValue) as Ref<M[K]>;
+    const apply = (v: M[K] | undefined) => {
+        value.value = v === undefined ? initialValue : v;
+    };
 
     useWatchDisposable(handle, (h) => {
+        apply(h?.getSnapshot(event));
         if (!h) return undefined;
 
-        // Discrete events (open, loadingChange, …) apply synchronously.
-        if (event !== 'optionsChange') {
-            return h.subscribe(event, (v) => {
-                value.value = v as V;
-            });
-        }
+        if (!COALESCED_EVENTS.has(event)) return h.subscribe(event, apply);
 
-        // Coalesce a burst of optionsChange notifications into a single deferred update.
         let scheduled = false;
         let disposed = false;
-        let latest = value.value;
+        let latest: M[K] | undefined = value.value;
         const unsubscribe = h.subscribe(event, (v) => {
-            latest = v as V;
+            latest = v;
             if (!scheduled) {
                 scheduled = true;
                 queueMicrotask(() => {
                     scheduled = false;
-                    if (!disposed) value.value = latest;
+                    if (!disposed) apply(latest);
                 });
             }
         });
@@ -45,13 +56,4 @@ export function useHandleEvent<V>(handle: Readonly<Ref<EventSource | null>>, eve
     });
 
     return value;
-}
-
-/** Subscribe to a listbox handle event. */
-export function useListboxEvent<K extends keyof ListboxEventMap>(
-    handle: Readonly<Ref<ListboxHandle | null>>,
-    event: K,
-    initialValue: ListboxEventMap[K],
-): Ref<ListboxEventMap[K]> {
-    return useHandleEvent(handle as unknown as Readonly<Ref<EventSource | null>>, event, initialValue);
 }

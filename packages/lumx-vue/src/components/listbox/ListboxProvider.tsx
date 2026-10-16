@@ -1,9 +1,9 @@
 import { defineComponent, onBeforeUnmount, shallowRef } from 'vue';
-import { setupListbox } from '@lumx/core/js/components/Composite/setupComposite';
+import { setupListbox } from '@lumx/core/js/components/Listbox/setupListbox';
 
 import { useId } from '../../composables/useId';
 import { getName } from '../../utils/VueToJSX';
-import { provideListboxContext } from '../composite/CompositeContext';
+import { provideCompositeContext } from '../composite/CompositeContext';
 
 /**
  * Internal standalone listbox provider.
@@ -16,7 +16,7 @@ const ListboxProvider = defineComponent(
         const listboxId = useId();
         // The handle does not need the DOM element: the list mounts it.
         const list = shallowRef(setupListbox({ onSelect: (option) => emit('select', option) }));
-        provideListboxContext({ list, listboxId, type: 'listbox' });
+        provideCompositeContext({ handle: list, id: listboxId });
         // Tear down the handle (pending timers, subscribers) on unmount.
         onBeforeUnmount(() => list.value.destroy());
         return () => slots.default?.();

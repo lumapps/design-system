@@ -2,7 +2,7 @@ import type { CommonRef, HasClassName, JSXElement, LumxClassName } from '../../t
 import { classNames } from '../../utils';
 import { ListItem } from '../List/ListItem';
 import { ListItemAction } from '../List/ListItemAction';
-import { getTextProps } from '../Text';
+import { CompositeItemDescription } from '../Composite/CompositeItemDescription';
 
 /**
  * Injected framework-specific components for ListboxOption rendering.
@@ -150,18 +150,12 @@ export const ListboxOption = (props: ListboxOptionProps, { Tooltip }: ListboxOpt
             <>
                 {wrappedAction}
 
-                {description && (
-                    <p
-                        id={descriptionId}
-                        {...getTextProps({
-                            className: classNames.join(element('description'), legacy.element('description')),
-                            typography: 'caption',
-                            color: 'dark-L2',
-                        })}
-                    >
-                        {description}
-                    </p>
-                )}
+                {description &&
+                    CompositeItemDescription({
+                        id: descriptionId,
+                        className: classNames.join(element('description'), legacy.element('description')),
+                        children: description,
+                    })}
             </>
         ),
     } as any);

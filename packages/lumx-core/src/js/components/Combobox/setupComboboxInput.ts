@@ -85,7 +85,7 @@ export function setupComboboxInput(input: HTMLInputElement, options: SetupCombob
                 if (!(event instanceof InputEvent)) return;
                 if (isDisabled()) return;
 
-                combobox.list.focusNav?.clear();
+                combobox.list.clearActiveItem();
                 userHasTyped = true;
 
                 // Notify the framework wrapper of the new input value synchronously.
@@ -105,7 +105,7 @@ export function setupComboboxInput(input: HTMLInputElement, options: SetupCombob
             'focus',
             () => {
                 if (isDisabled()) return;
-                combobox.list.focusNav?.clear();
+                combobox.list.clearActiveItem();
                 if (openOnFocus) {
                     combobox.setIsOpen(true);
                 }
@@ -146,27 +146,27 @@ export function setupComboboxInput(input: HTMLInputElement, options: SetupCombob
         signal.addEventListener('abort', unsubscribeOpen);
 
         return (event: KeyboardEvent): boolean => {
-            const nav = combobox.list.focusNav;
+            const { list } = combobox;
 
             switch (event.key) {
                 case 'Home':
                     input.setSelectionRange(0, 0);
-                    nav?.clear();
+                    list.clearActiveItem();
                     return true;
 
                 case 'End': {
                     const len = input.value.length;
                     input.setSelectionRange(len, len);
-                    nav?.clear();
+                    list.clearActiveItem();
                     return true;
                 }
 
                 case 'ArrowLeft':
                 case 'ArrowRight':
                     // Grid pattern: navigate cells when an active cell exists.
-                    if (combobox.list.navigateHorizontal(event.key)) return true;
+                    if (list.handleKeydown(event)) return true;
                     // Otherwise: clear active item, allow caret movement.
-                    nav?.clear();
+                    list.clearActiveItem();
                     return false;
 
                 default:

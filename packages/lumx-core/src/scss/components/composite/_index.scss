@@ -1,0 +1,20 @@
+/* ==========================================================================
+   Composite
+   ========================================================================== */
+
+// Parts shared by the composite widgets (listbox, grid, tree).
+
+// ---- Status -----------------------
+
+.#{$lumx-base-prefix}-composite-status {
+    text-align: center;
+}
+
+// ---- Item -----------------------
+
+.#{$lumx-base-prefix}-composite-item {
+    // Selection state icon, centered in the `after` slot
+    &__selection-icon {
+        margin: auto;
+    }
+}

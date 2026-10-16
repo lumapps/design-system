@@ -1,4 +1,4 @@
-import type { ListboxHandle } from '../Composite/types';
+import type { CompositeHandle } from '../Composite/types';
 
 /**
  * Delay before inserting content into the aria-live region after the popover opens (ms).
@@ -22,10 +22,10 @@ export interface ListboxStateSetters {
 }
 
 /**
- * Subscribe to the listbox handle events needed by `ListboxState`.
+ * Subscribe to the listbox handle events needed by `CompositeStatus`.
  *
  * Manages three subscriptions:
- * - `loadingChange` → `setIsLoading` (+ synchronous initial read of `list.isLoading`)
+ * - `loadingChange` → `setIsLoading` (+ synchronous initial read of the `loadingChange` snapshot)
  * - `loadingAnnouncement` → `setShouldAnnounce`
  * - `open` → `setIsOpen` (deferred by {@link OPEN_ANNOUNCEMENT_DELAY}ms when shown, immediate when hidden)
  *   (a standalone listbox is always visible: `setIsOpen(true)` once, no subscription)
@@ -34,11 +34,11 @@ export interface ListboxStateSetters {
  * @param setters Framework-specific state setters.
  * @returns A cleanup function that unsubscribes all events and clears timers.
  */
-export function subscribeListboxState(list: ListboxHandle, setters: ListboxStateSetters): () => void {
+export function subscribeListboxState(list: CompositeHandle, setters: ListboxStateSetters): () => void {
     const { setIsLoading, setShouldAnnounce, setIsOpen } = setters;
 
     // Read current loading state synchronously
-    setIsLoading(list.isLoading);
+    setIsLoading(list.getSnapshot('loadingChange') ?? false);
 
     const unsubLoadingChange = list.subscribe('loadingChange', setIsLoading);
     const unsubLoadingAnnouncement = list.subscribe('loadingAnnouncement', setShouldAnnounce);

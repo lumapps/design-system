@@ -23,27 +23,28 @@ export function setupComboboxButton(button: HTMLButtonElement, callbacks: Combob
         button.addEventListener('click', () => combobox.setIsOpen(!combobox.isOpen), { signal });
 
         return (event: KeyboardEvent): boolean => {
-            const nav = combobox.list.focusNav;
+            const { list } = combobox;
+            const { activeItem } = list;
 
             switch (event.key) {
                 case 'Tab':
                     // Selects the focused option
-                    if (combobox.isOpen && nav?.selectors.activeItem) {
-                        combobox.list.select(nav.selectors.activeItem);
+                    if (combobox.isOpen && activeItem) {
+                        list.select(activeItem);
                     }
                     // Return false to continue normal 'Tab' behavior (focus next).
                     return false;
 
                 case ' ':
                     // Space acts like Enter in button mode: open, or "click" the active option (listbox).
-                    if (combobox.isOpen) combobox.list.handleKeydown(event);
+                    if (combobox.isOpen) list.handleKeydown(event);
                     else combobox.setIsOpen(true);
                     return true;
 
                 case 'ArrowUp':
                     // Alt+ArrowUp: select the focused option and close.
-                    if (event.altKey && combobox.isOpen && nav?.selectors.activeItem) {
-                        combobox.list.select(nav.selectors.activeItem);
+                    if (event.altKey && combobox.isOpen && activeItem) {
+                        list.select(activeItem);
                         combobox.setIsOpen(false);
                         return true;
                     }
@@ -54,13 +55,13 @@ export function setupComboboxButton(button: HTMLButtonElement, callbacks: Combob
                 case 'End':
                     // Open, then jump (the listbox defers the jump until the options commit when opening from closed).
                     combobox.setIsOpen(true);
-                    combobox.list.handleKeydown(event);
+                    list.handleKeydown(event);
                     return true;
 
                 case 'ArrowLeft':
                 case 'ArrowRight':
                     // Grid pattern: navigate to the previous/next cell (listbox).
-                    return combobox.isOpen && combobox.list.handleKeydown(event);
+                    return combobox.isOpen && list.handleKeydown(event);
 
                 case 'Escape':
                     // Close if open; never clear selection (button-mode has no text input).
@@ -76,7 +77,7 @@ export function setupComboboxButton(button: HTMLButtonElement, callbacks: Combob
                     // Printable characters: open, then typeahead (listbox).
                     if (!isPrintableKey(event)) return false;
                     combobox.setIsOpen(true);
-                    combobox.list.handleKeydown(event);
+                    list.handleKeydown(event);
                     return true;
             }
         };

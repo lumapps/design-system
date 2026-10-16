@@ -11,8 +11,9 @@ import type { JSXElement } from '@lumx/core/js/types';
 import { useClassName } from '../../composables/useClassName';
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { useWatchDisposable } from '../../composables/useWatchDisposable';
-import { useListboxEvent } from '../composite/useCompositeEvent';
-import { provideListboxContext, useListboxContext } from '../composite/CompositeContext';
+import { useCompositeEvent } from '../composite/useCompositeEvent';
+import { provideCompositeContext, useCompositeContext } from '../composite/CompositeContext';
+import { useListboxHandle } from './context/useListboxHandle';
 
 export type ListboxListProps = VueToJSXProps<UIProps, 'aria-label' | 'aria-busy' | 'aria-multiselectable' | 'id'>;
 
@@ -37,13 +38,15 @@ const ListboxList = defineComponent(
     (props: ListboxListProps, { slots }) => {
         const attrs = useAttrs();
         const className = useClassName(() => props.class);
-        const { list, listboxId } = useListboxContext();
+        const { id: listboxId } = useCompositeContext();
+        const list = useListboxHandle();
         const listRef = ref<HTMLElement | null>(null);
 
         const type = computed(() => props.type || 'listbox');
-        provideListboxContext({
-            list,
-            listboxId,
+        provideCompositeContext({
+            handle: list,
+            id: listboxId,
+            level: 0,
             // Getter: keeps the provided `type` reactive (read again on each consumer render).
             get type() {
                 return type.value;
@@ -61,9 +64,9 @@ const ListboxList = defineComponent(
         });
 
         // Tracking states (options are rendered only while visible: standalone always, combobox while open)
-        const isLoading = useListboxEvent(list, 'loadingChange', false);
-        const isOpen = useListboxEvent(list, 'open', false);
-        const options = useListboxEvent(list, 'optionsChange', undefined);
+        const isLoading = useCompositeEvent(list, 'loadingChange', false);
+        const isOpen = useCompositeEvent(list, 'open', false);
+        const options = useCompositeEvent(list, 'optionsChange', undefined);
 
         // Flush pending navigation (that could not run when hidden)
         watch(

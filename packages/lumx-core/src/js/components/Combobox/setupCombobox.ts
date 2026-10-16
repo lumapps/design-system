@@ -1,5 +1,4 @@
-import { isSelected } from '../Listbox/utils';
-import { setupListbox } from '../Composite/setupComposite';
+import { setupListbox } from '../Listbox/setupListbox';
 import { COMBOBOX_POPOVER_CLASSNAME } from './constants';
 import type { ComboboxCallbacks, ComboboxHandle, OnTriggerAttach } from './types';
 
@@ -70,7 +69,7 @@ export function setupCombobox(
             callbacks.onSelect?.(option);
             // Close on selection (when not multiselectable)
             if (element && !list.isMultiSelect) {
-                list.focusNav?.clear();
+                list.clearActiveItem();
                 // Defer the close to the next frame (to make sure all other click handler resolve).
                 requestAnimationFrame(() => {
                     handle.setIsOpen(false);
@@ -103,7 +102,7 @@ export function setupCombobox(
     /** Detach everything (abort all listeners, clear state). */
     function detach() {
         // Clear the active option while the old trigger is still the focus owner.
-        list.focusNav?.clear();
+        list.clearActiveItem();
         abortController?.abort();
         abortController = null;
     }
@@ -131,7 +130,6 @@ export function setupCombobox(
 
             let flag = false;
             const { altKey } = event;
-            const nav = list.focusNav;
 
             switch (event.key) {
                 case 'Enter':
@@ -152,7 +150,7 @@ export function setupCombobox(
                     if (!handle.isOpen) {
                         handle.setIsOpen(true);
                         // Focus first or selected item on open (deferred until the options commit).
-                        if (!altKey) nav?.goTo((s) => s.getMatching(isSelected) ?? s.getFirst());
+                        if (!altKey) list.activateDefaultItem('first');
                     } else if (!altKey) {
                         list.handleKeydown(event);
                     }
@@ -164,8 +162,8 @@ export function setupCombobox(
                     if (!handle.isOpen && !altKey) {
                         handle.setIsOpen(true);
                         // Focus last or selected item on open (deferred until the options commit).
-                        nav?.goTo((s) => s.getMatching(isSelected) ?? s.getLast());
-                    } else if (handle.isOpen && (nav?.selectors.activeItem || !altKey)) {
+                        list.activateDefaultItem('last');
+                    } else if (handle.isOpen && (list.activeItem || !altKey)) {
                         // Alt+ArrowUp only moves when there is an active option.
                         list.handleKeydown(event);
                     }
@@ -178,8 +176,8 @@ export function setupCombobox(
                     // When there is nothing to close or clear, let Escape propagate
                     // (ex: so a surrounding dialog can close).
                     if (alwaysOpen) {
-                        if (nav?.selectors.activeItem) {
-                            nav.clear();
+                        if (list.activeItem) {
+                            list.clearActiveItem();
                             flag = true;
                         }
                     } else if (handle.isOpen) {
@@ -260,11 +258,11 @@ export function setupCombobox(
         setIsOpen(isOpen: boolean) {
             // Always open: a close request only clears the active option.
             if (alwaysOpen && !isOpen) {
-                list.focusNav?.clear();
+                list.clearActiveItem();
                 return;
             }
             if (list.isOpen === isOpen) return;
-            if (!isOpen) list.focusNav?.clear();
+            if (!isOpen) list.clearActiveItem();
             // Update aria-expanded on trigger (false when no visible options or skeletons)
             trigger?.setAttribute('aria-expanded', String(isOpen && list.hasVisibleContent));
             // Last: the listbox dispatches `open` to the subscribers, which must see the trigger in its final state.

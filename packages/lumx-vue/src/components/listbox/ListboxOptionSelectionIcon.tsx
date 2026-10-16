@@ -1,10 +1,13 @@
 import { defineComponent } from 'vue';
 
-import { ListboxOptionSelectionIcon as UI } from '@lumx/core/js/components/Composite/CompositeSelectionIcon';
+import {
+    CompositeSelectionIcon as UI,
+    LEGACY_OPTION_CLASSNAME,
+} from '@lumx/core/js/components/Composite/CompositeSelectionIcon';
 
 import { getName } from '../../utils/VueToJSX';
-import { useListboxContext } from '../composite/CompositeContext';
-import { useListboxOptionContext } from '../composite/CompositeItemContext';
+import { useCompositeContext } from '../composite/CompositeContext';
+import { useCompositeItemContext } from '../composite/CompositeItemContext';
 
 /**
  * Combobox.SelectionIcon component (`Listbox.SelectionIcon`, re-exported by the combobox).
@@ -20,12 +23,13 @@ import { useListboxOptionContext } from '../composite/CompositeItemContext';
  */
 const ListboxOptionSelectionIcon = defineComponent(
     () => {
-        const optionContext = useListboxOptionContext();
-        const listContext = useListboxContext();
+        const optionContext = useCompositeItemContext();
+        const listContext = useCompositeContext();
         return () =>
             UI({
                 selectionType: listContext.selectionType,
                 isSelected: optionContext.isSelected,
+                className: LEGACY_OPTION_CLASSNAME,
             });
     },
     {

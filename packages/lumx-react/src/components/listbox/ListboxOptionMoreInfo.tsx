@@ -10,9 +10,10 @@ import {
 import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 import { IconButton, IconButtonProps } from '@lumx/react/components/button';
 import { Popover } from '@lumx/react/components/popover';
-import { useListboxOptionContext } from '../composite/CompositeItemContext';
-import { useListboxContext } from '../composite/CompositeContext';
-import { useListboxEvent } from '../composite/useCompositeEvent';
+import { optionActiveEvent } from '@lumx/core/js/components/Composite/constants';
+import { useCompositeItemContext } from '../composite/CompositeItemContext';
+import { useCompositeContext } from '../composite/CompositeContext';
+import { useCompositeEvent } from '../composite/useCompositeEvent';
 
 /**
  * Props for Combobox.OptionMoreInfo component.
@@ -44,13 +45,13 @@ export const ListboxOptionMoreInfo = (props: ListboxOptionMoreInfoProps) => {
     const ref = useRef<HTMLButtonElement>(null);
     const [isHovered, setIsHovered] = useState(false);
 
-    // Get the parent option ID from the option context (provided by Combobox.Option).
-    const { optionId } = useListboxOptionContext();
+    // Get the parent option ID from the item context (provided by Combobox.Option).
+    const { itemId: optionId } = useCompositeItemContext();
 
     // Subscribe to active descendant changes to detect keyboard highlight.
-    const { list } = useListboxContext();
-    const activeDescendantId = useListboxEvent(list, 'activeDescendantChange', null);
-    const isKeyboardHighlighted = activeDescendantId === optionId;
+    const { handle } = useCompositeContext();
+    // Only this option updates when the active item moves (the per-item active event).
+    const isKeyboardHighlighted = useCompositeEvent(handle, optionActiveEvent(optionId), false);
 
     // Open on mouse hover or keyboard highlight.
     const isOpen = isHovered || isKeyboardHighlighted;

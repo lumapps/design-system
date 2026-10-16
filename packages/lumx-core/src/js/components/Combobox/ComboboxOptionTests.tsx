@@ -2,7 +2,8 @@ import userEvent from '@testing-library/user-event';
 import { screen, waitFor } from '@testing-library/dom';
 import { mdiCheckboxBlankOutline, mdiCheckboxMarked, mdiCheckCircle, mdiRadioboxBlank } from '@lumx/icons';
 import { CLASSNAME as COMBOBOX_OPTION_CLASSNAME } from '../Listbox/ListboxOption';
-import { getByClassName, queryByClassName } from '../../../testing/queries';
+import { getByClassName, getByTagName, queryByClassName } from '../../../testing/queries';
+import { CLASSNAME as SELECTION_ICON_CLASSNAME } from '../Composite/CompositeSelectionIcon';
 import { ComboboxNamespace } from './Tests';
 
 type RenderResult = { unmount: () => void; container: HTMLElement };
@@ -175,7 +176,15 @@ export default function listboxOptionTests({ Combobox, render }: ListboxOptionTe
 
         describe('SelectionIcon', () => {
             const getIconPath = () =>
-                document.querySelector('.lumx-listbox-option__selection-icon path')?.getAttribute('d');
+                getByTagName(getByClassName(document.body, SELECTION_ICON_CLASSNAME), 'path').getAttribute('d');
+
+            it('should keep the class names of the previous versions on the icon', async () => {
+                await setup({ isSelected: true, after: <Combobox.SelectionIcon /> });
+                expect(getByClassName(document.body, SELECTION_ICON_CLASSNAME)).toHaveClass(
+                    'lumx-listbox-option__selection-icon',
+                    'lumx-combobox-option__selection-icon',
+                );
+            });
 
             it('should render a check circle icon when selected in a single selection list', async () => {
                 await setup({ isSelected: true, after: <Combobox.SelectionIcon /> });

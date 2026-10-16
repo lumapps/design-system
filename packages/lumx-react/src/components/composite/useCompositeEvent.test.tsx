@@ -1,14 +1,12 @@
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { render, screen } from '@testing-library/react';
 import { vi } from 'vitest';
 
-import { setupListbox } from '@lumx/core/js/components/Composite/setupComposite';
-import type { ListboxHandle } from '@lumx/core/js/components/Composite/types';
+import { setupListbox } from '@lumx/core/js/components/Listbox/setupListbox';
+import type { ListboxHandle } from '@lumx/core/js/components/Listbox/types';
 
-import { ListboxContext, useListboxContext } from './CompositeContext';
-import { Combobox } from '../combobox';
-import { useListboxEvent } from './useCompositeEvent';
+import { CompositeContext, useCompositeContext } from './CompositeContext';
+import { useCompositeEvent } from './useCompositeEvent';
 
 /**
  * Reads the live option count through the hook and renders the options as its children —
@@ -16,8 +14,8 @@ import { useListboxEvent } from './useCompositeEvent';
  * useSyncExternalStore check after the children register, bottom-up).
  */
 function OptionList({ children }: { children: React.ReactNode }) {
-    const { list } = useListboxContext();
-    const state = useListboxEvent(list, 'optionsChange', undefined);
+    const { handle } = useCompositeContext();
+    const state = useCompositeEvent(handle, 'optionsChange', undefined);
     return (
         <ul role="listbox" data-testid="list" data-count={state?.optionsLength ?? 0}>
             {children}
@@ -41,19 +39,19 @@ function Option({ list, label }: { list: ListboxHandle; label: string }) {
 }
 
 function Harness({ list, count }: { list: ListboxHandle; count: number }) {
-    const ctx = React.useMemo(() => ({ list, listboxId: 'lb', type: 'listbox' as const }), [list]);
+    const ctx = React.useMemo(() => ({ handle: list, id: 'lb', type: 'listbox' as const }), [list]);
     return (
-        <ListboxContext.Provider value={ctx}>
+        <CompositeContext.Provider value={ctx}>
             <OptionList>
                 {Array.from({ length: count }, (_, i) => (
                     <Option key={i} list={list} label={`opt-${i}`} />
                 ))}
             </OptionList>
-        </ListboxContext.Provider>
+        </CompositeContext.Provider>
     );
 }
 
-describe('useListboxEvent', () => {
+describe('useCompositeEvent', () => {
     it('reads the optionsChange snapshot during commit without an un-acted update', async () => {
         // The handle dispatches `optionsChange` synchronously as options register. React, via
         // useSyncExternalStore reading `getSnapshot`, must reflect the final count during its own
@@ -80,43 +78,5 @@ describe('useListboxEvent', () => {
         expect(screen.getByTestId('list').getAttribute('data-count')).toBe('200');
         spy.mockRestore();
         expect(actWarnings).toEqual([]);
-    });
-});
-
-/** Consumer of the public hook: reads a combobox event and a listbox event. */
-function ComboboxEvents() {
-    const isOpen = Combobox.useComboboxEvent('open', false);
-    const options = Combobox.useComboboxEvent('optionsChange', undefined);
-    return (
-        <output data-testid="events" data-open={isOpen} data-count={options?.optionsLength ?? 0}>
-            events
-        </output>
-    );
-}
-
-describe('useComboboxEvent', () => {
-    it('should read the open state and the listbox events of the combobox', async () => {
-        render(
-            <Combobox.Provider>
-                <Combobox.Button label="Fruits" />
-                <ComboboxEvents />
-                <Combobox.Popover>
-                    <Combobox.List aria-label="Fruits">
-                        {['Apple', 'Banana', 'Cherry'].map((fruit) => (
-                            <Combobox.Option key={fruit} value={fruit}>
-                                {fruit}
-                            </Combobox.Option>
-                        ))}
-                    </Combobox.List>
-                </Combobox.Popover>
-            </Combobox.Provider>,
-        );
-        const events = screen.getByTestId('events');
-        expect(events).toHaveAttribute('data-open', 'false');
-        expect(events).toHaveAttribute('data-count', '0');
-
-        await userEvent.click(screen.getByRole('combobox'));
-        await waitFor(() => expect(events).toHaveAttribute('data-open', 'true'));
-        await waitFor(() => expect(events).toHaveAttribute('data-count', '3'));
     });
 });

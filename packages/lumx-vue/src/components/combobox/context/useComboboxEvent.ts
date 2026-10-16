@@ -1,29 +1,21 @@
 import { computed, type Ref } from 'vue';
-import type { ListboxEventMap } from '@lumx/core/js/components/Composite/types';
+import type { CompositeEventMap } from '@lumx/core/js/components/Composite/types';
 import { useComboboxContext } from './ComboboxContext';
-import { useListboxEvent } from '../../composite/useCompositeEvent';
+import { useCompositeEvent } from '../../composite/useCompositeEvent';
 
 /**
  * Composable to subscribe to a combobox event (`open`, `optionsChange`, `loadingChange`,
  * `activeDescendantChange`, …). Must be used within a `Combobox.Provider`.
  *
- * The events are dispatched by the listbox handle of the combobox (see {@link useListboxEvent}).
- *
- * `optionsChange` updates are coalesced into a microtask. Mounting a large option list fires one
- * `optionsChange` per option registration; applying each synchronously makes a consumer that both
- * reads the option count and (re)mounts options — e.g. `Combobox.Input` — mutate its own render
- * dependency, tripping Vue's recursive-update guard. Coalescing applies only the final value, once
- * per tick. Other events are applied synchronously.
- *
- * (React does not need this: it batches synchronous store updates itself, and coalescing there
- * would defer the update into a microtask that fires outside `act` in consumers' unit tests.)
+ * The events are dispatched by the listbox handle of the combobox (see {@link useCompositeEvent}).
+ * `optionsChange` updates are coalesced (see `useCompositeEvent`).
  */
-export function useComboboxEvent<K extends keyof ListboxEventMap>(
+export function useComboboxEvent<K extends keyof CompositeEventMap>(
     event: K,
-    initialValue: ListboxEventMap[K],
-): Ref<ListboxEventMap[K]> {
+    initialValue: CompositeEventMap[K],
+): Ref<CompositeEventMap[K]> {
     const { handle } = useComboboxContext();
-    return useListboxEvent(
+    return useCompositeEvent(
         computed(() => handle.value?.list ?? null),
         event,
         initialValue,
