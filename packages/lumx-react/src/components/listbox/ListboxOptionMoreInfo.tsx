@@ -11,8 +11,8 @@ import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 import { IconButton, IconButtonProps } from '@lumx/react/components/button';
 import { Popover } from '@lumx/react/components/popover';
 import { useListboxOptionContext } from './context/ListboxOptionContext';
-import { useListboxContext } from './context/ListboxContext';
-import { useListboxEvent } from './context/useListboxEvent';
+import { useCompositeContext } from '../composite/CompositeContext';
+import { useCompositeEvent } from '../composite/useCompositeEvent';
 
 /**
  * Props for Combobox.OptionMoreInfo component.
@@ -48,8 +48,8 @@ export const ListboxOptionMoreInfo = (props: ListboxOptionMoreInfoProps) => {
     const { optionId } = useListboxOptionContext();
 
     // Subscribe to active descendant changes to detect keyboard highlight.
-    const { list } = useListboxContext();
-    const activeDescendantId = useListboxEvent(list, 'activeDescendantChange', null);
+    const { handle } = useCompositeContext();
+    const activeDescendantId = useCompositeEvent(handle, 'activeDescendantChange', null);
     const isKeyboardHighlighted = activeDescendantId === optionId;
 
     // Open on mouse hover or keyboard highlight.

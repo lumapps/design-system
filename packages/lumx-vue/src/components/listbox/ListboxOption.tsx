@@ -15,10 +15,11 @@ import { useWatchDisposable } from '../../composables/useWatchDisposable';
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { Tooltip } from '../tooltip';
 import type { TooltipProps } from '../tooltip/Tooltip';
-import { useListboxContext } from './context/ListboxContext';
+import { useCompositeContext } from '../composite/CompositeContext';
+import { useCompositeEvent } from '../composite/useCompositeEvent';
 import { provideListboxOptionContext } from './context/ListboxOptionContext';
-import { useListboxEvent } from './context/useListboxEvent';
-import { optionActiveEvent } from '@lumx/core/js/components/Listbox/constants';
+import { useListboxHandle } from './context/useListboxHandle';
+import { optionActiveEvent } from '@lumx/core/js/components/Composite/constants';
 
 export type ListboxOptionProps = VueToJSXProps<
     UIProps,
@@ -44,7 +45,8 @@ const ListboxOption = defineComponent(
     (props: ListboxOptionProps, { slots, emit }) => {
         const attrs = useAttrs();
         const className = useClassName(() => props.class);
-        const { type, list } = useListboxContext();
+        const { type } = useCompositeContext();
+        const list = useListboxHandle();
         const isGrid = type === 'grid';
         const optionId = useId();
         const descriptionId = useId();
@@ -52,7 +54,7 @@ const ListboxOption = defineComponent(
         const isFiltered = ref(false);
 
         // Force the tooltip open while the option is the active descendant (keyboard highlight).
-        const isActive = useListboxEvent(list, optionActiveEvent(optionId), false);
+        const isActive = useCompositeEvent(list, optionActiveEvent(optionId), false);
 
         // Provide option context to children (e.g. OptionMoreInfo)
         provideListboxOptionContext({

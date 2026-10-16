@@ -1,6 +1,7 @@
 import { createContext, Dispatch, RefObject, SetStateAction, useContext } from 'react';
 
 import type { ComboboxHandle } from '@lumx/core/js/components/Combobox/types';
+import type { CompositeHandle } from '@lumx/core/js/components/Composite/types';
 
 /** Context value shared between Combobox sub-components. */
 export interface ComboboxContextValue {
@@ -8,6 +9,8 @@ export interface ComboboxContextValue {
     handle: ComboboxHandle | null;
     /** Setter for the handle (called by trigger on mount/unmount). */
     setHandle: Dispatch<SetStateAction<ComboboxHandle | null>>;
+    /** The list registered on the combobox handle (null until the list component registers it). */
+    list: CompositeHandle | null;
     /** The ID of the listbox element. */
     listboxId: string;
     /** Reference to the anchor element for popover positioning. */
@@ -27,4 +30,9 @@ export function useComboboxContext() {
         throw new Error('Combobox sub-components must be used within a Combobox');
     }
     return context;
+}
+
+/** Access the Combobox context, or `undefined` outside of a Combobox (does not throw). */
+export function useOptionalComboboxContext(): ComboboxContextValue | undefined {
+    return useContext(ComboboxContext);
 }

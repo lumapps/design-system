@@ -1,4 +1,4 @@
-import { computed, defineComponent, ref, useAttrs, watch } from 'vue';
+import { computed, defineComponent, ref, shallowRef, useAttrs, watch } from 'vue';
 
 import {
     ListboxList as UI,
@@ -7,12 +7,16 @@ import {
     CLASSNAME,
 } from '@lumx/core/js/components/Listbox/ListboxList';
 import type { JSXElement } from '@lumx/core/js/types';
+import { setupListbox } from '@lumx/core/js/components/Listbox/setupListbox';
+import type { ListboxHandle } from '@lumx/core/js/components/Listbox/types';
 
 import { useClassName } from '../../composables/useClassName';
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { useWatchDisposable } from '../../composables/useWatchDisposable';
-import { useListboxEvent } from './context/useListboxEvent';
-import { provideListboxContext, useListboxContext } from './context/ListboxContext';
+import { provideCompositeContext, useCompositeContext } from '../composite/CompositeContext';
+import { useCompositeEvent } from '../composite/useCompositeEvent';
+import { useOptionalComboboxContext } from '../combobox/context/ComboboxContext';
+import { useListboxHandle } from './context/useListboxHandle';
 
 export type ListboxListProps = VueToJSXProps<UIProps, 'aria-label' | 'aria-busy' | 'aria-multiselectable' | 'id'>;
 
@@ -24,11 +28,12 @@ export type ListboxListProps = VueToJSXProps<UIProps, 'aria-label' | 'aria-busy'
  * @see https://www.w3.org/WAI/ARIA/apg/patterns/listbox/
  * @see https://www.w3.org/WAI/ARIA/apg/patterns/grid/
  *
- * Mounts the listbox handle of the enclosing provider on its element:
- * - Inside a combobox (`Combobox.Provider`): renders its options only while the combobox is open.
- *   The trigger owns focus.
+ * Mounts a listbox handle on its element:
+ * - Inside a combobox (`Combobox.Provider`): creates the listbox handle with the combobox list options and
+ *   registers it on the combobox. Renders its options only while the combobox is open. The trigger owns focus.
  * - Inside a `ListboxProvider`: a standalone list that owns focus (`tabindex="0"` +
- *   `aria-activedescendant`) and handles its own keyboard navigation.
+ *   `aria-activedescendant`) and handles its own keyboard navigation. A `ListboxProvider` nested
+ *   in a combobox wins (the list stays standalone and does not register on the combobox).
  *
  * @param props Component props.
  * @return Vue element.
@@ -37,13 +42,37 @@ const ListboxList = defineComponent(
     (props: ListboxListProps, { slots }) => {
         const attrs = useAttrs();
         const className = useClassName(() => props.class);
-        const { list, listboxId } = useListboxContext();
+        const { id: listboxId } = useCompositeContext();
+        const providedList = useListboxHandle();
+        const comboboxContext = useOptionalComboboxContext();
         const listRef = ref<HTMLElement | null>(null);
 
+        // A nearer standalone listbox (`ListboxProvider` inside the combobox) wins over the combobox.
+        // Inside a combobox, the provided handle is the registered list, which is linked (not standalone).
+        const isStandalone = computed(() => !!providedList.value?.isStandalone);
+
+        // Inside a combobox: create the listbox handle (linked to the trigger) and register it on the combobox.
+        const comboboxList = shallowRef<ListboxHandle | null>(null);
+        if (comboboxContext) {
+            useWatchDisposable([comboboxContext.handle, isStandalone], ([combobox, standalone]) => {
+                if (!combobox || standalone) return undefined;
+                const newList = setupListbox(combobox.listOptions);
+                const unregister = combobox.registerList(newList);
+                comboboxList.value = newList;
+                return () => {
+                    unregister();
+                    newList.destroy();
+                    if (comboboxList.value === newList) comboboxList.value = null;
+                };
+            });
+        }
+        const list = computed(() => (isStandalone.value || !comboboxContext ? providedList.value : comboboxList.value));
+
         const type = computed(() => props.type || 'listbox');
-        provideListboxContext({
-            list,
-            listboxId,
+        provideCompositeContext({
+            handle: list,
+            id: listboxId,
+            level: 0,
             // Getter: keeps the provided `type` reactive (read again on each consumer render).
             get type() {
                 return type.value;
@@ -61,9 +90,9 @@ const ListboxList = defineComponent(
         });
 
         // Tracking states (options are rendered only while visible: standalone always, combobox while open)
-        const isLoading = useListboxEvent(list, 'loadingChange', false);
-        const isOpen = useListboxEvent(list, 'open', false);
-        const options = useListboxEvent(list, 'optionsChange', undefined);
+        const isLoading = useCompositeEvent(list, 'loadingChange', false);
+        const isOpen = useCompositeEvent(list, 'open', false);
+        const options = useCompositeEvent(list, 'optionsChange', undefined);
 
         // Flush pending navigation (that could not run when hidden)
         watch(

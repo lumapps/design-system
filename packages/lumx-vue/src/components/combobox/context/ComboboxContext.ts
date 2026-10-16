@@ -1,6 +1,7 @@
 import { type InjectionKey, type Ref, type ShallowRef, inject, provide } from 'vue';
 
 import type { ComboboxHandle } from '@lumx/core/js/components/Combobox/types';
+import type { CompositeHandle } from '@lumx/core/js/components/Composite/types';
 
 /** Context value shared between Combobox sub-components. */
 export interface ComboboxContextValue {
@@ -8,6 +9,8 @@ export interface ComboboxContextValue {
     handle: ShallowRef<ComboboxHandle | null>;
     /** Setter for the handle (called by trigger on mount/unmount). */
     setHandle: (handle: ComboboxHandle | null) => void;
+    /** The list registered on the combobox handle (null until the list component registers it). */
+    list: Readonly<Ref<CompositeHandle | null>>;
     /** The ID of the listbox element. */
     listboxId: string;
     /** Reference to the anchor element for popover positioning. */
@@ -34,4 +37,9 @@ export function useComboboxContext(): ComboboxContextValue {
         throw new Error('Combobox sub-components must be used within a Combobox');
     }
     return context;
+}
+
+/** Access the Combobox context, or `undefined` outside of a Combobox (does not throw). */
+export function useOptionalComboboxContext(): ComboboxContextValue | undefined {
+    return inject(COMBOBOX_CONTEXT_KEY, undefined);
 }
