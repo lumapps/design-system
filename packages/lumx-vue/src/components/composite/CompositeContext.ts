@@ -6,15 +6,18 @@ import type { CompositeHandle, CompositeType } from '@lumx/core/js/components/Co
  * its items, sections, skeletons and state.
  *
  * Provided by `ListboxProvider` (standalone listbox) and by `Combobox.Provider` (the list registered on
- * the combobox), then re-provided by the list with its `type`.
+ * the combobox), then re-provided by the list with its `type` (and by a tree item with the next `level`).
  */
 export interface CompositeContextValue {
     /** The composite handle (null inside a combobox until a list registers). */
     handle: Readonly<Ref<CompositeHandle | null>>;
     /** The ID of the composite element. */
     id: string;
-    /** The pattern of the list. "grid" enables 2D keyboard navigation and action buttons on options. */
-    type: CompositeType;
+    /**
+     * The pattern of the list. "grid" enables 2D keyboard navigation and action buttons on options.
+     * Provided by the list element only: undefined above it (`ListboxProvider`, `Combobox.Provider`).
+     */
+    type?: CompositeType;
     /** The selection type of the list (from `aria-multiselectable`). Provided by the list. */
     selectionType?: 'single' | 'multiple';
     /** The nesting level of the items (0 or undefined: root items). A skeleton is nested when it is above 0. */
@@ -28,12 +31,17 @@ export function provideCompositeContext(value: CompositeContextValue) {
     provide(COMPOSITE_CONTEXT_KEY, value);
 }
 
+/** Access the composite context, or `undefined` outside of a composite widget (does not throw). */
+export function useOptionalCompositeContext(): CompositeContextValue | undefined {
+    return inject(COMPOSITE_CONTEXT_KEY, undefined);
+}
+
 /**
  * Access the composite context.
  * @throws Error outside a `ListboxProvider` or a `Combobox.Provider`.
  */
 export function useCompositeContext(): CompositeContextValue {
-    const context = inject(COMPOSITE_CONTEXT_KEY, null);
+    const context = useOptionalCompositeContext();
     if (!context) {
         throw new Error('Listbox sub-components must be used within a Combobox or a standalone listbox');
     }

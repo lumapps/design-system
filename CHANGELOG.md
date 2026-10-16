@@ -13,8 +13,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   `SelectTextField`: add `aria-label` (deprecates `ariaLabel`) and `aria-labelledby` props; with an empty `label`, the listbox is labelled by `aria-labelledby`.
     -   `Combobox`: the listbox is always open when it is not in a `Combobox.Popover` (inline listbox); new `alwaysOpen` prop on `Combobox.Provider` to override it.
     -   `SelectTextField`: `popoverProps={false}` renders the list inline below the text field (no popover), to compose the field in other patterns.
-
--   `@lumx/react`:
     -   `TreeList` and `TreeListItem`: a tree (WAI-ARIA tree view pattern) usable standalone or inside a `Combobox` (`Combobox.Provider`), with selectable and non-selectable tree items, lazy parent items, and the auto and manual filters in a combobox.
 
 ### Changed
