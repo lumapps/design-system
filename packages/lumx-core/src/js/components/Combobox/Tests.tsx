@@ -11,6 +11,7 @@ import { CLASSNAME as COMBOBOX_SECTION_CLASSNAME } from '../Listbox/ListboxSecti
 import { CLASSNAME as COMBOBOX_STATE_CLASSNAME } from '../Listbox/ListboxState';
 import { VISUALLY_HIDDEN } from '../../constants';
 import { setupCombobox } from './setupCombobox';
+import { setupListbox } from '../Listbox/setupListbox';
 import type { ComboboxInputOptions } from './types';
 
 // ─── Fixtures ────────────────────────────────────────────────────
@@ -3150,16 +3151,18 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
             try {
                 const callbacks = { onSelect: vi.fn() };
                 const handle = setupCombobox(callbacks);
+                const list = setupListbox(handle.listOptions);
+                handle.registerList(list);
 
                 const loadingChanges: boolean[] = [];
                 const announcements: boolean[] = [];
-                handle.list.subscribe('loadingChange', (v) => loadingChanges.push(v));
-                handle.list.subscribe('loadingAnnouncement', (v) => announcements.push(v));
+                list.subscribe('loadingChange', (v) => loadingChanges.push(v));
+                list.subscribe('loadingAnnouncement', (v) => announcements.push(v));
 
                 // Register 3 skeletons while closed
-                const cleanup1 = handle.list.registerSkeleton();
-                const cleanup2 = handle.list.registerSkeleton();
-                const cleanup3 = handle.list.registerSkeleton();
+                const cleanup1 = list.registerSkeleton();
+                const cleanup2 = list.registerSkeleton();
+                const cleanup3 = list.registerSkeleton();
 
                 // loadingChange fires immediately
                 expect(loadingChanges).toEqual([true]);
@@ -3189,6 +3192,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
                 expect(announcements).toEqual([true, false]);
 
                 handle.destroy();
+                list.destroy();
             } finally {
                 vi.useRealTimers();
             }
@@ -3199,12 +3203,14 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
             try {
                 const callbacks = { onSelect: vi.fn() };
                 const handle = setupCombobox(callbacks);
+                const list = setupListbox(handle.listOptions);
+                handle.registerList(list);
 
                 const announcements: boolean[] = [];
-                handle.list.subscribe('loadingAnnouncement', (v) => announcements.push(v));
+                list.subscribe('loadingAnnouncement', (v) => announcements.push(v));
 
                 // Register skeletons and open
-                const cleanup1 = handle.list.registerSkeleton();
+                const cleanup1 = list.registerSkeleton();
                 handle.setIsOpen(true);
 
                 // Wait for announcement
@@ -3227,6 +3233,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
                 expect(announcements).toEqual([true, false, true, false]);
 
                 handle.destroy();
+                list.destroy();
             } finally {
                 vi.useRealTimers();
             }
@@ -3237,12 +3244,14 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
             try {
                 const callbacks = { onSelect: vi.fn() };
                 const handle = setupCombobox(callbacks);
+                const list = setupListbox(handle.listOptions);
+                handle.registerList(list);
 
                 const announcements: boolean[] = [];
-                handle.list.subscribe('loadingAnnouncement', (v) => announcements.push(v));
+                list.subscribe('loadingAnnouncement', (v) => announcements.push(v));
 
                 // Register and unregister skeletons while closed
-                const cleanup = handle.list.registerSkeleton();
+                const cleanup = list.registerSkeleton();
                 vi.advanceTimersByTime(500);
                 cleanup();
 
@@ -3250,6 +3259,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
                 expect(announcements).toEqual([]);
 
                 handle.destroy();
+                list.destroy();
             } finally {
                 vi.useRealTimers();
             }

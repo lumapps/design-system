@@ -1,4 +1,4 @@
-import type { ListboxHandle } from '../Listbox/types';
+import type { CompositeHandle } from '../Composite/types';
 
 /**
  * Delay before inserting content into the aria-live region after the popover opens (ms).
@@ -22,19 +22,19 @@ export interface ListboxStateSetters {
 }
 
 /**
- * Subscribe to the listbox handle events needed by `ListboxState`.
+ * Subscribe to the composite handle events needed by `ListboxState` (a listbox, a grid, …).
  *
  * Manages three subscriptions:
  * - `loadingChange` → `setIsLoading` (+ synchronous initial read of `list.isLoading`)
  * - `loadingAnnouncement` → `setShouldAnnounce`
  * - `open` → `setIsOpen` (deferred by {@link OPEN_ANNOUNCEMENT_DELAY}ms when shown, immediate when hidden)
- *   (a standalone listbox is always visible: `setIsOpen(true)` once, no subscription)
+ *   (a standalone composite is always visible: `setIsOpen(true)` once, no subscription)
  *
- * @param list    The listbox handle to subscribe to (`ComboboxHandle.list` inside a combobox).
+ * @param list    The composite handle to subscribe to (the registered `ComboboxHandle.list` inside a combobox).
  * @param setters Framework-specific state setters.
  * @returns A cleanup function that unsubscribes all events and clears timers.
  */
-export function subscribeListboxState(list: ListboxHandle, setters: ListboxStateSetters): () => void {
+export function subscribeListboxState(list: CompositeHandle, setters: ListboxStateSetters): () => void {
     const { setIsLoading, setShouldAnnounce, setIsOpen } = setters;
 
     // Read current loading state synchronously
@@ -43,7 +43,7 @@ export function subscribeListboxState(list: ListboxHandle, setters: ListboxState
     const unsubLoadingChange = list.subscribe('loadingChange', setIsLoading);
     const unsubLoadingAnnouncement = list.subscribe('loadingAnnouncement', setShouldAnnounce);
 
-    // Standalone listbox: the options are always visible.
+    // Standalone composite: the items are always visible.
     if (list.isStandalone) {
         setIsOpen(true);
         return () => {

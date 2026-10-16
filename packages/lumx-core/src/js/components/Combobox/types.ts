@@ -1,4 +1,4 @@
-import type { ListboxHandle } from '../Listbox/types';
+import type { CompositeEventSource, CompositeHandle, CompositeOptions } from '../Composite/types';
 
 export type { SectionState, SectionRegistration, OptionRegistration, OptionActiveEvent } from '../Listbox/types';
 
@@ -46,38 +46,61 @@ export interface ComboboxInputOptions {
     selectionMode?: 'fill' | 'keep' | 'clear';
 }
 
+/** Map of combobox event names to their payload types. */
+export interface ComboboxEventMap {
+    /**
+     * Fired when the popup opens or closes (see {@link ComboboxHandle.setIsOpen}).
+     * Owned by the combobox (it exists before any list registers) and forwarded to the registered list.
+     * Replayed on subscribe while open.
+     */
+    open: boolean;
+    /** Fired when a list registers or unregisters (see {@link ComboboxHandle.registerList}). Payload: the list. */
+    list: CompositeHandle | null;
+}
+
 /**
  * Handle returned by `setupCombobox`. Used by framework wrappers and mode controllers.
  *
- * The combobox owns the trigger. Everything else (the open state, the option registry, the filter,
- * the focus navigation, the selection, the loading state and all the events) is on the
- * {@link ListboxHandle} exposed as `list`: the listbox element is mounted with `list.mount(element)`.
- * The combobox open state is the listbox `open` event.
+ * The combobox owns the trigger and the popup open state. The list is late-bound: the list component
+ * creates its own composite handle (e.g. `setupListbox`) with {@link ComboboxHandle.listOptions}, then
+ * registers it with {@link ComboboxHandle.registerList}. The list owns the item registry, the filter,
+ * the focus navigation, the selection, the loading state and the list events.
  */
-export interface ComboboxHandle {
+export interface ComboboxHandle extends CompositeEventSource<ComboboxEventMap> {
     /** Register the trigger element. Returns a cleanup function. */
     registerTrigger(trigger: HTMLInputElement | HTMLButtonElement): () => void;
-    /** Tear down all listeners and state. */
+    /**
+     * Register the list handle (created with {@link ComboboxHandle.listOptions}). The current open state is
+     * forwarded to it. Registering another list replaces the previous one. Returns an unregister function.
+     */
+    registerList(list: CompositeHandle): () => void;
+    /** Tear down all listeners and state (the registered list is unregistered, not destroyed). */
     destroy(): void;
 
     /** The current trigger element (may be null before registration). */
     readonly trigger: HTMLInputElement | HTMLButtonElement | null;
-    /** The listbox handle (option registry, filter, focus navigation, selection, listbox events). */
-    readonly list: ListboxHandle;
-    /** Whether the popup is open (same as `list.isOpen`). */
+    /** The registered list handle (null until a list registers). */
+    readonly list: CompositeHandle | null;
+    /**
+     * Options to create the list handle with: the trigger as focus owner (`aria-activedescendant`,
+     * `aria-haspopup` and inline detection on mount), the selection (closes the popup on a single
+     * selection) and the navigation wrap of the input trigger.
+     */
+    readonly listOptions: CompositeOptions;
+    /** Whether the popup is open. */
     readonly isOpen: boolean;
-    /** Whether the listbox is always open (see {@link ComboboxHandle.setAlwaysOpen}). */
+    /** Whether the list is always open (see {@link ComboboxHandle.setAlwaysOpen}). */
     readonly alwaysOpen: boolean;
 
     /**
-     * Set the open state and update ARIA. Subscribe to `list` `open` to observe it.
+     * Set the open state and update ARIA. Subscribe to `open` to observe it.
      * When always open, a close request only clears the active option.
      */
     setIsOpen(isOpen: boolean): void;
     /**
-     * Force the listbox always open (inline listbox, not in a popup) or not. With `false`, the listbox uses the
-     * open/close behavior (the listbox closes). When always open, focus out, selection and Escape do not
-     * close the listbox. With `undefined` (default), the listbox is always open when it is mounted outside of a
+     * Force the list always open (inline list, not in a popup) or not. With `false`, the list uses the
+     * open/close behavior (the list closes). When always open, focus out, selection and Escape do not
+     * close the list. With `undefined` (default), the list is always open when it is mounted outside of a
      * `Combobox.Popover`.
      */
     setAlwaysOpen(alwaysOpen: boolean | undefined): void;

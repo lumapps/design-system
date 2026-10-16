@@ -1,5 +1,5 @@
 import { ListboxOptionSelectionIcon as UI } from '@lumx/core/js/components/Listbox/ListboxOptionSelectionIcon';
-import { useListboxContext } from './context/ListboxContext';
+import { useCompositeContext } from '../composite/CompositeContext';
 import { useListboxOptionContext } from './context/ListboxOptionContext';
 
 /**
@@ -16,7 +16,7 @@ import { useListboxOptionContext } from './context/ListboxOptionContext';
  */
 export const ListboxOptionSelectionIcon = () => {
     const { isSelected } = useListboxOptionContext();
-    const { selectionType } = useListboxContext();
+    const { selectionType } = useCompositeContext();
     return <UI selectionType={selectionType} isSelected={isSelected} />;
 };
 ListboxOptionSelectionIcon.displayName = 'ComboboxSelectionIcon';

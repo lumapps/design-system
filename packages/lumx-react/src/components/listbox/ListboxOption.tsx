@@ -13,11 +13,12 @@ import {
 } from '@lumx/core/js/components/Listbox/ListboxOption';
 import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 import { useId } from '@lumx/react/hooks/useId';
-import { optionActiveEvent } from '@lumx/core/js/components/Listbox/constants';
+import { optionActiveEvent } from '@lumx/core/js/components/Composite/constants';
 import { Tooltip, TooltipProps } from '../tooltip';
-import { useListboxContext } from './context/ListboxContext';
+import { useCompositeContext } from '../composite/CompositeContext';
+import { useCompositeEvent } from '../composite/useCompositeEvent';
 import { ListboxOptionContext } from './context/ListboxOptionContext';
-import { useListboxEvent } from './context/useListboxEvent';
+import { useListboxHandle } from './context/useListboxHandle';
 
 /**
  * Props forwarded to the inner action element (button or link).
@@ -77,7 +78,8 @@ export const ListboxOption = forwardRef<ListboxOptionProps, HTMLLIElement>((prop
         onClick,
         ...forwardedProps
     } = props;
-    const { type, list } = useListboxContext();
+    const { type } = useCompositeContext();
+    const list = useListboxHandle();
     const isGrid = type === 'grid';
     const optionId = useId();
     const descriptionId = useId();
@@ -86,7 +88,7 @@ export const ListboxOption = forwardRef<ListboxOptionProps, HTMLLIElement>((prop
     const [isFiltered, setIsFiltered] = useState(false);
 
     // Force the tooltip open while the option is the active descendant (keyboard highlight).
-    const isActive = useListboxEvent(list, optionActiveEvent(optionId), false);
+    const isActive = useCompositeEvent(list, optionActiveEvent(optionId), false);
 
     useEffect(() => {
         const element = internalRef.current;

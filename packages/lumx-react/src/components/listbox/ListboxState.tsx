@@ -10,8 +10,8 @@ import { subscribeListboxState } from '@lumx/core/js/components/Listbox/subscrib
 import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 import { GenericBlock } from '../generic-block';
 import { Text } from '../text';
-import { useListboxEvent } from './context/useListboxEvent';
-import { useListboxContext } from './context/ListboxContext';
+import { useCompositeContext } from '../composite/CompositeContext';
+import { useCompositeEvent } from '../composite/useCompositeEvent';
 
 /**
  * Props for Combobox.State component.
@@ -51,8 +51,8 @@ export interface ListboxStateProps extends ReactToJSX<UIProps, 'state'> {
  * @return React element.
  */
 export const ListboxState = (props: ListboxStateProps) => {
-    const { list } = useListboxContext();
-    const optionsState = useListboxEvent(list, 'optionsChange', undefined);
+    const { handle: list } = useCompositeContext();
+    const optionsState = useCompositeEvent(list, 'optionsChange', undefined);
 
     const [isLoading, setIsLoading] = useState(false);
     const [shouldAnnounce, setShouldAnnounce] = useState(false);

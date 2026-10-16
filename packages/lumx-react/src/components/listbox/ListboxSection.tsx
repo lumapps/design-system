@@ -12,7 +12,7 @@ import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { ListSection } from '../list/ListSection';
-import { useListboxContext } from './context/ListboxContext';
+import { useListboxHandle } from './context/useListboxHandle';
 
 /**
  * Props for Combobox.Section component.
@@ -38,7 +38,7 @@ export interface ListboxSectionProps extends GenericProps, ReactToJSX<UIProps, L
  * @return React element.
  */
 export const ListboxSection = forwardRef<ListboxSectionProps, HTMLLIElement>((props, ref) => {
-    const { list } = useListboxContext();
+    const list = useListboxHandle();
     const internalRef = useRef<HTMLLIElement>(null);
     const mergedRef = useMergeRefs(ref, internalRef);
     const [sectionState, setSectionState] = useState({ hidden: false, 'aria-hidden': false });
