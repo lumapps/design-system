@@ -1,12 +1,13 @@
-import { computed, defineComponent, onWatcherCleanup, ref, shallowRef, useAttrs, watch } from 'vue';
+import { defineComponent, onWatcherCleanup, ref, shallowRef, useAttrs, watch } from 'vue';
 
 import { COMBOBOX_PROVIDER_COMPONENT_NAME } from '@lumx/core/js/components/Combobox/constants';
 import type { ComboboxHandle } from '@lumx/core/js/components/Combobox/types';
+import type { CompositeHandle } from '@lumx/core/js/components/Composite/types';
 
 import { useId } from '../../composables/useId';
 import { getName } from '../../utils/VueToJSX';
 import { provideComboboxContext } from './context/ComboboxContext';
-import { provideListboxContext } from '../listbox/context/ListboxContext';
+import { provideCompositeContext } from '../composite/CompositeContext';
 
 /**
  * Defines the props of the component.
@@ -24,6 +25,8 @@ export interface ComboboxProviderProps {
  *
  * Provides shared context to sub-components. The vanilla JS combobox handle is
  * created by the trigger sub-component (Combobox.Input or Combobox.Button) on mount.
+ * The list handle is created by the list component, which registers it on the combobox handle:
+ * the provider shares the registered list with the sub-components (composite context).
  *
  * @param props Component props.
  * @return Vue element.
@@ -38,9 +41,24 @@ const ComboboxProvider = defineComponent(
             handle.value = h;
         };
 
-        provideComboboxContext({ handle, setHandle, listboxId, anchorRef });
-        // The listbox of the combobox: shared with the list, the options and the state through the listbox context.
-        provideListboxContext({ list: computed(() => handle.value?.list ?? null), listboxId, type: 'listbox' });
+        // The list registered on the combobox (updated when the list component registers or unregisters it).
+        const list = shallowRef<CompositeHandle | null>(null);
+        watch(
+            handle,
+            (handleValue) => {
+                list.value = handleValue?.list ?? null;
+                if (!handleValue) return;
+                const unsubscribe = handleValue.subscribe('list', (listValue) => {
+                    list.value = listValue;
+                });
+                onWatcherCleanup(unsubscribe);
+            },
+            { immediate: true },
+        );
+
+        provideComboboxContext({ handle, setHandle, list, listboxId, anchorRef });
+        // The list of the combobox: shared with the list, the options and the state through the composite context.
+        provideCompositeContext({ handle: list, id: listboxId, type: 'listbox' });
 
         // Force the always open state (`undefined`: the core detects the inline listbox).
         watch([handle, () => props.alwaysOpen], ([handleValue, alwaysOpen]) => {
@@ -50,7 +68,7 @@ const ComboboxProvider = defineComponent(
         // Subscribe to the open event and forward to the onOpen callback.
         watch(handle, (handleValue) => {
             if (!handleValue) return;
-            const unsubscribe = handleValue.list.subscribe('open', (isOpen) => {
+            const unsubscribe = handleValue.subscribe('open', (isOpen) => {
                 (attrs.onOpen as any)?.(isOpen);
                 emit('open', isOpen);
             });

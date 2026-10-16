@@ -1,5 +1,13 @@
 export { setupListbox } from './setupListbox';
-export type { ListboxEventMap, ListboxFocusOwnerLink, ListboxHandle, ListboxOptions, OptionActiveEvent } from './types';
+export type {
+    ListboxEventMap,
+    ListboxFocusOwnerLink,
+    ListboxHandle,
+    ListboxOptions,
+    ListboxType,
+    OptionActiveEvent,
+} from './types';
+export { isListboxHandle } from './utils';
 
 export { ListboxList } from './ListboxList';
 export type { ListboxListProps, ListboxListType } from './ListboxList';

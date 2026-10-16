@@ -21,11 +21,12 @@
         overflow-y: auto;
     }
 
-    // Hide popover when there is no option, no state, and no skeleton
+    // Hide popover when there is no option, no visible tree item, no state, and no skeleton
+    // (a tree item hidden by the filter keeps its class, a hidden option does not)
     &:empty,
     &:not(:has(.#{$lumx-base-prefix}-listbox-option)):not(:has(.#{$lumx-base-prefix}-listbox-state)):not(
         :has(.#{$lumx-base-prefix}-listbox-option-skeleton)
-    ) {
+    ):not(:has(.#{$lumx-base-prefix}-tree-list-item:not([hidden]))) {
         display: none;
     }
 }

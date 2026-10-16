@@ -12,8 +12,8 @@ import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { useWatchDisposable } from '../../composables/useWatchDisposable';
 import { GenericBlock } from '../generic-block';
 import { Text } from '../text';
-import { useListboxEvent } from './context/useListboxEvent';
-import { useListboxContext } from './context/ListboxContext';
+import { useCompositeContext } from '../composite/CompositeContext';
+import { useCompositeEvent } from '../composite/useCompositeEvent';
 
 export type ListboxStateProps = VueToJSXProps<UIProps, 'state'>;
 
@@ -25,8 +25,8 @@ export type ListboxStateProps = VueToJSXProps<UIProps, 'state'>;
  */
 const ListboxState = defineComponent(
     (props: ListboxStateProps) => {
-        const { list } = useListboxContext();
-        const optionsState = useListboxEvent(list, 'optionsChange', undefined);
+        const { handle: list } = useCompositeContext();
+        const optionsState = useCompositeEvent(list, 'optionsChange', undefined);
         const isLoading = ref(false);
         const shouldAnnounce = ref(false);
         const isOpen = ref(false);

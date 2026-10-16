@@ -15,8 +15,8 @@ import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { IconButton } from '../button';
 import { Popover } from '../popover';
 import { useListboxOptionContext } from './context/ListboxOptionContext';
-import { useListboxContext } from './context/ListboxContext';
-import { useListboxEvent } from './context/useListboxEvent';
+import { useCompositeContext } from '../composite/CompositeContext';
+import { useCompositeEvent } from '../composite/useCompositeEvent';
 
 export type ListboxOptionMoreInfoProps = VueToJSXProps<
     UIProps,
@@ -55,8 +55,8 @@ const ListboxOptionMoreInfo = defineComponent(
         const { optionId } = useListboxOptionContext();
 
         // Subscribe to active descendant changes for keyboard highlight detection
-        const { list } = useListboxContext();
-        const activeDescendantId = useListboxEvent(list, 'activeDescendantChange', null);
+        const { handle } = useCompositeContext();
+        const activeDescendantId = useCompositeEvent(handle, 'activeDescendantChange', null);
 
         // Open on mouse hover or keyboard highlight.
         const isOpen = computed(() => isHovered.value || activeDescendantId.value === optionId);

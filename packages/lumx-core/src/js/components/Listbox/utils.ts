@@ -1,29 +1,9 @@
-import type { OptionRegistration, SectionRegistration, SectionState } from './types';
+import type { CompositeHandle } from '../Composite/types';
+import type { ListboxHandle, OptionRegistration, SectionRegistration, SectionState } from './types';
 
-/**
- * Get the value for an option element.
- * Uses `data-value` when set; falls back to the element's trimmed `textContent`.
- *
- * This is the *selection* value , which may differ from the visible label
- */
-export function getOptionValue(option: HTMLElement): string {
-    if (option.dataset.value !== undefined) return option.dataset.value;
-    return option.textContent?.trim() ?? '';
-}
-
-/**
- * Get the visible label for an option element (its trimmed `textContent`).
- *
- * Used for typeahead matching: the user types the characters they see, which is the
- * option's label — not its `data-value` (which can be an unrelated id).
- */
-export function getOptionLabel(option: HTMLElement): string {
-    return option.textContent?.trim() ?? '';
-}
-
-/** Returns true when an option carries aria-disabled="true". */
-export function isOptionDisabled(option: HTMLElement): boolean {
-    return option.getAttribute('aria-disabled') === 'true';
+/** Whether a composite handle is a listbox handle (it has the option registry). */
+export function isListboxHandle(handle: CompositeHandle | null | undefined): handle is ListboxHandle {
+    return !!handle && 'registerOption' in handle;
 }
 
 /** Returns true when the cell is NOT the first gridcell in its row (i.e., it's an action cell). */
@@ -32,8 +12,6 @@ export function isActionCell(cell: HTMLElement): boolean {
     if (!row) return false;
     return row.querySelector('[role="gridcell"]') !== cell;
 }
-
-export const isSelected = (el: Element) => el.getAttribute('aria-selected') === 'true';
 
 /**
  * Compute the current state of a section and notify when it changed.

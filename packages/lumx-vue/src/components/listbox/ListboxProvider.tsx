@@ -3,7 +3,7 @@ import { setupListbox } from '@lumx/core/js/components/Listbox/setupListbox';
 
 import { useId } from '../../composables/useId';
 import { getName } from '../../utils/VueToJSX';
-import { provideListboxContext } from './context/ListboxContext';
+import { provideCompositeContext } from '../composite/CompositeContext';
 
 /**
  * Internal standalone listbox provider.
@@ -16,7 +16,7 @@ const ListboxProvider = defineComponent(
         const listboxId = useId();
         // The handle does not need the DOM element: the list mounts it.
         const list = shallowRef(setupListbox({ onSelect: (option) => emit('select', option) }));
-        provideListboxContext({ list, listboxId, type: 'listbox' });
+        provideCompositeContext({ handle: list, id: listboxId, type: 'listbox' });
         // Tear down the handle (pending timers, subscribers) on unmount.
         onBeforeUnmount(() => list.value.destroy());
         return () => slots.default?.();

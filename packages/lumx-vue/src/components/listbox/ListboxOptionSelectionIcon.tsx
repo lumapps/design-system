@@ -3,7 +3,7 @@ import { defineComponent } from 'vue';
 import { ListboxOptionSelectionIcon as UI } from '@lumx/core/js/components/Listbox/ListboxOptionSelectionIcon';
 
 import { getName } from '../../utils/VueToJSX';
-import { useListboxContext } from './context/ListboxContext';
+import { useCompositeContext } from '../composite/CompositeContext';
 import { useListboxOptionContext } from './context/ListboxOptionContext';
 
 /**
@@ -21,7 +21,7 @@ import { useListboxOptionContext } from './context/ListboxOptionContext';
 const ListboxOptionSelectionIcon = defineComponent(
     () => {
         const optionContext = useListboxOptionContext();
-        const listContext = useListboxContext();
+        const listContext = useCompositeContext();
         return () =>
             UI({
                 selectionType: listContext.selectionType,
