@@ -71,9 +71,10 @@ export function setupCombobox(
         handle.setIsOpen(value);
     }
 
-    /** Set `aria-haspopup="grid"` on the trigger when the list is a grid. */
+    /** Set `aria-haspopup="grid"` (or `"tree"`) on the trigger when the list is a grid (or a tree). */
     function syncHasPopup(element: HTMLElement | null) {
-        if (trigger && element?.getAttribute('role') === 'grid') trigger.setAttribute('aria-haspopup', 'grid');
+        const role = element?.getAttribute('role');
+        if (trigger && (role === 'grid' || role === 'tree')) trigger.setAttribute('aria-haspopup', role);
     }
 
     /**

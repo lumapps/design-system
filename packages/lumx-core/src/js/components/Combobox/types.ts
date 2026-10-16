@@ -18,7 +18,8 @@ export interface ComboboxInputOptions {
      * Controls how the combobox filters options as the user types.
      *
      * - `'auto'` (default) — Options are automatically filtered client-side.
-     * - `'manual'` — Filtering is the consumer's responsibility.
+     * - `'manual'` — Filtering is the consumer's responsibility. The list still gets the filter text
+     *   (a tree list opens its parent items with rendered sub-items while the text is not empty).
      * - `'off'` — Like `'manual'`, but the input is rendered as `readOnly`
      *   and `openOnFocus` defaults to `true`.
      */
