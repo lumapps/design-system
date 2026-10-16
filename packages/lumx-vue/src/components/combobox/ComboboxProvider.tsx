@@ -58,7 +58,8 @@ const ComboboxProvider = defineComponent(
 
         provideComboboxContext({ handle, setHandle, list, listboxId, anchorRef });
         // The list of the combobox: shared with the list, the options and the state through the composite context.
-        provideCompositeContext({ handle: list, id: listboxId, type: 'listbox' });
+        // No `type`: the registered list may be a listbox, a grid or a tree (the list element provides it).
+        provideCompositeContext({ handle: list, id: listboxId });
 
         // Force the always open state (`undefined`: the core detects the inline listbox).
         watch([handle, () => props.alwaysOpen], ([handleValue, alwaysOpen]) => {

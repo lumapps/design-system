@@ -1,4 +1,4 @@
-import { computed, defineComponent, ref, shallowRef, useAttrs, watch } from 'vue';
+import { computed, defineComponent, ref, useAttrs } from 'vue';
 
 import {
     ListboxList as UI,
@@ -12,9 +12,8 @@ import type { ListboxHandle } from '@lumx/core/js/components/Listbox/types';
 
 import { useClassName } from '../../composables/useClassName';
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
-import { useWatchDisposable } from '../../composables/useWatchDisposable';
 import { provideCompositeContext, useCompositeContext } from '../composite/CompositeContext';
-import { useCompositeEvent } from '../composite/useCompositeEvent';
+import { useCompositeList } from '../composite/useCompositeList';
 import { useOptionalComboboxContext } from '../combobox/context/ComboboxContext';
 import { useListboxHandle } from './context/useListboxHandle';
 
@@ -49,24 +48,22 @@ const ListboxList = defineComponent(
 
         // A nearer standalone listbox (`ListboxProvider` inside the combobox) wins over the combobox.
         // Inside a combobox, the provided handle is the registered list, which is linked (not standalone).
-        const isStandalone = computed(() => !!providedList.value?.isStandalone);
+        // Set on setup: the provided handle of a standalone listbox exists before its list renders.
+        const isStandalone = !!providedList.value?.isStandalone;
 
         // Inside a combobox: create the listbox handle (linked to the trigger) and register it on the combobox.
-        const comboboxList = shallowRef<ListboxHandle | null>(null);
-        if (comboboxContext) {
-            useWatchDisposable([comboboxContext.handle, isStandalone], ([combobox, standalone]) => {
-                if (!combobox || standalone) return undefined;
-                const newList = setupListbox(combobox.listOptions);
-                const unregister = combobox.registerList(newList);
-                comboboxList.value = newList;
-                return () => {
-                    unregister();
-                    newList.destroy();
-                    if (comboboxList.value === newList) comboboxList.value = null;
-                };
-            });
-        }
-        const list = computed(() => (isStandalone.value || !comboboxContext ? providedList.value : comboboxList.value));
+        const {
+            handle: list,
+            isOpen,
+            isLoading,
+        } = useCompositeList<ListboxHandle>({
+            elementRef: listRef,
+            combobox:
+                comboboxContext && !isStandalone
+                    ? { handle: comboboxContext.handle, createList: setupListbox }
+                    : undefined,
+            standaloneHandle: providedList,
+        });
 
         const type = computed(() => props.type || 'listbox');
         provideCompositeContext({
@@ -82,26 +79,6 @@ const ListboxList = defineComponent(
                 return multiselectable === true || multiselectable === 'true' ? 'multiple' : 'single';
             },
         });
-
-        // Mount the list element on the handle.
-        useWatchDisposable([list, listRef], ([listValue, element]) => {
-            if (!listValue || !element) return undefined;
-            return listValue.mount(element);
-        });
-
-        // Tracking states (options are rendered only while visible: standalone always, combobox while open)
-        const isLoading = useCompositeEvent(list, 'loadingChange', false);
-        const isOpen = useCompositeEvent(list, 'open', false);
-        const options = useCompositeEvent(list, 'optionsChange', undefined);
-
-        // Flush pending navigation (that could not run when hidden)
-        watch(
-            [isOpen, () => options.value?.optionsLength],
-            () => {
-                if (isOpen.value) list.value?.flushPendingNavigation();
-            },
-            { flush: 'post' },
-        );
 
         return () => {
             const children = isOpen.value ? (slots.default?.() as JSXElement) : null;
