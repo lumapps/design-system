@@ -32,7 +32,7 @@ export interface ListboxOptionMoreInfoProps extends ReactToJSX<UIProps, ListboxO
  * Displays an info icon button on a combobox option that shows a popover with additional details.
  * The popover opens on mouse hover over the icon or when the parent option is keyboard-highlighted.
  *
- * Must be placed in the `after` slot of a `Combobox.Option`.
+ * Must be placed in the `after` slot of a `Combobox.Option` (or of a `TreeListItem`).
  *
  * Please consider using a simpler option `description` prop instead for better UX and a11y.
  *

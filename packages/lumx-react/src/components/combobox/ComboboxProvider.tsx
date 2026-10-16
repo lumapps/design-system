@@ -42,8 +42,9 @@ export function ComboboxProvider(props: ComboboxProviderProps) {
     const list = useEventSource<ComboboxEventMap, 'list'>(handle, 'list', null);
     const contextValue = useMemo(() => ({ handle, setHandle, list, listboxId, anchorRef }), [handle, list, listboxId]);
     // The list of the combobox: shared with the list, the options and the state through the composite context.
+    // No `type`: the registered list may be a listbox, a grid or a tree (the list element provides it).
     const compositeContextValue = useMemo<CompositeContextValue>(
-        () => ({ handle: list, id: listboxId, type: 'listbox' }),
+        () => ({ handle: list, id: listboxId }),
         [list, listboxId],
     );
 
