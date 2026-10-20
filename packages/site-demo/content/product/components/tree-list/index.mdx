@@ -1,0 +1,98 @@
+---
+title: Tree List
+frameworks: ['react', 'vue']
+---
+
+import * as ReactDemoDefault from './react/default.tsx';
+import * as ReactDemoMultipleSelection from './react/multiple-selection.tsx';
+import * as ReactDemoItemContent from './react/item-content.tsx';
+import * as ReactDemoComboboxInput from './react/combobox-input.tsx';
+import * as VueDemoDefault from './vue/default.vue';
+import * as VueDemoMultipleSelection from './vue/multiple-selection.vue';
+import * as VueDemoItemContent from './vue/item-content.vue';
+import * as VueDemoComboboxInput from './vue/combobox-input.vue';
+import ReactTreeList from 'lumx-docs:@lumx/react/components/tree-list/TreeList';
+import ReactTreeListItem from 'lumx-docs:@lumx/react/components/tree-list/TreeListItem';
+import VueTreeList from 'lumx-docs:@lumx/vue/components/tree-list/TreeList';
+import VueTreeListItem from 'lumx-docs:@lumx/vue/components/tree-list/TreeListItem';
+
+**Tree lists display a hierarchy of items that users can open, close and select.**
+
+Use a tree list when the items have a parent-child relationship (folders, categories, organization charts).
+For a flat set of items, use a [list](../list) instead.
+
+## Default
+
+The tree list is a single tab stop. Use the keyboard to move in the tree:
+
+-   <kbd>↑</kbd> and <kbd>↓</kbd> move to the previous and next visible tree item.
+-   <kbd>→</kbd> opens a closed parent item, or moves to the first sub-item of an open parent item.
+-   <kbd>←</kbd> closes an open parent item, or moves to the parent item.
+-   <kbd>Enter</kbd> selects the tree item.
+
+A tree item with a `value` is selectable. The `value` of the tree list holds the selected value.
+A parent item starts open when one of its sub-items is selected.
+
+A tree item without a `value` is not selectable (in this demo: "Citrus" and "Drinks").
+A click or <kbd>Enter</kbd> on a non-selectable parent item opens or closes it.
+
+<DemoBlock demo={{ react: ReactDemoDefault, vue: VueDemoDefault }} />
+
+## Multiple selection
+
+Set `selectionType="multiple"` to let users select several tree items.
+The `value` of the tree list is then an array, and each selectable tree item shows a checkbox.
+
+<DemoBlock demo={{ react: ReactDemoMultipleSelection, vue: VueDemoMultipleSelection }} />
+
+## Item content
+
+A tree item has a `label`, an optional `description`, and `before` and `after` sections
+(for example an icon or a thumbnail).
+
+<DemoBlock demo={{ react: ReactDemoItemContent, vue: VueDemoItemContent }} />
+
+## In a combobox
+
+Put the tree list in a `Combobox.Provider` to use it as the list of a combobox.
+The combobox trigger then owns the focus and the keyboard: <kbd>↑</kbd> and <kbd>↓</kbd> move in the tree
+while the focus stays on the trigger.
+
+With `Combobox.Input`, the text that the user types filters the tree.
+A tree item matches on its own label and description. The ancestors of a matching tree item open,
+and the sub-items of a matching parent item stay visible.
+To load the tree items from a server, set `filter="manual"` on the input and render the search result.
+
+In this demo, the tree list has no popover: it is always visible below the input, which acts as a filter field.
+The open state of the parent items stays as the user sets it.
+
+<DemoBlock demo={{ react: ReactDemoComboboxInput, vue: VueDemoComboboxInput }} />
+
+The tree list also works in the other combobox setups:
+
+-   **In a popover**: put the tree list in `Combobox.Popover`. The tree items show only while the popup is open,
+    and the open state of the parent items resets each time the popup opens.
+-   **With a button trigger**: use `Combobox.Button` instead of `Combobox.Input` for a select-only combobox.
+    There is no filter, and users type the first letters of a visible tree item to move to it.
+
+### Accessibility concerns
+
+The tree list follows the [WAI-ARIA tree view pattern](https://www.w3.org/WAI/ARIA/apg/patterns/treeview/).
+
+-   **Label**: always give an accessible name to the tree with `aria-label` or `aria-labelledby`.
+-   **Focus**: the focus stays on the tree (or on the combobox trigger). The active tree item is set
+    with `aria-activedescendant`.
+-   **State**: parent items have `aria-expanded`, and selectable tree items have `aria-selected`.
+    The browser computes the level, the position and the size of each tree item from the DOM.
+-   **Filter result**: add `Combobox.State` next to the tree list with an input. It is a live region that
+    announces the number of results (`nbOptionMessage`), the empty message, and the error message.
+    With `filter="auto"`, the count includes only the matching tree items, not their visible ancestors or
+    sub-items. Without filter text, there is no count.
+-   **Touch screen readers**: on iOS, a user cannot open a selectable parent item. To support iOS, use a
+    non-selectable parent item with a first leaf item such as "All fruits" that carries the parent value.
+
+## Properties
+
+<PropTable docs={{ react: ReactTreeList, vue: VueTreeList }} />
+
+<PropTable docs={{ react: ReactTreeListItem, vue: VueTreeListItem }} />
