@@ -18,6 +18,7 @@ export interface TreeListProps extends HasClassName {
     'aria-busy'?: boolean;
     /**
      * Selection type: one selected tree item, or several (`aria-multiselectable`).
+     * Also read by `Combobox.SelectionIcon` to pick the checkbox icons.
      */
     selectionType?: TreeListSelectionType;
     /** Content (`TreeListItem` or `ListboxOptionSkeleton` elements). Render the states outside the tree. */

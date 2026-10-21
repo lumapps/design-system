@@ -58,7 +58,8 @@ export type TreeListProps = SingleTreeListProps | MultipleTreeListProps;
 
 /**
  * TreeList component: a list in the WAI-ARIA tree pattern (`role="tree"`), with `TreeListItem` (`TreeList.Item`) items.
- * Use `Combobox.OptionSkeleton` and `Combobox.State` inside, as in a list.
+ * Use `Combobox.OptionSkeleton`, `Combobox.State` and `Combobox.OptionMoreInfo` inside, as in a list. A
+ * selectable tree item shows its selection icon.
  *
  * Selection: `value` holds the selected tree item value (or values with `selectionType="multiple"`), and
  * the tree items read their selected state from it. `onChange` receives the new value on every selection

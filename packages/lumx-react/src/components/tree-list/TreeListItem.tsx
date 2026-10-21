@@ -20,6 +20,7 @@ import { Tooltip, TooltipProps } from '../tooltip';
 import { CompositeContext } from '../composite/CompositeContext';
 import { TreeListContext } from './TreeListContext';
 import { useCompositeEvent } from '../composite/useCompositeEvent';
+import { CompositeItemContext } from '../composite/CompositeItemContext';
 import type { CompositeItemActionProps } from '../composite/types';
 
 /** Props computed by the component (not public). */
@@ -28,6 +29,7 @@ type InternalProps =
     | 'isParent'
     | 'isOpen'
     | 'isSelected'
+    | 'selectionType'
     | 'hidden'
     | 'level'
     | 'handleClick'
@@ -61,7 +63,7 @@ export interface TreeListItemProps
     onClick?(): void;
     /** Content rendered before the label (e.g. an icon). */
     before?: ReactNode;
-    /** Content rendered after the label. */
+    /** Content rendered after the label (e.g. `Combobox.OptionMoreInfo`). The selection icon comes after it. */
     after?: ReactNode;
     /** Props forwarded to a Tooltip wrapping the `role="treeitem"` element. */
     tooltipProps?: Partial<TooltipProps>;
@@ -76,6 +78,8 @@ export interface TreeListItemProps
  *   tree `value` holds it. Without, it is not selectable: Enter or a click on a non-selectable parent item
  *   opens or closes it, and on a non-selectable leaf item only calls `onClick` (e.g. an action such as
  *   "Create a new list…").
+ * - A selectable tree item shows its selection icon (the icons of `Combobox.SelectionIcon`: a check circle or a
+ *   blank radio in single selection, a checkbox in multiple selection).
  * - The open state is internal: a parent item starts open when a sub-item at any depth is selected.
  *   In a combobox, it resets on each popup open.
  * - Touch screen readers: TalkBack (Chrome) can open and close the parent items. On iOS, a user can
@@ -104,7 +108,7 @@ export const TreeListItem = forwardRef<TreeListItemProps, HTMLLIElement>((props,
     if (!compositeContext) {
         throw new Error(`${COMPONENT_NAME} must be used within a TreeList`);
     }
-    const { handle, level = 0 } = compositeContext;
+    const { handle, level = 0, selectionType } = compositeContext;
     const tree = isTreeListHandle(handle) ? handle : null;
     // Inside another composite (e.g. a `Combobox.List`), the tree item is never registered: it stays inert.
     const isOutsideTree = !!handle && !tree;
@@ -153,34 +157,43 @@ export const TreeListItem = forwardRef<TreeListItemProps, HTMLLIElement>((props,
     // The sub-items are one level deeper (a skeleton in a group does not make the tree busy).
     const nestedContext = useMemo(() => ({ ...compositeContext, level: level + 1 }), [compositeContext, level]);
 
+    // The item context of the tree item (`Combobox.OptionMoreInfo` in its slots).
+    // A nested tree item provides its own: the nearest one wins.
+    const itemContextValue = useMemo(() => ({ itemId: id, isSelected, isSelectable }), [id, isSelected, isSelectable]);
+
     const handleClick = () => {
         onClick?.();
         // The tree list selects a selectable tree item. A non-selectable parent item opens or closes.
         if (!isSelectable) controllerRef.current?.toggle();
     };
 
-    return UI(
-        {
-            ...forwardedProps,
-            ref: mergedRef,
-            id,
-            label,
-            value,
-            isSelected,
-            isParent,
-            level,
-            isOpen: state.isOpen,
-            hidden: state.hidden,
-            before,
-            after,
-            actionProps,
-            handleClick,
-            handleToggleClick: () => controllerRef.current?.toggle(),
-            tooltipProps: tooltipProps && { ...tooltipProps, forceOpen: tooltipProps.forceOpen || isActive },
-            // The core template renders the sub-items of a parent item only.
-            children: <CompositeContext.Provider value={nestedContext}>{children}</CompositeContext.Provider>,
-        },
-        { Tooltip },
+    return (
+        <CompositeItemContext.Provider value={itemContextValue}>
+            {UI(
+                {
+                    ...forwardedProps,
+                    ref: mergedRef,
+                    id,
+                    label,
+                    value,
+                    isSelected,
+                    selectionType,
+                    isParent,
+                    level,
+                    isOpen: state.isOpen,
+                    hidden: state.hidden,
+                    before,
+                    after,
+                    actionProps,
+                    handleClick,
+                    handleToggleClick: () => controllerRef.current?.toggle(),
+                    tooltipProps: tooltipProps && { ...tooltipProps, forceOpen: tooltipProps.forceOpen || isActive },
+                    // The core template renders the sub-items of a parent item only.
+                    children: <CompositeContext.Provider value={nestedContext}>{children}</CompositeContext.Provider>,
+                },
+                { Tooltip },
+            )}
+        </CompositeItemContext.Provider>
     );
 });
 

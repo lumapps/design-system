@@ -25,3 +25,4 @@ export const FilterNoMatchHidesPopover = { ...testStories.FilterNoMatchHidesPopo
 export const AccessibilityOpenTree = { ...testStories.AccessibilityOpenTree };
 export const AccessibilityLoadingGroup = { ...testStories.AccessibilityLoadingGroup };
 export const AccessibilityStandaloneTree = { ...testStories.AccessibilityStandaloneTree };
+export const OptionMoreInfoActiveTreeItem = { ...testStories.OptionMoreInfoActiveTreeItem };

@@ -7,6 +7,7 @@ import { ListItem } from '../List/ListItem';
 import { ListItemAction, type ListItemActionProps } from '../List/ListItemAction';
 import { RawClickable } from '../RawClickable';
 import { CompositeItemDescription } from '../Composite/CompositeItemDescription';
+import { CompositeSelectionIcon } from '../Composite/CompositeSelectionIcon';
 import {
     TREE_LABEL_ATTRIBUTE,
     TREE_LEVEL_PROPERTY,
@@ -35,7 +36,7 @@ export interface TreeListItemProps extends HasClassName {
     children?: JSXElement;
     /** A component to be rendered before the label (e.g. an icon or avatar). */
     before?: JSXElement;
-    /** A component to be rendered after the label. */
+    /** A component to be rendered after the label (e.g. a "more info" button). The selection icon comes after it. */
     after?: JSXElement;
     /** Helper description (part of the filter match text). */
     description?: string;
@@ -43,6 +44,11 @@ export interface TreeListItemProps extends HasClassName {
     value?: string;
     /** Whether the tree item is selected (internal: from the tree `value`; no effect on a non-selectable tree item). */
     isSelected?: boolean;
+    /**
+     * Selection type of the tree (internal: from the tree). A selectable tree item renders the selection icon of
+     * that type (see `CompositeSelectionIcon`). Nothing on a non-selectable tree item.
+     */
+    selectionType?: 'single' | 'multiple';
     /** Props forwarded to a Tooltip wrapping the `role="treeitem"` element. */
     tooltipProps?: Record<string, any>;
     /** Extra props forwarded to the inner `role="treeitem"` element. */
@@ -90,6 +96,8 @@ const { block, element } = classNames.bem(CLASSNAME);
  * - The `role="treeitem"` element is the row button. It holds the label and carries `aria-expanded`,
  *   `aria-selected` (only on a selectable tree item) and `aria-owns` (its group is a sibling, not a child).
  *   It is labelled by its label only (`aria-labelledby`), never by the text of the owned group.
+ * - A selectable tree item renders its selection icon after the `after` content (a check circle or a blank
+ *   radio in single selection, a checkbox in multiple selection). Nothing on a non-selectable tree item.
  * - The expand toggle is a sibling of the row button, hidden from assistive technologies. On a
  *   non-selectable parent item, it is the main action of the row (its overlay covers the row).
  * - A closed group stays in the DOM, with `hidden`.
@@ -110,6 +118,7 @@ export const TreeListItem = (props: TreeListItemProps, { Tooltip }: TreeListItem
         description,
         value,
         isSelected,
+        selectionType,
         tooltipProps,
         actionProps,
         ref,
@@ -153,7 +162,8 @@ export const TreeListItem = (props: TreeListItemProps, { Tooltip }: TreeListItem
         'data-value': value,
         // The name is the label only: without it, the name from content includes the owned group (sub-items).
         'aria-labelledby': labelId,
-        'aria-describedby': description ? descriptionId : undefined,
+        'aria-describedby':
+            [description && descriptionId, id && `${id}-more-info`].filter(Boolean).join(' ') || undefined,
         children: (
             <span id={labelId} {...labelProps}>
                 {label}
@@ -205,7 +215,12 @@ export const TreeListItem = (props: TreeListItemProps, { Tooltip }: TreeListItem
                         {before}
                     </>
                 ) as JSXElement,
-                after,
+                after: (
+                    <>
+                        {after}
+                        {isSelectable && CompositeSelectionIcon({ selectionType, isSelected: Boolean(isSelected) })}
+                    </>
+                ) as JSXElement,
                 children: (
                     <>
                         {wrappedAction}
