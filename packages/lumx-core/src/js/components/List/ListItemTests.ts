@@ -30,6 +30,11 @@ export default (renderOptions: SetupOptions<any>) => {
                 expect(listItem).toHaveTextContent('Label');
             });
 
+            it('should ignore the core-only `as` prop', () => {
+                const { listItem } = setup({ as: 'div' }, renderOptions);
+                expect(listItem.tagName).toBe('LI');
+            });
+
             it('should render as a button when handleClick is provided', () => {
                 const { link } = setup({ handleClick: vi.fn() }, renderOptions);
                 expect(screen.getByRole('button', { name: 'Label' })).toBeInTheDocument();

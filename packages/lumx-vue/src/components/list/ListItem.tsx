@@ -36,7 +36,11 @@ const ListItem = defineComponent(
         const hasOnClick = useHasEventListener('onClick');
 
         const { isAnyDisabled, disabledStateProps, otherProps } = useDisableStateProps(
-            computed(() => ({ ...props, ...attrs })),
+            computed(() => {
+                // `as` is a core-only prop (not exposed by the Vue component).
+                const { as: _as, ...forwardedAttrs } = attrs;
+                return { ...props, ...forwardedAttrs };
+            }),
         );
 
         const handleClick = (event: any) => {

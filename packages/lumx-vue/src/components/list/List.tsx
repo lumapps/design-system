@@ -19,9 +19,18 @@ const List = defineComponent(
         const attrs = useAttrs();
         const className = useClassName(() => props.class);
 
-        return () => (
-            <ListUI {...props} {...attrs} className={className.value} children={slots.default?.() as JSXElement} />
-        );
+        return () => {
+            // `as` is a core-only prop (not exposed by the Vue component).
+            const { as: _as, ...forwardedAttrs } = attrs;
+            return (
+                <ListUI
+                    {...props}
+                    {...forwardedAttrs}
+                    className={className.value}
+                    children={slots.default?.() as JSXElement}
+                />
+            );
+        };
     },
     {
         name: getName(COMPONENT_NAME),

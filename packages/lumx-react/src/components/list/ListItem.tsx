@@ -45,7 +45,8 @@ export interface ListItemProps extends GenericProps, HasAriaDisabled, ReactToJSX
  */
 const _ListItem = forwardRef<ListItemProps, HTMLLIElement>((props, ref) => {
     const { disabledStateProps, otherProps } = useDisableStateProps(props);
-    const { onItemSelected, onClick, linkRef, ...forwardedProps } = otherProps;
+    // `as` is a core-only prop (not exposed by the React component).
+    const { as: _as, onItemSelected, onClick, linkRef, ...forwardedProps } = otherProps;
 
     const handleClick = (event: any) => {
         onItemSelected?.(event);
