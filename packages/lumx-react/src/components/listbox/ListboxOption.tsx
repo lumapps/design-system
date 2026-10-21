@@ -98,8 +98,7 @@ export const ListboxOption = forwardRef<ListboxOptionProps, HTMLLIElement>((prop
         list.refilterOption(element);
     }, [list, value]);
 
-    // Provide the item context to the whole option, so sub-components (e.g. OptionMoreInfo, SelectionIcon)
-    // can read the option ID (keyboard highlight detection) and its selected state from any slot.
+    // The item context of the option (`Combobox.SelectionIcon`, `Combobox.OptionMoreInfo` in its slots).
     const itemContextValue = useMemo(
         () => ({ itemId: optionId, isSelected: Boolean(isSelected) }),
         [optionId, isSelected],

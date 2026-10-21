@@ -1,8 +1,9 @@
 /* eslint-disable no-await-in-loop */
 import userEvent from '@testing-library/user-event';
 import { screen, waitFor, within } from '@testing-library/dom';
-import { mdiChevronDown, mdiChevronRight } from '@lumx/icons';
+import { mdiCheck, mdiChevronDown, mdiChevronRight } from '@lumx/icons';
 import { getByClassName, getByTagName, queryAllByClassName } from '../../../testing/queries';
+import { CLASSNAME as SELECTION_ICON_CLASSNAME } from '../Composite/CompositeSelectionIcon';
 import { CLASSNAME as SKELETON_CLASSNAME } from '../Listbox/ListboxOptionSkeleton';
 import { CLASSNAME as TREE_LIST_ITEM_CLASSNAME } from './TreeListItem';
 import { CLASSNAME as TREE_LIST_SECTION_CLASSNAME } from './TreeListSection';
@@ -19,6 +20,8 @@ export interface TreeListComboboxNamespace {
     State: any;
     List: any;
     Option: any;
+    OptionMoreInfo: any;
+    SelectionIcon: any;
 }
 
 /** Components used by the tree tests and stories. */
@@ -298,6 +301,12 @@ export default function treeListTests({ components, renderWithState }: TreeListT
             expect(getTreeItem('Fruits')).toHaveAttribute('aria-selected', 'true');
             expect(getTreeItem('Fruits')).toHaveAttribute('data-value', 'fruits');
             expect(getTreeItem('Vegetables')).toHaveAttribute('aria-selected', 'false');
+            // The selection icon on the selectable tree items only (empty when not selected).
+            const fruitsIcon = getByClassName(getRow('Fruits'), SELECTION_ICON_CLASSNAME);
+            expect(getByTagName(fruitsIcon, 'path')).toHaveAttribute('d', mdiCheck);
+            const vegetablesIcon = getByClassName(getRow('Vegetables'), SELECTION_ICON_CLASSNAME);
+            expect(getByTagName(vegetablesIcon, 'path')).toHaveAttribute('d', '');
+            expect(queryAllByClassName(getRow('Drinks'), SELECTION_ICON_CLASSNAME)).toHaveLength(0);
             expect(getTreeItem('Drinks')).not.toHaveAttribute('aria-selected');
             expect(getTreeItem('Drinks')).not.toHaveAttribute('data-value');
             expect(getTreeItem('Drinks')).not.toHaveAttribute('aria-disabled');
@@ -780,7 +789,7 @@ export default function treeListTests({ components, renderWithState }: TreeListT
             expect(getTreeItem('Lemon')).toHaveAttribute('aria-selected', 'false');
         });
 
-        it('calls onChange with the toggled values (multiple selection)', async () => {
+        it('calls onChange with the toggled values (multiple selection), with the selection icon', async () => {
             const onUpdate = vi.fn();
             renderWithState(
                 templates.standaloneTemplate,
@@ -788,11 +797,19 @@ export default function treeListTests({ components, renderWithState }: TreeListT
                 { onChangeProp: 'onUpdate' },
             );
             expect(screen.getByRole('tree', { name: 'Food' })).toHaveAttribute('aria-multiselectable', 'true');
+            // The selection icon on the selectable tree items only (empty when not selected).
+            const lemonIcon = getByClassName(getRow('Lemon'), SELECTION_ICON_CLASSNAME);
+            expect(getByTagName(lemonIcon, 'path')).toHaveAttribute('d', mdiCheck);
+            const orangeIcon = getByClassName(getRow('Orange'), SELECTION_ICON_CLASSNAME);
+            expect(getByTagName(orangeIcon, 'path')).toHaveAttribute('d', '');
+            expect(queryAllByClassName(getRow('Citrus'), SELECTION_ICON_CLASSNAME)).toHaveLength(0);
             await userEvent.click(getTreeItem('Orange'));
             expect(onUpdate).toHaveBeenLastCalledWith(['lemon', 'orange']);
             await waitFor(() => expect(getTreeItem('Orange')).toHaveAttribute('aria-selected', 'true'));
             expect(getTreeItem('Lemon')).toHaveAttribute('aria-selected', 'true');
             // The icon follows the selected state.
+            const orangeIconAfter = getByClassName(getRow('Orange'), SELECTION_ICON_CLASSNAME);
+            expect(getByTagName(orangeIconAfter, 'path')).toHaveAttribute('d', mdiCheck);
             await userEvent.click(getTreeItem('Lemon'));
             expect(onUpdate).toHaveBeenLastCalledWith(['orange']);
             await waitFor(() => expect(getTreeItem('Lemon')).toHaveAttribute('aria-selected', 'false'));
@@ -951,6 +968,49 @@ export default function treeListTests({ components, renderWithState }: TreeListT
 
             await userEvent.clear(input);
             await waitFor(() => expect(other).not.toHaveAttribute('hidden'));
+        });
+    });
+
+    describe('Item context', () => {
+        it('provides the item context to the slots of a tree item', async () => {
+            const { TreeList, TreeListItem, Combobox } = components;
+            renderWithState(
+                ({ value, onChange }: any) => (
+                    <TreeList aria-label="Food" value={value} onChange={onChange}>
+                        <TreeListItem
+                            label="Fruits"
+                            value="fruits"
+                            before={<Combobox.SelectionIcon />}
+                            after={<Combobox.OptionMoreInfo>Fruits info</Combobox.OptionMoreInfo>}
+                        />
+                        <TreeListItem label="Vegetables" value="vegetables" before={<Combobox.SelectionIcon />} />
+                        <TreeListItem label="Drinks" before={<Combobox.SelectionIcon />} />
+                    </TreeList>
+                ),
+                { value: 'fruits' },
+            );
+            const fruits = getTreeItem('Fruits');
+            // The more info popover ID of the tree item (`<itemId>-more-info`).
+            expect((fruits.getAttribute('aria-describedby') as string).split(' ')).toContain(`${fruits.id}-more-info`);
+            // Selectable tree item: the slot icon reads the selected state from the context (+ the built-in icon).
+            const fruitsIconPaths = queryAllByClassName(getRow('Fruits'), SELECTION_ICON_CLASSNAME).map((icon) =>
+                getByTagName(icon, 'path').getAttribute('d'),
+            );
+            expect(fruitsIconPaths).toEqual([mdiCheck, mdiCheck]);
+            // Non-selectable tree item: no slot icon (and no built-in icon).
+            expect(queryAllByClassName(getRow('Drinks'), SELECTION_ICON_CLASSNAME)).toHaveLength(0);
+
+            // The item context follows the selection: the slot icons update.
+            await userEvent.click(getTreeItem('Vegetables'));
+            await waitFor(() => expect(getTreeItem('Vegetables')).toHaveAttribute('aria-selected', 'true'));
+            const vegetablesIconPaths = queryAllByClassName(getRow('Vegetables'), SELECTION_ICON_CLASSNAME).map(
+                (icon) => getByTagName(icon, 'path').getAttribute('d'),
+            );
+            expect(vegetablesIconPaths).toEqual([mdiCheck, mdiCheck]);
+            const fruitsIconPathsAfter = queryAllByClassName(getRow('Fruits'), SELECTION_ICON_CLASSNAME).map((icon) =>
+                getByTagName(icon, 'path').getAttribute('d'),
+            );
+            expect(fruitsIconPathsAfter).toEqual(['', '']);
         });
     });
 

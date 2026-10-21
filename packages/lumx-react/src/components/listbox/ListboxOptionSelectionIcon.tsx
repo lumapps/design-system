@@ -12,13 +12,14 @@ import { useCompositeItemContext } from '../composite/CompositeItemContext';
  * a check icon when the option is selected, else an empty icon that keeps the option contents aligned.
  *
  * The option selected state (`isSelected`) is read from the parent context.
- * Must be placed in the `after` slot of a `Combobox.Option`.
+ * Must be placed in the `after` slot of a `Combobox.Option` (a `TreeListItem` renders its own selection icon).
  *
  * @return React element.
  */
 export const ListboxOptionSelectionIcon = () => {
-    const { isSelected } = useCompositeItemContext();
+    const { isSelected, isSelectable = true } = useCompositeItemContext();
     const { selectionType } = useCompositeContext();
+    if (!isSelectable) return null;
     return <UI selectionType={selectionType} isSelected={isSelected} className={LEGACY_OPTION_CLASSNAME} />;
 };
 ListboxOptionSelectionIcon.displayName = 'ComboboxSelectionIcon';
