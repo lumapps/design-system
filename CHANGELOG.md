@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   `SelectTextField`: add `aria-label` (deprecates `ariaLabel`) and `aria-labelledby` props; with an empty `label`, the listbox is labelled by `aria-labelledby`.
     -   `Combobox`: the listbox is always open when it is not in a `Combobox.Popover` (inline listbox); new `alwaysOpen` prop on `Combobox.Provider` to override it.
     -   `SelectTextField`: `popoverProps={false}` renders the list inline below the text field (no popover), to compose the field in other patterns.
+    -   `SelectList`: new component to pick one or more options from a list that stays visible on the page (single/multiple selection, sections, loading/error states, infinite scroll).
 
 ### Changed
 

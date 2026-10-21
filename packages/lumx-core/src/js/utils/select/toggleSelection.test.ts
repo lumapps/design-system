@@ -24,6 +24,11 @@ describe('toggleSelection', () => {
             const result = toggleSelection(FRUITS, 'id', FRUITS[0], 'cherry', false);
             expect(result).toEqual(FRUITS[2]);
         });
+
+        it('keeps the option when it is selected again', () => {
+            const result = toggleSelection(FRUITS, 'id', FRUITS[0], 'apple', false);
+            expect(result).toEqual(FRUITS[0]);
+        });
     });
 
     describe('multi mode', () => {
