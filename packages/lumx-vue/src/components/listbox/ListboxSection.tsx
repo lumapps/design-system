@@ -14,7 +14,7 @@ import type { JSXElement } from '@lumx/core/js/types';
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { useWatchDisposable } from '../../composables/useWatchDisposable';
 import { ListSection } from '../list';
-import { useListboxContext } from './context/ListboxContext';
+import { useListboxContext } from '../composite/CompositeContext';
 
 export type ListboxSectionProps = VueToJSXProps<UIProps, ListboxSectionPropsToOverride | 'hidden' | 'aria-hidden'>;
 

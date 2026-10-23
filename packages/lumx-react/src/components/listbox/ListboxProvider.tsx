@@ -1,7 +1,7 @@
 import { ReactNode, useEffect, useMemo, useRef, useState } from 'react';
-import { setupListbox } from '@lumx/core/js/components/Listbox/setupListbox';
+import { setupListbox } from '@lumx/core/js/components/Composite/setupComposite';
 import { useId } from '@lumx/react/hooks/useId';
-import { ListboxContext, ListboxContextValue } from './context/ListboxContext';
+import { ListboxContext, ListboxContextValue } from '../composite/CompositeContext';
 
 /**
  * Defines the props of the component.

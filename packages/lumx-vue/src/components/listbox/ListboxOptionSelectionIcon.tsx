@@ -1,10 +1,10 @@
 import { defineComponent } from 'vue';
 
-import { ListboxOptionSelectionIcon as UI } from '@lumx/core/js/components/Listbox/ListboxOptionSelectionIcon';
+import { ListboxOptionSelectionIcon as UI } from '@lumx/core/js/components/Composite/CompositeSelectionIcon';
 
 import { getName } from '../../utils/VueToJSX';
-import { useListboxContext } from './context/ListboxContext';
-import { useListboxOptionContext } from './context/ListboxOptionContext';
+import { useListboxContext } from '../composite/CompositeContext';
+import { useListboxOptionContext } from '../composite/CompositeItemContext';
 
 /**
  * Combobox.SelectionIcon component (`Listbox.SelectionIcon`, re-exported by the combobox).

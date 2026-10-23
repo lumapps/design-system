@@ -14,9 +14,9 @@ import type { JSXElement } from '@lumx/core/js/types';
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { IconButton } from '../button';
 import { Popover } from '../popover';
-import { useListboxOptionContext } from './context/ListboxOptionContext';
-import { useListboxContext } from './context/ListboxContext';
-import { useListboxEvent } from './context/useListboxEvent';
+import { useListboxOptionContext } from '../composite/CompositeItemContext';
+import { useListboxContext } from '../composite/CompositeContext';
+import { useListboxEvent } from '../composite/useCompositeEvent';
 
 export type ListboxOptionMoreInfoProps = VueToJSXProps<
     UIProps,

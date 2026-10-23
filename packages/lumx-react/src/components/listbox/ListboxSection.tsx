@@ -12,7 +12,7 @@ import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { ListSection } from '../list/ListSection';
-import { useListboxContext } from './context/ListboxContext';
+import { useListboxContext } from '../composite/CompositeContext';
 
 /**
  * Props for Combobox.Section component.

@@ -1,7 +1,7 @@
 import { computed, type Ref } from 'vue';
-import type { ListboxEventMap } from '@lumx/core/js/components/Listbox/types';
+import type { ListboxEventMap } from '@lumx/core/js/components/Composite/types';
 import { useComboboxContext } from './ComboboxContext';
-import { useListboxEvent } from '../../listbox/context/useListboxEvent';
+import { useListboxEvent } from '../../composite/useCompositeEvent';
 
 /**
  * Composable to subscribe to a combobox event (`open`, `optionsChange`, `loadingChange`,

@@ -1,10 +1,10 @@
 import { createTypeahead, type Typeahead } from '../../utils/typeahead';
 import { createSelectorTreeWalker } from '../../utils/browser/createSelectorTreeWalker';
 import { isPrintableKey } from '../../utils/browser/isPrintableKey';
-import { getOptionLabel, getOptionValue, isOptionDisabled, isSelected, notifySection } from './utils';
+import { getOptionLabel, getOptionValue, isOptionDisabled, isSelected, notifySection } from '../Listbox/utils';
 import { isOptionActiveEvent, OPTION_ACTIVE_EVENT_PREFIX, optionActiveEvent } from './constants';
-import { createGridNavigation, createListNavigation, type ListboxNavigation } from './navigation';
-import { CLASSNAME as STATUS_CLASSNAME } from './ListboxState';
+import { createGridNavigation, createListNavigation, type ListboxNavigation } from '../Listbox/navigation';
+import { CLASSNAME as STATUS_CLASSNAME } from './CompositeStatus';
 import type {
     ListboxEventMap,
     OptionActiveEvent,

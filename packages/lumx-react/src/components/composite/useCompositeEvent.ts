@@ -4,7 +4,7 @@ import { useCallback, useRef } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { useSyncExternalStore } from 'use-sync-external-store/shim';
 
-import type { ListboxEventMap, ListboxHandle } from '@lumx/core/js/components/Listbox/types';
+import type { ListboxEventMap, ListboxHandle } from '@lumx/core/js/components/Composite/types';
 
 /**
  * Subscribe to a listbox handle event via `useSyncExternalStore`.

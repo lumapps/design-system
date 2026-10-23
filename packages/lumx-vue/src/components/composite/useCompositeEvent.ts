@@ -1,6 +1,6 @@
 import { type Ref, ref } from 'vue';
-import type { ListboxEventMap, ListboxHandle } from '@lumx/core/js/components/Listbox/types';
-import { useWatchDisposable } from '../../../composables/useWatchDisposable';
+import type { ListboxEventMap, ListboxHandle } from '@lumx/core/js/components/Composite/types';
+import { useWatchDisposable } from '../../composables/useWatchDisposable';
 
 /** Minimal event source shape of the listbox handle. */
 export interface EventSource {

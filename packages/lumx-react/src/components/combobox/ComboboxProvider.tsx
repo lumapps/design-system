@@ -4,7 +4,7 @@ import type { ComboboxHandle } from '@lumx/core/js/components/Combobox/types';
 import { useId } from '@lumx/react/hooks/useId';
 
 import { ComboboxContext } from './context/ComboboxContext';
-import { ListboxContext, ListboxContextValue } from '../listbox/context/ListboxContext';
+import { ListboxContext, ListboxContextValue } from '../composite/CompositeContext';
 
 /**
  * Defines the props of the component.

@@ -8,8 +8,8 @@ import {
     CLASSNAME,
 } from '@lumx/core/js/components/Listbox/ListboxList';
 import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
-import { useListboxEvent } from './context/useListboxEvent';
-import { ListboxContext, ListboxContextValue, useListboxContext } from './context/ListboxContext';
+import { useListboxEvent } from '../composite/useCompositeEvent';
+import { ListboxContext, ListboxContextValue, useListboxContext } from '../composite/CompositeContext';
 
 /** Props of the list component (`Combobox.List` and `Listbox.List`). */
 export interface ListboxListProps extends ReactToJSX<UIProps, 'aria-busy'> {}

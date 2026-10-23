@@ -1,5 +1,5 @@
 import { type InjectionKey, type Ref, inject, provide } from 'vue';
-import type { ListboxHandle } from '@lumx/core/js/components/Listbox/types';
+import type { ListboxHandle } from '@lumx/core/js/components/Composite/types';
 
 /**
  * Context value shared by the listbox sub-components (list, options, sections, skeletons, state).
