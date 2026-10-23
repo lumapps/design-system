@@ -4,12 +4,24 @@ import { createListFocusNavigation } from '../../utils/focusNavigation';
 import { setupComposite } from './setupComposite';
 import { optionActiveEvent } from './constants';
 import { CLASSNAME as STATUS_CLASSNAME } from './CompositeStatus';
-import type { CompositeFilter, CompositeOptions, CompositeSpecialization, CompositeState } from './types';
+import type {
+    CompositeFilter,
+    CompositeNavigation,
+    CompositeOptions,
+    CompositeSpecialization,
+    CompositeState,
+} from './types';
 
 const ITEM_SELECTOR = '[role="option"]';
 
-/** Minimal specialization: a list navigation over `role="option"` items and a fixed visible count. */
-function createTestSpecialization(state: { visibleCount: number; isCountHidden?: boolean }) {
+/**
+ * Minimal specialization: a list navigation over `role="option"` items and a fixed visible count.
+ * `nav` overrides parts of the navigation module (e.g. `keepFocusSelector`, `isOptionCell`).
+ */
+function createTestSpecialization(
+    state: { visibleCount: number; isCountHidden?: boolean },
+    nav: Partial<Pick<CompositeNavigation, 'keepFocusSelector' | 'isOptionCell' | 'getCellFromTarget'>> = {},
+) {
     const specialization = {
         createNavigation: ({ container, callbacks, signal, getActiveItem, wrap }) => ({
             type: 'listbox',
@@ -22,6 +34,7 @@ function createTestSpecialization(state: { visibleCount: number; isCountHidden?:
             isOptionCell: () => true,
             scrollIntoView: () => undefined,
             navigateHorizontal: () => false,
+            ...nav,
         }),
         getVisibleCount: () => state.visibleCount,
         isCountHidden: () => !!state.isCountHidden,
@@ -76,14 +89,68 @@ describe(setupComposite, () => {
             handle.destroy();
         });
 
-        it('should show the selected item on focus', () => {
-            const { handle } = setupComposite({}, createTestSpecialization({ visibleCount: 2 }));
+        /** Press an element (mousedown, then click) and return the mousedown event. */
+        const press = (element: HTMLElement) => {
+            const mousedown = new MouseEvent('mousedown', { bubbles: true, cancelable: true });
+            element.dispatchEvent(mousedown);
+            element.click();
+            return mousedown;
+        };
+
+        it('should focus on a press on an item, and make the clicked item the active item', () => {
+            const onSelect = vi.fn();
+            const { handle } = setupComposite({ onSelect }, createTestSpecialization({ visibleCount: 2 }));
             const list = renderList(['Apple', 'Banana']);
-            screen.getByRole('option', { name: 'Banana' }).setAttribute('aria-selected', 'true');
+            list.tabIndex = 0;
             handle.mount(list);
 
-            list.dispatchEvent(new FocusEvent('focus'));
+            const banana = document.getElementById('opt-Banana') as HTMLElement;
+            const mousedown = new MouseEvent('mousedown', { bubbles: true, cancelable: true });
+            banana.dispatchEvent(mousedown);
+            // The press focuses the composite, but does not show the first item (the click sets the active item).
+            expect(mousedown.defaultPrevented).toBe(true);
+            expect(document.activeElement).toBe(list);
+            expect(list).not.toHaveAttribute('aria-activedescendant');
+
+            banana.click();
             expect(list).toHaveAttribute('aria-activedescendant', 'opt-Banana');
+            expect(onSelect).toHaveBeenCalledWith({ value: 'Banana' }, banana);
+            // Pointer: no focus ring.
+            expect(banana).not.toHaveAttribute('data-focus-visible-added');
+
+            handle.destroy();
+        });
+
+        it('should not focus on a press on a disabled item', () => {
+            const onSelect = vi.fn();
+            const { handle } = setupComposite({ onSelect }, createTestSpecialization({ visibleCount: 2 }));
+            const list = renderList(['Apple', 'Banana']);
+            list.tabIndex = 0;
+            handle.mount(list);
+
+            const banana = document.getElementById('opt-Banana') as HTMLElement;
+            banana.setAttribute('aria-disabled', 'true');
+            expect(press(banana).defaultPrevented).toBe(true);
+            expect(document.activeElement).not.toBe(list);
+            expect(list).not.toHaveAttribute('aria-activedescendant');
+            expect(onSelect).not.toHaveBeenCalled();
+
+            handle.destroy();
+        });
+
+        it('should not prevent a press on an element that is neither an item nor a keepFocusSelector element', () => {
+            const { handle } = setupComposite(
+                {},
+                createTestSpecialization({ visibleCount: 2 }, { keepFocusSelector: '[data-extra]' }),
+            );
+            const list = renderList(['Apple', 'Banana']);
+            list.tabIndex = 0;
+            handle.mount(list);
+
+            const other = document.createElement('span');
+            list.appendChild(other);
+            expect(press(other).defaultPrevented).toBe(false);
+            expect(list).not.toHaveAttribute('aria-activedescendant');
 
             handle.destroy();
         });
@@ -111,6 +178,18 @@ describe(setupComposite, () => {
             expect(handle.handleKeydown(new KeyboardEvent('keydown', { key: 'ArrowDown' }))).toBe(true);
             expect(input).toHaveAttribute('aria-activedescendant', 'opt-Apple');
             expect(list).not.toHaveAttribute('aria-activedescendant');
+
+            // A click on an item selects it and focuses the focus owner, without making it the active item
+            // (the active item follows the keyboard only).
+            input.blur();
+            const banana = document.getElementById('opt-Banana') as HTMLElement;
+            const mousedown = new MouseEvent('mousedown', { bubbles: true, cancelable: true });
+            banana.dispatchEvent(mousedown);
+            expect(mousedown.defaultPrevented).toBe(true);
+            expect(document.activeElement).not.toBe(list);
+            banana.click();
+            expect(document.activeElement).toBe(input);
+            expect(input).toHaveAttribute('aria-activedescendant', 'opt-Apple');
 
             // Enter without an active item is not handled (lets a surrounding form submit).
             handle.clearActiveItem();

@@ -1,4 +1,5 @@
 import { setupComposite } from '../Composite/setupComposite';
+import { includesIgnoreCase } from '../../utils/string/includesIgnoreCase';
 import type { CompositeFilter, CompositeOptions } from '../Composite/types';
 import { getOptionValue } from '../Composite/utils';
 import { createGridNavigation, createListNavigation } from './navigation';
@@ -34,8 +35,7 @@ export function setupListbox(options: CompositeOptions = {}): ListboxHandle {
 
     function isFilteredOut(option: HTMLElement, { value, mode }: CompositeFilter): boolean {
         // `'manual'`: the consumer filters the options, none is hidden.
-        const filterLower = value.toLowerCase();
-        return mode === 'auto' && filterLower.length > 0 && !getOptionValue(option).toLowerCase().includes(filterLower);
+        return mode === 'auto' && value.length > 0 && !includesIgnoreCase(getOptionValue(option), value);
     }
 
     /** Update the filter state of a registered option. Returns whether it changed (then notifies the option). */
