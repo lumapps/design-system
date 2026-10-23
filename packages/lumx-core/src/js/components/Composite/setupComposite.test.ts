@@ -4,7 +4,7 @@ import { createListFocusNavigation } from '../../utils/focusNavigation';
 import { setupComposite } from './setupComposite';
 import { optionActiveEvent } from './constants';
 import { CLASSNAME as STATUS_CLASSNAME } from './CompositeStatus';
-import type { CompositeFilter, CompositeOptions, CompositeSpecialization } from './types';
+import type { CompositeFilter, CompositeOptions, CompositeSpecialization, CompositeState } from './types';
 
 const ITEM_SELECTOR = '[role="option"]';
 
@@ -271,26 +271,30 @@ describe(setupComposite, () => {
             const loadingChanges: boolean[] = [];
             const announcements: boolean[] = [];
             handle.subscribe('loadingChange', (value) => loadingChanges.push(value));
-            handle.subscribe('loadingAnnouncement', (value) => announcements.push(value));
+            handle.subscribe('stateChange', (state) => {
+                if (state && state.isLoadingAnnounced !== announcements[announcements.length - 1])
+                    announcements.push(state.isLoadingAnnounced);
+            });
 
             const unregister1 = handle.registerSkeleton();
             const unregister2 = handle.registerSkeleton();
+            expect(handle.getSnapshot('stateChange')?.isLoading).toBe(true);
             expect(handle.getSnapshot('loadingChange')).toBe(true);
             expect(handle.hasVisibleContent).toBe(true);
             expect(loadingChanges).toEqual([true]);
 
             // Standalone: open from creation, the announcement fires after the delay.
             vi.advanceTimersByTime(499);
-            expect(announcements).toEqual([]);
+            expect(announcements).toEqual([false]);
             vi.advanceTimersByTime(1);
-            expect(announcements).toEqual([true]);
+            expect(announcements).toEqual([false, true]);
 
             unregister1();
             expect(loadingChanges).toEqual([true]);
             unregister2();
             expect(loadingChanges).toEqual([true, false]);
-            expect(announcements).toEqual([true, false]);
-            expect(handle.getSnapshot('loadingChange')).toBe(false);
+            expect(announcements).toEqual([false, true, false]);
+            expect(handle.getSnapshot('stateChange')?.isLoading).toBe(false);
             handle.destroy();
         });
 
@@ -316,14 +320,15 @@ describe(setupComposite, () => {
             handle.subscribe('loadingChange', (value) => loadingChanges.push(value));
 
             const unregister = handle.registerSkeleton({ isNested: true });
+            expect(handle.getSnapshot('stateChange')?.isLoading).toBe(false);
             expect(loadingChanges).toEqual([]);
 
             vi.advanceTimersByTime(500);
-            expect(handle.getSnapshot('loadingAnnouncement')).toBe(true);
+            expect(handle.getSnapshot('stateChange')?.isLoadingAnnounced).toBe(true);
 
             unregister();
             expect(loadingChanges).toEqual([]);
-            expect(handle.getSnapshot('loadingAnnouncement')).toBe(false);
+            expect(handle.getSnapshot('stateChange')?.isLoadingAnnounced).toBe(false);
             handle.destroy();
         });
 
@@ -333,7 +338,7 @@ describe(setupComposite, () => {
                 { focusOwner: { getFocusOwner: () => input } },
                 createTestSpecialization({ visibleCount: 0 }),
             );
-            const isAnnounced = () => handle.getSnapshot('loadingAnnouncement') ?? false;
+            const isAnnounced = () => handle.getSnapshot('stateChange')?.isLoadingAnnounced;
 
             // Skeletons registered and unregistered while closed: no announcement.
             handle.registerSkeleton()();
@@ -469,6 +474,80 @@ describe(setupComposite, () => {
             second.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }));
             expect(second).toHaveAttribute('aria-activedescendant', 'opt-Cherry');
             handle.destroy();
+        });
+    });
+
+    describe('stateChange (live region state)', () => {
+        beforeEach(() => {
+            vi.useFakeTimers();
+        });
+        afterEach(() => {
+            vi.useRealTimers();
+        });
+
+        it('should have a value from creation: open at once when standalone', () => {
+            const { handle } = setupComposite({}, createTestSpecialization({ visibleCount: 2 }));
+            expect(handle.getSnapshot('stateChange')).toEqual({
+                optionsLength: 0,
+                inputValue: '',
+                isCountHidden: false,
+                isLoading: false,
+                isLoadingAnnounced: false,
+                isOpenForAnnouncement: true,
+            });
+            handle.destroy();
+        });
+
+        it('should open for the live region 100ms after the open, and close at once (linked)', () => {
+            const input = renderInput();
+            const { handle } = setupComposite(
+                { focusOwner: { getFocusOwner: () => input } },
+                createTestSpecialization({ visibleCount: 0 }),
+            );
+            const changes: Array<boolean | undefined> = [];
+            handle.subscribe('stateChange', (state) => changes.push(state?.isOpenForAnnouncement));
+            expect(handle.getSnapshot('stateChange')?.isOpenForAnnouncement).toBe(false);
+
+            handle.setOpen(true);
+            vi.advanceTimersByTime(99);
+            expect(changes).toEqual([]);
+            vi.advanceTimersByTime(1);
+            expect(changes).toEqual([true]);
+
+            handle.setOpen(false);
+            expect(changes).toEqual([true, false]);
+
+            // A close before the delay cancels the pending open.
+            handle.setOpen(true);
+            handle.setOpen(false);
+            vi.advanceTimersByTime(100);
+            expect(changes).toEqual([true, false]);
+            handle.destroy();
+        });
+
+        it('should carry the visible count and the focus owner input value, and reset on destroy', () => {
+            const input = renderInput();
+            input.value = 'ap';
+            const state = { visibleCount: 0 };
+            const { handle, notifyOptionsChange } = setupComposite(
+                { focusOwner: { getFocusOwner: () => input, getInputValue: () => input.value } },
+                createTestSpecialization(state),
+            );
+            const changes: Array<Partial<CompositeState>> = [];
+            handle.subscribe('stateChange', (value) => {
+                if (!value) return;
+                const { optionsLength, inputValue, isLoading, isLoadingAnnounced } = value;
+                changes.push({ optionsLength, inputValue, isLoading, isLoadingAnnounced });
+            });
+
+            state.visibleCount = 2;
+            notifyOptionsChange();
+            expect(changes).toEqual([
+                { optionsLength: 2, inputValue: 'ap', isLoading: false, isLoadingAnnounced: false },
+            ]);
+
+            handle.destroy();
+            expect(handle.getSnapshot('stateChange')).toMatchObject({ optionsLength: 0, isOpenForAnnouncement: false });
         });
     });
 });

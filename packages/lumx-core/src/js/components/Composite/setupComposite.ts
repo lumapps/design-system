@@ -12,10 +12,21 @@ import type {
     CompositeNavigation,
     CompositeOptions,
     CompositeSpecialization,
+    CompositeState,
 } from './types';
 
 /** Delay before announcing loading in the live region (ms). */
 const LOADING_ANNOUNCEMENT_DELAY = 500;
+
+/**
+ * Delay before the live region content shows after the composite opens (ms).
+ *
+ * The combobox popover uses `closeMode="hide"` (`display:none` when closed), so the live region container is
+ * not in the accessibility tree until the popover becomes visible. Screen readers only detect content
+ * *changes* in live regions that are already visible. This delay ensures the popover's `display:none` is
+ * removed and the accessibility tree is updated before content is inserted, so screen readers announce it.
+ */
+const OPEN_ANNOUNCEMENT_DELAY = 100;
 
 /** The `optionsChange` payload before any item registers. */
 const INITIAL_OPTIONS = { optionsLength: 0, inputValue: '', isCountHidden: false };
@@ -71,7 +82,7 @@ export function setupComposite(options: CompositeOptions, specialization: Compos
 
     /** The current filter (see {@link CompositeHandle.setFilter}). */
     let filter = NO_FILTER;
-    /** The last `optionsChange` payload. */
+    /** The last `optionsChange` payload (the visible items part of the live region state). */
     let lastOptions: Required<NonNullable<CompositeEventMap['optionsChange']>> = INITIAL_OPTIONS;
     /**
      * Registered skeletons, one token per registration: a stale cleanup (e.g. after a destroy) finds no
@@ -87,15 +98,27 @@ export function setupComposite(options: CompositeOptions, specialization: Compos
     let loadingTimer: ReturnType<typeof setTimeout> | undefined;
     /** Whether a loading announcement has been sent since the items became visible. */
     let announcementSent = false;
+    /** Whether the items are open for the live region (see {@link CompositeState.isOpenForAnnouncement}). */
+    let isOpenForAnnouncement = isStandalone;
+    /** Timer for the delayed open state of the live region. */
+    let openTimer: ReturnType<typeof setTimeout> | undefined;
 
     const isLoading = () => rootSkeletons.size > 0;
+
+    /** The live region state (see {@link CompositeState}). */
+    const getState = (): CompositeState => ({
+        ...lastOptions,
+        isLoading: isLoading(),
+        isLoadingAnnounced: announcementSent,
+        isOpenForAnnouncement,
+    });
 
     /** Subscribers, per event (also the per-item `optionActive:<id>` events). Sets are created on demand. */
     const subscribers = new Map<keyof CompositeEventMap, Set<Subscriber>>();
     /** The last dispatched value of the static events (the per-item events are derived, see `getSnapshot`). */
     type LatestValues = { [K in keyof CompositeEventMap]?: CompositeEventMap[K] };
-    // `open` has a value from creation so pull-based subscribers read it before any change.
-    const initialValues = (): LatestValues => ({ open: isOpen });
+    // `open` and `stateChange` have a value from creation so pull-based subscribers read it before any change.
+    const initialValues = (): LatestValues => ({ open: isOpen, stateChange: getState() });
     let latestValues = initialValues();
 
     function emit<K extends keyof CompositeEventMap>(event: K, value: CompositeEventMap[K]) {
@@ -114,6 +137,16 @@ export function setupComposite(options: CompositeOptions, specialization: Compos
         if (previous === id) return;
         if (previous) emit(optionActiveEvent(previous), false);
         if (id) emit(optionActiveEvent(id), true);
+    }
+
+    /** Fire `stateChange` when a field of the live region state changed. */
+    function notifyStateChange() {
+        const next = getState();
+        const last = latestValues.stateChange;
+        if (last && (Object.keys(next) as Array<keyof CompositeState>).every((key) => last[key] === next[key])) {
+            return;
+        }
+        notify('stateChange', next);
     }
 
     // Forward-declared so the DOM listeners can reference `handle` (via closure) before it is constructed.
@@ -163,6 +196,7 @@ export function setupComposite(options: CompositeOptions, specialization: Compos
         ) {
             lastOptions = next;
             notify('optionsChange', next);
+            notifyStateChange();
         }
     }
 
@@ -180,7 +214,7 @@ export function setupComposite(options: CompositeOptions, specialization: Compos
         if (!hasSkeleton() || !isOpen) return;
         loadingTimer = setTimeout(() => {
             announcementSent = true;
-            notify('loadingAnnouncement', true);
+            notifyStateChange();
         }, LOADING_ANNOUNCEMENT_DELAY);
     }
 
@@ -189,7 +223,7 @@ export function setupComposite(options: CompositeOptions, specialization: Compos
         clearTimeout(loadingTimer);
         if (announcementSent) {
             announcementSent = false;
-            notify('loadingAnnouncement', false);
+            notifyStateChange();
         }
     }
 
@@ -201,10 +235,25 @@ export function setupComposite(options: CompositeOptions, specialization: Compos
         syncHidden();
         if (isLoading() !== wasLoading) {
             notify('loadingChange', isLoading());
+            notifyStateChange();
         }
         if (hasSkeleton() === hadSkeleton) return;
         if (hadSkeleton) resetLoadingAnnouncement();
         else startLoadingAnnouncementTimer();
+    }
+
+    /** Set the open state of the live region: delayed on open, at once on close. */
+    function setOpenForAnnouncement(open: boolean) {
+        clearTimeout(openTimer);
+        if (open) {
+            openTimer = setTimeout(() => {
+                isOpenForAnnouncement = true;
+                notifyStateChange();
+            }, OPEN_ANNOUNCEMENT_DELAY);
+        } else {
+            isOpenForAnnouncement = false;
+            notifyStateChange();
+        }
     }
 
     // ── Mount (DOM) ───────────────────────────────────────────
@@ -373,6 +422,7 @@ export function setupComposite(options: CompositeOptions, specialization: Compos
             if (open) startLoadingAnnouncementTimer();
             else resetLoadingAnnouncement();
             notify('open', open);
+            setOpenForAnnouncement(open);
         },
 
         select(option: HTMLElement | null) {
@@ -497,10 +547,12 @@ export function setupComposite(options: CompositeOptions, specialization: Compos
         destroy() {
             unmount();
             clearTimeout(loadingTimer);
+            clearTimeout(openTimer);
             announcementSent = false;
             filter = NO_FILTER;
             lastOptions = INITIAL_OPTIONS;
             isOpen = isStandalone;
+            isOpenForAnnouncement = isStandalone;
             rootSkeletons.clear();
             nestedSkeletons.clear();
             // After the state reset: the initial values read it.

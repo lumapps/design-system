@@ -20,6 +20,29 @@ export interface CompositeFilter {
 /** Event name for the active state of one item. */
 export type OptionActiveEvent = `optionActive:${string}`;
 
+/**
+ * State of a composite for its live region (see `CompositeStatus`): the item count, the loading state and the
+ * open state, as one snapshot (see {@link CompositeEventMap.stateChange}).
+ */
+export interface CompositeState {
+    /** The number of visible items. */
+    optionsLength: number;
+    /** The current input value (combobox only, empty string otherwise). */
+    inputValue: string;
+    /** Whether the item count must not be announced (set by the composite specialization). */
+    isCountHidden: boolean;
+    /** Whether root skeletons are registered (loading), at once. */
+    isLoading: boolean;
+    /** Whether the loading lasted long enough to be announced (500ms after skeletons mount while open). */
+    isLoadingAnnounced: boolean;
+    /**
+     * Whether the items are open for the live region: set 100ms after the composite opens (the popover must
+     * be in the accessibility tree before the live region content changes), cleared at once when it closes.
+     * A standalone composite is always open.
+     */
+    isOpenForAnnouncement: boolean;
+}
+
 /** Map of composite event names to their payload types. */
 export interface CompositeEventMap {
     /** Fired when the active descendant changes (visual focus). Payload: the active item id or null. */
@@ -32,20 +55,22 @@ export interface CompositeEventMap {
     optionsChange: { optionsLength: number; inputValue?: string; isCountHidden?: boolean } | undefined;
     /**
      * Fired immediately when the aggregate loading state changes (root skeleton count transitions
-     * between 0 and >0). Used for empty suppression in the status and for `aria-busy` on the list.
+     * between 0 and >0). Used for `aria-busy` on the list. The live region reads the loading state and
+     * the loading announcement from {@link stateChange}.
      */
     loadingChange: boolean;
-    /**
-     * Fired after a 500ms debounce when loading persists while the items are visible,
-     * or immediately when loading ends. Used to control the loading message text in the live region.
-     */
-    loadingAnnouncement: boolean;
     /**
      * Fired when the items become visible or hidden (see {@link CompositeHandle.setOpen}).
      * Inside a combobox, this is the combobox open state. A standalone composite is open from
      * creation and never closes.
      */
     open: boolean;
+    /**
+     * Fired when any field of the live region state changes (see {@link CompositeState}): the visible count,
+     * the loading state, the loading announcement, and the delayed open state. Has a value from creation
+     * (`undefined` only as the initial value of the framework hooks, without a handle).
+     */
+    stateChange: CompositeState | undefined;
     /**
      * Fired only when this item becomes the active descendant (true)
      * or stops being the active descendant (false).
@@ -58,7 +83,7 @@ export interface CompositeEventMap {
  * Link to a parent widget that owns focus (e.g. a combobox trigger).
  * Without it, the composite is standalone and owns focus itself.
  * The parent sets the open state ({@link CompositeHandle.setOpen}) and observes the composite through its
- * events (e.g. `optionsChange`).
+ * events (e.g. `stateChange`).
  */
 export interface CompositeFocusOwnerLink {
     /** The element that holds DOM focus and `aria-activedescendant`. */
