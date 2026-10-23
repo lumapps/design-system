@@ -5289,13 +5289,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@trysound/sax@npm:0.2.0":
-  version: 0.2.0
-  resolution: "@trysound/sax@npm:0.2.0"
-  checksum: 10/7379713eca480ac0d9b6c7b063e06b00a7eac57092354556c81027066eb65b61ea141a69d0cc2e15d32e05b2834d4c9c2184793a5e36bbf5daf05ee5676af18c
-  languageName: node
-  linkType: hard
-
 "@ts-morph/common@npm:~0.28.1":
   version: 0.28.1
   resolution: "@ts-morph/common@npm:0.28.1"
@@ -22493,8 +22486,8 @@ __metadata:
   linkType: hard
 
 "svgo@npm:^2.7.0":
-  version: 2.8.3
-  resolution: "svgo@npm:2.8.3"
+  version: 2.8.4
+  resolution: "svgo@npm:2.8.4"
   dependencies:
     commander: "npm:^7.2.0"
     css-select: "npm:^4.1.3"
@@ -22504,8 +22497,25 @@ __metadata:
     sax: "npm:^1.5.0"
     stable: "npm:^0.1.8"
   bin:
-    svgo: ./bin/svgo
-  checksum: 10/02e2affc61e277cef18013efc45cb1783f2e7d44949bd245671b0e37bb001130248bbff235360adf185b686db2bf07d95168b385ef72bbea1b124608b6eef714
+    svgo: bin/svgo
+  checksum: 10/102d2129a427c5b4a773cad5889de2f74feed20fab97d1bacac125952ccfc4fb015874e185e7690681e1970b38359be712ca212a3dac0ac54930acc91b6cd115
+  languageName: node
+  linkType: hard
+
+"svgo@npm:^3.3.5":
+  version: 3.3.5
+  resolution: "svgo@npm:3.3.5"
+  dependencies:
+    commander: "npm:^7.2.0"
+    css-select: "npm:^5.1.0"
+    css-tree: "npm:^2.3.1"
+    css-what: "npm:^6.1.0"
+    csso: "npm:^5.0.5"
+    picocolors: "npm:^1.0.0"
+    sax: "npm:^1.5.0"
+  bin:
+    svgo: bin/svgo
+  checksum: 10/5b5f2246f0c7112e4b7c9e0199f0fd69a1bb2d3dd3545b5d4abe8b962e43010c8fbea90a09a03da9441325fbc0dea5eb1f230a4e89ca757d3f90b310be323ab4
   languageName: node
   linkType: hard
 
@@ -22523,23 +22533,6 @@ __metadata:
   bin:
     svgo: bin/svgo.js
   checksum: 10/72a501b49a9ceed175e1e1a66208516641a9f4a1c1908bb6bf4cf2e9678ce68e827af68a569a532dfdbbf7929abf044bbb8b47aa6a0fc9aedc127791ad1df650
-  languageName: node
-  linkType: hard
-
-"svgo@npm:~3.2.0":
-  version: 3.2.0
-  resolution: "svgo@npm:3.2.0"
-  dependencies:
-    "@trysound/sax": "npm:0.2.0"
-    commander: "npm:^7.2.0"
-    css-select: "npm:^5.1.0"
-    css-tree: "npm:^2.3.1"
-    css-what: "npm:^6.1.0"
-    csso: "npm:^5.0.5"
-    picocolors: "npm:^1.0.0"
-  bin:
-    svgo: ./bin/svgo
-  checksum: 10/2fdf3f2090e17b3c309e60f69c78a2afd5a9771247adb540bae3fce467243f7a601a2a5497ef40998292da41ad828b3eabf3c18b75bf449c2d2cbf6d7f6e96d9
   languageName: node
   linkType: hard
 
