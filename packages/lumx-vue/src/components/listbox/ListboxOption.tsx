@@ -15,10 +15,10 @@ import { useWatchDisposable } from '../../composables/useWatchDisposable';
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { Tooltip } from '../tooltip';
 import type { TooltipProps } from '../tooltip/Tooltip';
-import { useListboxContext } from './context/ListboxContext';
-import { provideListboxOptionContext } from './context/ListboxOptionContext';
-import { useListboxEvent } from './context/useListboxEvent';
-import { optionActiveEvent } from '@lumx/core/js/components/Listbox/constants';
+import { useListboxContext } from '../composite/CompositeContext';
+import { provideListboxOptionContext } from '../composite/CompositeItemContext';
+import { useListboxEvent } from '../composite/useCompositeEvent';
+import { optionActiveEvent } from '@lumx/core/js/components/Composite/constants';
 
 export type ListboxOptionProps = VueToJSXProps<
     UIProps,

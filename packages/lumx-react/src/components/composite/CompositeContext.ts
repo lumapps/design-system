@@ -1,5 +1,5 @@
 import { createContext, useContext } from 'react';
-import type { ListboxHandle } from '@lumx/core/js/components/Listbox/types';
+import type { ListboxHandle } from '@lumx/core/js/components/Composite/types';
 
 /**
  * Context value shared by the listbox sub-components (list, options, sections, skeletons, state).

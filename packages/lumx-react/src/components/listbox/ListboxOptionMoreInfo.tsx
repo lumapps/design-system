@@ -10,9 +10,9 @@ import {
 import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 import { IconButton, IconButtonProps } from '@lumx/react/components/button';
 import { Popover } from '@lumx/react/components/popover';
-import { useListboxOptionContext } from './context/ListboxOptionContext';
-import { useListboxContext } from './context/ListboxContext';
-import { useListboxEvent } from './context/useListboxEvent';
+import { useListboxOptionContext } from '../composite/CompositeItemContext';
+import { useListboxContext } from '../composite/CompositeContext';
+import { useListboxEvent } from '../composite/useCompositeEvent';
 
 /**
  * Props for Combobox.OptionMoreInfo component.

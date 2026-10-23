@@ -6,7 +6,7 @@ import type { ComboboxHandle } from '@lumx/core/js/components/Combobox/types';
 import { useId } from '../../composables/useId';
 import { getName } from '../../utils/VueToJSX';
 import { provideComboboxContext } from './context/ComboboxContext';
-import { provideListboxContext } from '../listbox/context/ListboxContext';
+import { provideListboxContext } from '../composite/CompositeContext';
 
 /**
  * Defines the props of the component.

@@ -1,4 +1,4 @@
-import type { OptionRegistration, SectionRegistration, SectionState } from './types';
+import type { OptionRegistration, SectionRegistration, SectionState } from '../Composite/types';
 
 /**
  * Get the value for an option element.

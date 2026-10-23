@@ -13,8 +13,8 @@ import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 import { IconButton, IconButtonProps } from '../button';
 import { TextField, TextFieldProps } from '../text-field';
-import { useListboxEvent } from '../listbox/context/useListboxEvent';
-import { useListboxContext } from '../listbox/context/ListboxContext';
+import { useListboxEvent } from '../composite/useCompositeEvent';
+import { useListboxContext } from '../composite/CompositeContext';
 import { useComboboxContext } from './context/ComboboxContext';
 import { useComboboxOpen } from './context/useComboboxOpen';
 

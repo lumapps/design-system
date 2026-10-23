@@ -12,7 +12,7 @@ import type { JSXElement } from '@lumx/core/js/types';
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { useClassName } from '../../composables/useClassName';
 import { useWatchDisposable } from '../../composables/useWatchDisposable';
-import { useListboxContext } from './context/ListboxContext';
+import { useListboxContext } from '../composite/CompositeContext';
 
 export type ListboxOptionSkeletonProps = VueToJSXProps<UIProps, ListboxOptionSkeletonPropsToOverride>;
 

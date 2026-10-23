@@ -1,4 +1,4 @@
-import type { ListboxHandle } from '../Listbox/types';
+import type { ListboxHandle } from '../Composite/types';
 
 /**
  * Delay before inserting content into the aria-live region after the popover opens (ms).

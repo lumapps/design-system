@@ -1,5 +1,5 @@
 import { isSelected } from '../Listbox/utils';
-import { setupListbox } from '../Listbox/setupListbox';
+import { setupListbox } from '../Composite/setupComposite';
 import { COMBOBOX_POPOVER_CLASSNAME } from './constants';
 import type { ComboboxCallbacks, ComboboxHandle, OnTriggerAttach } from './types';
 

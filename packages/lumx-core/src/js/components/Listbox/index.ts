@@ -1,5 +1,11 @@
-export { setupListbox } from './setupListbox';
-export type { ListboxEventMap, ListboxFocusOwnerLink, ListboxHandle, ListboxOptions, OptionActiveEvent } from './types';
+export { setupListbox } from '../Composite/setupComposite';
+export type {
+    ListboxEventMap,
+    ListboxFocusOwnerLink,
+    ListboxHandle,
+    ListboxOptions,
+    OptionActiveEvent,
+} from '../Composite/types';
 
 export { ListboxList } from './ListboxList';
 export type { ListboxListProps, ListboxListType } from './ListboxList';
@@ -23,8 +29,8 @@ export type {
 export { ListboxSection } from './ListboxSection';
 export type { ListboxSectionProps, ListboxSectionPropsToOverride, ListboxSectionComponents } from './ListboxSection';
 
-export { ListboxState } from './ListboxState';
-export type { ListboxStateProps } from './ListboxState';
+export { ListboxState } from '../Composite/CompositeStatus';
+export type { ListboxStateProps } from '../Composite/CompositeStatus';
 
 export { subscribeListboxState } from './subscribeListboxState';
 export type { ListboxStateSetters } from './subscribeListboxState';

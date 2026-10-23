@@ -3,12 +3,12 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { vi } from 'vitest';
 
-import { setupListbox } from '@lumx/core/js/components/Listbox/setupListbox';
-import type { ListboxHandle } from '@lumx/core/js/components/Listbox/types';
+import { setupListbox } from '@lumx/core/js/components/Composite/setupComposite';
+import type { ListboxHandle } from '@lumx/core/js/components/Composite/types';
 
-import { ListboxContext, useListboxContext } from './ListboxContext';
-import { Combobox } from '../../combobox';
-import { useListboxEvent } from './useListboxEvent';
+import { ListboxContext, useListboxContext } from './CompositeContext';
+import { Combobox } from '../combobox';
+import { useListboxEvent } from './useCompositeEvent';
 
 /**
  * Reads the live option count through the hook and renders the options as its children —

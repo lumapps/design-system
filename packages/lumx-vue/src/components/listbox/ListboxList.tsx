@@ -11,8 +11,8 @@ import type { JSXElement } from '@lumx/core/js/types';
 import { useClassName } from '../../composables/useClassName';
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { useWatchDisposable } from '../../composables/useWatchDisposable';
-import { useListboxEvent } from './context/useListboxEvent';
-import { provideListboxContext, useListboxContext } from './context/ListboxContext';
+import { useListboxEvent } from '../composite/useCompositeEvent';
+import { provideListboxContext, useListboxContext } from '../composite/CompositeContext';
 
 export type ListboxListProps = VueToJSXProps<UIProps, 'aria-label' | 'aria-busy' | 'aria-multiselectable' | 'id'>;
 
