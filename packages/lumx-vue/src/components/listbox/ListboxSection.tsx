@@ -14,7 +14,7 @@ import type { JSXElement } from '@lumx/core/js/types';
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { useWatchDisposable } from '../../composables/useWatchDisposable';
 import { ListSection } from '../list';
-import { useListboxContext } from '../composite/CompositeContext';
+import { useListboxHandle } from './context/useListboxHandle';
 
 export type ListboxSectionProps = VueToJSXProps<UIProps, ListboxSectionPropsToOverride | 'hidden' | 'aria-hidden'>;
 
@@ -27,7 +27,7 @@ export type ListboxSectionProps = VueToJSXProps<UIProps, ListboxSectionPropsToOv
 const ListboxSection = defineComponent(
     (props: ListboxSectionProps, { slots }) => {
         const className = useClassName(() => props.class);
-        const { list } = useListboxContext();
+        const list = useListboxHandle();
         const sectionRef = ref<HTMLElement | null>(null);
         const sectionState = reactive({ hidden: false, 'aria-hidden': false });
 

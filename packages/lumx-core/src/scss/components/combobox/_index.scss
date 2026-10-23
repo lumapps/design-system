@@ -2,7 +2,7 @@
    Combobox
    ========================================================================== */
 
-// NB: list, option, section and state styles live in `components/list-box`.
+// NB: list, option and section styles live in `components/list-box`, the state styles in `components/composite`.
 
 // ---- Input -----------------------
 .#{$lumx-base-prefix}-combobox-input {
@@ -21,11 +21,11 @@
         overflow-y: auto;
     }
 
-    // Hide the popover when it holds no visible list (the listbox sets `hidden` on a list without visible
+    // Hide the popover when it holds no visible list (the composite sets `hidden` on a list without visible
     // content) and no state
     $visible-list: ':is([role="listbox"], [role="grid"]):not([hidden])';
 
-    &:not(:has(#{$visible-list}, .#{$lumx-base-prefix}-listbox-state)) {
+    &:not(:has(#{$visible-list}, .#{$lumx-base-prefix}-composite-status)) {
         display: none;
     }
 }

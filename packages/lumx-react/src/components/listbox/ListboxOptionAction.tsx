@@ -9,7 +9,7 @@ import {
 import { forwardRefPolymorphic } from '@lumx/react/utils/react/forwardRefPolymorphic';
 import { useId } from '@lumx/react/hooks/useId';
 import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';
-import { useListboxContext } from '../composite/CompositeContext';
+import { useCompositeContext } from '../composite/CompositeContext';
 
 /**
  * Combobox.OptionAction props.
@@ -50,7 +50,7 @@ export const ListboxOptionAction = Object.assign(
             const { disabledStateProps, otherProps } = useDisableStateProps(props as any);
             const { children, className, as: Element = 'button', onClick, ...forwardedProps } = otherProps as any;
             const actionId = useId();
-            const { type } = useListboxContext();
+            const { type } = useCompositeContext();
             const isGrid = type === 'grid';
 
             useEffect(() => {

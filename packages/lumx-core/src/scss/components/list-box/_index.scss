@@ -7,16 +7,10 @@
 
 // ---- List -----------------------
 
-// The listbox sets `hidden` on the list when it has no visible content (see `setupListbox`).
-// Before the listbox mounts: hide an empty list.
+// The composite sets `hidden` on the list when it has no visible content (see `setupComposite`).
+// Before the composite mounts: hide an empty list.
 .#{$lumx-base-prefix}-listbox-list:empty {
     display: none;
-}
-
-// ---- State -----------------------
-
-.#{$lumx-base-prefix}-listbox-state {
-    text-align: center;
 }
 
 // ---- Option -----------------------
@@ -35,11 +29,6 @@
         &:nth-child(3n + 2) .#{$lumx-base-prefix}-skeleton-typography {
             width: min(55%, 170px);
         }
-    }
-
-    // Selection state icon (select options), centered in the `after` slot
-    &__selection-icon {
-        margin: auto;
     }
 
     // Allow flex items to shrink below their content width so `truncate` text shows an ellipsis

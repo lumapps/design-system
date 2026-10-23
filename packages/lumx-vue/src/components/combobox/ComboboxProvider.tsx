@@ -6,7 +6,7 @@ import type { ComboboxHandle } from '@lumx/core/js/components/Combobox/types';
 import { useId } from '../../composables/useId';
 import { getName } from '../../utils/VueToJSX';
 import { provideComboboxContext } from './context/ComboboxContext';
-import { provideListboxContext } from '../composite/CompositeContext';
+import { provideCompositeContext } from '../composite/CompositeContext';
 
 /**
  * Defines the props of the component.
@@ -39,8 +39,8 @@ const ComboboxProvider = defineComponent(
         };
 
         provideComboboxContext({ handle, setHandle, listboxId, anchorRef });
-        // The listbox of the combobox: shared with the list, the options and the state through the listbox context.
-        provideListboxContext({ list: computed(() => handle.value?.list ?? null), listboxId, type: 'listbox' });
+        // The listbox of the combobox: shared with the list, the options and the state through the composite context.
+        provideCompositeContext({ handle: computed(() => handle.value?.list ?? null), id: listboxId });
 
         // Force the always open state (`undefined`: the core detects the inline listbox).
         watch([handle, () => props.alwaysOpen], ([handleValue, alwaysOpen]) => {

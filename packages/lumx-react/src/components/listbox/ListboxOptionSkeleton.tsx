@@ -9,7 +9,7 @@ import {
     CLASSNAME,
 } from '@lumx/core/js/components/Listbox/ListboxOptionSkeleton';
 import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
-import { useListboxContext } from '../composite/CompositeContext';
+import { useCompositeContext } from '../composite/CompositeContext';
 
 /**
  * Props for Combobox.OptionSkeleton component.
@@ -50,8 +50,10 @@ export interface ListboxOptionSkeletonProps
  * @return React element(s).
  */
 export const ListboxOptionSkeleton = (props: ListboxOptionSkeletonProps) => {
-    const { list } = useListboxContext();
-    useEffect(() => list?.registerSkeleton(), [list]);
+    const { handle, level = 0 } = useCompositeContext();
+    // A skeleton in a nested level of items does not make the whole list busy.
+    const isNested = level > 0;
+    useEffect(() => handle?.registerSkeleton({ isNested }), [handle, isNested]);
 
     return <UI {...props} />;
 };

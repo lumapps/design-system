@@ -8,9 +8,8 @@ import { CLASSNAME as COMBOBOX_OPTION_CLASSNAME } from '../Listbox/ListboxOption
 import { CLASSNAME as COMBOBOX_OPTION_SKELETON_CLASSNAME } from '../Listbox/ListboxOptionSkeleton';
 import { CLASSNAME as COMBOBOX_POPOVER_CLASSNAME } from './ComboboxPopover';
 import { CLASSNAME as COMBOBOX_SECTION_CLASSNAME } from '../Listbox/ListboxSection';
-import { CLASSNAME as COMBOBOX_STATE_CLASSNAME } from '../Composite/CompositeStatus';
+import { CLASSNAME as STATUS_CLASSNAME } from '../Composite/CompositeStatus';
 import { VISUALLY_HIDDEN } from '../../constants';
-import { setupCombobox } from './setupCombobox';
 import type { ComboboxInputOptions } from './types';
 
 // ─── Fixtures ────────────────────────────────────────────────────
@@ -2812,11 +2811,13 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
     describe('Combobox.State - Live region', () => {
         it('should always render a live region element', () => {
             renderWithState(t.emptyStateTemplate);
-            const stateEl = queryByClassName(document.body, COMBOBOX_STATE_CLASSNAME);
+            const stateEl = queryByClassName(document.body, STATUS_CLASSNAME);
             expect(stateEl).toBeInTheDocument();
             expect(stateEl).toHaveAttribute('role', 'status');
             expect(stateEl).toHaveAttribute('aria-live', 'polite');
             expect(stateEl).toHaveAttribute('aria-atomic', 'true');
+            // Keeps the class names of the previous versions
+            expect(stateEl).toHaveClass('lumx-listbox-state', 'lumx-combobox-state');
         });
     });
 
@@ -2831,7 +2832,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
             });
 
             // Options are visible — state container should be visually hidden
-            const stateEl = queryByClassName(document.body, COMBOBOX_STATE_CLASSNAME);
+            const stateEl = queryByClassName(document.body, STATUS_CLASSNAME);
             expect(stateEl).toBeInTheDocument();
             expect(stateEl!.className).toContain(VISUALLY_HIDDEN);
         });
@@ -2853,7 +2854,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
             });
 
             await waitFor(() => {
-                const stateEl = queryByClassName(document.body, COMBOBOX_STATE_CLASSNAME);
+                const stateEl = queryByClassName(document.body, STATUS_CLASSNAME);
                 expect(stateEl).toBeInTheDocument();
                 expect(stateEl!.className).not.toContain(VISUALLY_HIDDEN);
                 expect(stateEl).toHaveTextContent('No results for "z"');
@@ -2873,16 +2874,14 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
             await userEvent.type(input, 'z');
             await waitFor(() => {
                 expect(screen.queryAllByRole('option').length).toBe(0);
-                expect(queryByClassName(document.body, COMBOBOX_STATE_CLASSNAME)!.className).not.toContain(
-                    VISUALLY_HIDDEN,
-                );
+                expect(queryByClassName(document.body, STATUS_CLASSNAME)!.className).not.toContain(VISUALLY_HIDDEN);
             });
 
             // Clear input — options reappear
             await userEvent.clear(input);
             await waitFor(() => {
                 expect(screen.queryAllByRole('option').length).toBeGreaterThan(0);
-                expect(queryByClassName(document.body, COMBOBOX_STATE_CLASSNAME)!.className).toContain(VISUALLY_HIDDEN);
+                expect(queryByClassName(document.body, STATUS_CLASSNAME)!.className).toContain(VISUALLY_HIDDEN);
             });
         });
 
@@ -2901,9 +2900,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
             });
 
             await waitFor(() => {
-                expect(queryByClassName(document.body, COMBOBOX_STATE_CLASSNAME)).toHaveTextContent(
-                    'No results for "z"',
-                );
+                expect(queryByClassName(document.body, STATUS_CLASSNAME)).toHaveTextContent('No results for "z"');
             });
         });
 
@@ -2919,17 +2916,13 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
             // Type "z" — list becomes empty
             await userEvent.type(input, 'z');
             await waitFor(() => {
-                expect(queryByClassName(document.body, COMBOBOX_STATE_CLASSNAME)).toHaveTextContent(
-                    'No results for "z"',
-                );
+                expect(queryByClassName(document.body, STATUS_CLASSNAME)).toHaveTextContent('No results for "z"');
             });
 
             // Keep typing "zz" — list stays empty, message should update
             await userEvent.type(input, 'z');
             await waitFor(() => {
-                expect(queryByClassName(document.body, COMBOBOX_STATE_CLASSNAME)).toHaveTextContent(
-                    'No results for "zz"',
-                );
+                expect(queryByClassName(document.body, STATUS_CLASSNAME)).toHaveTextContent('No results for "zz"');
             });
         });
     });
@@ -2945,7 +2938,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
             });
 
             await waitFor(() => {
-                const stateEl = queryByClassName(document.body, COMBOBOX_STATE_CLASSNAME);
+                const stateEl = queryByClassName(document.body, STATUS_CLASSNAME);
                 expect(stateEl).toBeInTheDocument();
                 expect(stateEl).toHaveTextContent('10 result(s) available');
             });
@@ -2967,7 +2960,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
             });
 
             await waitFor(() => {
-                const stateEl = queryByClassName(document.body, COMBOBOX_STATE_CLASSNAME);
+                const stateEl = queryByClassName(document.body, STATUS_CLASSNAME);
                 expect(stateEl).toHaveTextContent('1 result(s) available');
             });
         });
@@ -2988,7 +2981,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
             });
 
             await waitFor(() => {
-                const stateEl = queryByClassName(document.body, COMBOBOX_STATE_CLASSNAME);
+                const stateEl = queryByClassName(document.body, STATUS_CLASSNAME);
                 expect(stateEl).toHaveTextContent('No results');
                 expect(stateEl).not.toHaveTextContent('result(s) available');
             });
@@ -3008,7 +3001,7 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
             // Content is deferred after open to allow the aria-live region
             // to become visible in the accessibility tree first.
             await waitFor(() => {
-                const stateEl = queryByClassName(document.body, COMBOBOX_STATE_CLASSNAME);
+                const stateEl = queryByClassName(document.body, STATUS_CLASSNAME);
                 expect(stateEl).toBeInTheDocument();
                 expect(stateEl!.className).not.toContain(VISUALLY_HIDDEN);
                 expect(stateEl).toHaveTextContent('Service unavailable');
@@ -3025,16 +3018,8 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
             });
 
             await waitFor(() => {
-                expect(queryByClassName(document.body, COMBOBOX_STATE_CLASSNAME)).toHaveTextContent(
-                    'Please try again later',
-                );
+                expect(queryByClassName(document.body, STATUS_CLASSNAME)).toHaveTextContent('Please try again later');
             });
-        });
-
-        it('should have role=status on the state container', () => {
-            renderWithState(t.errorStateTemplate);
-            expect(queryByClassName(document.body, COMBOBOX_STATE_CLASSNAME)).toHaveAttribute('role', 'status');
-            expect(queryByClassName(document.body, COMBOBOX_STATE_CLASSNAME)).toHaveAttribute('aria-live', 'polite');
         });
     });
 
@@ -3135,124 +3120,13 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
     });
 
     describe('Combobox.State - Loading state', () => {
-        it('should suppress empty message while skeletons are mounted', async () => {
+        it('should show the loading message instead of the empty message while skeletons are mounted', async () => {
             renderWithState(t.loadingTemplate);
             await userEvent.click(screen.getByRole('combobox'));
-            const stateEl = queryByClassName(document.body, COMBOBOX_STATE_CLASSNAME);
-            expect(stateEl).toBeInTheDocument();
+            // The loading message is announced after a 500ms debounce
+            await waitFor(() => expect(screen.getByRole('status')).toHaveTextContent('Loading fruits…'));
             // Should not show "No results" since we have skeletons (loading)
-            expect(stateEl).not.toHaveTextContent('No results');
-        });
-
-        it('should announce loading after debounce via handle events (only when open)', () => {
-            // Test the handle's debounce behavior directly (framework-agnostic)
-            vi.useFakeTimers();
-            try {
-                const callbacks = { onSelect: vi.fn() };
-                const handle = setupCombobox(callbacks);
-
-                const loadingChanges: boolean[] = [];
-                const announcements: boolean[] = [];
-                handle.list.subscribe('loadingChange', (v) => loadingChanges.push(v));
-                handle.list.subscribe('loadingAnnouncement', (v) => announcements.push(v));
-
-                // Register 3 skeletons while closed
-                const cleanup1 = handle.list.registerSkeleton();
-                const cleanup2 = handle.list.registerSkeleton();
-                const cleanup3 = handle.list.registerSkeleton();
-
-                // loadingChange fires immediately
-                expect(loadingChanges).toEqual([true]);
-                // No announcement while closed
-                expect(announcements).toEqual([]);
-
-                // After 500ms — still no announcement because combobox is closed
-                vi.advanceTimersByTime(500);
-                expect(announcements).toEqual([]);
-
-                // Open the combobox — timer starts now
-                handle.setIsOpen(true);
-
-                // After 499ms — still no announcement
-                vi.advanceTimersByTime(499);
-                expect(announcements).toEqual([]);
-
-                // After 500ms — announcement fires
-                vi.advanceTimersByTime(1);
-                expect(announcements).toEqual([true]);
-
-                // Unregister all — loading ends
-                cleanup1();
-                cleanup2();
-                cleanup3();
-                expect(loadingChanges).toEqual([true, false]);
-                expect(announcements).toEqual([true, false]);
-
-                handle.destroy();
-            } finally {
-                vi.useRealTimers();
-            }
-        });
-
-        it('should retrigger loading announcement when reopening', () => {
-            vi.useFakeTimers();
-            try {
-                const callbacks = { onSelect: vi.fn() };
-                const handle = setupCombobox(callbacks);
-
-                const announcements: boolean[] = [];
-                handle.list.subscribe('loadingAnnouncement', (v) => announcements.push(v));
-
-                // Register skeletons and open
-                const cleanup1 = handle.list.registerSkeleton();
-                handle.setIsOpen(true);
-
-                // Wait for announcement
-                vi.advanceTimersByTime(500);
-                expect(announcements).toEqual([true]);
-
-                // Close the combobox — announcement resets
-                handle.setIsOpen(false);
-                expect(announcements).toEqual([true, false]);
-
-                // Reopen while still loading — announcement retriggers after delay
-                handle.setIsOpen(true);
-                expect(announcements).toEqual([true, false]);
-
-                vi.advanceTimersByTime(500);
-                expect(announcements).toEqual([true, false, true]);
-
-                // Cleanup
-                cleanup1();
-                expect(announcements).toEqual([true, false, true, false]);
-
-                handle.destroy();
-            } finally {
-                vi.useRealTimers();
-            }
-        });
-
-        it('should not announce loading if skeletons register and unregister while closed', () => {
-            vi.useFakeTimers();
-            try {
-                const callbacks = { onSelect: vi.fn() };
-                const handle = setupCombobox(callbacks);
-
-                const announcements: boolean[] = [];
-                handle.list.subscribe('loadingAnnouncement', (v) => announcements.push(v));
-
-                // Register and unregister skeletons while closed
-                const cleanup = handle.list.registerSkeleton();
-                vi.advanceTimersByTime(500);
-                cleanup();
-
-                // No announcements should have fired
-                expect(announcements).toEqual([]);
-
-                handle.destroy();
-            } finally {
-                vi.useRealTimers();
-            }
+            expect(screen.getByRole('status')).not.toHaveTextContent('No results');
         });
     });
 }

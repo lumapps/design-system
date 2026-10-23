@@ -8,8 +8,9 @@ import {
     CLASSNAME,
 } from '@lumx/core/js/components/Listbox/ListboxList';
 import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
-import { useListboxEvent } from '../composite/useCompositeEvent';
-import { ListboxContext, ListboxContextValue, useListboxContext } from '../composite/CompositeContext';
+import { CompositeContext, CompositeContextValue, useCompositeContext } from '../composite/CompositeContext';
+import { useCompositeEvent } from '../composite/useCompositeEvent';
+import { useListboxHandle } from './context/useListboxHandle';
 
 /** Props of the list component (`Combobox.List` and `Listbox.List`). */
 export interface ListboxListProps extends ReactToJSX<UIProps, 'aria-busy'> {}
@@ -30,23 +31,24 @@ export interface ListboxListProps extends ReactToJSX<UIProps, 'aria-busy'> {}
  */
 export const ListboxList = forwardRef<ListboxListProps, HTMLUListElement>((props, ref) => {
     const { 'aria-label': ariaLabel, type = 'listbox', className, children, ...forwardedProps } = props;
-    const { list, listboxId } = useListboxContext();
+    const { id: listboxId } = useCompositeContext();
+    const list = useListboxHandle();
 
     const internalRef = useRef<HTMLUListElement>(null);
     const mergedRef = useMergeRefs(ref, internalRef);
 
     const selectionType = String(forwardedProps['aria-multiselectable']) === 'true' ? 'multiple' : 'single';
 
-    const contextValue = useMemo<ListboxContextValue>(
-        () => ({ list, listboxId, type, selectionType }),
+    const contextValue = useMemo<CompositeContextValue>(
+        () => ({ handle: list, id: listboxId, type, selectionType, level: 0 }),
         [list, listboxId, type, selectionType],
     );
 
     // Options are rendered only while visible (standalone: always; combobox: while open).
-    const isOpen = useListboxEvent(list, 'open', false);
-    const options = useListboxEvent(list, 'optionsChange', undefined);
+    const isOpen = useCompositeEvent(list, 'open', false);
+    const options = useCompositeEvent(list, 'optionsChange', undefined);
     const visibleCount = options?.optionsLength ?? 0;
-    const isLoading = useListboxEvent(list, 'loadingChange', false);
+    const isLoading = useCompositeEvent(list, 'loadingChange', false);
 
     // Mount the list element on the handle.
     useEffect(() => {
@@ -61,7 +63,7 @@ export const ListboxList = forwardRef<ListboxListProps, HTMLUListElement>((props
     }, [isOpen, visibleCount, list]);
 
     return (
-        <ListboxContext.Provider value={contextValue}>
+        <CompositeContext.Provider value={contextValue}>
             {UI({
                 ...forwardedProps,
                 // Standalone: the list itself is the (single) tab stop.
@@ -74,7 +76,7 @@ export const ListboxList = forwardRef<ListboxListProps, HTMLUListElement>((props
                 type,
                 children: isOpen ? children : null,
             } as UIProps)}
-        </ListboxContext.Provider>
+        </CompositeContext.Provider>
     );
 });
 ListboxList.displayName = COMPONENT_NAME;
