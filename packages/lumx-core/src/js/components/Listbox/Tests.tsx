@@ -1,6 +1,8 @@
 import userEvent from '@testing-library/user-event';
 import { screen, within } from '@testing-library/dom';
 import { mdiCheckboxBlankOutline, mdiCheckboxMarked, mdiCheckCircle, mdiPencil, mdiRadioboxBlank } from '@lumx/icons';
+import { getByTagName, queryAllByClassName } from '../../../testing/queries';
+import { CLASSNAME as SELECTION_ICON_CLASSNAME } from '../Composite/CompositeSelectionIcon';
 
 // ─── Fixtures ────────────────────────────────────────────────────
 
@@ -260,8 +262,8 @@ export default function listboxTests({
 
         describe('SelectionIcon', () => {
             const getIconPaths = (listbox: HTMLElement) =>
-                Array.from(listbox.querySelectorAll('.lumx-listbox-option__selection-icon path')).map((path) =>
-                    path.getAttribute('d'),
+                queryAllByClassName(listbox, SELECTION_ICON_CLASSNAME).map((icon) =>
+                    getByTagName(icon, 'path').getAttribute('d'),
                 );
 
             it('should render radio icons in a single selection list', () => {

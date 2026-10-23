@@ -1,7 +1,7 @@
 import { ReactNode, useEffect, useMemo, useRef, useState } from 'react';
 import { setupListbox } from '@lumx/core/js/components/Listbox/setupListbox';
 import { useId } from '@lumx/react/hooks/useId';
-import { ListboxContext, ListboxContextValue } from './context/ListboxContext';
+import { CompositeContext, CompositeContextValue } from '../composite/CompositeContext';
 
 /**
  * Defines the props of the component.
@@ -33,7 +33,7 @@ export function ListboxProvider(props: ListboxProviderProps) {
     // Tear down the handle (pending timers, subscribers) on unmount.
     useEffect(() => () => list.destroy(), [list]);
 
-    const contextValue = useMemo<ListboxContextValue>(() => ({ list, listboxId, type: 'listbox' }), [list, listboxId]);
-    return <ListboxContext.Provider value={contextValue}>{children}</ListboxContext.Provider>;
+    const contextValue = useMemo<CompositeContextValue>(() => ({ handle: list, id: listboxId }), [list, listboxId]);
+    return <CompositeContext.Provider value={contextValue}>{children}</CompositeContext.Provider>;
 }
 ListboxProvider.displayName = 'ListboxProvider';

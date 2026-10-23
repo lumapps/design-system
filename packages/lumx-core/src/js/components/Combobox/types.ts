@@ -1,7 +1,5 @@
 import type { ListboxHandle } from '../Listbox/types';
 
-export type { SectionState, SectionRegistration, OptionRegistration, OptionActiveEvent } from '../Listbox/types';
-
 /** Callbacks provided by the consumer (React/Vue) to react to combobox state changes. */
 export interface ComboboxCallbacks {
     /** Called when an option is selected (click or keyboard). */

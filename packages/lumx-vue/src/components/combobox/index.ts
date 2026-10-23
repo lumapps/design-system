@@ -6,7 +6,7 @@ import ListboxOptionMoreInfo from '../listbox/ListboxOptionMoreInfo';
 import ListboxOptionSkeleton from '../listbox/ListboxOptionSkeleton';
 import ListboxOptionSelectionIcon from '../listbox/ListboxOptionSelectionIcon';
 import ListboxSection from '../listbox/ListboxSection';
-import ListboxState from '../listbox/ListboxState';
+import CompositeStatus from '../composite/CompositeStatus';
 import ComboboxButton from './ComboboxButton';
 import ComboboxInput from './ComboboxInput';
 import ComboboxPopover from './ComboboxPopover';
@@ -23,7 +23,7 @@ export type { ListboxOptionActionProps as ComboboxOptionActionProps } from '../l
 export type { ListboxOptionMoreInfoProps as ComboboxOptionMoreInfoProps } from '../listbox/ListboxOptionMoreInfo';
 export type { ListboxOptionSkeletonProps as ComboboxOptionSkeletonProps } from '../listbox/ListboxOptionSkeleton';
 export type { ListboxSectionProps as ComboboxSectionProps } from '../listbox/ListboxSection';
-export type { ListboxStateProps as ComboboxStateProps } from '../listbox/ListboxState';
+export type { CompositeStatusProps as ComboboxStateProps } from '../composite/CompositeStatus';
 
 export type { ComboboxButtonLabelDisplayMode } from '@lumx/core/js/components/Combobox/ComboboxButton';
 export type { ListboxListType as ComboboxListType } from '@lumx/core/js/components/Listbox/ListboxList';
@@ -55,7 +55,7 @@ export const Combobox = {
     /** Labelled group of options that auto-hides when all its child options are filtered out. */
     Section: ListboxSection,
     /** Displays empty, error, and loading state messages for the combobox list. */
-    State: ListboxState,
+    State: CompositeStatus,
     /** Visual separator between option groups (alias for ListDivider). Purely decorative — invisible to screen readers. */
     Divider: ListDivider,
 };

@@ -1,30 +1,31 @@
 import { ReactNode, useEffect, useState } from 'react';
 
 import {
-    ListboxState as UI,
-    ListboxStateProps as UIProps,
+    CompositeStatus as UI,
+    CompositeStatusProps as UIProps,
     COMPONENT_NAME,
     CLASSNAME,
-} from '@lumx/core/js/components/Listbox/ListboxState';
+} from '@lumx/core/js/components/Composite/CompositeStatus';
 import { subscribeListboxState } from '@lumx/core/js/components/Listbox/subscribeListboxState';
 import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 import { GenericBlock } from '../generic-block';
 import { Text } from '../text';
-import { useListboxEvent } from './context/useListboxEvent';
-import { useListboxContext } from './context/ListboxContext';
+import { useCompositeContext } from './CompositeContext';
+import { useCompositeEvent } from './useCompositeEvent';
 
 /**
- * Props for Combobox.State component.
+ * Props of the composite status (`Combobox.State`, `Listbox.State`).
  */
-export interface ListboxStateProps extends ReactToJSX<UIProps, 'state'> {
+export interface CompositeStatusProps extends ReactToJSX<UIProps, 'state'> {
     /** Additional content rendered after the state message. */
     children?: ReactNode;
 }
 
 /**
- * Combobox.State component - displays empty and error states for the combobox list.
+ * CompositeStatus: the live region of a composite (list, grid or tree), exposed as `Combobox.State` and
+ * `Listbox.State`. Displays the empty, loading, error and item count messages.
  *
- * Place this component as a sibling to `Combobox.List` inside a `Combobox.Popover`:
+ * Place this component as a sibling to `Combobox.List` inside a `Combobox.Popover` (or inside the list):
  *
  * ```tsx
  * <Combobox.Popover>
@@ -42,17 +43,17 @@ export interface ListboxStateProps extends ReactToJSX<UIProps, 'state'> {
  *   Takes priority over all other states.
  * - **Loading state**: active when `loadingMessage` is provided and skeletons have been
  *   mounted for at least 500ms. Suppresses the empty state while loading.
- * - **Empty state**: active when `emptyMessage` is provided and the list has no visible options
+ * - **Empty state**: active when `emptyMessage` is provided and the composite has no visible items
  *   and is not loading.
- * - **Option count**: active when `nbOptionMessage` is provided and the list is not empty,
+ * - **Item count**: active when `nbOptionMessage` is provided and the composite is not empty,
  *   not loading, and not in error.
  *
  * @param props Component props.
  * @return React element.
  */
-export const ListboxState = (props: ListboxStateProps) => {
-    const { list } = useListboxContext();
-    const optionsState = useListboxEvent(list, 'optionsChange', undefined);
+export const CompositeStatus = (props: CompositeStatusProps) => {
+    const { handle: list } = useCompositeContext();
+    const optionsState = useCompositeEvent(list, 'optionsChange', undefined);
 
     const [isLoading, setIsLoading] = useState(false);
     const [shouldAnnounce, setShouldAnnounce] = useState(false);
@@ -71,5 +72,5 @@ export const ListboxState = (props: ListboxStateProps) => {
     return UI({ ...props, loadingMessage, state }, { GenericBlock, Text });
 };
 
-ListboxState.displayName = COMPONENT_NAME;
-ListboxState.className = CLASSNAME;
+CompositeStatus.displayName = COMPONENT_NAME;
+CompositeStatus.className = CLASSNAME;

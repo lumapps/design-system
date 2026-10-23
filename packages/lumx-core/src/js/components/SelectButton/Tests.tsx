@@ -438,10 +438,8 @@ export default function selectButtonTests({ components, renderWithState }: Selec
             });
 
             await waitFor(() => {
-                const stateElement = document.body.querySelector('.lumx-listbox-state');
-                expect(stateElement).toBeTruthy();
-                expect(stateElement?.textContent).toContain(TRANSLATIONS.errorMessage);
-                expect(stateElement?.textContent).toContain(TRANSLATIONS.errorTryReloadMessage);
+                expect(screen.getByRole('status')).toHaveTextContent(TRANSLATIONS.errorMessage);
+                expect(screen.getByRole('status')).toHaveTextContent(TRANSLATIONS.errorTryReloadMessage);
             });
         });
     });

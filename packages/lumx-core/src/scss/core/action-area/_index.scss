@@ -32,7 +32,7 @@
         &:hover::before,
         &[data-focus-visible-added]::before,
         &[data-lumx-hover]::before {
-            @include lumx-state(lumx-base-const('state', 'HOVER'), lumx-base-const('emphasis', 'LOW'), 'dark');
+            @include lumx-action-area-overlay-hover('dark');
         }
 
         &:active::before,
@@ -46,7 +46,7 @@
         &:hover::before,
         &[data-focus-visible-added]::before,
         &[data-lumx-hover]::before {
-            @include lumx-state(lumx-base-const('state', 'HOVER'), lumx-base-const('emphasis', 'LOW'), 'light');
+            @include lumx-action-area-overlay-hover('light');
         }
 
         &:active::before,
@@ -65,8 +65,7 @@
     }
 
     &--focus-inset[data-focus-visible-added]::before {
-        outline-style: solid;
-        outline-offset: -2px;
+        @include lumx-action-area-focus-inset;
     }
 
     &--theme-dark[data-focus-visible-added]::before {

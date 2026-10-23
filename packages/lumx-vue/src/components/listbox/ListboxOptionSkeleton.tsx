@@ -12,7 +12,7 @@ import type { JSXElement } from '@lumx/core/js/types';
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { useClassName } from '../../composables/useClassName';
 import { useWatchDisposable } from '../../composables/useWatchDisposable';
-import { useListboxContext } from './context/ListboxContext';
+import { useCompositeContext } from '../composite/CompositeContext';
 
 export type ListboxOptionSkeletonProps = VueToJSXProps<UIProps, ListboxOptionSkeletonPropsToOverride>;
 
@@ -25,10 +25,13 @@ export type ListboxOptionSkeletonProps = VueToJSXProps<UIProps, ListboxOptionSke
 const ListboxOptionSkeleton = defineComponent(
     (props: ListboxOptionSkeletonProps, { slots, attrs }) => {
         const className = useClassName(() => props.class);
-        const { list } = useListboxContext();
+        const compositeContext = useCompositeContext();
 
-        // Register once with the combobox handle on mount
-        useWatchDisposable(list, (h) => h?.registerSkeleton());
+        // Register once with the composite handle on mount
+        // (a skeleton in a nested level of items does not make the whole list busy).
+        useWatchDisposable(compositeContext.handle, (h) =>
+            h?.registerSkeleton({ isNested: (compositeContext.level ?? 0) > 0 }),
+        );
 
         return () => {
             const before = attrs.before as JSXElement;
