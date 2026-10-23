@@ -52,7 +52,8 @@
         "nx/undici": "^7.30.1",
         "gatsby/webpack": "~5.104.1",
         "css-minimizer-webpack-plugin/serialize-javascript": "^7.0.5",
-        "gatsby/cookie": "^0.7.0"
+        "gatsby/cookie": "^0.7.0",
+        "version-changelog/cross-spawn": "^7.0.6"
     },
     "scripts": {
         "build:libs": "nx run-many --target=build --projects=@lumx/icons,@lumx/core,@lumx/react,@lumx/vue",
