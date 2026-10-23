@@ -28,3 +28,8 @@ export function useComboboxContext() {
     }
     return context;
 }
+
+/** Access the Combobox context, or `undefined` outside of a Combobox (does not throw). */
+export function useOptionalComboboxContext(): ComboboxContextValue | undefined {
+    return useContext(ComboboxContext);
+}
