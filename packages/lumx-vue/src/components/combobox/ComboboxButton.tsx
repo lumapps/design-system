@@ -14,8 +14,8 @@ import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { Button } from '../button';
 import { Tooltip } from '../tooltip';
 import { useComboboxContext } from './context/ComboboxContext';
-import { useListboxEvent } from '../listbox/context/useListboxEvent';
-import { useListboxContext } from '../listbox/context/ListboxContext';
+import { useListboxEvent } from '../composite/useCompositeEvent';
+import { useListboxContext } from '../composite/CompositeContext';
 import { useComboboxOpen } from './context/useComboboxOpen';
 
 export type ComboboxButtonProps = VueToJSXProps<UIProps, 'label' | 'renderButton'> & {

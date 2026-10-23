@@ -5,15 +5,15 @@ import {
     type ListboxStateProps as UIProps,
     COMPONENT_NAME,
     CLASSNAME,
-} from '@lumx/core/js/components/Listbox/ListboxState';
+} from '@lumx/core/js/components/Composite/CompositeStatus';
 import { subscribeListboxState } from '@lumx/core/js/components/Listbox/subscribeListboxState';
 
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { useWatchDisposable } from '../../composables/useWatchDisposable';
 import { GenericBlock } from '../generic-block';
 import { Text } from '../text';
-import { useListboxEvent } from './context/useListboxEvent';
-import { useListboxContext } from './context/ListboxContext';
+import { useListboxEvent } from './useCompositeEvent';
+import { useListboxContext } from './CompositeContext';
 
 export type ListboxStateProps = VueToJSXProps<UIProps, 'state'>;
 

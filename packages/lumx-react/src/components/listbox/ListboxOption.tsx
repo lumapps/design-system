@@ -13,11 +13,11 @@ import {
 } from '@lumx/core/js/components/Listbox/ListboxOption';
 import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 import { useId } from '@lumx/react/hooks/useId';
-import { optionActiveEvent } from '@lumx/core/js/components/Listbox/constants';
+import { optionActiveEvent } from '@lumx/core/js/components/Composite/constants';
 import { Tooltip, TooltipProps } from '../tooltip';
-import { useListboxContext } from './context/ListboxContext';
-import { ListboxOptionContext } from './context/ListboxOptionContext';
-import { useListboxEvent } from './context/useListboxEvent';
+import { useListboxContext } from '../composite/CompositeContext';
+import { ListboxOptionContext } from '../composite/CompositeItemContext';
+import { useListboxEvent } from '../composite/useCompositeEvent';
 
 /**
  * Props forwarded to the inner action element (button or link).

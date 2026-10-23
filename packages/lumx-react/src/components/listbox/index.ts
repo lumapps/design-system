@@ -10,7 +10,7 @@ import { ListboxOptionSkeleton } from './ListboxOptionSkeleton';
 import { ListboxProvider } from './ListboxProvider';
 import { ListboxOptionSelectionIcon } from './ListboxOptionSelectionIcon';
 import { ListboxSection } from './ListboxSection';
-import { ListboxState } from './ListboxState';
+import { ListboxState } from '../composite/CompositeStatus';
 
 export const Listbox = {
     /** Standalone listbox provider (creates the listbox handle). */

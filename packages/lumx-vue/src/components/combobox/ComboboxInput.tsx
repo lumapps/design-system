@@ -16,8 +16,8 @@ import { TextField } from '../text-field';
 import { IconButton } from '../button';
 import type { IconButtonProps } from '../button/IconButton';
 import { useComboboxContext } from './context/ComboboxContext';
-import { useListboxEvent } from '../listbox/context/useListboxEvent';
-import { useListboxContext } from '../listbox/context/ListboxContext';
+import { useListboxEvent } from '../composite/useCompositeEvent';
+import { useListboxContext } from '../composite/CompositeContext';
 import { useComboboxOpen } from './context/useComboboxOpen';
 
 /**

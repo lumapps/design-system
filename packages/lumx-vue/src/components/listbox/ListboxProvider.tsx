@@ -1,9 +1,9 @@
 import { defineComponent, onBeforeUnmount, shallowRef } from 'vue';
-import { setupListbox } from '@lumx/core/js/components/Listbox/setupListbox';
+import { setupListbox } from '@lumx/core/js/components/Composite/setupComposite';
 
 import { useId } from '../../composables/useId';
 import { getName } from '../../utils/VueToJSX';
-import { provideListboxContext } from './context/ListboxContext';
+import { provideListboxContext } from '../composite/CompositeContext';
 
 /**
  * Internal standalone listbox provider.

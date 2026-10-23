@@ -8,7 +8,7 @@ import { CLASSNAME as COMBOBOX_OPTION_CLASSNAME } from '../Listbox/ListboxOption
 import { CLASSNAME as COMBOBOX_OPTION_SKELETON_CLASSNAME } from '../Listbox/ListboxOptionSkeleton';
 import { CLASSNAME as COMBOBOX_POPOVER_CLASSNAME } from './ComboboxPopover';
 import { CLASSNAME as COMBOBOX_SECTION_CLASSNAME } from '../Listbox/ListboxSection';
-import { CLASSNAME as COMBOBOX_STATE_CLASSNAME } from '../Listbox/ListboxState';
+import { CLASSNAME as COMBOBOX_STATE_CLASSNAME } from '../Composite/CompositeStatus';
 import { VISUALLY_HIDDEN } from '../../constants';
 import { setupCombobox } from './setupCombobox';
 import type { ComboboxInputOptions } from './types';

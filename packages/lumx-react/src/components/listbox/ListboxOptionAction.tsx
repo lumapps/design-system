@@ -9,7 +9,7 @@ import {
 import { forwardRefPolymorphic } from '@lumx/react/utils/react/forwardRefPolymorphic';
 import { useId } from '@lumx/react/hooks/useId';
 import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';
-import { useListboxContext } from './context/ListboxContext';
+import { useListboxContext } from '../composite/CompositeContext';
 
 /**
  * Combobox.OptionAction props.

@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
-import { CLASSNAME as STATUS_CLASSNAME } from './ListboxState';
-import { setupListbox } from './setupListbox';
+import { CLASSNAME as STATUS_CLASSNAME } from '../Composite/CompositeStatus';
+import { setupListbox } from '../Composite/setupComposite';
 
 /** Render a standalone listbox with one option per label. */
 function render(labels: string[]) {

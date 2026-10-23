@@ -9,7 +9,7 @@ import {
     CLASSNAME,
 } from '@lumx/core/js/components/Listbox/ListboxOptionSkeleton';
 import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
-import { useListboxContext } from './context/ListboxContext';
+import { useListboxContext } from '../composite/CompositeContext';
 
 /**
  * Props for Combobox.OptionSkeleton component.
