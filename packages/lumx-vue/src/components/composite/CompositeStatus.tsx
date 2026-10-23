@@ -7,25 +7,28 @@ import {
     CLASSNAME,
 } from '@lumx/core/js/components/Composite/CompositeStatus';
 
+import type { JSXElement } from '@lumx/core/js/types';
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { GenericBlock } from '../generic-block';
 import { Text } from '../text';
 import { useCompositeContext } from './CompositeContext';
 import { useCompositeEvent } from './useCompositeEvent';
+import { useClassName } from '../../composables/useClassName';
 
 export type CompositeStatusProps = VueToJSXProps<UIProps, 'state'>;
 
 /**
  * CompositeStatus: the live region of a composite (list, grid or tree), exposed as `Combobox.State` and
- * `Listbox.State`. Displays the empty, loading, error and item count messages.
+ * `Listbox.State`. Displays the empty, loading, error and item count messages (and the default slot after them).
  *
  * @param props Component props.
  * @return Vue element.
  */
 const CompositeStatus = defineComponent(
-    (props: CompositeStatusProps) => {
+    (props: CompositeStatusProps, { slots }) => {
         const { handle: list } = useCompositeContext();
         const state = useCompositeEvent(list, 'stateChange', undefined);
+        const className = useClassName(() => props.class);
 
         return () =>
             UI(
@@ -36,6 +39,8 @@ const CompositeStatus = defineComponent(
                     errorTryReloadMessage: props.errorTryReloadMessage,
                     loadingMessage: props.loadingMessage,
                     state: state.value,
+                    className: className.value,
+                    children: slots.default?.() as JSXElement,
                 },
                 { GenericBlock, Text },
             );

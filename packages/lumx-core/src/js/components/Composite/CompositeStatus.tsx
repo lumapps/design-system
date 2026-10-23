@@ -1,4 +1,4 @@
-import type { LumxClassName } from '../../types';
+import type { HasClassName, JSXElement, LumxClassName } from '../../types';
 import { classNames } from '../../utils';
 import type { CompositeState } from './types';
 
@@ -19,7 +19,7 @@ export const LEGACY_CLASSNAME = 'lumx-listbox-state lumx-combobox-state';
 /**
  * Defines the props for the core CompositeStatus template.
  */
-export interface CompositeStatusProps {
+export interface CompositeStatusProps extends HasClassName {
     /**
      * Message to display when the composite has no visible items.
      * Can be a plain string or a function receiving the current input value (for dynamic messages).
@@ -55,6 +55,8 @@ export interface CompositeStatusProps {
      * Without it (no composite handle yet), nothing renders.
      */
     state?: CompositeState;
+    /** Additional content rendered after the state message. */
+    children?: JSXElement;
 }
 
 /**
@@ -87,7 +89,7 @@ export interface CompositeStatusComponents {
  * @return JSX element or null when no state is active.
  */
 export const CompositeStatus = (props: CompositeStatusProps, { GenericBlock, Text }: CompositeStatusComponents) => {
-    const { emptyMessage, nbOptionMessage, errorMessage, errorTryReloadMessage, state } = props;
+    const { emptyMessage, nbOptionMessage, errorMessage, errorTryReloadMessage, state, className, children } = props;
     const isOpen = state?.isOpenForAnnouncement ?? false;
     const optionsLength = state?.optionsLength ?? 0;
     const isEmpty = optionsLength === 0;
@@ -115,6 +117,7 @@ export const CompositeStatus = (props: CompositeStatusProps, { GenericBlock, Tex
     return (
         <GenericBlock
             className={classNames.join(
+                className,
                 !show && classNames.visuallyHidden(),
                 block(),
                 LEGACY_CLASSNAME,
@@ -153,6 +156,7 @@ export const CompositeStatus = (props: CompositeStatusProps, { GenericBlock, Tex
                     )}
                 </>
             )}
+            {children}
         </GenericBlock>
     );
 };

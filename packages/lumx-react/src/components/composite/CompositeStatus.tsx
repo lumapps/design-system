@@ -15,7 +15,7 @@ import { useCompositeEvent } from './useCompositeEvent';
 /**
  * Props of the composite status (`Combobox.State`, `Listbox.State`).
  */
-export interface CompositeStatusProps extends ReactToJSX<UIProps, 'state'> {
+export interface CompositeStatusProps extends ReactToJSX<UIProps, 'state' | 'children'> {
     /** Additional content rendered after the state message. */
     children?: ReactNode;
 }

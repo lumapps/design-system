@@ -47,7 +47,7 @@ export interface ComboboxInputOptions {
 /**
  * Map of combobox event names to their payload types.
  *
- * The combobox owns `open` and `composite`. The other events are the ones of the attached list (see
+ * The combobox owns `open`, `expanded` and `composite`. The other events are the ones of the attached list (see
  * {@link CompositeEventMap}): the combobox forwards them from the current list, re-subscribes when the list
  * changes, and then dispatches the snapshot of the new list (`undefined` when no list is attached).
  */
@@ -58,6 +58,11 @@ export interface ComboboxEventMap extends CompositeEventMap {
      * Replayed on subscribe while open.
      */
     open: boolean;
+    /**
+     * Fired when the trigger `aria-expanded` changes: the popup is open and the list has something to show
+     * (visible items or root skeletons, see {@link CompositeHandle.hasVisibleContent}).
+     */
+    expanded: boolean;
     /**
      * Fired when a composite (listbox, grid, tree, …) attaches as the list of the combobox, or detaches (see
      * {@link ComboboxHandle.attachList}). Payload: the composite handle, or null.

@@ -37,6 +37,8 @@ export function setupCombobox(options: SetupComboboxOptions = {}): ComboboxHandl
 
     /** The popup open state (source of truth, forwarded to the registered list). */
     let isOpen = false;
+    /** The trigger `aria-expanded` (see {@link ComboboxEventMap.expanded}). */
+    let isExpanded = false;
     /** When true, the list stays open (inline list, no popup to open or close). */
     let alwaysOpen = false;
     /** Whether the mounted list is inline (not in a `Combobox.Popover`). */
@@ -48,10 +50,12 @@ export function setupCombobox(options: SetupComboboxOptions = {}): ComboboxHandl
     let abortController: AbortController | null = null;
 
     /** Events owned by the combobox. The other events are forwarded from the attached list. */
-    type OwnEvent = 'open' | 'composite';
-    const isOwnEvent = (event: keyof ComboboxEventMap): event is OwnEvent => event === 'open' || event === 'composite';
+    type OwnEvent = 'open' | 'expanded' | 'composite';
+    const isOwnEvent = (event: keyof ComboboxEventMap): event is OwnEvent =>
+        event === 'open' || event === 'expanded' || event === 'composite';
     const subscribers: { [K in OwnEvent]: Set<(value: ComboboxEventMap[K]) => void> } = {
         open: new Set(),
+        expanded: new Set(),
         composite: new Set(),
     };
 
@@ -104,12 +108,16 @@ export function setupCombobox(options: SetupComboboxOptions = {}): ComboboxHandl
     }
 
     /**
-     * Sync `aria-expanded` on the trigger: true when the popup is open and the list has something to show
-     * (visible items or root skeletons), which changes with the open state, filtering, item register/unregister
-     * and skeleton transitions.
+     * Sync `aria-expanded` on the trigger, and fire `expanded` when it changed: true when the popup is open
+     * and the list has something to show (visible items or root skeletons), which changes with the open
+     * state, filtering, item register/unregister and skeleton transitions.
      */
     function syncExpanded() {
-        trigger?.setAttribute('aria-expanded', String(isOpen && !!list?.hasVisibleContent));
+        const expanded = isOpen && !!list?.hasVisibleContent;
+        trigger?.setAttribute('aria-expanded', String(expanded));
+        if (expanded === isExpanded) return;
+        isExpanded = expanded;
+        notify('expanded', expanded);
     }
 
     /** Options of the list handle: the combobox links it to the trigger (focus owner). */
@@ -399,7 +407,11 @@ export function setupCombobox(options: SetupComboboxOptions = {}): ComboboxHandl
 
         getSnapshot<K extends keyof ComboboxEventMap>(event: K): ComboboxEventMap[K] | undefined {
             if (isOwnEvent(event)) {
-                const own: { [E in OwnEvent]: ComboboxEventMap[E] } = { open: isOpen, composite: list };
+                const own: { [E in OwnEvent]: ComboboxEventMap[E] } = {
+                    open: isOpen,
+                    expanded: isExpanded,
+                    composite: list,
+                };
                 return own[event] as ComboboxEventMap[K];
             }
             return list?.getSnapshot(event as keyof CompositeEventMap) as ComboboxEventMap[K] | undefined;
@@ -410,6 +422,7 @@ export function setupCombobox(options: SetupComboboxOptions = {}): ComboboxHandl
             trigger = null;
             releaseList();
             isOpen = false;
+            isExpanded = false;
             for (const set of Object.values(subscribers)) set.clear();
             for (const forwarded of forwardedEvents.values()) forwarded.unsubscribe?.();
             forwardedEvents.clear();

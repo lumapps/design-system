@@ -204,6 +204,41 @@ describe(setupCombobox, () => {
         combobox.destroy();
     });
 
+    it('should fire expanded when the trigger aria-expanded changes', () => {
+        const combobox = setupCombobox({});
+        const { input, listElement } = render(['Apple']);
+        const [option] = getOptions(listElement);
+        combobox.registerTrigger(input);
+        const changes: boolean[] = [];
+        combobox.subscribe('expanded', (isExpanded) => changes.push(isExpanded));
+        const { list, detach } = combobox.attachList(setupListbox);
+        list.mount(listElement);
+
+        // Open with nothing to show: not expanded.
+        combobox.setIsOpen(true);
+        expect(combobox.getSnapshot('expanded')).toBe(false);
+        expect(changes).toEqual([]);
+
+        // An option registers: expanded.
+        const unregister = list.registerOption(option, () => undefined);
+        expect(input).toHaveAttribute('aria-expanded', 'true');
+        expect(changes).toEqual([true]);
+        expect(combobox.getSnapshot('expanded')).toBe(true);
+
+        // A root skeleton is something to show too.
+        unregister();
+        const unregisterSkeleton = list.registerSkeleton();
+        expect(changes).toEqual([true, false, true]);
+
+        combobox.setIsOpen(false);
+        expect(input).toHaveAttribute('aria-expanded', 'false');
+        expect(changes).toEqual([true, false, true, false]);
+
+        unregisterSkeleton();
+        detach();
+        combobox.destroy();
+    });
+
     it('should forward the list events and re-subscribe them on list change', () => {
         const combobox = setupCombobox({});
         const { input, listElement } = render(['Apple', 'Banana']);
