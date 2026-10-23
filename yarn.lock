@@ -3246,7 +3246,7 @@ __metadata:
   resolution: "@lumx/storybook-testing@workspace:dev-packages/storybook-testing"
   dependencies:
     "@storybook/addon-a11y": "npm:^10.2.19"
-    "@storybook/addon-vitest": "npm:^10.2.19"
+    "@storybook/addon-vitest": "npm:^10.6.2"
     "@vitest/browser-playwright": "npm:^4.1.11"
     storybook-addon-vis: "npm:^3.1.3"
     vitest: "npm:^4.1.11"
@@ -4809,18 +4809,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/addon-vitest@npm:^10.2.19":
-  version: 10.2.19
-  resolution: "@storybook/addon-vitest@npm:10.2.19"
+"@storybook/addon-vitest@npm:^10.6.2":
+  version: 10.6.2
+  resolution: "@storybook/addon-vitest@npm:10.6.2"
   dependencies:
     "@storybook/global": "npm:^5.0.0"
-    "@storybook/icons": "npm:^2.0.1"
+    "@storybook/icons": "npm:^2.0.2"
   peerDependencies:
-    "@vitest/browser": ^3.0.0 || ^4.0.0
-    "@vitest/browser-playwright": ^4.0.0
-    "@vitest/runner": ^3.0.0 || ^4.0.0
-    storybook: ^10.2.19
-    vitest: ^3.0.0 || ^4.0.0
+    "@vitest/browser": ^3.0.0 || ^4.0.0 || ^5.0.0
+    "@vitest/browser-playwright": ^4.0.0 || ^5.0.0
+    "@vitest/runner": ^3.0.0 || ^4.0.0 || ^5.0.0
+    storybook: ^10.6.2
+    vitest: ^3.0.0 || ^4.0.0 || ^5.0.0
   peerDependenciesMeta:
     "@vitest/browser":
       optional: true
@@ -4830,7 +4830,7 @@ __metadata:
       optional: true
     vitest:
       optional: true
-  checksum: 10/6a4640a5d5c1289cf068eb89a422be79891c2e51ec219bb1f8af255fac14c9206dd478744ba1ffb4e10b554aef60857eb31a1baba27f465e9cd835686e205c53
+  checksum: 10/8f0504f2bb20267692c1ed66b82e775d3f8b9a63eee92c5311a5dab4d2636bb19dc03fafa8c104b81496afc33025828cb73c94c0b7f91db527a8b7d2ba5244f4
   languageName: node
   linkType: hard
 
@@ -4885,6 +4885,15 @@ __metadata:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
     react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
   checksum: 10/04ffa285f4defc611def51f82492688bc49f6f4e8ce4e7ba5c99a1c1410b7e8820b5da65c33610a497df2409de7b48fae399052c5cacab6a4a4a9b48a36ebfd5
+  languageName: node
+  linkType: hard
+
+"@storybook/icons@npm:^2.0.2":
+  version: 2.2.0
+  resolution: "@storybook/icons@npm:2.2.0"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+  checksum: 10/273c2ba0dc9794406cebfe8740b03ed4675e50b7bac522bd7e9b29ef5d8867aa2eb28ac540e3b09b905600ac3a4b7c1f5a560d70d3d141ef1bc4ac55c7a332c0
   languageName: node
   linkType: hard
 
