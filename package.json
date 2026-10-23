@@ -55,7 +55,8 @@
         "css-minimizer-webpack-plugin/serialize-javascript": "^7.0.5",
         "gatsby/cookie": "^0.7.0",
         "version-changelog/cross-spawn": "^7.0.6",
-        "meow@npm:5.0.0/yargs-parser": "^13.1.2"
+        "meow@npm:5.0.0/yargs-parser": "^13.1.2",
+        "svg2ttf/@xmldom/xmldom": "^0.8.15"
     },
     "scripts": {
         "build:libs": "nx run-many --target=build --projects=@lumx/icons,@lumx/core,@lumx/react,@lumx/vue",
