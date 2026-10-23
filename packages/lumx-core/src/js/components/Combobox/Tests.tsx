@@ -680,7 +680,48 @@ export function createTemplates(Combobox: ComboboxNamespace, IconButton: any) {
         </Combobox.Provider>
     );
 
+    /**
+     * Combobox whose list remounts (a new list handle attaches to the combobox) when the typed text changes: no
+     * text, the first list; a text, the second list; a text with an "x", no list. (The typed text keeps the focus
+     * on the trigger, so the popup stays open.)
+     */
+    const listChangeTemplate = ({
+        value,
+        onChange,
+        onOpen,
+    }: {
+        value: string;
+        onChange: (v: string) => void;
+        onOpen?: (isOpen: boolean) => void;
+    }) => {
+        const fruits = value ? ['Date', 'Fig'] : ['Apple', 'Banana', 'Cherry'];
+        return (
+            <Combobox.Provider onOpen={onOpen}>
+                <Combobox.Input
+                    value={value}
+                    onChange={onChange}
+                    filter="manual"
+                    placeholder="Pick a fruit…"
+                    toggleButtonProps={{ label: 'Fruits' }}
+                />
+                <Combobox.Popover>
+                    {!value.includes('x') && (
+                        <Combobox.List key={value ? 'second' : 'first'} aria-label="Fruits">
+                            {fruits.map((fruit) => (
+                                <Combobox.Option key={fruit} value={fruit}>
+                                    {fruit}
+                                </Combobox.Option>
+                            ))}
+                        </Combobox.List>
+                    )}
+                    <Combobox.State nbOptionMessage={(count: number) => `${count} options`} />
+                </Combobox.Popover>
+            </Combobox.Provider>
+        );
+    };
+
     return {
+        listChangeTemplate,
         inlineTemplate,
         inputTemplate,
         manualFilterTemplate,
@@ -3116,6 +3157,41 @@ export default function comboboxTests({ components: { Combobox, IconButton }, re
                 expect(skeletonSection).toBeTruthy();
                 expect(skeletonSection).toHaveAttribute('aria-hidden', 'true');
             });
+        });
+    });
+
+    describe('List change (a new list attaches to the combobox)', () => {
+        it('should link the new list to the trigger, the state and the open state', async () => {
+            const onOpen = vi.fn();
+            renderWithState(t.listChangeTemplate, { value: '', onOpen });
+            const input = screen.getByRole('combobox');
+
+            await userEvent.click(input);
+            expect(await screen.findByText('3 options')).toBeInTheDocument();
+            expect(onOpen).toHaveBeenLastCalledWith(true);
+
+            // Remount the list while open: a new list handle attaches to the combobox.
+            await userEvent.type(input, 'd');
+            expect(await screen.findByText('2 options')).toBeInTheDocument();
+            expect(screen.queryByText('3 options')).not.toBeInTheDocument();
+            expect(screen.getAllByRole('option')).toHaveLength(2);
+            expect(input).toHaveAttribute('aria-expanded', 'true');
+
+            // The open state still reaches `onOpen` and the new list.
+            onOpen.mockClear();
+            await userEvent.keyboard('{Escape}');
+            await waitFor(() => expect(onOpen).toHaveBeenLastCalledWith(false));
+            await userEvent.keyboard('{ArrowDown}');
+            await waitFor(() => expect(onOpen).toHaveBeenLastCalledWith(true));
+            // The new list is linked to the trigger (the first option becomes active).
+            await waitFor(() =>
+                expect(input).toHaveAttribute('aria-activedescendant', screen.getByRole('option', { name: 'Date' }).id),
+            );
+
+            // Unmount the list while open: no list, nothing to show.
+            await userEvent.type(input, 'x');
+            await waitFor(() => expect(input).toHaveAttribute('aria-expanded', 'false'));
+            expect(screen.queryAllByRole('option')).toHaveLength(0);
         });
     });
 

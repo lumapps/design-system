@@ -15,7 +15,6 @@ import { Tooltip } from '../tooltip';
 import { Button } from '../button';
 import { useComboboxEvent } from './context/useComboboxEvent';
 import { useComboboxContext } from './context/ComboboxContext';
-import { useComboboxOpen } from './context/useComboboxOpen';
 
 /**
  * Props for Combobox.Button component.
@@ -45,9 +44,8 @@ export const ComboboxButton = Object.assign(
     forwardRefPolymorphic(
         <E extends ElementType = typeof Button>(props: ComboboxButtonProps<E>, ref: ComponentRef<E>) => {
             const { listboxId, anchorRef, setHandle } = useComboboxContext();
-            const [isOpen] = useComboboxOpen();
-            const state = useComboboxEvent('optionsChange', { optionsLength: 0 });
-            const isLoading = useComboboxEvent('loadingChange', false);
+            // Open, with something to show (the trigger `aria-expanded`).
+            const isExpanded = useComboboxEvent('expanded', false);
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const { as, label, value, labelDisplayMode = 'show-selection', onSelect, ...buttonProps } = props as any;
 
@@ -84,7 +82,7 @@ export const ComboboxButton = Object.assign(
                     value,
                     labelDisplayMode,
                     listboxId,
-                    isOpen: isOpen && (!!state?.optionsLength || isLoading),
+                    isOpen: isExpanded,
                     ref: mergedRef,
                 },
                 { Button: ButtonComp, Tooltip },

@@ -50,8 +50,8 @@ export const ComboboxInput = forwardRef<ComboboxInputProps, HTMLDivElement>((pro
         selectionMode,
         ...otherProps
     } = props;
-    const state = useComboboxEvent('optionsChange', { optionsLength: 0 });
-    const isLoading = useComboboxEvent('loadingChange', false);
+    // Open, with something to show (the trigger `aria-expanded`).
+    const isExpanded = useComboboxEvent('expanded', false);
     const internalInputRef = useRef<HTMLInputElement>(null);
     const mergedInputRef = useMergeRefs(externalInputRef, internalInputRef);
 
@@ -96,7 +96,7 @@ export const ComboboxInput = forwardRef<ComboboxInputProps, HTMLDivElement>((pro
             ...otherProps,
             ref,
             listboxId,
-            isOpen: isOpen && (!!state?.optionsLength || isLoading),
+            isOpen: isExpanded,
             filter,
             inputRef: mergedInputRef,
             textFieldRef: anchorRef as Ref<HTMLDivElement>,
