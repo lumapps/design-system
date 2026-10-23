@@ -71,13 +71,12 @@ const ComboboxInput = defineComponent(
             setHandle(null);
         });
 
-        // Track options and loading state to compute aria-expanded correctly.
-        const optionsState = useComboboxEvent('optionsChange', { optionsLength: 0 });
-        const isLoading = useComboboxEvent('loadingChange', false);
+        // Open, with something to show (the trigger `aria-expanded`).
+        const isExpanded = useComboboxEvent('expanded', false);
 
         const handleToggle = () => {
-            // Don't toggle when error/empty state (no options and not loading)
-            if (isOpen.value && !optionsState.value?.optionsLength && !isLoading.value) return;
+            // Don't toggle when error/empty state (open, but no options and not loading)
+            if (isOpen.value && !isExpanded.value) return;
             setIsOpen(!isOpen.value);
             inputEl.value?.focus();
         };
@@ -114,7 +113,7 @@ const ComboboxInput = defineComponent(
                     'aria-disabled': fwdAriaDisabled ?? (attrs as any).ariaDisabled,
                     ...eventHandlers,
                     listboxId,
-                    isOpen: isOpen.value && (!!optionsState.value?.optionsLength || isLoading.value),
+                    isOpen: isExpanded.value,
                     filter,
                     textFieldRef: (el: HTMLElement | null) => {
                         anchorRef.value = el;
