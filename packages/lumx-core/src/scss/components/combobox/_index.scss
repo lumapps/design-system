@@ -21,11 +21,11 @@
         overflow-y: auto;
     }
 
-    // Hide popover when there is no option, no state, and no skeleton
-    &:empty,
-    &:not(:has(.#{$lumx-base-prefix}-listbox-option)):not(:has(.#{$lumx-base-prefix}-listbox-state)):not(
-        :has(.#{$lumx-base-prefix}-listbox-option-skeleton)
-    ) {
+    // Hide the popover when it holds no visible list (the listbox sets `hidden` on a list without visible
+    // content) and no state
+    $visible-list: ':is([role="listbox"], [role="grid"]):not([hidden])';
+
+    &:not(:has(#{$visible-list}, .#{$lumx-base-prefix}-listbox-state)) {
         display: none;
     }
 }

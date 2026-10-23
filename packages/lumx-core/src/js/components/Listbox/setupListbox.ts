@@ -4,6 +4,7 @@ import { isPrintableKey } from '../../utils/browser/isPrintableKey';
 import { getOptionLabel, getOptionValue, isOptionDisabled, isSelected, notifySection } from './utils';
 import { isOptionActiveEvent, OPTION_ACTIVE_EVENT_PREFIX, optionActiveEvent } from './constants';
 import { createGridNavigation, createListNavigation, type ListboxNavigation } from './navigation';
+import { CLASSNAME as STATUS_CLASSNAME } from './ListboxState';
 import type {
     ListboxEventMap,
     OptionActiveEvent,
@@ -107,6 +108,28 @@ export function setupListbox(options: ListboxOptions = {}): ListboxHandle {
         return filterLower.length > 0 && !getOptionValue(option).toLowerCase().includes(filterLower);
     }
 
+    /** Whether the listbox has visible options or skeletons (something to show). */
+    const hasVisibleContent = () => getVisibleOptionCount() > 0 || skeletonCount > 0;
+
+    /**
+     * Whether the mounted element holds a status (the live region, e.g. a `Combobox.State` inside the list),
+     * outside of a hidden subtree. The status is always rendered (visually hidden when it shows no message), so
+     * that the live region stays in the accessibility tree: the element must not hide it. (Read when the options
+     * or the skeletons change: a status is rendered with the list, not later.)
+     */
+    function hasStatus(container: HTMLElement) {
+        return Array.from(container.querySelectorAll(`.${STATUS_CLASSNAME}`)).some((status) => {
+            const hiddenAncestor = status.parentElement?.closest('[hidden]');
+            return !hiddenAncestor || hiddenAncestor === container || !container.contains(hiddenAncestor);
+        });
+    }
+
+    /** Hide the mounted element (`hidden`) when it has no visible content and no status. */
+    function syncHidden() {
+        if (!element) return;
+        element.toggleAttribute('hidden', !hasVisibleContent() && !hasStatus(element));
+    }
+
     /**
      * Notify sections, then fire `optionsChange` when the visible count changed (or when the input
      * value changed while empty).
@@ -115,6 +138,7 @@ export function setupListbox(options: ListboxOptions = {}): ListboxHandle {
         for (const [sectionElement] of sectionRegistrations) {
             notifySection(sectionElement, sectionRegistrations, optionRegistrations);
         }
+        syncHidden();
         const visibleCount = getVisibleOptionCount();
         const inputValue = link?.getInputValue?.() ?? '';
         const isEmpty = visibleCount === 0;
@@ -151,6 +175,7 @@ export function setupListbox(options: ListboxOptions = {}): ListboxHandle {
 
     /** Called when the skeleton count transitions between 0 and >0 (or vice versa). */
     function onSkeletonCountChange() {
+        syncHidden();
         const isLoading = skeletonCount > 0;
         lastLoadingState = isLoading;
         notify('loadingChange', isLoading);
@@ -211,6 +236,7 @@ export function setupListbox(options: ListboxOptions = {}): ListboxHandle {
         });
         navigation = nav;
         const { focusNav, cellSelector } = nav;
+        syncHidden();
         link?.onMount?.(listbox);
 
         typeaheadController = createTypeahead(
@@ -319,7 +345,7 @@ export function setupListbox(options: ListboxOptions = {}): ListboxHandle {
             return skeletonCount > 0;
         },
         get hasVisibleContent() {
-            return getVisibleOptionCount() > 0 || skeletonCount > 0;
+            return hasVisibleContent();
         },
 
         mount,

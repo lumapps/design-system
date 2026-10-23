@@ -112,7 +112,10 @@ export interface ListboxHandle {
     readonly isMultiSelect: boolean;
     /** Whether any skeleton placeholders are registered (loading). */
     readonly isLoading: boolean;
-    /** Whether the listbox has visible options or skeletons. */
+    /**
+     * Whether the listbox has visible options or skeletons. Without them, the mounted element gets `hidden`
+     * (unless it holds a status: the live region, e.g. a `Combobox.State` inside the list).
+     */
     readonly hasVisibleContent: boolean;
 
     /**

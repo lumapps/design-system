@@ -458,7 +458,9 @@ export default function listboxTests({
                 WITH_SELECT_STATE,
             );
             const trigger = screen.getByRole('combobox');
-            const listbox = screen.getByRole('listbox', { name: 'Fruits', hidden: true });
+            // Closed popover: the list has no visible content (`hidden`, so it has no accessible name).
+            const listbox = screen.getByRole('listbox', { hidden: true });
+            expect(listbox).toHaveAttribute('aria-label', 'Fruits');
             expect(listbox).not.toHaveAttribute('tabindex');
 
             await userEvent.tab();
