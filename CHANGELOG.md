@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+-   `@lumx/react`:
+    -   `Combobox.useComboboxEvent`: remove the `loadingAnnouncement` event (use `stateChange`).
+
 ## [4.27.0][] - 2026-10-16
 
 ### Added

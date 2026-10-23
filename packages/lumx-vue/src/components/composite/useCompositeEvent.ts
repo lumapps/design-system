@@ -4,14 +4,14 @@ import { useWatchDisposable } from '../../composables/useWatchDisposable';
 
 /**
  * Composite events coalesced into a single deferred update (microtask): mounting a large item list fires one
- * `optionsChange` per item registration. Applying each notification synchronously makes a
+ * `optionsChange` (and one `stateChange`) per item registration. Applying each notification synchronously makes a
  * consumer that both reads the value and (re)mounts the items mutate its own render dependency, which trips the Vue
  * recursive update guard. The other events are applied synchronously.
  *
  * (React does not need this: it batches synchronous store updates itself, and coalescing there
  * would defer the update into a microtask that fires outside `act` in consumers' unit tests.)
  */
-const COALESCED_EVENTS: ReadonlySet<PropertyKey> = new Set<keyof CompositeEventMap>(['optionsChange']);
+const COALESCED_EVENTS: ReadonlySet<PropertyKey> = new Set<keyof CompositeEventMap>(['optionsChange', 'stateChange']);
 
 /**
  * Subscribe to an event of a handle (a composite handle). Re-subscribes when the handle changes, then starts from
