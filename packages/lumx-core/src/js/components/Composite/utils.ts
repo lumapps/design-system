@@ -23,4 +23,7 @@ export function isOptionDisabled(option: HTMLElement): boolean {
     return option.getAttribute('aria-disabled') === 'true';
 }
 
-export const isSelected = (el: Element) => el.getAttribute('aria-selected') === 'true';
+/** Selector of a selected item (`aria-selected="true"`). */
+export const SELECTED_SELECTOR = '[aria-selected="true"]';
+
+export const isSelected = (el: Element) => el.matches(SELECTED_SELECTOR);

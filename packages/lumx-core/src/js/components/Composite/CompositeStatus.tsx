@@ -82,7 +82,8 @@ export interface CompositeStatusComponents {
  * - Error state: active when `errorMessage` is provided (presence-based).
  * - Empty state: active when the item count (`optionsLength`) is 0 and `emptyMessage` is provided, and there is
  *   no error.
- * - Item count: active when `nbOptionMessage` is provided, the composite is not empty, not loading, and not in error.
+ * - Item count: active when `nbOptionMessage` is provided, the composite is not empty, not loading, not in error, and
+ *   the count is not hidden (`isCountHidden`, e.g. a tree without a filter).
  *
  * @param props Component props.
  * @param components Injected framework-specific components.
@@ -102,9 +103,12 @@ export const CompositeStatus = (props: CompositeStatusProps, { GenericBlock, Tex
     // to be announced (`isLoadingAnnounced`: 500ms after the skeletons mount).
     const loadingMessage = state?.isLoadingAnnounced ? props.loadingMessage : undefined;
     const showLoading = !showError && !!loadingMessage;
-    // Show the item count message when the composite is open, not empty, not loading, and not in error.
+    // Show the item count message when the composite is open, not empty, not loading, not in error, and the
+    // count is not hidden.
     const resolvedNbOptionMessage =
-        !isEmpty && !showError && !state?.isLoading && nbOptionMessage ? nbOptionMessage(optionsLength) : undefined;
+        !isEmpty && !showError && !state?.isLoading && !state?.isCountHidden && nbOptionMessage
+            ? nbOptionMessage(optionsLength)
+            : undefined;
     const show = showEmpty || showError;
     const alignProps = { hAlign: 'center', vAlign: 'center' };
 
