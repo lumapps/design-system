@@ -24951,12 +24951,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"yargs-parser@npm:^10.0.0":
-  version: 10.1.0
-  resolution: "yargs-parser@npm:10.1.0"
+"yargs-parser@npm:^13.1.2":
+  version: 13.1.2
+  resolution: "yargs-parser@npm:13.1.2"
   dependencies:
-    camelcase: "npm:^4.1.0"
-  checksum: 10/7be10b61334ce1b08e1d4cd3587ec9a2f2229b48c95333a0ddeac8e7ea00520513914ae1f4694a4e29ec97048d42c3835de61fd0864767c45d8ac0afd837a02f
+    camelcase: "npm:^5.0.0"
+    decamelize: "npm:^1.2.0"
+  checksum: 10/89a84fbb32827832a1d34f596f5efe98027c398af731728304a920c2f9ba03071c694418723df16882ebb646ddb72a8fb1c9567552afcbc2f268e86c4faea5a8
   languageName: node
   linkType: hard
 
