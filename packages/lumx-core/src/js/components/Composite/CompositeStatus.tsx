@@ -1,5 +1,6 @@
-import type { LumxClassName } from '../../types';
+import type { HasClassName, LumxClassName } from '../../types';
 import { classNames } from '../../utils';
+import type { CompositeState } from './types';
 
 /**
  * Component display name.
@@ -18,7 +19,7 @@ export const LEGACY_CLASSNAME = 'lumx-listbox-state lumx-combobox-state';
 /**
  * Defines the props for the core CompositeStatus template.
  */
-export interface CompositeStatusProps {
+export interface CompositeStatusProps extends HasClassName {
     /**
      * Message to display when the composite has no visible items.
      * Can be a plain string or a function receiving the current input value (for dynamic messages).
@@ -50,31 +51,10 @@ export interface CompositeStatusProps {
      */
     loadingMessage?: string;
     /**
-     * Composite state
+     * The live region state of the composite (the `stateChange` snapshot, see `CompositeState`).
+     * Without it (no composite handle yet), nothing renders.
      */
-    state?: {
-        /**
-         * The number of currently visible items.
-         * Driven by the framework wrapper via the composite handle's `optionsChange` event.
-         */
-        optionsLength?: number;
-        /**
-         * The current value of the combobox input.
-         * Passed to `emptyMessage` when it is a function.
-         */
-        inputValue?: string;
-        /**
-         * Whether loading is active (immediate, from `loadingChange` event).
-         * Used to suppress false "empty" state while data is loading.
-         */
-        isLoading?: boolean;
-        /**
-         * Whether the combobox popover is open.
-         * Used to gate live region content so screen readers announce messages
-         * when the popover opens (content insertion triggers `aria-live` announcement).
-         */
-        isOpen?: boolean;
-    };
+    state?: CompositeState;
 }
 
 /**
@@ -107,8 +87,8 @@ export interface CompositeStatusComponents {
  * @return JSX element or null when no state is active.
  */
 export const CompositeStatus = (props: CompositeStatusProps, { GenericBlock, Text }: CompositeStatusComponents) => {
-    const { emptyMessage, nbOptionMessage, errorMessage, errorTryReloadMessage, loadingMessage, state } = props;
-    const isOpen = state?.isOpen ?? true;
+    const { emptyMessage, nbOptionMessage, errorMessage, errorTryReloadMessage, state, className } = props;
+    const isOpen = state?.isOpenForAnnouncement ?? false;
     const optionsLength = state?.optionsLength ?? 0;
     const isEmpty = optionsLength === 0;
     const showError = !!errorMessage;
@@ -116,9 +96,9 @@ export const CompositeStatus = (props: CompositeStatusProps, { GenericBlock, Tex
         typeof emptyMessage === 'function' ? emptyMessage(state?.inputValue || '') : emptyMessage;
     // Suppress empty while loading (immediate flag prevents false "no results" before data arrives)
     const showEmpty = isEmpty && !showError && !state?.isLoading && !!resolvedEmptyMessage;
-    // Show loading message when provided and not in error state.
-    // The framework wrapper gates `loadingMessage` via the debounced `loadingAnnouncement` event,
-    // passing `undefined` until the 500ms threshold is reached.
+    // Show the loading message when provided, not in error state, and once the loading lasted long enough
+    // to be announced (`isLoadingAnnounced`: 500ms after the skeletons mount).
+    const loadingMessage = state?.isLoadingAnnounced ? props.loadingMessage : undefined;
     const showLoading = !showError && !!loadingMessage;
     // Show the item count message when the composite is open, not empty, not loading, and not in error.
     const resolvedNbOptionMessage =
@@ -135,6 +115,7 @@ export const CompositeStatus = (props: CompositeStatusProps, { GenericBlock, Tex
     return (
         <GenericBlock
             className={classNames.join(
+                className,
                 !show && classNames.visuallyHidden(),
                 block(),
                 LEGACY_CLASSNAME,
