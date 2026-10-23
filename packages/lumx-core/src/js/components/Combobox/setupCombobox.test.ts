@@ -1,8 +1,10 @@
 // @vitest-environment jsdom
 import { within } from '@testing-library/dom';
 import { setupListbox } from '../Listbox/setupListbox';
+import { setupTreeList } from '../TreeList/setupTreeList';
 import type { CompositeHandle } from '../Composite/types';
 import { setupCombobox } from './setupCombobox';
+import { setupComboboxInput } from './setupComboboxInput';
 import { COMBOBOX_POPOVER_CLASSNAME } from './constants';
 
 /** Render a trigger input and a list of options inside a combobox popover. */
@@ -292,6 +294,44 @@ describe(setupCombobox, () => {
 
         combobox.destroy();
         third.detach();
+    });
+
+    it('should set aria-haspopup="tree" from a mounted tree', () => {
+        const combobox = setupCombobox({});
+        const { input, listElement } = render([], 'tree');
+        combobox.registerTrigger(input);
+        const { list: tree, detach } = combobox.attachList(setupTreeList);
+        tree.mount(listElement);
+        expect(input).toHaveAttribute('aria-haspopup', 'tree');
+        combobox.destroy();
+        detach();
+    });
+
+    it('should give the manual filter text to a listbox without hiding any option', () => {
+        const { input, listElement } = render(['Apple', 'Banana']);
+        const combobox = setupComboboxInput(input, { filter: 'manual' });
+        const { list, detach } = combobox.attachList(setupListbox);
+        list.mount(listElement);
+        const isFiltered = vi.fn();
+        const unregisterOptions = getOptions(listElement).map((option) => list.registerOption(option, isFiltered));
+
+        input.value = 'zzz';
+        input.dispatchEvent(new InputEvent('input', { inputType: 'insertText' }));
+        expect(isFiltered).not.toHaveBeenCalledWith(true);
+        expect(list.getSnapshot('optionsChange')).toEqual(expect.objectContaining({ optionsLength: 2 }));
+
+        // Empty list (the consumer renders no option): the payload follows the typed text at once
+        // (e.g. for the empty message of `Combobox.State`).
+        unregisterOptions.forEach((unregister) => unregister());
+        input.value = 'kiwi';
+        input.dispatchEvent(new InputEvent('input', { inputType: 'insertText' }));
+        expect(list.getSnapshot('optionsChange')).toEqual({
+            optionsLength: 0,
+            inputValue: 'kiwi',
+            isCountHidden: false,
+        });
+        combobox.destroy();
+        detach();
     });
 
     it('should select with the list options and close on a single selection', () => {
