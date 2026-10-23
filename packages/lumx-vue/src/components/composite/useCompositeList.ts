@@ -1,4 +1,4 @@
-import { type Ref, type ShallowRef, shallowRef, watch } from 'vue';
+import { type Ref, type ShallowRef, onBeforeUnmount, shallowRef, watch } from 'vue';
 
 import type { CompositeHandle, CompositeOptions } from '@lumx/core/js/components/Composite/types';
 
@@ -11,16 +11,23 @@ import { useCompositeEvent } from './useCompositeEvent';
 export interface UseCompositeListOptions<H extends CompositeHandle> {
     /** The list element, mounted on the handle. */
     elementRef: Readonly<Ref<HTMLElement | null>>;
-    /** Create the list handle (e.g. `setupListbox`) with the combobox list options. */
+    /** Create the list handle (e.g. `setupListbox`): with the combobox list options, or as a standalone list. */
     createList(options: CompositeOptions): H;
-    /** Standalone list: the handle of the list provider above the list (e.g. `ListboxProvider`). */
-    standaloneHandle: Readonly<Ref<H | null>>;
+    /**
+     * Standalone list: the handle of the list provider above the list (e.g. `ListboxProvider`). When undefined,
+     * the composable creates the standalone handle with `createList` (and destroys it on unmount).
+     */
+    standaloneHandle?: Readonly<Ref<H | null>>;
+    /** Standalone list created by the composable: called on a selection. */
+    onSelect?(option: { value: string }): void;
 }
 
 /** Result of {@link useCompositeList}. */
 export interface UseCompositeListResult<H extends CompositeHandle> {
     /** The list handle (null inside a combobox until the trigger mounts). */
     handle: Readonly<Ref<H | null>>;
+    /** The combobox list ID when the list is the combobox list (the trigger `aria-controls` it), else undefined. */
+    comboboxListId?: string;
     /** Whether the items are visible (standalone: always; combobox: while open). */
     isOpen: Readonly<Ref<boolean>>;
     /** Whether root skeletons are registered (`aria-busy` on the list). */
@@ -33,18 +40,19 @@ export interface UseCompositeListResult<H extends CompositeHandle> {
  *   carries `comboboxListId`). Set on setup.
  * - Combobox list: attach the handle (linked to the trigger) when the combobox handle exists, then detach it on
  *   unmount or when the combobox handle changes.
- * - Standalone list: the handle of the list provider.
+ * - Standalone list: the handle of the list provider, or a handle created on setup.
  * - Mount the list element on the handle.
  * - Replay the pending keyboard navigation after the items render on open.
  */
 export function useCompositeList<H extends CompositeHandle>(
     options: UseCompositeListOptions<H>,
 ): UseCompositeListResult<H> {
-    const { elementRef, createList, standaloneHandle } = options;
+    const { elementRef, createList, standaloneHandle, onSelect } = options;
     const comboboxContext = useOptionalComboboxContext();
-    const isInCombobox = useOptionalCompositeContext()?.comboboxListId !== undefined;
+    const comboboxListId = useOptionalCompositeContext()?.comboboxListId;
+    const isInCombobox = comboboxListId !== undefined;
 
-    let handle: Readonly<Ref<H | null>> = standaloneHandle;
+    let handle: Readonly<Ref<H | null>>;
     if (isInCombobox && comboboxContext) {
         const comboboxList: ShallowRef<H | null> = shallowRef(null);
         useWatchDisposable(comboboxContext.handle, (comboboxHandle) => {
@@ -57,6 +65,13 @@ export function useCompositeList<H extends CompositeHandle>(
             };
         });
         handle = comboboxList;
+    } else if (standaloneHandle) {
+        handle = standaloneHandle;
+    } else {
+        // Standalone list without a list provider: create its own handle.
+        const ownHandle = createList({ onSelect: (option) => onSelect?.(option) });
+        onBeforeUnmount(() => ownHandle.destroy());
+        handle = shallowRef(ownHandle);
     }
 
     // Mount the list element on the handle.
@@ -78,5 +93,5 @@ export function useCompositeList<H extends CompositeHandle>(
         { flush: 'post' },
     );
 
-    return { handle, isOpen, isLoading };
+    return { handle, comboboxListId, isOpen, isLoading };
 }
