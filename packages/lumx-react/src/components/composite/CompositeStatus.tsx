@@ -1,12 +1,9 @@
-import { ReactNode, useEffect, useState } from 'react';
-
 import {
     CompositeStatus as UI,
     CompositeStatusProps as UIProps,
     COMPONENT_NAME,
     CLASSNAME,
 } from '@lumx/core/js/components/Composite/CompositeStatus';
-import { subscribeListboxState } from '@lumx/core/js/components/Listbox/subscribeListboxState';
 import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 import { GenericBlock } from '../generic-block';
 import { Text } from '../text';
@@ -16,10 +13,7 @@ import { useCompositeEvent } from './useCompositeEvent';
 /**
  * Props of the composite status (`Combobox.State`, `Listbox.State`).
  */
-export interface CompositeStatusProps extends ReactToJSX<UIProps, 'state'> {
-    /** Additional content rendered after the state message. */
-    children?: ReactNode;
-}
+export type CompositeStatusProps = ReactToJSX<UIProps, 'state'>;
 
 /**
  * CompositeStatus: the live region of a composite (list, grid or tree), exposed as `Combobox.State` and
@@ -53,23 +47,9 @@ export interface CompositeStatusProps extends ReactToJSX<UIProps, 'state'> {
  */
 export const CompositeStatus = (props: CompositeStatusProps) => {
     const { handle: list } = useCompositeContext();
-    const optionsState = useCompositeEvent(list, 'optionsChange', undefined);
+    const state = useCompositeEvent(list, 'stateChange', undefined);
 
-    const [isLoading, setIsLoading] = useState(false);
-    const [shouldAnnounce, setShouldAnnounce] = useState(false);
-    const [isOpen, setIsOpen] = useState(false);
-
-    useEffect(() => {
-        if (!list) return undefined;
-        return subscribeListboxState(list, { setIsLoading, setShouldAnnounce, setIsOpen });
-    }, [list]);
-
-    const state = { ...optionsState, isLoading, isOpen };
-
-    // Only pass loadingMessage to core after the 500ms debounce threshold
-    const loadingMessage = shouldAnnounce ? props.loadingMessage : undefined;
-
-    return UI({ ...props, loadingMessage, state }, { GenericBlock, Text });
+    return UI({ ...props, state }, { GenericBlock, Text });
 };
 
 CompositeStatus.displayName = COMPONENT_NAME;

@@ -23,6 +23,3 @@ export type {
 
 export { ListboxSection } from './ListboxSection';
 export type { ListboxSectionProps, ListboxSectionPropsToOverride, ListboxSectionComponents } from './ListboxSection';
-
-export { subscribeListboxState } from './subscribeListboxState';
-export type { ListboxStateSetters } from './subscribeListboxState';
