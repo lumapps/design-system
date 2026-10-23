@@ -1,17 +1,19 @@
-import type { CompositeEventMap } from '@lumx/core/js/components/Composite/types';
+import type { ComboboxEventMap } from '@lumx/core/js/components/Combobox/types';
 import { useComboboxContext } from './ComboboxContext';
 import { useCompositeEvent } from '../../composite/useCompositeEvent';
 
 /**
- * Hook to subscribe to a combobox event (`open`, `optionsChange`, `loadingChange`,
+ * Hook to subscribe to a combobox event (`open`, `expanded`, `optionsChange`, `loadingChange`,
  * `activeDescendantChange`, …). Must be used within a `Combobox.Provider`.
  *
- * The events are dispatched by the listbox handle of the combobox (see {@link useCompositeEvent}).
+ * The combobox handle owns the `open` and `expanded` events (even before a list registers) and forwards the other events
+ * from the registered list: it re-subscribes when the registered list changes and dispatches the snapshot of
+ * the new list (see `ComboboxEventMap`).
  */
-export function useComboboxEvent<K extends keyof CompositeEventMap>(
+export function useComboboxEvent<K extends keyof ComboboxEventMap>(
     event: K,
-    initialValue: CompositeEventMap[K],
-): CompositeEventMap[K] {
+    initialValue: ComboboxEventMap[K],
+): ComboboxEventMap[K] {
     const { handle } = useComboboxContext();
-    return useCompositeEvent(handle?.list ?? null, event, initialValue);
+    return useCompositeEvent<ComboboxEventMap, K>(handle, event, initialValue);
 }

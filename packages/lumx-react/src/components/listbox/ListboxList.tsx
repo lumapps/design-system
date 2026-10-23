@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef } from 'react';
+import { useMemo, useRef } from 'react';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import {
@@ -7,9 +7,11 @@ import {
     COMPONENT_NAME,
     CLASSNAME,
 } from '@lumx/core/js/components/Listbox/ListboxList';
+import { setupListbox } from '@lumx/core/js/components/Listbox/setupListbox';
+import type { ListboxHandle } from '@lumx/core/js/components/Listbox/types';
 import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 import { CompositeContext, CompositeContextValue, useCompositeContext } from '../composite/CompositeContext';
-import { useCompositeEvent } from '../composite/useCompositeEvent';
+import { useCompositeList } from '../composite/useCompositeList';
 import { useListboxHandle } from './context/useListboxHandle';
 
 /** Props of the list component (`Combobox.List` and `Listbox.List`). */
@@ -23,19 +25,32 @@ export interface ListboxListProps extends ReactToJSX<UIProps, 'aria-busy'> {}
  * @see https://www.w3.org/WAI/ARIA/apg/patterns/listbox/
  * @see https://www.w3.org/WAI/ARIA/apg/patterns/grid/
  *
- * Mounts the listbox handle of the enclosing provider on its element:
- * - Inside a combobox (`Combobox.Provider`): renders its options only while the combobox is open.
- *   The trigger owns focus.
+ * Mounts a listbox handle on its element:
+ * - Inside a combobox (`Combobox.Provider`): creates the listbox handle with the combobox list options and
+ *   registers it on the combobox. Renders its options only while the combobox is open. The trigger owns focus.
  * - Inside a `ListboxProvider`: a standalone list that owns focus (`tabindex="0"` +
- *   `aria-activedescendant`) and handles its own keyboard navigation.
+ *   `aria-activedescendant`) and handles its own keyboard navigation. A `ListboxProvider` nested
+ *   in a combobox wins (the list stays standalone and does not register on the combobox).
  */
 export const ListboxList = forwardRef<ListboxListProps, HTMLUListElement>((props, ref) => {
     const { 'aria-label': ariaLabel, type = 'listbox', className, children, ...forwardedProps } = props;
     const { id: listboxId } = useCompositeContext();
-    const list = useListboxHandle();
+    const providedList = useListboxHandle();
 
     const internalRef = useRef<HTMLUListElement>(null);
     const mergedRef = useMergeRefs(ref, internalRef);
+
+    // The combobox list (linked to the trigger), or the standalone list of the `ListboxProvider` (a nearer
+    // `ListboxProvider` inside the combobox wins).
+    const {
+        handle: list,
+        isOpen,
+        isLoading,
+    } = useCompositeList<ListboxHandle>({
+        elementRef: internalRef,
+        createList: setupListbox,
+        standaloneHandle: providedList,
+    });
 
     const selectionType = String(forwardedProps['aria-multiselectable']) === 'true' ? 'multiple' : 'single';
 
@@ -43,24 +58,6 @@ export const ListboxList = forwardRef<ListboxListProps, HTMLUListElement>((props
         () => ({ handle: list, id: listboxId, type, selectionType, level: 0 }),
         [list, listboxId, type, selectionType],
     );
-
-    // Options are rendered only while visible (standalone: always; combobox: while open).
-    const isOpen = useCompositeEvent(list, 'open', false);
-    const options = useCompositeEvent(list, 'optionsChange', undefined);
-    const visibleCount = options?.optionsLength ?? 0;
-    const isLoading = useCompositeEvent(list, 'loadingChange', false);
-
-    // Mount the list element on the handle.
-    useEffect(() => {
-        const element = internalRef.current;
-        if (!element) return undefined;
-        return list?.mount(element);
-    }, [list]);
-
-    // Flush pending keyboard navigation after options commit on open.
-    useEffect(() => {
-        if (isOpen) list?.flushPendingNavigation();
-    }, [isOpen, visibleCount, list]);
 
     return (
         <CompositeContext.Provider value={contextValue}>

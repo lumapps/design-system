@@ -7,7 +7,8 @@ import { useSyncExternalStore } from 'use-sync-external-store/shim';
 import type { CompositeEventMap, CompositeEventSource } from '@lumx/core/js/components/Composite/types';
 
 /**
- * Subscribe to an event of an event source (a composite handle) via `useSyncExternalStore`.
+ * Subscribe to an event of an event source (a composite handle, or the combobox handle, which has the composite
+ * events and its own) via `useSyncExternalStore`.
  *
  * Reads the handle's synchronous `getSnapshot` — the correct pattern for an external (non-React) store.
  * It reads the current value during commit, so a consumer doesn't miss changes that happened between
@@ -18,7 +19,7 @@ import type { CompositeEventMap, CompositeEventSource } from '@lumx/core/js/comp
  * The handle dispatches synchronously, so the store update fires within the triggering render/event
  * (inside React's `act` in tests) rather than a deferred microtask.
  *
- * Re-subscribes when the handle changes (e.g. trigger mount/unmount). Returns `initialValue`
+ * Re-subscribes when the handle changes (e.g. a list registers on the combobox). Returns `initialValue`
  * while there is no handle or until the event has fired at least once.
  */
 export function useCompositeEvent<M extends CompositeEventMap, K extends keyof M>(

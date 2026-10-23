@@ -1,6 +1,6 @@
 export { setupComboboxInput } from './setupComboboxInput';
 export { setupComboboxButton } from './setupComboboxButton';
-export type { ComboboxCallbacks, ComboboxHandle } from './types';
+export type { ComboboxCallbacks, ComboboxEventMap, ComboboxHandle } from './types';
 
 export { ComboboxPopover } from './ComboboxPopover';
 export type { ComboboxPopoverProps, ComboboxPopoverComponents } from './ComboboxPopover';
