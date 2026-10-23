@@ -58,7 +58,8 @@
         "meow@npm:5.0.0/yargs-parser": "^13.1.2",
         "svg2ttf/@xmldom/xmldom": "^0.8.15",
         "svgtofont/svgo": "^3.3.5",
-        "@ardatan/relay-compiler/immutable": "^3.8.4"
+        "@ardatan/relay-compiler/immutable": "^3.8.4",
+        "gatsby/path-to-regexp": "0.1.13"
     },
     "scripts": {
         "build:libs": "nx run-many --target=build --projects=@lumx/icons,@lumx/core,@lumx/react,@lumx/vue",
