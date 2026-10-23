@@ -48,7 +48,8 @@
     },
     "resolutions": {
         "gatsby-sharp/sharp": "^0.35.5",
-        "vite": "^7.3.7"
+        "vite": "^7.3.7",
+        "nx/undici": "^7.30.1"
     },
     "scripts": {
         "build:libs": "nx run-many --target=build --projects=@lumx/icons,@lumx/core,@lumx/react,@lumx/vue",
