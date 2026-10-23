@@ -9,3 +9,9 @@ export type {
 export { isTreeListHandle } from './utils';
 export { isTreeValueSelected, toggleTreeValue } from './selection';
 export type { TreeListSelectionType } from './selection';
+
+export { TreeList } from './TreeList';
+export type { TreeListProps } from './TreeList';
+
+export { TreeListItem } from './TreeListItem';
+export type { TreeListItemProps, TreeListItemPropsToOverride, TreeListItemComponents } from './TreeListItem';
