@@ -47,6 +47,7 @@
         "url": "git+https://github.com/lumapps/design-system.git"
     },
     "resolutions": {
+        "external-editor/tmp": "^0.2.6",
         "gatsby-sharp/sharp": "^0.35.5",
         "vite": "^7.3.7",
         "nx/undici": "^7.30.1",
