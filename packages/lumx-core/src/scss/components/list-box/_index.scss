@@ -7,14 +7,10 @@
 
 // ---- List -----------------------
 
-// Hide list when there is no option, no state, and no skeleton
-.#{$lumx-base-prefix}-listbox-list {
-    &:empty,
-    &:not(:has(.#{$lumx-base-prefix}-listbox-option)):not(:has(.#{$lumx-base-prefix}-listbox-state)):not(
-        :has(.#{$lumx-base-prefix}-listbox-option-skeleton)
-    ) {
-        display: none;
-    }
+// The listbox sets `hidden` on the list when it has no visible content (see `setupListbox`).
+// Before the listbox mounts: hide an empty list.
+.#{$lumx-base-prefix}-listbox-list:empty {
+    display: none;
 }
 
 // ---- State -----------------------
