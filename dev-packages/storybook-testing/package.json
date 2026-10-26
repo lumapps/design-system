@@ -4,8 +4,8 @@
     "version": "4.27.0",
     "type": "module",
     "dependencies": {
-        "@storybook/addon-a11y": "^10.2.19",
-        "@storybook/addon-vitest": "^10.2.19",
+        "@storybook/addon-a11y": "^10.6.2",
+        "@storybook/addon-vitest": "^10.6.2",
         "@vitest/browser-playwright": "^4.1.11",
         "storybook-addon-vis": "^3.1.3",
         "vitest": "^4.1.11"
