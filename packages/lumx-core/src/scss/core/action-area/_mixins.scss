@@ -16,3 +16,14 @@ $interactive: 'a, button, input, select, textarea, label, [tabindex]';
         z-index: 1;
     }
 }
+
+// Hover (and keyboard focus) state of an action overlay (`::before`).
+@mixin lumx-action-area-overlay-hover($theme: 'dark') {
+    @include lumx-state(lumx-base-const('state', 'HOVER'), lumx-base-const('emphasis', 'LOW'), $theme);
+}
+
+// Focus outline of an action overlay (`::before`), inside the action.
+@mixin lumx-action-area-focus-inset {
+    outline-style: solid;
+    outline-offset: -2px;
+}

@@ -1,8 +1,7 @@
-import { ElementType, ReactNode, useEffect, useMemo, useRef, useState } from 'react';
+import { ReactNode, useEffect, useMemo, useRef, useState } from 'react';
 
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';
-import { HasPolymorphicAs, HasRequiredLinkHref } from '@lumx/react/utils/type';
 import { GenericProps } from '@lumx/core/js/types';
 import {
     ListboxOption as UI,
@@ -13,16 +12,13 @@ import {
 } from '@lumx/core/js/components/Listbox/ListboxOption';
 import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 import { useId } from '@lumx/react/hooks/useId';
-import { optionActiveEvent } from '@lumx/core/js/components/Listbox/constants';
+import { optionActiveEvent } from '@lumx/core/js/components/Composite/constants';
 import { Tooltip, TooltipProps } from '../tooltip';
-import { useListboxContext } from './context/ListboxContext';
-import { ListboxOptionContext } from './context/ListboxOptionContext';
-import { useListboxEvent } from './context/useListboxEvent';
-
-/**
- * Props forwarded to the inner action element (button or link).
- */
-export type ListboxOptionActionProps<E extends ElementType = 'button'> = HasPolymorphicAs<E> & HasRequiredLinkHref<E>;
+import { useCompositeContext } from '../composite/CompositeContext';
+import { useCompositeEvent } from '../composite/useCompositeEvent';
+import type { CompositeItemActionProps } from '../composite/types';
+import { CompositeItemContext } from '../composite/CompositeItemContext';
+import { useListboxHandle } from './context/useListboxHandle';
 
 /**
  * Props for Combobox.Option component.
@@ -43,7 +39,7 @@ export interface ListboxOptionProps extends GenericProps, ReactToJSX<UIProps, Li
     /** Props forwarded to a Tooltip wrapping the role="option" / role="gridcell" trigger element. */
     tooltipProps?: Partial<TooltipProps>;
     /** Props forwarded to the inner action element (e.g. `{ as: 'a', href: '/foo' }`). */
-    actionProps?: ListboxOptionActionProps<any>;
+    actionProps?: CompositeItemActionProps<any>;
 }
 
 /**
@@ -77,7 +73,8 @@ export const ListboxOption = forwardRef<ListboxOptionProps, HTMLLIElement>((prop
         onClick,
         ...forwardedProps
     } = props;
-    const { type, list } = useListboxContext();
+    const { type } = useCompositeContext();
+    const list = useListboxHandle();
     const isGrid = type === 'grid';
     const optionId = useId();
     const descriptionId = useId();
@@ -86,7 +83,7 @@ export const ListboxOption = forwardRef<ListboxOptionProps, HTMLLIElement>((prop
     const [isFiltered, setIsFiltered] = useState(false);
 
     // Force the tooltip open while the option is the active descendant (keyboard highlight).
-    const isActive = useListboxEvent(list, optionActiveEvent(optionId), false);
+    const isActive = useCompositeEvent(list, optionActiveEvent(optionId), false);
 
     useEffect(() => {
         const element = internalRef.current;
@@ -101,33 +98,37 @@ export const ListboxOption = forwardRef<ListboxOptionProps, HTMLLIElement>((prop
         list.refilterOption(element);
     }, [list, value]);
 
-    // Wrap `after` content in an option context so sub-components (e.g. OptionMoreInfo)
-    // can access the parent option's ID for keyboard highlight detection.
-    const optionContextValue = useMemo(() => ({ optionId, isSelected: Boolean(isSelected) }), [optionId, isSelected]);
-    const wrappedAfter = after ? (
-        <ListboxOptionContext.Provider value={optionContextValue}>{after}</ListboxOptionContext.Provider>
-    ) : undefined;
+    // Provide the item context to the whole option, so sub-components (e.g. OptionMoreInfo, SelectionIcon)
+    // can read the option ID (keyboard highlight detection) and its selected state from any slot.
+    const itemContextValue = useMemo(
+        () => ({ itemId: optionId, isSelected: Boolean(isSelected) }),
+        [optionId, isSelected],
+    );
 
-    return UI(
-        {
-            ...forwardedProps,
-            ref: mergedRef,
-            actionProps,
-            hidden: isFiltered,
-            value,
-            description,
-            children,
-            isSelected,
-            isDisabled,
-            isGrid,
-            before,
-            after: wrappedAfter,
-            handleClick: onClick,
-            id: optionId,
-            descriptionId,
-            tooltipProps: tooltipProps && { ...tooltipProps, forceOpen: tooltipProps.forceOpen || isActive },
-        },
-        { Tooltip },
+    return (
+        <CompositeItemContext.Provider value={itemContextValue}>
+            {UI(
+                {
+                    ...forwardedProps,
+                    ref: mergedRef,
+                    actionProps,
+                    hidden: isFiltered,
+                    value,
+                    description,
+                    children,
+                    isSelected,
+                    isDisabled,
+                    isGrid,
+                    before,
+                    after,
+                    handleClick: onClick,
+                    id: optionId,
+                    descriptionId,
+                    tooltipProps: tooltipProps && { ...tooltipProps, forceOpen: tooltipProps.forceOpen || isActive },
+                },
+                { Tooltip },
+            )}
+        </CompositeItemContext.Provider>
     );
 });
 

@@ -4,7 +4,7 @@ import type { ComboboxHandle } from '@lumx/core/js/components/Combobox/types';
 import { useId } from '@lumx/react/hooks/useId';
 
 import { ComboboxContext } from './context/ComboboxContext';
-import { ListboxContext, ListboxContextValue } from '../listbox/context/ListboxContext';
+import { CompositeContext, CompositeContextValue } from '../composite/CompositeContext';
 
 /**
  * Defines the props of the component.
@@ -36,9 +36,9 @@ export function ComboboxProvider(props: ComboboxProviderProps) {
     const anchorRef = useRef<HTMLElement>(null);
     const [handle, setHandle] = useState<ComboboxHandle | null>(null);
     const contextValue = useMemo(() => ({ handle, setHandle, listboxId, anchorRef }), [handle, listboxId]);
-    // The listbox of the combobox: shared with the list, the options and the state through the listbox context.
-    const listboxContextValue = useMemo<ListboxContextValue>(
-        () => ({ list: handle?.list ?? null, listboxId, type: 'listbox' }),
+    // The listbox of the combobox: shared with the list, the options and the state through the composite context.
+    const compositeContextValue = useMemo<CompositeContextValue>(
+        () => ({ handle: handle?.list ?? null, id: listboxId }),
         [handle, listboxId],
     );
 
@@ -59,7 +59,7 @@ export function ComboboxProvider(props: ComboboxProviderProps) {
 
     return (
         <ComboboxContext.Provider value={contextValue}>
-            <ListboxContext.Provider value={listboxContextValue}>{children}</ListboxContext.Provider>
+            <CompositeContext.Provider value={compositeContextValue}>{children}</CompositeContext.Provider>
         </ComboboxContext.Provider>
     );
 }

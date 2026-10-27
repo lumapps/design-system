@@ -12,7 +12,7 @@ import { useId } from '../../composables/useId';
 import { useClassName } from '../../composables/useClassName';
 import { useDisableStateProps } from '../../composables/useDisableStateProps';
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
-import { useListboxContext } from './context/ListboxContext';
+import { useCompositeContext } from '../composite/CompositeContext';
 
 export type ListboxOptionActionProps = Pick<VueToJSXProps<UIProps>, 'isDisabled' | 'class'> & {
     /** On click callback. */
@@ -35,11 +35,11 @@ const ListboxOptionAction = defineComponent(
         const actionId = useId();
         const className = useClassName(() => props.class);
         const { disabledStateProps, otherProps } = useDisableStateProps(props as any);
-        const listboxContext = useListboxContext();
+        const compositeContext = useCompositeContext();
         let warned = false;
 
         return () => {
-            if (listboxContext.type !== 'grid') {
+            if (compositeContext.type !== 'grid') {
                 if (!warned) {
                     warned = true;
                     console.warn(

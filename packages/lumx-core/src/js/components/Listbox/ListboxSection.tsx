@@ -22,7 +22,7 @@ export interface ListboxSectionProps extends HasClassName {
     /**
      * When true, the section is visually rendered (label + content) but hidden from assistive
      * technology. Used for skeleton-only sections: the visual skeleton provides feedback to
-     * sighted users, while the live region (`ListboxState`) handles the loading announcement.
+     * sighted users, while the live region (`CompositeStatus`) handles the loading announcement.
      */
     'aria-hidden'?: boolean;
 }
