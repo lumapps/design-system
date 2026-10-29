@@ -1,4 +1,4 @@
-import { defineComponent, ref } from 'vue';
+import { defineComponent } from 'vue';
 
 import {
     CompositeStatus as UI,
@@ -6,14 +6,13 @@ import {
     COMPONENT_NAME,
     CLASSNAME,
 } from '@lumx/core/js/components/Composite/CompositeStatus';
-import { subscribeListboxState } from '@lumx/core/js/components/Listbox/subscribeListboxState';
 
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
-import { useWatchDisposable } from '../../composables/useWatchDisposable';
 import { GenericBlock } from '../generic-block';
 import { Text } from '../text';
 import { useCompositeContext } from './CompositeContext';
 import { useCompositeEvent } from './useCompositeEvent';
+import { useClassName } from '../../composables/useClassName';
 
 export type CompositeStatusProps = VueToJSXProps<UIProps, 'state'>;
 
@@ -27,44 +26,22 @@ export type CompositeStatusProps = VueToJSXProps<UIProps, 'state'>;
 const CompositeStatus = defineComponent(
     (props: CompositeStatusProps) => {
         const { handle: list } = useCompositeContext();
-        const optionsState = useCompositeEvent(list, 'optionsChange', undefined);
-        const isLoading = ref(false);
-        const shouldAnnounce = ref(false);
-        const isOpen = ref(false);
+        const state = useCompositeEvent(list, 'stateChange', undefined);
+        const className = useClassName(() => props.class);
 
-        useWatchDisposable(list, (listValue) => {
-            if (listValue) {
-                return subscribeListboxState(listValue, {
-                    setIsLoading: (v) => {
-                        isLoading.value = v;
-                    },
-                    setShouldAnnounce: (v) => {
-                        shouldAnnounce.value = v;
-                    },
-                    setIsOpen: (v) => {
-                        isOpen.value = v;
-                    },
-                });
-            }
-        });
-
-        return () => {
-            const state = { ...optionsState.value, isLoading: isLoading.value, isOpen: isOpen.value };
-            // Only pass loadingMessage to core after the 500ms debounce threshold
-            const loadingMessage = shouldAnnounce.value ? props.loadingMessage : undefined;
-
-            return UI(
+        return () =>
+            UI(
                 {
                     emptyMessage: props.emptyMessage,
                     nbOptionMessage: props.nbOptionMessage,
                     errorMessage: props.errorMessage,
                     errorTryReloadMessage: props.errorTryReloadMessage,
-                    loadingMessage,
-                    state,
+                    loadingMessage: props.loadingMessage,
+                    state: state.value,
+                    className: className.value,
                 },
                 { GenericBlock, Text },
             );
-        };
     },
     {
         name: getName(COMPONENT_NAME),
