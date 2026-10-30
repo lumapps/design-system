@@ -6,7 +6,8 @@ import type { CompositeHandle, CompositeType } from '@lumx/core/js/components/Co
  * its items, sections, skeletons and state.
  *
  * Provided by `ListboxProvider` (standalone listbox) and by `Combobox.Provider` (the list registered on
- * the combobox, with `comboboxListId`), then re-provided by the list with its `type`, without `comboboxListId`.
+ * the combobox, with `comboboxListId`), then re-provided by the list with its `type` (and by a tree item with
+ * the next `level`), without `comboboxListId`.
  */
 export interface CompositeContextValue {
     /** The composite handle (null inside a combobox until a list registers). */
