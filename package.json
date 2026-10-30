@@ -102,6 +102,6 @@
         "dev-packages/*",
         ".github/actions"
     ],
-    "packageManager": "yarn@4.12.0",
+    "packageManager": "yarn@4.18.1",
     "version": "4.27.0"
 }
