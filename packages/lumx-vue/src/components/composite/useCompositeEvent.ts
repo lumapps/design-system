@@ -14,10 +14,11 @@ import { useWatchDisposable } from '../../composables/useWatchDisposable';
 const COALESCED_EVENTS: ReadonlySet<PropertyKey> = new Set<keyof CompositeEventMap>(['optionsChange', 'stateChange']);
 
 /**
- * Subscribe to an event of a handle (a composite handle). Re-subscribes when the handle changes, then starts from
- * the new handle snapshot (or `initialValue` while there is no handle or until the event has fired at least once),
- * so it never keeps the value of the previous handle. An `undefined` notification resets the value to
- * `initialValue` the same way.
+ * Subscribe to an event of a handle (a composite handle, or the combobox handle, which has the composite events and
+ * its own). Re-subscribes when the handle changes, then starts from the new handle snapshot (or `initialValue` while
+ * there is no handle or until the event has fired at least once), so it never keeps the value of the previous
+ * handle. An `undefined` notification (e.g. the combobox list detached) resets the value to `initialValue` the same
+ * way.
  */
 export function useCompositeEvent<M extends CompositeEventMap, K extends keyof M>(
     handle: Readonly<Ref<CompositeEventSource<M> | null>>,

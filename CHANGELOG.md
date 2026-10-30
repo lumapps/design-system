@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   `@lumx/react`:
+    -   `Combobox.useComboboxEvent`: add the `expanded` event (fired when the trigger `aria-expanded` changes).
+
 ### Changed
 
 -   `@lumx/react`:

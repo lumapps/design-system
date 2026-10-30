@@ -5,11 +5,11 @@ import type { CompositeHandle, CompositeType } from '@lumx/core/js/components/Co
  * Context value shared by the sub-components of a composite widget (a list, a grid, …): the list,
  * its items, sections, skeletons and state.
  *
- * Provided by `ListboxProvider` (standalone listbox) and by `Combobox.Provider` (listbox of a combobox),
- * then re-provided by the list with its `type`.
+ * Provided by `ListboxProvider` (standalone listbox) and by `Combobox.Provider` (the list registered on
+ * the combobox, with `comboboxListId`), then re-provided by the list with its `type`, without `comboboxListId`.
  */
 export interface CompositeContextValue {
-    /** The composite handle (null inside a combobox until the trigger creates it). */
+    /** The composite handle (null inside a combobox until a list registers). */
     handle: CompositeHandle | null;
     /** The ID of the composite element. */
     id: string;
@@ -22,6 +22,13 @@ export interface CompositeContextValue {
     selectionType?: 'single' | 'multiple';
     /** The nesting level of the items (0 or undefined: root items). A skeleton is nested when it is above 0. */
     level?: number;
+    /**
+     * The ID of the list of the combobox (the trigger `aria-controls` it). Set by `Combobox.Provider` only: a list
+     * is the combobox list when its nearest composite context carries it. The list, its items and a nested
+     * `ListboxProvider` provide their own context without it, so a list rendered inside them is standalone.
+     * (At that level, it is the same value as `id`.)
+     */
+    comboboxListId?: string;
 }
 
 export const CompositeContext = createContext<CompositeContextValue | undefined>(undefined);

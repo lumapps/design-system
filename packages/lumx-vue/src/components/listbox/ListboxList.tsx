@@ -1,4 +1,4 @@
-import { computed, defineComponent, ref, useAttrs, watch } from 'vue';
+import { computed, defineComponent, ref, useAttrs } from 'vue';
 
 import {
     ListboxList as UI,
@@ -7,12 +7,13 @@ import {
     CLASSNAME,
 } from '@lumx/core/js/components/Listbox/ListboxList';
 import type { JSXElement } from '@lumx/core/js/types';
+import { setupListbox } from '@lumx/core/js/components/Listbox/setupListbox';
+import type { ListboxHandle } from '@lumx/core/js/components/Listbox/types';
 
 import { useClassName } from '../../composables/useClassName';
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
-import { useWatchDisposable } from '../../composables/useWatchDisposable';
-import { useCompositeEvent } from '../composite/useCompositeEvent';
 import { provideCompositeContext, useCompositeContext } from '../composite/CompositeContext';
+import { useCompositeList } from '../composite/useCompositeList';
 import { useListboxHandle } from './context/useListboxHandle';
 
 export type ListboxListProps = VueToJSXProps<UIProps, 'aria-label' | 'aria-busy' | 'aria-multiselectable' | 'id'>;
@@ -25,11 +26,12 @@ export type ListboxListProps = VueToJSXProps<UIProps, 'aria-label' | 'aria-busy'
  * @see https://www.w3.org/WAI/ARIA/apg/patterns/listbox/
  * @see https://www.w3.org/WAI/ARIA/apg/patterns/grid/
  *
- * Mounts the listbox handle of the enclosing provider on its element:
- * - Inside a combobox (`Combobox.Provider`): renders its options only while the combobox is open.
- *   The trigger owns focus.
+ * Mounts a listbox handle on its element:
+ * - Inside a combobox (`Combobox.Provider`): creates the listbox handle with the combobox list options and
+ *   registers it on the combobox. Renders its options only while the combobox is open. The trigger owns focus.
  * - Inside a `ListboxProvider`: a standalone list that owns focus (`tabindex="0"` +
- *   `aria-activedescendant`) and handles its own keyboard navigation.
+ *   `aria-activedescendant`) and handles its own keyboard navigation. A `ListboxProvider` nested
+ *   in a combobox wins (the list stays standalone and does not register on the combobox).
  *
  * @param props Component props.
  * @return Vue element.
@@ -39,8 +41,20 @@ const ListboxList = defineComponent(
         const attrs = useAttrs();
         const className = useClassName(() => props.class);
         const { id: listboxId } = useCompositeContext();
-        const list = useListboxHandle();
+        const providedList = useListboxHandle();
         const listRef = ref<HTMLElement | null>(null);
+
+        // The combobox list (linked to the trigger), or the standalone list of the `ListboxProvider` (a nearer
+        // `ListboxProvider` inside the combobox wins).
+        const {
+            handle: list,
+            isOpen,
+            isLoading,
+        } = useCompositeList<ListboxHandle>({
+            elementRef: listRef,
+            createList: setupListbox,
+            standaloneHandle: providedList,
+        });
 
         const type = computed(() => props.type || 'listbox');
         provideCompositeContext({
@@ -56,26 +70,6 @@ const ListboxList = defineComponent(
                 return multiselectable === true || multiselectable === 'true' ? 'multiple' : 'single';
             },
         });
-
-        // Mount the list element on the handle.
-        useWatchDisposable([list, listRef], ([listValue, element]) => {
-            if (!listValue || !element) return undefined;
-            return listValue.mount(element);
-        });
-
-        // Tracking states (options are rendered only while visible: standalone always, combobox while open)
-        const isLoading = useCompositeEvent(list, 'loadingChange', false);
-        const isOpen = useCompositeEvent(list, 'open', false);
-        const options = useCompositeEvent(list, 'optionsChange', undefined);
-
-        // Flush pending navigation (that could not run when hidden)
-        watch(
-            [isOpen, () => options.value?.optionsLength],
-            () => {
-                if (isOpen.value) list.value?.flushPendingNavigation();
-            },
-            { flush: 'post' },
-        );
 
         return () => {
             const children = isOpen.value ? (slots.default?.() as JSXElement) : null;
