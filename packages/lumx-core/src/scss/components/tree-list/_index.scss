@@ -1,0 +1,144 @@
+/* ==========================================================================
+   Tree list
+   ========================================================================== */
+
+// The row reuses the list item structure (`lumx-list-item`, size tiny) and the list item action styles
+// (hover, active, selected), at every depth.
+
+// Indent: each group sets `--lumx-tree-list-level` (the level of its sub-items, unset at the root).
+// The rows (and the skeletons or states in a group) get one big spacing unit of indent per level.
+$lumx-tree-list-indent: calc(var(--lumx-tree-list-level, 0) * #{$lumx-spacing-unit-big});
+
+// Size of the expand toggle (a size `s` icon button), also the width of the spacer on a leaf item.
+$lumx-tree-list-toggle-size: calc(var(--lumx-button-height) / 1.5);
+
+// Duration of the group open and close animation (the same as the expansion panel).
+$lumx-tree-list-transition-duration: 400ms;
+
+// ---- Tree -----------------------
+
+// The composite sets `hidden` on the tree when it has no visible content (see `setupComposite`).
+// Before the composite mounts: hide an empty tree.
+.#{$lumx-base-prefix}-tree-list:empty {
+    display: none;
+}
+
+// ---- Tree item -----------------------
+
+.#{$lumx-base-prefix}-tree-list-item {
+    &__row {
+        padding-left: $lumx-tree-list-indent;
+    }
+
+    // Allow the content to shrink below its text width so that a `truncate` label shows an ellipsis
+    &__row > .#{$lumx-base-prefix}-list-item__wrapper > .#{$lumx-base-prefix}-list-item__content {
+        min-width: 0;
+    }
+
+    // The `before` slot holds the expand toggle (or the spacer) and the `before` content: no fixed width
+    &__row > .#{$lumx-base-prefix}-list-item__wrapper > .#{$lumx-base-prefix}-list-item__before {
+        justify-content: flex-start;
+        width: auto;
+    }
+
+    // The row action is a full width block, so that a `truncate` label gets the content width (a block button
+    // gets the width of its text). (One class more than the `all: unset` of the action area action.)
+    &__row &__action {
+        display: block;
+        width: 100%;
+    }
+
+    // Non-selectable parent item: the expand toggle is the main action of the row. The row action (a `span`)
+    // lets the pointer through to the toggle overlay (it stays the `role="treeitem"`).
+    &__action--passive {
+        pointer-events: none;
+    }
+
+    // Expand toggle, or the spacer of the same width on a leaf item
+    &__toggle,
+    &__spacer {
+        flex-shrink: 0;
+    }
+
+    &__spacer {
+        width: $lumx-tree-list-toggle-size;
+    }
+
+    // Negative vertical margins: the toggle fits in the line height (size `xs`), so that a parent item row
+    // keeps the height of a list item of size `tiny`.
+    &__toggle {
+        margin-block: calc((#{$lumx-size-xs} - #{$lumx-tree-list-toggle-size}) / 2);
+
+        // A bigger chevron than the default icon of a size `s` icon button
+        // (the icon size rule of the button, with the toggle class).
+        &.#{$lumx-base-prefix}-button--size-s.#{$lumx-base-prefix}-button--variant-icon > i {
+            width: $lumx-size-xs;
+            height: $lumx-size-xs;
+            font-size: $lumx-size-xs;
+            line-height: $lumx-size-xs;
+        }
+    }
+
+    // Main toggle: its overlay (`::before`) covers the whole row (the row is the positioning context, not the
+    // toggle). (One class more than the `position: relative` of the button.)
+    // A pointer anywhere on the row is on the toggle: the toggle shows its own hover and active states on top of
+    // the row ones, to show that a click opens or closes the item (it does not select it).
+    &__row &__toggle--main {
+        position: static;
+    }
+
+    // The button styles disable the pointer on `::before` and round it: the overlay catches the clicks
+    // on the row, with square corners (one class more than the button `::before` rules).
+    &__row &__toggle--main.#{$lumx-base-prefix}-button.#{$lumx-base-prefix}-action-area__action::before {
+        pointer-events: auto;
+        border-radius: 0;
+    }
+
+    // Keyboard: the active item is the row action, show its highlight on the toggle overlay (the focus style of
+    // an action overlay).
+    &__row:has(&__action--passive[data-focus-visible-added]) &__toggle--main::before {
+        @include lumx-action-area-overlay-hover("dark");
+        @include lumx-action-area-focus-inset;
+    }
+
+    // Keyboard: the toggle also shows its hover state, as with the pointer (Enter opens or closes the item, it does
+    // not select it).
+    &__row:has(&__action--passive[data-focus-visible-added]) &__toggle--main {
+        color: var(--lumx-button-emphasis-low-state-hover-theme-light-color);
+        background-color: var(--lumx-button-emphasis-low-state-hover-theme-light-background-color);
+    }
+
+    // Sub-items (the indent is on their rows)
+    &__group {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+
+        // Skeletons and states: a margin (they have no full width background, and a state has a fixed padding)
+        > :not(.#{$lumx-base-prefix}-tree-list-item) {
+            margin-left: $lumx-tree-list-indent;
+        }
+
+        // Open and close animation: the height goes to and from `auto` (`interpolate-size`). Where it is supported,
+        // a closed group (`hidden`) stays in the layout with no height and hidden content (`visibility` changes at
+        // the end of the close), so that it can animate. Elsewhere, a closed group has `display: none`.
+        @supports (interpolate-size: allow-keywords) {
+            // stylelint-disable-next-line property-no-unknown -- (not in the stylelint 14 property list yet)
+            interpolate-size: allow-keywords;
+            overflow-y: clip;
+            transition:
+                height $lumx-tree-list-transition-duration,
+                visibility $lumx-tree-list-transition-duration;
+
+            @media (prefers-reduced-motion: reduce) {
+                transition: none;
+            }
+
+            &[hidden] {
+                display: block;
+                height: 0;
+                visibility: hidden;
+            }
+        }
+    }
+}
