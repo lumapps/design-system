@@ -413,6 +413,45 @@ export default function listboxTests({
                 expect(onEdit).toHaveBeenCalledTimes(1);
                 expect(onSelect).not.toHaveBeenCalled();
             });
+
+            it('should make a clicked option action the active item without selecting the option', async () => {
+                const onSelect = vi.fn();
+                const onEdit = vi.fn();
+                renderWithState(
+                    ({ onSelect: handleSelect }) => (
+                        <Listbox.Provider onSelect={handleSelect}>
+                            <Listbox.List type="grid" aria-label="Fruits">
+                                {FRUITS.slice(0, 2).map((fruit) => (
+                                    <Listbox.Option
+                                        key={fruit}
+                                        value={fruit}
+                                        after={
+                                            <Listbox.OptionAction
+                                                as={IconButton}
+                                                icon={mdiPencil}
+                                                label={`Edit ${fruit}`}
+                                                hideTooltip
+                                                onClick={onEdit}
+                                            />
+                                        }
+                                    >
+                                        {fruit}
+                                    </Listbox.Option>
+                                ))}
+                            </Listbox.List>
+                        </Listbox.Provider>
+                    ),
+                    { onSelect },
+                    WITH_SELECT_STATE,
+                );
+                const grid = screen.getByRole('grid', { name: 'Fruits' });
+                const editBanana = screen.getByRole('gridcell', { name: `Edit ${FRUITS[1]}` });
+                await userEvent.click(editBanana);
+                expect(grid).toHaveFocus();
+                expect(grid).toHaveAttribute('aria-activedescendant', editBanana.id);
+                expect(onEdit).toHaveBeenCalledTimes(1);
+                expect(onSelect).not.toHaveBeenCalled();
+            });
         });
 
         describe('Tooltip on active option', () => {

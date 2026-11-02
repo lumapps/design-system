@@ -1,7 +1,7 @@
 import type { FocusNavigationCallbacks, FocusNavigationController } from '../../utils/focusNavigation';
 
 /**
- * Pattern of a mounted composite element (from its role, e.g. `'listbox'` or `'grid'`): each composite
+ * Pattern of a mounted composite element (from its role, e.g. `'listbox'`, `'grid'` or `'tree'`): each composite
  * specialization (see {@link setupComposite}) defines its own patterns.
  */
 export type CompositeType = string;
@@ -133,8 +133,18 @@ export interface CompositeNavigation {
     readonly focusNav: FocusNavigationController;
     /** Selector of the elements that can become active (options, grid cells, …). */
     readonly cellSelector: string;
+    /**
+     * Selector of other elements (not cells) whose mousedown must not move DOM focus away from the
+     * focus owner (e.g. an expand toggle next to a tree item).
+     */
+    readonly keepFocusSelector?: string;
     /** Whether a clicked cell selects its item (e.g. false for grid action cells). */
     isOptionCell(cell: HTMLElement): boolean;
+    /**
+     * Find the cell of a pressed or clicked element (e.g. the tree item of an expand toggle that covers its row).
+     * Default: the closest element that matches {@link cellSelector}.
+     */
+    getCellFromTarget?(target: HTMLElement): HTMLElement | null;
     /** Scroll the active item into view. */
     scrollIntoView(item: HTMLElement): void;
     /**
@@ -234,7 +244,7 @@ export interface CompositeHandle extends CompositeEventSource {
 
     /** Clear the active item and discard the pending navigation intent. No-op while not mounted. */
     clearActiveItem(): void;
-    /** Make an item active. No-op while not mounted. */
+    /** Make an item active (e.g. a parent tree item when its group closes). No-op while not mounted. */
     setActiveItem(item: HTMLElement): void;
     /**
      * Make the first selected item active, or else the first (`'first'`) or the last (`'last'`) item.
