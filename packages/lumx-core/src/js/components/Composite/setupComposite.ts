@@ -313,29 +313,39 @@ export function setupComposite(options: CompositeOptions, specialization: Compos
         mounted = { element: container, navigation: nav, typeahead, controller };
         syncHidden();
         link?.onMount?.(container);
+        /** The cell of a pressed or clicked element (see {@link CompositeNavigation.getCellFromTarget}). */
+        const getCell = (target: HTMLElement): HTMLElement | null =>
+            nav.getCellFromTarget ? nav.getCellFromTarget(target) : target.closest<HTMLElement>(cellSelector);
 
         // ── Delegated listeners ───────────────────────────────
 
         container.addEventListener(
             'click',
             (event) => {
-                const cell = (event.target as HTMLElement).closest(cellSelector) as HTMLElement | null;
+                const cell = getCell(event.target as HTMLElement);
                 if (!cell) return;
                 // Do not select disabled cells.
                 if (isOptionDisabled(cell)) {
                     event.stopPropagation();
                     return;
                 }
-                // Not an option cell (e.g. grid action cell) — skip the selection, let its own handler fire.
-                if (!nav.isOptionCell(cell)) return;
-
-                handle.select(cell);
-                getFocusOwner()?.focus();
-                // Standalone: the clicked item becomes the active item.
+                // Not an option cell (e.g. grid action cell, non-selectable tree item): skip the selection,
+                // let its own handler fire.
+                if (nav.isOptionCell(cell)) {
+                    handle.select(cell);
+                    getFocusOwner()?.focus();
+                }
+                // Standalone: the clicked item becomes the active item (also a non-option cell, e.g. a grid
+                // action cell).
                 if (isStandalone) focusNav.goTo(() => cell);
             },
             { signal },
         );
+
+        /** Elements whose mousedown must not move DOM focus (the cells, and the extra elements of the pattern). */
+        const pressSelector = nav.keepFocusSelector ? `${cellSelector}, ${nav.keepFocusSelector}` : cellSelector;
+        /** Standalone only: true while the composite takes focus from a press on a cell (see mousedown). */
+        let isFocusFromPress = false;
 
         // Prevent mousedown on cells to avoid moving focus away from the focus owner before click fires.
         container.addEventListener(
@@ -343,7 +353,17 @@ export function setupComposite(options: CompositeOptions, specialization: Compos
             (event) => {
                 // Standalone: pointer interaction hides the focus ring (until the next key press).
                 if (isStandalone) isPointerModality = true;
-                if ((event.target as HTMLElement).closest(cellSelector)) event.preventDefault();
+                const target = event.target as HTMLElement;
+                if (!target.closest(pressSelector)) return;
+                event.preventDefault();
+                // Standalone: the composite takes the focus that the pressed element does not take (not on a
+                // disabled cell: its click does nothing). The click sets the active item.
+                const cell = getCell(target);
+                if (isStandalone && document.activeElement !== container && !(cell && isOptionDisabled(cell))) {
+                    isFocusFromPress = true;
+                    container.focus();
+                    isFocusFromPress = false;
+                }
             },
             { signal },
         );
@@ -368,10 +388,11 @@ export function setupComposite(options: CompositeOptions, specialization: Compos
                 { signal },
             );
             // On focus: show the visual focus on the selected item, or else on the first item.
+            // Not on a focus from a press on a cell: the click sets the active item.
             container.addEventListener(
                 'focus',
                 () => {
-                    if (!focusNav.selectors.activeItem) handle.activateDefaultItem('first');
+                    if (!focusNav.selectors.activeItem && !isFocusFromPress) handle.activateDefaultItem('first');
                 },
                 { signal },
             );

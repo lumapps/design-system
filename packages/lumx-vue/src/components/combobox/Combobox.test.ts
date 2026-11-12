@@ -1,12 +1,11 @@
 import { render } from '@testing-library/vue';
-import { defineComponent, h, ref } from 'vue';
-import identity from 'lodash/identity';
+import { defineComponent, h } from 'vue';
 
 import comboboxTests from '@lumx/core/js/components/Combobox/Tests';
 import { CLASSNAME as TEXT_FIELD_CLASSNAME } from '@lumx/core/js/components/TextField/constants';
 import { CLASSNAME as COMBOBOX_BUTTON_CLASSNAME } from '@lumx/core/js/components/Combobox/ComboboxButton';
 import { getByClassName } from '@lumx/core/testing/queries';
-import { commonTestsSuiteVTL, SetupRenderOptions } from '@lumx/vue/testing';
+import { commonTestsSuiteVTL, renderWithState, SetupRenderOptions } from '@lumx/vue/testing';
 
 import { Button, IconButton } from '@lumx/vue';
 
@@ -14,40 +13,6 @@ import { Combobox } from '.';
 import ComboboxButton from './ComboboxButton';
 import ComboboxInput from './ComboboxInput';
 import ComboboxProvider from './ComboboxProvider';
-
-/**
- * Renders a template with controlled state management.
- * Vue equivalent of the React renderWithState helper.
- */
-function renderWithState(
-    template: (props: any) => any,
-    initialArgs: Record<string, any> = {},
-    {
-        onChangeProp = 'onChange',
-        valueExtract = identity,
-    }: { onChangeProp?: string; valueExtract?: (v: any) => any } = {},
-) {
-    const Wrapper = defineComponent({
-        setup() {
-            const value = ref(initialArgs.value ?? '');
-
-            return () => {
-                const props = {
-                    ...initialArgs,
-                    value: value.value,
-                    [onChangeProp]: (...args: any[]) => {
-                        value.value = valueExtract(args[0]);
-                        initialArgs[onChangeProp]?.(...args);
-                    },
-                };
-                return template(props);
-            };
-        },
-    });
-
-    const { unmount, container } = render(Wrapper);
-    return { unmount, container: container as HTMLElement };
-}
 
 describe('<Combobox>', () => {
     comboboxTests({
