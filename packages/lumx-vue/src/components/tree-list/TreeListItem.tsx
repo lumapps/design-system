@@ -20,6 +20,7 @@ import { Tooltip } from '../tooltip';
 import type { TooltipProps } from '../tooltip/Tooltip';
 import { provideCompositeContext, useOptionalCompositeContext } from '../composite/CompositeContext';
 import { useCompositeEvent } from '../composite/useCompositeEvent';
+import { provideCompositeItemContext } from '../composite/CompositeItemContext';
 import { useOptionalTreeListContext } from './TreeListContext';
 
 export type TreeListItemProps = VueToJSXProps<
@@ -29,6 +30,7 @@ export type TreeListItemProps = VueToJSXProps<
     | 'isParent'
     | 'isOpen'
     | 'isSelected'
+    | 'selectionType'
     | 'hidden'
     | 'level'
     | 'handleClick'
@@ -73,12 +75,14 @@ function hasContent(nodes: unknown): boolean {
 /**
  * TreeListItem component: one tree item of a `TreeList`, with its sub-items (default slot: `TreeListItem`,
  * `Combobox.OptionSkeleton` or `Combobox.State`). Label: the `label` slot, or the `label` prop.
- * The `before` and `after` slots take e.g. an icon.
+ * The `before` and `after` slots take e.g. an icon or `Combobox.OptionMoreInfo` (the selection icon comes after).
  *
  * - With a `value`, the tree item is selectable (Enter or a click selects it), and it is selected when the
  *   tree `value` holds it. Without, it is not selectable: Enter or a click on a non-selectable parent item
  *   opens or closes it, and on a non-selectable leaf item only emits `click` (e.g. an action such as
  *   "Create a new list…").
+ * - A selectable tree item shows its selection icon (the icons of `Combobox.SelectionIcon`: a check circle or a
+ *   blank radio in single selection, a checkbox in multiple selection).
  * - The open state is internal: a parent item starts open when a sub-item at any depth is selected.
  *   In a combobox, it resets on each popup open.
  * - Touch screen readers: TalkBack (Chrome) can open and close the parent items. On iOS, a user can
@@ -121,6 +125,19 @@ const TreeListItem = defineComponent(
 
         // Force the tooltip open while the tree item is the active item (keyboard highlight).
         const isActive = useCompositeEvent(tree, optionActiveEvent(id), false);
+
+        // The item context of the tree item (`Combobox.OptionMoreInfo` in its slots).
+        // A nested tree item provides its own: the nearest one wins.
+        provideCompositeItemContext({
+            itemId: id,
+            // Getters: keep the provided values reactive.
+            get isSelected() {
+                return isSelected();
+            },
+            get isSelectable() {
+                return props.value !== undefined;
+            },
+        });
 
         // The sub-items are one level deeper (a skeleton in a group does not make the tree busy).
         provideCompositeContext({
@@ -189,6 +206,7 @@ const TreeListItem = defineComponent(
                     value: props.value,
                     description: props.description,
                     isSelected: isSelected(),
+                    selectionType: compositeContext.selectionType,
                     isParent,
                     level,
                     isOpen: state.value.isOpen,

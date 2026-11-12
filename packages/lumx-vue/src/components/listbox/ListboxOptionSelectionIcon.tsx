@@ -17,7 +17,7 @@ import { useCompositeItemContext } from '../composite/CompositeItemContext';
  * - `multiple` list (`aria-multiselectable` on `Combobox.List`): a checkbox icon, marked or blank.
  *
  * The option selected state (`isSelected`) and the list selection type are read from the parent context.
- * Must be placed in the `after` slot of a `Combobox.Option`.
+ * Must be placed in the `after` slot of a `Combobox.Option` (a `TreeListItem` renders its own selection icon).
  *
  * @return Vue element.
  */
@@ -25,12 +25,14 @@ const ListboxOptionSelectionIcon = defineComponent(
     () => {
         const optionContext = useCompositeItemContext();
         const listContext = useCompositeContext();
-        return () =>
-            UI({
+        return () => {
+            if (optionContext.isSelectable === false) return null;
+            return UI({
                 selectionType: listContext.selectionType,
                 isSelected: optionContext.isSelected,
                 className: LEGACY_OPTION_CLASSNAME,
             });
+        };
     },
     {
         name: getName('ComboboxSelectionIcon'),

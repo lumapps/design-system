@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `@lumx/react`, `@lumx/vue`:
     -   Create the `TreeList` and `TreeListItem` components: a tree (WAI-ARIA tree view pattern) usable standalone or inside a `Combobox.Provider`, with selectable and non-selectable tree items, lazy parent items, and the auto and manual filters in a combobox.
+    -   `TreeListItem`: show the selection icon on selectable tree items, and support `Combobox.OptionMoreInfo` and `Combobox.SelectionIcon` in tree items.
 -   `@lumx/react`:
     -   `Combobox.useComboboxEvent`: add the `expanded` event (fired when the trigger `aria-expanded` changes).
 

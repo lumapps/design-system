@@ -44,13 +44,14 @@ A click or <kbd>Enter</kbd> on a non-selectable parent item opens or closes it.
 
 Set `selectionType="multiple"` to let users select several tree items.
 The `value` of the tree list is then an array, and a selection toggles the tree item in it.
+Each selectable tree item shows a checkbox (a radio button with the single selection).
 
 <DemoBlock demo={{ react: ReactDemoMultipleSelection, vue: VueDemoMultipleSelection }} />
 
 ## Item content
 
 A tree item has a `label`, an optional `description`, and `before` and `after` sections
-(for example an icon or a thumbnail).
+(for example an icon or a thumbnail). The selection icon comes after the `after` section.
 
 <DemoBlock demo={{ react: ReactDemoItemContent, vue: VueDemoItemContent }} />
 

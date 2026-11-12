@@ -160,8 +160,54 @@ export function setup({
         },
     };
 
+    /**
+     * `Combobox.OptionMoreInfo` in tree items (standalone tree): the popover opens on the active tree item and
+     * describes it (`aria-describedby`). A sub-item reads its own item context (the nearest one wins). Browser only
+     * (popover), like the combobox option more info stories.
+     * No axe `error` mode: axe reports the more info button itself (`aria-hidden-focus`: an `aria-hidden` button
+     * that stays focusable), in a combobox option too.
+     */
+    const OptionMoreInfoActiveTreeItem = {
+        render: () => {
+            const { TreeList, TreeListItem, Combobox } = components;
+            return (
+                <TreeList aria-label="Food">
+                    <TreeListItem
+                        label="Fruits"
+                        value="fruits"
+                        after={<Combobox.OptionMoreInfo>Fruits info</Combobox.OptionMoreInfo>}
+                    >
+                        <TreeListItem
+                            label="Apple"
+                            value="apple"
+                            after={<Combobox.OptionMoreInfo>Apple info</Combobox.OptionMoreInfo>}
+                        />
+                    </TreeListItem>
+                </TreeList>
+            );
+        },
+        async play() {
+            await expect(screen.queryByText('Fruits info')).not.toBeInTheDocument();
+
+            // Focus the tree: "Fruits" is the active tree item.
+            await userEvent.tab();
+            await expect(await screen.findByText('Fruits info')).toBeInTheDocument();
+            // The tree item is described by its more info popover.
+            const fruits = screen.getByRole('treeitem', { name: 'Fruits' });
+            const describedBy = (fruits.getAttribute('aria-describedby') as string).split(' ');
+            const popoverId = describedBy.find((id) => id.endsWith('-more-info')) as string;
+            await expect(document.getElementById(popoverId)).toHaveTextContent('Fruits info');
+
+            // Open "Fruits", then move to its sub-item "Apple".
+            await userEvent.keyboard('{ArrowRight}{ArrowRight}');
+            await expect(await screen.findByText('Apple info')).toBeInTheDocument();
+            await waitFor(() => expect(screen.queryByText('Fruits info')).not.toBeInTheDocument());
+        },
+    };
+
     return {
         meta,
+        OptionMoreInfoActiveTreeItem,
         TreeItemRowLayout,
         ClickNonSelectableParentItemRow,
         FilterNoMatchHidesPopover,

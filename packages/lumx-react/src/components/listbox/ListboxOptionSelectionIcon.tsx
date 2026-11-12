@@ -13,13 +13,14 @@ import { useCompositeItemContext } from '../composite/CompositeItemContext';
  * - `multiple` list (`aria-multiselectable` on `Combobox.List`): a checkbox icon, marked or blank.
  *
  * The option selected state (`isSelected`) and the list selection type are read from the parent context.
- * Must be placed in the `after` slot of a `Combobox.Option`.
+ * Must be placed in the `after` slot of a `Combobox.Option` (a `TreeListItem` renders its own selection icon).
  *
  * @return React element.
  */
 export const ListboxOptionSelectionIcon = () => {
-    const { isSelected } = useCompositeItemContext();
+    const { isSelected, isSelectable = true } = useCompositeItemContext();
     const { selectionType } = useCompositeContext();
+    if (!isSelectable) return null;
     return <UI selectionType={selectionType} isSelected={isSelected} className={LEGACY_OPTION_CLASSNAME} />;
 };
 ListboxOptionSelectionIcon.displayName = 'ComboboxSelectionIcon';
