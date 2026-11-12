@@ -1,4 +1,4 @@
-import { Locale } from '@lumx/react/utils/locale/types';
+import { Locale } from '../locale/types';
 import { parseLocale } from '../locale/parseLocale';
 import { getFirstDayOfWeek } from './getFirstDayOfWeek';
 

@@ -1,10 +1,19 @@
-import { Locale } from '@lumx/react/utils/locale/types';
+import { Locale } from '../locale/types';
+
+/** Week info of `Intl.Locale` (not in the TS lib of the repo). */
+interface WeekInfo {
+    firstDay: number;
+}
+interface LocaleWeekInfo {
+    getWeekInfo?(): WeekInfo;
+    weekInfo?: WeekInfo;
+}
 
 /** Get first day of week for locale from the browser API */
 export const getFromBrowser = (locale: Locale): number | undefined => {
     try {
-        const localeMetadata = new Intl.Locale(locale.code) as any;
-        const { firstDay } = localeMetadata.getWeekInfo?.() || localeMetadata.weekInfo;
+        const localeMetadata = new Intl.Locale(locale.code) as Intl.Locale & LocaleWeekInfo;
+        const { firstDay } = (localeMetadata.getWeekInfo?.() || localeMetadata.weekInfo) as WeekInfo;
         // Sunday is represented as `0` in Date.getDay()
         if (firstDay === 7) return 0;
         return firstDay;

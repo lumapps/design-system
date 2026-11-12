@@ -12,4 +12,8 @@ export type PropsToOverride =
     | 'handleAfterClick'
     | 'handleMouseEnter'
     | 'handleMouseLeave'
-    | 'handleKeyDown';
+    | 'handleKeyDown'
+    | 'handlePreviousMonth'
+    | 'handleNextMonth'
+    | 'handleDayPick'
+    | 'handleInputChange';
