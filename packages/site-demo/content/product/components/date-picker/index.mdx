@@ -1,23 +1,29 @@
 ---
 title: Date picker
-frameworks: ['react']
+frameworks: ['react', 'vue']
 ---
 
-import * as DemoDefault from './react/default.tsx';
-import * as DemoInput from './react/input.tsx';
-import * as DemoRestrictedSelectionModes from './react/restricted-selection-modes.tsx';
+import * as ReactDemoDefault from './react/default.tsx';
+import * as VueDemoDefault from './vue/default.vue';
+import * as ReactDemoInput from './react/input.tsx';
+import * as VueDemoInput from './vue/input.vue';
+import * as ReactDemoRestrictedSelectionModes from './react/restricted-selection-modes.tsx';
+import * as VueDemoRestrictedSelectionModes from './vue/restricted-selection-modes.vue';
 import ReactDatePicker from 'lumx-docs:@lumx/react/components/date-picker/DatePicker';
+import ReactDatePickerField from 'lumx-docs:@lumx/react/components/date-picker/DatePickerField';
+import VueDatePicker from 'lumx-docs:@lumx/vue/components/date-picker/DatePicker';
+import VueDatePickerField from 'lumx-docs:@lumx/vue/components/date-picker/DatePickerField';
 
 **Date pickers allow users to pick a date from a calendar.**
 
-<DemoBlock orientation="horizontal" demo={{ react: DemoDefault }} />
+<DemoBlock orientation="horizontal" demo={{ react: ReactDemoDefault, vue: VueDemoDefault }} />
 
 ## Input
 
 `DatePickerField` is a [text field](/product/components/text-field) where users can type a date or pick one in a calendar.
 A click on the input (or <kbd>↓</kbd>) opens the calendar in a dialog.
 
-<DemoBlock orientation="horizontal" demo={{ react: DemoInput }} />
+<DemoBlock orientation="horizontal" demo={{ react: ReactDemoInput, vue: VueDemoInput }} />
 
 ### Typed dates
 
@@ -64,8 +70,13 @@ The standalone `DatePicker` has the same calendar keyboard. It does not move the
 
 Date selection can be restricted via `minDate` and `maxDate` properties.
 
-<DemoBlock orientation="horizontal" demo={{ react: DemoRestrictedSelectionModes }} />
+<DemoBlock
+    orientation="horizontal"
+    demo={{ react: ReactDemoRestrictedSelectionModes, vue: VueDemoRestrictedSelectionModes }}
+/>
 
 ## Properties
 
-<PropTable docs={{ react: ReactDatePicker }} />
+<PropTable docs={{ react: ReactDatePicker, vue: VueDatePicker }} />
+
+<PropTable docs={{ react: ReactDatePickerField, vue: VueDatePickerField }} />
