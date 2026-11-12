@@ -1,11 +1,18 @@
-import React, { SyntheticEvent, useCallback, useRef } from 'react';
+import { SyntheticEvent, useEffect, useReducer, useRef, useState } from 'react';
 
-import { DatePicker, IconButtonProps, Placement, PopoverDialog, TextField, TextFieldProps } from '@lumx/react';
+import { IconButtonProps, PopoverDialog, TextField, TextFieldProps } from '@lumx/react';
 import { GenericProps } from '@lumx/react/utils/type';
+import { DatePickerField as UI } from '@lumx/core/js/components/DatePicker/DatePickerField';
+import {
+    createDatePickerFieldState,
+    type DatePickerFieldStateProps,
+} from '@lumx/core/js/components/DatePicker/createDatePickerFieldState';
 import { getCurrentLocale } from '@lumx/core/js/utils/locale/getCurrentLocale';
-import { useBooleanState } from '@lumx/react/hooks/useBooleanState';
+import { useId } from '@lumx/react/hooks/useId';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';
+
+import { DatePicker } from './DatePicker';
 
 /**
  * Defines the props of the component.
@@ -36,7 +43,14 @@ export interface DatePickerFieldProps extends Omit<TextFieldProps, 'value' | 'on
 const COMPONENT_NAME = 'DatePickerField';
 
 /**
- * DatePickerField component.
+ * DatePickerField component: an editable `role="combobox"` input that opens a modal dialog with the calendar
+ * (`DatePicker`).
+ *
+ * - Down, Alt+Down or a click on the input open the dialog and focus the roving day (the selected day, else today).
+ * - The user can type a date (long format or numeric date of the locale). The typed text is committed on Enter
+ *   and on blur: `onChange` is called with the parsed date (snapped to `minDate`/`maxDate`), then the input shows
+ *   the formatted `value` again.
+ * - An empty text clears the value only when the field has a clear button (`clearButtonProps`).
  *
  * @param  props Component props.
  * @param  ref   Component ref.
@@ -52,84 +66,72 @@ export const DatePickerField = forwardRef<DatePickerFieldProps, HTMLDivElement>(
         name,
         nextButtonProps,
         onChange,
+        onClear,
         previousButtonProps,
         value,
+        label,
+        'aria-label': ariaLabel,
         ...forwardedProps
     } = otherProps;
-    const anchorRef = useRef(null);
 
-    const [isOpen, close, , toggleOpen] = useBooleanState(false);
+    const anchorRef = useRef<HTMLDivElement>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
+    const dialogId = useId();
 
-    const handleKeyboardNav = useCallback(
-        (evt: React.KeyboardEvent) => {
-            if (evt.key === 'Enter' || evt.key === ' ') {
-                toggleOpen();
-            }
+    // Bridge: the state reads the latest props and asks for a render on change.
+    const latestProps = useRef<DatePickerFieldStateProps>({});
+    latestProps.current = {
+        value,
+        locale,
+        minDate,
+        maxDate,
+        name,
+        clearButtonProps: forwardedProps.clearButtonProps,
+        onChange(newValue, changeName, event) {
+            if (event) onChange(newValue, changeName, event as unknown as SyntheticEvent);
+            else onChange(newValue, changeName);
         },
-        [toggleOpen],
+    };
+    const [, forceUpdate] = useReducer((count: number) => count + 1, 0);
+    const [state] = useState(() =>
+        createDatePickerFieldState({ getProps: () => latestProps.current, onUpdate: forceUpdate }),
     );
-    const onTextFieldChange = useCallback(
-        (textFieldValue: string, textFieldName?: string, event?: SyntheticEvent) => {
-            if (!textFieldValue) {
-                onChange(undefined, textFieldName, event);
-            }
+    useEffect(() => (inputRef.current ? state.attachInput(inputRef.current) : undefined), [state]);
+
+    const { focusElement, ...view } = state.getView();
+
+    return UI(
+        {
+            ...forwardedProps,
+            ...disabledStateProps,
+            ref,
+            name,
+            label,
+            'aria-label': ariaLabel,
+            onClear(event?: SyntheticEvent) {
+                state.clear();
+                onClear?.(event);
+            },
+            ...view,
+            dialogId,
+            handleInputChange: state.inputText,
+            handleClose: state.close,
+            anchorRef,
+            inputRef,
+            focusElement: { current: focusElement ?? null },
+            datePickerProps: {
+                locale,
+                value,
+                minDate,
+                maxDate,
+                defaultMonth,
+                nextButtonProps,
+                previousButtonProps,
+                todayOrSelectedDateRef: state.setRovingDayElement,
+                onChange: state.pickDay,
+            },
         },
-        [onChange],
-    );
-    const onDatePickerChange = useCallback(
-        (newDate?: Date) => {
-            onChange(newDate, name);
-            close();
-        },
-        [name, onChange, close],
-    );
-
-    // Format date for text field
-    const textFieldValue = value?.toLocaleDateString(locale, { year: 'numeric', month: 'long', day: 'numeric' }) || '';
-
-    const todayOrSelectedDateRef = React.useRef(null);
-
-    return (
-        <>
-            <TextField
-                ref={ref}
-                {...forwardedProps}
-                name={name}
-                forceFocusStyle={isOpen}
-                textFieldRef={anchorRef}
-                value={textFieldValue}
-                onClick={toggleOpen}
-                onChange={onTextFieldChange}
-                onKeyPress={handleKeyboardNav}
-                {...disabledStateProps}
-                readOnly
-                aria-haspopup="dialog"
-            />
-            {isOpen ? (
-                <PopoverDialog
-                    // Can't use `aria-labelledby` targeting the text field label element (not correctly read on some screen readers)
-                    aria-label={forwardedProps.label}
-                    anchorRef={anchorRef}
-                    placement={Placement.BOTTOM_START}
-                    isOpen={isOpen}
-                    onClose={close}
-                    // On open, focus the selected day or today
-                    focusElement={todayOrSelectedDateRef}
-                >
-                    <DatePicker
-                        locale={locale}
-                        maxDate={maxDate}
-                        minDate={minDate}
-                        value={value}
-                        todayOrSelectedDateRef={todayOrSelectedDateRef}
-                        onChange={onDatePickerChange}
-                        defaultMonth={defaultMonth}
-                        nextButtonProps={nextButtonProps}
-                        previousButtonProps={previousButtonProps}
-                    />
-                </PopoverDialog>
-            ) : null}
-        </>
+        { TextField, PopoverDialog, DatePicker },
     );
 });
 DatePickerField.displayName = COMPONENT_NAME;
