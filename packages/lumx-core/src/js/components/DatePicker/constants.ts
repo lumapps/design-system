@@ -10,6 +10,11 @@ export const COMPONENT_NAME = 'DatePicker';
  */
 export const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-date-picker';
 
+/**
+ * Field component display name.
+ */
+export const FIELD_COMPONENT_NAME = 'DatePickerField';
+
 /** Attribute holding the local `YYYY-MM-DD` of a day button (see `getDateKey`). */
 export const DATE_ATTRIBUTE = 'data-date';
 

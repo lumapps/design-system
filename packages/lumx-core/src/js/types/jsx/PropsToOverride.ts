@@ -15,4 +15,5 @@ export type PropsToOverride =
     | 'handleKeyDown'
     | 'handlePreviousMonth'
     | 'handleNextMonth'
-    | 'handleDayPick';
+    | 'handleDayPick'
+    | 'handleInputChange';

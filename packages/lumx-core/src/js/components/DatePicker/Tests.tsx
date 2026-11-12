@@ -26,6 +26,7 @@ type RenderResult = {
 export interface DatePickerTestSetup {
     components: {
         DatePicker: any;
+        DatePickerField: any;
     };
     /**
      * Render a template with a controlled `value` state, updated by `onChange` (then calls `initialArgs.onChange`
@@ -49,11 +50,16 @@ const getDay = (date: Date) => screen.getByRole('gridcell', { name: dayName(date
 /** The first argument of the last call of a spy. */
 const lastValue = (spy: ReturnType<typeof vi.fn>) => spy.mock.calls[spy.mock.calls.length - 1]?.[0];
 
-export function createTemplates({ DatePicker }: DatePickerTestSetup['components']) {
+export function createTemplates({ DatePicker, DatePickerField }: DatePickerTestSetup['components']) {
     /** Standalone calendar (`en-US`: Sunday first). */
     const pickerTemplate = (props: any) => <DatePicker locale="en-US" {...MONTH_BUTTON_PROPS} {...props} />;
 
-    return { pickerTemplate };
+    /** Date field (`en-US`). */
+    const fieldTemplate = (props: any) => (
+        <DatePickerField label="Date" name="date" locale="en-US" {...MONTH_BUTTON_PROPS} {...props} />
+    );
+
+    return { pickerTemplate, fieldTemplate };
 }
 
 // ═══════════════════════════════════════════════════════════════════
@@ -61,7 +67,7 @@ export function createTemplates({ DatePicker }: DatePickerTestSetup['components'
 // ═══════════════════════════════════════════════════════════════════
 
 export default function datePickerTests({ components, renderWithState }: DatePickerTestSetup) {
-    const { pickerTemplate } = createTemplates(components);
+    const { pickerTemplate, fieldTemplate } = createTemplates(components);
 
     describe('DatePicker', () => {
         // November 2026 (Sunday first): row 1 = 1 to 7, row 5 = 29, 30 and blank cells.
@@ -305,6 +311,222 @@ export default function datePickerTests({ components, renderWithState }: DatePic
             await userEvent.click(getDay(day(2026, 11, 3)));
             expect(lastValue(onChange)).toEqual(day(2026, 11, 3));
             expect(getDay(day(2026, 11, 3))).toHaveAttribute('aria-selected', 'true');
+        });
+    });
+
+    describe('DatePickerField', () => {
+        const NOVEMBER_12 = day(2026, 11, 12);
+        const getInput = () => screen.getByRole('combobox', { name: 'Date' });
+
+        describe('input', () => {
+            it('should render an editable combobox with a dialog popup', () => {
+                renderWithState(fieldTemplate, { value: NOVEMBER_12 });
+                const input = getInput();
+                expect(input).toHaveAttribute('aria-haspopup', 'dialog');
+                expect(input).toHaveAttribute('aria-expanded', 'false');
+                expect(input).toHaveAttribute('aria-controls');
+                expect(input).not.toHaveAttribute('readonly');
+                expect(input).not.toHaveAttribute('aria-autocomplete');
+                expect(input).toHaveValue('November 12, 2026');
+            });
+
+            it('should open on click and focus the selected day', async () => {
+                renderWithState(fieldTemplate, { value: NOVEMBER_12 });
+                await userEvent.click(getInput());
+                const dialog = await screen.findByRole('dialog', { name: 'Date' });
+                expect(dialog).toHaveAttribute('aria-modal', 'true');
+                expect(dialog.id).toBe(getInput().getAttribute('aria-controls'));
+                expect(getInput()).toHaveAttribute('aria-expanded', 'true');
+                await waitFor(() => expect(getDay(NOVEMBER_12)).toHaveFocus());
+            });
+
+            it('should open on Down and on Alt+Down', async () => {
+                renderWithState(fieldTemplate, { value: NOVEMBER_12 });
+                getInput().focus();
+                await userEvent.keyboard('{ArrowDown}');
+                expect(await screen.findByRole('dialog')).toBeInTheDocument();
+                await userEvent.keyboard('{Escape}');
+                await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument());
+                expect(getInput()).toHaveFocus();
+                await userEvent.keyboard('{Alt>}{ArrowDown}{/Alt}');
+                expect(await screen.findByRole('dialog')).toBeInTheDocument();
+            });
+
+            it('should not open on Enter and Space', async () => {
+                renderWithState(fieldTemplate, {});
+                getInput().focus();
+                await userEvent.keyboard('{Enter} ');
+                expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+            });
+
+            it('should not open when disabled', async () => {
+                renderWithState(fieldTemplate, { value: NOVEMBER_12, isDisabled: true });
+                expect(getInput()).toBeDisabled();
+                await userEvent.click(getInput());
+                expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+            });
+
+            it('should not open when aria-disabled', async () => {
+                renderWithState(fieldTemplate, { value: NOVEMBER_12, 'aria-disabled': true });
+                expect(getInput()).toHaveAttribute('aria-disabled', 'true');
+                await userEvent.click(getInput());
+                await userEvent.keyboard('{ArrowDown}');
+                expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+            });
+
+            it('should ignore readOnly (the input stays editable and opens)', async () => {
+                renderWithState(fieldTemplate, { value: NOVEMBER_12, readOnly: true });
+                expect(getInput()).not.toHaveAttribute('readonly');
+                await userEvent.click(getInput());
+                expect(await screen.findByRole('dialog')).toBeInTheDocument();
+            });
+
+            it('should format the value again when the locale changes', async () => {
+                const { setArgs } = renderWithState(fieldTemplate, { value: NOVEMBER_12 });
+                expect(getInput()).toHaveValue('November 12, 2026');
+                await setArgs({ locale: 'fr' });
+                expect(getInput()).toHaveValue('12 novembre 2026');
+            });
+
+            it('should name the dialog with the field aria-label when there is no label', async () => {
+                renderWithState(fieldTemplate, { label: undefined, 'aria-label': 'Publication date' });
+                await userEvent.click(screen.getByRole('combobox', { name: 'Publication date' }));
+                expect(await screen.findByRole('dialog', { name: 'Publication date' })).toBeInTheDocument();
+            });
+        });
+
+        it('should pick a day, close the dialog and focus the input', async () => {
+            const onChange = vi.fn();
+            renderWithState(fieldTemplate, { value: NOVEMBER_12, onChange });
+            await userEvent.click(getInput());
+            await userEvent.click(await screen.findByRole('gridcell', { name: dayName(day(2026, 11, 3)) }));
+            expect(lastValue(onChange)).toEqual(day(2026, 11, 3));
+            await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument());
+            expect(getInput()).toHaveValue('November 3, 2026');
+            await waitFor(() => expect(getInput()).toHaveFocus());
+        });
+
+        it('should follow a key move into another month, then focus the selected day on the next open', async () => {
+            renderWithState(fieldTemplate, { value: day(2026, 11, 30) });
+            await userEvent.click(getInput());
+            await waitFor(() => expect(getDay(day(2026, 11, 30))).toHaveFocus());
+            await userEvent.keyboard('{ArrowRight}');
+            expect(await screen.findByRole('grid', { name: 'December 2026' })).toBeInTheDocument();
+            await waitFor(() => expect(getDay(day(2026, 12, 1))).toHaveFocus());
+            expect(screen.getByRole('dialog')).toBeInTheDocument();
+
+            await userEvent.keyboard('{Escape}');
+            await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument());
+            await userEvent.click(getInput());
+            expect(await screen.findByRole('grid', { name: 'November 2026' })).toBeInTheDocument();
+            await waitFor(() => expect(getDay(day(2026, 11, 30))).toHaveFocus());
+        });
+
+        describe('typed input', () => {
+            /** Replace the input text (no click: a click opens the dialog). */
+            const replaceText = async (text: string) => {
+                const input = getInput();
+                input.focus();
+                await userEvent.clear(input);
+                if (text) await userEvent.type(input, text, { skipClick: true });
+            };
+
+            /** Replace the input text, then commit with Enter. */
+            const typeAndEnter = async (text: string) => {
+                await replaceText(text);
+                await userEvent.keyboard('{Enter}');
+            };
+
+            it('should commit a typed date on Enter', async () => {
+                const onChange = vi.fn();
+                renderWithState(fieldTemplate, { value: NOVEMBER_12, onChange });
+                await typeAndEnter('12/25/2026');
+                expect(onChange).toHaveBeenCalledTimes(1);
+                expect(lastValue(onChange)).toEqual(day(2026, 12, 25));
+                expect(getInput()).toHaveValue('December 25, 2026');
+                expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+            });
+
+            it('should commit a typed date on blur and call onBlur', async () => {
+                const onChange = vi.fn();
+                const onBlur = vi.fn();
+                renderWithState(fieldTemplate, { value: NOVEMBER_12, onChange, onBlur });
+                await replaceText('March 3, 85');
+                await userEvent.tab();
+                expect(lastValue(onChange)).toEqual(day(1985, 3, 3));
+                expect(onBlur).toHaveBeenCalled();
+                // The commit comes before the blur of the consumer.
+                expect(onChange.mock.invocationCallOrder[0]).toBeLessThan(onBlur.mock.invocationCallOrder[0]);
+                expect(getInput()).toHaveValue('March 3, 1985');
+            });
+
+            it('should not call onChange for the same day', async () => {
+                const onChange = vi.fn();
+                renderWithState(fieldTemplate, { value: NOVEMBER_12, onChange });
+                await typeAndEnter('11/12/26');
+                expect(onChange).not.toHaveBeenCalled();
+                expect(getInput()).toHaveValue('November 12, 2026');
+            });
+
+            it('should snap a date out of the range', async () => {
+                const onChange = vi.fn();
+                renderWithState(fieldTemplate, { value: NOVEMBER_12, onChange, maxDate: day(2026, 11, 20) });
+                await typeAndEnter('1/1/2030');
+                expect(lastValue(onChange)).toEqual(day(2026, 11, 20));
+                expect(getInput()).toHaveValue('November 20, 2026');
+            });
+
+            it('should show the value again on an invalid text', async () => {
+                const onChange = vi.fn();
+                renderWithState(fieldTemplate, { value: NOVEMBER_12, onChange });
+                await typeAndEnter('31/02/2026');
+                expect(onChange).not.toHaveBeenCalled();
+                expect(getInput()).toHaveValue('November 12, 2026');
+            });
+
+            it('should show the value again when the consumer ignores onChange', async () => {
+                const onChange = vi.fn();
+                renderWithState((props: any) => fieldTemplate({ ...props, value: NOVEMBER_12 }), { onChange });
+                await typeAndEnter('12/25/2026');
+                expect(onChange).toHaveBeenCalledTimes(1);
+                expect(getInput()).toHaveValue('November 12, 2026');
+            });
+
+            it('should clear on an empty text with a clear button', async () => {
+                const onChange = vi.fn();
+                renderWithState(fieldTemplate, {
+                    value: NOVEMBER_12,
+                    onChange,
+                    clearButtonProps: { label: 'Clear' },
+                });
+                await typeAndEnter('');
+                expect(onChange).toHaveBeenCalledTimes(1);
+                expect(lastValue(onChange)).toBeUndefined();
+                expect(getInput()).toHaveValue('');
+            });
+
+            it('should show the value again on an empty text without a clear button', async () => {
+                const onChange = vi.fn();
+                renderWithState(fieldTemplate, { value: NOVEMBER_12, onChange });
+                await typeAndEnter('');
+                expect(onChange).not.toHaveBeenCalled();
+                expect(getInput()).toHaveValue('November 12, 2026');
+            });
+
+            it('should not call onChange while typing', async () => {
+                const onChange = vi.fn();
+                renderWithState(fieldTemplate, { value: NOVEMBER_12, onChange, clearButtonProps: { label: 'Clear' } });
+                await replaceText('12/2');
+                expect(onChange).not.toHaveBeenCalled();
+            });
+
+            it('should open the calendar on the typed month on the next open', async () => {
+                renderWithState(fieldTemplate, { value: NOVEMBER_12 });
+                await typeAndEnter('2/14/2027');
+                await userEvent.click(getInput());
+                expect(await screen.findByRole('grid', { name: 'February 2027' })).toBeInTheDocument();
+                await waitFor(() => expect(getDay(day(2027, 2, 14))).toHaveFocus());
+            });
         });
     });
 }
