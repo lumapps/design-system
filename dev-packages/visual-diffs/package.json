@@ -9,5 +9,6 @@
     "dependencies": {
         "pixelmatch": "^7.0.0",
         "sharp": "^0.35.5"
-    }
+    },
+    "version": "4.28.0"
 }
