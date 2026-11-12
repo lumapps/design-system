@@ -1,10 +1,12 @@
+import React from 'react';
 import { DatePickerProps } from '@lumx/react';
 import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
 import { getByClassName } from '@lumx/react/testing/utils/queries';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { act, render, screen, fireEvent } from '@testing-library/react';
+import datePickerTests from '@lumx/core/js/components/DatePicker/Tests';
 import { vi } from 'vitest';
 
-import { DatePicker } from '.';
+import { DatePicker, DatePickerField } from '.';
 import { CLASSNAME } from './constants';
 
 const mockedDate = new Date(1487721600000); // Feb 22 2017
@@ -12,6 +14,32 @@ const mockedDate = new Date(1487721600000); // Feb 22 2017
 vi.mock('@lumx/core/js/utils/date/getYearDisplayName', () => ({
     getYearDisplayName: () => 'année',
 }));
+
+/**
+ * Render a template with a controlled `value` state, updated by `onChange` (then calls `initialArgs.onChange`).
+ * The other args can be changed with `setArgs`.
+ */
+function renderWithState(template: (props: any) => React.JSX.Element, initialArgs: Record<string, any> = {}) {
+    let updateArgs: React.Dispatch<React.SetStateAction<Record<string, any>>> = () => {};
+    const Wrapper = () => {
+        const [args, setArgs] = React.useState(initialArgs);
+        const [value, setValue] = React.useState<Date | undefined>(initialArgs.value ?? undefined);
+        updateArgs = setArgs;
+        return template({
+            ...args,
+            value,
+            onChange: (newValue: Date | undefined, ...rest: any[]) => {
+                setValue(newValue);
+                args.onChange?.(newValue, ...rest);
+            },
+        });
+    };
+    const result = render(<Wrapper />);
+    const setArgs = async (newArgs: Record<string, any>) => {
+        await act(async () => updateArgs((args) => ({ ...args, ...newArgs })));
+    };
+    return { ...result, setArgs };
+}
 
 const setup = (propsOverride: Partial<DatePickerProps> = {}) => {
     const props: DatePickerProps = {
@@ -27,6 +55,11 @@ const setup = (propsOverride: Partial<DatePickerProps> = {}) => {
     return { props, datePicker };
 };
 
+// Shared core test suite (DatePicker and DatePickerField), with real dates.
+describe('DatePicker core tests', () => {
+    datePickerTests({ components: { DatePicker, DatePickerField }, renderWithState });
+});
+
 describe(`<${DatePicker.displayName}>`, () => {
     beforeEach(() => {
         vi.useFakeTimers();
@@ -40,37 +73,32 @@ describe(`<${DatePicker.displayName}>`, () => {
     commonTestsSuiteRTL(setup, {
         baseClassName: CLASSNAME,
         forwardRef: 'datePicker',
+        forwardClassName: 'datePicker',
+        forwardAttributes: 'datePicker',
+        applyTheme: {
+            affects: [{ element: 'datePicker' }],
+            viaProp: true,
+            viaContext: false,
+        },
     });
 
-    describe('Navigation', () => {
-        it('should change month when clicking next/prev buttons (uncontrolled)', () => {
-            setup();
-            // Initial month: Février 2017
-            expect(screen.getByText('février 2017')).toBeInTheDocument();
-
-            const nextBtn = screen.getByRole('button', { name: 'Next month' });
-            fireEvent.click(nextBtn);
-            // Next month: Mars 2017
+    describe('Keyboard', () => {
+        it('should show the month of a key move and focus its day in StrictMode', () => {
+            render(
+                <React.StrictMode>
+                    <DatePicker
+                        locale="fr"
+                        onChange={vi.fn()}
+                        value={new Date(2017, 1, 28)}
+                        nextButtonProps={{ label: 'Next month' }}
+                        previousButtonProps={{ label: 'Previous month' }}
+                    />
+                </React.StrictMode>,
+            );
+            screen.getByRole('gridcell', { name: /28 février 2017/i }).focus();
+            fireEvent.keyDown(document.activeElement as Element, { key: 'ArrowRight' });
             expect(screen.getByText('mars 2017')).toBeInTheDocument();
-
-            const prevBtn = screen.getByRole('button', { name: 'Previous month' });
-            fireEvent.click(prevBtn);
-            // Back to Février 2017
-            expect(screen.getByText('février 2017')).toBeInTheDocument();
-        });
-    });
-
-    describe('Validation', () => {
-        it('should warn and use current date if value is invalid', () => {
-            const consoleSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
-            const invalidDate = new Date('invalid');
-            setup({ value: invalidDate });
-
-            expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining('Invalid date provided'));
-            // Should fallback to mocked current date (Feb 2017)
-            expect(screen.getByText('février 2017')).toBeInTheDocument();
-
-            consoleSpy.mockRestore();
+            expect(screen.getByRole('gridcell', { name: /^1 mars 2017/i })).toHaveFocus();
         });
     });
 });
