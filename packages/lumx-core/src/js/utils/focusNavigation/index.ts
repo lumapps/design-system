@@ -2,13 +2,15 @@ export type {
     FocusNavigationCallbacks,
     FocusNavigationController,
     FocusNavigationSelectors,
+    GridFocusNavigationController,
+    GridNavigationDirection,
     GridNavigationOptions,
     ListFocusNavigationController,
     ListFocusNavigationSelectors,
     ListNavigationOptions,
 } from './types';
 
-export type { RovingTabIndexOptions } from './setupRovingTabIndex';
+export type { GridRovingTabIndexOptions, RovingTabIndexOptions } from './setupRovingTabIndex';
 
 export { createListFocusNavigation } from './createListFocusNavigation';
 export { createGridFocusNavigation } from './createGridFocusNavigation';

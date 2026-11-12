@@ -1,7 +1,9 @@
 // @vitest-environment jsdom
+import { screen } from '@testing-library/dom';
+
 import { createGridFocusNavigation } from './createGridFocusNavigation';
 
-import type { FocusNavigationCallbacks, FocusNavigationSelectors } from './types';
+import type { FocusNavigationCallbacks, FocusNavigationSelectors, GridNavigationDirection } from './types';
 
 function createContainer(html: string): HTMLElement {
     const div = document.createElement('div');
@@ -716,6 +718,513 @@ describe('createGridFocusNavigation', () => {
             nav.flushPendingNavigation();
             expect(resolve).not.toHaveBeenCalled();
             expect(nav.selectors.activeItem).toBeNull();
+        });
+    });
+
+    /**
+     * Grid with non-navigable cells (4 columns by position):
+     * ```
+     * row 0: [blank] [blank]  A      B
+     * row 1:  C      (D)      E      F
+     * row 2:  G       H       I    [blank]
+     * ```
+     * `[blank]` are blank cells, `(D)` is a disabled cell.
+     */
+    function createGridWithBlankCells(): HTMLElement {
+        return createContainer(`
+            <div role="grid">
+                <div role="row">
+                    <div role="gridcell" data-blank data-testid="blank-0-0"></div>
+                    <div role="gridcell" data-blank data-testid="blank-0-1"></div>
+                    <div role="gridcell">A</div>
+                    <div role="gridcell">B</div>
+                </div>
+                <div role="row">
+                    <div role="gridcell">C</div>
+                    <div role="gridcell" aria-disabled="true">D</div>
+                    <div role="gridcell">E</div>
+                    <div role="gridcell">F</div>
+                </div>
+                <div role="row">
+                    <div role="gridcell">G</div>
+                    <div role="gridcell">H</div>
+                    <div role="gridcell">I</div>
+                    <div role="gridcell" data-blank data-testid="blank-2-3"></div>
+                </div>
+            </div>
+        `);
+    }
+
+    const BLANK_GRID_OPTIONS = {
+        ...GRID_OPTIONS,
+        cellDisabledSelector: '[aria-disabled="true"], [data-blank]',
+    };
+
+    describe('non-navigable cells (cellDisabledSelector)', () => {
+        it('should resolve first/last/matching to navigable cells only', () => {
+            const container = createGridWithBlankCells();
+            const { callbacks } = makeCallbacks();
+            const nav = createGridFocusNavigation(
+                { ...BLANK_GRID_OPTIONS, container },
+                callbacks,
+                new AbortController().signal,
+            );
+
+            expect(nav.selectors.getFirst()).toBe(screen.getByRole('gridcell', { name: 'A' }));
+            expect(nav.selectors.getLast()).toBe(screen.getByRole('gridcell', { name: 'G' }));
+            expect(nav.selectors.getMatching(() => true)).toBe(screen.getByRole('gridcell', { name: 'A' }));
+            expect(nav.selectors.getMatching((cell) => cell.textContent === 'D')).toBeNull();
+            expect(nav.selectors.hasNavigableItems).toBe(true);
+        });
+
+        it('should report no navigable items when every cell is non-navigable', () => {
+            const container = createContainer(`
+                <div role="grid">
+                    <div role="row"><div role="gridcell" data-blank></div><div role="gridcell" aria-disabled="true">X</div></div>
+                </div>
+            `);
+            const { callbacks } = makeCallbacks();
+            const nav = createGridFocusNavigation(
+                { ...BLANK_GRID_OPTIONS, container },
+                callbacks,
+                new AbortController().signal,
+            );
+            expect(nav.selectors.hasNavigableItems).toBe(false);
+            expect(nav.goDown()).toBe(false);
+            expect(nav.selectors.activeItem).toBeNull();
+        });
+
+        it('should not activate a non-navigable cell with goTo', () => {
+            const container = createGridWithBlankCells();
+            const { callbacks, activated } = makeCallbacks();
+            const nav = createGridFocusNavigation(
+                { ...BLANK_GRID_OPTIONS, container },
+                callbacks,
+                new AbortController().signal,
+            );
+
+            expect(nav.goTo(() => screen.getByRole('gridcell', { name: 'D' }))).toBe(false);
+            expect(nav.goTo(() => screen.getByTestId('blank-0-0'))).toBe(false);
+            expect(activated).toHaveLength(0);
+        });
+
+        it('should go down from the first row into the column of its first navigable cell (position index)', () => {
+            const container = createGridWithBlankCells();
+            const { callbacks } = makeCallbacks();
+            const nav = createGridFocusNavigation(
+                { ...BLANK_GRID_OPTIONS, container },
+                callbacks,
+                new AbortController().signal,
+            );
+
+            // No active cell: first navigable cell of the first row.
+            expect(nav.goDown()).toBe(true);
+            expect(nav.selectors.activeItem).toBe(screen.getByRole('gridcell', { name: 'A' }));
+
+            // A is at position 2 (blank cells count): down goes to E, then I.
+            expect(nav.goDown()).toBe(true);
+            expect(nav.selectors.activeItem).toBe(screen.getByRole('gridcell', { name: 'E' }));
+            expect(nav.goDown()).toBe(true);
+            expect(nav.selectors.activeItem).toBe(screen.getByRole('gridcell', { name: 'I' }));
+        });
+
+        it('should skip non-navigable cells when moving left/right in a row', () => {
+            const container = createGridWithBlankCells();
+            const { callbacks } = makeCallbacks();
+            const nav = createGridFocusNavigation(
+                { ...BLANK_GRID_OPTIONS, container },
+                callbacks,
+                new AbortController().signal,
+            );
+
+            nav.goTo(() => screen.getByRole('gridcell', { name: 'C' }));
+            expect(nav.goRight()).toBe(true);
+            expect(nav.selectors.activeItem).toBe(screen.getByRole('gridcell', { name: 'E' }));
+            expect(nav.goLeft()).toBe(true);
+            expect(nav.selectors.activeItem).toBe(screen.getByRole('gridcell', { name: 'C' }));
+        });
+
+        it('should not move left past the leading blank cells (no wrap)', () => {
+            const container = createGridWithBlankCells();
+            const { callbacks } = makeCallbacks();
+            const nav = createGridFocusNavigation(
+                { ...BLANK_GRID_OPTIONS, container },
+                callbacks,
+                new AbortController().signal,
+            );
+
+            nav.goTo(() => screen.getByRole('gridcell', { name: 'A' }));
+            expect(nav.goLeft()).toBe(false);
+            expect(nav.selectors.activeItem).toBe(screen.getByRole('gridcell', { name: 'A' }));
+        });
+
+        it('should wrap left/right to the navigable cells of the adjacent rows (wrap)', () => {
+            const container = createGridWithBlankCells();
+            const { callbacks } = makeCallbacks();
+            const nav = createGridFocusNavigation(
+                { ...BLANK_GRID_OPTIONS, container, wrap: true },
+                callbacks,
+                new AbortController().signal,
+            );
+
+            // Left from A: past the leading blanks, wraps to the last navigable cell of the last row.
+            nav.goTo(() => screen.getByRole('gridcell', { name: 'A' }));
+            expect(nav.goLeft()).toBe(true);
+            expect(nav.selectors.activeItem).toBe(screen.getByRole('gridcell', { name: 'I' }));
+
+            // Right from I: past the trailing blank, wraps to the first navigable cell of the first row.
+            expect(nav.goRight()).toBe(true);
+            expect(nav.selectors.activeItem).toBe(screen.getByRole('gridcell', { name: 'A' }));
+
+            // Left from C: wraps to the last navigable cell of the previous row.
+            nav.goTo(() => screen.getByRole('gridcell', { name: 'C' }));
+            expect(nav.goLeft()).toBe(true);
+            expect(nav.selectors.activeItem).toBe(screen.getByRole('gridcell', { name: 'B' }));
+        });
+
+        it('should not move up/down onto a non-navigable cell', () => {
+            const container = createGridWithBlankCells();
+            const { callbacks, activated } = makeCallbacks();
+            const nav = createGridFocusNavigation(
+                { ...BLANK_GRID_OPTIONS, container, wrap: true },
+                callbacks,
+                new AbortController().signal,
+            );
+
+            // Up from C targets the blank cell at position 0.
+            nav.goTo(() => screen.getByRole('gridcell', { name: 'C' }));
+            activated.length = 0;
+            expect(nav.goUp()).toBe(false);
+            expect(nav.selectors.activeItem).toBe(screen.getByRole('gridcell', { name: 'C' }));
+
+            // Up from H targets the disabled D.
+            nav.goTo(() => screen.getByRole('gridcell', { name: 'H' }));
+            activated.length = 0;
+            expect(nav.goUp()).toBe(false);
+            expect(nav.selectors.activeItem).toBe(screen.getByRole('gridcell', { name: 'H' }));
+
+            // Down from F targets the trailing blank cell.
+            nav.goTo(() => screen.getByRole('gridcell', { name: 'F' }));
+            activated.length = 0;
+            expect(nav.goDown()).toBe(false);
+            expect(nav.selectors.activeItem).toBe(screen.getByRole('gridcell', { name: 'F' }));
+            expect(activated).toHaveLength(0);
+        });
+
+        it('should keep the position index in the column memory', () => {
+            const container = createGridWithBlankCells();
+            const { callbacks } = makeCallbacks();
+            const nav = createGridFocusNavigation(
+                { ...BLANK_GRID_OPTIONS, container },
+                callbacks,
+                new AbortController().signal,
+            );
+
+            // C (position 0) -> Right skips D -> E (position 2) -> Up -> A (position 2).
+            nav.goTo(() => screen.getByRole('gridcell', { name: 'C' }));
+            nav.goRight();
+            expect(nav.goUp()).toBe(true);
+            expect(nav.selectors.activeItem).toBe(screen.getByRole('gridcell', { name: 'A' }));
+
+            // B (position 3) -> Down -> F (position 3).
+            nav.goTo(() => screen.getByRole('gridcell', { name: 'B' }));
+            expect(nav.goDown()).toBe(true);
+            expect(nav.selectors.activeItem).toBe(screen.getByRole('gridcell', { name: 'F' }));
+        });
+    });
+
+    describe('goToRowStart / goToRowEnd', () => {
+        it('should move to the first/last cell of the active row', () => {
+            const container = createGrid(3, 3);
+            const { callbacks } = makeCallbacks();
+            const nav = createGridFocusNavigation(
+                { ...GRID_OPTIONS, container },
+                callbacks,
+                new AbortController().signal,
+            );
+
+            nav.goTo(() => container.querySelector<HTMLElement>('#cell-1-1'));
+            expect(nav.goToRowEnd()).toBe(true);
+            expect(nav.selectors.activeItem?.id).toBe('cell-1-2');
+            expect(nav.goToRowStart()).toBe(true);
+            expect(nav.selectors.activeItem?.id).toBe('cell-1-0');
+        });
+
+        it('should skip non-navigable cells at the row edges', () => {
+            const container = createGridWithBlankCells();
+            const { callbacks } = makeCallbacks();
+            const nav = createGridFocusNavigation(
+                { ...BLANK_GRID_OPTIONS, container },
+                callbacks,
+                new AbortController().signal,
+            );
+
+            nav.goTo(() => screen.getByRole('gridcell', { name: 'B' }));
+            expect(nav.goToRowStart()).toBe(true);
+            expect(nav.selectors.activeItem).toBe(screen.getByRole('gridcell', { name: 'A' }));
+
+            nav.goTo(() => screen.getByRole('gridcell', { name: 'G' }));
+            expect(nav.goToRowEnd()).toBe(true);
+            expect(nav.selectors.activeItem).toBe(screen.getByRole('gridcell', { name: 'I' }));
+        });
+
+        it('should update the column memory', () => {
+            const container = createGridWithBlankCells();
+            const { callbacks } = makeCallbacks();
+            const nav = createGridFocusNavigation(
+                { ...BLANK_GRID_OPTIONS, container },
+                callbacks,
+                new AbortController().signal,
+            );
+
+            // G -> row end I (position 2) -> Up -> E.
+            nav.goTo(() => screen.getByRole('gridcell', { name: 'G' }));
+            nav.goToRowEnd();
+            expect(nav.goUp()).toBe(true);
+            expect(nav.selectors.activeItem).toBe(screen.getByRole('gridcell', { name: 'E' }));
+        });
+
+        it('should return false with no active cell', () => {
+            const container = createGrid(2, 2);
+            const { callbacks, activated } = makeCallbacks();
+            const nav = createGridFocusNavigation(
+                { ...GRID_OPTIONS, container },
+                callbacks,
+                new AbortController().signal,
+            );
+
+            expect(nav.goToRowStart()).toBe(false);
+            expect(nav.goToRowEnd()).toBe(false);
+            expect(activated).toHaveLength(0);
+        });
+    });
+
+    describe('onBoundary', () => {
+        it('should be called past the first/last row with the remembered column', () => {
+            const container = createGridWithBlankCells();
+            const { callbacks } = makeCallbacks();
+            const onBoundary = vi.fn(() => false);
+            const nav = createGridFocusNavigation(
+                { ...BLANK_GRID_OPTIONS, container, onBoundary },
+                callbacks,
+                new AbortController().signal,
+            );
+
+            nav.goTo(() => screen.getByRole('gridcell', { name: 'A' }));
+            expect(nav.goUp()).toBe(false);
+            expect(onBoundary).toHaveBeenLastCalledWith('up', screen.getByRole('gridcell', { name: 'A' }));
+            expect(nav.selectors.activeItem).toBe(screen.getByRole('gridcell', { name: 'A' }));
+
+            nav.goTo(() => screen.getByRole('gridcell', { name: 'H' }));
+            expect(nav.goDown()).toBe(false);
+            expect(onBoundary).toHaveBeenLastCalledWith('down', screen.getByRole('gridcell', { name: 'H' }));
+            expect(nav.selectors.activeItem).toBe(screen.getByRole('gridcell', { name: 'H' }));
+        });
+
+        it('should be called on an up/down move onto a non-navigable cell', () => {
+            const container = createGridWithBlankCells();
+            const { callbacks } = makeCallbacks();
+            const onBoundary = vi.fn(() => false);
+            const nav = createGridFocusNavigation(
+                { ...BLANK_GRID_OPTIONS, container, onBoundary },
+                callbacks,
+                new AbortController().signal,
+            );
+
+            // Up from C lands on the leading blank cell.
+            nav.goTo(() => screen.getByRole('gridcell', { name: 'C' }));
+            expect(nav.goUp()).toBe(false);
+            expect(onBoundary).toHaveBeenLastCalledWith('up', screen.getByRole('gridcell', { name: 'C' }));
+
+            // Up from H lands on the disabled D.
+            nav.goTo(() => screen.getByRole('gridcell', { name: 'H' }));
+            expect(nav.goUp()).toBe(false);
+            expect(onBoundary).toHaveBeenLastCalledWith('up', screen.getByRole('gridcell', { name: 'H' }));
+            expect(nav.selectors.activeItem).toBe(screen.getByRole('gridcell', { name: 'H' }));
+        });
+
+        it('should be called past the first/last navigable cell of the row', () => {
+            const container = createGridWithBlankCells();
+            const { callbacks } = makeCallbacks();
+            const onBoundary = vi.fn(() => false);
+            const nav = createGridFocusNavigation(
+                { ...BLANK_GRID_OPTIONS, container, onBoundary },
+                callbacks,
+                new AbortController().signal,
+            );
+
+            // Left from A: past the leading blank cells.
+            nav.goTo(() => screen.getByRole('gridcell', { name: 'A' }));
+            expect(nav.goLeft()).toBe(false);
+            expect(onBoundary).toHaveBeenLastCalledWith('left', screen.getByRole('gridcell', { name: 'A' }));
+
+            // Right from I: past the trailing blank cell.
+            nav.goTo(() => screen.getByRole('gridcell', { name: 'I' }));
+            expect(nav.goRight()).toBe(false);
+            expect(onBoundary).toHaveBeenLastCalledWith('right', screen.getByRole('gridcell', { name: 'I' }));
+
+            // Right from F: last cell of a middle row.
+            nav.goTo(() => screen.getByRole('gridcell', { name: 'F' }));
+            expect(nav.goRight()).toBe(false);
+            expect(onBoundary).toHaveBeenLastCalledWith('right', screen.getByRole('gridcell', { name: 'F' }));
+            expect(nav.selectors.activeItem).toBe(screen.getByRole('gridcell', { name: 'F' }));
+        });
+
+        it('should not be called when the move stays inside the grid', () => {
+            const container = createGridWithBlankCells();
+            const { callbacks } = makeCallbacks();
+            const onBoundary = vi.fn(() => false);
+            const nav = createGridFocusNavigation(
+                { ...BLANK_GRID_OPTIONS, container, onBoundary },
+                callbacks,
+                new AbortController().signal,
+            );
+
+            nav.goTo(() => screen.getByRole('gridcell', { name: 'C' }));
+            nav.goRight();
+            nav.goDown();
+            nav.goLeft();
+            nav.goToRowStart();
+            nav.goToRowEnd();
+            expect(onBoundary).not.toHaveBeenCalled();
+        });
+
+        it('should replace wrap', () => {
+            const container = createGrid(2, 2);
+            const { callbacks } = makeCallbacks();
+            const onBoundary = vi.fn(() => false);
+            const nav = createGridFocusNavigation(
+                { ...GRID_OPTIONS, container, wrap: true, onBoundary },
+                callbacks,
+                new AbortController().signal,
+            );
+
+            nav.goTo(() => container.querySelector<HTMLElement>('#cell-1-1'));
+            expect(nav.goDown()).toBe(false);
+            expect(nav.goRight()).toBe(false);
+            expect(onBoundary).toHaveBeenCalledTimes(2);
+            expect(nav.selectors.activeItem?.id).toBe('cell-1-1');
+        });
+
+        it('should report the move as handled when it returns true, without moving', () => {
+            const container = createGrid(2, 2);
+            const { callbacks, activated } = makeCallbacks();
+            const nav = createGridFocusNavigation(
+                { ...GRID_OPTIONS, container, onBoundary: () => true },
+                callbacks,
+                new AbortController().signal,
+            );
+
+            nav.goTo(() => container.querySelector<HTMLElement>('#cell-1-1'));
+            activated.length = 0;
+            expect(nav.goDown()).toBe(true);
+            expect(activated).toHaveLength(0);
+            expect(nav.selectors.activeItem?.id).toBe('cell-1-1');
+        });
+
+        it('should move at once when the consumer goes to a target already in the DOM', () => {
+            const container = createGrid(2, 2);
+            const { callbacks } = makeCallbacks();
+            const nav = createGridFocusNavigation(
+                {
+                    ...GRID_OPTIONS,
+                    container,
+                    // Right past the row end: go to the first cell of the next row.
+                    onBoundary: () => nav.goTo(() => container.querySelector<HTMLElement>('#cell-1-0')),
+                },
+                callbacks,
+                new AbortController().signal,
+            );
+
+            nav.goTo(() => container.querySelector<HTMLElement>('#cell-0-1'));
+            expect(nav.goRight()).toBe(true);
+            expect(nav.selectors.activeItem?.id).toBe('cell-1-0');
+        });
+
+        it('should defer the consumer goTo until flushPendingNavigation after the DOM change', () => {
+            const container = createGridWithBlankCells();
+            const { callbacks, activated } = makeCallbacks();
+            const onBoundarySpy = vi.fn();
+            const nav = createGridFocusNavigation(
+                {
+                    ...BLANK_GRID_OPTIONS,
+                    container,
+                    onBoundary(direction: GridNavigationDirection, activeCell: HTMLElement) {
+                        onBoundarySpy(direction, activeCell);
+                        // The consumer renders the next page later, and asks for the cell at the same column.
+                        const column = Array.from(activeCell.parentElement?.children ?? []).indexOf(activeCell);
+                        nav.goTo(
+                            () =>
+                                container.querySelectorAll<HTMLElement>('#next-page [role="gridcell"]')[column] ?? null,
+                        );
+                        return true;
+                    },
+                },
+                callbacks,
+                new AbortController().signal,
+            );
+
+            nav.goTo(() => screen.getByRole('gridcell', { name: 'H' }));
+            activated.length = 0;
+
+            // Down past the last row: handled, but the target is not rendered yet.
+            expect(nav.goDown()).toBe(true);
+            expect(onBoundarySpy).toHaveBeenCalledWith('down', screen.getByRole('gridcell', { name: 'H' }));
+            expect(activated).toHaveLength(0);
+            expect(nav.selectors.activeItem).toBe(screen.getByRole('gridcell', { name: 'H' }));
+
+            // A flush before the render keeps the intent.
+            nav.flushPendingNavigation();
+            expect(activated).toHaveLength(0);
+
+            // Render the next page, then flush: the deferred goTo resolves.
+            container.innerHTML = `
+                <div role="row" id="next-page">
+                    <div role="gridcell">J</div>
+                    <div role="gridcell">K</div>
+                </div>
+            `;
+            nav.flushPendingNavigation();
+            expect(nav.selectors.activeItem).toBe(screen.getByRole('gridcell', { name: 'K' }));
+            expect(activated).toEqual([screen.getByRole('gridcell', { name: 'K' })]);
+
+            // The intent is consumed: a later flush does nothing.
+            nav.flushPendingNavigation();
+            expect(activated).toHaveLength(1);
+        });
+
+        it('should drop the pending goTo on a newer move', () => {
+            const container = createGridWithBlankCells();
+            const { callbacks, activated } = makeCallbacks();
+            const nav = createGridFocusNavigation(
+                {
+                    ...BLANK_GRID_OPTIONS,
+                    container,
+                    onBoundary: () => {
+                        nav.goTo(() => container.querySelector<HTMLElement>('#next-page [role="gridcell"]'));
+                        return true;
+                    },
+                },
+                callbacks,
+                new AbortController().signal,
+            );
+
+            nav.goTo(() => screen.getByRole('gridcell', { name: 'H' }));
+            // Down past the last row: pending.
+            expect(nav.goDown()).toBe(true);
+            // A newer move in the grid wins.
+            expect(nav.goLeft()).toBe(true);
+            expect(nav.selectors.activeItem).toBe(screen.getByRole('gridcell', { name: 'G' }));
+            activated.length = 0;
+
+            // The next page is rendered later: the dropped goTo does not move.
+            container.insertAdjacentHTML(
+                'beforeend',
+                '<div role="row" id="next-page"><div role="gridcell">J</div></div>',
+            );
+            nav.flushPendingNavigation();
+            expect(activated).toHaveLength(0);
+            expect(nav.selectors.activeItem).toBe(screen.getByRole('gridcell', { name: 'G' }));
         });
     });
 });
