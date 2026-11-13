@@ -7,10 +7,10 @@ import { withValueOnChange } from '@lumx/react/stories/decorators/withValueOnCha
 import { setup } from '@lumx/core/js/components/TreeList/TestStories';
 
 import { Combobox } from '../combobox';
-import { TreeList, TreeListItem } from '.';
+import { TreeList, TreeListItem, TreeListSection } from '.';
 
 const { meta, ...testStories } = setup({
-    components: { TreeList, TreeListItem, Combobox },
+    components: { TreeList, TreeListItem, TreeListSection, Combobox },
     decorators: { withValueOnChange },
 });
 

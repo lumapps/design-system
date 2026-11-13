@@ -19,7 +19,7 @@ import type { TreeListItemController, TreeListItemState } from './types';
  * The reference tree (SPEC 7.4), with the markup of the `TreeListItem` template (see the DOM contract in `dom.ts`).
  * Every parent item renders closed (the tree item controllers open them), `selected` lists the selected values.
  */
-function renderTree({ multi = false, selected = [] as string[] } = {}) {
+function renderTree({ multi = false, selected = [] as string[], sections = false } = {}) {
     const item = (label: string, opts: { value?: string; sub?: string; description?: string; lazy?: boolean }) => {
         const { value, sub, description, lazy } = opts;
         const id = label.toLowerCase();
@@ -40,21 +40,32 @@ function renderTree({ multi = false, selected = [] as string[] } = {}) {
                 ${isParent ? `<ul role="group" id="${groupId}" hidden>${sub ?? ''}</ul>` : ''}
             </li>`;
     };
+    /** A section (the markup of the `TreeListSection` template), only with the `sections` option. */
+    const section = (name: string, content: string) =>
+        sections
+            ? `<li role="none" class="lumx-tree-list-section" data-testid="section-${name}"><ul role="none">${content}</ul></li>`
+            : content;
     const html = `
         <input id="trigger" />
         <ul role="tree" aria-label="Food" ${multi ? 'aria-multiselectable="true"' : ''}>
-            ${item('Fruits', {
-                value: 'fruits',
-                sub: `${item('Citrus', {
-                    sub: `${item('Lemon', { value: 'lemon' })}${item('Orange', { value: 'orange' })}`,
-                })}${item('Apple', { value: 'apple', description: 'Red or green' })}`,
-            })}
+            ${section(
+                'food',
+                `${item('Fruits', {
+                    value: 'fruits',
+                    sub: `${item('Citrus', {
+                        sub: `${item('Lemon', { value: 'lemon' })}${item('Orange', { value: 'orange' })}`,
+                    })}${item('Apple', { value: 'apple', description: 'Red or green' })}`,
+                })}
             ${item('Vegetables', {
                 value: 'vegetables',
                 sub: `${item('Leek', { value: 'leek' })}${item('Carrot', { value: 'carrot' })}`,
-            })}
-            ${item('Drinks', { sub: `${item('Lemonade', { value: 'lemonade' })}${item('Water', { value: 'water' })}` })}
-            ${item('Snacks', { value: 'snacks', lazy: true })}
+            })}`,
+            )}
+            ${section(
+                'other',
+                `${item('Drinks', { sub: `${item('Lemonade', { value: 'lemonade' })}${item('Water', { value: 'water' })}` })}
+                ${item('Snacks', { value: 'snacks', lazy: true })}`,
+            )}
         </ul>`;
     document.body.innerHTML = html;
     /** A tree item element (the sub-items in a closed group are hidden). */
@@ -66,6 +77,8 @@ function renderTree({ multi = false, selected = [] as string[] } = {}) {
         tree: screen.getByRole('tree', { name: 'Food' }),
         li,
         treeItem,
+        /** A section root (with the `sections` option). */
+        sectionRoot: (name: string) => screen.getByTestId(`section-${name}`),
         /** The expand toggle of a parent item (out of the accessibility tree). */
         toggle: (label: string) => within(li(label)).getAllByRole('button', { hidden: true })[0],
     };
@@ -82,7 +95,9 @@ function render(root: HTMLElement, state: TreeListItemState) {
  * item (what the React and Vue tree item components do on mount). `open` lists the parent items opened by the
  * user before the test, `selected` the selected values.
  */
-function setup(options: { open?: string[]; multi?: boolean; selected?: string[]; standalone?: boolean } = {}) {
+function setup(
+    options: { open?: string[]; multi?: boolean; selected?: string[]; standalone?: boolean; sections?: boolean } = {},
+) {
     const { open = [], standalone = false, ...renderOptions } = options;
     const dom = renderTree(renderOptions);
     const onSelect = vi.fn();
@@ -406,6 +421,89 @@ describe('setupTreeList', () => {
             await Promise.resolve();
             expect(lastCount()).toMatchObject({ optionsLength: 1 });
             expect(li('Drinks')).toHaveAttribute('hidden');
+        });
+    });
+
+    describe('section registry', () => {
+        /** Register the two sections of the tree, rendered with the `hidden` attribute as the template does. */
+        const registerSections = (
+            list: ReturnType<typeof setup>['list'],
+            sectionRoot: (name: string) => HTMLElement,
+        ) => {
+            const onChange = { food: vi.fn(), other: vi.fn() };
+            const unregister = Object.fromEntries(
+                (['food', 'other'] as const).map((name) => [
+                    name,
+                    list.registerSection(sectionRoot(name), (state) => {
+                        onChange[name](state);
+                        sectionRoot(name).toggleAttribute('hidden', state.hidden);
+                    }),
+                ]),
+            );
+            return { onChange, unregister };
+        };
+
+        it('notifies the initial state at once', () => {
+            const { list, sectionRoot } = setup({ sections: true });
+            const { onChange } = registerSections(list, sectionRoot);
+            expect(onChange.food).toHaveBeenCalledExactlyOnceWith({ hidden: false });
+            expect(onChange.other).toHaveBeenCalledExactlyOnceWith({ hidden: false });
+        });
+
+        it('hides a section when the auto filter hides all of its tree items, and shows it on clear', () => {
+            const { list, sectionRoot } = setup({ sections: true });
+            const { onChange } = registerSections(list, sectionRoot);
+            list.setFilter('leek');
+            expect(sectionRoot('food')).not.toHaveAttribute('hidden');
+            expect(sectionRoot('other')).toHaveAttribute('hidden');
+            // Typing more letters: no change, no notification.
+            list.setFilter('lee');
+            expect(onChange.other).toHaveBeenCalledTimes(2);
+            list.setFilter('');
+            expect(sectionRoot('other')).not.toHaveAttribute('hidden');
+        });
+
+        it('keeps the sections visible with the manual filter', () => {
+            const { list, sectionRoot } = setup({ sections: true });
+            registerSections(list, sectionRoot);
+            list.setFilter('leek', 'manual');
+            expect(sectionRoot('food')).not.toHaveAttribute('hidden');
+            expect(sectionRoot('other')).not.toHaveAttribute('hidden');
+        });
+
+        it('keeps a section with no registered tree item visible', () => {
+            const { list, sectionRoot, controllers } = setup({ sections: true });
+            const { onChange } = registerSections(list, sectionRoot);
+            for (const label of ['Drinks', 'Lemonade', 'Water', 'Snacks']) controllers[label].destroy();
+            list.setFilter('leek');
+            expect(sectionRoot('other')).not.toHaveAttribute('hidden');
+            expect(onChange.other).toHaveBeenCalledTimes(1);
+        });
+
+        it('stops notifying an unregistered section', () => {
+            const { list, sectionRoot } = setup({ sections: true });
+            const { onChange, unregister } = registerSections(list, sectionRoot);
+            unregister.other();
+            list.setFilter('leek');
+            expect(onChange.other).toHaveBeenCalledTimes(1);
+        });
+
+        it('moves over the tree items of all the sections, and keeps the parent items of the sections', () => {
+            const { press, focusOwner, treeItem, sectionRoot, list } = setup({ sections: true, open: ['Vegetables'] });
+            registerSections(list, sectionRoot);
+            for (const label of ['Fruits', 'Vegetables', 'Leek', 'Carrot', 'Drinks', 'Snacks']) {
+                press('ArrowDown');
+                expect(focusOwner).toHaveAttribute('aria-activedescendant', treeItem(label).id);
+            }
+            // Left on a root tree item in a section: no parent item (the section is not a group).
+            press('ArrowUp');
+            expect(focusOwner).toHaveAttribute('aria-activedescendant', treeItem('Drinks').id);
+            press('ArrowLeft');
+            expect(focusOwner).toHaveAttribute('aria-activedescendant', treeItem('Drinks').id);
+            // Left on a sub-item: back to its parent item.
+            press('ArrowUp');
+            press('ArrowLeft');
+            expect(focusOwner).toHaveAttribute('aria-activedescendant', treeItem('Vegetables').id);
         });
     });
 

@@ -7,14 +7,18 @@ import * as ReactDemoDefault from './react/default.tsx';
 import * as ReactDemoMultipleSelection from './react/multiple-selection.tsx';
 import * as ReactDemoItemContent from './react/item-content.tsx';
 import * as ReactDemoComboboxInput from './react/combobox-input.tsx';
+import * as ReactDemoSections from './react/sections.tsx';
 import * as VueDemoDefault from './vue/default.vue';
 import * as VueDemoMultipleSelection from './vue/multiple-selection.vue';
 import * as VueDemoItemContent from './vue/item-content.vue';
 import * as VueDemoComboboxInput from './vue/combobox-input.vue';
+import * as VueDemoSections from './vue/sections.vue';
 import ReactTreeList from 'lumx-docs:@lumx/react/components/tree-list/TreeList';
 import ReactTreeListItem from 'lumx-docs:@lumx/react/components/tree-list/TreeListItem';
 import VueTreeList from 'lumx-docs:@lumx/vue/components/tree-list/TreeList';
 import VueTreeListItem from 'lumx-docs:@lumx/vue/components/tree-list/TreeListItem';
+import ReactTreeListSection from 'lumx-docs:@lumx/react/components/tree-list/TreeListSection';
+import VueTreeListSection from 'lumx-docs:@lumx/vue/components/tree-list/TreeListSection';
 
 **Tree lists display a hierarchy of items that users can open, close and select.**
 
@@ -53,6 +57,17 @@ A tree item has a `label`, an optional `description`, and `before` and `after` s
 (for example an icon or a thumbnail).
 
 <DemoBlock demo={{ react: ReactDemoItemContent, vue: VueDemoItemContent }} />
+
+## Sections
+
+Use `TreeList.Section` to put the root tree items in sections. A section has an optional `label`.
+A divider separates the sections, and the sections from the standalone tree items.
+Use a section without a label as a separator.
+
+Put sections at the root of the tree list only. The tree items of a section are root tree items.
+With `filter="auto"` in a combobox, a section is hidden when the filter hides all of its tree items.
+
+<DemoBlock demo={{ react: ReactDemoSections, vue: VueDemoSections }} />
 
 ## In a combobox
 
@@ -93,6 +108,8 @@ The tree list follows the [WAI-ARIA tree view pattern](https://www.w3.org/WAI/AR
     With `filter="auto"`, the count includes only the matching tree items, not their visible ancestors or
     sub-items. With `filter="manual"`, the tree does not know which tree items match: the count includes all
     the rendered tree items. Without filter text, there is no count.
+-   **Sections**: a section has no ARIA role, and its label is visual only. In a tree, a group changes the level
+    of its tree items, so the section cannot be a labelled group.
 -   **Touch screen readers**: on iOS, a user cannot open a selectable parent item (its sub-items are reachable
     only through the filter). To support iOS, use a non-selectable parent item with a first leaf item such as
     "All fruits" that carries the parent value.
@@ -102,3 +119,5 @@ The tree list follows the [WAI-ARIA tree view pattern](https://www.w3.org/WAI/AR
 <PropTable docs={{ react: ReactTreeList, vue: VueTreeList }} />
 
 <PropTable docs={{ react: ReactTreeListItem, vue: VueTreeListItem }} />
+
+<PropTable docs={{ react: ReactTreeListSection, vue: VueTreeListSection }} />
