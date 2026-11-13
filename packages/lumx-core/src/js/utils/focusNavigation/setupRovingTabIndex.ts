@@ -1,22 +1,19 @@
 import { querySelectorInclusive } from '../browser/querySelectorInclusive';
 import { trackContainerFocus } from '../browser/trackContainerFocus';
+import { createSelectorTreeWalker } from '../browser/createSelectorTreeWalker';
+import { createGridFocusNavigation } from './createGridFocusNavigation';
 import { createListFocusNavigation } from './createListFocusNavigation';
-import type { FocusNavigationController } from './types';
+import type {
+    FocusNavigationCallbacks,
+    FocusNavigationController,
+    GridFocusNavigationController,
+    GridNavigationOptions,
+} from './types';
 
-/** Options for {@link setupRovingTabIndex}. */
-export interface RovingTabIndexOptions {
+/** Options shared by the list and grid modes of {@link setupRovingTabIndex}. */
+interface BaseRovingTabIndexOptions {
     /** Container element holding the focusable items. */
     container: HTMLElement;
-    /** CSS selector identifying focusable items within the container. */
-    itemSelector: string;
-    /**
-     * Navigation axis — determines which arrow keys navigate.
-     * - `'horizontal'` (default): Left/Right navigate.
-     * - `'vertical'`: Up/Down navigate.
-     */
-    direction?: 'horizontal' | 'vertical';
-    /** CSS selector matching disabled items (skipped during navigation). */
-    itemDisabledSelector?: string;
     /**
      * Attribute name indicating the selected item (e.g. `'aria-selected'`, `'aria-checked'`).
      * When set, the roving tabindex will observe changes to this attribute and keep
@@ -28,58 +25,230 @@ export interface RovingTabIndexOptions {
     onItemFocused?: (item: HTMLElement) => void;
 }
 
+/** Options for {@link setupRovingTabIndex} (list mode). */
+export interface RovingTabIndexOptions extends BaseRovingTabIndexOptions {
+    /** List mode (default). */
+    type?: 'list';
+    /** CSS selector identifying focusable items within the container. */
+    itemSelector: string;
+    /**
+     * Navigation axis — determines which arrow keys navigate.
+     * - `'horizontal'` (default): Left/Right navigate.
+     * - `'vertical'`: Up/Down navigate.
+     */
+    direction?: 'horizontal' | 'vertical';
+    /** CSS selector matching disabled items (skipped during navigation). */
+    itemDisabledSelector?: string;
+}
+
+/**
+ * Options for {@link setupRovingTabIndex} (grid mode).
+ * See {@link GridNavigationOptions} for the navigation rules (columns by position, non-navigable cells,
+ * boundary callback).
+ */
+export interface GridRovingTabIndexOptions
+    extends BaseRovingTabIndexOptions,
+        Pick<GridNavigationOptions, 'rowSelector' | 'cellSelector' | 'cellDisabledSelector' | 'onBoundary'> {
+    /** Grid mode. */
+    type: 'grid';
+    /**
+     * Who writes the `tabindex` of the cells.
+     * - `'managed'` (default): this module keeps a single `tabindex="0"` cell (moves, mount normalization,
+     *   DOM mutations, `itemSelectedAttr` sync).
+     * - `'rendered'`: the consumer renders the tab stop (`tabindex="0"` on one cell, `-1` on the others) and
+     *   moves it from `onItemFocused`. This module only moves focus: it never writes `tabindex` and does not
+     *   observe the DOM (`itemSelectedAttr` is ignored).
+     */
+    tabStop?: 'managed' | 'rendered';
+}
+
 /**
  * Set up the roving tabindex pattern on a container element.
  *
- * - Keyboard navigation (Arrow keys, Home, End)
+ * - Keyboard navigation
+ *   - List mode: Arrow keys (on the `direction` axis, wrapping), Home, End.
+ *   - Grid mode: Arrow keys (no wrap, `onBoundary` at the edges), Home/End (first/last navigable cell of the
+ *     row), Ctrl+Home/Ctrl+End (first navigable cell of the first row / last navigable cell of the last row).
+ *     The grid consumes these keys even when focus cannot move (no page scroll at the grid edges). It does
+ *     not handle other keys (e.g. Page Up/Down) nor arrows with a modifier: they propagate.
  * - tabindex management (`0` on active, `-1` on others)
  * - Mount normalization (single-tabstop invariant)
  * - DOM mutation handling via MutationObserver:
  *   removal recovery, insertion normalization, disabled-state changes
  *
+ * In grid mode with `tabStop: 'rendered'`, only the keyboard navigation is set up: the consumer renders the
+ * tab stop (see {@link GridRovingTabIndexOptions.tabStop}).
+ *
  * Torn down when `signal` is aborted.
  */
-export function setupRovingTabIndex(options: RovingTabIndexOptions, signal: AbortSignal): FocusNavigationController {
-    const {
-        container,
-        itemSelector,
-        direction = 'horizontal',
-        itemDisabledSelector,
-        itemSelectedAttr = 'aria-selected',
-        onItemFocused,
-    } = options;
+export function setupRovingTabIndex(options: RovingTabIndexOptions, signal: AbortSignal): FocusNavigationController;
+export function setupRovingTabIndex(
+    options: GridRovingTabIndexOptions,
+    signal: AbortSignal,
+): GridFocusNavigationController;
+export function setupRovingTabIndex(
+    options: RovingTabIndexOptions | GridRovingTabIndexOptions,
+    signal: AbortSignal,
+): FocusNavigationController {
+    const { container, itemSelectedAttr = 'aria-selected', onItemFocused } = options;
+    const itemSelector = options.type === 'grid' ? options.cellSelector : options.itemSelector;
+    const itemDisabledSelector = options.type === 'grid' ? options.cellDisabledSelector : options.itemDisabledSelector;
 
     const itemActiveSelector = `${itemSelector}[tabindex="0"]`;
+    const enabledItemSelector = itemDisabledSelector ? `${itemSelector}:not(${itemDisabledSelector})` : itemSelector;
+    // The consumer renders the tab stop: never write `tabindex`.
+    const isTabStopRendered = options.type === 'grid' && options.tabStop === 'rendered';
 
     // Item selected selector
     let itemSelectedSelector = `${itemSelector}[${itemSelectedAttr}=true]`;
     if (itemDisabledSelector) itemSelectedSelector += `:not(${itemDisabledSelector})`;
 
+    const callbacks: FocusNavigationCallbacks = {
+        onActivate(item: HTMLElement) {
+            if (!isTabStopRendered) item.setAttribute('tabindex', '0');
+            item.focus();
+            onItemFocused?.(item);
+        },
+        onDeactivate(item: HTMLElement) {
+            if (!isTabStopRendered) item.setAttribute('tabindex', '-1');
+        },
+    };
+
+    let nav: FocusNavigationController;
+    let gridNav: GridFocusNavigationController | null = null;
+    let gridRowSelector = '';
+    if (options.type === 'grid') {
+        const { rowSelector, cellSelector, cellDisabledSelector, onBoundary } = options;
+        gridRowSelector = rowSelector;
+        gridNav = createGridFocusNavigation(
+            { type: 'grid', container, rowSelector, cellSelector, cellDisabledSelector, onBoundary },
+            callbacks,
+            signal,
+        );
+        nav = gridNav;
+    } else {
+        nav = createListFocusNavigation(
+            {
+                type: 'list',
+                container,
+                itemSelector,
+                direction: options.direction ?? 'horizontal',
+                wrap: true,
+                itemDisabledSelector,
+                getActiveItem: () => container.querySelector<HTMLElement>(itemActiveSelector),
+            },
+            callbacks,
+            signal,
+        );
+    }
+
+    // ─── Keyboard navigation ───────────────────────────────────────
+
+    /** List mode keys. Returns true when the key moved focus. */
+    function handleListKey(evt: KeyboardEvent): boolean {
+        // Adopt focus target if nothing is active yet.
+        if (!nav.selectors.activeItem) {
+            const target = evt.target as HTMLElement;
+            if (target.matches(itemSelector) && container.contains(target)) {
+                nav.goTo(() => target);
+            }
+        }
+
+        switch (evt.key) {
+            case 'ArrowRight':
+                return nav.goRight();
+            case 'ArrowLeft':
+                return nav.goLeft();
+            case 'ArrowDown':
+                return nav.goDown();
+            case 'ArrowUp':
+                return nav.goUp();
+            case 'Home':
+                return nav.goTo((s) => s.getFirst());
+            case 'End':
+                return nav.goTo((s) => s.getLast());
+            default:
+                return false;
+        }
+    }
+
+    /** Grid mode keys. Returns true when the key is a grid key (even when focus could not move). */
+    function handleGridKey(grid: GridFocusNavigationController, rowSelector: string, evt: KeyboardEvent): boolean {
+        if (evt.altKey || evt.metaKey || evt.shiftKey) return false;
+
+        let move: (() => boolean) | undefined;
+        if (evt.ctrlKey) {
+            if (evt.key === 'Home') {
+                move = () => grid.goTo((s) => s.getFirst());
+            } else if (evt.key === 'End') {
+                // Last navigable cell of the last row.
+                move = () =>
+                    grid.goTo((s) => {
+                        const lastRow = s.getLast()?.closest(rowSelector);
+                        const cells = lastRow?.querySelectorAll<HTMLElement>(enabledItemSelector);
+                        return cells?.length ? cells[cells.length - 1] : null;
+                    });
+            }
+        } else {
+            const keyMoves: Record<string, () => boolean> = {
+                ArrowRight: () => grid.goRight(),
+                ArrowLeft: () => grid.goLeft(),
+                ArrowDown: () => grid.goDown(),
+                ArrowUp: () => grid.goUp(),
+                Home: () => grid.goToRowStart(),
+                End: () => grid.goToRowEnd(),
+            };
+            move = Object.prototype.hasOwnProperty.call(keyMoves, evt.key) ? keyMoves[evt.key] : undefined;
+        }
+        if (!move) return false;
+
+        // Adopt the focused cell if it is not the active one (e.g. focused with a click or with Tab).
+        const target = evt.target as HTMLElement;
+        if (target !== grid.selectors.activeItem && target.matches(enabledItemSelector) && container.contains(target)) {
+            grid.goTo(() => target);
+        }
+
+        move();
+        return true;
+    }
+
+    container.addEventListener(
+        'keydown',
+        (evt: KeyboardEvent) => {
+            const handled = gridNav ? handleGridKey(gridNav, gridRowSelector, evt) : handleListKey(evt);
+            if (handled) {
+                evt.preventDefault();
+                evt.stopPropagation();
+            }
+        },
+        { signal },
+    );
+
+    // ─── tabindex management ───────────────────────────────────────
+
+    if (isTabStopRendered) return nav;
+
     // Track focus inside container
     const containerFocus = trackContainerFocus(container, signal);
 
-    const nav = createListFocusNavigation(
-        {
-            type: 'list',
-            container,
-            itemSelector,
-            direction,
-            wrap: true,
-            itemDisabledSelector,
-            getActiveItem: () => container.querySelector<HTMLElement>(itemActiveSelector),
-        },
-        {
-            onActivate(item: HTMLElement) {
-                item.setAttribute('tabindex', '0');
-                item.focus();
-                onItemFocused?.(item);
-            },
-            onDeactivate(item: HTMLElement) {
-                item.setAttribute('tabindex', '-1');
-            },
-        },
-        signal,
-    );
+    /** Current tab stop in the DOM (`tabindex="0"` item). */
+    const getTabStop = () => container.querySelector<HTMLElement>(itemActiveSelector);
+
+    /** Find the enabled item nearest to `anchor` (the anchor itself, then forward, then backward). */
+    function findNearestEnabled(anchor: Node): HTMLElement | null {
+        if (!container.contains(anchor)) return container.querySelector<HTMLElement>(enabledItemSelector);
+
+        // If the anchor itself is an enabled item, return it directly.
+        if (anchor instanceof HTMLElement && anchor.matches(enabledItemSelector)) return anchor;
+
+        // Walk forward from the anchor for the nearest enabled item, then backward.
+        const walker = createSelectorTreeWalker(container, enabledItemSelector);
+        walker.currentNode = anchor;
+        const next = walker.nextNode();
+        if (next instanceof HTMLElement) return next;
+        walker.currentNode = anchor;
+        return walker.previousNode() as HTMLElement | null;
+    }
 
     // ─── tabindex normalization ────────────────────────────────────
 
@@ -107,7 +276,7 @@ export function setupRovingTabIndex(options: RovingTabIndexOptions, signal: Abor
         }
 
         if (!hasTabStop) {
-            const fallback = container.querySelector<HTMLElement>(nav.selectors.enabledItemSelector);
+            const fallback = container.querySelector<HTMLElement>(enabledItemSelector);
             if (fallback) setTabIndex(fallback, '0');
         }
     }
@@ -115,7 +284,7 @@ export function setupRovingTabIndex(options: RovingTabIndexOptions, signal: Abor
     /** Enforce the single-tabstop invariant across all items. */
     function normalizeAllItems(): void {
         const items = Array.from(container.querySelectorAll<HTMLElement>(itemSelector));
-        const { activeItem } = nav.selectors;
+        const activeItem = getTabStop();
 
         // Prefer either the current active item (from DOM) or the current selected item
         let preferredTabStopIndex = activeItem && items.indexOf(activeItem);
@@ -133,8 +302,7 @@ export function setupRovingTabIndex(options: RovingTabIndexOptions, signal: Abor
     function ensureTabStop(shouldFocus: boolean, anchor?: Node | null): void {
         if (container.querySelector(itemActiveSelector)) return;
         const fallback =
-            (anchor && nav.selectors.findNearestEnabled(anchor)) ??
-            container.querySelector<HTMLElement>(nav.selectors.enabledItemSelector);
+            (anchor && findNearestEnabled(anchor)) ?? container.querySelector<HTMLElement>(enabledItemSelector);
         if (!fallback) return;
         if (shouldFocus) {
             nav.goTo(() => fallback);
@@ -202,13 +370,24 @@ export function setupRovingTabIndex(options: RovingTabIndexOptions, signal: Abor
 
         // Handle inserted items
         if (insertedItems.length > 0) {
-            const hasTabStop = container.querySelector<HTMLElement>(itemActiveSelector) !== null;
-            normalizeItems(insertedItems, hasTabStop);
+            const tabStops = Array.from(container.querySelectorAll<HTMLElement>(itemActiveSelector));
+            const hasTabStop = tabStops.some((item) => !insertedItems.includes(item));
+            // Without a tab stop among the existing items, an inserted item rendered as the tab stop keeps it
+            // (e.g. a framework re-render that replaces the items).
+            const renderedTabStop = hasTabStop
+                ? undefined
+                : tabStops.find((item) => !itemDisabledSelector || !item.matches(itemDisabledSelector));
+            normalizeItems(
+                renderedTabStop
+                    ? [renderedTabStop, ...insertedItems.filter((item) => item !== renderedTabStop)]
+                    : insertedItems,
+                hasTabStop,
+            );
         }
 
         // Handle disabled
         if (disabledTargets.length > 0) {
-            const currentActive = nav.selectors.activeItem;
+            const currentActive = getTabStop();
             for (const target of disabledTargets) {
                 setTabIndex(target, '-1');
             }
@@ -237,51 +416,6 @@ export function setupRovingTabIndex(options: RovingTabIndexOptions, signal: Abor
         attributeFilter: ['aria-disabled', 'disabled', itemSelectedAttr],
     });
     signal.addEventListener('abort', () => observer.disconnect());
-
-    // ─── Keyboard navigation ───────────────────────────────────────
-
-    container.addEventListener(
-        'keydown',
-        (evt: KeyboardEvent) => {
-            // Adopt focus target if nothing is active yet.
-            if (!nav.selectors.activeItem) {
-                const target = evt.target as HTMLElement;
-                if (target.matches(itemSelector) && container.contains(target)) {
-                    nav.goTo(() => target);
-                }
-            }
-
-            let handled = false;
-            switch (evt.key) {
-                case 'ArrowRight':
-                    handled = nav.goRight();
-                    break;
-                case 'ArrowLeft':
-                    handled = nav.goLeft();
-                    break;
-                case 'ArrowDown':
-                    handled = nav.goDown();
-                    break;
-                case 'ArrowUp':
-                    handled = nav.goUp();
-                    break;
-                case 'Home':
-                    handled = nav.goTo((s) => s.getFirst());
-                    break;
-                case 'End':
-                    handled = nav.goTo((s) => s.getLast());
-                    break;
-                default:
-                    break;
-            }
-
-            if (handled) {
-                evt.preventDefault();
-                evt.stopPropagation();
-            }
-        },
-        { signal },
-    );
 
     return nav;
 }
