@@ -19,6 +19,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   `@lumx/react`:
     -   `Combobox.useComboboxEvent`: remove the `loadingAnnouncement` event (use `stateChange`).
 
+### Fixed
+
+-   `@lumx/react`, `@lumx/vue`:
+    -   `ListSection`: add the automatic divider between a section and the visible content before it (before, only a section after another section got this divider).
+
 ## [4.27.0][] - 2026-10-16
 
 ### Added

@@ -48,10 +48,11 @@ export function setup({
      * - Single section → no divider rendered
      * - Two adjacent sections → one auto-divider between them
      * - Three adjacent sections → two auto-dividers
-     * - Sections separated by a ListItem → no auto-divider (not adjacent)
+     * - Sections separated by a ListItem → one auto-divider on each side of the ListItem
      * - Sections separated by an explicit ListDivider → explicit divider only, no duplicate auto-divider
      * - Hidden section between two visible sections → one auto-divider between the visible sections
      * - Hidden first section → no divider before the first visible section
+     * - ListItem before a section → one auto-divider between the ListItem and the section
      */
     const AutoDividerEdgeCases = {
         render({ 'list.itemPadding': itemPadding, 'listItem.size': itemSize }: any) {
@@ -142,6 +143,16 @@ export function setup({
                                 <ListItem size={itemSize}>Hidden item</ListItem>
                             </ListSection>
                             <ListSection label="Visible section">
+                                <ListItem size={itemSize}>Item A</ListItem>
+                            </ListSection>
+                        </List>
+                    </div>
+
+                    <div>
+                        <p style={{ marginBottom: '8px', fontWeight: 'bold' }}>ListItem before a section</p>
+                        <List itemPadding={itemPadding} style={{ border: '1px dashed red' }}>
+                            <ListItem size={itemSize}>Standalone item</ListItem>
+                            <ListSection label="Section 1">
                                 <ListItem size={itemSize}>Item A</ListItem>
                             </ListSection>
                         </List>

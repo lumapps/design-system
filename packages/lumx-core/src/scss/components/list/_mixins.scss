@@ -148,9 +148,10 @@
     // Insert a divider before each section that:
     // 1. Is not directly following another visible section (avoids double dividers)
     // 2. Is not directly following an explicit divider
-    // 3. Has at least one preceding visible section (uses `~` general sibling combinator
-    //    so hidden-first-sections don't get a spurious top divider)
-    #{$section}:not([hidden]) ~ &:not(#{$section}:not([hidden]) + &):not(#{$divider} + &) {
+    // 3. Has visible content before it: a preceding sibling that is not an explicit divider, hidden or
+    //    empty (uses `~` general sibling combinator so that a section with only hidden content before it
+    //    does not get a top divider)
+    :not(#{$divider}, [hidden], :empty) ~ &:not(#{$section}:not([hidden]) + &):not(#{$divider} + &) {
         &::before {
             content: '';
             display: block;
