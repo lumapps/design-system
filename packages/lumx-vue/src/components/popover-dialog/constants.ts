@@ -23,6 +23,7 @@ export const POPOVER_DIALOG_PROP_KEYS = keysOf<PopoverDialogProps>()(
     'focusAnchorOnClose',
     'focusElement',
     'hasArrow',
+    'id',
     'width',
     'minWidth',
     'maxWidth',

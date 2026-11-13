@@ -1,4 +1,4 @@
-import { Locale } from '@lumx/react/utils/locale/types';
+import { Locale } from '../locale/types';
 import { getFirstDayOfWeek } from './getFirstDayOfWeek';
 
 export type WeekDayInfo = { letter: string; number: number; long: string };

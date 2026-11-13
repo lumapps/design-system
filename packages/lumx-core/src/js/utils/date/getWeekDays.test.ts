@@ -1,5 +1,5 @@
-import { parseLocale } from '@lumx/react/utils/locale/parseLocale';
-import { Locale } from '@lumx/react/utils/locale/types';
+import { parseLocale } from '../locale/parseLocale';
+import { Locale } from '../locale/types';
 import { getWeekDays } from './getWeekDays';
 
 describe(getWeekDays.name, () => {

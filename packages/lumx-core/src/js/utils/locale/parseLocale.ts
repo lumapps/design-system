@@ -1,4 +1,4 @@
-import { Locale } from '@lumx/react/utils/locale/types';
+import { Locale } from './types';
 
 /**
  * Parse locale code
