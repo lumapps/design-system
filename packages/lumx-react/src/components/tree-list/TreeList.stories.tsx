@@ -2,10 +2,10 @@ import { withValueOnChange } from '@lumx/react/stories/decorators/withValueOnCha
 import { setup } from '@lumx/core/js/components/TreeList/Stories';
 
 import { Combobox } from '../combobox';
-import { TreeList, TreeListItem } from '.';
+import { TreeList, TreeListItem, TreeListSection } from '.';
 
 const { meta, ...stories } = setup({
-    components: { TreeList, TreeListItem, Combobox },
+    components: { TreeList, TreeListItem, TreeListSection, Combobox },
     decorators: { withValueOnChange },
 });
 
@@ -21,3 +21,4 @@ export const InComboboxInline = { ...stories.InComboboxInline };
 export const InComboboxButton = { ...stories.InComboboxButton };
 export const InComboboxMultipleSelection = { ...stories.InComboboxMultipleSelection };
 export const LazyParentItem = { ...stories.LazyParentItem };
+export const WithSections = { ...stories.WithSections };

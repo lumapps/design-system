@@ -58,7 +58,7 @@ export const ListSection = (props: ListSectionProps) => {
                     {label}
                 </Text>
             )}
-            <ul {...itemsWrapperProps} className={element('items')} aria-labelledby={hasHeader ? labelId : undefined}>
+            <ul aria-labelledby={hasHeader ? labelId : undefined} {...itemsWrapperProps} className={element('items')}>
                 {children}
             </ul>
         </li>

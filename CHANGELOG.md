@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `@lumx/react`, `@lumx/vue`:
     -   Create the `TreeList` and `TreeListItem` components: a tree (WAI-ARIA tree view pattern) usable standalone or inside a `Combobox.Provider`, with selectable and non-selectable tree items, lazy parent items, and the auto and manual filters in a combobox.
+    -   `TreeListSection` (`TreeList.Section`): a section of root tree items with an optional label, and a divider between the sections. The auto filter hides a section with no matching tree item.
 -   `@lumx/react`:
     -   `Combobox.useComboboxEvent`: add the `expanded` event (fired when the trigger `aria-expanded` changes).
 
@@ -18,6 +19,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `@lumx/react`:
     -   `Combobox.useComboboxEvent`: remove the `loadingAnnouncement` event (use `stateChange`).
+-   `@lumx/react`, `@lumx/vue`:
+    -   `ListSection`: the `aria-labelledby` of `itemsWrapperProps` now overrides the default one of the items list (the section label).
 
 ### Fixed
 

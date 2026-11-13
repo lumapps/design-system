@@ -1,4 +1,4 @@
-import { Comment, Fragment, Text, type VNode, computed, defineComponent, ref, watch } from 'vue';
+import { computed, defineComponent, ref, watch } from 'vue';
 
 import {
     TreeListItem as UI,
@@ -21,6 +21,7 @@ import type { TooltipProps } from '../tooltip/Tooltip';
 import { provideCompositeContext, useOptionalCompositeContext } from '../composite/CompositeContext';
 import { useCompositeEvent } from '../composite/useCompositeEvent';
 import { useOptionalTreeListContext } from './TreeListContext';
+import { hasContent } from './hasContent';
 
 export type TreeListItemProps = VueToJSXProps<
     UIProps,
@@ -57,18 +58,6 @@ export const emitSchema = {
     /** On tree item clicked (or activated with Enter), selectable or not. */
     click: () => true,
 };
-
-/** Whether the rendered slot content is not empty (ignores comments and blank text). */
-function hasContent(nodes: unknown): boolean {
-    if (!Array.isArray(nodes)) return false;
-    return nodes.some((node: VNode) => {
-        if (!node || typeof node !== 'object') return false;
-        if (node.type === Comment) return false;
-        if (node.type === Text) return String(node.children ?? '').trim() !== '';
-        if (node.type === Fragment) return hasContent(node.children);
-        return true;
-    });
-}
 
 /**
  * TreeListItem component: one tree item of a `TreeList`, with its sub-items (default slot: `TreeListItem`,

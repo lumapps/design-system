@@ -5,6 +5,7 @@ import { mdiChevronDown, mdiChevronRight } from '@lumx/icons';
 import { getByClassName, getByTagName, queryAllByClassName } from '../../../testing/queries';
 import { CLASSNAME as SKELETON_CLASSNAME } from '../Listbox/ListboxOptionSkeleton';
 import { CLASSNAME as TREE_LIST_ITEM_CLASSNAME } from './TreeListItem';
+import { CLASSNAME as TREE_LIST_SECTION_CLASSNAME } from './TreeListSection';
 
 // ─── Types ───────────────────────────────────────────────────────
 
@@ -25,6 +26,7 @@ export interface TreeListComponents {
     /** The tree (standalone, or in a combobox). */
     TreeList: any;
     TreeListItem: any;
+    TreeListSection: any;
     Combobox: TreeListComboboxNamespace;
 }
 
@@ -53,7 +55,7 @@ export interface TreeListTestSetup {
  * Create framework-agnostic JSX templates for the tree tests (the reference tree of the spec).
  * Exported so the test stories can reuse the same tree.
  */
-export function createTreeTemplates({ TreeList, TreeListItem, Combobox }: TreeListComponents) {
+export function createTreeTemplates({ TreeList, TreeListItem, TreeListSection, Combobox }: TreeListComponents) {
     /**
      * The reference tree:
      * Fruits (value) > Citrus (no value) > Lemon, Orange; Fruits > Apple (description).
@@ -201,11 +203,42 @@ export function createTreeTemplates({ TreeList, TreeListItem, Combobox }: TreeLi
         </>
     );
 
+    /**
+     * Tree with sections, with an input trigger (`value`: the input text, set with `onChange`):
+     * "Fruits" section (label) > Apple, Orange (in Citrus); a section without label > Water, Lemonade.
+     */
+    const sectionTemplate = ({ value, onChange }: any) => (
+        <Combobox.Provider>
+            <Combobox.Input
+                value={value}
+                onChange={onChange}
+                filter="auto"
+                placeholder="Pick a food…"
+                toggleButtonProps={{ label: 'Food' }}
+            />
+            <Combobox.Popover>
+                <TreeList aria-label="Food">
+                    <TreeListSection label="Fruits">
+                        <TreeListItem label="Apple" value="apple" />
+                        <TreeListItem label="Citrus">
+                            <TreeListItem label="Orange" value="orange" />
+                        </TreeListItem>
+                    </TreeListSection>
+                    <TreeListSection>
+                        <TreeListItem label="Water" value="water" />
+                        <TreeListItem label="Lemonade" value="lemonade" />
+                    </TreeListSection>
+                </TreeList>
+            </Combobox.Popover>
+        </Combobox.Provider>
+    );
+
     return {
         inputTemplate,
         buttonTemplate,
         lazyTemplate,
         standaloneTemplate,
+        sectionTemplate,
     };
 }
 
@@ -867,6 +900,57 @@ export default function treeListTests({ components, renderWithState }: TreeListT
             await waitFor(() =>
                 expect(screen.getByRole('tree', { hidden: true })).toHaveAttribute('aria-busy', 'true'),
             );
+        });
+    });
+
+    describe('Section', () => {
+        it('renders the sections without ARIA semantics, and their tree items as root tree items', async () => {
+            renderWithState(templates.sectionTemplate, { value: '' });
+            await userEvent.click(screen.getByRole('combobox'));
+            const tree = await screen.findByRole('tree');
+            const sections = queryAllByClassName(tree, TREE_LIST_SECTION_CLASSNAME);
+            expect(sections).toHaveLength(2);
+            for (const section of sections) {
+                expect(section).toHaveAttribute('role', 'none');
+                const items = getByClassName(section, 'lumx-list-section__items');
+                expect(items).toHaveAttribute('role', 'none');
+                // A global ARIA attribute would make browsers ignore `role="none"`.
+                expect(items).not.toHaveAttribute('aria-labelledby');
+            }
+            // The label is shown in the first section only.
+            expect(within(sections[0]).getByText('Fruits')).toBeInTheDocument();
+            expect(getTreeItemLabels()).toEqual(['Apple', 'Citrus', 'Water', 'Lemonade']);
+            // No group between the tree and the tree items of a section.
+            expect(getTreeItem('Water').closest('[role="group"]')).toBeNull();
+        });
+
+        it('moves over the tree items of all the sections with Up and Down', async () => {
+            renderWithState(templates.sectionTemplate, { value: '' });
+            const input = screen.getByRole('combobox');
+            await userEvent.click(input);
+            await screen.findByRole('tree');
+            for (const label of ['Apple', 'Citrus', 'Water', 'Lemonade']) {
+                await userEvent.keyboard('{ArrowDown}');
+                expect(input).toHaveAttribute('aria-activedescendant', getTreeItem(label).id);
+            }
+            // A root tree item in a section has no parent item.
+            await userEvent.keyboard('{ArrowLeft}');
+            expect(input).toHaveAttribute('aria-activedescendant', getTreeItem('Lemonade').id);
+        });
+
+        it('hides a section when the auto filter hides all of its tree items', async () => {
+            renderWithState(templates.sectionTemplate, { value: '' });
+            const input = screen.getByRole('combobox');
+            await userEvent.click(input);
+            const tree = await screen.findByRole('tree');
+            const [fruits, other] = queryAllByClassName(tree, TREE_LIST_SECTION_CLASSNAME);
+            await userEvent.type(input, 'orange');
+            expect(getTreeItemLabels()).toEqual(['Citrus', 'Orange']);
+            await waitFor(() => expect(other).toHaveAttribute('hidden'));
+            expect(fruits).not.toHaveAttribute('hidden');
+
+            await userEvent.clear(input);
+            await waitFor(() => expect(other).not.toHaveAttribute('hidden'));
         });
     });
 
