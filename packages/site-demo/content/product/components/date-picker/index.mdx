@@ -2,6 +2,7 @@
 title: Date picker
 frameworks: ['react']
 ---
+
 import * as DemoDefault from './react/default.tsx';
 import * as DemoInput from './react/input.tsx';
 import * as DemoRestrictedSelectionModes from './react/restricted-selection-modes.tsx';
@@ -13,9 +14,51 @@ import ReactDatePicker from 'lumx-docs:@lumx/react/components/date-picker/DatePi
 
 ## Input
 
-Date picker can be triggered by a click on a [text field](/product/components/text-field).
+`DatePickerField` is a [text field](/product/components/text-field) where users can type a date or pick one in a calendar.
+A click on the input (or <kbd>↓</kbd>) opens the calendar in a dialog.
 
 <DemoBlock orientation="horizontal" demo={{ react: DemoInput }} />
+
+### Typed dates
+
+Users can type a date in the input. The field reads the text on <kbd>Enter</kbd> and when the input loses focus,
+then shows the selected date again in the long format of the `locale` (e.g. "November 12, 2026").
+The field accepts:
+
+-   The long format of the `locale`, with the month names of the `locale` (e.g. "November 12, 2026", "12 novembre 2026").
+-   A numeric date, in the day, month and year order of the `locale` (e.g. `11/12/2026` in `en-US`,
+    `12/11/2026` in `fr-FR`). Any non-digit characters separate the parts (`12.11.2026`, `12-11-2026`).
+-   A two-digit year: the nearest year, from 50 years back to 49 years forward (`85` is 1985, `26` is 2026).
+-   A day and a month with no year: the current year (e.g. `11/12` in `en-US`).
+
+A date outside of `minDate` and `maxDate` is moved to the nearest of the two.
+Any other text (a single number, an impossible date like `02/31/2026`) is ignored: the input shows the selected date again.
+
+**A date field can become empty only if it has a clear button** (`clearButtonProps`). Without it, an empty
+text is ignored like an invalid text.
+
+### Keyboard
+
+On the input:
+
+-   <kbd>↓</kbd> or <kbd>Alt</kbd> + <kbd>↓</kbd> opens the calendar and focuses the selected day (else today).
+-   <kbd>Enter</kbd> reads the typed date. It does not open the calendar.
+-   <kbd>Space</kbd> and the other characters type in the input.
+
+In the calendar dialog:
+
+-   <kbd>Tab</kbd> moves between the previous month button, the year input, the next month button and the calendar grid (one
+    tab stop, on the selected day).
+-   <kbd>←</kbd> and <kbd>→</kbd> move to the previous and next day, <kbd>↑</kbd> and <kbd>↓</kbd> to the same day of the
+    previous and next week. They cross into the previous and next month.
+-   <kbd>Home</kbd> and <kbd>End</kbd> move to the first and last day of the week.
+-   <kbd>Page Up</kbd> and <kbd>Page Down</kbd> move to the same day of the previous and next month, with
+    <kbd>Shift</kbd> of the previous and next year (the last day of the month if the day does not exist).
+-   <kbd>Enter</kbd> or <kbd>Space</kbd> selects the day and closes the dialog.
+-   <kbd>Escape</kbd> closes the dialog. The focus goes back to the input.
+
+A key move to a day outside of `minDate` and `maxDate` does not move the focus.
+The standalone `DatePicker` has the same calendar keyboard. It does not move the focus on mount.
 
 ## Restricted selection modes
 

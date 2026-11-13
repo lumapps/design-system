@@ -1,51 +1,17 @@
-import { useState } from 'react';
-
-import { addMonthResetDay, isDateValid } from '@lumx/core/js/utils/date/calendarDay';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 import { CLASSNAME, COMPONENT_NAME } from './constants';
-import { DatePickerControlled } from './DatePickerControlled';
 import { DatePickerProps } from './types';
+import { useCalendar } from './useCalendar';
 
 /**
- * DatePicker component.
+ * DatePicker component: the month toolbar and the calendar grid (`role="grid"`), with the shown month held
+ * internally. It does not move focus on mount: Tab enters the grid on the roving day (the selected day, else today).
  *
  * @param  props Component props.
  * @param  ref   Component ref.
  * @return React element.
  */
-export const DatePicker = forwardRef<DatePickerProps, HTMLDivElement>((props, ref) => {
-    const { defaultMonth, locale, value, onChange, ...forwardedProps } = props;
-
-    let referenceDate = value || defaultMonth || new Date();
-    if (!isDateValid(referenceDate)) {
-        // eslint-disable-next-line no-console
-        console.warn(`[@lumx/react/DatePicker] Invalid date provided ${referenceDate}`);
-        referenceDate = new Date();
-    }
-
-    const [selectedMonth, setSelectedMonth] = useState(referenceDate);
-    const setPrevMonth = () => setSelectedMonth((current) => addMonthResetDay(current, -1));
-    const setNextMonth = () => setSelectedMonth((current) => addMonthResetDay(current, +1));
-
-    const onDatePickerChange = (newDate?: Date) => {
-        onChange(newDate);
-    };
-
-    return (
-        <DatePickerControlled
-            ref={ref}
-            {...forwardedProps}
-            defaultMonth={defaultMonth}
-            locale={locale}
-            value={value}
-            onPrevMonthChange={setPrevMonth}
-            onNextMonthChange={setNextMonth}
-            selectedMonth={selectedMonth}
-            onChange={onDatePickerChange}
-            onMonthChange={setSelectedMonth}
-        />
-    );
-});
+export const DatePicker = forwardRef<DatePickerProps, HTMLDivElement>((props, ref) => useCalendar(props, ref));
 DatePicker.displayName = COMPONENT_NAME;
 DatePicker.className = CLASSNAME;
