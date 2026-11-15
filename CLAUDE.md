@@ -14,7 +14,7 @@ design-system/
 │   ├── lumx-vue/        # @lumx/vue — Vue 3 wrappers over core (27 components, TSX syntax)
 │   ├── lumx-icons/      # @lumx/icons — icon library (Material Design Icons + custom overrides)
 │   └── site-demo/       # Documentation site (Gatsby + MDX, NOT published to npm)
-├── dev-packages/        # Internal tools: eslint configs, rollup plugins, storybook/visual testing
+├── dev-packages/        # Internal tools: eslint configs, lib build config, storybook/visual testing
 ├── configs/             # Shared build configs (postcss, terser)
 └── .github/workflows/   # 8 CI/CD workflows
 ```

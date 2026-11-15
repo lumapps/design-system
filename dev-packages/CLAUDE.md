@@ -10,9 +10,7 @@ Private packages powering the monorepo build, lint, test, and visual-diff infras
 | `eslint-plugin-lumapps`                     | Custom ESLint rules specific to LumX conventions               |
 | `storybook-testing`                         | Shared Storybook test utilities (`@lumx/storybook-testing`)    |
 | `visual-diffs`                              | Playwright-based visual regression tool (`@lumx/visual-diffs`) |
-| `rollup-plugin-fix-esm-imports`             | Rollup plugin: fixes ESM import paths for downstream compat    |
-| `rollup-plugin-optimize-imports-lumx-icons` | Rollup plugin: tree-shakes `@lumx/icons` imports in consumers  |
-| `base-vite-lib-config`                      | Shared base Vite config for building LumX library packages     |
+| `base-vite-lib-config`                      | Shared Vite config (and its plugins) to build the LumX libs    |
 | `docgen`                                    | React/Vue docgen (`@lumx/docgen`) powering the site-demo prop-table Gatsby plugin |
 
 ## WHERE TO LOOK
@@ -23,9 +21,9 @@ Private packages powering the monorepo build, lint, test, and visual-diff infras
 | Change shared linting config | `eslint-config-lumapps/`                     |
 | Fix visual-diff tooling      | `visual-diffs/`                              |
 | Fix Storybook test utilities | `storybook-testing/`                         |
-| Fix Rollup ESM issues        | `rollup-plugin-fix-esm-imports/`             |
-| Fix icon import optimization | `rollup-plugin-optimize-imports-lumx-icons/` |
-| Shared Vite lib config       | `base-vite-lib-config/`                      |
+| Change the lib build config  | `base-vite-lib-config/index.ts`              |
+| Fix ESM import issues        | `base-vite-lib-config/plugins/`              |
+| Fix icon import optimization | `base-vite-lib-config/plugins/`              |
 | Fix React/Vue prop-table docgen | `docgen/`                                |
 
 ## VISUAL DIFFS
@@ -50,4 +48,4 @@ Private packages powering the monorepo build, lint, test, and visual-diff infras
 -   All packages here are workspace-internal only (`"private": true`)
 -   Consumed via Yarn workspace protocol (`"@lumx/storybook-testing": "workspace:*"`)
 -   Changes to ESLint config apply immediately across all packages (no rebuild needed)
--   Rollup plugins only affect the build output — not runtime behavior
+-   Lib build plugins only affect the build output — not runtime behavior
