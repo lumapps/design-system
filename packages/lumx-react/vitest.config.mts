@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import { defineConfig, mergeConfig } from 'vitest/config';
 import viteConfig from './vite.config.mts';
 
