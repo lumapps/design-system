@@ -3,7 +3,8 @@ import React, { Children, ReactElement, ReactNode } from 'react';
 import isEmpty from 'lodash/isEmpty';
 import noop from 'lodash/noop';
 
-import { Comp, GenericProps, isComponentType } from '@lumx/react/utils/type';
+import type { GenericProps } from '@lumx/core/js/types';
+import { Comp, isComponentType } from '@lumx/react/utils/type';
 import { classNames } from '@lumx/core/js/utils';
 import { partitionMulti } from '@lumx/react/utils/partitionMulti';
 import { FlexBox, FlexBoxProps } from '@lumx/react';

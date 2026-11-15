@@ -1,6 +1,6 @@
 import { RefObject, useEffect } from 'react';
 
-import { Falsy } from '@lumx/react/utils/type';
+import type { Falsy } from '@lumx/core/js/types';
 import { setupClickAway } from '@lumx/core/js/utils/ClickAway';
 
 export interface ClickAwayParameters {

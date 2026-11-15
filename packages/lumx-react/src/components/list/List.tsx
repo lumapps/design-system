@@ -1,8 +1,8 @@
 import { Key, SyntheticEvent } from 'react';
 
-import { Size } from '@lumx/react';
+import { Size } from '@lumx/core/js/constants';
 import { useKeyboardListNavigation } from '@lumx/react/hooks/useKeyboardListNavigation';
-import { GenericProps } from '@lumx/react/utils/type';
+import type { GenericProps } from '@lumx/core/js/types';
 import {
     List as UI,
     ListProps as UIProps,

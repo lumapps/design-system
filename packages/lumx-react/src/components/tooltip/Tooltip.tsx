@@ -4,7 +4,7 @@ import { ReactNode, useState } from 'react';
 import { useFloating, offset, autoUpdate, type Placement as FloatingPlacement } from '@floating-ui/react-dom';
 
 import { DOCUMENT, IS_BROWSER } from '@lumx/react/constants';
-import { GenericProps } from '@lumx/react/utils/type';
+import type { GenericProps } from '@lumx/core/js/types';
 import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';
 
 import { TooltipContextProvider } from '@lumx/react/components/tooltip/context';

@@ -1,5 +1,5 @@
 import React from 'react';
-import { RectSize } from '@lumx/react/utils/type';
+import type { RectSize } from '@lumx/core/js/types';
 
 /** Get natural image size after load. */
 export function useImageSize(imgRef: React.RefObject<HTMLImageElement>, getInitialSize?: () => RectSize | null) {

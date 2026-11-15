@@ -1,6 +1,6 @@
 import { ElementType, ReactNode, SyntheticEvent } from 'react';
 
-import { ComponentRef, HasPolymorphicAs, HasRequiredLinkHref } from '@lumx/react/utils/type';
+import { ComponentRef, HasPolymorphicAs } from '@lumx/react/utils/type';
 import {
     CLASSNAME,
     COMPONENT_NAME,
@@ -9,7 +9,7 @@ import {
     ListItemActionProps as UIProps,
 } from '@lumx/core/js/components/List/ListItemAction';
 import { forwardRefPolymorphic } from '@lumx/react/utils/react/forwardRefPolymorphic';
-import { GenericProps } from '@lumx/core/js/types';
+import { GenericProps, HasRequiredLinkHref } from '@lumx/core/js/types';
 import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 
 /**

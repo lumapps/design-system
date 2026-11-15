@@ -8,7 +8,8 @@ import {
     COMPONENT_NAME,
     DEFAULT_PROPS,
 } from '@lumx/core/js/components/Card';
-import { ComponentRef, GenericProps, HasPolymorphicAs } from '@lumx/react/utils/type';
+import type { GenericProps } from '@lumx/core/js/types';
+import { ComponentRef, HasPolymorphicAs } from '@lumx/react/utils/type';
 import { forwardRefPolymorphic } from '@lumx/react/utils/react/forwardRefPolymorphic';
 import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 

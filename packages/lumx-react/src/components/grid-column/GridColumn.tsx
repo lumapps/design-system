@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import { GenericProps } from '@lumx/react/utils/type';
+import type { GenericProps } from '@lumx/core/js/types';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import {
     GridColumn as UI,

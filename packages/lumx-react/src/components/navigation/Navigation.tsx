@@ -1,7 +1,6 @@
-import { HasAriaLabelOrLabelledBy, HasClassName, HasTheme } from '@lumx/react/utils/type';
-import type { LumxClassName } from '@lumx/core/js/types';
+import type { LumxClassName, HasAriaLabelOrLabelledBy, HasClassName, HasTheme } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
-import { Orientation, Theme } from '@lumx/react';
+import { Orientation, Theme } from '@lumx/core/js/constants';
 import { ThemeProvider, useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 

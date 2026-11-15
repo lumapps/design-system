@@ -1,7 +1,9 @@
 import { ElementType, ReactNode } from 'react';
-import { Icon, Placement, Size, Text, Tooltip } from '@lumx/react';
+import { Size } from '@lumx/core/js/constants';
+import { Icon, Placement, Text, Tooltip } from '@lumx/react';
 import { classNames } from '@lumx/core/js/utils';
-import { ComponentRef, HasClassName, HasPolymorphicAs, HasRequiredLinkHref, HasTheme } from '@lumx/react/utils/type';
+import type { HasClassName, HasRequiredLinkHref, HasTheme } from '@lumx/core/js/types';
+import { ComponentRef, HasPolymorphicAs } from '@lumx/react/utils/type';
 
 import { forwardRefPolymorphic } from '@lumx/react/utils/react/forwardRefPolymorphic';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';

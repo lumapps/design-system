@@ -10,7 +10,8 @@ import {
 import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 import { forwardRefPolymorphic } from '@lumx/react/utils/react/forwardRefPolymorphic';
 import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';
-import { ComponentRef, HasPolymorphicAs, HasRequiredLinkHref } from '@lumx/react/utils/type';
+import type { HasRequiredLinkHref } from '@lumx/core/js/types';
+import { ComponentRef, HasPolymorphicAs } from '@lumx/react/utils/type';
 import { Tooltip } from '../tooltip';
 import { Button } from '../button';
 import { useComboboxEvent } from './context/useComboboxEvent';

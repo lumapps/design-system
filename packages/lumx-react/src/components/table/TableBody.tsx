@@ -4,7 +4,7 @@ import {
     CLASSNAME,
     COMPONENT_NAME,
 } from '@lumx/core/js/components/Table/TableBody';
-import { GenericProps } from '@lumx/react/utils/type';
+import type { GenericProps } from '@lumx/core/js/types';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 

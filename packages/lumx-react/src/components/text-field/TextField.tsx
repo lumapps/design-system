@@ -1,7 +1,7 @@
 import { Ref, RefObject, ReactNode, SyntheticEvent, useRef, useState } from 'react';
 
 import { Theme } from '@lumx/core/js/constants';
-import { GenericProps } from '@lumx/react/utils/type';
+import type { GenericProps } from '@lumx/core/js/types';
 import { mergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { useId } from '@lumx/react/hooks/useId';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';

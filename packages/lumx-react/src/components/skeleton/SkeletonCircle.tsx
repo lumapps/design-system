@@ -1,5 +1,5 @@
-import { Theme } from '@lumx/react';
-import { GenericProps } from '@lumx/react/utils/type';
+import { Theme } from '@lumx/core/js/constants';
+import type { GenericProps } from '@lumx/core/js/types';
 import {
     SkeletonCircle as UI,
     SkeletonCircleProps as UIProps,

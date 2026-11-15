@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { Theme } from '@lumx/react';
-import { GenericProps } from '@lumx/react/utils/type';
+import { Theme } from '@lumx/core/js/constants';
+import type { GenericProps } from '@lumx/core/js/types';
 import { mergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';

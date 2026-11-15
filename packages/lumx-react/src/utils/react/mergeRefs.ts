@@ -1,4 +1,4 @@
-import { Falsy } from '@lumx/react/utils/type';
+import type { Falsy } from '@lumx/core/js/types';
 import { MutableRefObject, useMemo } from 'react';
 
 type FnRef<T> = (value: T) => void;

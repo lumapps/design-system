@@ -1,5 +1,5 @@
 import { IconButtonProps } from '@lumx/react';
-import { GenericProps } from '@lumx/react/utils/type';
+import type { GenericProps } from '@lumx/core/js/types';
 import { Ref } from 'react';
 
 /**

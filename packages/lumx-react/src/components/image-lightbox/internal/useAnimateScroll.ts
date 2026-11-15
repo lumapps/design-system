@@ -1,5 +1,5 @@
 import React from 'react';
-import type { Point, RectSize } from '@lumx/react/utils/type';
+import type { Point, RectSize } from '@lumx/core/js/types';
 
 /** Maintains the scroll position centered relative to the original scroll area's dimensions when the content scales. */
 export function useAnimateScroll(scrollAreaRef: React.RefObject<HTMLDivElement>) {

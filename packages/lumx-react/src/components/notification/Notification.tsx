@@ -2,11 +2,11 @@ import { useRef } from 'react';
 
 import isFunction from 'lodash/isFunction';
 
-import { Button, Emphasis, Icon, Kind, Size, Theme } from '@lumx/react';
+import { Emphasis, Kind, Size, Theme } from '@lumx/core/js/constants';
+import { Button, Icon } from '@lumx/react';
 import { DOCUMENT, NOTIFICATION_TRANSITION_DURATION } from '@lumx/react/constants';
 import { NOTIFICATION_CONFIGURATION } from '@lumx/react/components/notification/constants';
-import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import type { LumxClassName } from '@lumx/core/js/types';
+import type { LumxClassName, GenericProps, HasTheme } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
 import { useTransitionVisibility } from '@lumx/react/hooks/useTransitionVisibility';
 import { mergeRefs } from '@lumx/react/utils/react/mergeRefs';

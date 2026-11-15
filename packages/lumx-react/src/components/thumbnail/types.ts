@@ -1,6 +1,6 @@
 import React from 'react';
-import { AspectRatio, Size } from '@lumx/react';
-import { ValueOf } from '@lumx/react/utils/type';
+import { AspectRatio, Size } from '@lumx/core/js/constants';
+import type { ValueOf } from '@lumx/core/js/types';
 
 /**
  *  Focal point using vertical alignment, horizontal alignment or coordinates (from -1 to 1).

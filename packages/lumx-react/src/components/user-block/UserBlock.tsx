@@ -1,7 +1,8 @@
 import React, { ReactNode } from 'react';
 
-import { Avatar, Theme, Text, Link, ColorPalette } from '@lumx/react';
-import { GenericProps } from '@lumx/react/utils/type';
+import { Theme, ColorPalette } from '@lumx/core/js/constants';
+import { Avatar, Text, Link } from '@lumx/react';
+import type { GenericProps } from '@lumx/core/js/types';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';

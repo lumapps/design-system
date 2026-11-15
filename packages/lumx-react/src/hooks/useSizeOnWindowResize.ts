@@ -1,7 +1,7 @@
 import React from 'react';
 
 import throttle from 'lodash/throttle';
-import { RectSize } from '@lumx/react/utils/type';
+import type { RectSize } from '@lumx/core/js/types';
 
 /**
  * Observe element size (only works if it's size depends on the window size).
