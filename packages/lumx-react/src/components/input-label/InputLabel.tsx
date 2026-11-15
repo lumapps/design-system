@@ -1,4 +1,4 @@
-import { Theme } from '@lumx/react';
+import { Theme } from '@lumx/core/js/constants';
 import { InputLabel as UI, InputLabelProps as UIProps } from '@lumx/core/js/components/InputLabel';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';

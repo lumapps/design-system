@@ -3,8 +3,8 @@ import type { ReactElement, Ref } from 'react';
 
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';
-import { HasPolymorphicAs, HasRequiredLinkHref } from '@lumx/react/utils/type';
-import { GenericProps } from '@lumx/core/js/types';
+import { HasPolymorphicAs } from '@lumx/react/utils/type';
+import { GenericProps, HasRequiredLinkHref } from '@lumx/core/js/types';
 import { ColorPalette } from '@lumx/core/js/constants';
 import {
     MenuItem as UI,

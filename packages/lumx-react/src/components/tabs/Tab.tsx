@@ -1,7 +1,8 @@
 import { ElementType, ReactNode } from 'react';
 
 import { Icon, IconProps, Text } from '@lumx/react';
-import { ComponentRef, GenericProps, HasPolymorphicAs, HasRequiredLinkHref } from '@lumx/react/utils/type';
+import type { GenericProps, HasRequiredLinkHref } from '@lumx/core/js/types';
+import { ComponentRef, HasPolymorphicAs } from '@lumx/react/utils/type';
 import { forwardRefPolymorphic } from '@lumx/react/utils/react/forwardRefPolymorphic';
 import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';
 import {

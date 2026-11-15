@@ -1,7 +1,7 @@
 import React, { MouseEventHandler } from 'react';
 
-import { Theme } from '@lumx/react';
-import { GenericProps } from '@lumx/react/utils/type';
+import { Theme } from '@lumx/core/js/constants';
+import type { GenericProps } from '@lumx/core/js/types';
 import { useBooleanState } from '@lumx/react/hooks/useBooleanState';
 import { useId } from '@lumx/react/hooks/useId';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';

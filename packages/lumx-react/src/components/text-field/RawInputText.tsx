@@ -1,6 +1,7 @@
 import { ComponentProps, SyntheticEvent } from 'react';
 
-import { Theme, useTheme } from '@lumx/react';
+import { Theme } from '@lumx/core/js/constants';
+import { useTheme } from '@lumx/react';
 
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import {

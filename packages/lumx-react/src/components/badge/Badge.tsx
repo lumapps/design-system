@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
 import { Badge as UI, BadgeProps as UIProps } from '@lumx/core/js/components/Badge';
-import { GenericProps } from '@lumx/react/utils/type';
+import type { GenericProps } from '@lumx/core/js/types';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 

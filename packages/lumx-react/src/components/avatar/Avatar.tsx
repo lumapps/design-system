@@ -1,8 +1,9 @@
 import React, { KeyboardEventHandler, MouseEventHandler, ReactNode } from 'react';
 
-import { AspectRatio, Theme, Thumbnail, ThumbnailProps } from '@lumx/react';
+import { AspectRatio, Theme } from '@lumx/core/js/constants';
+import { Thumbnail, ThumbnailProps } from '@lumx/react';
 
-import { GenericProps } from '@lumx/react/utils/type';
+import type { GenericProps } from '@lumx/core/js/types';
 import {
     Avatar as UI,
     AvatarProps as UIProps,

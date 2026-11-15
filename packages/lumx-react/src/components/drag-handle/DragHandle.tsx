@@ -1,4 +1,4 @@
-import { GenericProps } from '@lumx/react/utils/type';
+import type { GenericProps } from '@lumx/core/js/types';
 import {
     DragHandle as UI,
     DragHandleProps as UIProps,

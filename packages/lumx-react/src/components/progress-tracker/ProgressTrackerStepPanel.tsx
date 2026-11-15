@@ -1,5 +1,5 @@
 import { useTabProviderContext } from '@lumx/react/components/tabs/state';
-import { GenericProps } from '@lumx/react/utils/type';
+import type { GenericProps } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import type { Point } from '@lumx/react/utils/type';
+import type { Point } from '@lumx/core/js/types';
 import type { useAnimateScroll } from './useAnimateScroll';
 
 /**

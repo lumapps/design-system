@@ -1,7 +1,7 @@
 import React, { ReactElement, useState } from 'react';
 
-import { Theme } from '@lumx/react';
-import { Falsy, GenericProps } from '@lumx/react/utils/type';
+import { Theme } from '@lumx/core/js/constants';
+import type { Falsy, GenericProps } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
 import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { useImageLoad } from '@lumx/react/components/thumbnail/useImageLoad';

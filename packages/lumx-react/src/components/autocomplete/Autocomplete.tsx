@@ -2,8 +2,7 @@ import { ReactNode, SyntheticEvent, useRef } from 'react';
 
 import { Dropdown, DropdownProps, IconButtonProps, Offset, Placement, TextField, TextFieldProps } from '@lumx/react';
 
-import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import type { LumxClassName } from '@lumx/core/js/types';
+import type { LumxClassName, GenericProps, HasTheme } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
 import { useFocus } from '@lumx/react/hooks/useFocus';
 import { mergeRefs } from '@lumx/react/utils/react/mergeRefs';

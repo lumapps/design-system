@@ -1,5 +1,5 @@
 import { Icon } from '@lumx/react';
-import { GenericProps } from '@lumx/react/utils/type';
+import type { GenericProps } from '@lumx/core/js/types';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { wrapChildrenIconWithSpaces } from '@lumx/react/utils/react/wrapChildrenIconWithSpaces';
 import { useDisableStateProps } from '@lumx/react/utils/disabled';

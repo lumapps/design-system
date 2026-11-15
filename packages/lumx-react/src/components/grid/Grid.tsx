@@ -1,6 +1,5 @@
-import { Alignment, Orientation, Size } from '@lumx/react';
-import { GenericProps } from '@lumx/react/utils/type';
-import type { LumxClassName } from '@lumx/core/js/types';
+import { Alignment, Orientation, Size } from '@lumx/core/js/constants';
+import type { LumxClassName, GenericProps } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 

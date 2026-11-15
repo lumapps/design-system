@@ -1,6 +1,6 @@
 import { ReactNode, Ref, SyntheticEvent } from 'react';
 
-import { GenericProps, HasAriaDisabled } from '@lumx/react/utils/type';
+import type { GenericProps, HasAriaDisabled } from '@lumx/core/js/types';
 import {
     ListItem as UI,
     ListItemProps as UIProps,

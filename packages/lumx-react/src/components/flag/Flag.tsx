@@ -1,4 +1,5 @@
-import { Theme, Text } from '@lumx/react';
+import { Theme } from '@lumx/core/js/constants';
+import { Text } from '@lumx/react';
 import {
     CLASSNAME,
     COMPONENT_NAME,

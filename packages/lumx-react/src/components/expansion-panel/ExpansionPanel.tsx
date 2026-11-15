@@ -2,8 +2,10 @@ import React, { Children, PropsWithChildren, ReactNode, useRef } from 'react';
 
 import isEmpty from 'lodash/isEmpty';
 
-import { DragHandle, IconButton, IconButtonProps, Theme } from '@lumx/react';
-import { GenericProps, isComponent } from '@lumx/react/utils/type';
+import { Theme } from '@lumx/core/js/constants';
+import { DragHandle, IconButton, IconButtonProps } from '@lumx/react';
+import type { GenericProps } from '@lumx/core/js/types';
+import { isComponent } from '@lumx/react/utils/type';
 import { partitionMulti } from '@lumx/react/utils/partitionMulti';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';

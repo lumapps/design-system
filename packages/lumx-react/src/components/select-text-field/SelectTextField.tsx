@@ -6,7 +6,7 @@ import { getOptionDisplayName } from '@lumx/core/js/utils/select/getOptionDispla
 import { toggleSelection } from '@lumx/core/js/utils/select/toggleSelection';
 import { SelectTextField as UI } from '@lumx/core/js/components/SelectTextField';
 import { CLASSNAME as SCROLL_BOX_CLASSNAME } from '@lumx/core/js/components/ScrollBox';
-import { HasClassName } from '@lumx/react/utils/type';
+import type { HasClassName } from '@lumx/core/js/types';
 import { Combobox, type ComboboxPopoverProps } from '../combobox';
 import { wrapRenderOption } from '../combobox/wrapRenderOption';
 import { InfiniteScroll } from '../../utils/InfiniteScroll';

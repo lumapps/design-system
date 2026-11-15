@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-import { GenericProps } from '@lumx/react/utils/type';
+import type { GenericProps } from '@lumx/core/js/types';
 import {
     CLASSNAME,
     COMPONENT_NAME,

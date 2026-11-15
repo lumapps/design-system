@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-import { GenericProps } from '@lumx/react/utils/type';
+import type { GenericProps } from '@lumx/core/js/types';
 import {
     Toolbar as UI,
     ToolbarProps as UIProps,

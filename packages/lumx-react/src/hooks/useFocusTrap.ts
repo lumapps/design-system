@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 import { setupFocusTrap } from '@lumx/core/js/utils/focus/setupFocusTrap';
-import { Falsy } from '@lumx/react/utils/type';
+import type { Falsy } from '@lumx/core/js/types';
 
 /**
  * Trap 'Tab' focus switch inside the `focusZoneElement`.

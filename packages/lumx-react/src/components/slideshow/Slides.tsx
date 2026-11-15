@@ -2,8 +2,7 @@ import React, { Children } from 'react';
 
 import chunk from 'lodash/chunk';
 
-import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import type { LumxClassName } from '@lumx/core/js/types';
+import type { LumxClassName, GenericProps, HasTheme } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';

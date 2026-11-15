@@ -3,9 +3,9 @@ import { Children, ReactNode } from 'react';
 import isEmpty from 'lodash/isEmpty';
 
 import { mdiChevronDown, mdiChevronUp } from '@lumx/icons';
-import { Emphasis, Icon, Size, IconButton, IconButtonProps } from '@lumx/react';
-import { GenericProps, HasCloseMode } from '@lumx/react/utils/type';
-import type { LumxClassName } from '@lumx/core/js/types';
+import { Emphasis, Size } from '@lumx/core/js/constants';
+import { Icon, IconButton, IconButtonProps } from '@lumx/react';
+import type { LumxClassName, GenericProps, HasCloseMode } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
 import { useId } from '@lumx/react/hooks/useId';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';

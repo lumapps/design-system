@@ -1,4 +1,4 @@
-import { GenericProps } from '@lumx/react/utils/type';
+import type { GenericProps } from '@lumx/core/js/types';
 import {
     RadioGroup as UI,
     CLASSNAME,

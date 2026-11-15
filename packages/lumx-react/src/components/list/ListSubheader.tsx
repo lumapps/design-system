@@ -1,7 +1,6 @@
 import { ReactNode } from 'react';
 
-import { GenericProps } from '@lumx/react/utils/type';
-import type { LumxClassName } from '@lumx/core/js/types';
+import type { LumxClassName, GenericProps } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 

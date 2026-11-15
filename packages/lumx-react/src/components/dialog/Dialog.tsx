@@ -1,13 +1,15 @@
 import React, { Children, ReactElement, Ref, RefObject, useEffect, useMemo, useRef, useState } from 'react';
 
-import { HeadingLevelProvider, ProgressCircular, Size } from '@lumx/react';
+import { Size } from '@lumx/core/js/constants';
+import { HeadingLevelProvider, ProgressCircular } from '@lumx/react';
 
 import { DIALOG_TRANSITION_DURATION, DOCUMENT } from '@lumx/react/constants';
 import { useCallbackOnEscape } from '@lumx/react/hooks/useCallbackOnEscape';
 import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
 import { useIntersectionObserver } from '@lumx/react/hooks/useIntersectionObserver';
 
-import { GenericProps, HasCloseMode, isComponent } from '@lumx/react/utils/type';
+import type { GenericProps, HasCloseMode } from '@lumx/core/js/types';
+import { isComponent } from '@lumx/react/utils/type';
 import { partitionMulti } from '@lumx/react/utils/partitionMulti';
 import { ClickAwayProvider } from '@lumx/react/utils/ClickAwayProvider';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
