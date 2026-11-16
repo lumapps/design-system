@@ -24,6 +24,12 @@ export interface TreeListItemOptions {
     onChange(state: TreeListItemState): void;
 }
 
+/** State of a section, rendered by the section components. */
+export interface TreeListSectionState {
+    /** Whether the filter hides every tree item of the section (a section with no tree item stays visible). */
+    hidden: boolean;
+}
+
 /** Controller of a registered tree item (see {@link TreeListHandle.registerTreeItem}). */
 export interface TreeListItemController {
     /** The current state. */
@@ -57,4 +63,9 @@ export interface TreeListHandle extends CompositeHandle {
      * The registry also sets `aria-busy` on the group while it holds only skeletons.
      */
     registerTreeItem(element: HTMLElement, options: TreeListItemOptions): TreeListItemController;
+    /**
+     * Register a section root `<li>` element (what the React and Vue section components do on mount). `onChange`
+     * is called at once with the current state, then on each change. Returns the function that unregisters it.
+     */
+    registerSection(element: HTMLElement, onChange: (state: TreeListSectionState) => void): () => void;
 }

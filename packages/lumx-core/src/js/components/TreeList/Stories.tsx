@@ -66,7 +66,7 @@ function renderFoodTree(TreeListItem: any, items: FoodItem[] = FOOD_TREE): any {
  * combobox. Framework-specific components and decorators are injected via options.
  */
 export function setup({
-    components: { TreeList, TreeListItem, Combobox },
+    components: { TreeList, TreeListItem, TreeListSection, Combobox },
     decorators: { withValueOnChange },
 }: SetupStoriesOptions<{
     components: TreeListComponents;
@@ -257,6 +257,40 @@ export function setup({
         ),
     };
 
+    /**
+     * Sections of root tree items (`TreeListSection`): a divider between the sections, and between them and the
+     * standalone tree items. A section without a label is a separator. The auto filter hides a section with no
+     * matching item.
+     */
+    const WithSections = {
+        args: { value: { text: '', selected: '' } },
+        decorators: [withInputState],
+        render: ({ value, onUpdate }: any) => (
+            <Combobox.Provider>
+                <Combobox.Input
+                    value={value.text}
+                    onChange={(text: string) => onUpdate({ ...value, text })}
+                    selectionMode="keep"
+                    placeholder="Pick a food…"
+                    toggleButtonProps={{ label: 'Food' }}
+                />
+                <Combobox.Popover>
+                    <TreeList
+                        aria-label="Food"
+                        value={value.selected}
+                        onChange={(selected: string) => onUpdate({ text: LABELS[selected] ?? '', selected })}
+                    >
+                        <TreeListSection label="Food">
+                            {renderFoodTree(TreeListItem, FOOD_TREE.slice(0, 2))}
+                        </TreeListSection>
+                        <TreeListSection>{renderFoodTree(TreeListItem, FOOD_TREE.slice(2))}</TreeListSection>
+                    </TreeList>
+                    <Combobox.State emptyMessage="No food found" />
+                </Combobox.Popover>
+            </Combobox.Provider>
+        ),
+    };
+
     return {
         meta,
         Standalone,
@@ -266,5 +300,6 @@ export function setup({
         InComboboxButton,
         InComboboxMultipleSelection,
         LazyParentItem,
+        WithSections,
     };
 }

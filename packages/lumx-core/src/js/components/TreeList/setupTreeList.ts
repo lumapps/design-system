@@ -19,6 +19,7 @@ import type {
     TreeListItemOptions,
     TreeListItemState,
     TreeListOptions,
+    TreeListSectionState,
 } from './types';
 
 /** Filter state of a tree item (computed by the tree item registry). */
@@ -41,12 +42,22 @@ const NO_FILTER_STATE: TreeItemFilterState = { filter: '', hidden: false, hasMat
 interface TreeItemEntry {
     /** The open state of the parent item (undefined on a leaf item). */
     readonly isOpen: boolean | undefined;
+    /** Whether the filter hides the tree item. */
+    readonly hidden: boolean;
     /** Apply the filter state computed by the registry (no-op when unchanged). */
     applyFilterState(state: TreeItemFilterState): void;
     /** After a filter clear (one frame later): back to the open state before the filter. */
     restoreAfterClear(): void;
     /** Open or close the parent item (a user action). */
     setOpen(isOpen: boolean): void;
+}
+
+/** A registered section, as the registry sees it. */
+interface SectionEntry {
+    /** Called when the state changes. */
+    onChange(state: TreeListSectionState): void;
+    /** The last notified state. */
+    last: TreeListSectionState;
 }
 
 /**
@@ -68,6 +79,8 @@ interface TreeItemEntry {
 export function setupTreeList(options: TreeListOptions = {}): TreeListHandle {
     /** Tree items, keyed by their root `<li>` element. */
     const registrations = new Map<HTMLElement, TreeItemEntry>();
+    /** Sections, keyed by their root `<li>` element. */
+    const sections = new Map<HTMLElement, SectionEntry>();
     /** Number of matching tree items (auto filter only), from the last full update. */
     let matchingCount = 0;
     /** The filter of the last full update (to detect a clear). */
@@ -98,6 +111,33 @@ export function setupTreeList(options: TreeListOptions = {}): TreeListHandle {
     }
 
     /**
+     * Compute the state of a section and notify it when it changed (or always, with `force`): hidden when it
+     * holds registered tree items and the filter hides all of them.
+     */
+    function notifySection(element: HTMLElement, force = false) {
+        const entry = sections.get(element);
+        if (!entry) return;
+        let hasItems = false;
+        let hasVisibleItem = false;
+        for (const [root, item] of registrations) {
+            if (!element.contains(root)) continue;
+            hasItems = true;
+            if (!item.hidden) {
+                hasVisibleItem = true;
+                break;
+            }
+        }
+        const hidden = hasItems && !hasVisibleItem;
+        if (!force && hidden === entry.last.hidden) return;
+        entry.last = { hidden };
+        entry.onChange(entry.last);
+    }
+
+    function notifySections() {
+        for (const element of sections.keys()) notifySection(element);
+    }
+
+    /**
      * Compute the filter state of every tree item (from the DOM nesting and the filter) and notify the
      * changed ones. Auto filter: a tree item is visible when it is a matching item, when a tree item below
      * it matches, or when a tree item above it matches. Manual filter: nothing is hidden, and every parent
@@ -111,7 +151,10 @@ export function setupTreeList(options: TreeListOptions = {}): TreeListHandle {
         // A new filter before the restore frame: the restore is not needed.
         if (filterValue) cancelRestore();
         matchingCount = 0;
-        if (registrations.size === 0) return;
+        if (registrations.size === 0) {
+            notifySections();
+            return;
+        }
         const items = Array.from(registrations.keys());
         const parents = new Map(items.map((item) => [item, getParentRegistration(item)]));
         /** The registered parent items of a tree item, from its parent item up to the root. */
@@ -156,6 +199,7 @@ export function setupTreeList(options: TreeListOptions = {}): TreeListHandle {
                 hasMatchBelow: hasMatchBelow.has(item),
             });
         }
+        notifySections();
         // A selection clears the filter before the framework renders the new `aria-selected`: the open state
         // after the clear (which keeps the ancestors of the selected items open) is only known on the next frame.
         if (isCleared) {
@@ -218,6 +262,7 @@ export function setupTreeList(options: TreeListOptions = {}): TreeListHandle {
             lastFilter = '';
             matchingCount = 0;
             registrations.clear();
+            sections.clear();
         },
     });
 
@@ -336,6 +381,9 @@ export function setupTreeList(options: TreeListOptions = {}): TreeListHandle {
             get isOpen() {
                 return isParent() ? state.isOpen : undefined;
             },
+            get hidden() {
+                return state.hidden;
+            },
             applyFilterState,
             restoreAfterClear,
             setOpen,
@@ -366,6 +414,15 @@ export function setupTreeList(options: TreeListOptions = {}): TreeListHandle {
         };
     }
 
-    // Add the tree item registry to the composite handle (keeps its getters).
-    return Object.assign(composite, { registerTreeItem });
+    /** Register a section root (see {@link TreeListHandle.registerSection}). */
+    function registerSection(element: HTMLElement, onChange: (state: TreeListSectionState) => void) {
+        sections.set(element, { onChange, last: { hidden: false } });
+        notifySection(element, true);
+        return () => {
+            sections.delete(element);
+        };
+    }
+
+    // Add the tree item and section registry to the composite handle (keeps its getters).
+    return Object.assign(composite, { registerTreeItem, registerSection });
 }
