@@ -1,5 +1,6 @@
 {
     "name": "@lumx/changelog-utils",
     "private": true,
-    "main": "index.js"
+    "main": "index.js",
+    "version": "4.28.0"
 }
