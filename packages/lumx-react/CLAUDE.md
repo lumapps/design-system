@@ -13,7 +13,6 @@ packages/lumx-react/src/
 │   ├── theme/           # ThemeContext, useTheme, ThemeProvider
 │   ├── disabled/        # useDisableStateProps
 │   ├── moving-focus/    # Focus management
-│   ├── date/            # Date utilities
 │   └── Portal/          # React Portal
 ├── stories/             # Storybook decorators, story utils
 │   └── demos-generated/ # Auto-generated from site-demo MDX (never hand-edit)

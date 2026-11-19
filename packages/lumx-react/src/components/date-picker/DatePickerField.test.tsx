@@ -10,7 +10,7 @@ import { CLASSNAME } from './constants';
 
 const mockedDate = new Date(1487721600000);
 
-vi.mock('@lumx/react/utils/date/getYearDisplayName', () => ({
+vi.mock('@lumx/core/js/utils/date/getYearDisplayName', () => ({
     getYearDisplayName: () => 'année',
 }));
 
