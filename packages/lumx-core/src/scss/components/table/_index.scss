@@ -2,7 +2,7 @@
    Data table
    ========================================================================== */
 
-.#{$lumx-base-prefix}-table {
+.lumx-table {
     $self: &;
 
     @include lumx-table;
@@ -117,22 +117,22 @@
 /* Clickable row
    ========================================================================== */
 
-.#{$lumx-base-prefix}-table__row--is-clickable:not(.#{$lumx-base-prefix}-table__row--is-selected) {
-    .#{$lumx-base-prefix}-table--theme-light & {
+.lumx-table__row--is-clickable:not(.lumx-table__row--is-selected) {
+    .lumx-table--theme-light & {
         @include lumx-table-row-is-clickable(lumx-base-const("theme", "LIGHT"), false);
     }
 
-    .#{$lumx-base-prefix}-table--theme-dark & {
+    .lumx-table--theme-dark & {
         @include lumx-table-row-is-clickable(lumx-base-const("theme", "DARK"), false);
     }
 }
 
-.#{$lumx-base-prefix}-table__row--is-clickable.#{$lumx-base-prefix}-table__row--is-selected {
-    .#{$lumx-base-prefix}-table--theme-light & {
+.lumx-table__row--is-clickable.lumx-table__row--is-selected {
+    .lumx-table--theme-light & {
         @include lumx-table-row-is-clickable(lumx-base-const("theme", "LIGHT"), true);
     }
 
-    .#{$lumx-base-prefix}-table--theme-dark & {
+    .lumx-table--theme-dark & {
         @include lumx-table-row-is-clickable(lumx-base-const("theme", "DARK"), true);
     }
 }

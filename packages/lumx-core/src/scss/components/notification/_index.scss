@@ -4,7 +4,7 @@
    Notification
    ========================================================================== */
 
-.#{$lumx-base-prefix}-notification {
+.lumx-notification {
     $self: &;
 
     @include lumx-elevation(4);
@@ -66,7 +66,7 @@
    ========================================================================== */
 
 @each $color in $lumx-notification-color-palette {
-    .#{$lumx-base-prefix}-notification--color-#{$color} .#{$lumx-base-prefix}-notification__icon {
+    .lumx-notification--color-#{$color} .lumx-notification__icon {
         background-color: lumx-color-variant($color, "N");
 
         @if $color == "yellow" {

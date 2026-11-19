@@ -4,10 +4,10 @@
    Button
    ========================================================================== */
 
-.#{$lumx-base-prefix}-button {
+.lumx-button {
     @include lumx-button-base;
 
-    .#{$lumx-base-prefix}-badge {
+    .lumx-badge {
         position: absolute;
         top: math.div(-$lumx-spacing-unit, 2);
         right: math.div(-$lumx-spacing-unit, 2);
@@ -19,38 +19,38 @@
 
 @each $key, $size in $lumx-sizes {
     @if $key == lumx-base-const("size", "S") or $key == lumx-base-const("size", "M") {
-        .#{$lumx-base-prefix}-button--size-#{$key} {
-            &.#{$lumx-base-prefix}-button--emphasis-high {
-                &.#{$lumx-base-prefix}-button--variant-button {
+        .lumx-button--size-#{$key} {
+            &.lumx-button--emphasis-high {
+                &.lumx-button--variant-button {
                     @include lumx-button-size(lumx-base-const("emphasis", "HIGH"), "button", $key);
                 }
 
-                &.#{$lumx-base-prefix}-button--variant-icon {
+                &.lumx-button--variant-icon {
                     @include lumx-button-size(lumx-base-const("emphasis", "HIGH"), "icon", $key);
                 }
             }
 
-            &.#{$lumx-base-prefix}-button--emphasis-medium {
-                &.#{$lumx-base-prefix}-button--variant-button {
+            &.lumx-button--emphasis-medium {
+                &.lumx-button--variant-button {
                     @include lumx-button-size(lumx-base-const("emphasis", "MEDIUM"), "button", $key);
                 }
 
-                &.#{$lumx-base-prefix}-button--variant-icon {
+                &.lumx-button--variant-icon {
                     @include lumx-button-size(lumx-base-const("emphasis", "MEDIUM"), "icon", $key);
                 }
             }
 
-            &.#{$lumx-base-prefix}-button--emphasis-low {
-                &.#{$lumx-base-prefix}-button--variant-button {
+            &.lumx-button--emphasis-low {
+                &.lumx-button--variant-button {
                     @include lumx-button-size(lumx-base-const("emphasis", "LOW"), "button", $key);
                 }
 
-                &.#{$lumx-base-prefix}-button--variant-icon {
+                &.lumx-button--variant-icon {
                     @include lumx-button-size(lumx-base-const("emphasis", "LOW"), "icon", $key);
                 }
             }
 
-            &.#{$lumx-base-prefix}-button--variant-button {
+            &.lumx-button--variant-button {
                 i:first-child {
                     @include lumx-button-icon("button", $key, lumx-base-const("position", "LEFT"));
                 }
@@ -60,7 +60,7 @@
                 }
             }
 
-            &.#{$lumx-base-prefix}-button--variant-icon {
+            &.lumx-button--variant-icon {
                 & > i,
                 & > img {
                     @include lumx-button-icon("icon", $key);
@@ -79,8 +79,8 @@
 
 @each $key, $color in $lumx-color-palette {
     @if $key != "dark" and $key != "light" {
-        .#{$lumx-base-prefix}-button--color-#{$key} {
-            &.#{$lumx-base-prefix}-button--emphasis-high.#{$lumx-base-prefix}-button--theme-light {
+        .lumx-button--color-#{$key} {
+            &.lumx-button--emphasis-high.lumx-button--theme-light {
                 @include lumx-button-color(
                         lumx-base-const("emphasis", "HIGH"),
                         $key,
@@ -88,7 +88,7 @@
                 );
             }
 
-            &.#{$lumx-base-prefix}-button--emphasis-high.#{$lumx-base-prefix}-button--theme-dark {
+            &.lumx-button--emphasis-high.lumx-button--theme-dark {
                 @include lumx-button-color(lumx-base-const("emphasis", "HIGH"), $key, lumx-base-const("theme", "DARK"));
             }
         }
@@ -96,12 +96,12 @@
 }
 
 @each $key, $color in $lumx-color-palette {
-    .#{$lumx-base-prefix}-button--color-#{$key} {
-        &.#{$lumx-base-prefix}-button--emphasis-medium {
+    .lumx-button--color-#{$key} {
+        &.lumx-button--emphasis-medium {
             @include lumx-button-color(lumx-base-const("emphasis", "MEDIUM"), $key);
         }
 
-        &.#{$lumx-base-prefix}-button--emphasis-low {
+        &.lumx-button--emphasis-low {
             @include lumx-button-color(lumx-base-const("emphasis", "LOW"), $key);
         }
     }
@@ -111,13 +111,13 @@
 /* Button selected
    ========================================================================== */
 
-.#{$lumx-base-prefix}-button.#{$lumx-base-prefix}-button--is-selected.#{$lumx-base-prefix}-button--emphasis-medium,
-.#{$lumx-base-prefix}-button.#{$lumx-base-prefix}-button--is-selected.#{$lumx-base-prefix}-button--emphasis-low, {
+.lumx-button.lumx-button--is-selected.lumx-button--emphasis-medium,
+.lumx-button.lumx-button--is-selected.lumx-button--emphasis-low, {
     @include lumx-button-size(lumx-base-const("emphasis", "SELECTED"));
 
     @each $key, $color in $lumx-color-palette {
-        &.#{$lumx-base-prefix}-button--color-#{$key} {
-            &.#{$lumx-base-prefix}-button--is-selected {
+        &.lumx-button--color-#{$key} {
+            &.lumx-button--is-selected {
                 @include lumx-button-color(lumx-base-const("emphasis", "SELECTED"), $key);
             }
         }
@@ -127,7 +127,7 @@
 /* Button wrapper
    ========================================================================== */
 
-.#{$lumx-base-prefix}-button-wrapper {
+.lumx-button-wrapper {
     width: fit-content;
 
     &--variant-button {
@@ -150,12 +150,12 @@
 /* Button group
    ========================================================================== */
 
-.#{$lumx-base-prefix}-button-group {
+.lumx-button-group {
     display: inline-flex;
     vertical-align: top;
     gap: 1px;
 
-    .#{$lumx-base-prefix}-button {
+    .lumx-button {
         // Remove border radius on the right on the first button (if not hidden and not also the last button)
         &:not(:last-of-type:not(.visually-hidden)) {
             &, &::before {
@@ -177,8 +177,8 @@
 /* Button full width
    ========================================================================== */
 
-.#{$lumx-base-prefix}-button--is-full-width:not(.#{$lumx-base-prefix}-button--variant-icon),
-.#{$lumx-base-prefix}-button-wrapper--is-full-width:not(.#{$lumx-base-prefix}-button-wrapper--variant-icon) {
+.lumx-button--is-full-width:not(.lumx-button--variant-icon),
+.lumx-button-wrapper--is-full-width:not(.lumx-button-wrapper--variant-icon) {
     flex-grow: 1;
     width: 100%;
 }

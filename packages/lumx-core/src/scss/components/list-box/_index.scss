@@ -9,36 +9,36 @@
 
 // The composite sets `hidden` on the list when it has no visible content (see `setupComposite`).
 // Before the composite mounts: hide an empty list.
-.#{$lumx-base-prefix}-listbox-list:empty {
+.lumx-listbox-list:empty {
     display: none;
 }
 
 // ---- Option -----------------------
 
-.#{$lumx-base-prefix}-listbox-option {
+.lumx-listbox-option {
     // Skeleton option placeholders — width variation via :nth-child cycling
     &-skeleton {
-        .#{$lumx-base-prefix}-skeleton-typography {
+        .lumx-skeleton-typography {
             width: min(65%, 200px);
         }
 
-        &:nth-child(3n + 1) .#{$lumx-base-prefix}-skeleton-typography {
+        &:nth-child(3n + 1) .lumx-skeleton-typography {
             width: min(70%, 230px);
         }
 
-        &:nth-child(3n + 2) .#{$lumx-base-prefix}-skeleton-typography {
+        &:nth-child(3n + 2) .lumx-skeleton-typography {
             width: min(55%, 170px);
         }
     }
 
     // Allow flex items to shrink below their content width so `truncate` text shows an ellipsis
-    .#{$lumx-base-prefix}-list-item__wrapper,
-    .#{$lumx-base-prefix}-list-item__content {
+    .lumx-list-item__wrapper,
+    .lumx-list-item__content {
         min-width: 0;
     }
 
     // Center option content
-    .#{$lumx-base-prefix}-list-item__content {
+    .lumx-list-item__content {
         display: flex;
         flex-direction: column;
         justify-items: center;

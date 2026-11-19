@@ -19,24 +19,24 @@ $lumx-tree-list-transition-duration: $lumx-expansion-panel-transition-duration;
 
 // The composite sets `hidden` on the tree when it has no visible content (see `setupComposite`).
 // Before the composite mounts: hide an empty tree.
-.#{$lumx-base-prefix}-tree-list:empty {
+.lumx-tree-list:empty {
     display: none;
 }
 
 // ---- Tree item -----------------------
 
-.#{$lumx-base-prefix}-tree-list-item {
+.lumx-tree-list-item {
     &__row {
         padding-left: $lumx-tree-list-indent;
     }
 
     // Allow the content to shrink below its text width so that a `truncate` label shows an ellipsis
-    &__row > .#{$lumx-base-prefix}-list-item__wrapper > .#{$lumx-base-prefix}-list-item__content {
+    &__row > .lumx-list-item__wrapper > .lumx-list-item__content {
         min-width: 0;
     }
 
     // The `before` slot holds the expand toggle (or the spacer) and the `before` content: no fixed width
-    &__row > .#{$lumx-base-prefix}-list-item__wrapper > .#{$lumx-base-prefix}-list-item__before {
+    &__row > .lumx-list-item__wrapper > .lumx-list-item__before {
         justify-content: flex-start;
         width: auto;
     }
@@ -71,7 +71,7 @@ $lumx-tree-list-transition-duration: $lumx-expansion-panel-transition-duration;
 
         // A bigger chevron than the default icon of a size `s` icon button
         // (the icon size rule of the button, with the toggle class).
-        &.#{$lumx-base-prefix}-button--size-s.#{$lumx-base-prefix}-button--variant-icon > i {
+        &.lumx-button--size-s.lumx-button--variant-icon > i {
             width: $lumx-size-xs;
             height: $lumx-size-xs;
             font-size: $lumx-size-xs;
@@ -89,7 +89,7 @@ $lumx-tree-list-transition-duration: $lumx-expansion-panel-transition-duration;
 
     // The button styles disable the pointer on `::before` and round it: the overlay catches the clicks
     // on the row, with square corners (one class more than the button `::before` rules).
-    &__row &__toggle--main.#{$lumx-base-prefix}-button.#{$lumx-base-prefix}-action-area__action::before {
+    &__row &__toggle--main.lumx-button.lumx-action-area__action::before {
         pointer-events: auto;
         border-radius: 0;
     }
@@ -115,7 +115,7 @@ $lumx-tree-list-transition-duration: $lumx-expansion-panel-transition-duration;
         list-style: none;
 
         // Skeletons: a margin (they have no full width background)
-        > :not(.#{$lumx-base-prefix}-tree-list-item) {
+        > :not(.lumx-tree-list-item) {
             margin-left: $lumx-tree-list-indent;
         }
 

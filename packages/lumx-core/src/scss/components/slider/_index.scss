@@ -5,7 +5,7 @@
    Slider
    ========================================================================== */
 
-.#{$lumx-base-prefix}-slider {
+.lumx-slider {
     $self: &;
 
     user-select: none;
@@ -146,8 +146,8 @@
    ========================================================================== */
 
 // Hover state
-.#{$lumx-base-prefix}-slider__handle:hover {
-    .#{$lumx-base-prefix}-slider--theme-light & {
+.lumx-slider__handle:hover {
+    .lumx-slider--theme-light & {
         @include lumx-state(
             lumx-base-const("state", "HOVER"),
             lumx-base-const("emphasis", "HIGH"),
@@ -156,7 +156,7 @@
         );
     }
 
-    .#{$lumx-base-prefix}-slider--theme-dark & {
+    .lumx-slider--theme-dark & {
         @include lumx-state(
             lumx-base-const("state", "HOVER"),
             lumx-base-const("emphasis", "HIGH"),
@@ -167,8 +167,8 @@
 }
 
 // Active state
-.#{$lumx-base-prefix}-slider__handle:active {
-    .#{$lumx-base-prefix}-slider--theme-light & {
+.lumx-slider__handle:active {
+    .lumx-slider--theme-light & {
         @include lumx-state(
             lumx-base-const("state", "ACTIVE"),
             lumx-base-const("emphasis", "HIGH"),
@@ -177,7 +177,7 @@
         );
     }
 
-    .#{$lumx-base-prefix}-slider--theme-dark & {
+    .lumx-slider--theme-dark & {
         @include lumx-state(
             lumx-base-const("state", "ACTIVE"),
             lumx-base-const("emphasis", "HIGH"),
@@ -188,8 +188,8 @@
 }
 
 // Focus state
-.#{$lumx-base-prefix}-slider__handle[data-focus-visible-added] {
-    .#{$lumx-base-prefix}-slider--theme-light & {
+.lumx-slider__handle[data-focus-visible-added] {
+    .lumx-slider--theme-light & {
         @include lumx-state(
             lumx-base-const("state", "FOCUS"),
             lumx-base-const("emphasis", "HIGH"),
@@ -198,7 +198,7 @@
         );
     }
 
-    .#{$lumx-base-prefix}-slider--theme-dark & {
+    .lumx-slider--theme-dark & {
         @include lumx-state(
             lumx-base-const("state", "FOCUS"),
             lumx-base-const("emphasis", "HIGH"),

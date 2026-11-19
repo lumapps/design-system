@@ -4,7 +4,7 @@
    Dropdown
    ========================================================================== */
 
-.#{$lumx-base-prefix}-dropdown {
+.lumx-dropdown {
     z-index: map.get($lumx-base-layers, "high");
 
     &--has-toggle {

@@ -2,7 +2,7 @@
    List
    ========================================================================== */
 
-.#{$lumx-base-prefix}-list {
+.lumx-list {
     @include lumx-list;
 }
 
@@ -10,17 +10,17 @@
    ========================================================================== */
 
 @each $key, $size in $lumx-list-item-sizes {
-    .#{$lumx-base-prefix}-list-item--size-#{$key} {
-        .#{$lumx-base-prefix}-list-item__wrapper,
-        .#{$lumx-base-prefix}-list-item__link {
+    .lumx-list-item--size-#{$key} {
+        .lumx-list-item__wrapper,
+        .lumx-list-item__link {
             @include lumx-list-item($key);
         }
 
-        .#{$lumx-base-prefix}-list-item__before {
+        .lumx-list-item__before {
             @include lumx-list-item-before($key);
         }
 
-        .#{$lumx-base-prefix}-list-item__after {
+        .lumx-list-item__after {
             @include lumx-list-item-after($key);
         }
     }
@@ -29,7 +29,7 @@
 /* Item link
    ========================================================================== */
 
-.#{$lumx-base-prefix}-list-item {
+.lumx-list-item {
     // Positioning context for action area overlay (harmless no-op when no action area child).
     position: relative;
 
@@ -48,9 +48,9 @@
     // Selected action: from `aria-selected` (ex: combobox option) or `aria-current` (ex: nav link) on the action,
     // or from `isSelected` on the list item.
     // (the background is on the action overlay `::before`, so the state selectors must come before `::before`)
-    & .#{$lumx-base-prefix}-action-area__action[aria-selected="true"],
-    & .#{$lumx-base-prefix}-action-area__action[aria-current]:not([aria-current="false"]):not([aria-current=""]),
-    &__wrapper--is-selected .#{$lumx-base-prefix}-action-area__action {
+    & .lumx-action-area__action[aria-selected="true"],
+    & .lumx-action-area__action[aria-current]:not([aria-current="false"]):not([aria-current=""]),
+    &__wrapper--is-selected .lumx-action-area__action {
         &::before {
             background-color: lumx-color-variant("primary", "L5");
         }
@@ -82,16 +82,16 @@
 /* Item spacing
    ========================================================================== */
 
-.#{$lumx-base-prefix}-list-item__link,
-.#{$lumx-base-prefix}-list-item__wrapper {
+.lumx-list-item__link,
+.lumx-list-item__wrapper {
     // Padding big (defaults when list contain clickable item)
-    .#{$lumx-base-prefix}-list:has(.#{$lumx-base-prefix}-list-item__link) &,
-    .#{$lumx-base-prefix}-list.#{$lumx-base-prefix}-list--item-padding-big & {
+    .lumx-list:has(.lumx-list-item__link) &,
+    .lumx-list.lumx-list--item-padding-big & {
         @include lumx-list-item-padding("big");
     }
 
     // Padding huge
-    .#{$lumx-base-prefix}-list.#{$lumx-base-prefix}-list--item-padding-huge & {
+    .lumx-list.lumx-list--item-padding-huge & {
         @include lumx-list-item-padding("huge");
     }
 }
@@ -99,14 +99,14 @@
 /* Item content
    ========================================================================== */
 
-.#{$lumx-base-prefix}-list-item__content {
+.lumx-list-item__content {
     @include lumx-list-item-content;
 }
 
 /* Subheader
    ========================================================================== */
 
-.#{$lumx-base-prefix}-list-subheader {
+.lumx-list-subheader {
     @include lumx-list-subheader;
 
     i {
@@ -114,13 +114,13 @@
     }
 
     // Padding big (defaults when list contain clickable item)
-    .#{$lumx-base-prefix}-list:has(.#{$lumx-base-prefix}-list-item__link) &,
-    .#{$lumx-base-prefix}-list.#{$lumx-base-prefix}-list--item-padding-big & {
+    .lumx-list:has(.lumx-list-item__link) &,
+    .lumx-list.lumx-list--item-padding-big & {
         @include lumx-list-item-padding("big");
     }
 
     // Padding huge
-    .#{$lumx-base-prefix}-list.#{$lumx-base-prefix}-list--item-padding-huge & {
+    .lumx-list.lumx-list--item-padding-huge & {
         @include lumx-list-item-padding("huge");
     }
 }
@@ -128,7 +128,7 @@
 /* Section
    ========================================================================== */
 
-.#{$lumx-base-prefix}-list-section {
+.lumx-list-section {
     @include lumx-list-auto-section-divider;
 
     &__title {
@@ -139,13 +139,13 @@
         }
 
         // Padding big (defaults when list contain clickable item)
-        .#{$lumx-base-prefix}-list:has(.#{$lumx-base-prefix}-list-item__link) &,
-        .#{$lumx-base-prefix}-list.#{$lumx-base-prefix}-list--item-padding-big & {
+        .lumx-list:has(.lumx-list-item__link) &,
+        .lumx-list.lumx-list--item-padding-big & {
             @include lumx-list-item-padding('big');
         }
 
         // Padding huge
-        .#{$lumx-base-prefix}-list.#{$lumx-base-prefix}-list--item-padding-huge & {
+        .lumx-list.lumx-list--item-padding-huge & {
             @include lumx-list-item-padding('huge');
         }
     }
@@ -160,6 +160,6 @@
 /* Divider
    ========================================================================== */
 
-.#{$lumx-base-prefix}-list-divider {
+.lumx-list-divider {
     @include lumx-list-divider;
 }
