@@ -25,6 +25,8 @@
         padding-top: 0;
     }
 
+    // A grid row (`role="row"`): the week days header row, and one row of 7 cells per week.
+    // Each cell is 1/7 of the row (blank cells and week day headers: `__day-wrapper`, days: `__month-day`).
     &__days-wrapper {
         display: flex;
         flex-wrap: wrap;
@@ -52,6 +54,7 @@
         @include lumx-button-base;
         @include lumx-button-color(lumx-base-const("emphasis", "LOW"), "dark");
 
+        flex: none;
         width: map.get($lumx-sizes, lumx-base-const("size", "M"));
         height: map.get($lumx-sizes, lumx-base-const("size", "M"));
         line-height: map.get($lumx-sizes, lumx-base-const("size", "M"));
