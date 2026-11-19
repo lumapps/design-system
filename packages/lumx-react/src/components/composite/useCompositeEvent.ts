@@ -1,10 +1,7 @@
 import { useCallback, useRef } from 'react';
-// `use-sync-external-store` is a devDependency on purpose: rollup inlines it into the built lib
-// (see rollup.config.mjs `external`), so consumers don't need to install it.
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { useSyncExternalStore } from 'use-sync-external-store/shim';
 
 import type { CompositeEventMap, CompositeEventSource } from '@lumx/core/js/components/Composite/types';
+import { useSyncExternalStore } from '@lumx/react/hooks/useSyncExternalStore';
 
 /**
  * Subscribe to an event of an event source (a composite handle, or the combobox handle, which has the composite
