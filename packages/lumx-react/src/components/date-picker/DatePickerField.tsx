@@ -3,6 +3,7 @@ import React, { SyntheticEvent, useCallback, useRef } from 'react';
 import { DatePicker, IconButtonProps, Placement, PopoverDialog, TextField, TextFieldProps } from '@lumx/react';
 import type { GenericProps } from '@lumx/core/js/types';
 import { getCurrentLocale } from '@lumx/core/js/utils/locale/getCurrentLocale';
+import { formatDate } from '@lumx/core/js/utils/date/formatDate';
 import { useBooleanState } from '@lumx/react/hooks/useBooleanState';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';
@@ -84,8 +85,7 @@ export const DatePickerField = forwardRef<DatePickerFieldProps, HTMLDivElement>(
         [name, onChange, close],
     );
 
-    // Format date for text field
-    const textFieldValue = value?.toLocaleDateString(locale, { year: 'numeric', month: 'long', day: 'numeric' }) || '';
+    const textFieldValue = formatDate(value, locale);
 
     const todayOrSelectedDateRef = React.useRef(null);
 
