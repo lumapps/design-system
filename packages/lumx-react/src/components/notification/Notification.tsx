@@ -1,9 +1,8 @@
 import { useRef } from 'react';
-
-import isFunction from 'lodash/isFunction';
+import type { ElementType, ReactElement, Ref } from 'react';
 
 import { Emphasis, Kind, Size, Theme } from '@lumx/core/js/constants';
-import { Button, Icon } from '@lumx/react';
+import { Button, ButtonProps, Icon } from '@lumx/react';
 import { DOCUMENT, NOTIFICATION_TRANSITION_DURATION } from '@lumx/react/constants';
 import { NOTIFICATION_CONFIGURATION } from '@lumx/react/components/notification/constants';
 import type { LumxClassName, GenericProps, HasTheme } from '@lumx/core/js/types';
@@ -12,15 +11,31 @@ import { useTransitionVisibility } from '@lumx/react/hooks/useTransitionVisibili
 import { mergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+import type { HasPolymorphicAs } from '@lumx/react/utils/type';
 
 import { Portal } from '@lumx/react/utils';
 
 /**
+ * Props of the notification action.
+ * Without `as`: props of a `Button`, with a `label` used as its content.
+ * With `as`: props of that component.
+ * Both get the medium `emphasis` and the `theme` of the notification as defaults.
+ */
+export type NotificationActionProps<E extends ElementType = typeof Button> =
+    | (Omit<ButtonProps, 'children'> & { as?: undefined; label?: string })
+    | (HasPolymorphicAs<E> & { as: E });
+
+/**
  * Defines the props of the component.
  */
-export interface NotificationProps extends GenericProps, HasTheme {
-    /** Action button label. */
+export interface NotificationProps<E extends ElementType = typeof Button> extends GenericProps, HasTheme {
+    /**
+     * Action button label.
+     * @deprecated Use `actionProps.label` instead.
+     */
     actionLabel?: string;
+    /** Displays the action (`{ label, onClick }`, or `{ as: IconButton, icon, label, onClick }`, etc.). */
+    actionProps?: NotificationActionProps<E>;
     /** Content. */
     content?: React.ReactNode;
     /** Whether the component is open or not. */
@@ -29,7 +44,10 @@ export interface NotificationProps extends GenericProps, HasTheme {
     type?: Kind;
     /** Z-axis position. */
     zIndex?: number;
-    /** On action button click callback. */
+    /**
+     * On action button click callback.
+     * @deprecated Use `actionProps.onClick` instead.
+     */
     onActionClick?(): void;
     /** On click callback. */
     onClick?(): void;
@@ -56,6 +74,19 @@ const DEFAULT_PROPS: Partial<NotificationProps> = {
     usePortal: true,
 };
 
+/**
+ * Notification component type, generic on the `as` component of `actionProps`.
+ */
+type NotificationComponent = {
+    <E extends ElementType = typeof Button>(
+        props: NotificationProps<E> & { ref?: Ref<HTMLDivElement> },
+    ): ReactElement | null;
+    readonly $$typeof: symbol;
+    displayName: typeof COMPONENT_NAME;
+    className: typeof CLASSNAME;
+    defaultProps: Partial<NotificationProps>;
+};
+
 /* eslint-disable react-hooks/rules-of-hooks, jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */
 /**
  * Notification component.
@@ -64,10 +95,11 @@ const DEFAULT_PROPS: Partial<NotificationProps> = {
  * @param  ref   Component ref.
  * @return React element.
  */
-export const Notification = forwardRef<NotificationProps, HTMLDivElement>((props, ref) => {
+export const Notification = forwardRef<NotificationProps<ElementType>, HTMLDivElement>((props, ref) => {
     const defaultTheme = useTheme() || Theme.light;
     const {
         actionLabel,
+        actionProps,
         className,
         content,
         isOpen,
@@ -87,13 +119,26 @@ export const Notification = forwardRef<NotificationProps, HTMLDivElement>((props
     const { color, icon } = NOTIFICATION_CONFIGURATION[type as Kind] || {};
     const rootRef = useRef<HTMLDivElement>(null);
     const isVisible = useTransitionVisibility(rootRef, !!isOpen, NOTIFICATION_TRANSITION_DURATION);
-    const hasAction: boolean = Boolean(onActionClick) && Boolean(actionLabel);
+    const {
+        as: Action,
+        label: actionPropsLabel = actionLabel,
+        onClick: onActionPropsClick,
+        ...forwardedActionProps
+    } = actionProps || {};
+    // A `Button` without a label has no accessible name.
+    const hasAction = Boolean(Action) || (Boolean(actionPropsLabel) && Boolean(actionProps || onActionClick));
 
-    const handleCallback = (evt?: React.MouseEvent) => {
-        if (isFunction(onActionClick)) {
-            onActionClick();
-        }
-        evt?.stopPropagation();
+    const handleActionClick = (evt: React.MouseEvent) => {
+        if (onActionPropsClick) onActionPropsClick(evt);
+        // The deprecated callback is typed with no argument.
+        else onActionClick?.();
+        evt.stopPropagation();
+    };
+    const commonActionProps = {
+        emphasis: Emphasis.medium,
+        theme,
+        ...forwardedActionProps,
+        onClick: handleActionClick,
     };
 
     if (!type || !isVisible) {
@@ -124,15 +169,19 @@ export const Notification = forwardRef<NotificationProps, HTMLDivElement>((props
                 <div className={element('content')}>{content}</div>
                 {hasAction && (
                     <div className={element('action')}>
-                        <Button emphasis={Emphasis.medium} theme={theme} onClick={handleCallback}>
-                            <span>{actionLabel}</span>
-                        </Button>
+                        {Action ? (
+                            <Action {...commonActionProps} label={actionPropsLabel} />
+                        ) : (
+                            <Button {...commonActionProps}>
+                                <span>{actionPropsLabel}</span>
+                            </Button>
+                        )}
                     </div>
                 )}
             </div>
         </Portal>
     );
-});
+}) as unknown as NotificationComponent;
 Notification.displayName = COMPONENT_NAME;
 Notification.className = CLASSNAME;
 Notification.defaultProps = DEFAULT_PROPS;

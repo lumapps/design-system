@@ -9,6 +9,12 @@ import ReactNotification from 'lumx-docs:@lumx/react/components/notification/Not
 
 <DemoBlock orientation="horizontal" vAlign="center" demo={{ react: DemoDefault }} />
 
+### Action
+
+Use `actionProps` to add an action to the notification: `actionProps={{ label: 'Undo', onClick }}` renders a button.
+
+Use `as` to render another component. For example, `actionProps={{ as: IconButton, icon: mdiClose, label: 'Close', onClick }}` renders a close icon button.
+
 ### Accessibility concerns
 
 Notifications use the ARIA `alert` role which will announce itself when it appears.

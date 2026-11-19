@@ -1,4 +1,6 @@
-import { Notification, Kind } from '@lumx/react';
+import { IconButton, Notification, Kind } from '@lumx/react';
+import { mdiClose } from '@lumx/icons';
+import { action } from 'storybook/actions';
 import { NOTIFICATION_TRANSITION_DURATION } from '@lumx/core/js/constants';
 import { getSelectArgType } from '@lumx/core/stories/controls/selectArgType';
 import { withChromaticForceScreenSize } from '../../stories/decorators/withChromaticForceScreenSize';
@@ -77,6 +79,30 @@ export const InfoWithAction = {
         type: Kind.info,
         content: 'InfoWithAction',
         actionLabel: 'Undo',
+        isOpen: true,
+    },
+};
+
+/**
+ * Info notification with the action described by `actionProps`
+ */
+export const InfoWithActionProps = {
+    args: {
+        type: Kind.info,
+        content: 'InfoWithActionProps',
+        actionProps: { label: 'Undo', onClick: action('onClick') },
+        isOpen: true,
+    },
+};
+
+/**
+ * Info notification with a close icon button as its action
+ */
+export const InfoWithCloseAction = {
+    args: {
+        type: Kind.info,
+        content: 'InfoWithCloseAction',
+        actionProps: { as: IconButton, icon: mdiClose, label: 'Close', emphasis: 'low', onClick: action('onClick') },
         isOpen: true,
     },
 };

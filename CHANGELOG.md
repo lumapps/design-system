@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   `@lumx/react`:
+    -   `Notification`: add the `actionProps` prop that describes the action (`label`, `onClick`, and `as` to render another component, for example a close `IconButton`). It deprecates `actionLabel` and `onActionClick`.
+
 ## [4.28.0][] - 2026-11-16
 
 ### Added
