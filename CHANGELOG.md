@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   `@lumx/react`:
+    -   Fix the CodeSandbox demos ("React is undefined" error): replace the inlined `use-sync-external-store` shim with the React `useSyncExternalStore` (with a fallback for React 17).
+
 ## [4.28.0][] - 2026-11-16
 
 ### Added
