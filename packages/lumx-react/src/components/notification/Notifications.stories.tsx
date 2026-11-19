@@ -69,21 +69,6 @@ export const Warning = {
 };
 
 /**
- * Info notification with action button
- */
-export const InfoWithAction = {
-    argTypes: {
-        onActionClick: { action: true },
-    },
-    args: {
-        type: Kind.info,
-        content: 'InfoWithAction',
-        actionLabel: 'Undo',
-        isOpen: true,
-    },
-};
-
-/**
  * Info notification with the action described by `actionProps`
  */
 export const InfoWithActionProps = {
