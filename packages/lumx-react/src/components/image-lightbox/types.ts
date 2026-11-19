@@ -1,5 +1,5 @@
 import type { IconButtonProps, LightboxProps, SlideshowProps, ThumbnailProps } from '@lumx/react';
-import type { HasClassName } from '@lumx/react/utils/type';
+import type { HasClassName } from '@lumx/core/js/types';
 import type { ImageCaptionMetadata } from '@lumx/react/components/image-block/ImageCaption';
 
 export type InheritedSlideShowProps = Pick<SlideshowProps, 'slideshowControlsProps' | 'slideGroupLabel'>;

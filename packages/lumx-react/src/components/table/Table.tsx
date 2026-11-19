@@ -1,4 +1,4 @@
-import { Theme } from '@lumx/react';
+import { Theme } from '@lumx/core/js/constants';
 import {
     Table as UI,
     TableProps as UIProps,
@@ -6,7 +6,7 @@ import {
     COMPONENT_NAME,
     DEFAULT_PROPS,
 } from '@lumx/core/js/components/Table';
-import { GenericProps } from '@lumx/react/utils/type';
+import type { GenericProps } from '@lumx/core/js/types';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';

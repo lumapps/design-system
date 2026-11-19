@@ -1,4 +1,5 @@
-import { Theme, Tooltip, TooltipProps } from '@lumx/react';
+import { Theme } from '@lumx/core/js/constants';
+import { Tooltip, TooltipProps } from '@lumx/react';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useDisableStateProps } from '@lumx/react/utils/disabled';

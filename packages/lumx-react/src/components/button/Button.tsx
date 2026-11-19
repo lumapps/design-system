@@ -1,6 +1,7 @@
 import isEmpty from 'lodash/isEmpty';
 
-import { Icon, Theme, Text, ThemeProvider } from '@lumx/react';
+import { Theme } from '@lumx/core/js/constants';
+import { Icon, Text, ThemeProvider } from '@lumx/react';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useDisableStateProps } from '@lumx/react/utils/disabled';

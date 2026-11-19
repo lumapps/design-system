@@ -1,16 +1,7 @@
 import React, { KeyboardEventHandler } from 'react';
 
-import {
-    Button,
-    DatePickerProps,
-    Emphasis,
-    FlexBox,
-    IconButton,
-    Text,
-    TextField,
-    TextFieldProps,
-    Toolbar,
-} from '@lumx/react';
+import { Emphasis } from '@lumx/core/js/constants';
+import { Button, DatePickerProps, FlexBox, IconButton, Text, TextField, TextFieldProps, Toolbar } from '@lumx/react';
 import { mdiChevronLeft, mdiChevronRight } from '@lumx/icons';
 import { getMonthCalendar } from '@lumx/react/utils/date/getMonthCalendar';
 import { isSameDay } from '@lumx/react/utils/date/isSameDay';

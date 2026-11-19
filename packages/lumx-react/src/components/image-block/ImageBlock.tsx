@@ -1,6 +1,7 @@
-import { Size, Theme, Thumbnail } from '@lumx/react';
+import { Size, Theme } from '@lumx/core/js/constants';
+import { Thumbnail } from '@lumx/react';
 
-import { GenericProps } from '@lumx/react/utils/type';
+import type { GenericProps } from '@lumx/core/js/types';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';

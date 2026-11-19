@@ -1,6 +1,7 @@
 import { ElementType, ReactNode, SyntheticEvent, useEffect } from 'react';
 
-import { ComponentRef, HasClassName, HasPolymorphicAs, HasRequiredLinkHref } from '@lumx/react/utils/type';
+import type { HasClassName, HasRequiredLinkHref } from '@lumx/core/js/types';
+import { ComponentRef, HasPolymorphicAs } from '@lumx/react/utils/type';
 import {
     ListboxOptionAction as UI,
     COMPONENT_NAME,

@@ -1,5 +1,5 @@
-import { Theme } from '@lumx/react';
-import { GenericProps } from '@lumx/react/utils/type';
+import { Theme } from '@lumx/core/js/constants';
+import type { GenericProps } from '@lumx/core/js/types';
 import { Divider as UI, DividerProps as UIProps, CLASSNAME, COMPONENT_NAME } from '@lumx/core/js/components/Divider';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';

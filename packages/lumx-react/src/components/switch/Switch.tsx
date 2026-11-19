@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { Alignment, Theme } from '@lumx/react';
-import { GenericProps } from '@lumx/react/utils/type';
+import { Alignment, Theme } from '@lumx/core/js/constants';
+import type { GenericProps } from '@lumx/core/js/types';
 import { Switch as UI, SwitchProps as UIProps, CLASSNAME, COMPONENT_NAME } from '@lumx/core/js/components/Switch';
 import { useId } from '@lumx/react/hooks/useId';
 import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';

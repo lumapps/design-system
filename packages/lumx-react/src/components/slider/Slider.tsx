@@ -1,10 +1,10 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import { SyntheticEvent, useMemo, useRef } from 'react';
 
-import { InputHelper, InputLabel, Theme } from '@lumx/react';
+import { Theme } from '@lumx/core/js/constants';
+import { InputHelper, InputLabel } from '@lumx/react';
 import { useEventCallback } from '@lumx/react/hooks/useEventCallback';
-import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import type { LumxClassName } from '@lumx/core/js/types';
+import type { LumxClassName, GenericProps, HasTheme } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
 import { clamp } from '@lumx/react/utils/number/clamp';
 import { useId } from '@lumx/react/hooks/useId';

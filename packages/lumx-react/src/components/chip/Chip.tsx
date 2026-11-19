@@ -4,7 +4,7 @@ import isFunction from 'lodash/isFunction';
 
 import { Theme } from '@lumx/core/js/constants';
 import { useStopPropagation } from '@lumx/react/hooks/useStopPropagation';
-import { GenericProps } from '@lumx/react/utils/type';
+import type { GenericProps } from '@lumx/core/js/types';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';

@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@lumx/react/constants';
-import { Callback } from '@lumx/react/utils/type';
+import type { Callback } from '@lumx/core/js/types';
 import { onEscapePressed } from '@lumx/core/js/utils';
 import { useEffect } from 'react';
 import { Listener, makeListenerTowerContext } from '@lumx/core/js/utils/function/listenerTower';

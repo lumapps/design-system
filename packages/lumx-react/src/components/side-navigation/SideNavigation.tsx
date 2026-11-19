@@ -1,8 +1,7 @@
 import { ReactNode } from 'react';
 
-import { Theme } from '@lumx/react';
-import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import type { LumxClassName } from '@lumx/core/js/types';
+import { Theme } from '@lumx/core/js/constants';
+import type { LumxClassName, GenericProps, HasTheme } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';

@@ -2,7 +2,7 @@ import {
     InputRequiredLegend as UI,
     InputRequiredLegendProps as UIProps,
 } from '@lumx/core/js/components/InputRequiredLegend';
-import { Theme } from '@lumx/react';
+import { Theme } from '@lumx/core/js/constants';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { GenericProps } from '@lumx/core/js/types';

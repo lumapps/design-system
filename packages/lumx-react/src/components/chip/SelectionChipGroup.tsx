@@ -8,7 +8,7 @@ import {
     type SelectionChipGroupProps as UIProps,
 } from '@lumx/core/js/components/Chip/SelectionChipGroup';
 import { setupSelectionChipGroupEvents } from '@lumx/core/js/components/Chip/setupSelectionChipGroupEvents';
-import { GenericProps } from '@lumx/react/utils/type';
+import type { GenericProps } from '@lumx/core/js/types';
 import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 
 import { Chip } from './Chip';

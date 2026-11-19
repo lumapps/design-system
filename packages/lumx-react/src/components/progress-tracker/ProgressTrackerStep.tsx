@@ -1,9 +1,9 @@
 import { FocusEventHandler, KeyboardEventHandler, useCallback } from 'react';
 
 import { mdiAlertCircle, mdiCheckCircle, mdiRadioboxBlank, mdiRadioboxMarked } from '@lumx/icons';
-import { Icon, InputHelper, InputLabel, Kind, Size } from '@lumx/react';
-import { GenericProps } from '@lumx/react/utils/type';
-import type { LumxClassName } from '@lumx/core/js/types';
+import { Kind, Size } from '@lumx/core/js/constants';
+import { Icon, InputHelper, InputLabel } from '@lumx/react';
+import type { LumxClassName, GenericProps } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 

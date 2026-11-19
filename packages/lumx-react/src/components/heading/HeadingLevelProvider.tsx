@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-import { HeadingElement } from '@lumx/react/utils/type';
+import type { HeadingElement } from '@lumx/core/js/types';
 
 import { computeHeadingLevel } from '@lumx/core/js/components/Heading/utils';
 

@@ -2,7 +2,8 @@ import { ReactNode } from 'react';
 
 import { mdiClose } from '@lumx/icons';
 
-import { Autocomplete, AutocompleteProps, Chip, HorizontalAlignment, Icon, Size } from '@lumx/react';
+import { HorizontalAlignment, Size } from '@lumx/core/js/constants';
+import { Autocomplete, AutocompleteProps, Chip, Icon } from '@lumx/react';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';

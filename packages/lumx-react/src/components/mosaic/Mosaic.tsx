@@ -1,7 +1,8 @@
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 
-import { Theme, Thumbnail, ThumbnailProps } from '@lumx/react';
-import { GenericProps } from '@lumx/react/utils/type';
+import { Theme } from '@lumx/core/js/constants';
+import { Thumbnail, ThumbnailProps } from '@lumx/react';
+import type { GenericProps } from '@lumx/core/js/types';
 import {
     CLASSNAME,
     COMPONENT_NAME,

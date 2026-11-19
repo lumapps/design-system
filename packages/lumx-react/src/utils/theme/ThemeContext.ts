@@ -1,5 +1,5 @@
 import React from 'react';
-import type { Theme } from '@lumx/react';
+import type { Theme } from '@lumx/core/js/constants';
 
 type ThemeContextValue = Theme | undefined;
 export const ThemeContext = React.createContext<ThemeContextValue>(undefined);
