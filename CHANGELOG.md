@@ -12,9 +12,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   `@lumx/react`:
     -   `Notification`: add the `actionProps` prop that describes the action (`label`, `onClick`, and `as` to render another component, for example a close `IconButton`). It deprecates `actionLabel` and `onActionClick`.
 
+### Changed
+
+-   `@lumx/react`:
+    -   `DatePickerField`: the input is an editable `combobox` (was a read-only `textbox`). The user can type a date (long or numeric format of the locale), read on Enter and on blur. Enter and Space no longer open the dialog: Down, Alt+Down and a click do. A date field can become empty only if it has a clear button.
+    -   `DatePicker`, `DatePickerField`: the calendar is a `grid`, each day is a `gridcell` (was a `button`), with arrow keys, Home/End and Page Up/Page Down navigation.
+    -   Migration (tests only, no production code change): query the date input with `getByRole('combobox', …)` (was `textbox`) and give a `name` to any `combobox` query that shares a scope with a date field; query a day with `getByRole('gridcell', …)` (was `button`); open the dialog with a click, Down or Alt+Down (not Enter or Space).
+
 ### Fixed
 
 -   `@lumx/react`:
+    -   `DatePicker`: forward the `className` and `theme` props to the root element.
     -   `DatePicker`, `DatePickerField`: compare `minDate` and `maxDate` by their local day. Outside UTC, a range edge with a time of day no longer enables the day before `minDate` or disables the `maxDate` day. An invalid `minDate` or `maxDate` is ignored.
     -   `DatePicker`, `DatePickerField`: show the dates in the Gregorian calendar in every locale, as the calendar grid (for example `th` and `fa`).
 
