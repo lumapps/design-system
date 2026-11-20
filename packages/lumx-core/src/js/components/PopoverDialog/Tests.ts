@@ -42,6 +42,11 @@ export default (renderOptions: SetupOptions<any>) => {
                 expect(element).toHaveAttribute('aria-label', 'Label prop');
             });
 
+            it('should forward a stable id', () => {
+                const { element } = setup({ id: 'date-picker-dialog' }, renderOptions);
+                expect(element).toHaveAttribute('id', 'date-picker-dialog');
+            });
+
             it('should prefer label prop over aria-label', () => {
                 const { element } = setup({ label: 'Label prop', 'aria-label': 'Aria label' }, renderOptions);
                 expect(element).toHaveAttribute('aria-label', 'Label prop');

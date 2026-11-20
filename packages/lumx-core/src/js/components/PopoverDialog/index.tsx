@@ -12,6 +12,8 @@ export type PopoverDialogProps = PopoverProps &
     Pick<AriaAttributes, 'aria-label' | 'aria-labelledby'> & {
         /** Accessible label for the dialog (alternative to aria-label prop). */
         label?: string;
+        /** Stable ID of the dialog element (ex: the `aria-controls` of the element that opens it). */
+        id?: string;
     };
 
 /**
