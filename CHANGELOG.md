@@ -12,6 +12,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   `@lumx/react`:
     -   `Notification`: add the `actionProps` prop that describes the action (`label`, `onClick`, and `as` to render another component, for example a close `IconButton`). It deprecates `actionLabel` and `onActionClick`.
 
+### Fixed
+
+-   `@lumx/react`:
+    -   `DatePicker`, `DatePickerField`: compare `minDate` and `maxDate` by their local day. Outside UTC, a range edge with a time of day no longer enables the day before `minDate` or disables the `maxDate` day. An invalid `minDate` or `maxDate` is ignored.
+    -   `DatePicker`, `DatePickerField`: show the dates in the Gregorian calendar in every locale, as the calendar grid (for example `th` and `fa`).
+
 ## [4.28.0][] - 2026-11-16
 
 ### Added

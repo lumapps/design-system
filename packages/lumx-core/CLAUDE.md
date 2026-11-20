@@ -10,7 +10,7 @@ packages/lumx-core/src/
 │   ├── components/      # Framework-agnostic JSX component defs (PascalCase dirs)
 │   ├── constants/       # Enums, keycodes, BEM class constants
 │   ├── types/           # Shared TypeScript interfaces (30+ files)
-│   └── utils/           # Shared utilities (classNames, focus, events, portal…)
+│   └── utils/           # Shared utilities (classNames, focus, events, portal…, date and locale for the date picker)
 ├── scss/
 │   ├── components/      # Per-component SCSS (54 components, each with _index.scss)
 │   └── core/            # Base styles: color, typography, spacing, elevation, state, size

@@ -10,7 +10,7 @@ import { CLASSNAME } from './constants';
 
 const mockedDate = new Date(1487721600000); // Feb 22 2017
 
-vi.mock('@lumx/react/utils/date/getYearDisplayName', () => ({
+vi.mock('@lumx/core/js/utils/date/getYearDisplayName', () => ({
     getYearDisplayName: () => 'année',
 }));
 
@@ -69,6 +69,18 @@ describe(`<${DatePickerControlled.displayName}>`, () => {
 
         const selected = queryByClassName(datePickerControlled, `lumx-button--is-selected`);
         expect(selected).toBe(screen.queryByRole('button', { name: /22 février 2017/i }));
+    });
+
+    it('should show the dates in the Gregorian calendar', () => {
+        const { datePickerControlled } = setup({ locale: 'th' });
+
+        expect(queries.getYear()).toHaveAttribute('value', '2017');
+
+        const toolbar = getByClassName(document.body, 'lumx-toolbar__label');
+        expect(queries.getAccessibleMonthYear(toolbar)).toHaveTextContent('กุมภาพันธ์ 2017');
+
+        const selected = queryByClassName(datePickerControlled, `lumx-button--is-selected`);
+        expect(selected).toBe(screen.queryByRole('button', { name: /22 กุมภาพันธ์ 2017/i }));
     });
 
     it('should validate year when pressing Enter', async () => {

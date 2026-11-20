@@ -3,16 +3,15 @@ import React, { KeyboardEventHandler } from 'react';
 import { Emphasis } from '@lumx/core/js/constants';
 import { Button, DatePickerProps, FlexBox, IconButton, Text, TextField, TextFieldProps, Toolbar } from '@lumx/react';
 import { mdiChevronLeft, mdiChevronRight } from '@lumx/icons';
-import { getMonthCalendar } from '@lumx/react/utils/date/getMonthCalendar';
-import { isSameDay } from '@lumx/react/utils/date/isSameDay';
+import { getMonthCalendar } from '@lumx/core/js/utils/date/getMonthCalendar';
+import { isSameDay, addMonthResetDay } from '@lumx/core/js/utils/date/calendarDay';
 import { getCurrentLocale } from '@lumx/core/js/utils/locale/getCurrentLocale';
-import { parseLocale } from '@lumx/react/utils/locale/parseLocale';
-import { Locale } from '@lumx/react/utils/locale/types';
+import { parseLocale } from '@lumx/core/js/utils/locale/parseLocale';
+import { Locale } from '@lumx/core/js/utils/locale/types';
 import { usePreviousValue } from '@lumx/react/hooks/usePreviousValue';
-import { getYearDisplayName } from '@lumx/react/utils/date/getYearDisplayName';
+import { getYearDisplayName } from '@lumx/core/js/utils/date/getYearDisplayName';
 import { classNames, onEnterPressed } from '@lumx/core/js/utils';
-import { addMonthResetDay } from '@lumx/react/utils/date/addMonthResetDay';
-import { formatDayNumber } from '@lumx/react/utils/date/formatDayNumber';
+import { formatDayNumber, LONG_DATE_FORMAT } from '@lumx/core/js/utils/date/formatDate';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 import { CLASSNAME } from './constants';
@@ -67,7 +66,9 @@ export const DatePickerControlled = forwardRef<DatePickerControlledProps, HTMLDi
     }, [locale, minDate, maxDate, selectedMonth]);
 
     const selectedYear = selectedMonth.getFullYear();
-    const formattedYear = selectedMonth.toLocaleDateString(locale, { year: 'numeric' }).slice(0, 4);
+    const formattedYear = selectedMonth
+        .toLocaleDateString(locale, { year: 'numeric', calendar: 'gregory' })
+        .slice(0, 4);
     const [currentYear, setCurrentYear] = React.useState(String(selectedYear));
 
     // Updates month offset when validating year. Adds or removes 12 months per year when updating year value.
@@ -112,7 +113,7 @@ export const DatePickerControlled = forwardRef<DatePickerControlledProps, HTMLDi
         [updateYear],
     );
 
-    const monthYear = selectedMonth.toLocaleDateString(locale, { year: 'numeric', month: 'long' });
+    const monthYear = selectedMonth.toLocaleDateString(locale, { year: 'numeric', month: 'long', calendar: 'gregory' });
 
     // Update current year when selected year changes
     React.useEffect(() => {
@@ -230,13 +231,9 @@ export const DatePickerControlled = forwardRef<DatePickerControlledProps, HTMLDi
                                             emphasis="low"
                                             onClick={() => onChange(date)}
                                         >
-                                            <span aria-hidden>{formatDayNumber(locale, date)}</span>
+                                            <span aria-hidden>{formatDayNumber(date, locale)}</span>
                                             <span className={classNames.visuallyHidden()}>
-                                                {date.toLocaleDateString(locale, {
-                                                    day: 'numeric',
-                                                    month: 'long',
-                                                    year: 'numeric',
-                                                })}
+                                                {date.toLocaleDateString(locale, LONG_DATE_FORMAT)}
                                             </span>
                                         </Button>
                                     )}
