@@ -4,6 +4,7 @@ export * from '@lumx/core/js/types';
 export * from './components/alert-dialog';
 export * from './components/avatar';
 export * from './components/combobox';
+export * from './components/date-picker';
 export * from './components/badge';
 export * from './components/button';
 export * from './components/card';
