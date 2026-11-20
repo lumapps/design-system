@@ -1,4 +1,4 @@
-import { parseLocale } from '@lumx/react/utils/locale/parseLocale';
+import { parseLocale } from './parseLocale';
 
 describe(parseLocale.name, () => {
     it('should parse various locale formats', () => {
