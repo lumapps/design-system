@@ -13,7 +13,6 @@ export default () => {
             type: 'info',
         },
         infoWithCallback: {
-            actionLabel: 'Undo',
             content: 'Info with callback',
             type: 'info',
         },
@@ -77,7 +76,9 @@ export default () => {
                 <Notification
                     isOpen={isOpen}
                     onClick={close}
-                    onActionClick={onClick('success')}
+                    actionProps={
+                        type === 'infoWithCallback' ? { label: 'Undo', onClick: onClick('success') } : undefined
+                    }
                     {...properties[type]}
                 />
             )}
