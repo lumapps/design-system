@@ -338,8 +338,14 @@ jobs:
             - name: 'Trigger lumapps-web bump workflow'
               env:
                   GH_TOKEN: ${{ secrets.GITBOT_TOKEN }}
+                  # Exact version: just after a publish, the npm dist tag can still give the previous version.
+                  VERSION: ${{ needs.build_publish_NPM.outputs.prereleaseVersion || needs.check_trigger.outputs.version }}
               run: |
-                  ARGS=(-f "version=${{ needs.build_publish_NPM.outputs.distTag }}")
+                  if [ -z "$VERSION" ]; then
+                      echo "::error::No published version to bump"
+                      exit 1
+                  fi
+                  ARGS=(-f "version=$VERSION")
                   STORYBOOK_URL="${{ needs.deploy_storybook_react.outputs.storybook_url }}"
                   if [ -n "$STORYBOOK_URL" ]; then
                       ARGS+=(-f "storybookUrl=$STORYBOOK_URL")
