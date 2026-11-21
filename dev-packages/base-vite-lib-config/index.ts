@@ -1,11 +1,11 @@
 import path from 'path';
 import { defineConfig, esmExternalRequirePlugin, type Plugin } from 'vite';
 import { dts } from 'rolldown-plugin-dts';
-import fixEsmImports from 'rollup-plugin-lumx-fix-esm-imports';
-import optimizeImportsLumxIcons from 'rollup-plugin-optimize-imports-lumx-icons';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 
 import lumxCorePkg from '../../packages/lumx-core/package.json' with { type: 'json' };
+import fixEsmImports from './plugins/fix-esm-imports.ts';
+import optimizeImportsLumxIcons from './plugins/optimize-icons-imports.ts';
 
 export function toPackageRegex(pkgName: string) {
     return new RegExp(`^${pkgName}(/.*)?$`);
