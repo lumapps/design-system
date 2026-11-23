@@ -46,7 +46,7 @@ export const Combobox = {
     OptionMoreInfo: ListboxOptionMoreInfo,
     /** Loading placeholder skeleton(s) that auto-register loading state with the combobox handle. */
     OptionSkeleton: ListboxOptionSkeleton,
-    /** Selection state icon (check circle / radio, or checkbox in multiple lists) for the `after` slot of an option. Reads the option `isSelected` and the list `aria-multiselectable`. */
+    /** Selection state icon (a check icon when selected) for the `after` slot of an option. Reads the option `isSelected`. */
     SelectionIcon: ListboxOptionSelectionIcon,
     /** Floating popover container that auto-binds to the combobox anchor and open/close state. */
     Popover: ComboboxPopover,

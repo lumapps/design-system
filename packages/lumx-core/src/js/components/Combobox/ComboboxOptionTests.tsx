@@ -1,6 +1,6 @@
 import userEvent from '@testing-library/user-event';
 import { screen, waitFor } from '@testing-library/dom';
-import { mdiCheckboxBlankOutline, mdiCheckboxMarked, mdiCheckCircle, mdiRadioboxBlank } from '@lumx/icons';
+import { mdiCheck } from '@lumx/icons';
 import { CLASSNAME as COMBOBOX_OPTION_CLASSNAME } from '../Listbox/ListboxOption';
 import { getByClassName, getByTagName, queryByClassName } from '../../../testing/queries';
 import { CLASSNAME as SELECTION_ICON_CLASSNAME } from '../Composite/CompositeSelectionIcon';
@@ -186,24 +186,24 @@ export default function listboxOptionTests({ Combobox, render }: ListboxOptionTe
                 );
             });
 
-            it('should render a check circle icon when selected in a single selection list', async () => {
+            it('should render a check icon when selected in a single selection list', async () => {
                 await setup({ isSelected: true, after: <Combobox.SelectionIcon /> });
-                expect(getIconPath()).toBe(mdiCheckCircle);
+                expect(getIconPath()).toBe(mdiCheck);
             });
 
-            it('should render a radio icon when not selected in a single selection list', async () => {
+            it('should render an empty icon when not selected in a single selection list', async () => {
                 await setup({ isSelected: false, after: <Combobox.SelectionIcon /> });
-                expect(getIconPath()).toBe(mdiRadioboxBlank);
+                expect(getIconPath()).toBe('');
             });
 
-            it('should render a marked checkbox icon when selected in a multiple selection list', async () => {
+            it('should render a check icon when selected in a multiple selection list', async () => {
                 await setup({ isSelected: true, isMultiselectable: true, after: <Combobox.SelectionIcon /> });
-                expect(getIconPath()).toBe(mdiCheckboxMarked);
+                expect(getIconPath()).toBe(mdiCheck);
             });
 
-            it('should render a blank checkbox icon when not selected in a multiple selection list', async () => {
+            it('should render an empty icon when not selected in a multiple selection list', async () => {
                 await setup({ isSelected: false, isMultiselectable: true, after: <Combobox.SelectionIcon /> });
-                expect(getIconPath()).toBe(mdiCheckboxBlankOutline);
+                expect(getIconPath()).toBe('');
             });
         });
 

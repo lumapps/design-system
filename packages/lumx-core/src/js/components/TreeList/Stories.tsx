@@ -185,7 +185,7 @@ export function setup({
         ),
     };
 
-    /** Multiple selection: a checkbox icon on the selectable tree items (nothing on the non-selectable ones). */
+    /** Multiple selection: a check icon on the selected tree items (nothing on the non-selectable ones). */
     const InComboboxMultipleSelection = {
         args: { value: { text: '', selected: ['lemon'] } },
         decorators: [withInputState],

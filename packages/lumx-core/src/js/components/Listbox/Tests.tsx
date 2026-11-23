@@ -1,6 +1,6 @@
 import userEvent from '@testing-library/user-event';
 import { screen, within } from '@testing-library/dom';
-import { mdiCheckboxBlankOutline, mdiCheckboxMarked, mdiCheckCircle, mdiPencil, mdiRadioboxBlank } from '@lumx/icons';
+import { mdiCheck, mdiPencil } from '@lumx/icons';
 import { getByTagName, queryAllByClassName } from '../../../testing/queries';
 import { CLASSNAME as SELECTION_ICON_CLASSNAME } from '../Composite/CompositeSelectionIcon';
 
@@ -266,7 +266,7 @@ export default function listboxTests({
                     getByTagName(icon, 'path').getAttribute('d'),
                 );
 
-            it('should render radio icons in a single selection list', () => {
+            it('should render a check icon on the selected option in a single selection list', () => {
                 renderWithState(
                     () => (
                         <Listbox.Provider>
@@ -284,12 +284,12 @@ export default function listboxTests({
                     WITH_SELECT_STATE,
                 );
                 expect(getIconPaths(screen.getByRole('listbox', { name: 'Fruits' }))).toEqual([
-                    mdiCheckCircle,
-                    mdiRadioboxBlank,
+                    mdiCheck,
+                    '',
                 ]);
             });
 
-            it('should render checkbox icons in a multiple selection list', () => {
+            it('should render a check icon on the selected option in a multiple selection list', () => {
                 renderWithState(
                     () => (
                         <Listbox.Provider>
@@ -307,8 +307,8 @@ export default function listboxTests({
                     WITH_SELECT_STATE,
                 );
                 expect(getIconPaths(screen.getByRole('listbox', { name: 'Fruits' }))).toEqual([
-                    mdiCheckboxMarked,
-                    mdiCheckboxBlankOutline,
+                    mdiCheck,
+                    '',
                 ]);
             });
         });
