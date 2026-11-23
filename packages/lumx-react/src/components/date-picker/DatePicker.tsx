@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
-import { addMonthResetDay } from '@lumx/react/utils/date/addMonthResetDay';
-import { isDateValid } from '@lumx/react/utils/date/isDateValid';
+import { addMonthResetDay, isDateValid } from '@lumx/core/js/utils/date/calendarDay';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 import { CLASSNAME, COMPONENT_NAME } from './constants';

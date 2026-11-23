@@ -10,7 +10,7 @@ import { CLASSNAME } from './constants';
 
 const mockedDate = new Date(1487721600000);
 
-vi.mock('@lumx/react/utils/date/getYearDisplayName', () => ({
+vi.mock('@lumx/core/js/utils/date/getYearDisplayName', () => ({
     getYearDisplayName: () => 'année',
 }));
 
@@ -45,6 +45,11 @@ describe(`<${DatePickerField.displayName}>`, () => {
         const { inputNative, props } = setup();
         expect(inputNative).toBe(screen.queryByRole('textbox', { name: props.label }));
         expect(inputNative).toHaveValue('22 février 2017');
+    });
+
+    it('should show the date in the Gregorian calendar', () => {
+        const { inputNative } = setup({ locale: 'th' });
+        expect(inputNative).toHaveValue('22 กุมภาพันธ์ 2017');
     });
 
     it('should open on click', async () => {
