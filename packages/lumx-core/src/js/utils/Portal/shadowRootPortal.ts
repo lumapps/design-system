@@ -47,7 +47,9 @@ export const getShadowRootPortalContainer = (anchor?: Node | null): ShadowRootPo
         }
         released = true;
         currentHolder.holders -= 1;
-        if (currentHolder.holders <= 0) {
+        // A stale holder (its container removed from the DOM by the app) can live on after a newer
+        // holder replaced it in the map: only the current holder may remove the container or the entry.
+        if (currentHolder.holders <= 0 && holdersByShadowRoot.get(root) === currentHolder) {
             currentHolder.container.remove();
             holdersByShadowRoot.delete(root);
         }

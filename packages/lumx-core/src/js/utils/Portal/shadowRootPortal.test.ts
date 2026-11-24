@@ -94,4 +94,23 @@ describe('getShadowRootPortalContainer', () => {
         expect(second.container).not.toBe(first.container);
         expect(shadowRoot.querySelector(`.${PORTAL_CONTAINER_CLASSNAME}`)).toBe(second.container);
     });
+
+    it('should not let a stale holder remove the container or the entry of a holder that replaced it', () => {
+        const host = document.createElement('div');
+        document.body.appendChild(host);
+        const shadowRoot = host.attachShadow({ mode: 'open' });
+        const anchor = document.createElement('div');
+        shadowRoot.appendChild(anchor);
+
+        const stale = getShadowRootPortalContainer(anchor);
+        (stale.container as HTMLDivElement).remove();
+
+        const replacement = getShadowRootPortalContainer(anchor);
+        stale.teardown?.();
+
+        expect(shadowRoot.querySelector(`.${PORTAL_CONTAINER_CLASSNAME}`)).toBe(replacement.container);
+
+        const another = getShadowRootPortalContainer(anchor);
+        expect(another.container).toBe(replacement.container);
+    });
 });
