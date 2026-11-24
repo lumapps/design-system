@@ -144,6 +144,35 @@ const MyComponent = () => (
     content
 </Message>
 
+<FrameworkOnly framework="vue">
+
+## ShadowRootPortalProvider
+
+The `ShadowRootPortalProvider` component keeps overlays (`Dialog`, `Tooltip`, `Lightbox`, popovers) inside the shadow
+root of the app that wraps it. Use it when the app renders in a shadow root, so overlays keep the app styles instead
+of rendering in the main `document.body`.
+
+```html
+<template>
+    <ShadowRootPortalProvider>
+        <App />
+    </ShadowRootPortalProvider>
+</template>
+
+<script setup>
+    import { ShadowRootPortalProvider } from '@lumx/vue/utils';
+    import App from './App.vue';
+</script>
+```
+
+Every `ShadowRootPortalProvider` of a given shadow root shares one `div.lumx-portal-container`, so several providers
+in the same shadow root do not create several containers.
+
+When the app already holds a reference to its host element, pass it as the `anchor` prop: the provider then resolves
+its container immediately, instead of waiting for its own mount.
+
+</FrameworkOnly>
+
 <FrameworkOnly framework="react">
 
 ## Disabled state context

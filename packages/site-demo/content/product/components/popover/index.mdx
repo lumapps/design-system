@@ -17,10 +17,18 @@ import * as VueDemoAlignments from './vue/alignments.vue';
 import * as VueDemoMatchingWidth from './vue/matching-width.vue';
 import ReactPopover from 'lumx-docs:@lumx/react/components/popover/Popover';
 import VuePopover from 'lumx-docs:@lumx/vue/components/popover/Popover';
+import { FrameworkOnly } from '@lumx/demo/components/content/FrameworkOnly';
 
 **Popovers display pieces of UI on top of others. They are positioned using anchor elements.**
 
 <DemoBlock orientation="horizontal" demo={{ react: ReactDemoDefault, vue: VueDemoDefault }} />
+
+<FrameworkOnly framework="vue">
+
+For an app that renders in a shadow root, use
+[`ShadowRootPortalProvider`](/product/utilities/miscellaneous#shadowrootportalprovider) to keep the popover inside it.
+
+</FrameworkOnly>
 
 ## Positions
 
