@@ -30,7 +30,7 @@ const InlineList = defineComponent(
     {
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
-        props: keysOf<InlineListProps>()('color', 'colorVariant', 'typography', 'wrap', 'class'),
+        props: keysOf<InlineListProps>()('color', 'colorVariant', 'typography', ['wrap', Boolean], 'class'),
     },
 );
 

@@ -37,7 +37,7 @@ const Flag = defineComponent(
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         // Redefine properties so that they come in as `props` on the `defineComponent` function
-        props: keysOf<FlagProps>()('color', 'icon', 'truncate', 'theme', 'class'),
+        props: keysOf<FlagProps>()('color', 'icon', ['truncate', Boolean], 'theme', 'class'),
     },
 );
 

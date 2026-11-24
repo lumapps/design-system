@@ -123,7 +123,7 @@ export const Tooltip = defineComponent(
             'label',
             'placement',
             'delay',
-            'forceOpen',
+            ['forceOpen', Boolean],
             'closeMode',
             'ariaLinkMode',
             'zIndex',

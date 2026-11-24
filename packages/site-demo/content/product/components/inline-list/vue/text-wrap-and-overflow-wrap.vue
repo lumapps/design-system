@@ -1,5 +1,5 @@
 <template>
-    <InlineList typography="body1" color="dark-L2" :wrap="true" :style="{ maxWidth: '275px' }">
+    <InlineList typography="body1" color="dark-L2" wrap :style="{ maxWidth: '275px' }">
         <Text as="span">
             <Icon :icon="mdiEarth" />
             Some text

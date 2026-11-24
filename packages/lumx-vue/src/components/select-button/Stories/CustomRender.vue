@@ -10,7 +10,7 @@
     >
         <!-- Use a Chip as the button trigger -->
         <template #button="{ buttonProps, children }">
-            <Chip v-bind="buttonProps" :is-clickable="true" :is-selected="!!value">
+            <Chip v-bind="buttonProps" is-clickable :is-selected="!!value">
                 {{ children }}
                 <template #after>
                     <Icon :icon="mdiMenuDown" />

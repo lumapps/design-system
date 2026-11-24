@@ -32,7 +32,7 @@ const Icon = defineComponent(
             'icon',
             'color',
             'colorVariant',
-            'hasShape',
+            ['hasShape', Boolean],
             'size',
             'alt',
             'verticalAlign',

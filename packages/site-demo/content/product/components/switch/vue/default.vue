@@ -3,9 +3,9 @@
 
     <Switch v-model:is-checked="state" :theme="theme" helper="Helper text"> With helper </Switch>
 
-    <Switch :is-disabled="true" :is-checked="state" :theme="theme" @change="state = $event"> Disabled </Switch>
+    <Switch is-disabled :is-checked="state" :theme="theme" @change="state = $event"> Disabled </Switch>
 
-    <Switch :is-checked="true" :is-disabled="true" :theme="theme"> Disabled checked </Switch>
+    <Switch is-checked is-disabled :theme="theme"> Disabled checked </Switch>
 </template>
 
 <script setup lang="ts">

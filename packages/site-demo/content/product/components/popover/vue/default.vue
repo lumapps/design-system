@@ -1,9 +1,7 @@
 <template>
     <Button :style="{ marginBottom: '80px' }" ref="anchorRef" size="s" emphasis="medium">Anchor</Button>
 
-    <Popover :is-open="true" class="lumx-spacing-padding-huge" :anchor-ref="anchorElRef" placement="bottom">
-        Popover
-    </Popover>
+    <Popover is-open class="lumx-spacing-padding-huge" :anchor-ref="anchorElRef" placement="bottom"> Popover </Popover>
 </template>
 
 <script setup lang="ts">

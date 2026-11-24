@@ -2,7 +2,7 @@
     <FlexBox :style="{ marginTop: '80px', gap: '128px' }" orientation="vertical">
         <Button ref="topStartAnchorRef" size="s" emphasis="medium" :style="{ placeSelf: 'flex-start' }"> TOP_START </Button>
         <Popover
-            :is-open="true"
+            is-open
             class="lumx-spacing-padding-huge"
             :anchor-ref="topStartAnchorElRef"
             placement="top-start"
@@ -11,7 +11,7 @@
         </Popover>
         <Button ref="topEndAnchorRef" size="s" emphasis="medium" :style="{ placeSelf: 'flex-end' }"> TOP_END </Button>
     </FlexBox>
-    <Popover :is-open="true" class="lumx-spacing-padding-huge" :anchor-ref="topEndAnchorElRef" placement="top-end">
+    <Popover is-open class="lumx-spacing-padding-huge" :anchor-ref="topEndAnchorElRef" placement="top-end">
         Popover aligned on start of the top side
     </Popover>
 </template>

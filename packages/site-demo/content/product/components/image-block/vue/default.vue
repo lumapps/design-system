@@ -9,9 +9,9 @@
     >
         <template #actions>
             <FlexBox orientation="horizontal" gap="regular">
-                <IconButton label="Edit" color="dark" emphasis="low" :has-background="true" :icon="mdiPencil" />
-                <IconButton label="See" color="dark" emphasis="low" :has-background="true" :icon="mdiEye" />
-                <IconButton label="Delete" color="dark" emphasis="low" :has-background="true" :icon="mdiDelete" />
+                <IconButton label="Edit" color="dark" emphasis="low" has-background :icon="mdiPencil" />
+                <IconButton label="See" color="dark" emphasis="low" has-background :icon="mdiEye" />
+                <IconButton label="Delete" color="dark" emphasis="low" has-background :icon="mdiDelete" />
             </FlexBox>
         </template>
         <template #tags>

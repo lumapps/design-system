@@ -57,7 +57,7 @@ const ImageCaption = defineComponent(
             'theme',
             'title',
             'titleProps',
-            'truncate',
+            ['truncate', Boolean],
         ),
     },
 );

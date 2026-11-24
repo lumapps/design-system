@@ -108,7 +108,7 @@ const ComboboxButton = defineComponent(
             'labelDisplayMode',
             'renderButton',
             'listboxId',
-            'isOpen',
+            ['isOpen', Boolean],
             'onSelect',
         ),
         emits: {

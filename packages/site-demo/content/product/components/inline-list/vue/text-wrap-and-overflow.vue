@@ -1,10 +1,10 @@
 <template>
     <InlineList typography="body1" color="dark-L2" :style="{ maxWidth: '275px' }">
-        <Text as="span" :no-wrap="true">
+        <Text as="span" no-wrap>
             <Icon :icon="mdiEarth" />
             Some text
         </Text>
-        <Text as="span" :truncate="true">Very very very very very long text</Text>
+        <Text as="span" truncate>Very very very very very long text</Text>
     </InlineList>
 </template>
 

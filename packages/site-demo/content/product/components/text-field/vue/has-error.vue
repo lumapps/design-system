@@ -1,5 +1,5 @@
 <template>
-    <TextField label="Text field label" :value="value" :has-error="true" :theme="theme" @change="value = $event" />
+    <TextField label="Text field label" :value="value" has-error :theme="theme" @change="value = $event" />
 </template>
 
 <script setup lang="ts">

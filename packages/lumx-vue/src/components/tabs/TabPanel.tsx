@@ -50,7 +50,7 @@ const TabPanel = defineComponent(
     {
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
-        props: keysOf<TabPanelProps>()('isActive', 'id', 'class'),
+        props: keysOf<TabPanelProps>()(['isActive', Boolean], 'id', 'class'),
     },
 );
 

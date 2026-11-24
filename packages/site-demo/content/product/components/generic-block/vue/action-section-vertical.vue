@@ -32,7 +32,7 @@
             <Placeholder name="2" text-align="left" :height="64" width="100%" />
         </template>
         <template #actions>
-            <Checkbox :is-disabled="true" :input-props="{ 'aria-label': 'Select row' }" />
+            <Checkbox is-disabled :input-props="{ 'aria-label': 'Select row' }" />
         </template>
     </GenericBlock>
 </template>

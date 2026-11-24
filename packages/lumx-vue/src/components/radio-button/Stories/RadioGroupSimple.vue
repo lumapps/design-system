@@ -9,7 +9,7 @@
             @change="handleChange"
         />
         <RadioButton
-            :is-disabled="true"
+            is-disabled
             :helper="loremIpsum('tiny')"
             label="Radio button with help 2"
             name="test"

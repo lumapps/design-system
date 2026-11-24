@@ -66,7 +66,7 @@ const ImageBlock = defineComponent(
             'class',
             'description',
             'descriptionProps',
-            'fillHeight',
+            ['fillHeight', Boolean],
             'image',
             'size',
             'tags',

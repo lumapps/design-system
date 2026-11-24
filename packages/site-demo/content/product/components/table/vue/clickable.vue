@@ -1,15 +1,15 @@
 <template>
-    <Table :has-dividers="true" :theme="theme" :style="{ minWidth: '620px' }">
+    <Table has-dividers :theme="theme" :style="{ minWidth: '620px' }">
         <TableBody>
-            <TableRow :is-clickable="true">
+            <TableRow is-clickable>
                 <TableCell>Clickable table row</TableCell>
                 <TableCell width="150">Lorem ipsum</TableCell>
             </TableRow>
-            <TableRow :is-clickable="true" :is-disabled="true">
+            <TableRow is-clickable is-disabled>
                 <TableCell>Disabled clickable table row</TableCell>
                 <TableCell width="150">Lorem ipsum</TableCell>
             </TableRow>
-            <TableRow :is-clickable="true" :is-selected="true">
+            <TableRow is-clickable is-selected>
                 <TableCell>Selected clickable table row</TableCell>
                 <TableCell width="150">Lorem ipsum</TableCell>
             </TableRow>

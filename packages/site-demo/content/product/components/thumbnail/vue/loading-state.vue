@@ -1,6 +1,6 @@
 <template>
     <Thumbnail
-        :is-loading="true"
+        is-loading
         image="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8Xw8AAoMBgDTD2qgAAAAASUVORK5CYII="
         alt="loading image"
         aspect-ratio="square"

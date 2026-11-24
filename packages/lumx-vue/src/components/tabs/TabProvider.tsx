@@ -79,8 +79,8 @@ const TabProvider = defineComponent(
         name: getName(TAB_PROVIDER_COMPONENT_NAME),
         props: {
             activeTabIndex: { required: false },
-            isLazy: { required: false },
-            shouldActivateOnFocus: { required: false },
+            isLazy: { type: Boolean, default: undefined },
+            shouldActivateOnFocus: { type: Boolean, default: undefined },
         },
         emits: emitSchema,
     },

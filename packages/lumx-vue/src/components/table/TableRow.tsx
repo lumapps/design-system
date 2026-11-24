@@ -32,7 +32,12 @@ const TableRow = defineComponent(
     {
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
-        props: keysOf<TableRowProps>()('class', 'isClickable', 'isDisabled', 'isSelected'),
+        props: keysOf<TableRowProps>()(
+            'class',
+            ['isClickable', Boolean],
+            ['isDisabled', Boolean],
+            ['isSelected', Boolean],
+        ),
     },
 );
 

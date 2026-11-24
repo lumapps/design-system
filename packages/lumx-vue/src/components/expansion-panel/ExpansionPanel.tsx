@@ -129,9 +129,9 @@ const ExpansionPanel = defineComponent(
         props: keysOf<ExpansionPanelProps>()(
             'class',
             'closeMode',
-            'hasBackground',
-            'hasHeaderDivider',
-            'isOpen',
+            ['hasBackground', Boolean],
+            ['hasHeaderDivider', Boolean],
+            ['isOpen', Boolean],
             'label',
             'theme',
             'toggleButtonProps',

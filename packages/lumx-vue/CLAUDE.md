@@ -102,5 +102,6 @@ Run via **Vitest browser mode inside Playwright** — not a separate test runner
 -   TSX in Vue requires `shims-tsx.d.ts` — already configured, don't change
 -   Build tool: Vite (not Rollup)
 -   `VueToJSXProps<T>` converts core prop types to Vue-compatible equivalents
--   `keysOf<Props>()` helper generates Vue `props` array from TypeScript type
+-   `keysOf<Props>()` helper generates Vue `props` object from TypeScript type. The type refuses an incomplete list.
+-   In `keysOf`, a boolean prop must be a `['name', Boolean]` entry (`['name', Boolean, String]` when it accepts more types). It gives the prop a real `Boolean` type, so a bare template attribute casts to `true`.
 -   Default export is the component; named exports are `CLASSNAME`, `COMPONENT_NAME`, etc.

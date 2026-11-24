@@ -10,7 +10,7 @@
     <List>
         <ListItem>
             <template #before>
-                <Icon :icon="mdiSend" size="xs" :has-shape="true" />
+                <Icon :icon="mdiSend" size="xs" has-shape />
             </template>
             Item with icon before
         </ListItem>

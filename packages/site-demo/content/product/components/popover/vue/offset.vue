@@ -2,7 +2,7 @@
     <Button :style="{ marginBottom: '80px' }" ref="anchorRef" size="s" emphasis="medium"> Anchor </Button>
 
     <Popover
-        :is-open="true"
+        is-open
         class="lumx-spacing-padding-huge"
         :anchor-ref="anchorElRef"
         placement="right"
