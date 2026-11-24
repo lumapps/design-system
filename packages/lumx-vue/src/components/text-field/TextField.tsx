@@ -65,6 +65,7 @@ const TextField = defineComponent(
     (props: TextFieldProps, { emit }) => {
         const attrs = useAttrs();
         const getChipsSlot = useSlot('chips');
+        const getBeforeElementSlot = useSlot('beforeElement');
         const defaultTheme = useTheme();
         const className = useClassName(() => props.class);
         const generatedId = useId();
@@ -174,6 +175,7 @@ const TextField = defineComponent(
                     forceFocusStyle={props.forceFocusStyle}
                     hasError={props.hasError}
                     afterElement={props.afterElement}
+                    beforeElement={(getBeforeElementSlot() ?? props.beforeElement) || undefined}
                     helper={props.helper}
                     icon={props.icon}
                     isRequired={props.isRequired}
@@ -214,6 +216,7 @@ const TextField = defineComponent(
             'forceFocusStyle',
             'hasError',
             'afterElement',
+            'beforeElement',
             'helper',
             'icon',
             'isRequired',

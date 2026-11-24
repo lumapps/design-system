@@ -60,7 +60,7 @@ export const emitSchema = {
  * Free-form typed input (e.g. `"10:30 PM"`, `"14"`, `"930"`) is parsed on blur.
  */
 const TimePickerField = defineComponent(
-    (props: TimePickerFieldProps, { emit }) => {
+    (props: TimePickerFieldProps, { emit, slots }) => {
         const className = useClassName(() => props.class);
         const locale = computed(() => props.locale ?? getCurrentLocale());
         const step = computed(() => props.step ?? DEFAULT_PROPS.step);
@@ -151,6 +151,7 @@ const TimePickerField = defineComponent(
             return UI(
                 {
                     ...(forwardedProps as any),
+                    beforeElement: slots.beforeElement?.() ?? props.beforeElement,
                     value: selectedOption.value,
                     options: timeList.value,
                     translations,
@@ -181,6 +182,7 @@ const TimePickerField = defineComponent(
             // Inherited SelectTextField props
             'label',
             'labelProps',
+            'beforeElement',
             'placeholder',
             'icon',
             'isDisabled',

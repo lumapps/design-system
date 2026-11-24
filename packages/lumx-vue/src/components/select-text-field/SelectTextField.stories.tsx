@@ -3,6 +3,7 @@ import { withWrapper } from '@lumx/vue/stories/decorators/withWrapper';
 import { setup } from '@lumx/core/js/components/SelectTextField/Stories';
 
 import { SelectTextField } from '.';
+import { Avatar } from '../avatar';
 
 import StoryCustomRender from './Stories/CustomRender.vue';
 import StoryWithCreatableOptions from './Stories/WithCreatableOptions.vue';
@@ -10,7 +11,7 @@ import StoryWithSearch from './Stories/WithSearch.vue';
 import StoryMultipleWithSearch from './Stories/MultipleWithSearch.vue';
 
 const { meta, ...stories } = setup({
-    components: { SelectTextField },
+    components: { Avatar, SelectTextField },
     decorators: { withValueOnChange, withWrapper },
 });
 
@@ -36,6 +37,8 @@ export const MultipleDisabled = { ...stories.MultipleDisabled };
 export const Loading = { ...stories.Loading };
 export const LoadingMore = { ...stories.LoadingMore };
 export const ErrorState = { ...stories.ErrorState };
+export const WithBeforeElement = { ...stories.WithBeforeElement };
+export const MultipleWithBeforeElement = { ...stories.MultipleWithBeforeElement };
 
 // ── Vue-specific stories (scoped slots + stateful behavior) ──
 

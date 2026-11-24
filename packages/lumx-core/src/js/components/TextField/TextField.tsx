@@ -26,6 +26,11 @@ export interface TextFieldProps extends HasClassName, HasTheme, HasAriaDisabled,
     hasError?: boolean;
     /** Additional element to put at the end of the text field. */
     afterElement?: JSXElement;
+    /**
+     * Element to display at the start of the field, after the icon.
+     * Mark it as decorative (`aria-hidden`) when the input text gives the same information.
+     */
+    beforeElement?: JSXElement;
     /** Helper text. */
     helper?: string | JSXElement;
     /** Icon (SVG path). */
@@ -143,6 +148,7 @@ export const TextField = (props: TextFieldProps) => {
         theme,
         value,
         afterElement,
+        beforeElement,
         input,
         isFocus,
         IconButton,
@@ -203,6 +209,8 @@ export const TextField = (props: TextFieldProps) => {
                         icon,
                         size: Size.xs,
                     })}
+
+                {beforeElement && <div className={element('before-element')}>{beforeElement}</div>}
 
                 {chips ? (
                     <div className={element('chips')}>

@@ -5,6 +5,7 @@ import { expectTypeOf } from 'vitest';
 
 import selectTextFieldTests, { TRANSLATIONS, MULTI_TRANSLATIONS } from '@lumx/core/js/components/SelectTextField/Tests';
 import { SelectTextField, type SingleSelectTextFieldProps, type MultipleSelectTextFieldProps } from '.';
+import { getByClassName } from '@lumx/core/testing/queries';
 import { Combobox } from '../combobox';
 import { Chip } from '../chip';
 
@@ -461,6 +462,46 @@ describe('<SelectTextField>', () => {
             // before should appear earlier in document order than the first option.
             // eslint-disable-next-line no-bitwise
             expect(before!.compareDocumentPosition(firstOption!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+        });
+
+        it('should render the beforeElement slot', () => {
+            render(SelectTextField, {
+                props: {
+                    selectionType: 'single',
+                    label: 'Select a fruit',
+                    options: FRUITS,
+                    getOptionId: 'id',
+                    getOptionName: 'name',
+                    filter: 'auto',
+                    translations: TRANSLATIONS,
+                },
+                slots: {
+                    beforeElement: () => <span>Before slot</span>,
+                },
+            });
+            const beforeElement = getByClassName(document.body, 'lumx-text-field__before-element');
+            expect(beforeElement).toHaveTextContent('Before slot');
+        });
+
+        it('should give precedence to the beforeElement slot over the prop', () => {
+            render(SelectTextField, {
+                props: {
+                    selectionType: 'single',
+                    label: 'Select a fruit',
+                    options: FRUITS,
+                    getOptionId: 'id',
+                    getOptionName: 'name',
+                    filter: 'auto',
+                    translations: TRANSLATIONS,
+                    beforeElement: 'Before prop',
+                },
+                slots: {
+                    beforeElement: () => <span>Before slot</span>,
+                },
+            });
+            const beforeElement = getByClassName(document.body, 'lumx-text-field__before-element');
+            expect(beforeElement).toHaveTextContent('Before slot');
+            expect(beforeElement).not.toHaveTextContent('Before prop');
         });
 
         // ─── class + className merging ───────────────────────────

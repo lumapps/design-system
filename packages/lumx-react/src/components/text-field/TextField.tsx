@@ -100,6 +100,7 @@ export const TextField = forwardRef<TextFieldProps, HTMLDivElement>((props, ref)
         type = DEFAULT_PROPS.type,
         value,
         afterElement,
+        beforeElement,
         ...forwardedProps
     } = otherProps;
     const generatedTextFieldId = useId();
@@ -188,6 +189,7 @@ export const TextField = forwardRef<TextFieldProps, HTMLDivElement>((props, ref)
         input,
         id: textFieldId,
         afterElement,
+        beforeElement,
         hasError,
         helperId,
         labelId,

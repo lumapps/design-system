@@ -2,12 +2,12 @@ import { withValueOnChange } from '@lumx/vue/stories/decorators/withValueOnChang
 import { withCombinations } from '@lumx/vue/stories/decorators/withCombinations';
 import { withRender } from '@lumx/vue/stories/utils/withRender';
 import { setup } from '@lumx/core/js/components/TextField/Stories';
-import { Chip, IconButton, TextField, Typography } from '@lumx/vue';
+import { Avatar, Chip, IconButton, TextField, Typography } from '@lumx/vue';
 import WithChipsVue from './Stories/WithChips.vue';
 
 const { meta, ...stories } = setup({
     component: TextField,
-    components: { Chip, IconButton, Typography },
+    components: { Avatar, Chip, IconButton, Typography },
     decorators: { withValueOnChange, withCombinations },
 });
 
@@ -27,4 +27,8 @@ export const Valid = { ...stories.Valid };
 export const MaxLength = { ...stories.MaxLength };
 export const WithAfterElement = { ...stories.WithAfterElement };
 export const WithChips = { render: withRender({ WithChipsVue }) };
+export const WithBeforeElement = { ...stories.WithBeforeElement };
+export const WithBeforeElementAndIcon = { ...stories.WithBeforeElementAndIcon };
+export const WithBeforeElementMultiline = { ...stories.WithBeforeElementMultiline };
+export const WithBeforeElementDisabled = { ...stories.WithBeforeElementDisabled };
 export const Disabled = { ...stories.Disabled };

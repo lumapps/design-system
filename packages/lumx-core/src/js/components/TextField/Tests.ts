@@ -232,6 +232,36 @@ export default (renderOptions: SetupOptions<any>) => {
                 expect(inputNative).not.toHaveAttribute('icon');
             });
 
+            it('should render beforeElement', () => {
+                setup({ beforeElement: 'Before' }, renderOptions);
+                const beforeElement = getByClassName(document.body, `${CLASSNAME}__before-element`);
+                expect(beforeElement).toHaveTextContent('Before');
+            });
+
+            it('should not render the before element by default', () => {
+                setup({}, renderOptions);
+                expect(queryByClassName(document.body, `${CLASSNAME}__before-element`)).not.toBeInTheDocument();
+            });
+
+            it('should render beforeElement after the icon', () => {
+                setup({ icon: 'mdi-icon-path', beforeElement: 'Before' }, renderOptions);
+                const icon = getByClassName(document.body, `${CLASSNAME}__input-icon`);
+                const beforeElement = getByClassName(document.body, `${CLASSNAME}__before-element`);
+                expect(icon.nextElementSibling).toBe(beforeElement);
+            });
+
+            it('should render beforeElement before the chips', () => {
+                setup({ chips: 'chip', beforeElement: 'Before' }, renderOptions);
+                const beforeElement = getByClassName(document.body, `${CLASSNAME}__before-element`);
+                const chips = getByClassName(document.body, `${CLASSNAME}__chips`);
+                expect(beforeElement.nextElementSibling).toBe(chips);
+            });
+
+            it('should not forward "beforeElement" to the native input element', () => {
+                const { inputNative } = setup({ beforeElement: 'Before' }, renderOptions);
+                expect(inputNative).not.toHaveAttribute('beforeelement');
+            });
+
             it('should not forward "isValid" to the native input element', () => {
                 const { inputNative } = setup({ isValid: true }, renderOptions);
                 expect(inputNative).not.toHaveAttribute('isvalid');

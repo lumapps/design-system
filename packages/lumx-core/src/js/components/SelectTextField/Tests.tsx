@@ -304,6 +304,39 @@ export default function selectTextFieldTests({ components, renderWithState }: Se
             expect(beforeContent?.textContent).toBe('Before');
         });
 
+        it('should render beforeElement before the input', () => {
+            renderWithState(defaultTemplate, { beforeElement: 'Before' });
+            const beforeElement = getByClassName(document.body, 'lumx-text-field__before-element');
+            expect(beforeElement).toHaveTextContent('Before');
+        });
+
+        it('should render beforeElement after the icon', () => {
+            renderWithState(defaultTemplate, { icon: 'mdi-icon-path', beforeElement: 'Before' });
+            const icon = getByClassName(document.body, 'lumx-text-field__input-icon');
+            const beforeElement = getByClassName(document.body, 'lumx-text-field__before-element');
+            expect(icon.nextElementSibling).toBe(beforeElement);
+        });
+
+        it('should render beforeElement from inputProps', () => {
+            renderWithState(defaultTemplate, { inputProps: { beforeElement: 'Nested' } });
+            const beforeElement = getByClassName(document.body, 'lumx-text-field__before-element');
+            expect(beforeElement).toHaveTextContent('Nested');
+        });
+
+        it('should give precedence to beforeElement over inputProps.beforeElement', () => {
+            renderWithState(defaultTemplate, { beforeElement: 'Top', inputProps: { beforeElement: 'Nested' } });
+            const beforeElement = getByClassName(document.body, 'lumx-text-field__before-element');
+            expect(beforeElement).toHaveTextContent('Top');
+            expect(beforeElement).not.toHaveTextContent('Nested');
+        });
+
+        it('should render beforeElement before the chips in multiple selection', () => {
+            renderWithState(multiTemplate, { value: [FRUITS[0]], beforeElement: 'Before' });
+            const beforeElement = getByClassName(document.body, 'lumx-text-field__before-element');
+            const chips = getByClassName(document.body, 'lumx-text-field__chips');
+            expect(beforeElement.nextElementSibling).toBe(chips);
+        });
+
         it('should have proper ARIA attributes on the combobox', () => {
             renderWithState(defaultTemplate);
             const input = getInput();

@@ -27,16 +27,20 @@ describe('<Combobox>', () => {
          * Renders Combobox.Input inside a Provider (required for context)
          * and returns named DOM references.
          */
-        const setup = (propsOverride: any = {}, options: SetupRenderOptions<any> = {}) => {
+        const setup = (propsOverride: any = {}, options: SetupRenderOptions<any> = {}, slots?: any) => {
             const Wrapper = defineComponent({
                 setup() {
                     return () =>
                         h(ComboboxProvider, null, {
                             default: () =>
-                                h(ComboboxInput, {
-                                    placeholder: 'Pick a fruit…',
-                                    ...propsOverride,
-                                }),
+                                h(
+                                    ComboboxInput,
+                                    {
+                                        placeholder: 'Pick a fruit…',
+                                        ...propsOverride,
+                                    },
+                                    slots,
+                                ),
                         });
                 },
             });
@@ -63,6 +67,29 @@ describe('<Combobox>', () => {
                 viaContext: true,
                 defaultTheme: 'light',
             },
+        });
+
+        it('should render the beforeElement prop in the input', () => {
+            const { element } = setup({ beforeElement: 'Before prop' });
+            const beforeElement = getByClassName(element, `${TEXT_FIELD_CLASSNAME}__before-element`);
+            expect(beforeElement).toHaveTextContent('Before prop');
+        });
+
+        it('should render the beforeElement slot in the input', () => {
+            const { element } = setup({}, {}, { beforeElement: () => h('span', 'Before slot') });
+            const beforeElement = getByClassName(element, `${TEXT_FIELD_CLASSNAME}__before-element`);
+            expect(beforeElement).toHaveTextContent('Before slot');
+        });
+
+        it('should give precedence to the beforeElement slot over the prop', () => {
+            const { element } = setup(
+                { beforeElement: 'Before prop' },
+                {},
+                { beforeElement: () => h('span', 'Before slot') },
+            );
+            const beforeElement = getByClassName(element, `${TEXT_FIELD_CLASSNAME}__before-element`);
+            expect(beforeElement).toHaveTextContent('Before slot');
+            expect(beforeElement).not.toHaveTextContent('Before prop');
         });
     });
 
