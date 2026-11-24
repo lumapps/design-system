@@ -12,7 +12,7 @@
         "jsx-ast-utils": "^3.1.0",
         "lint-staged": "^10.5.3",
         "nx": "^23.3.0",
-        "playwright": "^1.58.2",
+        "playwright": "^1.65.1",
         "postcss-hover-media-feature": "^0.3.1",
         "prettier": "^3.2.5",
         "semver": "^7.6.0",
