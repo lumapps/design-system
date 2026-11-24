@@ -1,22 +1,24 @@
-import { defineConfig } from 'vite';
-import optimizeImportsLumxIcons from 'rollup-plugin-optimize-imports-lumx-icons';
+import { mergeConfig } from 'vite';
+
+import baseLibConfig, { lumxExternal, toPackageRegex } from '@lumx/base-vite-lib-config';
+
+import pkg from './package.json' with { type: 'json' };
+
+/** externalize */
+const external = [
+    ...lumxExternal,
+    // peer dependencies
+    ...Object.keys(pkg.peerDependencies || {}).map(toPackageRegex),
+];
 
 /**
  * Vite config
  *
- * Shared with Vitest and Storybook (with some override in the `viteFinal` of `.storybook/main.ts`)
+ * (shared with Vitest and Storybook)
  */
-export default defineConfig({
-    resolve: {
-        /** Use tsconfig path aliases natively. */
-        tsconfigPaths: true,
-    },
+export default mergeConfig(baseLibConfig({ pkg, external }), {
     oxc: {
         jsx: { runtime: 'automatic', importSource: 'react' },
         include: /\.[jt]sx?$/,
     },
-    plugins: [
-        /** Transform @lumx/icons imports to direct ESM imports. */
-        optimizeImportsLumxIcons(),
-    ],
 });
