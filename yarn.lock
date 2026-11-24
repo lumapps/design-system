@@ -3106,9 +3106,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@lumx/base-vite-lib-config@workspace:dev-packages/base-vite-lib-config"
   dependencies:
+    magic-string: "npm:^0.30.0"
     rolldown-plugin-dts: "patch:rolldown-plugin-dts@npm%3A0.30.2#~/.yarn/patches/rolldown-plugin-dts-npm-0.30.2-257d791eeb.patch"
-    rollup-plugin-lumx-fix-esm-imports: "workspace:*"
-    rollup-plugin-optimize-imports-lumx-icons: "workspace:*"
     vite: "npm:^8.3.8"
     vite-plugin-static-copy: "npm:^4.1.1"
   languageName: unknown
@@ -20477,20 +20476,6 @@ __metadata:
   checksum: 10/f58deb382a74f3f463ba7c07bcf25b70bb80da6e8ef4c5e2cb2b1a23e123afc7f48ea21bdf8e69afe22051bb13a27df9f5b73b1c2cb61216380a9bab8fabaf35
   languageName: node
   linkType: hard
-
-"rollup-plugin-lumx-fix-esm-imports@workspace:*, rollup-plugin-lumx-fix-esm-imports@workspace:dev-packages/rollup-plugin-fix-esm-imports":
-  version: 0.0.0-use.local
-  resolution: "rollup-plugin-lumx-fix-esm-imports@workspace:dev-packages/rollup-plugin-fix-esm-imports"
-  languageName: unknown
-  linkType: soft
-
-"rollup-plugin-optimize-imports-lumx-icons@workspace:*, rollup-plugin-optimize-imports-lumx-icons@workspace:dev-packages/rollup-plugin-optimize-imports-lumx-icons":
-  version: 0.0.0-use.local
-  resolution: "rollup-plugin-optimize-imports-lumx-icons@workspace:dev-packages/rollup-plugin-optimize-imports-lumx-icons"
-  dependencies:
-    magic-string: "npm:^0.30.0"
-  languageName: unknown
-  linkType: soft
 
 "run-applescript@npm:7.0.0":
   version: 7.0.0
