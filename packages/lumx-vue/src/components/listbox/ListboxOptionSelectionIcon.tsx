@@ -13,11 +13,10 @@ import { useCompositeItemContext } from '../composite/CompositeItemContext';
  * Combobox.SelectionIcon component (`Listbox.SelectionIcon`, re-exported by the combobox).
  *
  * Displays the selection state icon of an option (the same icon as in `SelectTextField` and `SelectButton`):
- * - `single` list: a check circle icon when selected, a blank radio icon otherwise.
- * - `multiple` list (`aria-multiselectable` on `Combobox.List`): a checkbox icon, marked or blank.
+ * a check icon when the option is selected, else an empty icon that keeps the option contents aligned.
  *
- * The option selected state (`isSelected`) and the list selection type are read from the parent context.
- * Must be placed in the `after` slot of a `Combobox.Option`.
+ * The option selected state (`isSelected`) is read from the parent context.
+ * Must be placed in the `after` slot of a `Combobox.Option` (a `TreeListItem` renders its own selection icon).
  *
  * @return Vue element.
  */
@@ -25,12 +24,14 @@ const ListboxOptionSelectionIcon = defineComponent(
     () => {
         const optionContext = useCompositeItemContext();
         const listContext = useCompositeContext();
-        return () =>
-            UI({
+        return () => {
+            if (optionContext.isSelectable === false) return null;
+            return UI({
                 selectionType: listContext.selectionType,
                 isSelected: optionContext.isSelected,
                 className: LEGACY_OPTION_CLASSNAME,
             });
+        };
     },
     {
         name: getName('ComboboxSelectionIcon'),

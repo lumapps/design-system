@@ -13,6 +13,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `@lumx/react`:
     -   `Notification`: add the `actionProps` prop that describes the action (`label`, `onClick`, and `as` to render another component, for example a close `IconButton`). It deprecates `actionLabel` and `onActionClick`.
+-   `@lumx/react`, `@lumx/vue`:
+    -   `SelectButton`, `SelectTextField`: show the selection state on the options with icons.
+    -   `TreeListItem`: show the selection icon on selectable tree items, and support `Combobox.OptionMoreInfo` and `Combobox.SelectionIcon` in tree items.
+
+### Changed
+
+-   `@lumx/react`, `@lumx/vue`:
+    -   `Combobox.SelectionIcon`: show a check icon on a selected option, in single and multiple selection lists. An option that is not selected shows an empty space of the same size.
 
 ### Fixed
 

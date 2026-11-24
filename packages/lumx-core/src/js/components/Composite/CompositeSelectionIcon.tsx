@@ -1,4 +1,4 @@
-import { mdiCheckboxBlankOutline, mdiCheckboxMarked, mdiCheckCircle, mdiRadioboxBlank } from '@lumx/icons';
+import { mdiCheck } from '@lumx/icons';
 
 import type { HasClassName } from '../../types';
 import { classNames } from '../../utils';
@@ -22,21 +22,14 @@ export interface CompositeSelectionIconProps extends HasClassName {
 /**
  * Selection state icon of a composite item (an option or a tree item). The icon is always rendered after the label.
  *
- * - `single`: a check circle icon when selected, a blank radio icon otherwise.
- * - `multiple`: a checkbox icon, marked or blank.
+ * A check icon when selected, else an empty icon that keeps the item contents aligned (in `single` and `multiple`
+ * selection).
  */
 export const CompositeSelectionIcon = ({ selectionType, isSelected, className }: CompositeSelectionIconProps) => {
-    let icon: string;
-    if (selectionType === 'multiple') {
-        icon = isSelected ? mdiCheckboxMarked : mdiCheckboxBlankOutline;
-    } else if (selectionType === 'single') {
-        icon = isSelected ? mdiCheckCircle : mdiRadioboxBlank;
-    } else {
-        return null;
-    }
+    if (!selectionType) return null;
     return (
         <Icon
-            icon={icon}
+            icon={isSelected ? mdiCheck : ''}
             color={isSelected ? 'primary' : undefined}
             className={classNames.join(CLASSNAME, className)}
         />

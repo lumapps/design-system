@@ -21,10 +21,7 @@ export interface ListboxListProps extends HasClassName {
      * Omit (or set to `undefined`) when not loading — the attribute is not rendered as `"false"`.
      */
     'aria-busy'?: boolean;
-    /**
-     * Allow selecting several options (`aria-multiselectable`).
-     * Also read by `Combobox.SelectionIcon` to pick the checkbox icons.
-     */
+    /** Allow selecting several options (`aria-multiselectable`). */
     'aria-multiselectable'?: boolean | 'true' | 'false';
     /** Content (should be ListboxOption elements). */
     children?: JSXElement;

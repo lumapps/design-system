@@ -304,7 +304,7 @@ export function setup({
         ),
     };
 
-    /** Combobox with `Combobox.SelectionIcon` in a single selection list (check circle / radio icons). */
+    /** Combobox with `Combobox.SelectionIcon` in a single selection list. */
     const ComboboxWithSelectionIconSingle = {
         args: { value: 'Banana' },
         decorators: [withValueOnChange()],
@@ -334,7 +334,7 @@ export function setup({
         ),
     };
 
-    /** Combobox with `Combobox.SelectionIcon` in a multiple selection list (checkbox icons). */
+    /** Combobox with `Combobox.SelectionIcon` in a multiple selection list. */
     const ComboboxWithSelectionIconMultiple = {
         args: { value: '' },
         decorators: [withValueOnChange()],
