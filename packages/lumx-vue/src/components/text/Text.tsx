@@ -7,6 +7,7 @@ import { useOverflowTooltipLabel } from '../../composables/useOverflowTooltipLab
 import { useSlot } from '../../composables/useSlot';
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { wrapChildrenIconWithSpaces } from '../../utils/wrapChildrenIconWithSpaces';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 export type TextProps = VueToJSXProps<UIProps>;
 
@@ -58,6 +59,7 @@ const Text = defineComponent(
         };
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         // Redefine properties so that they come in as `props` on the `defineComponent` function

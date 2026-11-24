@@ -13,6 +13,7 @@ import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { useClassName } from '../../composables/useClassName';
 import { useWatchDisposable } from '../../composables/useWatchDisposable';
 import { useCompositeContext } from '../composite/CompositeContext';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 export type ListboxOptionSkeletonProps = VueToJSXProps<UIProps, ListboxOptionSkeletonPropsToOverride>;
 
@@ -49,6 +50,7 @@ const ListboxOptionSkeleton = defineComponent(
         };
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<ListboxOptionSkeletonProps>()('hasDescription', 'count', 'class'),

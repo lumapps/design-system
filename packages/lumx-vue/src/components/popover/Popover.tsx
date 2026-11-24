@@ -21,6 +21,7 @@ import { usePopoverStyle } from './usePopoverStyle';
 import { useFocusTrap } from '../../composables/useFocusTrap';
 import { useFocus } from '../../composables/useFocus';
 import { useRestoreFocusOnClose } from '../../composables/useRestoreFocusOnClose';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 /**
  * Vue Popover props derived from core PopoverProps.
@@ -136,6 +137,7 @@ const Popover = defineComponent(
             );
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<PopoverProps>()(

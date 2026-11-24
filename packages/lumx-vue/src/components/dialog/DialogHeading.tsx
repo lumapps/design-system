@@ -7,6 +7,7 @@ import { DIALOG_LABEL_KEY, DIALOG_HEADING_COMPONENT_NAME } from '@lumx/core/js/c
 import { useRegisterId } from '../../utils/IdsRegistryContext';
 import { getName, keysOf } from '../../utils/VueToJSX';
 import Heading, { type HeadingProps } from '../heading/Heading';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 export type DialogHeadingProps = HeadingProps;
 
@@ -53,6 +54,7 @@ const DialogHeading = defineComponent(
         return () => <Heading {...headingProps.value}>{slots.default?.()}</Heading>;
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(DIALOG_HEADING_COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<DialogHeadingProps>()(

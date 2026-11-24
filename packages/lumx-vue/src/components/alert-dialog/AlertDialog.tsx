@@ -11,6 +11,7 @@ import Dialog from '../dialog/Dialog';
 import Button from '../button/Button';
 import Icon from '../icon/Icon';
 import Toolbar from '../toolbar/Toolbar';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 type ButtonActionProps = {
     label: string;
@@ -117,6 +118,7 @@ const AlertDialog = defineComponent(
         };
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<AlertDialogProps>()(

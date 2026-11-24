@@ -12,6 +12,7 @@ import { useClassName } from '../../composables/useClassName';
 import { useHasEventListener } from '../../composables/useHasEventListener';
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import Thumbnail, { type ThumbnailProps } from '../thumbnail/Thumbnail';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 export type MosaicThumbnailItem = Omit<ThumbnailProps, 'class'> & { onClick?: (event: Event) => void };
 
@@ -53,6 +54,7 @@ const Mosaic = defineComponent(
         );
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<MosaicProps>()('thumbnails', 'theme', 'class'),

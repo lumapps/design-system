@@ -7,6 +7,7 @@ import { IdsRegistryProvider } from '../../utils/IdsRegistryContext';
 import LightboxContent from './LightboxContent';
 import { emitSchema, LIGHTBOX_PROP_KEYS } from './constants';
 import type { LightboxProps } from './types';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 export type { LightboxProps };
 export { emitSchema };
@@ -24,6 +25,7 @@ const Lightbox = defineComponent(
         );
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: LIGHTBOX_PROP_KEYS,

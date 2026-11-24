@@ -29,6 +29,7 @@ import { Text } from '../text';
 
 import Chip from './Chip';
 import ChipGroup from './ChipGroup';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 /**
  * Props omit 'ref' (handled internally).
@@ -149,6 +150,7 @@ const SelectionChipGroup = defineComponent(
         };
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<SelectionChipGroupProps>()(

@@ -10,6 +10,7 @@ import {
 import { type JSXElement } from '@lumx/core/js/types';
 import { useClassName } from '../../composables/useClassName';
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 export type GridColumnProps = VueToJSXProps<UIProps>;
 
@@ -31,6 +32,7 @@ const GridColumn = defineComponent(
         );
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<GridColumnProps>()('as', 'class', 'gap', 'itemMinWidth', 'maxColumns', 'style'),

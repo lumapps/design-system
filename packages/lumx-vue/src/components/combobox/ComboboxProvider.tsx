@@ -9,6 +9,7 @@ import { getName } from '../../utils/VueToJSX';
 import { provideComboboxContext } from './context/ComboboxContext';
 import { provideCompositeContext } from '../composite/CompositeContext';
 import { useCompositeEvent } from '../composite/useCompositeEvent';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 /**
  * Defines the props of the component.
@@ -60,6 +61,7 @@ const ComboboxProvider = defineComponent(
         return () => slots.default?.();
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMBOBOX_PROVIDER_COMPONENT_NAME),
         inheritAttrs: false,
         props: {

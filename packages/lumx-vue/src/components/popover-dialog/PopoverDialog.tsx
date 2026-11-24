@@ -7,6 +7,7 @@ import { IdsRegistryProvider } from '../../utils/IdsRegistryContext';
 import PopoverDialogContent from './PopoverDialogContent';
 import { emitSchema, POPOVER_DIALOG_PROP_KEYS } from './constants';
 import type { PopoverDialogProps } from './types';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 export type { PopoverDialogProps };
 export { emitSchema };
@@ -24,6 +25,7 @@ const PopoverDialog = defineComponent(
         );
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: POPOVER_DIALOG_PROP_KEYS,

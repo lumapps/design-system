@@ -12,6 +12,7 @@ import { Thumbnail } from '../thumbnail';
 import { useTheme } from '../../composables/useTheme';
 import { useClassName } from '../../composables/useClassName';
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 export type LinkPreviewProps = VueToJSXProps<UIProps, 'TitleHeading' | 'Link' | 'Thumbnail'> & {
     /** Customize the title heading tag. */
@@ -50,6 +51,7 @@ const LinkPreview = defineComponent(
         };
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<LinkPreviewProps>()(

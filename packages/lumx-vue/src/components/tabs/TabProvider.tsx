@@ -5,6 +5,7 @@ import { INIT_STATE, reducer, type Action, type State } from '@lumx/core/js/comp
 
 import { getName } from '../../utils/VueToJSX';
 import { TAB_PROVIDER_INJECT_KEY } from './state';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 export interface TabProviderProps {
     /** Active tab index (controlled mode). */
@@ -73,6 +74,7 @@ const TabProvider = defineComponent(
         return () => slots.default?.();
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(TAB_PROVIDER_COMPONENT_NAME),
         props: {
             activeTabIndex: { required: false },

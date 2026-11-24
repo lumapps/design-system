@@ -13,6 +13,7 @@ import { useClassName } from '../../composables/useClassName';
 import { useHasEventListener } from '../../composables/useHasEventListener';
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import ListItemAction from './ListItemAction';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 export type { ListItemSize };
 
@@ -69,6 +70,7 @@ const ListItem = defineComponent(
         };
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<ListItemProps>()(

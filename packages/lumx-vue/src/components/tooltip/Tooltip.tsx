@@ -18,6 +18,7 @@ import { useInjectTooltipRef } from './useInjectTooltipRef';
 import { provideTooltipContext } from './context';
 import { getName, keysOf, type ClassValue } from '../../utils/VueToJSX';
 import { Portal } from '../../utils/Portal';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 export type { TooltipPlacement };
 
@@ -117,6 +118,7 @@ export const Tooltip = defineComponent(
         };
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<TooltipProps>()(

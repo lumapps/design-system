@@ -10,6 +10,7 @@ import { useTheme } from '../../composables/useTheme';
 import { useClassName } from '../../composables/useClassName';
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { useFitRowsToContent } from './useFitRowsToContent';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 export type RawInputTextareaProps = VueToJSXProps<UIProps>;
 
@@ -80,6 +81,7 @@ const RawInputTextarea = defineComponent(
         };
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName('RawInputTextarea'),
         inheritAttrs: false,
         props: keysOf<RawInputTextareaProps>()('class', 'theme', 'value', 'rows', 'name'),

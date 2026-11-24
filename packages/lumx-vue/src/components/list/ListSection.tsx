@@ -11,6 +11,7 @@ import { useId } from '../../composables/useId';
 import { useClassName } from '../../composables/useClassName';
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { Text } from '../text';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 export type ListSectionProps = VueToJSXProps<UIProps, 'id' | 'Text'>;
 
@@ -38,6 +39,7 @@ const ListSection = defineComponent(
         );
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<ListSectionProps>()('label', 'icon', 'itemsWrapperProps', 'class'),

@@ -10,6 +10,7 @@ import type { JSXElement } from '@lumx/core/js/types';
 
 import { useClassName } from '../../composables/useClassName';
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 /** The inline `style` and the `tabIndex` flow through the attrs. */
 export type ScrollBoxProps = VueToJSXProps<UIProps, 'style' | 'tabIndex'>;
@@ -36,6 +37,7 @@ const ScrollBox = defineComponent(
             });
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<ScrollBoxProps>()('fillSpace', 'scrollSnap', 'class'),

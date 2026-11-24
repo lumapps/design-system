@@ -4,6 +4,7 @@ import { setupListbox } from '@lumx/core/js/components/Listbox/setupListbox';
 import { useId } from '../../composables/useId';
 import { getName } from '../../utils/VueToJSX';
 import { provideCompositeContext } from '../composite/CompositeContext';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 /**
  * Internal standalone listbox provider.
@@ -22,6 +23,7 @@ const ListboxProvider = defineComponent(
         return () => slots.default?.();
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName('ListboxProvider'),
         inheritAttrs: false,
         props: {},

@@ -28,6 +28,7 @@ import { useRestoreFocusOnClose } from '../../composables/useRestoreFocusOnClose
 import { useTransitionVisibility } from '../../composables/useTransitionVisibility';
 import { useDisableBodyScroll } from '../../composables/useDisableBodyScroll';
 import { getName, keysOf, type ClassValue } from '../../utils/VueToJSX';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 export type DialogProps = Pick<BaseDialogProps, 'forceFooterDivider' | 'forceHeaderDivider' | 'isLoading'> &
     HasCloseMode & {
@@ -241,6 +242,7 @@ const Dialog = defineComponent(
         };
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<DialogProps>()(

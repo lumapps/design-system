@@ -11,6 +11,7 @@ import {
 import { useTheme } from '../../composables/useTheme';
 import { useClassName } from '../../composables/useClassName';
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 export type DragHandleProps = VueToJSXProps<UIProps>;
 
@@ -40,6 +41,7 @@ const DragHandle = defineComponent(
         };
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<DragHandleProps>()('class', 'theme'),

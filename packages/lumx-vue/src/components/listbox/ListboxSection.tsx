@@ -15,6 +15,7 @@ import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { useWatchDisposable } from '../../composables/useWatchDisposable';
 import { ListSection } from '../list';
 import { useListboxHandle } from './context/useListboxHandle';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 export type ListboxSectionProps = VueToJSXProps<UIProps, ListboxSectionPropsToOverride | 'hidden' | 'aria-hidden'>;
 
@@ -71,6 +72,7 @@ const ListboxSection = defineComponent(
         };
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<ListboxSectionProps>()('label', 'icon', 'class'),

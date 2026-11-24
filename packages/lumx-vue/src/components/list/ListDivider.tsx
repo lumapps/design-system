@@ -8,6 +8,7 @@ import {
 
 import { useClassName } from '../../composables/useClassName';
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 export type ListDividerProps = VueToJSXProps<UIProps>;
 
@@ -25,6 +26,7 @@ const ListDivider = defineComponent(
         return () => <ListDividerUI {...attrs} className={className.value} />;
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<ListDividerProps>()('class'),

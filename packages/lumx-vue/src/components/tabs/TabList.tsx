@@ -16,6 +16,7 @@ import { useClassName } from '../../composables/useClassName';
 import { useRovingTabIndexContainer } from '../../composables/useRovingTabIndexContainer';
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { TAB_PROVIDER_INJECT_KEY } from './state';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 // aria-label is excluded from declared Vue props — Vue treats aria-* as attrs,
 // so it flows through the {..attrs} spread to the core component.
@@ -70,6 +71,7 @@ const TabList = defineComponent(
         };
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<InternalProps>()('layout', 'position', 'theme', 'class'),

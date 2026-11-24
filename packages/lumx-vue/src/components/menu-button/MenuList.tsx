@@ -13,6 +13,7 @@ import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 
 import { useMenuContext } from './context';
 import { useMenuOpen } from './useMenuOpen';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 /** MenuList props. */
 export type MenuListProps = VueToJSXProps<UIProps, 'id' | 'aria-labelledby'>;
@@ -52,6 +53,7 @@ const MenuList = defineComponent(
             });
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<MenuListProps>()('class'),

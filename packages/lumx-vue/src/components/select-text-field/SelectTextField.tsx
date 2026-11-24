@@ -25,6 +25,7 @@ import { InfiniteScroll } from '@lumx/vue/utils/InfiniteScroll';
 import { useHasEventListener } from '../../composables/useHasEventListener';
 import { useClassName } from '../../composables/useClassName';
 import { useDisableStateProps } from '../../composables/useDisableStateProps';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 /**
  * Props shared across single and multiple selection modes.
@@ -352,6 +353,7 @@ const SelectTextField = defineComponent(
         };
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<SelectTextFieldProps<unknown>>()(

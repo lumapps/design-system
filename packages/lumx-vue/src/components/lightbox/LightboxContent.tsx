@@ -22,6 +22,7 @@ import { useDisableBodyScroll } from '../../composables/useDisableBodyScroll';
 
 import { emitSchema, LIGHTBOX_PROP_KEYS } from './constants';
 import type { LightboxProps } from './types';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 /**
  * Renders the core Lightbox UI, resolving its `aria-labelledby` from the ids registry.
@@ -115,6 +116,7 @@ const LightboxContent = defineComponent(
         };
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName('LightboxContent'),
         inheritAttrs: false,
         props: LIGHTBOX_PROP_KEYS,

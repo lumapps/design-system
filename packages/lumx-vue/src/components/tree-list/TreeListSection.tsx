@@ -16,6 +16,7 @@ import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { ListSection } from '../list';
 import { useOptionalCompositeContext } from '../composite/CompositeContext';
 import { hasContent } from './hasContent';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 export type TreeListSectionProps = VueToJSXProps<UIProps, TreeListSectionPropsToOverride | 'hidden'> & {
     /**
@@ -93,6 +94,7 @@ const TreeListSection = defineComponent(
         };
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<TreeListSectionProps>()('label', 'icon', 'class'),

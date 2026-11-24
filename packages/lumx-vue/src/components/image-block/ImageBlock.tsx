@@ -15,6 +15,7 @@ import { useClassName } from '../../composables/useClassName';
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { Thumbnail, ThumbnailProps } from '../thumbnail';
 import ImageCaption from './ImageCaption';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 export type ImageBlockProps = Omit<VueToJSXProps<UIProps, ImageBlockPropsToOverride>, never> & {
     /** Props to pass to the thumbnail (minus those already set by the ImageBlock props). */
@@ -55,6 +56,7 @@ const ImageBlock = defineComponent(
         };
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<ImageBlockProps>()(

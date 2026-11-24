@@ -15,6 +15,7 @@ import { Popover } from '../popover';
 import type { PopoverProps } from '../popover/Popover';
 import { useComboboxContext } from './context/ComboboxContext';
 import { useComboboxOpen } from './context/useComboboxOpen';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 /**
  * Props type extends the core ComboboxPopover props (via VueToJSXProps) with additional
@@ -56,6 +57,7 @@ const ComboboxPopover = defineComponent(
         };
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<ComboboxPopoverProps>()(

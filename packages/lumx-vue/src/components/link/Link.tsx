@@ -7,6 +7,7 @@ import { useClassName } from '../../composables/useClassName';
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { JSXElement } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 export type LinkProps = VueToJSXProps<UIProps>;
 
@@ -55,6 +56,7 @@ const Link = defineComponent(
         };
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<LinkProps>()(

@@ -23,6 +23,7 @@ import MenuProvider from './MenuProvider';
 import MenuTrigger from './MenuTrigger';
 import MenuPopover, { MenuPopoverProps } from './MenuPopover';
 import MenuList from './MenuList';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 /** Props that MenuButton explicitly declares */
 type MenuButtonBaseProps = VueToJSXProps<UIProps, 'children' | 'triggerProps' | 'onOpen'> & {
@@ -81,6 +82,7 @@ const MenuButton = defineComponent(
         };
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<MenuButtonBaseProps>()('label', 'popoverProps', 'class', 'variant'),

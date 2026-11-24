@@ -13,6 +13,7 @@ import { Popover } from '../popover';
 
 import { useMenuContext } from './context';
 import { useMenuOpen } from './useMenuOpen';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 /** MenusPopover props. */
 export type MenuPopoverProps = VueToJSXProps<UIProps, 'anchorRef' | 'isOpen' | 'handleClose'>;
@@ -42,6 +43,7 @@ const MenuPopover = defineComponent(
             );
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(MENU_POPOVER_COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<MenuPopoverProps>()('placement', 'fitToAnchorWidth', 'class'),

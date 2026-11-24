@@ -18,6 +18,7 @@ import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { IconButton } from '../button';
 import RawInputText from './RawInputText';
 import RawInputTextarea from './RawInputTextarea';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 export type TextFieldProps = VueToJSXProps<UIProps, TextFieldPropsToOverride | 'chips'> & {
     /** Character counter message formatter. Receives remaining character count, returns accessible label (e.g. \"{n} characters remaining\"). */
@@ -204,6 +205,7 @@ const TextField = defineComponent(
         };
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<TextFieldProps>()(

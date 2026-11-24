@@ -15,6 +15,7 @@ import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { provideCompositeContext, useCompositeContext } from '../composite/CompositeContext';
 import { useCompositeList } from '../composite/useCompositeList';
 import { useListboxHandle } from './context/useListboxHandle';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 export type ListboxListProps = VueToJSXProps<UIProps, 'aria-label' | 'aria-busy' | 'aria-multiselectable' | 'id'>;
 
@@ -94,6 +95,7 @@ const ListboxList = defineComponent(
         };
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         // Note: 'aria-label' is intentionally NOT declared as a prop because Vue normalizes

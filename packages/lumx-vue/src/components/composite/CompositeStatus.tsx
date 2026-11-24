@@ -13,6 +13,7 @@ import { Text } from '../text';
 import { useCompositeContext } from './CompositeContext';
 import { useCompositeEvent } from './useCompositeEvent';
 import { useClassName } from '../../composables/useClassName';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 export type CompositeStatusProps = VueToJSXProps<UIProps, 'state'>;
 
@@ -44,6 +45,7 @@ const CompositeStatus = defineComponent(
             );
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<CompositeStatusProps>()(

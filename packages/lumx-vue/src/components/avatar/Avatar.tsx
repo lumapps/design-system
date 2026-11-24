@@ -15,6 +15,7 @@ import { useTheme } from '../../composables/useTheme';
 import { useClassName } from '../../composables/useClassName';
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { Thumbnail, type ThumbnailProps } from '../thumbnail';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 export type { AvatarSize };
 
@@ -82,6 +83,7 @@ const Avatar = defineComponent(
         };
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<AvatarProps>()('image', 'alt', 'size', 'theme', 'linkProps', 'linkAs', 'thumbnailProps', 'class'),
