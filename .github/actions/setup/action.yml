@@ -27,9 +27,9 @@ runs:
             uses: actions/cache@v5
             with:
                 path: '**/node_modules'
-                key: ${{ runner.os }}-node-v${{ inputs.node_version }}-dependency-hash-${{ hashFiles('yarn.lock') }}
+                key: ${{ runner.os }}-node-modules-${{ hashFiles('.nvmrc', 'yarn.lock') }}
                 restore-keys: |
-                    ${{ runner.os }}-node-v${{ inputs.node_version }}-dependency-hash-
+                    ${{ runner.os }}-node-modules-
 
         -   name: "Install dependencies"
             if: inputs.focus == ''
