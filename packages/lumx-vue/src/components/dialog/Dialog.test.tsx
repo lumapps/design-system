@@ -127,6 +127,19 @@ describe('<Dialog />', () => {
                 expect(emitted('close')).toBeTruthy();
             });
 
+            it('should set v-model:is-open to false on Escape key press', async () => {
+                render({
+                    template:
+                        '<div><Dialog v-model:is-open="isOpen" :disable-body-scroll="false">Content</Dialog><span data-testid="out">{{ isOpen }}</span></div>',
+                    components: { Dialog },
+                    data() {
+                        return { isOpen: true };
+                    },
+                });
+                await userEvent.keyboard('[Escape]');
+                expect(screen.getByTestId('out')).toHaveTextContent('false');
+            });
+
             it('should not emit close on Escape when preventAutoClose is true', async () => {
                 const { emitted } = render(Dialog, {
                     props: { isOpen: true, disableBodyScroll: false, preventAutoClose: true },

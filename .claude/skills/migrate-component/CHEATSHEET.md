@@ -151,7 +151,7 @@ const Component = defineComponent(
 | `className`      | `className` | `useClassName(() => props.class).value`             | Merges `props.class` + `attrs.className` via `classNames.join` |
 | `tabIndex` etc.  | `tabIndex`  | `useAttrFallback(() => attrs.tabindex, 'tabIndex')` | For other React-named attrs landing in `$attrs`                |
 | `theme`          | `theme`     | `useTheme()`                                        | Same                                                           |
-| `onChange`       | `onChange`  | `emit('change')`                                    | Vue uses emit                                                  |
+| `onChange`       | `onChange`  | `emit('change')` + `emit('update:<prop>')`          | Vue uses emit; `update:<prop>` enables `v-model:<prop>`        |
 
 ## Test File Templates
 

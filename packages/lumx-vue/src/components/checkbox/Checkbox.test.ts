@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/vue';
 import userEvent from '@testing-library/user-event';
 
 import BaseCheckboxTests, { setup } from '@lumx/core/js/components/Checkbox/Tests';
-import { CLASSNAME, CheckboxProps } from '@lumx/core/js/components/Checkbox';
+import { CLASSNAME, CheckboxProps, INTERMEDIATE_STATE } from '@lumx/core/js/components/Checkbox';
 import { commonTestsSuiteVTL, SetupRenderOptions } from '@lumx/vue/testing';
 
 import { Checkbox } from '.';
@@ -64,6 +64,45 @@ describe('<Checkbox />', () => {
             // Should not trigger change event
             if (input) await userEvent.click(input);
             expect(emitted('change')).toBeUndefined();
+        });
+
+        it('should update v-model:is-checked when clicked', async () => {
+            render({
+                template:
+                    '<div><Checkbox v-model:is-checked="checked" id="test" label="Test label" /><span data-testid="out">{{ checked }}</span></div>',
+                components: { Checkbox },
+                data() {
+                    return { checked: false };
+                },
+            });
+            await userEvent.click(screen.getByRole('checkbox'));
+
+            expect(screen.getByTestId('out')).toHaveTextContent('true');
+        });
+
+        it('should leave v-model:is-checked unchanged when the checkbox is disabled', async () => {
+            render({
+                template:
+                    '<div><Checkbox v-model:is-checked="checked" id="test" label="Test label" :is-disabled="true" /><span data-testid="out">{{ checked }}</span></div>',
+                components: { Checkbox },
+                data() {
+                    return { checked: false };
+                },
+            });
+            await userEvent.click(screen.getByRole('checkbox'));
+
+            expect(screen.getByTestId('out')).toHaveTextContent('false');
+        });
+
+        it('should report a boolean on update:isChecked when starting from the intermediate state', async () => {
+            const { emitted } = render(Checkbox, {
+                props: { id: 'test', label: 'Test label', isChecked: INTERMEDIATE_STATE },
+            });
+            await userEvent.click(screen.getByRole('checkbox'));
+
+            const updateEvents = emitted('update:isChecked');
+            expect(updateEvents).toHaveLength(1);
+            expect(typeof (updateEvents as any)[0][0]).toBe('boolean');
         });
     });
 

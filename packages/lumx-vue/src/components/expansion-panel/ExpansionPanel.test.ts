@@ -60,6 +60,24 @@ describe('<ExpansionPanel />', () => {
             expect(emitted('close')).toHaveLength(1);
             expect(emitted('open')).toBeFalsy();
         });
+
+        it('should toggle v-model:is-open when the toggle button is clicked', async () => {
+            render({
+                template:
+                    '<div><ExpansionPanel v-model:is-open="isOpen" :toggle-button-props="{ label: \'Toggle\' }" label="Panel" /><span data-testid="out">{{ isOpen }}</span></div>',
+                components: { ExpansionPanel },
+                data() {
+                    return { isOpen: false };
+                },
+            });
+            const button = screen.getByRole('button', { name: /Toggle/i });
+
+            await userEvent.click(button);
+            expect(screen.getByTestId('out')).toHaveTextContent('true');
+
+            await userEvent.click(button);
+            expect(screen.getByTestId('out')).toHaveTextContent('false');
+        });
     });
 
     commonTestsSuiteVTL(setupPanel, {

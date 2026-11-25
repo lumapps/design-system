@@ -22,6 +22,8 @@ const DEFAULT_PROPS: Partial<TabProviderProps> = {
 
 export const emitSchema = {
     change: (index: number) => typeof index === 'number',
+    /** Model update for `v-model:active-tab-index`. */
+    'update:activeTabIndex': (index: number) => typeof index === 'number',
 };
 
 /**
@@ -66,6 +68,7 @@ const TabProvider = defineComponent(
             (newIndex) => {
                 if (props.activeTabIndex !== newIndex) {
                     emit('change', newIndex);
+                    emit('update:activeTabIndex', newIndex);
                 }
             },
         );

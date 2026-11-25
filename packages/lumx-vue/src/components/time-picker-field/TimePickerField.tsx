@@ -48,6 +48,9 @@ export const emitSchema = {
      */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     change: (_newValue?: Date) => true,
+    /** Model update for `v-model:value`. */
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    'update:value': (_newValue?: Date) => true,
 };
 
 /**
@@ -90,6 +93,11 @@ const TimePickerField = defineComponent(
             };
         });
 
+        const emitValueChange = (date?: Date) => {
+            emit('change', date);
+            emit('update:value', date);
+        };
+
         // Clamp the current value to bounds whenever enforce mode is set and value/bounds change.
         watch(
             () => [boundsMode.value, props.value, step.value, props.minTime, props.maxTime],
@@ -103,7 +111,7 @@ const TimePickerField = defineComponent(
                 const clamped = snapTimeToBounds(timeOfDay, props.minTime, props.maxTime, step.value);
 
                 if (clamped.hour !== props.value.getHours() || clamped.minute !== props.value.getMinutes()) {
-                    emit('change', getDateAtTime(clamped, props.value));
+                    emitValueChange(getDateAtTime(clamped, props.value));
                 }
             },
             { immediate: true },
@@ -111,7 +119,7 @@ const TimePickerField = defineComponent(
 
         const handleChange: UIProps['handleChange'] = (next) => {
             const date = next ? getDateAtTime(next, props.value) : undefined;
-            emit('change', date);
+            emitValueChange(date);
         };
 
         const handleSearch: UIProps['handleSearch'] = (typed) => {
@@ -130,7 +138,7 @@ const TimePickerField = defineComponent(
             const time = snapTimeToBounds(parsed, props.minTime, props.maxTime, step.value);
             if (props.value && isDateOnTime(props.value, time)) return;
 
-            emit('change', getDateAtTime(time, props.value));
+            emitValueChange(getDateAtTime(time, props.value));
         };
 
         return () => {

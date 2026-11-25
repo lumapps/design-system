@@ -529,6 +529,52 @@ describe('<SelectTextField>', () => {
             expect(textField).toHaveClass('from-class-name-attr');
         });
 
+        // ─── v-model ──────────────────────────────────────────────
+
+        it('should update v-model:value when an option is selected', async () => {
+            render({
+                template:
+                    '<div><SelectTextField v-model:value="value" selection-type="single" label="Select a fruit" :options="options" get-option-id="id" get-option-name="name" filter="auto" :translations="translations" /><span data-testid="out">{{ value?.name }}</span></div>',
+                components: { SelectTextField },
+                data() {
+                    return { options: FRUITS, value: undefined, translations: TRANSLATIONS };
+                },
+            });
+            const user = userEvent.setup();
+            await user.click(getInput());
+            const option = await waitFor(() => {
+                const el = document.body.querySelector<HTMLElement>('[role="option"][data-value="banana"]');
+                if (!el) throw new Error('option not found');
+                return el;
+            });
+            await user.click(option);
+
+            await waitFor(() => {
+                expect(document.body.querySelector('[data-testid="out"]')).toHaveTextContent('Banana');
+            });
+        });
+
+        it('should set v-model:value to undefined when the clear button is clicked', async () => {
+            render({
+                template:
+                    '<div><SelectTextField v-model:value="value" selection-type="single" label="Select a fruit" :options="options" get-option-id="id" get-option-name="name" filter="auto" :translations="translations" /><span data-testid="out">{{ value?.name ?? \'none\' }}</span></div>',
+                components: { SelectTextField },
+                data() {
+                    return { options: FRUITS, value: FRUITS[0], translations: TRANSLATIONS };
+                },
+            });
+            const clearButton = await waitFor(() => {
+                const el = document.body.querySelector<HTMLElement>(
+                    'button[aria-label="Clear"], .lumx-text-field__input-clear',
+                );
+                if (!el) throw new Error('clear button not found');
+                return el;
+            });
+            await fireEvent.click(clearButton);
+
+            expect(document.body.querySelector('[data-testid="out"]')).toHaveTextContent('none');
+        });
+
         // ─── aria-disabled normalization ─────────────────────────
 
         /*
@@ -587,6 +633,13 @@ describe('<SelectTextField>', () => {
                 expectTypeOf<SingleEmit>().toBeCallableWith('change', undefined);
                 expectTypeOf<MultipleEmit>().toBeCallableWith('change', [FRUIT]);
                 expectTypeOf<MultipleEmit>().toBeCallableWith('change', undefined);
+            });
+
+            it('narrows the update:value payload per selectionType', () => {
+                expectTypeOf<SingleEmit>().toBeCallableWith('update:value', FRUIT);
+                expectTypeOf<SingleEmit>().toBeCallableWith('update:value', undefined);
+                expectTypeOf<MultipleEmit>().toBeCallableWith('update:value', [FRUIT]);
+                expectTypeOf<MultipleEmit>().toBeCallableWith('update:value', undefined);
             });
 
             it('types common event payloads on $emit', () => {

@@ -13,7 +13,10 @@ export { emitSchema };
 
 const Lightbox = defineComponent(
     (props: LightboxProps, { emit, slots, attrs }) => {
-        const handleClose = () => emit('close');
+        const handleClose = () => {
+            emit('close');
+            emit('update:isOpen', false);
+        };
 
         return () => (
             <IdsRegistryProvider>

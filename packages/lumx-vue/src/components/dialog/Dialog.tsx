@@ -65,6 +65,8 @@ export type DialogProps = Pick<BaseDialogProps, 'forceFooterDivider' | 'forceHea
 export const emitSchema = {
     close: () => true,
     visibilityChange: (isVisible: boolean) => typeof isVisible === 'boolean',
+    /** Model update for `v-model:is-open`. Only ever sends `false`: the app opens the dialog itself. */
+    'update:isOpen': (isOpen: boolean) => typeof isOpen === 'boolean',
 };
 
 /**
@@ -113,7 +115,10 @@ const Dialog = defineComponent(
         // Close on escape (a tooltip or popover opened inside registers after the dialog and so gets the escape first).
         // Non-modal: the page stays usable, so only close when the focus is inside the dialog.
         const shouldPreventCloseOnEscape = computed(() => props.preventAutoClose || props.preventCloseOnEscape);
-        const handleClose = () => emit('close');
+        const handleClose = () => {
+            emit('close');
+            emit('update:isOpen', false);
+        };
         const onEscape = () => {
             if (isModal.value || isFocusWithin(wrapperRef.value)) handleClose();
         };

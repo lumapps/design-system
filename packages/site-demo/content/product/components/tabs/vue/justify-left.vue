@@ -1,6 +1,6 @@
 <template>
     <div style="min-width: 260px">
-        <TabProvider :active-tab-index="activeTab" @change="activeTab = $event">
+        <TabProvider v-model:active-tab-index="activeTab">
             <TabList :theme="theme" :layout="TabListLayout.clustered" aria-label="Tab list">
                 <Tab label="Tab 1" />
                 <Tab label="Tab 2" />

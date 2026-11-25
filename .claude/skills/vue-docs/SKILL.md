@@ -58,7 +58,7 @@ defineProps<{ theme?: Theme }>(); // only if withThemeSwitcher
 -   **FlexBox alignment props:** React `hAlign` maps to `horizontal-align` in Vue, and React `vAlign` maps to `vertical-align` in Vue
 -   **Events:** React callbacks to Vue events (`onChange={handler}` -> `@change="handler"`, `onClick` -> `@click`)
 -   **State:** `useState` to `ref()` (`const [checked, setChecked] = useState(false)` -> `const checked = ref(false)`)
--   **State updates in events:** `@change="checked = $event"` or `@click="active = !active"`
+-   **State updates in events:** `v-model:<prop>="state"` when the component emits `update:<prop>` (e.g. `v-model:is-checked="checked"`), else `@change="checked = $event"` or `@click="active = !active"`
 -   **Icons:** Import from `@lumx/icons`
 -   **Missing components:** If a React demo uses a component not in `@lumx/vue`, substitute with available components or plain HTML
 -   **Always verify** that imported components exist in `@lumx/vue` before using them

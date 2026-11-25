@@ -1,4 +1,5 @@
 import { render, screen, cleanup } from '@testing-library/vue';
+import userEvent from '@testing-library/user-event';
 import { nextTick } from 'vue';
 import BasePopoverDialogTests, { setup } from '@lumx/core/js/components/PopoverDialog/Tests';
 import { DialogLabelRegistryTests } from '@lumx/core/js/components/Dialog/labelRegistryTests';
@@ -73,6 +74,21 @@ describe('<PopoverDialog />', () => {
             expect(dialog).not.toHaveAttribute('aria-labelledby');
             // The raw (un-resolved) prop must not leak through as a stray attribute alongside the resolved one.
             expect(dialog).not.toHaveAttribute('arialabel');
+        });
+    });
+
+    describe('Vue', () => {
+        it('should set v-model:is-open to false on Escape key press', async () => {
+            render({
+                template:
+                    '<div><PopoverDialog v-model:is-open="isOpen" :use-portal="false" aria-label="Dialog"><div /></PopoverDialog><span data-testid="out">{{ isOpen }}</span></div>',
+                components: { PopoverDialog },
+                data() {
+                    return { isOpen: true };
+                },
+            });
+            await userEvent.keyboard('[Escape]');
+            expect(screen.getByTestId('out')).toHaveTextContent('false');
         });
     });
 

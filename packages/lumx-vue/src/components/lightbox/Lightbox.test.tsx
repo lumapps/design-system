@@ -67,6 +67,19 @@ describe('<Lightbox />', () => {
                 fireEvent.mouseDown(document.body);
                 expect(emitted('close')).toBeTruthy();
             });
+
+            it('should set v-model:is-open to false on Escape key press', async () => {
+                render({
+                    template:
+                        '<div><Lightbox v-model:is-open="isOpen" :parent-element="parentEl" /><span data-testid="out">{{ isOpen }}</span></div>',
+                    components: { Lightbox },
+                    data() {
+                        return { isOpen: true, parentEl: document.createElement('div') };
+                    },
+                });
+                await userEvent.keyboard('[Escape]');
+                expect(screen.getByTestId('out')).toHaveTextContent('false');
+            });
         });
 
         // Registry link/absent cases are covered by the shared DialogLabelRegistryTests above; mechanics

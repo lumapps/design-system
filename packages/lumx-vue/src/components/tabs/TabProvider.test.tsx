@@ -197,6 +197,30 @@ describe('TabProvider', () => {
         });
     });
 
+    describe('v-model', () => {
+        it('should update v-model:active-tab-index when a tab is clicked', async () => {
+            render({
+                template: `<div>
+                    <TabProvider v-model:active-tab-index="index">
+                        <TabList aria-label="Tab list"><Tab label="Tab 1" /><Tab label="Tab 2" /></TabList>
+                        <TabPanel>Tab 1 content</TabPanel>
+                        <TabPanel>Tab 2 content</TabPanel>
+                    </TabProvider>
+                    <span data-testid="out">{{ index }}</span>
+                </div>`,
+                components: { TabProvider, TabList, Tab, TabPanel },
+                data() {
+                    return { index: 0 };
+                },
+            });
+            await flushPromises();
+            await userEvent.click(query.tab('Tab 2'));
+
+            await waitFor(() => expect(screen.getByTestId('out')).toHaveTextContent('1'));
+            checkTabActive('Tab 2');
+        });
+    });
+
     describe('not lazy', () => {
         it('should render tab panel every time', async () => {
             await setup({ isLazy: false });

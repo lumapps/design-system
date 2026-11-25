@@ -97,14 +97,20 @@ const emitSchema = {
     clear: (_event?: MouseEvent) => true,
     /** Dropdown opened or closed. */
     open: (_isOpen: boolean) => true,
+    /** Model update for `v-model:value`. Typed payload restored via `SelectTextFieldEmits`. */
+    'update:value': (_newValue?: unknown) => true,
 };
 /* eslint-enable @typescript-eslint/no-unused-vars */
 
 /**
  * SelectTextField emits (adapting to the selection type).
  */
-type SelectTextFieldEmits<O, S extends 'single' | 'multiple'> = Omit<EmitsOf<typeof emitSchema>, 'change'> & {
+type SelectTextFieldEmits<O, S extends 'single' | 'multiple'> = Omit<
+    EmitsOf<typeof emitSchema>,
+    'change' | 'update:value'
+> & {
     change: (newValue: (S extends 'multiple' ? O[] : O) | undefined) => void;
+    'update:value': (newValue: (S extends 'multiple' ? O[] : O) | undefined) => void;
 };
 
 type SingleSelectTextFieldPublicProps<O> = SingleSelectTextFieldProps<O> &
@@ -196,6 +202,11 @@ const SelectTextField = defineComponent(
             return getOptionDisplayName(props.value, props.getOptionName, props.getOptionId);
         });
 
+        const emitValueChange = (next?: unknown) => {
+            emit('change', next);
+            emit('update:value', next);
+        };
+
         // Map option id selection to option object(s) selection (delegates the toggle math to core).
         const handleSelect = (selectedOption: { value: string }) => {
             const next = toggleSelection(
@@ -207,7 +218,7 @@ const SelectTextField = defineComponent(
             );
             // In multi mode, `toggleSelection` skips when no option matches and returns the
             // unchanged current array — the emit is a no-op for the consumer.
-            emit('change', next);
+            emitValueChange(next);
 
             // Reset search state after selection.
             isSearching.value = false;
@@ -223,13 +234,13 @@ const SelectTextField = defineComponent(
 
             // When the user clears the input (single mode only), clear the selection too.
             if (!isMultiple.value && inputValue === '' && props.value !== undefined && props.value !== null) {
-                emit('change', undefined);
+                emitValueChange(undefined);
             }
         };
 
         // Handle clear button click (single mode only).
         const handleClear = (event?: MouseEvent) => {
-            emit('change', undefined);
+            emitValueChange(undefined);
             isSearching.value = false;
             searchText.value = '';
             emit('search', '');
@@ -272,7 +283,7 @@ const SelectTextField = defineComponent(
                         theme={props.theme}
                         getOptionId={props.getOptionId}
                         getOptionName={props.getOptionName}
-                        onChange={(newValue) => emit('change', newValue)}
+                        onChange={(newValue) => emitValueChange(newValue)}
                         inputRef={inputElRef.value}
                         isDisabled={isAnyDisabled.value}
                         label={props.translations.chipGroupLabel ?? props.label}

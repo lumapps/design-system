@@ -1,10 +1,5 @@
 <template>
-    <TimePickerField
-        label="Time"
-        :value="value"
-        :translations="TRANSLATIONS"
-        @change="value = $event"
-    />
+    <TimePickerField v-model:value="value" label="Time" :translations="TRANSLATIONS" />
 </template>
 
 <script setup lang="ts">

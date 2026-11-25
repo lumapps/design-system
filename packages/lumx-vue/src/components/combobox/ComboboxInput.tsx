@@ -46,6 +46,11 @@ const ComboboxInput = defineComponent(
 
         const inputEl = ref<HTMLInputElement | null>(null);
 
+        const emitValueChange = (value: string, name?: string, event?: Event) => {
+            emit('change', value, name, event);
+            emit('update:value', value);
+        };
+
         // Get the input element from the TextField component after mount
         onMounted(() => {
             const input = inputEl.value;
@@ -57,7 +62,7 @@ const ComboboxInput = defineComponent(
                         emit('select', option);
                     },
                     onChange(value) {
-                        emit('change', value);
+                        emitValueChange(value);
                     },
                     selectionMode: props.selectionMode,
                     filter: props.filter,
@@ -95,8 +100,8 @@ const ComboboxInput = defineComponent(
             // Event handlers are framework-specific and forwarded through the core template's
             // spread to the TextField adapter. They are not in the core ComboboxInputProps type.
             const eventHandlers = {
-                onChange: (value: string, name?: string, event?: Event) => emit('change', value, name, event),
-                onInput: (value: string) => emit('change', value),
+                onChange: (value: string, name?: string, event?: Event) => emitValueChange(value, name, event),
+                onInput: (value: string) => emitValueChange(value),
                 onFocus: (event?: FocusEvent) => emit('focus', event),
                 onBlur: (event?: FocusEvent) => emit('blur', event),
                 onClear: (event?: MouseEvent) => emit('clear', event),
@@ -180,6 +185,8 @@ const ComboboxInput = defineComponent(
             blur: (_event?: FocusEvent) => true,
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
             clear: (_event?: MouseEvent) => true,
+            /** Model update for `v-model:value`. */
+            'update:value': (value: string) => typeof value === 'string',
         },
     },
 );

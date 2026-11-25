@@ -39,6 +39,8 @@ export interface AlertDialogProps extends Pick<BaseAlertDialogProps, 'kind' | 't
 
 export const emitSchema = {
     close: () => true,
+    /** Model update for `v-model:is-open`. Only ever sends `false`: the app opens the dialog itself. */
+    'update:isOpen': (isOpen: boolean) => typeof isOpen === 'boolean',
 };
 
 /**
@@ -70,7 +72,10 @@ const AlertDialog = defineComponent(
             const dialogPassthrough = {
                 isOpen: props.isOpen,
                 parentElement: props.parentElement,
-                onClose: () => emit('close'),
+                onClose: () => {
+                    emit('close');
+                    emit('update:isOpen', false);
+                },
             };
 
             // Inject vnode lifecycle hooks into button props to capture DOM elements for focus

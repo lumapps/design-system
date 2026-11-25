@@ -1,10 +1,9 @@
 <template>
     <Button ref="triggerRef" @click="isOpen = true">Open LightBox</Button>
     <Lightbox
-        :is-open="isOpen"
+        v-model:is-open="isOpen"
         :parent-element="(triggerRef as any)?.$el"
         :close-button-props="{ label: 'Close' }"
-        @close="isOpen = false"
     >
         <FlexBox vertical-align="center" horizontal-align="center" style="height: 100%">
             <Thumbnail alt="Portrait image" image="https://picsum.photos/id/653/275/500" />

@@ -48,6 +48,8 @@ export type PopoverProps = VueToJSXProps<
 
 export const emitSchema = {
     close: () => true,
+    /** Model update for `v-model:is-open`. Only ever sends `false`: the app opens the popover itself. */
+    'update:isOpen': (isOpen: boolean) => typeof isOpen === 'boolean',
 };
 
 const Popover = defineComponent(
@@ -89,6 +91,7 @@ const Popover = defineComponent(
         // Close handler using emit
         const handleClose = () => {
             emit('close');
+            emit('update:isOpen', false);
         };
 
         // Escape key handling

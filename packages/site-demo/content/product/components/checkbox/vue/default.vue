@@ -1,12 +1,11 @@
 <template>
-    <Checkbox label="Checkbox" :is-checked="checked1" :theme="theme" @change="checked1 = $event" />
+    <Checkbox label="Checkbox" v-model:is-checked="checked1" :theme="theme" />
 
     <Checkbox
         label="Checkbox with help"
         helper="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-        :is-checked="checked2"
+        v-model:is-checked="checked2"
         :theme="theme"
-        @change="checked2 = $event"
     />
 
     <Checkbox
@@ -16,7 +15,7 @@
         :theme="theme"
     />
 
-    <Checkbox label="Checkbox intermediate state" :is-checked="checked3" :theme="theme" @change="checked3 = $event" />
+    <Checkbox label="Checkbox intermediate state" v-model:is-checked="checked3" :theme="theme" />
 </template>
 
 <script setup lang="ts">

@@ -1,5 +1,6 @@
 import { defineComponent, ref } from 'vue';
-import { render } from '@testing-library/vue';
+import { render, screen } from '@testing-library/vue';
+import userEvent from '@testing-library/user-event';
 
 import timePickerFieldTests, { TRANSLATIONS } from '@lumx/core/js/components/TimePickerField/Tests';
 import { getByClassName } from '@lumx/core/testing/queries';
@@ -50,6 +51,21 @@ describe('<TimePickerField>', () => {
             const beforeElement = getByClassName(document.body, 'lumx-text-field__before-element');
             expect(beforeElement).toHaveTextContent('Before slot');
             expect(beforeElement).not.toHaveTextContent('Before prop');
+        });
+
+        it('should update v-model:value when an option is selected', async () => {
+            render({
+                template:
+                    '<div><TimePickerField v-model:value="value" label="Start" locale="en-US" :translations="translations" /><span data-testid="out">{{ value ? `${value.getHours()}:${value.getMinutes()}` : \'\' }}</span></div>',
+                components: { TimePickerField },
+                data() {
+                    return { value: undefined as Date | undefined, translations: TRANSLATIONS };
+                },
+            });
+            await userEvent.click(screen.getByRole('combobox'));
+            await userEvent.click(screen.getByRole('option', { name: '10:30 AM' }));
+
+            expect(screen.getByTestId('out')).toHaveTextContent('10:30');
         });
     });
 });

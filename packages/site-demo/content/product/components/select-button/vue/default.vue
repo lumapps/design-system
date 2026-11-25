@@ -1,11 +1,5 @@
 <template>
-    <SelectButton
-        label="Select a fruit"
-        :options="FRUITS"
-        :get-option-id="String"
-        :value="value"
-        @change="(newValue) => (value = newValue)"
-    />
+    <SelectButton label="Select a fruit" :options="FRUITS" :get-option-id="String" v-model:value="value" />
 </template>
 
 <script setup lang="ts">
