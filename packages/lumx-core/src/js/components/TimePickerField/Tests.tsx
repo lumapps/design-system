@@ -3,6 +3,7 @@ import { screen } from '@testing-library/dom';
 import { vi } from 'vitest';
 
 import { getDateAtTime } from '../../utils/time';
+import { getByClassName } from '../../../testing/queries';
 
 export const TRANSLATIONS = {
     clearLabel: 'Clear',
@@ -61,6 +62,11 @@ export default function timePickerFieldTests({ components, renderWithState }: Ti
             const inputValue = (screen.getByRole('combobox') as HTMLInputElement).value;
             expect(inputValue).toMatch(/^2:30/);
             expect(inputValue.toUpperCase()).toContain('PM');
+        });
+
+        it('renders beforeElement in the field', () => {
+            renderWithState(defaultTemplate, { beforeElement: 'Before' });
+            expect(getByClassName(document.body, 'lumx-text-field__before-element')).toHaveTextContent('Before');
         });
     });
 

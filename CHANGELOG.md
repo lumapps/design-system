@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   `@lumx/react`, `@lumx/vue`:
+    -   `TextField`, `Combobox.Input`, `SelectTextField`, `TimePickerField`: add the `beforeElement` prop (and the `#beforeElement` slot in Vue) to show a custom element at the start of the field.
+
 ## [4.29.0][] - 2026-11-23
 
 ### Added

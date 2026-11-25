@@ -1,7 +1,8 @@
 import { defineComponent, ref } from 'vue';
 import { render } from '@testing-library/vue';
 
-import timePickerFieldTests from '@lumx/core/js/components/TimePickerField/Tests';
+import timePickerFieldTests, { TRANSLATIONS } from '@lumx/core/js/components/TimePickerField/Tests';
+import { getByClassName } from '@lumx/core/testing/queries';
 
 import { TimePickerField } from '.';
 
@@ -38,5 +39,17 @@ describe('<TimePickerField>', () => {
     timePickerFieldTests({
         components: { TimePickerField },
         renderWithState,
+    });
+
+    describe('Vue', () => {
+        it('should give precedence to the beforeElement slot over the prop', () => {
+            render(TimePickerField, {
+                props: { label: 'Start time', translations: TRANSLATIONS, beforeElement: 'Before prop' },
+                slots: { beforeElement: 'Before slot' },
+            });
+            const beforeElement = getByClassName(document.body, 'lumx-text-field__before-element');
+            expect(beforeElement).toHaveTextContent('Before slot');
+            expect(beforeElement).not.toHaveTextContent('Before prop');
+        });
     });
 });

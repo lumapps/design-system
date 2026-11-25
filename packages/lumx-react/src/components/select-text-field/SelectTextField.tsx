@@ -39,6 +39,11 @@ interface BaseSelectTextFieldProps<O = any> extends BaseSelectTextFieldWrapperPr
     /** Content to render before the options list. */
     beforeOptions?: React.ReactNode;
     /**
+     * Element to display at the start of the field, after the icon.
+     * Mark it as decorative (`aria-hidden`) when the input text gives the same information.
+     */
+    beforeElement?: React.ReactNode;
+    /**
      * Props forwarded to the Combobox.Popover.
      * Set to `false` to render the list inline below the text field, with no popover (the list is always visible).
      * The parent must give the list a bounded height (flex column) so that the list scrolls.
@@ -151,6 +156,7 @@ export const SelectTextField = <O,>(props: SelectTextFieldProps<O>) => {
         // Load more
         onLoadMore,
         beforeOptions,
+        beforeElement,
         // Popover
         popoverProps,
         // Theme
@@ -311,6 +317,7 @@ export const SelectTextField = <O,>(props: SelectTextFieldProps<O>) => {
             inputProps: {
                 ...consumerInputProps,
                 labelProps: labelProps ?? consumerInputProps?.labelProps,
+                beforeElement: beforeElement ?? consumerInputProps?.beforeElement,
                 placeholder,
                 icon,
                 value: displayValue,

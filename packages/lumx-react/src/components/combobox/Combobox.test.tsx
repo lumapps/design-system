@@ -90,6 +90,11 @@ describe('<Combobox>', () => {
                 defaultTheme: 'light',
             },
         });
+
+        it('should render beforeElement in the input', () => {
+            const { element } = setup({ beforeElement: <span>Before</span> });
+            expect(getByClassName(element, `${TEXT_FIELD_CLASSNAME}__before-element`)).toHaveTextContent('Before');
+        });
     });
 
     // ── Combobox.Button — commonTestsSuiteRTL ─────────────────────

@@ -33,6 +33,11 @@ import { useDisableStateProps } from '../../composables/useDisableStateProps';
 interface BaseSelectTextFieldProps<O = any> extends Omit<BaseSelectTextFieldWrapperProps<O>, HyphenatedAriaProps> {
     /** Content to render before the options list. */
     beforeOptions?: JSXElement;
+    /**
+     * Element to display at the start of the field, after the icon.
+     * Mark it as decorative (`aria-hidden`) when the input text gives the same information.
+     */
+    beforeElement?: JSXElement;
     /** CSS class. */
     class?: ClassValue;
 }
@@ -310,6 +315,9 @@ const SelectTextField = defineComponent(
                     inputProps: {
                         ...props.inputProps,
                         labelProps: props.labelProps ?? props.inputProps?.labelProps,
+                        beforeElement: (slots.beforeElement?.() ??
+                            props.beforeElement ??
+                            props.inputProps?.beforeElement) as JSXElement | undefined,
                         placeholder: props.placeholder,
                         icon: props.icon,
                         value: displayValue.value,
@@ -385,6 +393,7 @@ const SelectTextField = defineComponent(
             'popoverProps',
             'translations',
             'beforeOptions',
+            'beforeElement',
             'openOnFocus',
             'class',
             'theme',

@@ -1,14 +1,15 @@
 import { mdiTranslate } from '@lumx/icons';
 import type { SetupStoriesOptions } from '@lumx/core/stories/types';
 import { loremIpsum } from '@lumx/core/stories/utils/lorem';
+import { AVATAR_IMAGES } from '@lumx/core/stories/controls/image';
 
 export function setup({
     component: TextField,
-    components: { Chip, IconButton, Typography },
+    components: { Avatar, Chip, IconButton, Typography },
     decorators: { withValueOnChange, withCombinations },
 }: SetupStoriesOptions<{
     decorators: 'withValueOnChange' | 'withCombinations';
-    components: { Chip: any; IconButton: any; Typography: any };
+    components: { Avatar: any; Chip: any; IconButton: any; Typography: any };
 }>) {
     const meta = {
         component: TextField,
@@ -16,6 +17,7 @@ export function setup({
             clearButtonProps: { control: false },
             chips: { control: false },
             afterElement: { control: false },
+            beforeElement: { control: false },
             onClear: { action: true },
         },
         decorators: [withValueOnChange({})],
@@ -126,6 +128,55 @@ export function setup({
         ),
     };
 
+    /** Custom element at the start */
+    const WithBeforeElement = {
+        render: (args: any) => (
+            <TextField
+                {...args}
+                beforeElement={
+                    <span
+                        aria-hidden="true"
+                        style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: 'red' }}
+                    />
+                }
+            />
+        ),
+    };
+
+    /** Custom element at the start, together with the icon */
+    const WithBeforeElementAndIcon = {
+        render: (args: any) => (
+            <TextField
+                {...args}
+                icon={mdiTranslate}
+                beforeElement={<Avatar size="xs" image={AVATAR_IMAGES.avatar1} alt="User avatar" />}
+            />
+        ),
+    };
+
+    /** Custom element at the start of a multiline field */
+    const WithBeforeElementMultiline = {
+        render: (args: any) => (
+            <TextField
+                {...args}
+                multiline
+                value={loremIpsum('short')}
+                beforeElement={<Avatar size="xs" image={AVATAR_IMAGES.avatar1} alt="User avatar" />}
+            />
+        ),
+    };
+
+    /** Custom element at the start of a disabled field */
+    const WithBeforeElementDisabled = {
+        render: (args: any) => (
+            <TextField
+                {...args}
+                isDisabled
+                beforeElement={<Avatar size="xs" image={AVATAR_IMAGES.avatar1} alt="User avatar" />}
+            />
+        ),
+    };
+
     /** Disabled state */
     const Disabled = {
         args: {
@@ -158,6 +209,10 @@ export function setup({
         MaxLength,
         WithAfterElement,
         WithChips,
+        WithBeforeElement,
+        WithBeforeElementAndIcon,
+        WithBeforeElementMultiline,
+        WithBeforeElementDisabled,
         Disabled,
     };
 }

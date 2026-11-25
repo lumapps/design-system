@@ -8,12 +8,13 @@ import { setup, FRUITS, type Fruit } from '@lumx/core/js/components/SelectTextFi
 import { MULTI_TRANSLATIONS } from '@lumx/core/js/components/SelectTextField/Tests';
 
 import { SelectTextField } from '.';
+import { Avatar } from '../avatar';
 import { Chip } from '../chip';
 import { Icon } from '../icon';
 import { Combobox } from '../combobox';
 
 const { meta, ...stories } = setup({
-    components: { SelectTextField },
+    components: { Avatar, SelectTextField },
     decorators: { withValueOnChange, withWrapper },
 });
 
@@ -40,6 +41,8 @@ export const MultipleDisabled = { ...stories.MultipleDisabled };
 export const Loading = { ...stories.Loading };
 export const LoadingMore = { ...stories.LoadingMore };
 export const ErrorState = { ...stories.ErrorState };
+export const WithBeforeElement = { ...stories.WithBeforeElement };
+export const MultipleWithBeforeElement = { ...stories.MultipleWithBeforeElement };
 
 // ── Framework-specific stories (use React hooks for complex state) ──
 

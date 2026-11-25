@@ -39,7 +39,7 @@ export interface ComboboxInputProps extends TextFieldProps, VueToJSXProps<UIProp
  * @return Vue element.
  */
 const ComboboxInput = defineComponent(
-    (props: ComboboxInputProps, { emit, attrs }) => {
+    (props: ComboboxInputProps, { emit, attrs, slots }) => {
         const className = useClassName(() => props.class);
         const { listboxId, anchorRef, setHandle, handle } = useComboboxContext();
         const { isOpen, setIsOpen } = useComboboxOpen();
@@ -110,6 +110,7 @@ const ComboboxInput = defineComponent(
                 {
                     ...attrs,
                     ...restForwardedProps,
+                    beforeElement: slots.beforeElement?.() ?? props.beforeElement,
                     'aria-disabled': fwdAriaDisabled ?? (attrs as any).ariaDisabled,
                     ...eventHandlers,
                     listboxId,
@@ -142,6 +143,7 @@ const ComboboxInput = defineComponent(
             'forceFocusStyle',
             'hasError',
             'afterElement',
+            'beforeElement',
             'helper',
             'icon',
             'isRequired',

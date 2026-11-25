@@ -98,6 +98,14 @@
         }
     }
 
+    &__before-element {
+        display: flex;
+        flex-shrink: 0;
+        align-items: center;
+        min-height: var(--lumx-text-field-input-min-height);
+        margin-right: $lumx-spacing-unit;
+    }
+
     &__input-wrapper {
         @include lumx-text-field-input-wrapper;
     }

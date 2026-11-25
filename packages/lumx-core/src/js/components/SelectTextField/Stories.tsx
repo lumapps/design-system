@@ -9,6 +9,7 @@ import {
     mdiSprout,
 } from '@lumx/icons';
 import type { SetupStoriesOptions } from '@lumx/core/stories/types';
+import { AVATAR_IMAGES } from '@lumx/core/stories/controls/image';
 import { TRANSLATIONS, MULTI_TRANSLATIONS } from './Tests';
 
 export const FRUITS = [
@@ -96,14 +97,22 @@ export const FRUITS = [
 
 export type Fruit = (typeof FRUITS)[number];
 
+const USERS = [
+    { id: 'ada', name: 'Ada Lovelace', avatar: AVATAR_IMAGES.avatar1 },
+    { id: 'grace', name: 'Grace Hopper', avatar: AVATAR_IMAGES.avatar2 },
+    { id: 'margaret', name: 'Margaret Hamilton', avatar: AVATAR_IMAGES.avatar3 },
+];
+
 /**
  * Setup SelectTextField stories for a specific framework (React or Vue).
  */
+
 export function setup({
-    components: { SelectTextField },
+    components: { Avatar, SelectTextField },
     decorators: { withValueOnChange, withWrapper },
 }: SetupStoriesOptions<{
     components: {
+        Avatar: any;
         SelectTextField: any;
     };
     decorators: 'withValueOnChange' | 'withWrapper';
@@ -540,6 +549,53 @@ export function setup({
         ),
     };
 
+    /** SelectTextField with the avatar of the selected user before the input */
+    const WithBeforeElement = {
+        args: { value: USERS[0] },
+        decorators: [withValueOnChange()],
+        render: ({ value, onChange }: any) => (
+            <SelectTextField
+                selectionType="single"
+                label="Select a user"
+                placeholder="Search users..."
+                options={USERS}
+                filter="auto"
+                getOptionId="id"
+                getOptionName="name"
+                value={value}
+                onChange={onChange}
+                translations={TRANSLATIONS}
+                beforeElement={value && <Avatar size="xs" image={value.avatar} alt="" aria-hidden="true" />}
+            />
+        ),
+    };
+
+    /** Multiple selection with a colored circle before the input */
+    const MultipleWithBeforeElement = {
+        args: { value: [FRUITS[0], FRUITS[2], FRUITS[4], FRUITS[6]] },
+        decorators: [withValueOnChange()],
+        render: ({ value, onChange }: any) => (
+            <SelectTextField
+                selectionType="multiple"
+                label="Select fruits"
+                placeholder="Search fruits..."
+                options={FRUITS}
+                filter="auto"
+                getOptionId="id"
+                getOptionName="name"
+                value={value}
+                onChange={(v: any) => onChange(v ?? [])}
+                translations={MULTI_TRANSLATIONS}
+                beforeElement={
+                    <span
+                        aria-hidden="true"
+                        style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: 'red' }}
+                    />
+                }
+            />
+        ),
+    };
+
     return {
         meta,
         Default,
@@ -560,5 +616,7 @@ export function setup({
         Loading,
         LoadingMore,
         ErrorState,
+        WithBeforeElement,
+        MultipleWithBeforeElement,
     };
 }

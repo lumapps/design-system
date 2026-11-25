@@ -2,6 +2,7 @@ import { fireEvent, render, screen } from '@testing-library/vue';
 
 import BaseTextFieldTests, { setup } from '@lumx/core/js/components/TextField/Tests';
 import { CLASSNAME } from '@lumx/core/js/components/TextField/constants';
+import { getByClassName } from '@lumx/core/testing/queries';
 import { commonTestsSuiteVTL, SetupRenderOptions } from '@lumx/vue/testing';
 
 import { TextField } from '.';
@@ -82,6 +83,22 @@ describe('<TextField />', () => {
             render(TextField, { props: { value: '', multiline: true } });
             expect(document.querySelector('textarea')).toBeInTheDocument();
             expect(document.querySelector('input')).not.toBeInTheDocument();
+        });
+
+        it('should render the beforeElement slot', () => {
+            render(TextField, { props: { value: '' }, slots: { beforeElement: 'Before slot' } });
+            const beforeElement = getByClassName(document.body, `${CLASSNAME}__before-element`);
+            expect(beforeElement).toHaveTextContent('Before slot');
+        });
+
+        it('should give precedence to the beforeElement slot over the prop', () => {
+            render(TextField, {
+                props: { value: '', beforeElement: 'Before prop' },
+                slots: { beforeElement: 'Before slot' },
+            });
+            const beforeElement = getByClassName(document.body, `${CLASSNAME}__before-element`);
+            expect(beforeElement).toHaveTextContent('Before slot');
+            expect(beforeElement).not.toHaveTextContent('Before prop');
         });
     });
 
