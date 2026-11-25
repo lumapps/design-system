@@ -2,40 +2,14 @@ import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { vi } from 'vitest';
-import identity from 'lodash/identity';
-import over from 'lodash/over';
 
 import treeListTests from '@lumx/core/js/components/TreeList/Tests';
 import { CLASSNAME as TREE_LIST_CLASSNAME } from '@lumx/core/js/components/TreeList/TreeList';
 import { CLASSNAME as TREE_LIST_ITEM_CLASSNAME } from '@lumx/core/js/components/TreeList/TreeListItem';
 import { CLASSNAME as TREE_LIST_SECTION_CLASSNAME } from '@lumx/core/js/components/TreeList/TreeListSection';
-import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
+import { commonTestsSuiteRTL, renderWithState, SetupRenderOptions } from '@lumx/react/testing/utils';
 import { getAllByClassName, getByClassName, queryByClassName } from '@lumx/react/testing/utils/queries';
 import { Combobox, TreeList, TreeListItem, TreeListSection } from '@lumx/react';
-
-/**
- * Render a template with controlled state management.
- * Mirrors the withValueOnChange Storybook decorator.
- */
-function renderWithState(
-    template: (props: any) => React.JSX.Element,
-    initialArgs: Record<string, any> = {},
-    {
-        onChangeProp = 'onChange',
-        valueExtract = identity,
-    }: { onChangeProp?: string; valueExtract?: (v: any) => any } = {},
-) {
-    const Wrapper = () => {
-        const [value, setValue] = React.useState(initialArgs.value ?? '');
-        const props = {
-            ...initialArgs,
-            value,
-            [onChangeProp]: over([(v: any) => setValue(valueExtract(v)), initialArgs[onChangeProp]]),
-        };
-        return template(props);
-    };
-    return render(<Wrapper />);
-}
 
 describe('<TreeList>', () => {
     treeListTests({ components: { TreeList, TreeListItem, TreeListSection, Combobox }, renderWithState });

@@ -1,32 +1,19 @@
 <template>
-    <RadioGroup>
-        <RadioButton
-            :is-checked="value === 'lorem'"
-            label="Radio button"
-            name="test1"
-            :theme="theme"
-            value="lorem"
-            @change="value = $event"
-        />
+    <RadioGroup v-model:value="value" name="test1">
+        <RadioButton label="Radio button" :theme="theme" value="lorem" />
 
         <RadioButton
-            :is-checked="value === 'ipsum'"
             helper="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere faucibus efficitur."
             label="Radio button with help"
-            name="test1"
             :theme="theme"
             value="ipsum"
-            @change="value = $event"
         />
 
         <RadioButton
-            :is-checked="value === 'dolor'"
             helper="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere faucibus efficitur."
             label="Disabled radio button with help"
-            name="test1"
             :theme="theme"
             value="dolor"
-            @change="value = $event"
             is-disabled
         />
     </RadioGroup>
@@ -38,5 +25,5 @@ import { RadioButton, RadioGroup, type Theme } from '@lumx/vue';
 
 defineProps<{ theme?: Theme }>();
 
-const value = ref<string | undefined>('lorem');
+const value = ref('lorem');
 </script>
