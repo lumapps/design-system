@@ -96,9 +96,16 @@ function render(root: HTMLElement, state: TreeListItemState) {
  * user before the test, `selected` the selected values.
  */
 function setup(
-    options: { open?: string[]; multi?: boolean; selected?: string[]; standalone?: boolean; sections?: boolean } = {},
+    options: {
+        open?: string[];
+        defaultOpen?: string[];
+        multi?: boolean;
+        selected?: string[];
+        standalone?: boolean;
+        sections?: boolean;
+    } = {},
 ) {
-    const { open = [], standalone = false, ...renderOptions } = options;
+    const { open = [], defaultOpen = [], standalone = false, ...renderOptions } = options;
     const dom = renderTree(renderOptions);
     const onSelect = vi.fn();
     const list = standalone
@@ -121,6 +128,7 @@ function setup(
         const isParent = !!getGroupOfRoot(root);
         controllers[label] = list.registerTreeItem(root, {
             isParent: () => isParent,
+            defaultOpen: defaultOpen.includes(label),
             onOpenChange: (isOpen) => openChanges.push([label, isOpen]),
             onChange: (state) => render(root, state),
         });
@@ -514,6 +522,39 @@ describe('setupTreeList', () => {
             expect(treeItem('Citrus')).toHaveAttribute('aria-expanded', 'true');
             expect(treeItem('Vegetables')).toHaveAttribute('aria-expanded', 'false');
             expect(getGroupOfRoot(li('Citrus'))).not.toHaveAttribute('hidden');
+        });
+
+        it('opens a parent item with defaultOpen at setup, with no onOpenChange', () => {
+            const { treeItem, li, openChanges } = setup({ defaultOpen: ['Drinks'] });
+            expect(treeItem('Drinks')).toHaveAttribute('aria-expanded', 'true');
+            expect(getGroupOfRoot(li('Drinks'))).not.toHaveAttribute('hidden');
+            expect(openChanges).toEqual([]);
+        });
+
+        it('lets the user close a parent item opened with defaultOpen', () => {
+            const { controllers, treeItem, openChanges } = setup({ defaultOpen: ['Drinks'] });
+            controllers.Drinks.toggle();
+            expect(treeItem('Drinks')).toHaveAttribute('aria-expanded', 'false');
+            expect(openChanges).toEqual([['Drinks', false]]);
+        });
+
+        it('ignores defaultOpen on a leaf item', () => {
+            const { treeItem } = setup({ defaultOpen: ['Leek'] });
+            expect(treeItem('Leek')).not.toHaveAttribute('aria-expanded');
+        });
+
+        it('lets the filter hide a parent item opened with defaultOpen, then opens it again after the filter clears', () => {
+            const { list, treeItem } = setup({ defaultOpen: ['Drinks'] });
+            list.setFilter('nothing');
+            expect(treeItem('Drinks')).toHaveAttribute('aria-expanded', 'false');
+            list.setFilter('');
+            nextFrame();
+            expect(treeItem('Drinks')).toHaveAttribute('aria-expanded', 'true');
+        });
+
+        it('opens a parent item with defaultOpen false when a sub-item is selected (the rule is an OR)', () => {
+            const { treeItem } = setup({ selected: ['lemon'], defaultOpen: [] });
+            expect(treeItem('Fruits')).toHaveAttribute('aria-expanded', 'true');
         });
 
         it('moves the active item out of a closing group to the parent item', () => {
