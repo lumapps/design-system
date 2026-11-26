@@ -69,6 +69,16 @@ A dialog needs an accessible name so assistive technologies can announce what it
     explicitly — through `dialogProps={{ 'aria-label': '...' }}` on `Dialog`/`AlertDialog`, or directly as a prop on
     `Lightbox`/`PopoverDialog` — instead of rendering a `DialogHeading`.
 
+### Focus and content
+
+-   By default, the dialog removes its content when it closes. Refs to children exist only while the dialog is open,
+    and a child that saves its state on mount runs again at each open. To keep the content mounted, set
+    `closeMode="hide"`.
+-   When the dialog opens, it puts the focus on its first focusable element. If this element is a close button with a
+    tooltip, the tooltip opens when the focus is visible, for example when the user opens the dialog with the
+    keyboard. To prevent this, set `focusElement` to a non-interactive header element with `tabindex="-1"`.
+-   Set `parentElement` to the trigger, so that the focus goes back to it when the dialog closes.
+
 ## Properties
 
 <PropTable docs={{ react: ReactDialog, vue: VueDialog }} />
