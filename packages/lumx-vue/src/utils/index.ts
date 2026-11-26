@@ -6,3 +6,4 @@ export { Portal, type PortalProps, type PortalInit, PortalProvider, type PortalP
 export { ClickAwayProvider, useClickAway } from './ClickAway';
 export { InfiniteScroll, type InfiniteScrollProps } from './InfiniteScroll';
 export { useTheme, ThemeProvider } from './theme';
+export { useOverflowTooltipLabel } from '../composables/useOverflowTooltipLabel';

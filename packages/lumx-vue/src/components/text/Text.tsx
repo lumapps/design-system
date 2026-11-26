@@ -3,7 +3,7 @@ import { computed, defineComponent, useAttrs, useTemplateRef, type VNodeArrayChi
 import { getTextProps, type TextProps as UIProps, COMPONENT_NAME } from '@lumx/core/js/components/Text';
 import { useClassName } from '@lumx/vue/composables/useClassName';
 
-import { useOverflowTooltipLabel } from '../../composables/useOverflowTooltipLabel';
+import { useOverflowTitle } from '../../composables/useOverflowTitle';
 import { useSlot } from '../../composables/useSlot';
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { wrapChildrenIconWithSpaces } from '../../utils/wrapChildrenIconWithSpaces';
@@ -21,7 +21,7 @@ const Text = defineComponent(
         const attrs = useAttrs();
         const defaultSlot = useSlot();
         const labelRef = useTemplateRef<HTMLElement>('tooltip-label');
-        const { tooltipLabel } = useOverflowTooltipLabel(labelRef);
+        const { title } = useOverflowTitle(labelRef);
 
         const className = useClassName(() => props.class);
         const textProps = computed(() =>
@@ -50,7 +50,7 @@ const Text = defineComponent(
                     {...componentProps.value}
                     class={componentProps.value.className}
                     style={componentProps.value.style}
-                    title={tooltipLabel.value}
+                    title={title.value}
                 >
                     {children}
                 </Component>

@@ -1,51 +1,50 @@
-import { render, act } from '@testing-library/react';
-import { vi } from 'vitest';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { Tooltip } from '@lumx/react/components/tooltip/Tooltip';
 import { useOverflowTooltipLabel } from './useOverflowTooltipLabel';
 
-// Mock Tooltip context
-vi.mock('@lumx/react/components/tooltip/context', () => ({
-    useTooltipContext: () => null,
-}));
+const TruncatedLabel = () => {
+    const { labelRef, tooltipLabel } = useOverflowTooltipLabel();
+    return (
+        <Tooltip label={tooltipLabel}>
+            <button type="button">
+                <span data-testid="label" ref={labelRef}>
+                    Long label
+                </span>
+            </button>
+        </Tooltip>
+    );
+};
 
 describe('useOverflowTooltipLabel', () => {
-    it('should set label if text overflows', () => {
-        const element = document.createElement('div');
-        element.innerText = 'Long text';
-        // Mock overflow properties
-        Object.defineProperty(element, 'offsetWidth', { value: 50 });
-        Object.defineProperty(element, 'scrollWidth', { value: 100 });
+    it('should show the label text in the tooltip when it overflows', async () => {
+        render(<TruncatedLabel />);
+        const label = screen.getByTestId('label');
+        label.innerText = 'Long label';
+        Object.defineProperty(label, 'offsetWidth', { value: 50 });
+        Object.defineProperty(label, 'scrollWidth', { value: 100 });
 
-        let result: any;
-        const TestComponent = ({ text }: any) => {
-            result = useOverflowTooltipLabel(text);
-            return null;
-        };
-        render(<TestComponent text="Long text" />);
+        await userEvent.hover(screen.getByRole('button'));
 
-        act(() => {
-            result.labelRef(element);
-        });
-
-        expect(result.tooltipLabel).toBe('Long text');
+        expect(await screen.findByRole('tooltip', { name: 'Long label' })).toBeInTheDocument();
     });
 
-    it('should NOT set label if text does not overflow', () => {
-        const element = document.createElement('div');
-        element.innerText = 'Short text';
-        Object.defineProperty(element, 'offsetWidth', { value: 100 });
-        Object.defineProperty(element, 'scrollWidth', { value: 100 });
+    it('should show no tooltip inside another tooltip', async () => {
+        render(
+            <Tooltip label="Parent">
+                <div>
+                    <TruncatedLabel />
+                </div>
+            </Tooltip>,
+        );
+        const label = screen.getByTestId('label');
+        label.innerText = 'Long label';
+        Object.defineProperty(label, 'offsetWidth', { value: 50 });
+        Object.defineProperty(label, 'scrollWidth', { value: 100 });
 
-        let result: any;
-        const TestComponent = ({ text }: any) => {
-            result = useOverflowTooltipLabel(text);
-            return null;
-        };
-        render(<TestComponent text="Short text" />);
+        await userEvent.hover(screen.getByRole('button'));
 
-        act(() => {
-            result.labelRef(element);
-        });
-
-        expect(result.tooltipLabel).toBeUndefined();
+        expect(await screen.findByRole('tooltip', { name: 'Parent' })).toBeInTheDocument();
+        expect(screen.queryByRole('tooltip', { name: 'Long label' })).not.toBeInTheDocument();
     });
 });

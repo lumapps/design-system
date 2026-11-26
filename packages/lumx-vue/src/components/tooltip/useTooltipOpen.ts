@@ -6,9 +6,14 @@ import { createTooltipOpenManager, type TooltipOpenManager } from '@lumx/core/js
  *
  * @param delay         Delay in millisecond to display the tooltip.
  * @param anchorElement Tooltip anchor element ref.
+ * @param onOpen        Called each time the open delay ends, before the state changes.
  * @return whether or not to show the tooltip plus popper mount callback and manager ref.
  */
-export function useTooltipOpen(delay: Ref<number | undefined>, anchorElement: Ref<HTMLElement | null>) {
+export function useTooltipOpen(
+    delay: Ref<number | undefined>,
+    anchorElement: Ref<HTMLElement | null>,
+    onOpen?: () => void,
+) {
     const isOpen = ref(false);
     const managerRef = shallowRef<TooltipOpenManager>();
 
@@ -19,6 +24,7 @@ export function useTooltipOpen(delay: Ref<number | undefined>, anchorElement: Re
         const manager = createTooltipOpenManager({
             delay: delay.value,
             onStateChange: (value) => {
+                if (value) onOpen?.();
                 isOpen.value = value;
             },
         });
@@ -28,6 +34,8 @@ export function useTooltipOpen(delay: Ref<number | undefined>, anchorElement: Re
 
         onCleanup(() => {
             manager.destroy();
+            // The manager dies with the anchor, so the open state must die with it.
+            isOpen.value = false;
         });
     });
 

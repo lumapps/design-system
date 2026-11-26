@@ -1,22 +1,23 @@
-import { MutableRefObject, useEffect, useRef, useState } from 'react';
-import { useCallbackOnEscape } from '@lumx/react/hooks/useCallbackOnEscape';
+import { MutableRefObject, useCallback, useEffect, useRef, useState } from 'react';
 import { createTooltipOpenManager, TooltipOpenManager } from '@lumx/core/js/components/Tooltip/tooltipOpenManager';
+import { useEventCallback } from '@lumx/react/hooks/useEventCallback';
 
 /**
  * Hook controlling tooltip visibility using mouse hover the anchor and delay.
  *
  * @param  delay         Delay in millisecond to display the tooltip.
  * @param  anchorElement Tooltip anchor element.
- * @return whether or not to show the tooltip.
+ * @param  onOpen        Called each time the open delay ends, before the state changes.
+ * @return whether the anchor activates the tooltip, the popper mount callback and a close callback.
  */
-export function useTooltipOpen(delay: number | undefined, anchorElement: HTMLElement | null) {
+export function useTooltipOpen(delay: number | undefined, anchorElement: HTMLElement | null, onOpen?: () => void) {
     const [isOpen, setIsOpen] = useState(false);
 
     const onPopperMount = useRef<any>(null) as MutableRefObject<(elem: HTMLElement | null) => void>;
     const managerRef = useRef<TooltipOpenManager | null>(null);
+    const handleOpen = useEventCallback(onOpen);
 
-    // Global close on escape
-    useCallbackOnEscape(isOpen ? () => managerRef.current?.close() : undefined);
+    const close = useCallback(() => managerRef.current?.close(), []);
 
     useEffect(() => {
         if (!anchorElement) {
@@ -25,7 +26,10 @@ export function useTooltipOpen(delay: number | undefined, anchorElement: HTMLEle
 
         const manager = createTooltipOpenManager({
             delay,
-            onStateChange: setIsOpen,
+            onStateChange: (value) => {
+                if (value) handleOpen();
+                setIsOpen(value);
+            },
         });
 
         managerRef.current = manager;
@@ -34,8 +38,10 @@ export function useTooltipOpen(delay: number | undefined, anchorElement: HTMLEle
         manager.attachAnchor(anchorElement);
         return () => {
             manager.destroy();
+            // The manager dies with the anchor, so the open state must die with it.
+            setIsOpen(false);
         };
-    }, [anchorElement, delay]);
+    }, [anchorElement, delay, handleOpen]);
 
-    return { isOpen, onPopperMount: onPopperMount.current };
+    return { isOpen, onPopperMount: onPopperMount.current, close };
 }

@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { ReactNode, useState } from 'react';
+import { ReactNode, useLayoutEffect, useState } from 'react';
 
 import { useFloating, offset, autoUpdate, type Placement as FloatingPlacement } from '@floating-ui/react-dom';
 
@@ -9,6 +9,7 @@ import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';
 
 import { TooltipContextProvider } from '@lumx/react/components/tooltip/context';
 import { useId } from '@lumx/react/hooks/useId';
+import { useCallbackOnEscape } from '@lumx/react/hooks/useCallbackOnEscape';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 import {
@@ -76,17 +77,35 @@ export const Tooltip = forwardRef<TooltipProps, HTMLDivElement>((props, ref) => 
         middleware: [offset(ARROW_SIZE)],
     });
 
+    const [resolvedFunctionLabel, setResolvedFunctionLabel] = useState<string | null | false | undefined>(undefined);
+    const resolveLabel = () => {
+        if (typeof label === 'function') setResolvedFunctionLabel(label());
+    };
+
     const position = resolvedPlacement ?? placement;
-    const { isOpen: isActivated, onPopperMount } = useTooltipOpen(delay, anchorElement);
-    const isOpen = (isActivated || forceOpen) && !!label;
-    const isMounted = !!label && (isOpen || closeMode === 'hide');
+    const { isOpen: isActivated, onPopperMount, close } = useTooltipOpen(delay, anchorElement, resolveLabel);
+
+    const resolvedLabel = typeof label === 'function' ? resolvedFunctionLabel : label;
+    const hasLabel = typeof label === 'function' || !!label;
+    const isOpen = (isActivated || forceOpen) && !!resolvedLabel;
+    const isMounted = !!resolvedLabel && (isOpen || closeMode === 'hide');
     const isHidden = !isOpen && closeMode === 'hide';
+
+    // No dependency list: the text of a function label can change on any render (ex: a toggle by keyboard).
+    useLayoutEffect(() => {
+        if (isActivated || forceOpen) resolveLabel();
+    });
+
+    // A forced-open tooltip does not take Escape from its container (ex: the highlighted option of a combobox).
+    useCallbackOnEscape(isActivated && resolvedLabel ? close : undefined);
+
     const wrappedChildren = useInjectTooltipRef({
         children,
         setAnchorElement,
         isMounted,
         id,
-        label,
+        label: resolvedLabel,
+        hasLabel,
         ariaLinkMode: ariaLinkMode as any,
     });
 
@@ -101,7 +120,7 @@ export const Tooltip = forwardRef<TooltipProps, HTMLDivElement>((props, ref) => 
                         ref: tooltipRef,
                         ...forwardedProps,
                         id,
-                        label: label as string,
+                        label: resolvedLabel as string,
                         position: position!,
                         isHidden,
                         style: isHidden ? undefined : floatingStyles,

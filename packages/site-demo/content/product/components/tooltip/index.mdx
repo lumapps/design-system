@@ -35,6 +35,14 @@ Use `closeMode="hide"` to render the tooltip hidden when not activated and keep 
 
 Consider using the [Popover](/product/components/popover/#accessibility-concerns) as a disclosure element to show longer or richer messages.
 
+## Truncated text
+
+Prefer to let long texts wrap on multiple lines.
+When the layout cannot wrap (for example, in a button or a navigation item), truncate the text and show its full value in a tooltip, only when it overflows.
+
+Use `useOverflowTooltipLabel` (from `@lumx/react/utils` or `@lumx/vue/utils`): set `labelRef` on the truncated element and give `tooltipLabel` to the tooltip `label`.
+The tooltip measures the text when it opens, so it stays correct after a resize.
+
 ## Properties
 
 <PropTable docs={{ react: ReactTooltip, vue: VueTooltip }} />

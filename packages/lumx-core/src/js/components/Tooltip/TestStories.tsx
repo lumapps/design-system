@@ -1,15 +1,23 @@
 import { waitFor, expect, screen } from 'storybook/test';
 import type { SetupStoriesOptions } from '@lumx/core/stories/types';
+import { TOOLTIP_HOVER_DELAY } from '@lumx/core/js/constants';
+
+const LONG_TEXT = 'Some very very very very very very very very very very long label';
+
+const waitLongerThanOpenDelay = () =>
+    new Promise<void>((resolve) => {
+        setTimeout(resolve, TOOLTIP_HOVER_DELAY.open + 300);
+    });
 
 /**
  * Setup Tooltip test stories (with play functions) for a specific framework (React or Vue).
- * Framework-specific components (Button) are injected via options.
+ * Framework-specific components are injected via options.
  */
 export function setup({
     component: Tooltip,
-    components: { Button },
+    components: { Button, ToggleTooltip, OverflowTooltip },
 }: SetupStoriesOptions<{
-    components: { Button: any };
+    components: { Button: any; ToggleTooltip: any; OverflowTooltip: any };
 }>) {
     /** Common render: Tooltip wrapping a Button anchor */
     const renderTooltipOnButton = ({ children, ...args }: any) => (
@@ -205,6 +213,112 @@ export function setup({
         },
     };
 
+    /** Test: with the keyboard, a function label follows the state that the anchor toggles, and Escape closes it */
+    const TestFunctionLabelFollowsKeyboardToggle = {
+        render: () => (
+            <ToggleTooltip
+                getLabel={(isExpanded: boolean) => (isExpanded ? 'Collapse sidebar' : 'Expand sidebar')}
+                isFunction
+            />
+        ),
+        async play({ userEvent }: any) {
+            await userEvent.tab();
+            await screen.findByRole('tooltip', { name: 'Expand sidebar' });
+
+            await userEvent.keyboard('{Enter}');
+            await screen.findByRole('tooltip', { name: 'Collapse sidebar' });
+
+            await userEvent.keyboard('{Escape}');
+            await waitFor(() => expect(screen.queryByRole('tooltip')).not.toBeInTheDocument());
+        },
+    };
+
+    /** Test: a string label that empties then comes back (the anchor detaches) */
+    const TestStringLabelBackAfterKeyboardToggle = {
+        render: () => <ToggleTooltip getLabel={(isExpanded: boolean) => (isExpanded ? '' : 'Publish')} />,
+        async play({ canvas, userEvent }: any) {
+            await userEvent.tab();
+            await screen.findByRole('tooltip', { name: 'Publish' });
+
+            await userEvent.keyboard('{Enter}');
+            await waitFor(() => expect(screen.queryByRole('tooltip')).not.toBeInTheDocument());
+
+            await userEvent.tab();
+            expect(canvas.getByRole('button', { name: 'Collapse' })).toHaveFocus();
+            await userEvent.keyboard('{Enter}');
+            await waitLongerThanOpenDelay();
+            expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
+
+            await userEvent.tab({ shift: true });
+            await screen.findByRole('tooltip', { name: 'Publish' });
+            await userEvent.keyboard('{Escape}');
+            await waitFor(() => expect(screen.queryByRole('tooltip')).not.toBeInTheDocument());
+        },
+    };
+
+    /** Test: a function label that empties then comes back */
+    const TestFunctionLabelBackAfterKeyboardToggle = {
+        render: () => <ToggleTooltip getLabel={(isExpanded: boolean) => (isExpanded ? '' : 'Publish')} isFunction />,
+        async play({ canvas, userEvent }: any) {
+            await userEvent.tab();
+            await screen.findByRole('tooltip', { name: 'Publish' });
+
+            await userEvent.keyboard('{Enter}');
+            await waitFor(() => expect(screen.queryByRole('tooltip')).not.toBeInTheDocument());
+
+            await userEvent.tab();
+            expect(canvas.getByRole('button', { name: 'Collapse' })).toHaveFocus();
+            await userEvent.keyboard('{Enter}');
+            await waitLongerThanOpenDelay();
+            expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
+
+            await userEvent.tab({ shift: true });
+            await screen.findByRole('tooltip', { name: 'Publish' });
+            await userEvent.keyboard('{Escape}');
+            await waitFor(() => expect(screen.queryByRole('tooltip')).not.toBeInTheDocument());
+        },
+    };
+
+    const renderOverflowTooltip = ({ text, isHidden }: any) => (
+        <div data-testid="container" style={{ width: '150px', display: isHidden ? 'none' : undefined }}>
+            <OverflowTooltip text={text} />
+        </div>
+    );
+
+    /** Test: a truncated label shows its full text in the tooltip */
+    const TestOverflowLabel = {
+        render: renderOverflowTooltip,
+        args: { text: LONG_TEXT },
+        async play({ canvas, userEvent }: any) {
+            await userEvent.hover(canvas.getByRole('button'));
+            expect(await screen.findByRole('tooltip')).toHaveTextContent(LONG_TEXT);
+        },
+    };
+
+    /** Test: a label that fits shows no tooltip */
+    const TestNoOverflowLabel = {
+        render: renderOverflowTooltip,
+        args: { text: 'Short' },
+        async play({ canvas, userEvent }: any) {
+            await userEvent.hover(canvas.getByRole('button'));
+            await waitLongerThanOpenDelay();
+            expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
+        },
+    };
+
+    /** Test: a label that mounts hidden, then shows truncated, gets its tooltip on the first hover */
+    const TestOverflowLabelHiddenMount = {
+        render: renderOverflowTooltip,
+        args: { text: LONG_TEXT, isHidden: true },
+        async play({ canvas, userEvent }: any) {
+            const container = canvas.getByTestId('container');
+            container.style.display = 'block';
+
+            await userEvent.hover(canvas.getByRole('button'));
+            expect(await screen.findByRole('tooltip')).toHaveTextContent(LONG_TEXT);
+        },
+    };
+
     return {
         meta,
         TestActivateOnHover,
@@ -216,5 +330,11 @@ export function setup({
         TestAriaDescribedByOnWrapperHover,
         TestAriaLabelledByOnHover,
         TestAriaLabelledByOnWrapperHover,
+        TestFunctionLabelFollowsKeyboardToggle,
+        TestStringLabelBackAfterKeyboardToggle,
+        TestFunctionLabelBackAfterKeyboardToggle,
+        TestOverflowLabel,
+        TestNoOverflowLabel,
+        TestOverflowLabelHiddenMount,
     };
 }

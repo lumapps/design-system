@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useOverflowTooltipLabel } from '@lumx/react/hooks/useOverflowTooltipLabel';
+import { useOverflowTitle } from '@lumx/react/hooks/useOverflowTitle';
 import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { wrapChildrenIconWithSpaces } from '@lumx/react/utils/react/wrapChildrenIconWithSpaces';
@@ -36,13 +36,13 @@ export const Text = forwardRef<TextProps>((props, ref) => {
         ...forwardedProps
     } = props;
 
-    const { tooltipLabel, labelRef } = useOverflowTooltipLabel(children);
+    const { title, labelRef } = useOverflowTitle(children);
     const { className, style } = React.useMemo(() => getTextProps(props), [props]);
 
     return (
         <Component
             ref={useMergeRefs(ref as React.Ref<any>, labelRef)}
-            title={tooltipLabel}
+            title={title}
             {...forwardedProps}
             className={className}
             style={style}

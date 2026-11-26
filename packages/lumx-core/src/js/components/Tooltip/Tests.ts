@@ -36,5 +36,16 @@ export default (renderOptions: SetupOptions<any>) => {
             expect(paragraphs[0]).toHaveTextContent('Line 1');
             expect(paragraphs[1]).toHaveTextContent('Line 2');
         });
+
+        it('should render with a function label', () => {
+            const { tooltip } = setup({ label: () => 'Tooltip label' }, renderOptions);
+            expect(tooltip).toBeInTheDocument();
+            expect(tooltip).toHaveTextContent('Tooltip label');
+        });
+
+        it('should not render when the function label is empty', () => {
+            const { tooltip } = setup({ label: () => '' }, renderOptions);
+            expect(tooltip).not.toBeInTheDocument();
+        });
     });
 };

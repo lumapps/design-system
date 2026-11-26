@@ -1,43 +1,24 @@
-import { ref, Ref, watch } from 'vue';
-import { useMutationObserver, useResizeObserver } from '@vueuse/core';
-import { classNames } from '@lumx/core/js/utils';
+import { shallowRef, type ComponentPublicInstance } from 'vue';
+import { getOverflowingText } from '@lumx/core/js/utils/browser/getOverflowingText';
 import { useTooltipContext } from '../components/tooltip/context';
 
 /**
- * Compute a tooltip label based on a label element `innerText` if the text overflows.
+ * Get a function tooltip label that gives the text of the label element only when it overflows.
+ *
+ * @example
+ * const { labelRef, tooltipLabel } = useOverflowTooltipLabel();
+ * <Tooltip label={tooltipLabel}><Text ref={labelRef} truncate>{text}</Text></Tooltip>
  */
-export function useOverflowTooltipLabel(labelRef: Ref<HTMLElement | null | undefined>) {
-    const tooltipLabel = ref<string | undefined>(undefined);
-
-    // Skip if already inside a tooltip (prevents nested tooltips)
+export function useOverflowTooltipLabel() {
     const isInsideTooltip = useTooltipContext();
-    if (isInsideTooltip) {
-        return { tooltipLabel };
-    }
+    const labelRef = shallowRef<HTMLElement | ComponentPublicInstance | null>(null);
 
-    const updateLabel = () => {
-        const labelElement = labelRef.value;
-        if (
-            labelElement &&
-            !labelElement.closest(`.${classNames.visuallyHidden()}`) &&
-            labelElement.offsetWidth < labelElement.scrollWidth
-        ) {
-            tooltipLabel.value = labelElement.innerText;
-        } else {
-            tooltipLabel.value = undefined;
-        }
+    const tooltipLabel = () => {
+        if (isInsideTooltip) return undefined;
+        const value = labelRef.value;
+        const element = value && '$el' in value ? (value.$el as HTMLElement) : value;
+        return getOverflowingText(element);
     };
 
-    useMutationObserver(labelRef, updateLabel, {
-        childList: true,
-        attributes: true,
-        characterData: true,
-        subtree: true,
-    });
-
-    useResizeObserver(labelRef, updateLabel);
-
-    watch(labelRef, updateLabel, { immediate: true });
-
-    return { tooltipLabel };
+    return { labelRef, tooltipLabel };
 }

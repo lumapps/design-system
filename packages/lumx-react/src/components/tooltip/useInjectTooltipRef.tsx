@@ -11,8 +11,10 @@ interface Options {
     isMounted: boolean | undefined;
     /** Tooltip id */
     id: string;
-    /** Tooltip label*/
+    /** Resolved tooltip label, used for the aria-label comparison */
     label?: string | null | false;
+    /** Whether the tooltip has a label (string or function) */
+    hasLabel: boolean;
     /** Choose how the tooltip text should link to the anchor */
     ariaLinkMode: 'aria-describedby' | 'aria-labelledby';
 }
@@ -23,12 +25,12 @@ interface Options {
  * will be wrapped in a <span>.
  */
 export const useInjectTooltipRef = (options: Options): ReactNode => {
-    const { children, setAnchorElement, isMounted, id, label, ariaLinkMode } = options;
+    const { children, setAnchorElement, isMounted, id, label, hasLabel, ariaLinkMode } = options;
     // Only add link when mounted
     const linkId = isMounted ? id : undefined;
 
     return useMemo(() => {
-        if (!label) return children;
+        if (!hasLabel) return children;
 
         // Non-disabled element
         if (React.isValidElement(children) && children.props.disabled !== true && children.props.isDisabled !== true) {
@@ -51,5 +53,5 @@ export const useInjectTooltipRef = (options: Options): ReactNode => {
                 {children}
             </div>
         );
-    }, [label, children, setAnchorElement, linkId, ariaLinkMode]);
+    }, [hasLabel, label, children, setAnchorElement, linkId, ariaLinkMode]);
 };
