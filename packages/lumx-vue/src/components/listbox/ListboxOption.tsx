@@ -138,8 +138,8 @@ const ListboxOption = defineComponent(
         props: keysOf<ListboxOptionProps>()(
             'value',
             'description',
-            'isDisabled',
-            'isSelected',
+            ['isDisabled', Boolean],
+            ['isSelected', Boolean],
             'tooltipProps',
             'actionProps',
             'class',

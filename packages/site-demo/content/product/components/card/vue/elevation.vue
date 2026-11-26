@@ -1,5 +1,5 @@
 <template>
-    <FlexBox orientation="horizontal" gap="big" :wrap="true">
+    <FlexBox orientation="horizontal" gap="big" wrap>
         <Card v-for="elevation in ELEVATIONS" :key="elevation" :elevation="elevation">
             <Text as="span">Elevation {{ elevation }}</Text>
         </Card>

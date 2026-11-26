@@ -49,7 +49,7 @@ const TableCell = defineComponent(
     {
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
-        props: keysOf<TableCellProps>()('class', 'icon', 'isSortable', 'sortOrder', 'variant'),
+        props: keysOf<TableCellProps>()('class', 'icon', ['isSortable', Boolean], 'sortOrder', 'variant'),
         emits: emitSchema,
     },
 );

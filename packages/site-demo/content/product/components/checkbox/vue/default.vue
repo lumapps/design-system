@@ -11,7 +11,7 @@
     <Checkbox
         label="Disabled checkbox with help"
         helper="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-        :is-disabled="true"
+        is-disabled
         :theme="theme"
     />
 

@@ -135,7 +135,7 @@ const Component = defineComponent(
     {
         name: 'LumxComponent',  // ← Prefix with 'Lumx'
         inheritAttrs: false,
-        props: keysOf<Props>()('class', 'prop1', 'prop2', ...),
+        props: keysOf<Props>()('class', 'prop1', ['isProp2', Boolean], ...), // ← Boolean props as `[name, Boolean]`
         emits: { change: (...args) => validation },
     }
 );

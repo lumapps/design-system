@@ -1,6 +1,6 @@
 <template>
     <Tooltip label="Print">
-        <Icon :icon="mdiPrinter" :has-shape="true" />
+        <Icon :icon="mdiPrinter" has-shape />
     </Tooltip>
 </template>
 

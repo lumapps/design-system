@@ -2,7 +2,7 @@
     <Message
         v-if="isMessageDisplayed"
         kind="info"
-        :has-background="true"
+        has-background
         close-button-label="Close"
         @close="isMessageDisplayed = false"
     >

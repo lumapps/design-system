@@ -69,6 +69,14 @@ describe('<Button />', () => {
             expect(icons[0]).not.toHaveClass('lumx-icon--theme-dark');
             expect(icons[1]).not.toHaveClass('lumx-icon--theme-dark');
         });
+
+        it('should cast a bare `full-width` template attribute to `true`', () => {
+            render({
+                template: '<Button full-width>Label</Button>',
+                components: { Button },
+            });
+            expect(screen.getByRole('button', { name: 'Label' })).toHaveClass(`${CLASSNAME}--is-full-width`);
+        });
     });
 
     describe('Disabled state', () => {

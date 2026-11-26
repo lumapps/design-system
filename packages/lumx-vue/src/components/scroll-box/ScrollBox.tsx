@@ -38,7 +38,7 @@ const ScrollBox = defineComponent(
     {
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
-        props: keysOf<ScrollBoxProps>()('fillSpace', 'scrollSnap', 'class'),
+        props: keysOf<ScrollBoxProps>()(['fillSpace', Boolean], ['scrollSnap', Boolean], 'class'),
     },
 );
 

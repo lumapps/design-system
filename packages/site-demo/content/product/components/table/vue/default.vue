@@ -1,5 +1,5 @@
 <template>
-    <Table :has-dividers="true" :theme="theme" :style="{ minWidth: '620px' }">
+    <Table has-dividers :theme="theme" :style="{ minWidth: '620px' }">
         <TableHeader>
             <TableRow>
                 <TableCell

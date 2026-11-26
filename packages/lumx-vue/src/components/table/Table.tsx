@@ -29,7 +29,7 @@ const Table = defineComponent(
     {
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
-        props: keysOf<TableProps>()('class', 'hasBefore', 'hasDividers', 'theme'),
+        props: keysOf<TableProps>()('class', ['hasBefore', Boolean], ['hasDividers', Boolean], 'theme'),
     },
 );
 

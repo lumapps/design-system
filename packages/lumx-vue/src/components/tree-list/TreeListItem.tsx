@@ -206,7 +206,7 @@ const TreeListItem = defineComponent(
             'label',
             'value',
             'description',
-            'hasSubItems',
+            ['hasSubItems', Boolean],
             'tooltipProps',
             'actionProps',
             'class',

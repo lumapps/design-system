@@ -2,25 +2,15 @@
     <Table v-bind="$attrs">
         <TableHeader>
             <TableRow>
-                <TableCell
-                    variant="head"
-                    :is-sortable="true"
-                    :sort-order="sortOrders.name"
-                    @header-click="handleSort('name')"
-                >
+                <TableCell variant="head" is-sortable :sort-order="sortOrders.name" @header-click="handleSort('name')">
                     Name
                 </TableCell>
-                <TableCell
-                    variant="head"
-                    :is-sortable="true"
-                    :sort-order="sortOrders.age"
-                    @header-click="handleSort('age')"
-                >
+                <TableCell variant="head" is-sortable :sort-order="sortOrders.age" @header-click="handleSort('age')">
                     Age
                 </TableCell>
                 <TableCell
                     variant="head"
-                    :is-sortable="true"
+                    is-sortable
                     :sort-order="sortOrders.email"
                     @header-click="handleSort('email')"
                 >

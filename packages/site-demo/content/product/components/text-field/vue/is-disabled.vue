@@ -1,5 +1,5 @@
 <template>
-    <TextField label="Textfield label" :is-disabled="true" :theme="theme" value="" />
+    <TextField label="Textfield label" is-disabled :theme="theme" value="" />
 </template>
 
 <script setup lang="ts">

@@ -59,7 +59,14 @@ const ListItemAction = defineComponent(
     {
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
-        props: keysOf<ListItemActionProps>()('as', 'href', 'class', 'isDisabled', 'disabled', 'aria-disabled'),
+        props: keysOf<ListItemActionProps>()(
+            'as',
+            'href',
+            'class',
+            ['isDisabled', Boolean],
+            ['disabled', Boolean],
+            ['aria-disabled', Boolean, String],
+        ),
         emits: emitSchema,
     },
 );

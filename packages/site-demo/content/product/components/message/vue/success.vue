@@ -1,5 +1,5 @@
 <template>
-    <Message kind="success" :has-background="true">
+    <Message kind="success" has-background>
         <p>
             Message text quisque tincidunt lobortis dui non auctor. Donec porta, ligula volutpat vehicula aliquet, dui
             sapien tempus felis, sed cursus diam ante.

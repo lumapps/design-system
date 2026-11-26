@@ -246,7 +246,7 @@ Migration order:
     - Emit events instead of onChange callbacks, plus `update:<prop>` for each controlled prop (see `packages/lumx-vue/CLAUDE.md` § `v-model`)
     - **Use JSX rendering**: `return (<ComponentUI ... />)`
     - **Add stop propagation**: `event.stopImmediatePropagation()`
-    - Define props using `keysOf<ComponentProps>()`
+    - Define props using `keysOf<ComponentProps>()`, with each boolean prop as a `['name', Boolean]` entry
     - Set `name: 'Lumx<Component>'`
     - Set `inheritAttrs: false`
     - **Create `index.ts` with exports for components and types only:**

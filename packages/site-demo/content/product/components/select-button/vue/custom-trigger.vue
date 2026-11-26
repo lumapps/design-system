@@ -40,7 +40,7 @@
         @change="(newValue) => (chipValue = newValue)"
     >
         <template #button="{ buttonProps, children }">
-            <Chip v-bind="buttonProps" :is-clickable="true" :is-selected="!!chipValue">
+            <Chip v-bind="buttonProps" is-clickable :is-selected="!!chipValue">
                 {{ children }}
                 <template #after>
                     <Icon :icon="mdiMenuDown" />

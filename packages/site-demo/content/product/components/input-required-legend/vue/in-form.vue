@@ -1,13 +1,7 @@
 <template>
     <FlexBox as="form" orientation="vertical" gap="regular">
         <InputRequiredLegend label="Indicates a required field" :theme="theme" />
-        <TextField
-            label="First name"
-            :value="firstName"
-            :is-required="true"
-            :theme="theme"
-            @change="firstName = $event"
-        />
+        <TextField label="First name" :value="firstName" is-required :theme="theme" @change="firstName = $event" />
         <TextField label="Nickname" :value="nickname" :theme="theme" @change="nickname = $event" />
     </FlexBox>
 </template>

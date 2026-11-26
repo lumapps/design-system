@@ -55,14 +55,14 @@ const FlexBox = defineComponent(
         // Redefine properties so that they come in as `props` on the `defineComponent` function
         props: keysOf<FlexBoxProps>()(
             'as',
-            'fillSpace',
+            ['fillSpace', Boolean],
             'gap',
             'horizontalAlign',
             'marginAuto',
-            'noShrink',
+            ['noShrink', Boolean],
             'orientation',
             'verticalAlign',
-            'wrap',
+            ['wrap', Boolean],
             'class',
         ),
     },

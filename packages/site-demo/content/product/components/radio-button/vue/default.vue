@@ -27,7 +27,7 @@
             :theme="theme"
             value="dolor"
             @change="value = $event"
-            :is-disabled="true"
+            is-disabled
         />
     </RadioGroup>
 </template>

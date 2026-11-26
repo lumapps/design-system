@@ -1,7 +1,7 @@
 <template>
     <Button :left-icon="mdiPlay" ref="buttonRef" @click="toggle" :theme="theme">Open processing dialog</Button>
 
-    <Dialog :is-open="isOpen" :is-loading="true" :parent-element="buttonRef?.$el" @close="close">
+    <Dialog :is-open="isOpen" is-loading :parent-element="buttonRef?.$el" @close="close">
         <template #header>
             <Toolbar>
                 <DialogHeading>Default dialog</DialogHeading>

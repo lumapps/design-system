@@ -14,9 +14,9 @@ export const LIGHTBOX_PROP_KEYS = keysOf<LightboxProps>()(
     'class',
     'closeButtonProps',
     'focusElement',
-    'isOpen',
+    ['isOpen', Boolean],
     'parentElement',
-    'preventAutoClose',
-    'preventCloseOnClick',
+    ['preventAutoClose', Boolean],
+    ['preventCloseOnClick', Boolean],
     'zIndex',
 );

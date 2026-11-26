@@ -51,7 +51,7 @@ const ListboxOptionSkeleton = defineComponent(
     {
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
-        props: keysOf<ListboxOptionSkeletonProps>()('hasDescription', 'count', 'class'),
+        props: keysOf<ListboxOptionSkeletonProps>()(['hasDescription', Boolean], 'count', 'class'),
     },
 );
 

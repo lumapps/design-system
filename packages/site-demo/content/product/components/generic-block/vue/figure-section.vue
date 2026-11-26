@@ -25,7 +25,7 @@
 
     <GenericBlock as="article" orientation="vertical" vertical-align="center">
         <template #figure>
-            <Icon :icon="mdiPlus" size="l" :has-shape="true" />
+            <Icon :icon="mdiPlus" size="l" has-shape />
         </template>
         <template #default>
             <Placeholder name="2" :height="52" :width="104" />

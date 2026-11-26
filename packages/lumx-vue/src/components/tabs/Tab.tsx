@@ -93,7 +93,15 @@ const Tab = defineComponent(
     {
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
-        props: keysOf<TabProps>()('icon', 'iconProps', 'id', 'isActive', 'isDisabled', 'label', 'class'),
+        props: keysOf<TabProps>()(
+            'icon',
+            'iconProps',
+            'id',
+            ['isActive', Boolean],
+            ['isDisabled', Boolean],
+            'label',
+            'class',
+        ),
         emits: emitSchema,
         slots: Object as SlotsType<{
             action: void;

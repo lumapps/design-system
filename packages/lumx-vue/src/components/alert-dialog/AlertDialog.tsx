@@ -129,7 +129,7 @@ const AlertDialog = defineComponent(
             'kind',
             'title',
             'size',
-            'isOpen',
+            ['isOpen', Boolean],
             'parentElement',
             'dialogProps',
             'confirmProps',

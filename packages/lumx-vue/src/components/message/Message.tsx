@@ -48,7 +48,7 @@ const Message = defineComponent(
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         // Redefine properties so that they come in as `props` on the `defineComponent` function
-        props: keysOf<MessageProps>()('hasBackground', 'icon', 'kind', 'class', 'closeButtonLabel'),
+        props: keysOf<MessageProps>()(['hasBackground', Boolean], 'icon', 'kind', 'class', 'closeButtonLabel'),
         emits: ['close'],
     },
 );

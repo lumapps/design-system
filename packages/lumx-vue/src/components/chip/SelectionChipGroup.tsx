@@ -165,7 +165,7 @@ const SelectionChipGroup = defineComponent(
             'value',
             'label',
             'chipRemoveLabel',
-            'isDisabled',
+            ['isDisabled', Boolean],
             'theme',
             'class',
             'inputRef',

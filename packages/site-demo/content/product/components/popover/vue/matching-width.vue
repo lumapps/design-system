@@ -9,11 +9,11 @@
         />
     </div>
     <Popover
-        :is-open="true"
+        is-open
         class="lumx-spacing-padding-huge"
         :anchor-ref="anchorRef"
         placement="bottom-start"
-        :fit-to-anchor-width="true"
+        fit-to-anchor-width
     >
         Popover's width matching anchor's
     </Popover>

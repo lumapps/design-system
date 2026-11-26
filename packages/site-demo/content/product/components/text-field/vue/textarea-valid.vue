@@ -1,12 +1,5 @@
 <template>
-    <TextField
-        label="Text area label"
-        :value="value"
-        :multiline="true"
-        :is-valid="true"
-        :theme="theme"
-        @change="value = $event"
-    />
+    <TextField label="Text area label" :value="value" multiline is-valid :theme="theme" @change="value = $event" />
 </template>
 
 <script setup lang="ts">

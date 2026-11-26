@@ -121,7 +121,7 @@ const MenuItem = defineComponent(
     {
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
-        props: keysOf<MenuItemProps>()('icon', 'afterIcon', 'color', 'isDisabled', 'class'),
+        props: keysOf<MenuItemProps>()('icon', 'afterIcon', 'color', ['isDisabled', Boolean], 'class'),
         emits: ['click'],
         slots: Object as SlotsType<{
             default: void;

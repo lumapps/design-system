@@ -10,7 +10,7 @@
         </template>
         <template #default>
             <Heading as="h2" typography="subtitle2">Marketing &amp; Comms Workspace</Heading>
-            <Text as="p" :truncate="true" typography="body1" color="dark-L2">
+            <Text as="p" truncate typography="body1" color="dark-L2">
                 A space to collaborate on events, communication and a workspace.
             </Text>
             <InlineList typography="body1" color="dark-L2">
