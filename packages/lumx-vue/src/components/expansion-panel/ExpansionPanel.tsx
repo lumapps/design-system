@@ -27,6 +27,8 @@ export const emitSchema = {
     close: (event: MouseEvent) => event instanceof MouseEvent,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     toggleOpen: (shouldOpen: boolean, event: MouseEvent) => typeof shouldOpen === 'boolean',
+    /** Model update for `v-model:is-open`. */
+    'update:isOpen': (isOpen: boolean) => typeof isOpen === 'boolean',
 };
 
 export { CLASSNAME, COMPONENT_NAME, DEFAULT_PROPS };
@@ -88,6 +90,7 @@ const ExpansionPanel = defineComponent(
         const handleToggleOpen = (shouldOpen: boolean, event: MouseEvent) => {
             event.stopImmediatePropagation();
             emit('toggleOpen', shouldOpen, event);
+            emit('update:isOpen', shouldOpen);
         };
 
         return () => {

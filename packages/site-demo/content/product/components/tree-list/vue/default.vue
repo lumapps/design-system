@@ -1,5 +1,5 @@
 <template>
-    <TreeList aria-label="Food" :value="value" @change="value = $event as string">
+    <TreeList v-model:value="value" aria-label="Food">
         <TreeListItem label="Fruits" value="fruits">
             <TreeListItem label="Citrus">
                 <TreeListItem label="Lemon" value="lemon" />

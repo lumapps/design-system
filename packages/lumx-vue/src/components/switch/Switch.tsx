@@ -20,6 +20,8 @@ export type SwitchProps = VueToJSXProps<UIProps, 'inputId' | 'inputRef'>;
 export const emitSchema = {
     change: (isChecked: boolean, value?: string, name?: string, event?: Event) =>
         typeof isChecked === 'boolean' && event instanceof Event,
+    /** Model update for `v-model:is-checked`. */
+    'update:isChecked': (isChecked: boolean) => typeof isChecked === 'boolean',
 };
 
 export { CLASSNAME, COMPONENT_NAME, DEFAULT_PROPS };
@@ -48,6 +50,7 @@ const Switch = defineComponent(
             }
 
             emit('change', isChecked, value, name, event);
+            emit('update:isChecked', isChecked);
         };
 
         return () => {

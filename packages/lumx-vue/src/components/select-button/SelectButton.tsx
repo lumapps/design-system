@@ -136,14 +136,20 @@ export const emitSchema = {
     'load-more': () => true,
     /** Dropdown opened or closed. */
     open: (_isOpen: boolean) => true,
+    /** Model update for `v-model:value`. Typed payload restored via `SelectButtonEmits`. */
+    'update:value': (_newValue: unknown) => true,
 };
 /* eslint-enable @typescript-eslint/no-unused-vars */
 
 /**
  * SelectButton emits typed over the option type O and the selection type S.
  */
-type SelectButtonEmits<O, S extends 'single' | 'multiple'> = Omit<EmitsOf<typeof emitSchema>, 'change'> & {
+type SelectButtonEmits<O, S extends 'single' | 'multiple'> = Omit<
+    EmitsOf<typeof emitSchema>,
+    'change' | 'update:value'
+> & {
     change: (newValue: S extends 'multiple' ? O[] : O) => void;
+    'update:value': (newValue: S extends 'multiple' ? O[] : O) => void;
 };
 
 type SingleSelectButtonPublicProps<O> = SingleSelectButtonProps<O> & EmitsToProps<SelectButtonEmits<O, 'single'>>;
@@ -240,6 +246,7 @@ const SelectButton = defineComponent(
                 props.selectionType === 'multiple',
             );
             emit('change', next);
+            emit('update:value', next);
         };
 
         /*

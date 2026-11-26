@@ -100,6 +100,49 @@ describe('<TextField />', () => {
             expect(beforeElement).toHaveTextContent('Before slot');
             expect(beforeElement).not.toHaveTextContent('Before prop');
         });
+
+        it('should update v-model:value on input', async () => {
+            render({
+                template: '<div><TextField v-model:value="value" /><span data-testid="out">{{ value }}</span></div>',
+                components: { TextField },
+                data() {
+                    return { value: '' };
+                },
+            });
+            const input = screen.getByRole('textbox');
+            await fireEvent.input(input, { target: { value: 'hello' } });
+
+            expect(screen.getByTestId('out')).toHaveTextContent('hello');
+        });
+
+        it('should update v-model:value on native change', async () => {
+            render({
+                template: '<div><TextField v-model:value="value" /><span data-testid="out">{{ value }}</span></div>',
+                components: { TextField },
+                data() {
+                    return { value: '' };
+                },
+            });
+            const input = screen.getByRole('textbox');
+            await fireEvent.change(input, { target: { value: 'hello' } });
+
+            expect(screen.getByTestId('out')).toHaveTextContent('hello');
+        });
+
+        it('should set v-model:value to an empty string when the clear button is clicked', async () => {
+            render({
+                template:
+                    '<div><TextField v-model:value="value" :clear-button-props="{ label: \'Clear\' }" /><span data-testid="out">{{ value }}</span></div>',
+                components: { TextField },
+                data() {
+                    return { value: 'some value' };
+                },
+            });
+            const clearButton = screen.getByRole('button', { name: 'Clear' });
+            await fireEvent.click(clearButton);
+
+            expect(screen.getByTestId('out')).toHaveTextContent('');
+        });
     });
 
     commonTestsSuiteVTL(setupTextField, {

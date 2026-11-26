@@ -1,6 +1,6 @@
 <template>
     <div style="min-width: 340px">
-        <TabProvider :active-tab-index="activeTab" @change="activeTab = $event">
+        <TabProvider v-model:active-tab-index="activeTab">
             <TabList :theme="theme" aria-label="Tab list">
                 <Tab label="Tab 1" :icon="mdiBowl" />
                 <Tab label="Tab 2" :icon="mdiBreadSliceOutline" :icon-props="{ color: 'red-L1', hasShape: false }" />

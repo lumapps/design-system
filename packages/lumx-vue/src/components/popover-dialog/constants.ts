@@ -5,6 +5,8 @@ import type { PopoverDialogProps } from './types';
 /** Emit contract, shared by the `PopoverDialog` wrapper and `PopoverDialogContent`. */
 export const emitSchema = {
     close: () => true,
+    /** Model update for `v-model:is-open`. Only ever sends `false`: the app opens the popover itself. */
+    'update:isOpen': (isOpen: boolean) => typeof isOpen === 'boolean',
 };
 
 /** Public prop names, shared by the `PopoverDialog` wrapper and `PopoverDialogContent`. */

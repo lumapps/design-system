@@ -51,6 +51,8 @@ export const emitSchema = {
     blur: (_event?: FocusEvent) => true,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     clear: (_event?: MouseEvent) => true,
+    /** Model update for `v-model:value`. */
+    'update:value': (value: string) => typeof value === 'string',
 };
 
 export { CLASSNAME, COMPONENT_NAME };
@@ -97,10 +99,12 @@ const TextField = defineComponent(
 
         const handleChange = (value: string, name?: string, event?: any) => {
             emit('change', value, name, event);
+            emit('update:value', value);
         };
 
         const handleInput = (value: string, name?: string, event?: any) => {
             emit('input', value, name, event);
+            emit('update:value', value);
         };
 
         const handleFocus = (event?: any) => {
@@ -115,7 +119,7 @@ const TextField = defineComponent(
 
         const handleClear = (event?: any) => {
             event?.stopImmediatePropagation();
-            emit('change', '');
+            handleChange('');
             emit('clear', event);
         };
 

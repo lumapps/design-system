@@ -62,6 +62,8 @@ export const emitSchema = {
      * values with `selectionType="multiple"`.
      */
     change: (newValue: string | string[]) => newValue !== undefined,
+    /** Model update for `v-model:value`. */
+    'update:value': (newValue: string | string[]) => newValue !== undefined,
 };
 
 /**
@@ -109,8 +111,9 @@ const TreeList = defineComponent(
 
         /** Compute the next value from the selected tree item, and emit `change`. */
         const handleSelect = (option: { value: string }) => {
-            if (props.selectionType === 'multiple') emit('change', toggleTreeValue(props.value, option.value));
-            else emit('change', option.value);
+            const next = props.selectionType === 'multiple' ? toggleTreeValue(props.value, option.value) : option.value;
+            emit('change', next);
+            emit('update:value', next);
         };
 
         /** Create the tree list handle (with the combobox list options, or as a standalone tree), with the selection. */

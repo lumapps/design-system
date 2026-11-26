@@ -1,4 +1,5 @@
 import { render, screen, cleanup } from '@testing-library/vue';
+import userEvent from '@testing-library/user-event';
 import BasePopoverTests, { setup } from '@lumx/core/js/components/Popover/Tests';
 import { CLASSNAME } from '@lumx/core/js/components/Popover';
 import { commonTestsSuiteVTL, type SetupRenderOptions } from '@lumx/vue/testing';
@@ -27,6 +28,21 @@ describe('<Popover />', () => {
     BasePopoverTests({
         render: renderPopover,
         screen,
+    });
+
+    describe('Vue', () => {
+        it('should set v-model:is-open to false on Escape key press', async () => {
+            render({
+                template:
+                    '<div><Popover v-model:is-open="isOpen" :close-on-escape="true" :use-portal="false">Popover content</Popover><span data-testid="out">{{ isOpen }}</span></div>',
+                components: { Popover },
+                data() {
+                    return { isOpen: true };
+                },
+            });
+            await userEvent.keyboard('{Escape}');
+            expect(screen.getByTestId('out')).toHaveTextContent('false');
+        });
     });
 
     const setupPopover = (props: any = {}, options: SetupRenderOptions<any> = {}) =>

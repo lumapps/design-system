@@ -65,6 +65,34 @@ describe('<Switch />', () => {
             if (input) await userEvent.click(input);
             expect(emitted('change')).toBeUndefined();
         });
+
+        it('should update v-model:is-checked when clicked', async () => {
+            render({
+                template:
+                    '<div><Switch v-model:is-checked="checked" id="test" label="Test label" /><span data-testid="out">{{ checked }}</span></div>',
+                components: { Switch },
+                data() {
+                    return { checked: false };
+                },
+            });
+            await userEvent.click(screen.getByRole('switch'));
+
+            expect(screen.getByTestId('out')).toHaveTextContent('true');
+        });
+
+        it('should leave v-model:is-checked unchanged when the switch is disabled', async () => {
+            render({
+                template:
+                    '<div><Switch v-model:is-checked="checked" id="test" label="Test label" :is-disabled="true" /><span data-testid="out">{{ checked }}</span></div>',
+                components: { Switch },
+                data() {
+                    return { checked: false };
+                },
+            });
+            await userEvent.click(screen.getByRole('switch'));
+
+            expect(screen.getByTestId('out')).toHaveTextContent('false');
+        });
     });
 
     // Common tests suite.

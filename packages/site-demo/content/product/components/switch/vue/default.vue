@@ -1,7 +1,7 @@
 <template>
-    <Switch :is-checked="state" :theme="theme" @change="state = $event"> Default </Switch>
+    <Switch v-model:is-checked="state" :theme="theme"> Default </Switch>
 
-    <Switch :is-checked="state" :theme="theme" helper="Helper text" @change="state = $event"> With helper </Switch>
+    <Switch v-model:is-checked="state" :theme="theme" helper="Helper text"> With helper </Switch>
 
     <Switch :is-disabled="true" :is-checked="state" :theme="theme" @change="state = $event"> Disabled </Switch>
 

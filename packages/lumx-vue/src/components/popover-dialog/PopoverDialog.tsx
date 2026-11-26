@@ -13,7 +13,10 @@ export { emitSchema };
 
 const PopoverDialog = defineComponent(
     (props: PopoverDialogProps, { emit, slots, attrs }) => {
-        const handleClose = () => emit('close');
+        const handleClose = () => {
+            emit('close');
+            emit('update:isOpen', false);
+        };
 
         return () => (
             <IdsRegistryProvider>

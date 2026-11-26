@@ -41,6 +41,22 @@ describe('<AlertDialog />', () => {
             fireEvent.click(overlay!);
             expect(emitted('close')).toBeTruthy();
         });
+
+        it('should set v-model:is-open to false when the dialog requests close', async () => {
+            render({
+                template:
+                    '<div><AlertDialog v-model:is-open="isOpen" :confirm-props="confirmProps" /><span data-testid="out">{{ isOpen }}</span></div>',
+                components: { AlertDialog },
+                data() {
+                    return { isOpen: true, confirmProps: { label: 'OK', onClick: () => {} } };
+                },
+            });
+            const overlay = document.querySelector('.lumx-dialog__overlay');
+            await fireEvent.mouseDown(overlay!);
+            await fireEvent.click(overlay!);
+
+            expect(screen.getByTestId('out')).toHaveTextContent('false');
+        });
     });
 
     commonTestsSuiteVTL(setupAlertDialog, {

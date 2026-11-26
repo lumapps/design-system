@@ -1,4 +1,5 @@
-import { render } from '@testing-library/vue';
+import { render, screen } from '@testing-library/vue';
+import userEvent from '@testing-library/user-event';
 import { defineComponent, h } from 'vue';
 
 import comboboxTests from '@lumx/core/js/components/Combobox/Tests';
@@ -90,6 +91,20 @@ describe('<Combobox>', () => {
             const beforeElement = getByClassName(element, `${TEXT_FIELD_CLASSNAME}__before-element`);
             expect(beforeElement).toHaveTextContent('Before slot');
             expect(beforeElement).not.toHaveTextContent('Before prop');
+        });
+
+        it('should update v-model:value when the user types', async () => {
+            render({
+                template:
+                    '<div><ComboboxProvider><ComboboxInput v-model:value="value" label="Fruit" /></ComboboxProvider><span data-testid="out">{{ value }}</span></div>',
+                components: { ComboboxProvider, ComboboxInput },
+                data() {
+                    return { value: '' };
+                },
+            });
+            await userEvent.type(screen.getByRole('combobox', { name: 'Fruit' }), 'ap');
+
+            expect(screen.getByTestId('out')).toHaveTextContent('ap');
         });
     });
 

@@ -7,9 +7,8 @@
         filter="auto"
         get-option-id="id"
         get-option-name="name"
-        :value="value"
+        v-model:value="value"
         :translations="TRANSLATIONS"
-        @change="value = $event"
     />
 </template>
 

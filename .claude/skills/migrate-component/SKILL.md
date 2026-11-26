@@ -243,7 +243,7 @@ Migration order:
     - Use `defineComponent` with render function
     - Use composables: `useTheme`, `useId`, `useDisableStateProps`
     - Support both `label` prop and default slot
-    - Emit events instead of onChange callbacks
+    - Emit events instead of onChange callbacks, plus `update:<prop>` for each controlled prop (see `packages/lumx-vue/CLAUDE.md` § `v-model`)
     - **Use JSX rendering**: `return (<ComponentUI ... />)`
     - **Add stop propagation**: `event.stopImmediatePropagation()`
     - Define props using `keysOf<ComponentProps>()`
@@ -1129,6 +1129,7 @@ export type ComponentProps = VueToJSXProps<UIProps, 'inputId' | 'label'>;
 
 export const emitSchema = {
     change: (/* params */) => /* validation */,
+    'update:value': (/* new value */) => /* validation */,
 };
 
 const Component = defineComponent(
@@ -1148,6 +1149,7 @@ const Component = defineComponent(
 
             event.stopImmediatePropagation();  // Important!
             emit('change', /* params */);
+            emit('update:value', /* new value */);
         };
 
         return () => {

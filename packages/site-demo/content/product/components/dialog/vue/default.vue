@@ -1,7 +1,7 @@
 <template>
     <Button :left-icon="mdiPlay" ref="buttonRef" @click="toggle" :theme="theme">Try dialog</Button>
 
-    <Dialog :is-open="isOpen" :parent-element="buttonRef?.$el" @close="close">
+    <Dialog v-model:is-open="isOpen" :parent-element="buttonRef?.$el">
         <template #header>
             <Toolbar>
                 <DialogHeading>Default dialog</DialogHeading>

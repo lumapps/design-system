@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/vue';
+import userEvent from '@testing-library/user-event';
 import { defineComponent, h, ref } from 'vue';
 import BaseSelectionChipGroupTests from '@lumx/core/js/components/Chip/SelectionChipGroupTests';
 import { mdiEarth } from '@lumx/icons';
@@ -55,6 +56,20 @@ describe('<SelectionChipGroup />', () => {
     });
 
     describe('Vue', () => {
+        it('should update v-model:value when a chip is removed', async () => {
+            render({
+                template:
+                    '<div><SelectionChipGroup v-model:value="value" get-option-id="id" get-option-name="name" label="Test chips" /><span data-testid="out">{{ value.map((o) => o.name).join(\',\') }}</span></div>',
+                components: { SelectionChipGroup },
+                data() {
+                    return { value: [...testOptions] };
+                },
+            });
+            await userEvent.click(screen.getByRole('option', { name: /Apricot/ }));
+
+            expect(screen.getByTestId('out')).toHaveTextContent('Apple,Banana');
+        });
+
         describe('Merging chip slot and getChipProps', () => {
             it('should let chip slot override getChipProps props', () => {
                 render(

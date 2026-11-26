@@ -43,6 +43,9 @@ export type SelectionChipGroupProps<O = any> = VueToJSXProps<UIProps<O>> & {
 export const emitSchema = {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     change: (_newValue?: any[]) => true,
+    /** Model update for `v-model:value`. Typed payload restored via `SelectionChipGroupEmits`. */
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    'update:value': (_newValue?: any[]) => true,
 };
 
 /**
@@ -50,6 +53,7 @@ export const emitSchema = {
  */
 export type SelectionChipGroupEmits<O> = {
     change: (newValue: O[] | undefined) => void;
+    'update:value': (newValue: O[] | undefined) => void;
 };
 
 /**
@@ -89,7 +93,10 @@ const SelectionChipGroup = defineComponent(
             const cleanup = setupSelectionChipGroupEvents({
                 getContainer,
                 getInput: () => props.inputRef,
-                onChange: (newValue) => emit('change', newValue),
+                onChange: (newValue) => {
+                    emit('change', newValue);
+                    emit('update:value', newValue);
+                },
                 getValue: () => props.value,
                 getOptionId: props.getOptionId,
             });

@@ -1,13 +1,12 @@
 <template>
     <TimePickerField
+        v-model:value="value"
         label="Working hours"
         helper="Pick a time between 9:00 and 18:00"
         locale="en-US"
-        :value="value"
         :min-time="minTime"
         :max-time="maxTime"
         :translations="TRANSLATIONS"
-        @change="value = $event"
     />
 </template>
 

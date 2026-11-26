@@ -1,13 +1,7 @@
 <template>
     <Combobox.Provider>
-        <Combobox.Input
-            label="Filter foods"
-            :value="text"
-            selection-mode="clear"
-            placeholder="Lemon, leek…"
-            @change="text = $event"
-        />
-        <TreeList aria-label="Food" :value="value" @change="value = $event as string">
+        <Combobox.Input v-model:value="text" label="Filter foods" selection-mode="clear" placeholder="Lemon, leek…" />
+        <TreeList v-model:value="value" aria-label="Food">
             <TreeListItem label="Fruits" value="fruits">
                 <TreeListItem label="Citrus">
                     <TreeListItem label="Lemon" value="lemon" />

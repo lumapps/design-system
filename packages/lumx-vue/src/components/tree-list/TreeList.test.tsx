@@ -179,6 +179,22 @@ describe('<TreeList>', () => {
         });
     });
 
+    describe('v-model', () => {
+        it('should update v-model:value when a tree item is selected', async () => {
+            render({
+                template:
+                    '<div><TreeList v-model:value="value" aria-label="Food"><TreeListItem label="Lemon" value="lemon" /><TreeListItem label="Orange" value="orange" /></TreeList><span data-testid="out">{{ value }}</span></div>',
+                components: { TreeList, TreeListItem },
+                data() {
+                    return { value: 'lemon' };
+                },
+            });
+            await userEvent.click(screen.getByRole('treeitem', { name: 'Orange' }));
+
+            expect(screen.getByTestId('out')).toHaveTextContent('orange');
+        });
+    });
+
     describe('Lifecycle', () => {
         it('attaches a new tree to the combobox after the previous tree unmounts', async () => {
             const Template = defineComponent({

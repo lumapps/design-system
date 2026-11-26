@@ -279,6 +279,58 @@ describe('<SelectButton>', () => {
             expect(document.body.querySelector('.lumx-infinite-scroll-anchor')).toBeInTheDocument();
         });
 
+        it('should update v-model:value when an option is selected', async () => {
+            render({
+                template:
+                    '<div><SelectButton v-model:value="value" :options="options" get-option-id="id" get-option-name="name" label="Pick a fruit" /><span data-testid="out">{{ value?.name }}</span></div>',
+                components: { SelectButton },
+                data() {
+                    return { options: FRUITS, value: undefined };
+                },
+            });
+            const user = userEvent.setup();
+            await user.click(getButton());
+            const option = await waitFor(() => {
+                const el = document.body.querySelector<HTMLElement>('[role="option"][data-value="banana"]');
+                if (!el) throw new Error('option not found');
+                return el;
+            });
+            await user.click(option);
+
+            await waitFor(() => {
+                expect(document.body.querySelector('[data-testid="out"]')).toHaveTextContent('Banana');
+            });
+        });
+
+        it('should update v-model:value with the whole array in multiple mode', async () => {
+            render({
+                template:
+                    '<div><SelectButton v-model:value="value" :options="options" get-option-id="id" get-option-name="name" selection-type="multiple" label="Pick fruits" /><span data-testid="out">{{ (value || []).map((o) => o.name).join(\',\') }}</span></div>',
+                components: { SelectButton },
+                data() {
+                    return { options: FRUITS, value: [] as Fruit[] };
+                },
+            });
+            const user = userEvent.setup();
+            await user.click(getButton());
+            const apple = await waitFor(() => {
+                const el = document.body.querySelector<HTMLElement>('[role="option"][data-value="apple"]');
+                if (!el) throw new Error('option not found');
+                return el;
+            });
+            await user.click(apple);
+            const cherry = await waitFor(() => {
+                const el = document.body.querySelector<HTMLElement>('[role="option"][data-value="cherry"]');
+                if (!el) throw new Error('option not found');
+                return el;
+            });
+            await user.click(cherry);
+
+            await waitFor(() => {
+                expect(document.body.querySelector('[data-testid="out"]')).toHaveTextContent('Apple,Cherry');
+            });
+        });
+
         /*
          * Compile-time assertions on the exported prop types. Enforced by `vue-tsc`
          * during `yarn type-check`; no runtime effect. We assert prop shapes rather
@@ -340,6 +392,11 @@ describe('<SelectButton>', () => {
             it('narrows the change payload per selectionType', () => {
                 expectTypeOf<SingleEmit>().toBeCallableWith('change', FRUIT);
                 expectTypeOf<MultipleEmit>().toBeCallableWith('change', [FRUIT]);
+            });
+
+            it('narrows the update:value payload per selectionType', () => {
+                expectTypeOf<SingleEmit>().toBeCallableWith('update:value', FRUIT);
+                expectTypeOf<MultipleEmit>().toBeCallableWith('update:value', [FRUIT]);
             });
 
             it('types common event payloads on $emit', () => {

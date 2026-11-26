@@ -1,5 +1,5 @@
 <template>
-    <TreeList aria-label="Files" :value="value" @change="value = $event as string">
+    <TreeList v-model:value="value" aria-label="Files">
         <TreeListItem label="Documents">
             <template #before>
                 <Icon :icon="mdiFolder" size="xs" />

@@ -20,6 +20,8 @@ export type CheckboxProps = VueToJSXProps<UIProps, 'inputId' | 'inputRef'>;
 export const emitSchema = {
     change: (isChecked: boolean, value?: string, name?: string, event?: Event) =>
         typeof isChecked === 'boolean' && event instanceof Event,
+    /** Model update for `v-model:is-checked`. Always a boolean, also when `isChecked` prop is `'intermediate'`. */
+    'update:isChecked': (isChecked: boolean) => typeof isChecked === 'boolean',
 };
 
 export { CLASSNAME, COMPONENT_NAME, DEFAULT_PROPS, INTERMEDIATE_STATE };
@@ -62,6 +64,7 @@ const Checkbox = defineComponent(
             }
 
             emit('change', isChecked, value, name, event);
+            emit('update:isChecked', isChecked);
         };
 
         return () => {

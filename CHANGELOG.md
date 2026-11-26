@@ -11,6 +11,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `@lumx/react`, `@lumx/vue`:
     -   `TextField`, `Combobox.Input`, `SelectTextField`, `TimePickerField`: add the `beforeElement` prop (and the `#beforeElement` slot in Vue) to show a custom element at the start of the field.
+-   `@lumx/vue`:
+    -   `TextField`, `SelectButton`, `SelectTextField`, `SelectionChipGroup`, `TimePickerField`, `TreeList`, `Combobox.Input`: add the `update:value` event. It supports `v-model:value`.
+    -   `Checkbox`, `Switch`: add the `update:isChecked` event. It supports `v-model:is-checked`.
+    -   `Dialog`, `Lightbox`, `AlertDialog`, `Popover`, `PopoverDialog`: add the `update:isOpen` event. It supports `v-model:is-open`. The event only reports the close, so it only ever sends `false`.
+    -   `ExpansionPanel`: add the `update:isOpen` event. It supports `v-model:is-open`.
+    -   `TabProvider`: add the `update:activeTabIndex` event. It supports `v-model:active-tab-index`.
+    -   These are new events. The current props and events do not change.
 
 ## [4.29.0][] - 2026-11-23
 
@@ -135,6 +142,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 -   `@lumx/react`, `@lumx/vue`:
+
     -   `Text`, `Heading`, `Link`: no space is added around an icon at the start or end of the content, or next to text that already ends or starts with a space.
     -   `Text`, `Heading`, `Link`: an inline icon does not wrap to a new line on its own anymore.
 
@@ -290,7 +298,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `@lumx/vue`:
     -   Create the `SelectButton` component
-       `InputLabel`: Added prop `as` to specify the HTML element to use for rendering
+        `InputLabel`: Added prop `as` to specify the HTML element to use for rendering
 -   `@lumx/react`:
     -   Create the `TimePickerField` component
     -   `InputLabel`: Added prop `as` to specify the HTML element to use for rendering
@@ -373,13 +381,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   Moved `Lightbox` from `@lumx/react`
     -   `setupRovingTabIndex`: add MutationObserver-based tabindex normalization (mount, removal recovery, insertion, disabled-state, selection)
     -   `Combobox`: replace `autoFilter` boolean with `filter` prop (`'auto'` | `'manual'` | `'off'`) and add `openOnFocus` prop
--  `@lumx/react`:
-    -  `TextField`: improve clear button a11y linking it to the input label via `aria-describedby`
+-   `@lumx/react`:
+    -   `TextField`: improve clear button a11y linking it to the input label via `aria-describedby`
     -   `Combobox.Input`: replace `autoFilter` with `filter` and `openOnFocus` props
     -   `SelectionChipGroup`: simplify chip labeling; remove unused `inputLabel` and `scope` props
     -   `SelectionChipGroup`: implement ARIA listbox pattern
--  `@lumx/vue`:
-    -  `TextField`: improve clear button a11y linking it to the input label via `aria-describedby`
+-   `@lumx/vue`:
+    -   `TextField`: improve clear button a11y linking it to the input label via `aria-describedby`
     -   `Combobox.Input`: replace `autoFilter` with `filter` and `openOnFocus` props
     -   Create the `SelectionChipGroup` component
 

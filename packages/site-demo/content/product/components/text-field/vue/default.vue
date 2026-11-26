@@ -1,5 +1,5 @@
 <template>
-    <TextField label="Text field label" :value="value" :theme="theme" @change="value = $event" />
+    <TextField label="Text field label" v-model:value="value" :theme="theme" />
 </template>
 
 <script setup lang="ts">

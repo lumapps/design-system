@@ -43,6 +43,16 @@ Multi-component families (Button, Chip, List, Tabs…) add siblings in the same 
 
 Every `defineComponent` sets `name: getName(COMPONENT_NAME)` (from `utils/VueToJSX`), producing a `Lumx`-prefixed name (e.g. `LumxButton`). The prefix prevents collisions with native HTML/SVG tags (`button`, `dialog`, `link`, `table`, `text`…) and namespaces components in devtools
 
+### `v-model` — `update:<prop>` events
+
+Every controlled prop (`value`, `isChecked`, `isOpen`…) supports `v-model:<prop>`:
+
+-   Emit `update:<propName>` with the new value as the only argument. Use the camelCase key in `emitSchema` (`'update:isChecked'` gives `v-model:is-checked`).
+-   Also emit the existing event (`change`, `close`…), for parity with React and for backward compatibility.
+-   An overlay that the app opens (`Dialog`, `Lightbox`…) emits `update:isOpen` with `false` only, on close.
+-   A generic payload loses its type in `emitSchema`. Restore it with an `Emits` type override (see `SelectTextField`).
+-   Test the round trip with a template that binds `v-model:<prop>`, and test that a disabled component keeps the model unchanged (see `Switch.test.ts`).
+
 ## COMPOSABLES
 
 `src/composables/` — the Vue equivalent of lumx-react hooks (theme, disabled state, focus, keyboard, slots, etc.), each with a co-located `.test.ts`.
