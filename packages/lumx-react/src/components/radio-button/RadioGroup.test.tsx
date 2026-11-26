@@ -1,7 +1,9 @@
-import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
+import radioGroupTests from '@lumx/core/js/components/RadioGroup/Tests';
+import { commonTestsSuiteRTL, renderWithState } from '@lumx/react/testing/utils';
 
 import { render } from '@testing-library/react';
 import { queryByClassName } from '@lumx/react/testing/utils/queries';
+import { RadioButton } from './RadioButton';
 import { RadioGroup, RadioGroupProps } from './RadioGroup';
 
 const CLASSNAME = RadioGroup.className as string;
@@ -20,6 +22,8 @@ const setup = (propsOverride: SetupProps = {}) => {
 };
 
 describe(`<${RadioGroup.displayName}>`, () => {
+    radioGroupTests({ components: { RadioGroup, RadioButton }, renderWithState });
+
     // Common tests suite.
     commonTestsSuiteRTL(setup, {
         baseClassName: CLASSNAME,

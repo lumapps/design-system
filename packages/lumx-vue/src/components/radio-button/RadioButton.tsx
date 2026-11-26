@@ -7,12 +7,14 @@ import {
     COMPONENT_NAME,
     DEFAULT_PROPS,
 } from '@lumx/core/js/components/RadioButton';
+import { resolveRadioState } from '@lumx/core/js/components/RadioGroup/resolveRadioState';
 
 import { useTheme } from '../../composables/useTheme';
 import { useClassName } from '../../composables/useClassName';
 import { useDisableStateProps } from '../../composables/useDisableStateProps';
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { useId } from '../../composables/useId';
+import { useOptionalRadioGroupContext } from './RadioGroupContext';
 
 export type RadioButtonProps = VueToJSXProps<UIProps, 'inputId' | 'inputRef'>;
 
@@ -35,6 +37,7 @@ const RadioButton = defineComponent(
         const className = useClassName(() => props.class);
         const generatedInputId = useId();
         const inputId = computed(() => props.id || generatedInputId);
+        const group = useOptionalRadioGroupContext();
 
         const { isAnyDisabled, disabledStateProps, otherProps } = useDisableStateProps(
             computed(() => ({ ...props, ...attrs })),
@@ -46,9 +49,14 @@ const RadioButton = defineComponent(
             }
 
             emit('change', value, name, event);
+            if (value !== undefined) group?.onChange?.(value, name, event);
         };
 
         return () => {
+            const { isChecked, name } = resolveRadioState(
+                { isChecked: props.isChecked ?? props.checked, name: props.name, value: props.value },
+                group,
+            );
             return (
                 <RadioButtonUI
                     {...otherProps.value}
@@ -58,6 +66,8 @@ const RadioButton = defineComponent(
                     isDisabled={isAnyDisabled.value}
                     handleChange={handleChange}
                     label={props.label}
+                    isChecked={isChecked}
+                    name={name}
                     inputProps={{
                         ...props.inputProps,
                         ...disabledStateProps.value,

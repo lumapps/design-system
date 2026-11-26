@@ -1,3 +1,4 @@
+import { useContext } from 'react';
 import { Theme } from '@lumx/core/js/constants';
 import type { GenericProps } from '@lumx/core/js/types';
 import {
@@ -6,11 +7,13 @@ import {
     CLASSNAME,
     COMPONENT_NAME,
 } from '@lumx/core/js/components/RadioButton';
+import { resolveRadioState } from '@lumx/core/js/components/RadioGroup/resolveRadioState';
 import { useId } from '@lumx/react/hooks/useId';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';
 import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
+import { RadioGroupContext } from './RadioGroupContext';
 
 /**
  * Defines the props of the component.
@@ -35,6 +38,7 @@ const DEFAULT_PROPS: Partial<RadioButtonProps> = {};
 export const RadioButton = forwardRef<RadioButtonProps, HTMLDivElement>((props, ref) => {
     const { isAnyDisabled, disabledStateProps, otherProps } = useDisableStateProps(props);
     const defaultTheme = useTheme() || Theme.light;
+    const group = useContext(RadioGroupContext);
     const {
         checked,
         className,
@@ -52,16 +56,22 @@ export const RadioButton = forwardRef<RadioButtonProps, HTMLDivElement>((props, 
     } = otherProps;
     const generatedInputId = useId();
     const inputId = id || generatedInputId;
+    const { isChecked: resolvedIsChecked, name: resolvedName } = resolveRadioState({ isChecked, name, value }, group);
+
+    const handleChange = (changeValue?: string, changeName?: string, event?: any) => {
+        onChange?.(changeValue, changeName, event);
+        if (changeValue !== undefined) group?.onChange?.(changeValue, changeName, event);
+    };
 
     return UI({
         ref,
         className,
         helper,
         inputRef,
-        isChecked,
+        isChecked: resolvedIsChecked,
         label,
-        name,
-        handleChange: onChange,
+        name: resolvedName,
+        handleChange: isAnyDisabled ? undefined : handleChange,
         theme,
         value,
         inputProps: {

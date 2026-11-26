@@ -11,8 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `@lumx/react`, `@lumx/vue`:
     -   `TextField`, `Combobox.Input`, `SelectTextField`, `TimePickerField`: add the `beforeElement` prop (and the `#beforeElement` slot in Vue) to show a custom element at the start of the field.
+    -   `RadioGroup`: add the `value` and `name` props, and the `onChange` prop (the `change` event in Vue). They let an app bind one value and one name on the group, instead of on every `RadioButton`. The current usage (`checked`/`isChecked` and `name` on each `RadioButton`) does not change.
 -   `@lumx/vue`:
-    -   `TextField`, `SelectButton`, `SelectTextField`, `SelectionChipGroup`, `TimePickerField`, `TreeList`, `Combobox.Input`: add the `update:value` event. It supports `v-model:value`.
+    -   `TextField`, `SelectButton`, `SelectTextField`, `SelectionChipGroup`, `TimePickerField`, `TreeList`, `RadioGroup`, `Combobox.Input`: add the `update:value` event. It supports `v-model:value`.
     -   `Checkbox`, `Switch`: add the `update:isChecked` event. It supports `v-model:is-checked`.
     -   `Dialog`, `Lightbox`, `AlertDialog`, `Popover`, `PopoverDialog`: add the `update:isOpen` event. It supports `v-model:is-open`. The event only reports the close, so it only ever sends `false`.
     -   `ExpansionPanel`: add the `update:isOpen` event. It supports `v-model:is-open`.
