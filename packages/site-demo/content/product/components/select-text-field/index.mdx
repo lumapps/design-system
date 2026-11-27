@@ -31,6 +31,12 @@ Set `selectionType="single"` for single selection mode. Users can type to filter
 
 <DemoBlock demo={{ react: ReactDemoSingleSelection, vue: VueDemoSingleSelection }} />
 
+### Empty input with a selected option
+
+Pass `searchInputValue=""` and `hasClearButton={false}` to keep the input empty while an option stays selected. The
+input shows only the typed text, and erasing it keeps the selection. Use it only where the selection shows elsewhere,
+for example in an [inline list](#inline-list).
+
 ## Multiple selection
 
 Set `selectionType="multiple"` to allow selecting multiple options. Selected values are displayed as chips below the input.

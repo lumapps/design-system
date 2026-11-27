@@ -131,6 +131,28 @@ export function setup({
         },
     };
 
+    /** Test the empty input with a selected option */
+    const EmptyInputWithSelection = {
+        render: (args: any) => (
+            <div>
+                {defaultTemplate({ value: FRUITS[0], searchInputValue: '', hasClearButton: false, ...args })}
+                <button type="button" data-testid="outside-button">
+                    Outside
+                </button>
+            </div>
+        ),
+        async play({ canvas }: any) {
+            const input = canvas.getByRole('combobox') as HTMLInputElement;
+
+            await userEvent.type(input, 'ban');
+            await expect(input).toHaveValue('ban');
+            await userEvent.click(canvas.getByTestId('outside-button'));
+            await waitFor(() => {
+                expect(input).toHaveValue('');
+            });
+        },
+    };
+
     /** Test blur reset to empty (multi select) */
     const MultiBlurResetsSearch = {
         render: (args: any) => (
@@ -324,6 +346,7 @@ export function setup({
         ClickOutsideCloses,
         BlurResetsToSelectedValue,
         BlurResetsToEmpty,
+        EmptyInputWithSelection,
         MultiBlurResetsSearch,
         WithInfiniteScroll,
         WithManyOptions,

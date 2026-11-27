@@ -26,6 +26,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `@lumx/react`, `@lumx/vue`:
     -   `TooltipProps['label']` also accepts a function. Code that reads it as a string must handle the function type.
+    -   `SelectTextField` (single selection): `searchInputValue=""` keeps the input empty while an option is selected. Code that copies `onSearch` into `searchInputValue` must pass `search || undefined` to keep showing the name of the selection.
+    -   `SelectTextField`, `TimePickerField` (single selection): with `hasClearButton={false}`, erasing the input or pressing Escape no longer clears the selection.
 -   `@lumx/vue`:
     -   `Text`: no mutation or resize observer for the `title`, as in React. The `title` no longer updates on resize.
 

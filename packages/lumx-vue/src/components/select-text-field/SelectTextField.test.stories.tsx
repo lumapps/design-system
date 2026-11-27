@@ -15,6 +15,7 @@ export default { ...meta, title: 'LumX components/select-text-field/SelectTextFi
 export const ClickOutsideCloses = { ...testStories.ClickOutsideCloses };
 export const BlurResetsToSelectedValue = { ...testStories.BlurResetsToSelectedValue };
 export const BlurResetsToEmpty = { ...testStories.BlurResetsToEmpty };
+export const EmptyInputWithSelection = { ...testStories.EmptyInputWithSelection };
 export const MultiBlurResetsSearch = { ...testStories.MultiBlurResetsSearch };
 
 // Vue-specific test stories (use Vue SFCs for stateful rendering)

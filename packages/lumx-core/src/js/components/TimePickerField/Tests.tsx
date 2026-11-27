@@ -252,6 +252,30 @@ export default function timePickerFieldTests({ components, renderWithState }: Ti
         });
     });
 
+    describe('input clear', () => {
+        it('clears the selection when the user empties the input', async () => {
+            const onChange = vi.fn();
+            renderWithState(defaultTemplate, { value: getDateAtTime({ hour: 8, minute: 0 }), onChange });
+            const input = screen.getByRole('combobox');
+            await userEvent.click(input);
+            await userEvent.clear(input);
+            expect(onChange).toHaveBeenCalledWith(undefined, undefined, undefined);
+        });
+
+        it('keeps the selection when the user empties the input with hasClearButton false', async () => {
+            const onChange = vi.fn();
+            renderWithState(defaultTemplate, {
+                value: getDateAtTime({ hour: 8, minute: 0 }),
+                hasClearButton: false,
+                onChange,
+            });
+            const input = screen.getByRole('combobox');
+            await userEvent.click(input);
+            await userEvent.clear(input);
+            expect(onChange).not.toHaveBeenCalledWith(undefined, undefined, undefined);
+        });
+    });
+
     describe('boundsMode', () => {
         it('clamps value to minTime on mount when boundsMode is "enforce"', () => {
             const onChange = vi.fn();

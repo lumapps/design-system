@@ -1,6 +1,6 @@
 /* eslint-disable no-await-in-loop */
 import userEvent from '@testing-library/user-event';
-import { getByRole, getConfig, queryByRole, waitFor } from '@testing-library/dom';
+import { findByRole, getByRole, getConfig, queryByRole, waitFor } from '@testing-library/dom';
 
 import { getByClassName, getByTagName, queryByClassName, queryByTagName } from '../../../testing/queries';
 
@@ -579,6 +579,125 @@ export default function selectTextFieldTests({ components, renderWithState }: Se
 
             // onChange must not have been called with undefined during partial typing
             expect(onChange).not.toHaveBeenCalledWith(undefined);
+        });
+
+        it('should not clear the selection when the user empties the input with hasClearButton false', async () => {
+            const onChange = vi.fn();
+            renderWithState(defaultTemplate, { value: FRUITS[0], hasClearButton: false, onChange });
+            const input = getByRole(document.body, 'combobox');
+
+            await userEvent.click(input);
+            await userEvent.clear(input);
+
+            expect(onChange).not.toHaveBeenCalledWith(undefined);
+        });
+
+        it('should clear the selection on Escape when the dropdown is closed', async () => {
+            const onChange = vi.fn();
+            renderWithState(defaultTemplate, { value: FRUITS[0], onChange });
+            const input = getByRole(document.body, 'combobox');
+
+            await userEvent.click(input);
+            await userEvent.keyboard('{Escape}');
+            await userEvent.keyboard('{Escape}');
+
+            expect(onChange).toHaveBeenCalledWith(undefined);
+        });
+
+        it('should not clear the selection on Escape with hasClearButton false', async () => {
+            const onChange = vi.fn();
+            renderWithState(defaultTemplate, { value: FRUITS[0], hasClearButton: false, onChange });
+            const input = getByRole(document.body, 'combobox');
+
+            await userEvent.click(input);
+            await userEvent.keyboard('{Escape}');
+            await userEvent.keyboard('{Escape}');
+
+            expect(onChange).not.toHaveBeenCalledWith(undefined);
+            expect(input).toHaveValue('Apple');
+        });
+    });
+
+    // ─── Empty input with searchInputValue="" ─────────────────────
+
+    describe('Empty input with searchInputValue=""', () => {
+        it('should keep the input empty on first render', () => {
+            renderWithState(defaultTemplate, { value: FRUITS[0], searchInputValue: '', hasClearButton: false });
+            expect(getByRole(document.body, 'combobox')).toHaveValue('');
+        });
+
+        it('should mark the selected option with aria-selected', async () => {
+            renderWithState(defaultTemplate, { value: FRUITS[0], searchInputValue: '', hasClearButton: false });
+            await userEvent.click(getByRole(document.body, 'combobox'));
+            expect(await findByRole(document.body, 'option', { name: 'Apple' })).toHaveAttribute(
+                'aria-selected',
+                'true',
+            );
+        });
+
+        it('should show the typed text while searching', async () => {
+            renderWithState(defaultTemplate, { value: FRUITS[0], searchInputValue: '', hasClearButton: false });
+            const input = getByRole(document.body, 'combobox');
+
+            await userEvent.click(input);
+            await userEvent.type(input, 'ban');
+
+            expect(input).toHaveValue('ban');
+        });
+
+        it('should select an option by click and return the input to empty', async () => {
+            const onChange = vi.fn();
+            renderWithState(defaultTemplate, {
+                value: FRUITS[0],
+                searchInputValue: '',
+                hasClearButton: false,
+                onChange,
+            });
+            const input = getByRole(document.body, 'combobox');
+
+            await userEvent.click(input);
+            await userEvent.click(await findByRole(document.body, 'option', { name: 'Banana' }));
+
+            await waitFor(() => {
+                expect(onChange).toHaveBeenCalledWith(FRUITS[2]);
+                expect(input).toHaveValue('');
+            });
+        });
+
+        it('should return the input to empty on blur after typing', async () => {
+            renderWithState(defaultTemplate, { value: FRUITS[0], searchInputValue: '', hasClearButton: false });
+            const input = getByRole(document.body, 'combobox');
+
+            await userEvent.click(input);
+            await userEvent.type(input, 'ban');
+            await userEvent.tab();
+
+            await waitFor(() => {
+                expect(input).toHaveValue('');
+            });
+        });
+
+        it('should not clear the selection when the typed text is erased back to empty', async () => {
+            const onChange = vi.fn();
+            renderWithState(defaultTemplate, {
+                value: FRUITS[0],
+                searchInputValue: '',
+                hasClearButton: false,
+                onChange,
+            });
+            const input = getByRole(document.body, 'combobox');
+
+            await userEvent.click(input);
+            await userEvent.type(input, 'ban');
+            await userEvent.clear(input);
+
+            expect(onChange).not.toHaveBeenCalledWith(undefined);
+            expect(input).toHaveValue('');
+        });
+
+        it('should not show the clear button while the input is empty', () => {
+            renderWithState(defaultTemplate, { value: FRUITS[0], searchInputValue: '' });
+            expect(queryByRole(document.body, 'button', { name: 'Clear' })).toBeNull();
         });
     });
 

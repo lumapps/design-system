@@ -1,5 +1,5 @@
 import { defineComponent, ref, nextTick } from 'vue';
-import { fireEvent, render, waitFor } from '@testing-library/vue';
+import { fireEvent, render, screen, waitFor } from '@testing-library/vue';
 import userEvent from '@testing-library/user-event';
 import { expectTypeOf } from 'vitest';
 
@@ -247,6 +247,72 @@ describe('<SelectTextField>', () => {
             search.value = 'cher';
             await nextTick();
             expect(getInput().value).toBe('cher');
+        });
+
+        it('should empty the input when the parent resets searchInputValue to "" with a selection', async () => {
+            const search = ref('cher');
+            const Wrapper = defineComponent({
+                setup: () => () => (
+                    <SelectTextField
+                        selectionType="single"
+                        label="Select a fruit"
+                        options={FRUITS}
+                        getOptionId="id"
+                        getOptionName="name"
+                        filter="manual"
+                        value={FRUITS[0]}
+                        searchInputValue={search.value}
+                        translations={TRANSLATIONS}
+                    />
+                ),
+            });
+            render(Wrapper);
+            const input = screen.getByRole('combobox');
+            expect(input).toHaveValue('cher');
+
+            search.value = '';
+            await nextTick();
+            expect(input).toHaveValue('');
+        });
+
+        it('should keep the selection and show its name on blur when onSearch is copied into searchInputValue', async () => {
+            const value = ref<unknown>(FRUITS[0]);
+            const search = ref('');
+            const onChange = vi.fn();
+            const Wrapper = defineComponent({
+                setup: () => () => (
+                    <SelectTextField
+                        selectionType="single"
+                        label="Select a fruit"
+                        options={FRUITS}
+                        getOptionId="id"
+                        getOptionName="name"
+                        filter="auto"
+                        translations={TRANSLATIONS}
+                        hasClearButton={false}
+                        value={value.value}
+                        onChange={(newValue?: unknown) => {
+                            value.value = newValue;
+                            onChange(newValue);
+                        }}
+                        onSearch={(newSearch: string) => {
+                            search.value = newSearch;
+                        }}
+                        searchInputValue={search.value || undefined}
+                    />
+                ),
+            });
+            render(Wrapper);
+            const input = screen.getByRole('combobox');
+            const user = userEvent.setup();
+
+            await user.click(input);
+            await user.type(input, 'b');
+            await user.clear(input);
+            expect(onChange).not.toHaveBeenCalledWith(undefined);
+
+            await user.tab();
+            expect(input).toHaveValue('Apple');
         });
 
         // ─── Scoped slots ────────────────────────────────────────
