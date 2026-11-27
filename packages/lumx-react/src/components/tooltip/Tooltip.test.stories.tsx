@@ -1,13 +1,45 @@
 import { useState, useRef } from 'react';
 import range from 'lodash/range';
-import { Button, Dialog, Dropdown, FlexBox } from '@lumx/react';
+import { Button, Dialog, Dropdown, FlexBox, Text } from '@lumx/react';
+import { useOverflowTooltipLabel } from '@lumx/react/utils';
 import { setup } from '@lumx/core/js/components/Tooltip/TestStories';
 
 import { Tooltip } from '.';
 
+const ToggleTooltip = ({
+    getLabel,
+    isFunction,
+}: {
+    getLabel: (isExpanded: boolean) => string;
+    isFunction?: boolean;
+}) => {
+    const [isExpanded, setExpanded] = useState(false);
+    return (
+        <>
+            <Tooltip label={isFunction ? () => getLabel(isExpanded) : getLabel(isExpanded)}>
+                <Button onClick={() => setExpanded(!isExpanded)}>Anchor</Button>
+            </Tooltip>
+            <Button onClick={() => setExpanded(false)}>Collapse</Button>
+        </>
+    );
+};
+
+const OverflowTooltip = ({ text }: { text: string }) => {
+    const { labelRef, tooltipLabel } = useOverflowTooltipLabel();
+    return (
+        <Tooltip label={tooltipLabel}>
+            <button type="button" style={{ maxWidth: '100%' }}>
+                <Text as="span" truncate ref={labelRef}>
+                    {text}
+                </Text>
+            </button>
+        </Tooltip>
+    );
+};
+
 const { meta, ...testStories } = setup({
     component: Tooltip,
-    components: { Button },
+    components: { Button, ToggleTooltip, OverflowTooltip },
 });
 
 export default {
@@ -25,6 +57,12 @@ export const TestAriaDescribedByOnHover = { ...testStories.TestAriaDescribedByOn
 export const TestAriaDescribedByOnWrapperHover = { ...testStories.TestAriaDescribedByOnWrapperHover };
 export const TestAriaLabelledByOnHover = { ...testStories.TestAriaLabelledByOnHover };
 export const TestAriaLabelledByOnWrapperHover = { ...testStories.TestAriaLabelledByOnWrapperHover };
+export const TestFunctionLabelFollowsKeyboardToggle = { ...testStories.TestFunctionLabelFollowsKeyboardToggle };
+export const TestStringLabelBackAfterKeyboardToggle = { ...testStories.TestStringLabelBackAfterKeyboardToggle };
+export const TestFunctionLabelBackAfterKeyboardToggle = { ...testStories.TestFunctionLabelBackAfterKeyboardToggle };
+export const TestOverflowLabel = { ...testStories.TestOverflowLabel };
+export const TestNoOverflowLabel = { ...testStories.TestNoOverflowLabel };
+export const TestOverflowLabelHiddenMount = { ...testStories.TestOverflowLabelHiddenMount };
 
 // React-specific test stories (use React hooks and components not available in Vue)
 

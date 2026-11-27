@@ -1,4 +1,4 @@
-import { defineComponent, ref, computed } from 'vue';
+import { defineComponent, ref, computed, watchPostEffect, onUpdated } from 'vue';
 import { useFloating, offset, autoUpdate } from '@floating-ui/vue';
 
 import {
@@ -52,6 +52,13 @@ export const Tooltip = defineComponent(
             middleware: [offset(ARROW_SIZE)],
         });
 
+        const resolvedFunctionLabel = ref<string | null | false | undefined>(undefined);
+
+        const resolveLabel = () => {
+            const currentLabel = props.label;
+            if (typeof currentLabel === 'function') resolvedFunctionLabel.value = currentLabel();
+        };
+
         // Open/close state machine
         const {
             isOpen: isActivated,
@@ -60,18 +67,42 @@ export const Tooltip = defineComponent(
         } = useTooltipOpen(
             computed(() => props.delay),
             anchorElement,
+            resolveLabel,
         );
 
+        const resolvedLabel = computed(() =>
+            typeof props.label === 'function' ? resolvedFunctionLabel.value : props.label,
+        );
+        const hasLabel = computed(() => typeof props.label === 'function' || !!props.label);
+
         // Visibility state (include isInsideTooltip check to prevent nested tooltips)
-        const isOpen = computed(() => (isActivated.value || props.forceOpen) && !!props.label);
-        const isMounted = computed(() => !!props.label && (isOpen.value || closeMode.value === 'hide'));
+        const isOpen = computed(() => (isActivated.value || props.forceOpen) && !!resolvedLabel.value);
+        const isMounted = computed(() => !!resolvedLabel.value && (isOpen.value || closeMode.value === 'hide'));
         const isHidden = computed(() => !isOpen.value && closeMode.value === 'hide');
 
-        // Escape key handler (reactive — updates when isOpen changes)
-        useCallbackOnEscape(computed(() => (isOpen.value ? () => manager.value?.close() : undefined)));
+        // Resolve before the first render; the post effect below follows the later `forceOpen` changes.
+        if (props.forceOpen) resolveLabel();
+
+        // The post effect tracks the reactive state that a function label reads, and runs after the mount (the setup
+        // has no DOM yet). `onUpdated` covers the DOM changes that no reactive state tracks.
+        const resolveIfOpen = () => {
+            if (isActivated.value || props.forceOpen) resolveLabel();
+        };
+        watchPostEffect(resolveIfOpen);
+        onUpdated(resolveIfOpen);
+
+        // A stable callback, else each label change registers the listener again on top of the more recent ones.
+        const closeTooltip = () => manager.value?.close();
+        // A forced-open tooltip does not take Escape from its container (ex: the highlighted option of a combobox).
+        useCallbackOnEscape(computed(() => (isActivated.value && !!resolvedLabel.value ? closeTooltip : undefined)));
 
         // Provide context to prevent nested tooltips (called in setup, not render)
         provideTooltipContext();
+
+        const setAnchorElement = (el: any) => {
+            // Handle Vue component instances (el.$el) vs DOM elements
+            anchorElement.value = el?.$el || el;
+        };
 
         return () => {
             const position = resolvedPlacement.value ?? placement.value;
@@ -79,13 +110,11 @@ export const Tooltip = defineComponent(
             // Inject ref + ARIA into anchor slot
             const wrappedChildren = useInjectTooltipRef({
                 slotContent: slots.default?.(),
-                setAnchorElement: (el: any) => {
-                    // Handle Vue component instances (el.$el) vs DOM elements
-                    anchorElement.value = el?.$el || el;
-                },
+                setAnchorElement,
                 isMounted: isMounted.value,
                 id,
-                label: props.label,
+                label: resolvedLabel.value,
+                hasLabel: hasLabel.value,
                 ariaLinkMode: ariaLinkMode.value,
             });
 
@@ -103,7 +132,7 @@ export const Tooltip = defineComponent(
                                     onPopperMount(element);
                                 },
                                 id,
-                                label: props.label as string,
+                                label: resolvedLabel.value as string,
                                 position,
                                 isHidden: isHidden.value,
                                 style: isHidden.value ? undefined : floatingStyles.value,

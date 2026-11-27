@@ -1,32 +1,22 @@
-import React from 'react';
+import { useCallback, useRef } from 'react';
 import { useTooltipContext } from '@lumx/react/components/tooltip/context';
-import { classNames } from '@lumx/core/js/utils';
+import { getOverflowingText } from '@lumx/core/js/utils/browser/getOverflowingText';
 
 /**
- * Compute a tooltip label based on a label element `innerText` if the text overflows.
- * Updates dynamically on content changes (but not on resize!)
+ * Get a function tooltip label that gives the text of the label element only when it overflows.
+ *
+ * @example
+ * const { labelRef, tooltipLabel } = useOverflowTooltipLabel();
+ * <Tooltip label={tooltipLabel}><Text ref={labelRef} truncate>{text}</Text></Tooltip>
  */
-export const useOverflowTooltipLabel = (content: React.ReactNode) => {
+export const useOverflowTooltipLabel = () => {
     const parentTooltip = useTooltipContext();
-    const [tooltipLabel, setTooltipLabel] = React.useState<string | undefined>(undefined);
-    const [labelElement, setLabelElement] = React.useState<HTMLElement | null>(null);
+    const labelRef = useRef<HTMLElement | null>(null);
 
-    React.useLayoutEffect(() => {
-        if (
-            // Not inside a tooltip
-            !parentTooltip &&
-            labelElement &&
-            // Not inside a visually hidden
-            !labelElement?.closest(`.${classNames.visuallyHidden()}`) &&
-            // Text overflows
-            labelElement.offsetWidth < labelElement.scrollWidth
-        ) {
-            // Set tooltip label
-            setTooltipLabel(labelElement.innerText);
-        } else {
-            setTooltipLabel(undefined);
-        }
-    }, [labelElement, parentTooltip, content]);
+    const tooltipLabel = useCallback(
+        () => (parentTooltip ? undefined : getOverflowingText(labelRef.current)),
+        [parentTooltip],
+    );
 
-    return { labelRef: setLabelElement, tooltipLabel };
+    return { labelRef, tooltipLabel };
 };

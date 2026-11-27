@@ -12,6 +12,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   `@lumx/react`, `@lumx/vue`:
     -   `TextField`, `Combobox.Input`, `SelectTextField`, `TimePickerField`: add the `beforeElement` prop (and the `#beforeElement` slot in Vue) to show a custom element at the start of the field.
     -   `TreeListItem`: add the `defaultOpen` prop to open a parent item at mount.
+    -   `Tooltip`: `label` accepts a function, called on open and on each render while open (for example, an overflow check). It needs the default `closeMode="unmount"`.
+    -   Add `useOverflowTooltipLabel` (`@lumx/react/utils`, `@lumx/vue/utils`): a tooltip label that shows only when the text overflows.
 -   `@lumx/vue`:
     -   `TextField`, `SelectButton`, `SelectTextField`, `SelectionChipGroup`, `TimePickerField`, `TreeList`, `Combobox.Input`: add the `update:value` event. It supports `v-model:value`.
     -   `Checkbox`, `Switch`: add the `update:isChecked` event. It supports `v-model:is-checked`.
@@ -19,6 +21,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   `ExpansionPanel`: add the `update:isOpen` event. It supports `v-model:is-open`.
     -   `TabProvider`: add the `update:activeTabIndex` event. It supports `v-model:active-tab-index`.
     -   These are new events. The current props and events do not change.
+
+### Changed
+
+-   `@lumx/react`, `@lumx/vue`:
+    -   `TooltipProps['label']` also accepts a function. Code that reads it as a string must handle the function type.
+-   `@lumx/vue`:
+    -   `Text`: no mutation or resize observer for the `title`, as in React. The `title` no longer updates on resize.
+
+### Fixed
+
+-   `@lumx/react`, `@lumx/vue`:
+    -   `Tooltip`: close when the anchor detaches (for example, an empty label), so the tooltip no longer comes back with no hover.
+    -   `Text`: a hidden text (width 0) gets no `title`.
+-   `@lumx/react`:
+    -   `NavigationItem`: measure the label overflow when the tooltip opens, so a label that mounts hidden or overflows after a resize gets its tooltip.
+-   `@lumx/vue`:
+    -   `Tooltip`: `forceOpen` no longer takes the Escape key from the container, as in React.
+    -   `Tooltip`: the anchor keeps the focus when the label becomes empty.
 
 ## [4.29.0][] - 2026-11-23
 

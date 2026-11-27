@@ -1,72 +1,40 @@
-/* eslint-disable vue/one-component-per-file */
-import { describe, it, expect, beforeAll, afterAll } from 'vitest';
-import { nextTick, defineComponent, ref } from 'vue';
-import { render } from '@testing-library/vue';
+import { defineComponent, h } from 'vue';
+import { render, screen } from '@testing-library/vue';
+import userEvent from '@testing-library/user-event';
+import { Tooltip } from '../components/tooltip';
 import { useOverflowTooltipLabel } from './useOverflowTooltipLabel';
 
+const TruncatedLabel = defineComponent(() => {
+    const { labelRef, tooltipLabel } = useOverflowTooltipLabel();
+    return () =>
+        h(Tooltip, { label: tooltipLabel }, () =>
+            h('button', { type: 'button' }, [h('span', { 'data-testid': 'label', ref: labelRef }, 'Long label')]),
+        );
+});
+
 describe('useOverflowTooltipLabel', () => {
-    // Mock ResizeObserver
-    beforeAll(() => {
-        global.ResizeObserver = class ResizeObserver {
-            observe() {}
-            unobserve() {}
-            disconnect() {}
-        };
+    it('should show the label text in the tooltip when it overflows', async () => {
+        render(TruncatedLabel);
+        const label = screen.getByTestId('label');
+        label.innerText = 'Long label';
+        Object.defineProperty(label, 'offsetWidth', { value: 50 });
+        Object.defineProperty(label, 'scrollWidth', { value: 100 });
+
+        await userEvent.hover(screen.getByRole('button'));
+
+        expect(await screen.findByRole('tooltip', { name: 'Long label' })).toBeInTheDocument();
     });
 
-    afterAll(() => {
-        delete (global as any).ResizeObserver;
-    });
+    it('should show no tooltip inside another tooltip', async () => {
+        render(defineComponent(() => () => h(Tooltip, { label: 'Parent' }, () => h('div', [h(TruncatedLabel)]))));
+        const label = screen.getByTestId('label');
+        label.innerText = 'Long label';
+        Object.defineProperty(label, 'offsetWidth', { value: 50 });
+        Object.defineProperty(label, 'scrollWidth', { value: 100 });
 
-    const mockElement = (text: string, offsetWidth: number, scrollWidth: number) => {
-        const element = document.createElement('div');
-        element.innerText = text;
-        Object.defineProperties(element, {
-            offsetWidth: { value: offsetWidth, configurable: true },
-            scrollWidth: { value: scrollWidth, configurable: true },
-        });
-        return element;
-    };
+        await userEvent.hover(screen.getByRole('button'));
 
-    it('should set label if text overflows', async () => {
-        const text = 'Long text';
-        const element = mockElement(text, 50, 100);
-
-        let result: any;
-        const TestComponent = defineComponent({
-            setup() {
-                const labelRef = ref<HTMLElement>();
-                result = { ...useOverflowTooltipLabel(labelRef), labelRef };
-                return () => null;
-            },
-        });
-
-        render(TestComponent);
-
-        result.labelRef.value = element;
-        await nextTick();
-
-        expect(result.tooltipLabel.value).toBe(text);
-    });
-
-    it('should NOT set label if text does not overflow', async () => {
-        const text = 'Short text';
-        const element = mockElement(text, 100, 100);
-
-        let result: any;
-        const TestComponent = defineComponent({
-            setup() {
-                const labelRef = ref<HTMLElement>();
-                result = { ...useOverflowTooltipLabel(labelRef), labelRef };
-                return () => null;
-            },
-        });
-
-        render(TestComponent);
-
-        result.labelRef.value = element;
-        await nextTick();
-
-        expect(result.tooltipLabel.value).toBeUndefined();
+        expect(await screen.findByRole('tooltip', { name: 'Parent' })).toBeInTheDocument();
+        expect(screen.queryByRole('tooltip', { name: 'Long label' })).not.toBeInTheDocument();
     });
 });

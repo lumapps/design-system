@@ -9,8 +9,10 @@ interface Options {
     isMounted: boolean;
     /** Tooltip id */
     id: string;
-    /** Tooltip label */
+    /** Resolved tooltip label, used for the aria-label comparison */
     label?: string | null | false;
+    /** Whether the tooltip has a label (string or function) */
+    hasLabel: boolean;
     /** Choose how the tooltip text should link to the anchor */
     ariaLinkMode: 'aria-describedby' | 'aria-labelledby';
 }
@@ -41,15 +43,18 @@ function isDisabledVNode(vnode: VNode): boolean {
  * - For text/fragment/multiple children/disabled elements: wrap in a div.
  */
 export function useInjectTooltipRef(options: Options): VNode {
-    const { slotContent, setAnchorElement, isMounted, id, label, ariaLinkMode } = options;
+    const { slotContent, setAnchorElement, isMounted, id, label, hasLabel, ariaLinkMode } = options;
 
-    // No tooltip needed
-    if (!slotContent || !label) {
-        return h(Fragment, slotContent);
-    }
+    if (!slotContent) return h(Fragment, slotContent);
 
     const children = renderSlotFragments(slotContent);
     const firstChild = children.find((c) => c.type !== Comment);
+
+    // No tooltip needed
+    if (!hasLabel) {
+        // Keep the same node type as the cloned anchor, else Vue re-creates the anchor and it loses the focus.
+        return children.length === 1 && firstChild ? firstChild : h(Fragment, slotContent);
+    }
 
     // Only add link when mounted
     const linkId = isMounted ? id : undefined;

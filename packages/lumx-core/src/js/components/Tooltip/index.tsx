@@ -13,8 +13,11 @@ export interface TooltipProps extends HasCloseMode {
     delay?: number;
     /** Whether the tooltip is displayed even without the mouse hovering the anchor. */
     forceOpen?: boolean;
-    /** Label text. */
-    label?: string | null | false;
+    /**
+     * Label text, or a cheap function that returns it, called on open and on each render while open.
+     * A function label needs `closeMode="unmount"`. See `useOverflowTooltipLabel`.
+     */
+    label?: string | null | false | (() => string | null | false | undefined);
     /** Placement of the tooltip relative to the anchor. */
     placement?: TooltipPlacement;
     /** Choose how the tooltip text should link to the anchor */

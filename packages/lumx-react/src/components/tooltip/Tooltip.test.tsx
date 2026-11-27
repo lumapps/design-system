@@ -7,6 +7,7 @@ import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
 import userEvent from '@testing-library/user-event';
 import { classNames } from '@lumx/core/js/utils';
 import BaseTooltipTests from '@lumx/core/js/components/Tooltip/Tests';
+import { useCallbackOnEscape } from '@lumx/react/hooks/useCallbackOnEscape';
 
 import { Tooltip, TooltipProps } from './Tooltip';
 
@@ -213,6 +214,117 @@ describe(`<${Tooltip.displayName}>`, () => {
                 });
                 expect(anchorWrapper).toHaveAttribute('aria-labelledby', `${tooltip?.id}`);
             });
+        });
+    });
+
+    describe('anchor detach', () => {
+        it('should close and not come back with no hover when the label becomes empty then comes back', async () => {
+            const { result } = await setup({
+                label: 'Tooltip label',
+                forceOpen: false,
+                children: <Button>Anchor</Button>,
+            });
+            await userEvent.hover(screen.getByRole('button', { name: 'Anchor' }));
+            expect(screen.getByRole('tooltip')).toBeInTheDocument();
+
+            await act(async () => {
+                result.rerender(
+                    <Tooltip label="">
+                        <Button>Anchor</Button>
+                    </Tooltip>,
+                );
+            });
+            await act(async () => {
+                result.rerender(
+                    <Tooltip label="Tooltip label">
+                        <Button>Anchor</Button>
+                    </Tooltip>,
+                );
+            });
+            expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
+
+            await userEvent.hover(screen.getByRole('button', { name: 'Anchor' }));
+            expect(screen.getByRole('tooltip')).toBeInTheDocument();
+        });
+    });
+
+    describe('function label', () => {
+        it('should not open, add no aria-describedby and not take Escape when the function result is empty', async () => {
+            const outerCallback = vi.fn();
+            const TestComponent = () => {
+                useCallbackOnEscape(outerCallback);
+                return (
+                    <Tooltip label={() => ''}>
+                        <Button>Anchor</Button>
+                    </Tooltip>
+                );
+            };
+            render(<TestComponent />);
+            const anchor = screen.getByRole('button', { name: 'Anchor' });
+
+            await userEvent.hover(anchor);
+            expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
+            expect(anchor).not.toHaveAttribute('aria-describedby');
+
+            document.body.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
+            expect(outerCallback).toHaveBeenCalled();
+        });
+
+        it('should follow the function result while open, and close when it becomes empty', async () => {
+            const { result } = await setup({
+                label: () => 'Collapse',
+                forceOpen: false,
+                children: <Button>Anchor</Button>,
+            });
+            await userEvent.hover(screen.getByRole('button', { name: 'Anchor' }));
+            expect(await screen.findByRole('tooltip')).toHaveTextContent('Collapse');
+
+            await act(async () => {
+                result.rerender(
+                    <Tooltip label={() => 'Expand'}>
+                        <Button>Anchor</Button>
+                    </Tooltip>,
+                );
+            });
+            expect(screen.getByRole('tooltip')).toHaveTextContent('Expand');
+
+            await act(async () => {
+                result.rerender(
+                    <Tooltip label={() => ''}>
+                        <Button>Anchor</Button>
+                    </Tooltip>,
+                );
+            });
+            expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
+
+            await act(async () => {
+                result.rerender(
+                    <Tooltip label={() => 'Collapse'}>
+                        <Button>Anchor</Button>
+                    </Tooltip>,
+                );
+            });
+            expect(screen.getByRole('tooltip')).toHaveTextContent('Collapse');
+        });
+    });
+
+    describe('escape', () => {
+        it('should not take the global escape listener with forceOpen', async () => {
+            const outerCallback = vi.fn();
+            const TestComponent = () => {
+                useCallbackOnEscape(outerCallback);
+                return (
+                    <Tooltip label="Tooltip label" forceOpen>
+                        <Button>Anchor</Button>
+                    </Tooltip>
+                );
+            };
+            render(<TestComponent />);
+            expect(screen.getByRole('tooltip')).toBeInTheDocument();
+
+            document.body.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
+
+            expect(outerCallback).toHaveBeenCalled();
         });
     });
 

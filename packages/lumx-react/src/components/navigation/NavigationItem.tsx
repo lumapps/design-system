@@ -45,7 +45,7 @@ export const NavigationItem = Object.assign(
             ...forwardedProps
         } = props;
         const theme = useTheme();
-        const { tooltipLabel, labelRef } = useOverflowTooltipLabel(label);
+        const { labelRef, tooltipLabel } = useOverflowTooltipLabel();
 
         return (
             <li
