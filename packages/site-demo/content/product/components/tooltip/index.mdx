@@ -9,11 +9,19 @@ import * as VueDemoDefault from './vue/default.vue';
 import * as VueDemoPlacement from './vue/placement.vue';
 import ReactTooltip from 'lumx-docs:@lumx/react/components/tooltip/Tooltip';
 import VueTooltip from 'lumx-docs:@lumx/vue/components/tooltip/Tooltip';
+import { FrameworkOnly } from '@lumx/demo/components/content/FrameworkOnly';
 
 **Tooltips display information when users hover or focus an element.**\
 They are positioned using anchor elements.
 
 <DemoBlock orientation="horizontal" demo={{ react: ReactDemoDefault, vue: VueDemoDefault }} />
+
+<FrameworkOnly framework="vue">
+
+For an app that renders in a shadow root, use
+[`ShadowRootPortalProvider`](/product/utilities/miscellaneous#shadowrootportalprovider) to keep the tooltip inside it.
+
+</FrameworkOnly>
 
 ## Placement
 

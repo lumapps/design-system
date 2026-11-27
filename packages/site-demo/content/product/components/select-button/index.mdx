@@ -15,12 +15,21 @@ import * as VueDemoListStates from './vue/list-states.vue';
 import * as VueDemoCustomTrigger from './vue/custom-trigger.vue';
 import ReactSelectButton from 'lumx-docs:@lumx/react/components/select-button/SelectButton';
 import VueSelectButton from 'lumx-docs:@lumx/vue/components/select-button/SelectButton';
+import { FrameworkOnly } from '@lumx/demo/components/content/FrameworkOnly';
 
 **Select buttons let users pick one or more options from a dropdown anchored to a button trigger.**
 
 Use a `SelectButton` when the dropdown offers a **selection** (choose one or more options from a list). For action-based dropdowns (edit, delete, filter), use [MenuButton](/product/components/menu-button) instead.
 
 For a full text input with built-in search and filtering, use [Select text field](/product/components/select-text-field) instead.
+
+<FrameworkOnly framework="vue">
+
+For an app that renders in a shadow root, use
+[`ShadowRootPortalProvider`](/product/utilities/miscellaneous#shadowrootportalprovider) to keep the options popover
+inside it.
+
+</FrameworkOnly>
 
 ## Default
 

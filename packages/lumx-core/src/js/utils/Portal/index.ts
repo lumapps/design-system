@@ -27,3 +27,5 @@ export interface PortalProps {
 export interface PortalProviderProps {
     value: PortalInit;
 }
+
+export { getShadowRootPortalContainer, PORTAL_CONTAINER_CLASSNAME } from './shadowRootPortal';

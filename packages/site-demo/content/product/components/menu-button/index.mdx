@@ -12,10 +12,19 @@ import * as VueDemoMenuItems from './vue/menu-items.vue';
 import ReactMenuButton from 'lumx-docs:@lumx/react/components/menu-button/MenuButton';
 
 import VueMenuButton from 'lumx-docs:@lumx/vue/components/menu-button/MenuButton';
+import { FrameworkOnly } from '@lumx/demo/components/content/FrameworkOnly';
 
 **Menu buttons open a dropdown of actions anchored to a button trigger.**
 
 Use a `MenuButton` when the dropdown contains **actions** (edit, delete, filter). For selection-based dropdowns, use [SelectButton](/product/components/select-button) instead.
+
+<FrameworkOnly framework="vue">
+
+The menu dropdown renders in place, so it already keeps its styles in a shadow root. For the other overlays of an
+app that renders in a shadow root, use
+[`ShadowRootPortalProvider`](/product/utilities/miscellaneous#shadowrootportalprovider).
+
+</FrameworkOnly>
 
 ## Default
 

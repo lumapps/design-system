@@ -6,12 +6,20 @@ import * as ReactDemoDefault from './react/default.tsx';
 import * as VueDemoDefault from './vue/default.vue';
 import ReactLightbox from 'lumx-docs:@lumx/react/components/lightbox/Lightbox';
 import VueLightbox from 'lumx-docs:@lumx/vue/components/lightbox/Lightbox';
+import { FrameworkOnly } from '@lumx/demo/components/content/FrameworkOnly';
 
 **Reveals elements above the page and on a backdrop after clicking on a trigger.**
 
 <DemoBlock vAlign="center" demo={{ react: ReactDemoDefault, vue: VueDemoDefault }} />
 
 See the [ImageLightbox](/product/components/image-lightbox) component a fully featured image and image slideshow lightbox.
+
+<FrameworkOnly framework="vue">
+
+For an app that renders in a shadow root, use
+[`ShadowRootPortalProvider`](/product/utilities/miscellaneous#shadowrootportalprovider) to keep the lightbox inside it.
+
+</FrameworkOnly>
 
 ### Accessibility concerns
 
