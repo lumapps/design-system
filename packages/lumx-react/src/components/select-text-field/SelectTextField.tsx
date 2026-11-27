@@ -202,7 +202,9 @@ export const SelectTextField = <O,>(props: SelectTextFieldProps<O>) => {
     let displayValue;
     if (isMultiple || isSearching) {
         displayValue = searchText;
-    } else if (!isMultiple) {
+    } else if (externalSearchValue === '') {
+        displayValue = '';
+    } else {
         displayValue = getOptionDisplayName(value as O | undefined, getOptionName, getOptionId);
     }
 
@@ -218,14 +220,16 @@ export const SelectTextField = <O,>(props: SelectTextFieldProps<O>) => {
             );
             // In multi mode, `toggleSelection` skips when no option matches and returns the
             // unchanged current array — the onChange call is a no-op for the consumer.
-            onChange?.(next as any);
+            // Escape on a closed combobox sends a clear request with an empty option id.
+            const isBlockedClear = !isMultiple && !hasClearButton && selectedOption.value === '';
+            if (!isBlockedClear) onChange?.(next as any);
 
             // Reset search state after selection.
             setIsSearching(false);
             setSearchText('');
             onSearch?.('');
         },
-        [getOptionId, isMultiple, onChange, onSearch, options, value],
+        [getOptionId, hasClearButton, isMultiple, onChange, onSearch, options, value],
     );
 
     // Handle text input changes (search).
@@ -236,11 +240,11 @@ export const SelectTextField = <O,>(props: SelectTextFieldProps<O>) => {
             onSearch?.(inputValue);
 
             // When the user clears the input (single mode only), clear the selection too.
-            if (!isMultiple && inputValue === '' && value !== undefined && value !== null) {
+            if (!isMultiple && hasClearButton && inputValue === '' && value !== undefined && value !== null) {
                 (onChange as ((newValue?: O) => void) | undefined)?.(undefined);
             }
         },
-        [isMultiple, onChange, onSearch, value],
+        [hasClearButton, isMultiple, onChange, onSearch, value],
     );
 
     // Handle clear button click (single mode only).

@@ -213,12 +213,16 @@ export interface BaseSelectTextFieldWrapperProps<O>
     filter: 'auto' | 'manual' | 'off';
     /**
      * Controlled search input value.
-     * When provided, this value seeds (and resets) the visible search text in the input.
-     * Setting it to `''` (empty string) resets the input.
+     * When provided, this value seeds the visible search text in the input. In multiple selection,
+     * `''` resets it.
+     * In single selection, `''` (empty string) keeps the input empty while the option stays selected:
+     * the input shows only the text the user types. When you copy `onSearch` into this prop, pass
+     * `search || undefined` so that the input shows the name of the selected option when idle.
      */
     searchInputValue?: string;
     /**
-     * Whether to show a clear button when a value is selected.
+     * Whether the selection can be cleared (single selection): with a clear button, when the user
+     * erases the input text, and with Escape. When `false`, the selection stays.
      * @default true
      */
     hasClearButton?: boolean;

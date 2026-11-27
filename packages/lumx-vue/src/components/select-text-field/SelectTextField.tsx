@@ -151,6 +151,7 @@ export interface SelectTextFieldConstructor {
 const SelectTextField = defineComponent(
     (props: SelectTextFieldProps, { emit, slots, attrs }) => {
         const isMultiple = computed(() => props.selectionType === 'multiple');
+        const hasClearButton = computed(() => props.hasClearButton ?? true);
 
         // Merge `class` prop with `className` attr (React-style attr from core JSX).
         const className = useClassName(() => props.class);
@@ -198,6 +199,7 @@ const SelectTextField = defineComponent(
             if (props.selectionType === 'multiple') return searchText.value;
             // Guard: while typing, always show what the user typed.
             if (isSearching.value) return searchText.value;
+            if (props.searchInputValue === '') return '';
             // TypeScript now narrows props to SingleSelectTextFieldProps here.
             return getOptionDisplayName(props.value, props.getOptionName, props.getOptionId);
         });
@@ -218,7 +220,9 @@ const SelectTextField = defineComponent(
             );
             // In multi mode, `toggleSelection` skips when no option matches and returns the
             // unchanged current array — the emit is a no-op for the consumer.
-            emitValueChange(next);
+            // Escape on a closed combobox sends a clear request with an empty option id.
+            const isBlockedClear = !isMultiple.value && !hasClearButton.value && selectedOption.value === '';
+            if (!isBlockedClear) emitValueChange(next);
 
             // Reset search state after selection.
             isSearching.value = false;
@@ -233,7 +237,8 @@ const SelectTextField = defineComponent(
             emit('search', inputValue);
 
             // When the user clears the input (single mode only), clear the selection too.
-            if (!isMultiple.value && inputValue === '' && props.value !== undefined && props.value !== null) {
+            const isClearable = !isMultiple.value && hasClearButton.value;
+            if (isClearable && inputValue === '' && props.value !== undefined && props.value !== null) {
                 emitValueChange(undefined);
             }
         };
@@ -247,7 +252,7 @@ const SelectTextField = defineComponent(
             emit('clear', event);
         };
 
-        // Handle blur: reset input to selected value name, then emit blur and search events.
+        // Handle blur: reset the search state, then emit search and blur events.
         const handleBlur = (event?: FocusEvent) => {
             isSearching.value = false;
             searchText.value = '';
@@ -271,7 +276,7 @@ const SelectTextField = defineComponent(
             const showClear =
                 !isMultiple.value &&
                 !isAnyDisabled.value &&
-                (props.hasClearButton ?? true) &&
+                hasClearButton.value &&
                 props.value !== undefined &&
                 props.value !== null;
 
