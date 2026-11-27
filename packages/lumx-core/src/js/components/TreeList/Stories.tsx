@@ -52,11 +52,17 @@ const collectLabels = (items: FoodItem[]): Array<[string, string]> =>
 /** Label of each selectable tree item of the food tree, by value (the input stories show it as the input text). */
 const LABELS: Record<string, string> = Object.fromEntries(collectLabels(FOOD_TREE));
 
-/** Render the food tree items (recursive). */
-function renderFoodTree(TreeListItem: any, items: FoodItem[] = FOOD_TREE): any {
+/** Render the food tree items (recursive). `defaultOpen`: labels of the tree items open at mount. */
+function renderFoodTree(TreeListItem: any, items: FoodItem[] = FOOD_TREE, defaultOpen: string[] = []): any {
     return items.map(({ label, value, description, children }) => (
-        <TreeListItem key={label} label={label} value={value} description={description}>
-            {children && renderFoodTree(TreeListItem, children)}
+        <TreeListItem
+            key={label}
+            label={label}
+            value={value}
+            description={description}
+            defaultOpen={defaultOpen.includes(label)}
+        >
+            {children && renderFoodTree(TreeListItem, children, defaultOpen)}
         </TreeListItem>
     ));
 }
@@ -90,6 +96,17 @@ export function setup({
         render: ({ value, onChange }: any) => (
             <TreeList aria-label="Food" value={value} onChange={onChange}>
                 {renderFoodTree(TreeListItem)}
+            </TreeList>
+        ),
+    };
+
+    /** Standalone tree with the root parent items open at mount (`defaultOpen`), no selection. */
+    const StandaloneDefaultOpen = {
+        args: { value: '' },
+        decorators: [withValueOnChange()],
+        render: ({ value, onChange }: any) => (
+            <TreeList aria-label="Food" value={value} onChange={onChange}>
+                {renderFoodTree(TreeListItem, FOOD_TREE, ['Fruits', 'Vegetables'])}
             </TreeList>
         ),
     };
@@ -294,6 +311,7 @@ export function setup({
     return {
         meta,
         Standalone,
+        StandaloneDefaultOpen,
         StandaloneMultipleSelection,
         InComboboxInput,
         InComboboxInline,

@@ -15,6 +15,7 @@ export default {
 };
 
 export const Standalone = { ...stories.Standalone };
+export const StandaloneDefaultOpen = { ...stories.StandaloneDefaultOpen };
 export const StandaloneMultipleSelection = { ...stories.StandaloneMultipleSelection };
 export const InComboboxInput = { ...stories.InComboboxInput };
 export const InComboboxInline = { ...stories.InComboboxInline };

@@ -64,10 +64,12 @@ export function createTreeTemplates({ TreeList, TreeListItem, TreeListSection, C
      */
     const renderTree = ({
         snacks,
+        defaultOpen,
         onOpenChange,
         onClick,
     }: {
         snacks?: 'loading' | 'loaded';
+        defaultOpen?: string[];
         onOpenChange?: (label: string, isOpen: boolean) => void;
         onClick?: (label: string) => void;
     }) => {
@@ -76,6 +78,7 @@ export function createTreeTemplates({ TreeList, TreeListItem, TreeListSection, C
                 key={label}
                 label={label}
                 value={value}
+                defaultOpen={defaultOpen?.includes(label)}
                 onOpenChange={(isOpen: boolean) => onOpenChange?.(label, isOpen)}
                 onClick={() => onClick?.(label)}
                 {...extra}
@@ -116,6 +119,7 @@ export function createTreeTemplates({ TreeList, TreeListItem, TreeListSection, C
         nbOptionMessage,
         withoutState,
         snacks,
+        defaultOpen,
     }: any) => (
         <Combobox.Provider>
             <Combobox.Input
@@ -135,7 +139,7 @@ export function createTreeTemplates({ TreeList, TreeListItem, TreeListSection, C
                     onChange={(selected: string | string[]) => onUpdate({ ...value, selected })}
                     onSelect={treeOnSelect}
                 >
-                    {renderTree({ snacks, onOpenChange, onClick })}
+                    {renderTree({ snacks, defaultOpen, onOpenChange, onClick })}
                 </TreeList>
                 {!withoutState && <Combobox.State emptyMessage="No result" nbOptionMessage={nbOptionMessage} />}
             </Combobox.Popover>
@@ -187,7 +191,15 @@ export function createTreeTemplates({ TreeList, TreeListItem, TreeListSection, C
      * Standalone tree (no combobox), between two buttons: the tree is its own focus owner.
      * `value`: the selected value (or values with `selectionType="multiple"`), set with `onUpdate`.
      */
-    const standaloneTemplate = ({ value, onUpdate, onSelect, onOpenChange, onClick, selectionType }: any) => (
+    const standaloneTemplate = ({
+        value,
+        onUpdate,
+        onSelect,
+        onOpenChange,
+        onClick,
+        selectionType,
+        defaultOpen,
+    }: any) => (
         <>
             <button type="button">Before</button>
             <TreeList
@@ -197,7 +209,7 @@ export function createTreeTemplates({ TreeList, TreeListItem, TreeListSection, C
                 onChange={onUpdate}
                 onSelect={onSelect}
             >
-                {renderTree({ onOpenChange, onClick })}
+                {renderTree({ defaultOpen, onOpenChange, onClick })}
             </TreeList>
             <button type="button">After</button>
         </>
@@ -796,6 +808,58 @@ export default function treeListTests({ components, renderWithState }: TreeListT
             await userEvent.click(getTreeItem('Lemon'));
             expect(onUpdate).toHaveBeenLastCalledWith(['orange']);
             await waitFor(() => expect(getTreeItem('Lemon')).toHaveAttribute('aria-selected', 'false'));
+        });
+    });
+
+    describe('Open at mount', () => {
+        it('opens a parent item with defaultOpen at mount, with no onOpenChange', () => {
+            const onOpenChange = vi.fn();
+            renderWithState(
+                templates.standaloneTemplate,
+                { value: '', onOpenChange, defaultOpen: ['Drinks'] },
+                { onChangeProp: 'onUpdate' },
+            );
+            expect(getTreeItem('Drinks')).toHaveAttribute('aria-expanded', 'true');
+            expect(getTreeItemLabels()).toEqual([...ROOT_ITEMS.slice(0, 2), 'Drinks', 'Lemonade', 'Water', 'Snacks']);
+            expect(onOpenChange).not.toHaveBeenCalled();
+        });
+
+        it('closes a parent item opened with defaultOpen on a click on its expand toggle', async () => {
+            const onOpenChange = vi.fn();
+            renderWithState(
+                templates.standaloneTemplate,
+                { value: '', onOpenChange, defaultOpen: ['Drinks'] },
+                { onChangeProp: 'onUpdate' },
+            );
+            await userEvent.click(getToggle('Drinks'));
+            expect(getTreeItem('Drinks')).toHaveAttribute('aria-expanded', 'false');
+            expect(onOpenChange).toHaveBeenLastCalledWith('Drinks', false);
+        });
+
+        it('keeps the tree items closed at mount without defaultOpen, with the ancestors of a selected sub-item open', () => {
+            renderWithState(
+                templates.standaloneTemplate,
+                { value: 'lemon', onUpdate: () => {} },
+                { onChangeProp: 'onUpdate' },
+            );
+            expect(getTreeItem('Drinks')).toHaveAttribute('aria-expanded', 'false');
+            expect(getTreeItem('Fruits')).toHaveAttribute('aria-expanded', 'true');
+            expect(getTreeItem('Citrus')).toHaveAttribute('aria-expanded', 'true');
+        });
+
+        it('opens a parent item with defaultOpen again at each popup open', async () => {
+            renderWithState(templates.inputTemplate, { value: inputValue(), defaultOpen: ['Drinks'] }, INPUT_STATE);
+            const input = screen.getByRole('combobox');
+            await userEvent.click(input);
+            await screen.findByRole('tree');
+            expect(getTreeItem('Drinks')).toHaveAttribute('aria-expanded', 'true');
+            await userEvent.click(getToggle('Drinks'));
+            expect(getTreeItem('Drinks')).toHaveAttribute('aria-expanded', 'false');
+            await userEvent.keyboard('{Escape}');
+            await waitFor(() => expect(input).toHaveAttribute('aria-expanded', 'false'));
+            await userEvent.click(screen.getByRole('button', { name: 'Food' }));
+            await screen.findByRole('tree');
+            expect(getTreeItem('Drinks')).toHaveAttribute('aria-expanded', 'true');
         });
     });
 

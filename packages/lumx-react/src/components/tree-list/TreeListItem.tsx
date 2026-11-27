@@ -53,6 +53,12 @@ export interface TreeListItemProps
      */
     hasSubItems?: boolean;
     /**
+     * Open the item at mount. Uncontrolled: it applies at each mount (in a combobox, at each popup
+     * open), it does not call `onOpenChange`, and a change after mount does nothing.
+     * With `hasSubItems`, `onOpenChange` does not fire at mount: load the sub-items yourself.
+     */
+    defaultOpen?: boolean;
+    /**
      * Called on every open and close by the user (expand toggle, Right, Left, Enter or a click on a
      * non-selectable parent item). Not called for the initial state or for the filter.
      */
@@ -76,8 +82,8 @@ export interface TreeListItemProps
  *   tree `value` holds it. Without, it is not selectable: Enter or a click on a non-selectable parent item
  *   opens or closes it, and on a non-selectable leaf item only calls `onClick` (e.g. an action such as
  *   "Create a new list…").
- * - The open state is internal: a parent item starts open when a sub-item at any depth is selected.
- *   In a combobox, it resets on each popup open.
+ * - The open state is internal: a parent item starts open with `defaultOpen`, or when a sub-item at
+ *   any depth is selected. In a combobox, it resets on each popup open.
  * - Touch screen readers: TalkBack (Chrome) can open and close the parent items. On iOS, a user can
  *   only reach the sub-items of a selectable parent item through the filter. To support it, use a
  *   non-selectable parent item with an "All <name>" leaf item that carries the parent value.
@@ -92,6 +98,7 @@ export const TreeListItem = forwardRef<TreeListItemProps, HTMLLIElement>((props,
         children,
         value,
         hasSubItems,
+        defaultOpen,
         onOpenChange,
         onClick,
         before,
@@ -126,8 +133,8 @@ export const TreeListItem = forwardRef<TreeListItemProps, HTMLLIElement>((props,
     const isActive = useCompositeEvent(tree, optionActiveEvent(id), false);
 
     // Latest props read by the controller.
-    const latestProps = useRef({ isParent, onOpenChange });
-    latestProps.current = { isParent, onOpenChange };
+    const latestProps = useRef({ isParent, defaultOpen, onOpenChange });
+    latestProps.current = { isParent, defaultOpen, onOpenChange };
 
     const [state, setState] = useState<TreeListItemState>({ isOpen: false, hidden: false });
     const controllerRef = useRef<TreeListItemController | null>(null);
@@ -137,6 +144,7 @@ export const TreeListItem = forwardRef<TreeListItemProps, HTMLLIElement>((props,
         if (!element || !tree) return undefined;
         const controller = tree.registerTreeItem(element, {
             isParent: () => latestProps.current.isParent,
+            defaultOpen: latestProps.current.defaultOpen,
             onOpenChange: (isOpen) => latestProps.current.onOpenChange?.(isOpen),
             onChange: setState,
         });

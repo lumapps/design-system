@@ -289,7 +289,7 @@ export function setupTreeList(options: TreeListOptions = {}): TreeListHandle {
 
     /** Register a tree item root and create the controller of its open state (see {@link TreeListHandle}). */
     function registerTreeItem(element: HTMLElement, itemOptions: TreeListItemOptions): TreeListItemController {
-        const { isParent, onOpenChange, onChange } = itemOptions;
+        const { isParent, defaultOpen, onOpenChange, onChange } = itemOptions;
         // Look inside the element (not in the document): Vue sets up the item before it is attached.
         const getTreeItem = () => getTreeItemOfRoot(element);
         const getGroup = () => getGroupOfRoot(element);
@@ -297,7 +297,7 @@ export function setupTreeList(options: TreeListOptions = {}): TreeListHandle {
 
         let filterState = NO_FILTER_STATE;
         /** Open state set by the user (or the initial state) without a filter. */
-        let userOpen = hasSelectedBelow();
+        let userOpen = defaultOpen || hasSelectedBelow();
         /** Open state set by the user during a filter (lasts until the next change of the filter text). */
         let filterOverride: boolean | null = null;
         /**

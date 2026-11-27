@@ -18,6 +18,11 @@ export interface TreeListItemState {
 export interface TreeListItemOptions {
     /** Whether the tree item is a parent item (it has sub-items, or it loads them on open). */
     isParent(): boolean;
+    /**
+     * Open the parent item at registration. Read once, at registration: a later change does nothing, and it
+     * never fires `onOpenChange`. A leaf item ignores it.
+     */
+    defaultOpen?: boolean;
     /** Called on every open and close by the user (never for the initial state or for the filter). */
     onOpenChange?(isOpen: boolean): void;
     /** Called when the state changes. */
@@ -53,7 +58,8 @@ export interface TreeListHandle extends CompositeHandle {
      * `[data-tree-label]` elements), never on its sub-items.
      *
      * The open state is internal to the controller:
-     * - Initial state: open when a sub-item at any depth is selected (the closed groups stay mounted).
+     * - Initial state: open when `defaultOpen` is set, or when a sub-item at any depth is selected (the
+     *   closed groups stay mounted).
      * - Without a filter: the user state (toggle, Right, Left, a click on a non-selectable parent item…).
      * - During a filter: the parent items with a match below open. A user action lasts until the next
      *   change of the filter text. On clear, each parent item goes back to its state from before the

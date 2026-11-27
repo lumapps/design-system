@@ -43,6 +43,12 @@ export type TreeListItemProps = VueToJSXProps<
      * In a combobox, the open state resets on each popup open: cache the loaded sub-items.
      */
     hasSubItems?: boolean;
+    /**
+     * Open the item at mount. Uncontrolled: it applies at each mount (in a combobox, at each popup
+     * open), it does not emit `openChange`, and a change after mount does nothing.
+     * With `hasSubItems`, `openChange` does not emit at mount: load the sub-items yourself.
+     */
+    defaultOpen?: boolean;
     /** Props forwarded to a Tooltip wrapping the `role="treeitem"` element. */
     tooltipProps?: Partial<TooltipProps>;
     /** Props forwarded to the inner `role="treeitem"` element. */
@@ -68,8 +74,8 @@ export const emitSchema = {
  *   tree `value` holds it. Without, it is not selectable: Enter or a click on a non-selectable parent item
  *   opens or closes it, and on a non-selectable leaf item only emits `click` (e.g. an action such as
  *   "Create a new list…").
- * - The open state is internal: a parent item starts open when a sub-item at any depth is selected.
- *   In a combobox, it resets on each popup open.
+ * - The open state is internal: a parent item starts open with `defaultOpen`, or when a sub-item at
+ *   any depth is selected. In a combobox, it resets on each popup open.
  * - Touch screen readers: TalkBack (Chrome) can open and close the parent items. On iOS, a user can
  *   only reach the sub-items of a selectable parent item through the filter. To support it, use a
  *   non-selectable parent item with an "All <name>" leaf item that carries the parent value.
@@ -134,6 +140,7 @@ const TreeListItem = defineComponent(
                 if (!treeValue || !element) return undefined;
                 controller = treeValue.registerTreeItem(element, {
                     isParent: () => isParent,
+                    defaultOpen: props.defaultOpen,
                     onOpenChange: (isOpen) => emit('openChange', isOpen),
                     onChange: (value) => {
                         state.value = value;
@@ -207,6 +214,7 @@ const TreeListItem = defineComponent(
             'value',
             'description',
             ['hasSubItems', Boolean],
+            ['defaultOpen', Boolean],
             'tooltipProps',
             'actionProps',
             'class',

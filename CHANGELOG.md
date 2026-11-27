@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `@lumx/react`, `@lumx/vue`:
     -   `TextField`, `Combobox.Input`, `SelectTextField`, `TimePickerField`: add the `beforeElement` prop (and the `#beforeElement` slot in Vue) to show a custom element at the start of the field.
+    -   `TreeListItem`: add the `defaultOpen` prop to open a parent item at mount.
 -   `@lumx/vue`:
     -   `TextField`, `SelectButton`, `SelectTextField`, `SelectionChipGroup`, `TimePickerField`, `TreeList`, `Combobox.Input`: add the `update:value` event. It supports `v-model:value`.
     -   `Checkbox`, `Switch`: add the `update:isChecked` event. It supports `v-model:is-checked`.
