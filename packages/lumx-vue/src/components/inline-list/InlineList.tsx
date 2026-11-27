@@ -9,6 +9,7 @@ import { type JSXElement } from '@lumx/core/js/types';
 
 import { useClassName } from '../../composables/useClassName';
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 export type InlineListProps = VueToJSXProps<UIProps, 'items'>;
 
@@ -28,6 +29,7 @@ const InlineList = defineComponent(
         );
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<InlineListProps>()('color', 'colorVariant', 'typography', ['wrap', Boolean], 'class'),

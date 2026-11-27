@@ -23,6 +23,7 @@ import { useClassName } from '../../composables/useClassName';
 import { SelectTextField, SelectTextFieldOption } from '../select-text-field';
 
 import type { SingleSelectTextFieldProps } from '../select-text-field/SelectTextField';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 /**
  * Inherited SelectTextField props (less the parts owned by TimePickerField).
@@ -175,6 +176,7 @@ const TimePickerField = defineComponent(
         };
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<TimePickerFieldProps>()(

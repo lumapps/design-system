@@ -22,6 +22,7 @@ import { provideCompositeContext, useOptionalCompositeContext } from '../composi
 import { useCompositeEvent } from '../composite/useCompositeEvent';
 import { useOptionalTreeListContext } from './TreeListContext';
 import { hasContent } from './hasContent';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 export type TreeListItemProps = VueToJSXProps<
     UIProps,
@@ -207,6 +208,7 @@ const TreeListItem = defineComponent(
         };
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<TreeListItemProps>()(

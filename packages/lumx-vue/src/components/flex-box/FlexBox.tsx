@@ -10,6 +10,7 @@ import type { JSXElement } from '@lumx/core/js/types';
 
 import { useClassName } from '../../composables/useClassName';
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 export type FlexBoxProps = VueToJSXProps<UIProps, 'vAlign' | 'hAlign'> & {
     /** Customize the root element. */
@@ -50,6 +51,7 @@ const FlexBox = defineComponent(
         };
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         // Redefine properties so that they come in as `props` on the `defineComponent` function

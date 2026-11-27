@@ -8,6 +8,7 @@ import { classNames } from '@lumx/core/js/utils';
 import { useDisableStateProps } from '../../composables/useDisableStateProps';
 import { useClassName } from '../../composables/useClassName';
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 export type ListItemActionProps = VueToJSXProps<BaseClickableProps & HasClassName> & {
     /** Customize the rendered element. */
@@ -57,6 +58,7 @@ const ListItemAction = defineComponent(
         };
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<ListItemActionProps>()(

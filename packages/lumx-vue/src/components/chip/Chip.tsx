@@ -15,6 +15,7 @@ import { useClassName } from '../../composables/useClassName';
 import { useDisableStateProps } from '../../composables/useDisableStateProps';
 import { useHasEventListener } from '../../composables/useHasEventListener';
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 export type ChipProps = VueToJSXProps<UIProps, ChipPropsToOverride>;
 
@@ -111,6 +112,7 @@ const Chip = defineComponent(
         );
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<ChipProps>()(

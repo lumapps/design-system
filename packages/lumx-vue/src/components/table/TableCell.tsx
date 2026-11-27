@@ -10,6 +10,7 @@ import { useClassName } from '../../composables/useClassName';
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { JSXElement } from '@lumx/core/js/types';
 import { useHasEventListener } from '@lumx/vue/composables/useHasEventListener';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 export { ThOrder, TableCellVariant };
 export type {
@@ -47,6 +48,7 @@ const TableCell = defineComponent(
         };
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<TableCellProps>()('class', 'icon', ['isSortable', Boolean], 'sortOrder', 'variant'),

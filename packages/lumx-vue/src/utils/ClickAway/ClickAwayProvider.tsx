@@ -9,6 +9,7 @@ import {
     type Ref,
 } from 'vue';
 import { setupClickAway, type ClickAwayCallback } from '@lumx/core/js/utils/ClickAway';
+import { COMPAT_OPTIONS } from '../compat/compatOptions';
 
 interface ContextValue {
     childrenRefs: Set<Ref<HTMLElement | undefined>>;
@@ -86,6 +87,7 @@ export const ClickAwayProvider = defineComponent(
         return () => slots.default?.();
     },
     {
+        ...COMPAT_OPTIONS,
         name: 'LumxClickAwayProvider',
         props: {
             callback: {

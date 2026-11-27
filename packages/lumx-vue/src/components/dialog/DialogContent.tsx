@@ -9,6 +9,7 @@ import { DIALOG_LABEL_KEY } from '@lumx/core/js/components/Dialog/constants';
 
 import { useRegisteredId } from '../../utils/IdsRegistryContext';
 import { getName, keysOf } from '../../utils/VueToJSX';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 export type DialogContentProps = Omit<UIProps, 'labelId'>;
 
@@ -21,6 +22,7 @@ export default defineComponent(
         return () => UI({ ...props, labelId: labelId.value });
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         props: keysOf<DialogContentProps>()(
             'ClickAwayProvider',

@@ -26,6 +26,7 @@ import { Avatar, type AvatarProps } from '../avatar';
 import { Link } from '../link';
 import Text from '../text/Text';
 import { useHasEventListener } from '@lumx/vue/composables/useHasEventListener';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 export type { UserBlockSize };
 
@@ -179,6 +180,7 @@ const UserBlock = defineComponent(
         };
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<UserBlockProps>()(

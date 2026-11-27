@@ -15,6 +15,7 @@ import { Button } from '../button';
 
 import { useMenuContext } from './context';
 import { useMenuOpen } from './useMenuOpen';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 /** MenuTrigger props. */
 export type MenuTriggerProps = VueToJSXProps<UIProps, 'menuId' | 'isOpen'>;
@@ -71,6 +72,7 @@ const MenuTrigger = defineComponent(
         };
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<MenuTriggerProps>()('class', 'id'),

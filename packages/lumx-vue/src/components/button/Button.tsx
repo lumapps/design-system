@@ -17,6 +17,7 @@ import { ResetTheme } from '../../utils/theme';
 import { Icon } from '../icon';
 import Text from '../text/Text';
 import { JSXElement } from '@lumx/core/js/types';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 export type ButtonProps = Omit<VueToJSXProps<UIProps>, HyphenatedAriaProps>;
 
@@ -105,6 +106,7 @@ const Button = defineComponent(
         };
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         // Redefine properties so that they come in as `props` on the `defineComponent` function

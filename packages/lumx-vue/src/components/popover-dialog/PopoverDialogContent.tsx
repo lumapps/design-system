@@ -13,6 +13,7 @@ import HeadingLevelProvider from '../heading/HeadingLevelProvider';
 
 import { emitSchema, POPOVER_DIALOG_PROP_KEYS } from './constants';
 import type { PopoverDialogProps } from './types';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 /**
  * Renders the core Popover as a dialog, resolving its `aria-labelledby` from the ids registry.
@@ -70,6 +71,7 @@ const PopoverDialogContent = defineComponent(
         };
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName('PopoverDialogContent'),
         inheritAttrs: false,
         props: POPOVER_DIALOG_PROP_KEYS,

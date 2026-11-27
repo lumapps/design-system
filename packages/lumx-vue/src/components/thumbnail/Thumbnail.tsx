@@ -19,6 +19,7 @@ import { useHasEventListener } from '../../composables/useHasEventListener';
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { useImageLoad } from './useImageLoad';
 import { useFocusPointStyle } from './useFocusPointStyle';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 export type ThumbnailProps = VueToJSXProps<
     Omit<
@@ -136,6 +137,7 @@ const Thumbnail = defineComponent(
         };
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<ThumbnailProps>()(

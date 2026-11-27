@@ -11,6 +11,7 @@ import type { JSXElement } from '@lumx/core/js/types';
 import { FlexBox as FlexBoxVue, FlexBoxProps } from '../flex-box';
 import { useClassName } from '../../composables/useClassName';
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 /** FlexBox section props extended with standard HTML style. */
 type SectionProps = FlexBoxProps & { style?: CSSProperties };
@@ -98,6 +99,7 @@ const GenericBlock = defineComponent(
         };
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<GenericBlockProps>()(

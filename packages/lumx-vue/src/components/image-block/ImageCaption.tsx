@@ -7,6 +7,7 @@ import { useTheme } from '../../composables/useTheme';
 import { getName, keysOf, type ClassValue } from '../../utils/VueToJSX';
 import { FlexBox } from '../flex-box';
 import { Text } from '../text';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 type ImageCaptionProps = {
     as?: 'div' | 'figcaption';
@@ -43,6 +44,7 @@ const ImageCaption = defineComponent(
         };
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName('ImageCaption'),
         inheritAttrs: false,
         props: keysOf<ImageCaptionProps>()(

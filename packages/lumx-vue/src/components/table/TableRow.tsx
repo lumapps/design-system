@@ -4,6 +4,7 @@ import { useDisableStateProps } from '../../composables/useDisableStateProps';
 import { useClassName } from '../../composables/useClassName';
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { JSXElement } from '@lumx/core/js/types';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 export type TableRowProps = VueToJSXProps<UIProps, 'tabIndex' | 'aria-disabled'> & {
     /** Whether the component is disabled or not. */
@@ -30,6 +31,7 @@ const TableRow = defineComponent(
         };
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<TableRowProps>()(

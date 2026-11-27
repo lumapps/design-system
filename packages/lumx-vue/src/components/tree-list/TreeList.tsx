@@ -19,6 +19,7 @@ import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { provideCompositeContext } from '../composite/CompositeContext';
 import { useCompositeList } from '../composite/useCompositeList';
 import { provideTreeListContext } from './TreeListContext';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 /**
  * Props common to the single and multiple selection trees.
@@ -173,6 +174,7 @@ const TreeList = defineComponent(
         };
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         // Note: the ARIA attributes are not declared as props (Vue would normalize them to camelCase):

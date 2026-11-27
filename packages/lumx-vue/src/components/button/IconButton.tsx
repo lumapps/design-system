@@ -12,6 +12,7 @@ import { useClassName } from '../../composables/useClassName';
 import { useAttrFallback } from '../../composables/useAttrFallback';
 import { useDisableStateProps } from '../../composables/useDisableStateProps';
 import { getName, type HyphenatedAriaProps, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 export type IconButtonProps = Omit<VueToJSXProps<UIProps>, HyphenatedAriaProps> & {
     /**
@@ -85,6 +86,7 @@ const IconButton = defineComponent(
         };
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         // Redefine properties so that they come in as `props` on the `defineComponent` function

@@ -15,6 +15,7 @@ import { Button } from '../button';
 import { Tooltip } from '../tooltip';
 import { useComboboxContext } from './context/ComboboxContext';
 import { useComboboxEvent } from './context/useComboboxEvent';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 export type ComboboxButtonProps = VueToJSXProps<UIProps, 'label' | 'renderButton'> & {
     /** The label for the button (used for ARIA and tooltip). */
@@ -99,6 +100,7 @@ const ComboboxButton = defineComponent(
         };
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<ComboboxButtonProps>()(

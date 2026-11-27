@@ -14,6 +14,7 @@ import { useDisableStateProps } from '../../composables/useDisableStateProps';
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { useId } from '../../composables/useId';
 import { JSXElement } from '@lumx/core/js/types';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 export type SwitchProps = VueToJSXProps<UIProps, 'inputId' | 'inputRef'>;
 
@@ -73,6 +74,7 @@ const Switch = defineComponent(
         };
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         // Redefine properties so that they come in as `props` on the `defineComponent` function

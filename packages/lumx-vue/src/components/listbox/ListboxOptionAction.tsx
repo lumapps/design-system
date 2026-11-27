@@ -13,6 +13,7 @@ import { useClassName } from '../../composables/useClassName';
 import { useDisableStateProps } from '../../composables/useDisableStateProps';
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { useCompositeContext } from '../composite/CompositeContext';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 export type ListboxOptionActionProps = Pick<VueToJSXProps<UIProps>, 'class' | 'isDisabled'> & {
     /** On click callback. */
@@ -63,6 +64,7 @@ const ListboxOptionAction = defineComponent(
         };
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<ListboxOptionActionProps>()(['isDisabled', Boolean], 'onClick', 'class'),

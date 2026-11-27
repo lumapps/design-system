@@ -11,6 +11,7 @@ import {
 import { useTheme } from '../../composables/useTheme';
 import { useClassName } from '../../composables/useClassName';
 import { getName, keysOf, type VueToJSXProps } from '../../utils/VueToJSX';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 export type ProgressCircularProps = VueToJSXProps<UIProps, 'ref' | 'svgProps' | 'circleProps'>;
 
@@ -42,6 +43,7 @@ const ProgressCircular = defineComponent(
         };
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<ProgressCircularProps>()('class', 'size', 'display', 'theme'),

@@ -5,6 +5,7 @@ import { COMPONENT_NAME } from '@lumx/core/js/utils/idsRegistry/constants';
 
 import { getName } from '../VueToJSX';
 import { IDS_REGISTRY_KEY } from './IdsRegistryContext';
+import { COMPAT_OPTIONS } from '../compat/compatOptions';
 
 /**
  * Provides a fresh ids registry to its subtree (via the default slot). The registry instance lives
@@ -12,6 +13,7 @@ import { IDS_REGISTRY_KEY } from './IdsRegistryContext';
  * - only the components subscribed (via `useRegisteredId`) to the name that changed.
  */
 export const IdsRegistryProvider = defineComponent({
+    ...COMPAT_OPTIONS,
     name: getName(COMPONENT_NAME),
     setup(_props, { slots }) {
         provide(IDS_REGISTRY_KEY, createIdsRegistry());

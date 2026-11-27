@@ -5,6 +5,7 @@ import type { JSXElement } from '@lumx/core/js/types';
 
 import { useClassName } from '../../composables/useClassName';
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 export type ListProps = VueToJSXProps<UIProps>;
 
@@ -33,6 +34,7 @@ const List = defineComponent(
         };
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<ListProps>()('itemPadding', 'class'),

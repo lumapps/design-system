@@ -7,6 +7,7 @@ import { useId } from '../../composables/useId';
 import { getName } from '../../utils/VueToJSX';
 
 import { provideMenuContext } from './context';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 /** MenuProvider props. */
 export interface MenuProviderProps {
@@ -41,6 +42,7 @@ const MenuProvider = defineComponent(
         return () => slots.default?.();
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(MENU_PROVIDER_COMPONENT_NAME),
         inheritAttrs: false,
         props: {

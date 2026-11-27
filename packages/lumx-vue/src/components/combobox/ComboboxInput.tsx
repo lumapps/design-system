@@ -18,6 +18,7 @@ import type { IconButtonProps } from '../button/IconButton';
 import { useComboboxContext } from './context/ComboboxContext';
 import { useComboboxEvent } from './context/useComboboxEvent';
 import { useComboboxOpen } from './context/useComboboxOpen';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 /**
  * Props for Combobox.Input component.
@@ -138,6 +139,7 @@ const ComboboxInput = defineComponent(
         };
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<ComboboxInputProps>()(

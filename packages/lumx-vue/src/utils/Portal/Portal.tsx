@@ -3,6 +3,7 @@ import { PORTAL_KEY, defaultPortalInit } from './PortalProvider';
 
 export type { PortalProps } from '@lumx/core/js/utils/Portal';
 import type { PortalProps } from '@lumx/core/js/utils/Portal';
+import { COMPAT_OPTIONS } from '../compat/compatOptions';
 
 /**
  * Render children in a portal outside the current DOM position
@@ -45,6 +46,7 @@ export const Portal = defineComponent(
         };
     },
     {
+        ...COMPAT_OPTIONS,
         name: 'LumxPortal',
         props: {
             enabled: {

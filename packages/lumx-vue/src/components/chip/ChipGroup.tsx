@@ -7,6 +7,7 @@ import {
 import { useClassName } from '../../composables/useClassName';
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { JSXElement } from '@lumx/core/js/types';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 export type ChipGroupProps = VueToJSXProps<UIProps, never>;
 
@@ -20,6 +21,7 @@ const ChipGroup = defineComponent(
         );
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<ChipGroupProps>()('align', 'class'),

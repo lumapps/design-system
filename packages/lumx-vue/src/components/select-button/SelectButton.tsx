@@ -32,6 +32,7 @@ import { useWrappedRenderSectionTitleSlot } from '../combobox/useWrappedRenderSe
 import { useHasEventListener } from '../../composables/useHasEventListener';
 import { useClassName } from '../../composables/useClassName';
 import { useDisableStateProps } from '../../composables/useDisableStateProps';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 /**
  * Props exposed to the `#button` scoped slot of `<SelectButton>`.
@@ -292,6 +293,7 @@ const SelectButton = defineComponent(
         };
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         slots: Object as SlotsType<{

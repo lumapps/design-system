@@ -6,6 +6,7 @@ import { useClassName } from '@lumx/vue/composables/useClassName';
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { Text } from '../text';
 import { useHeadingLevel } from './useHeadingLevel';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 export type HeadingProps = VueToJSXProps<UIProps>;
 
@@ -40,6 +41,7 @@ const Heading = defineComponent(
         return () => <Text {...uiProps.value}>{slots.default?.()}</Text>;
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         // Redefine properties so that they come in as `props` on the `defineComponent` function

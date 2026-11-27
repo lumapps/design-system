@@ -16,6 +16,7 @@ import IconButton from '../button/IconButton';
 import { useTheme } from '../../composables/useTheme';
 import { useClassName } from '../../composables/useClassName';
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 export type ExpansionPanelProps = VueToJSXProps<UIProps, ExpansionPanelPropsToOverride> & {
     /** Props to pass to the toggle button (minus those already set by the ExpansionPanel). */
@@ -124,6 +125,7 @@ const ExpansionPanel = defineComponent(
         };
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<ExpansionPanelProps>()(

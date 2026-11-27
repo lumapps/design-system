@@ -13,6 +13,7 @@ import { useClassName } from '../../composables/useClassName';
 import { useDisableStateProps } from '../../composables/useDisableStateProps';
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { useId } from '../../composables/useId';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 export type RadioButtonProps = VueToJSXProps<UIProps, 'inputId' | 'inputRef'>;
 
@@ -68,6 +69,7 @@ const RadioButton = defineComponent(
         };
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         // Redefine properties so that they come in as `props` on the `defineComponent` function

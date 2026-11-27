@@ -5,6 +5,7 @@ import { useTheme } from '../../composables/useTheme';
 import { useClassName } from '../../composables/useClassName';
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { JSXElement } from '@lumx/core/js/types';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 export type TableProps = VueToJSXProps<UIProps>;
 
@@ -27,6 +28,7 @@ const Table = defineComponent(
         };
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<TableProps>()('class', ['hasBefore', Boolean], ['hasDividers', Boolean], 'theme'),

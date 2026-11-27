@@ -7,6 +7,7 @@ import { computeHeadingLevel } from '@lumx/core/js/components/Heading/utils';
 import { getName, keysOf } from '../../utils/VueToJSX';
 import { HeadingLevelContextKey } from './context';
 import { useHeadingLevel } from './useHeadingLevel';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 export interface HeadingLevelProviderProps {
     /** The heading level to start at. If left undefined, the parent context will be used, if any. */
@@ -40,6 +41,7 @@ const HeadingLevelProvider = defineComponent(
         return () => slots.default?.();
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName('HeadingLevelProvider'),
         props: keysOf<HeadingLevelProviderProps>()('level'),
     },

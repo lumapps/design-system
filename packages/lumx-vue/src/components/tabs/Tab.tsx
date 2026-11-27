@@ -16,6 +16,7 @@ import { getName, type HyphenatedAriaProps, keysOf, VueToJSXProps } from '../../
 import { Icon } from '../icon';
 import { Text } from '../text';
 import { useTabProviderContext } from './state';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 export type TabProps = Omit<VueToJSXProps<UIProps, TabPropsToOverride>, HyphenatedAriaProps>;
 
@@ -91,6 +92,7 @@ const Tab = defineComponent(
         };
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<TabProps>()(

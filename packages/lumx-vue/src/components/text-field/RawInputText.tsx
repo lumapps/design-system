@@ -8,6 +8,7 @@ import {
 import { useTheme } from '../../composables/useTheme';
 import { useClassName } from '../../composables/useClassName';
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 export type RawInputTextProps = VueToJSXProps<UIProps>;
 
@@ -70,6 +71,7 @@ const RawInputText = defineComponent(
         };
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName('RawInputText'),
         inheritAttrs: false,
         props: keysOf<RawInputTextProps>()('class', 'theme', 'value', 'type', 'name'),

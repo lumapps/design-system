@@ -8,6 +8,7 @@ import {
 import { getName } from '../../utils/VueToJSX';
 import { useCompositeContext } from '../composite/CompositeContext';
 import { useCompositeItemContext } from '../composite/CompositeItemContext';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 /**
  * Combobox.SelectionIcon component (`Listbox.SelectionIcon`, re-exported by the combobox).
@@ -33,6 +34,7 @@ const ListboxOptionSelectionIcon = defineComponent(
             });
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName('ComboboxSelectionIcon'),
         inheritAttrs: false,
         props: {},

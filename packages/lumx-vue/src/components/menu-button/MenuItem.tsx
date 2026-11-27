@@ -16,6 +16,7 @@ import { Icon } from '../icon';
 import Text from '../text/Text';
 
 import { useMenuContext } from './context';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 export interface MenuItemActionSlotProps {
     /** Props to spread on the custom action element (includes onClick). */
@@ -119,6 +120,7 @@ const MenuItem = defineComponent(
         };
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<MenuItemProps>()('icon', 'afterIcon', 'color', ['isDisabled', Boolean], 'class'),

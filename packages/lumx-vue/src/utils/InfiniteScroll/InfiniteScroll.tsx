@@ -5,6 +5,7 @@ import {
     setupInfiniteScrollObserver,
 } from '@lumx/core/js/utils/InfiniteScroll';
 import { keysOf } from '../VueToJSX';
+import { COMPAT_OPTIONS } from '../compat/compatOptions';
 
 export type { InfiniteScrollProps };
 
@@ -26,6 +27,7 @@ export const InfiniteScroll = defineComponent(
         return () => UI({ ref: elementRef });
     },
     {
+        ...COMPAT_OPTIONS,
         name: 'LumxInfiniteScroll',
         inheritAttrs: false,
         props: keysOf<InfiniteScrollProps>()('callback', 'options'),

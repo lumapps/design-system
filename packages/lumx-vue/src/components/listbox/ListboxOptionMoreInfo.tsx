@@ -18,6 +18,7 @@ import { useCompositeItemContext } from '../composite/CompositeItemContext';
 import { useCompositeContext } from '../composite/CompositeContext';
 import { optionActiveEvent } from '@lumx/core/js/components/Composite/constants';
 import { useCompositeEvent } from '../composite/useCompositeEvent';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 export type ListboxOptionMoreInfoProps = VueToJSXProps<
     UIProps,
@@ -121,6 +122,7 @@ const ListboxOptionMoreInfo = defineComponent(
         };
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         props: keysOf<ListboxOptionMoreInfoProps>()('class'),

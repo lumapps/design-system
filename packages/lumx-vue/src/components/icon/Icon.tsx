@@ -5,6 +5,7 @@ import { Icon as IconUI, type IconProps as UIProps, COMPONENT_NAME } from '@lumx
 import { useTheme } from '../../composables/useTheme';
 import { useClassName } from '../../composables/useClassName';
 import { getName, keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { COMPAT_OPTIONS } from '../../utils/compat/compatOptions';
 
 export type IconProps = VueToJSXProps<UIProps>;
 
@@ -25,6 +26,7 @@ const Icon = defineComponent(
         );
     },
     {
+        ...COMPAT_OPTIONS,
         name: getName(COMPONENT_NAME),
         inheritAttrs: false,
         // Redefine properties so that they come in as `props` on the `defineComponent` function
